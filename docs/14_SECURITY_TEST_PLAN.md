@@ -337,6 +337,21 @@ Test:
 - alert payloads contain only allowlisted controlled metadata;
 - alert transport failure follows the approved retry/fail-closed behavior without leaking sensitive data.
 
+For `31_ADMINISTRATOR_ALERT_PROTOCOL.md`, also verify:
+
+- the Alert Service never acknowledges before the inbox row and fixed-template
+  SMTP queue item commit durably;
+- identical/conflicting concurrent retries create one logical alert and cannot
+  extend or rewrite its accepted time;
+- Emergency Export fails before authorization consumption or artifact work when
+  durable alert acceptance is unavailable;
+- deletion retry, key denial/destruction, and audit fail-closed deadlines do not
+  wait for alert delivery;
+- SMTP/console outages, acknowledgement races, retention failure, and restarts
+  preserve the exact alert state and escalation schedule;
+- prohibited sentinels never reach alerts, source outboxes, SMTP, logs, metrics,
+  traces, or errors.
+
 ## Browser caching
 
 Test headers and browser behavior for:

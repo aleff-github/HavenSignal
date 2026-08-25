@@ -254,14 +254,16 @@ production evidence, and dependent challenge/file/crypto gates remain blocking.
 
 ## MEDIUM — Administrator alert transport
 
-Still OPEN:
+`docs/31_ADMINISTRATOR_ALERT_PROTOCOL.md` proposes a separately deployed
+self-hosted Alert Service, durable administrator inbox, organization-operated
+SMTP wake-up queue, a closed content-free schema, synchronous durable
+acceptance, idempotent retry, acknowledgement/escalation, 365-day retention,
+and an exact per-operation failure matrix.
 
-- exact self-hosted delivery mechanism;
-- durable-acceptance semantics;
-- retry/escalation policy;
-- behavior when notification is unavailable.
-
-Alerts must contain only controlled metadata.
+Its six choices await consolidated owner approval and independent
+security/operations review. Service authentication, PostgreSQL durability and
+concurrency, SMTP/mailbox deployment, administrator access hardening,
+retention-job isolation, monitoring, and staffing/runbooks remain blocking.
 
 ## HIGH — Audit retention expiry authority
 

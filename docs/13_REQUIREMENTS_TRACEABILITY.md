@@ -97,9 +97,9 @@ independent HTTP/proxy/Django review.
 | SEC-CAPTCHA-004 | CRITICAL | 10 Network Anonymity | 14: dependency-failure tests | No fallback permitted |
 | SEC-FILE-001..003 | CRITICAL | 07 File Security; 15 Trust Boundaries; 29 File/Sandbox Proposal | 14/29: profile, parser differential, microVM, CDR and access tests | Exact protocol PROPOSED; owner/review and production sandbox gates OPEN |
 | SEC-FILE-004..006 | HIGH | 07 File Security; 12 Open Decisions; 29 File/Sandbox Proposal | 14/29: plaintext lifecycle, resource, corpus, teardown tests | Exact profiles PROPOSED; artifact pinning and production validation OPEN |
-| SEC-ALERT-001 | HIGH | 08 Audit Logging; 09 Emergency Export; 23 Audit Receipt Protocol | 14: alert trigger and witness-liveness tests | Audit timing owner-approved; transport OPEN |
-| SEC-ALERT-002 | CRITICAL | 08 Audit Logging | 14: allowlisted-payload tests | No content-bearing alerts permitted |
-| SEC-ALERT-003 | HIGH | 12 Open Decisions | Procedure/failure tests | OPEN |
+| SEC-ALERT-001 | HIGH | 08 Audit Logging; 09 Emergency Export; 23 Audit Receipt Protocol; 31 Alert Proposal | 14/31: alert trigger, witness-liveness, deletion, and export tests | Exact transport and triggers PROPOSED; approval/review and deployment gates OPEN |
+| SEC-ALERT-002 | CRITICAL | 08 Audit Logging; 31 Alert Proposal | 14/31: closed-schema and prohibited-data tests | Content-free schema PROPOSED; approval/review OPEN |
+| SEC-ALERT-003 | HIGH | 12 Open Decisions; 31 Alert Proposal | 31: durability, retry, escalation, acknowledgement, and failure tests | Exact protocol PROPOSED; approval/review and production gates OPEN |
 | SEC-BROWSER-001..002 | CRITICAL | 05 Recovery Response; 06 Operator Sessions; 16 Django Rules | 14: browser caching tests | Browser guarantee boundary documented |
 | SEC-INPUT-001..006 | HIGH | 00 Scope; 07 File Security; 16 Django Rules; 20 Submission Protocol; 26 Report Crypto; 29 File/Sandbox; 30 Request Admission proposals | 14/29/30: canonical text, byte/body/multipart/decoded-resource/no-spool tests | Exact profiles PROPOSED; owner/review and production boundary gates OPEN |
 
