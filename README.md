@@ -38,7 +38,8 @@ Read, in order:
 9. `docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md`
 10. `docs/22_NO_JAVASCRIPT_CHALLENGE_PROTOCOL.md`
 11. `docs/23_AUDIT_RECEIPT_AND_TRANSPARENCY_PROTOCOL.md`
-12. `START-CODEX.md`
+12. `docs/24_RESPONSE_NOTE_CRYPTOGRAPHIC_PROTOCOL.md`
+13. `START-CODEX.md`
 
 ## Source material
 
@@ -88,6 +89,13 @@ in `docs/23_AUDIT_RECEIPT_AND_TRANSPARENCY_PROTOCOL.md` are owner-approved.
 No Audit Service, receipt gate, or
 protected operation is authorized until the independent protocol review and
 production gates are complete.
+
+The exact Response Note byte profile, AEAD envelope, non-exportable
+Response-DEK operations, staging, and first-read expiry sequence in
+`docs/24_RESPONSE_NOTE_CRYPTOGRAPHIC_PROTOCOL.md` are proposed only. No
+finalization or recovery-decryption implementation is authorized before the
+visible owner choices, independent protocol review, and Key Service production
+gates are complete.
 
 ## Local preview
 

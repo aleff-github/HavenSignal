@@ -41,6 +41,18 @@ Still OPEN:
 - Response-DEK wrapping/unwrapping construction;
 - Response-DEK representation and lifecycle protocol.
 
+`docs/24_RESPONSE_NOTE_CRYPTOGRAPHIC_PROTOCOL.md` now proposes an exact
+version-1 construction: libsodium XChaCha20-Poly1305-IETF, constant-length
+canonical plaintext framing, deterministic-CBOR AAD/envelope, a non-exportable
+Key Service Response-DEK, inert provisional staging, and server/Key-Service
+enforced first-read expiry. It is **PROPOSED**, not approved or authorizing.
+
+The project owner must decide its six listed choices. Independent
+cryptographic/protocol review, step-up artifact binding, Key Service
+product/topology/HSM and non-resurrection proof, service authentication,
+trusted clocks, PostgreSQL concurrency/durability, audit implementation, and
+deployment remain separate blockers.
+
 ## CRITICAL — Key Service product, topology, and proof of non-resurrection
 
 The policy is approved:

@@ -25,6 +25,11 @@ exact audit-event, durable-receipt, Merkle-checkpoint, witness, and anti-replay
 construction. It is non-authorizing pending independent cryptographic/protocol
 review and its named production gates.
 
+`docs/24_RESPONSE_NOTE_CRYPTOGRAPHIC_PROTOCOL.md` is the proposed exact
+Response Note AEAD, envelope, non-exportable Response-DEK, staging, first-read,
+and expiry protocol. It is non-authorizing pending its owner decisions,
+independent cryptographic/protocol review, and named production gates.
+
 ## Traceability index
 
 | Requirement IDs | Severity | Primary design documents | Verification | Current gate |
@@ -53,8 +58,8 @@ review and its named production gates.
 | SEC-RECOVERY-001..004 | CRITICAL | 05 Recovery Response; 20 Submission Protocol; 21 Recovery Credential Construction | 14: recovery enumeration/secret-handling tests | Owner choices approved; independent cryptographic review and dependent gates remain OPEN |
 | SEC-RECOVERY-005 | CRITICAL | 05 Recovery Response; 12 Open Decisions; 21 Recovery Credential Construction | Owner decision and independent cryptographic design review | Owner-approved; independent review required before implementation |
 | SEC-RESPONSE-001 | CRITICAL | 00 Scope; 05 Recovery Response | Response validation/no-draft tests | No design blocker |
-| SEC-RESPONSE-002..008 | CRITICAL | 04 Cryptographic Model; 05 Recovery Response | 14: Response-DEK lifecycle/restore/first-read race/expiry-denial tests | Exact crypto and unread lifetime OPEN |
-| SEC-FINALIZE-001..004, SEC-FINALIZE-006 | CRITICAL | 03 Lifecycle; 04 Cryptographic Model; 06 Operator Sessions | 14: every crash point, retry, race, immutable staging, visibility tests | Protocol approved; external service interfaces gated by their designs |
+| SEC-RESPONSE-002..008 | CRITICAL | 04 Cryptographic Model; 05 Recovery Response; 24 Response Crypto Proposal | 14: AEAD/context, Response-DEK lifecycle/restore/first-read race/expiry-denial tests | Exact construction PROPOSED; owner approval and independent review OPEN; unread lifetime separately OPEN |
+| SEC-FINALIZE-001..004, SEC-FINALIZE-006 | CRITICAL | 03 Lifecycle; 04 Cryptographic Model; 06 Operator Sessions; 24 Response Crypto Proposal | 14: every crash point, retry, race, immutable staging, activation, visibility tests | Sequence approved; Response crypto PROPOSED and external service gates remain |
 | SEC-FINALIZE-005 | HIGH | 03 Lifecycle; 08 Audit Logging | 14: deletion retry/alert tests | Alert transport details OPEN |
 | SEC-EXPORT-001..005 | CRITICAL/HIGH | 09 Emergency Export; 15 Trust Boundaries | 14: export safeguards, crypto, cleanup tests | Exact crypto format, signing, alert semantics OPEN |
 | SEC-EXPORT-006 | HIGH | 02 Threat Model; 09 Emergency Export | Threat-model acceptance review | Accepted residual risk |

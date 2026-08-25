@@ -151,7 +151,11 @@ Ticket ID + Recovery Secret
 
 The Recovery Secret must not be the sole material sufficient to decrypt a retained or restored ciphertext indefinitely.
 
-The exact AEAD, nonce strategy, AAD, key derivation/separation, verifier, Response-DEK wrapping, and lifecycle representation remain OPEN CRITICAL. No implementation may invent these constructions.
+The exact credential verifier is owner-approved in `docs/21`.
+`docs/24_RESPONSE_NOTE_CRYPTOGRAPHIC_PROTOCOL.md` proposes the AEAD, nonce,
+AAD, constant-length envelope, non-exportable Response-DEK representation,
+staging, and expiry lifecycle. It remains OPEN CRITICAL and no implementation
+may anticipate its approval or independent review.
 
 ## Response retention
 
@@ -159,6 +163,10 @@ At first successful reporter read:
 
 - record `first_read_at` using server-side time;
 - define expiry at first read + 72 hours.
+
+The current `docs/24` proposal defines this boundary as the first valid recovery
+authorization that durably establishes the window before plaintext decryption.
+That availability trade-off is not approved yet.
 
 Concurrent first-read attempts must use server-authoritative locking/conditional update so exactly one immutable `first_read_at` and expiry are established. Later reads reuse that expiry and cannot extend it.
 
