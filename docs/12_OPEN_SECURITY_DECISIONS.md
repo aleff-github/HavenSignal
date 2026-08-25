@@ -53,6 +53,17 @@ product/topology/HSM and non-resurrection proof, service authentication,
 trusted clocks, PostgreSQL concurrency/durability, audit implementation, and
 deployment remain separate blockers.
 
+## CRITICAL — Original report cryptographic construction
+
+`docs/26_REPORT_CONTENT_CRYPTOGRAPHIC_PROTOCOL.md` proposes the exact random
+non-exportable Report-DEK, RFC 5869 HKDF-SHA-256 object-subkeys,
+XChaCha20-Poly1305, fixed-length frames, deterministic-CBOR context, staging,
+and narrow-use model. It also proposes defining `5 MB` as exactly 5 MiB.
+
+The six listed choices await consolidated pre-code owner approval and
+independent cryptographic review. Key Service, file/sandbox, storage,
+concurrency, audit, and deployment gates remain independently blocking.
+
 ## CRITICAL — Key Service product, topology, and proof of non-resurrection
 
 The policy is approved:
@@ -117,7 +128,7 @@ response was lost.
 `docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md` is the approved authority for the
 sequence, state model, audit phases, retry behavior, reconciliation timing, and
 lost-response residual risk. The dependent CAPTCHA, recovery
-encoding/verifier, AEAD, Key Service, audit receipt, aggregate-size, and
+encoding/verifier, report crypto, Key Service, audit receipt, aggregate-size, and
 applicable file/sandbox gates remain independently blocking.
 
 ## CRITICAL — Emergency Export cryptographic formats

@@ -114,7 +114,7 @@ All edges are deny-by-default and require authenticated service identity, least-
 |---|---|---|---|
 | Reporter Gateway | Self-hosted CAPTCHA | Generate/validate submission challenge | No-JS protocol owner-approved; rendering/audio/accessibility and production reviews OPEN |
 | Reporter Gateway | Audit Collector | Append only the approved submission event envelope | Sequencing and exact protocol owner-approved; independent review and production gates remain OPEN CRITICAL |
-| Reporter Gateway | Submission coordinator / Key Service | Create protection capability for one new submission only | `20_SUBMISSION_ACCEPTANCE_PROTOCOL.md` APPROVED; crypto and Key Service constructions remain OPEN CRITICAL |
+| Reporter Gateway | Submission coordinator / Key Service | Create/encrypt only one new submission with no decrypt capability | Sequencing APPROVED; exact report crypto PROPOSED in document 26; review and Key Service gates OPEN CRITICAL |
 | Reporter Gateway | Metadata/ciphertext stores | Create only the new report records/objects required by the approved sequence | `20_SUBMISSION_ACCEPTANCE_PROTOCOL.md` APPROVED; dependent storage/crypto gates remain OPEN CRITICAL |
 | Recovery Gateway | Self-hosted CAPTCHA | Validate retrieval challenge | No-JS protocol owner-approved; dependent reviews OPEN |
 | Recovery Gateway | Recovery state/verifier | Uniformly authorize Ticket ID and Recovery Secret | Owner-approved construction; independent cryptographic review OPEN CRITICAL |
@@ -122,7 +122,7 @@ All edges are deny-by-default and require authenticated service identity, least-
 | Operator Console | Authentication/step-up service | Password/WebAuthn login and operation-bound authorization | Exact protocol PROPOSED in document 25; approval/review, hardware, workstation, and deployment gates OPEN |
 | Operator Console | Audit Collector | Obtain operation-bound pre-action receipts and append outcomes | Exact protocol owner-approved in document 23; independent review and production gates OPEN CRITICAL |
 | Operator Console | State authority | CLAIM/OPEN/reopen and validate current lease generation using server time | Schema may be designed; security transitions require concurrency tests |
-| Operator Console | Key Service | Use one Report-DEK only for the current authorized OPEN/REOPEN context | Receipt and Key Service policy OPEN CRITICAL |
+| Operator Console | Key Service | Request in-service report-text decrypt only for the current authorized OPEN/REOPEN context; never receive key bytes | Exact report crypto PROPOSED in document 26; receipt review and Key Service policy OPEN CRITICAL |
 | Operator Console | File Processing Sandbox | Request one controlled safe representation for the current lease | PDF/image profile and sandbox OPEN |
 | Operator Console | Security Workflow Coordinator | Start one fenced finalization workflow | Dependent crypto/MFA/audit gates remain OPEN |
 | Operator Console | Emergency Export Worker | Start one export bound to the current OPEN lease and authorization | Export crypto/MFA/audit/alert gates remain OPEN |
@@ -210,7 +210,10 @@ Read access uses a different service identity and interface. Retention expiry is
 
 The Key Service exposes distinct policy operations for new-report protection, authorized report use, response protection/use, and per-object key destruction. Policy evaluation is state-aware and operation-scoped.
 
-The interface design must not assume that raw DEKs are returned to callers. Exact cryptographic placement, wrapping, nonce/AAD construction, key derivation, verifier, and secure-memory behavior remain OPEN CRITICAL.
+The interface design does not return raw DEKs to callers. Exact report and
+Response Note constructions are defined/proposed in documents 26 and 24;
+independent review, Key Service product/topology, and secure-memory/deployment
+behavior remain OPEN CRITICAL.
 
 The service must reject:
 
@@ -313,7 +316,8 @@ Reporter-facing proxy, application, and upstream infrastructure configuration mu
 |---|---|
 | Submission Gateway to audit/key/storage | Sequencing in `20_SUBMISSION_ACCEPTANCE_PROTOCOL.md` APPROVED; dependent constructions remain OPEN CRITICAL |
 | Recovery Gateway/verifier | Owner-approved encoding/verifier; independent cryptographic review and dependent gates remain OPEN CRITICAL |
-| Response protection/use | AEAD, nonce, AAD, derivation/separation, wrapping, representation, lifecycle — OPEN CRITICAL |
+| Original report protection/use | Exact construction PROPOSED in document 26; consolidated approval/review and Key Service gates OPEN CRITICAL |
+| Response protection/use | Exact construction owner-approved in document 24; independent review and Key Service gates OPEN CRITICAL |
 | Key Service | Product, topology, state-aware policy, replication, backup, and non-resurrection proof — OPEN CRITICAL |
 | Audit receipts/checkpoints | Receipt, anti-replay, chain/batch, signatures, independent verification, alerting — OPEN CRITICAL |
 | Emergency Export | Encryption format, signed manifest, key identifiers, rotation, signing-key lifecycle — OPEN CRITICAL |

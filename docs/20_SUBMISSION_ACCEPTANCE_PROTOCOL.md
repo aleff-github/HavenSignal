@@ -218,8 +218,10 @@ is no in-process or text-only fallback that silently drops submitted files.
     state, ciphertext references, the attempt version, and the pre-action receipt
     reference as `CIPHERTEXT_STAGED`. The row is not operator/recovery visible.
 
-Exact AEAD, nonce/AAD, verifier, Key Service, ciphertext format, and durability
-proofs remain independently OPEN.
+The exact report AEAD, nonce/AAD, subkey, fixed-frame, and ciphertext-envelope
+construction is proposed in `docs/26_REPORT_CONTENT_CRYPTOGRAPHIC_PROTOCOL.md`.
+It remains independently OPEN alongside its review, Key Service, verifier, and
+durability gates.
 
 ### Phase 5 — audit and commit acceptance
 

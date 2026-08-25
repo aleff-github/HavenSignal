@@ -41,6 +41,25 @@ For `20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`, also verify:
   finish the evidenced transition or destroy scoped staged material;
 - crash injection at each approved phase reaches only an allowed state.
 
+## Original report cryptography
+
+Test:
+
+- RFC 5869 HKDF-SHA-256 vectors and per-report/object/purpose subkey separation;
+- pinned XChaCha20-Poly1305 vectors, random nonce uniqueness, combined-mode
+  lengths, and byte-identical idempotent retries;
+- deterministic-CBOR KDF/AAD/envelope encoding and rejection of every context,
+  object, slot, attempt, or key-handle substitution;
+- canonical UTF-8/NFC text and fixed 20,005-byte frame validation;
+- attachment framing at 0 and 5,242,880-byte boundaries, fixed ciphertext size,
+  kind binding, zero padding, and oversized rejection;
+- Reporter Gateway cannot decrypt existing content, Operator Console cannot
+  receive original attachment bytes, and sandbox streams cannot be redirected;
+- provisional/staged/SEALED activation crashes and races never expose content or
+  issue credentials before every approved condition;
+- Report-DEK destruction makes every object permanently unusable across live
+  replicas, rollback, snapshot, restore, and disaster recovery.
+
 ## Recovery enumeration
 
 Test:
