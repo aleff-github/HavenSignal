@@ -2,17 +2,21 @@
 
 ## Status
 
-**PROPOSED — project-owner review required. The submission gate remains OPEN
-CRITICAL and no endpoint is authorized by this document.**
+**APPROVED — project-owner decision recorded on 2026-08-25.**
 
-This proposal resolves sequencing semantics only. It does not select or approve
+This approval establishes the sequencing, retry, lost-response, state,
+audit-phase, and reconciliation policy in this document. It does not authorize
+a submission endpoint: every dependent security construction listed below
+remains independently blocking.
+
+This document resolves sequencing semantics only. It does not select or approve
 a CAPTCHA, cryptographic construction, Key Service, audit receipt format,
 recovery verifier, file parser, sandbox, aggregate request limit, or deployment
 topology. Each dependent OPEN decision remains independently blocking.
 
 ## Governing requirements
 
-This proposal applies primarily to:
+This approved protocol applies primarily to:
 
 - `SEC-CONF-001..008`;
 - `SEC-ANON-001..004`;
@@ -60,7 +64,7 @@ No boundary receives a general read, list, decrypt, unwrap, or historical audit
 mutation capability. The crash reconciler never receives report plaintext or a
 general Report-DEK-use capability.
 
-## Proposed decisions
+## Approved decisions
 
 ### One server-authoritative submission attempt
 
@@ -91,7 +95,7 @@ Encrypted objects and controlled metadata may require durable staging while
 independent services complete. A staged object is not yet a report in the main
 lifecycle and must remain invisible to reporter recovery and operator queues.
 
-Proposed internal attempt states are:
+Approved internal attempt states are:
 
 ```text
 READY -> PROCESSING -> CIPHERTEXT_STAGED -> AUDIT_CONFIRMED -> ACCEPTED
@@ -106,7 +110,7 @@ winner.
 
 ### Two truthful audit phases
 
-The proposal adds these controlled event families:
+The approved protocol adds these controlled event families:
 
 - `SUBMISSION_ACCEPTANCE_REQUESTED`: durably accepted before creation of a
   Report-DEK or durable report material;
@@ -125,7 +129,7 @@ local-success receipt is permitted.
 
 ### Credential response loss favors confidentiality
 
-The recommended baseline does not escrow the Recovery Secret for replay and
+The approved baseline does not escrow the Recovery Secret for replay and
 does not issue replacement credentials.
 
 If `SEALED` commits but the response is lost, the report remains accepted and
@@ -142,11 +146,11 @@ This is an explicit availability loss chosen to avoid:
 - content hashing or deduplication that could correlate reports;
 - a provisional credential-envelope cryptographic protocol.
 
-The project owner must explicitly accept this residual risk. A future replayable
-delivery design would require a separate approved cryptographic construction and
-would supersede this decision.
+The project owner explicitly accepted this residual risk on 2026-08-25. A
+future replayable delivery design would require a separate approved
+cryptographic construction and would supersede this decision.
 
-## Proposed sequence
+## Approved sequence
 
 ### Phase 0 — serve the inert form
 
@@ -292,11 +296,11 @@ at every transition. At minimum they prove:
 | Report-DEK | Approved Key Service live domain only | Application logs/storage, historical restorable backups |
 | Audit metadata | Allowlisted event codes and system identifiers | Reporter input, filenames, secrets, keys, raw errors |
 
-## Decisions required for approval
+## Recorded project-owner decision
 
-The project owner must explicitly decide the following recommended policy:
+On 2026-08-25 the project owner approved all five recommended choices:
 
-| Decision | Recommended approval |
+| Decision | Approved policy |
 |---|---|
 | Lost credential response | Accept the residual availability loss; never reissue or replace credentials and never duplicate the same attempt |
 | Attempt credential | One opaque, single-use, non-sliding credential valid for two hours before first claim; exact encoding/verifier remains in its dependent review |

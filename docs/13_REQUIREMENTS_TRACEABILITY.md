@@ -6,9 +6,10 @@ The original questionnaire remains historical evidence under `/source` and is lo
 
 `docs/19_SECURITY_SERVICE_INTERFACES.md` is the approved cross-cutting capability and dependency map. Its approval does not close any implementation gate in `docs/12_OPEN_SECURITY_DECISIONS.md`.
 
-`docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md` is the proposed submission
-sequencing and retry model. It remains non-authorizing while its project-owner
-choices and dependent OPEN constructions are unresolved.
+`docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md` is the approved submission
+sequencing and retry model. Its approval authorizes only the internal state and
+sequencing design; submission remains non-authorizing while dependent OPEN
+constructions are unresolved.
 
 `docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md` is the proposed exact Ticket ID,
 Recovery Secret, and keyed-verifier construction. It remains non-authorizing
@@ -45,7 +46,7 @@ complete.
 | SEC-KEY-006..007 | CRITICAL | 02 Threat Model; 04 Cryptographic Model; 15 Trust Boundaries | 14: negative capability and combined-backup restoration tests | Exact Key Service policy implementation OPEN |
 | SEC-ROLE-001..003 | CRITICAL | 02 Threat Model; 15 Trust Boundaries | 14: role/capability tests | MFA/admin operational procedures OPEN |
 | SEC-ROLE-004 | HIGH | 02 Threat Model | Threat-model review | Accepted limitation |
-| SEC-RECOVERY-001..004 | CRITICAL | 05 Recovery Response; 20 Submission Protocol; 21 Recovery Credential Construction | 14: recovery enumeration/secret-handling tests | Encoding/verifier and lost-response proposals require approval; dependent gates remain |
+| SEC-RECOVERY-001..004 | CRITICAL | 05 Recovery Response; 20 Submission Protocol; 21 Recovery Credential Construction | 14: recovery enumeration/secret-handling tests | Lost-response policy approved; encoding/verifier and dependent gates remain OPEN |
 | SEC-RECOVERY-005 | CRITICAL | 05 Recovery Response; 12 Open Decisions; 21 Recovery Credential Construction | Owner decision and independent cryptographic design review | PROPOSED; not authorized |
 | SEC-RESPONSE-001 | CRITICAL | 00 Scope; 05 Recovery Response | Response validation/no-draft tests | No design blocker |
 | SEC-RESPONSE-002..008 | CRITICAL | 04 Cryptographic Model; 05 Recovery Response | 14: Response-DEK lifecycle/restore/first-read race/expiry-denial tests | Exact crypto and unread lifetime OPEN |

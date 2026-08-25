@@ -15,7 +15,7 @@ Test that:
 
 ## Submission sequencing
 
-After the sequence is approved, test every failure boundary between audit acceptance, key creation, encryption, metadata/ciphertext persistence, and one-time credential delivery.
+Under the approved sequence, test every failure boundary between audit acceptance, key creation, encryption, metadata/ciphertext persistence, and one-time credential delivery.
 
 Verify:
 
@@ -26,7 +26,7 @@ Verify:
 - the system never claims one-time credentials were delivered when the response was lost;
 - orphan keys/ciphertexts/metadata are reconciled without logging reporter data.
 
-If `20_SUBMISSION_ACCEPTANCE_PROTOCOL.md` is approved, also verify:
+For `20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`, also verify:
 
 - expired, unknown, consumed, and replayed attempt credentials fail closed;
 - synchronized parallel POST copies create one attempt owner and at most one
@@ -39,7 +39,7 @@ If `20_SUBMISSION_ACCEPTANCE_PROTOCOL.md` is approved, also verify:
 - no event or state claims that the reporter received or saved credentials;
 - the reconciler cannot obtain plaintext or construct credentials and can only
   finish the evidenced transition or destroy scoped staged material;
-- crash injection at each proposed phase reaches only an allowed state.
+- crash injection at each approved phase reaches only an allowed state.
 
 ## Recovery enumeration
 
