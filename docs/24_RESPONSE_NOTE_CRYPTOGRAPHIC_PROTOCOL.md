@@ -2,9 +2,10 @@
 
 ## Status
 
-**PROPOSED — project-owner and independent cryptographic/protocol review
-required. No Response Note encryption, finalization, recovery-decryption, or
-Response-DEK operation is authorized by this document.**
+**OWNER-APPROVED — project-owner decision recorded on 2026-08-25;
+independent cryptographic/protocol review remains required. No Response Note
+encryption, finalization, recovery-decryption, or Response-DEK operation is
+authorized for production by this document alone.**
 
 This proposal selects the exact version-1 Response Note byte profile, AEAD
 construction, nonce and AAD rules, fixed-length ciphertext envelope,
@@ -425,9 +426,9 @@ At minimum, release-blocking tests must prove:
 SQLite, ordinary Django `TestCase`, one process, a mock Key Service, or a
 software-only deletion assertion is insufficient for release acceptance.
 
-## Decisions required for approval
+## Recorded project-owner decision
 
-The project owner must explicitly approve:
+On 2026-08-25 the project owner approved all six visible choices:
 
 1. XChaCha20-Poly1305-IETF combined mode with one random 256-bit Response-DEK
    and one random 192-bit nonce per immutable Response Note;
@@ -441,8 +442,8 @@ The project owner must explicitly approve:
 6. Key Service hard expiry, forward-only destruction, and the stated
    concurrency/idempotency behavior.
 
-Independent cryptographic/protocol review remains mandatory after owner
-approval. Production remains blocked by the exact step-up artifact binding,
+Independent cryptographic/protocol review remains mandatory. Production
+remains blocked by the exact step-up artifact binding,
 Key Service product/topology/HSM and non-resurrection proof, service
 authentication, trusted-clock profile, PostgreSQL concurrency/durability,
 audit implementation/review, recovery endpoint, and deployment review.

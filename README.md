@@ -92,10 +92,9 @@ production gates are complete.
 
 The exact Response Note byte profile, AEAD envelope, non-exportable
 Response-DEK operations, staging, and first-read expiry sequence in
-`docs/24_RESPONSE_NOTE_CRYPTOGRAPHIC_PROTOCOL.md` are proposed only. No
+`docs/24_RESPONSE_NOTE_CRYPTOGRAPHIC_PROTOCOL.md` are owner-approved. No
 finalization or recovery-decryption implementation is authorized before the
-visible owner choices, independent protocol review, and Key Service production
-gates are complete.
+independent protocol review and Key Service production gates are complete.
 
 ## Local preview
 

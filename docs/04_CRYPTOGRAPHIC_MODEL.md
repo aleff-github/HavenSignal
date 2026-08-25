@@ -106,11 +106,11 @@ At the first valid read, server time sets `first_read_at` and Response-DEK expir
 
 After server-authoritative expiry, the Key Service and recovery path refuse every use even if replica cleanup or physical deletion is temporarily retrying.
 
-`docs/24_RESPONSE_NOTE_CRYPTOGRAPHIC_PROTOCOL.md` proposes the exact AEAD,
+`docs/24_RESPONSE_NOTE_CRYPTOGRAPHIC_PROTOCOL.md` defines the owner-approved AEAD,
 nonce, AAD, fixed-length envelope, non-exportable Response-DEK, staging, and
 first-read expiry construction. It remains OPEN CRITICAL and must not be
-implemented until owner approval, independent cryptographic/protocol review,
-and every named Key Service/deployment gate are complete.
+implemented until independent cryptographic/protocol review and every named
+Key Service/deployment gate are complete.
 
 ## Sensitive memory
 
