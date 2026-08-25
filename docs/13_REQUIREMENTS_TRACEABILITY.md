@@ -20,6 +20,11 @@ no-JavaScript challenge and anonymous abuse-control protocol. It remains
 non-authorizing until its dependent rendering, audio/accessibility,
 PostgreSQL-concurrency, and production-boundary reviews are complete.
 
+`docs/23_AUDIT_RECEIPT_AND_TRANSPARENCY_PROTOCOL.md` is the current proposed
+exact audit-event, durable-receipt, Merkle-checkpoint, witness, and anti-replay
+construction. It is non-authorizing pending project-owner approval, independent
+cryptographic/protocol review, and its named production gates.
+
 ## Traceability index
 
 | Requirement IDs | Severity | Primary design documents | Verification | Current gate |
@@ -29,10 +34,10 @@ PostgreSQL-concurrency, and production-boundary reviews are complete.
 | SEC-ANON-004 | HIGH | 10 Network Anonymity; 11 Technology Decisions | 14: CAPTCHA and dependency/security checks | No-JS product OPEN |
 | SEC-ANON-005 | CRITICAL | 10 Network Anonymity; 15 Trust Boundaries | Deployment/security acceptance test | Production deployment gate |
 | SEC-ANON-006..007 | HIGH | 10 Network Anonymity | UI/deployment review | No design blocker |
-| SEC-LOG-001..004 | CRITICAL | 08 Audit Logging; 15 Trust Boundaries | 14: audit failure and privilege tests | Exact audit construction OPEN |
-| SEC-LOG-005 | CRITICAL | 08 Audit Logging; 16 Django Rules | 14: reporter input/logging and protected-note tests | No design blocker for logging schema |
-| SEC-LOG-006..008 | HIGH | 08 Audit Logging | 14: checkpoints, alerts, retention | Checkpoint/alert details OPEN |
-| SEC-LOG-009..012 | CRITICAL | 08 Audit Logging; 03 Lifecycle | 14: receipt, replay, truncation, crash tests | Exact receipt/checkpoint construction OPEN |
+| SEC-LOG-001..004 | CRITICAL | 08 Audit Logging; 15 Trust Boundaries; 23 Audit Receipt Proposal | 14: audit failure, durability, and privilege tests | Exact construction PROPOSED; owner approval and independent review OPEN |
+| SEC-LOG-005 | CRITICAL | 08 Audit Logging; 16 Django Rules; 23 Audit Receipt Proposal | 14: reporter input/logging, closed-schema, and protected-note tests | Proposed schema is non-authorizing pending review |
+| SEC-LOG-006..008 | HIGH | 08 Audit Logging; 23 Audit Receipt Proposal | 14: proofs, checkpoints, witness alerts, retention | Cadence/retention PROPOSED; owner approval, independent review, and alert transport OPEN |
+| SEC-LOG-009..012 | CRITICAL | 03 Lifecycle; 08 Audit Logging; 23 Audit Receipt Proposal | 14: receipt, replay, concurrency, truncation, cessation, and crash tests | Exact construction PROPOSED; owner approval and independent review OPEN |
 | SEC-ACCESS-001..010 | CRITICAL/HIGH | 03 Lifecycle; 06 Operator Sessions | 14: session controls/finalization | Domain model may be specified; crypto/audit release remains gated |
 | SEC-ACCESS-011..015 | CRITICAL | 03 Lifecycle; 06 Operator Sessions; 16 Django Rules | 14: lease generation, stale request, constraint tests | Exact schema may be designed without implementing decrypt |
 | SEC-AUTH-001..004 | CRITICAL/HIGH | 06 Operator Sessions; 11 Technology Decisions | 14: authentication/session checks | Enrollment/reset/recovery OPEN |
@@ -58,7 +63,7 @@ PostgreSQL-concurrency, and production-boundary reviews are complete.
 | SEC-CAPTCHA-004 | CRITICAL | 10 Network Anonymity | 14: dependency-failure tests | No fallback permitted |
 | SEC-FILE-001..003 | CRITICAL | 07 File Security; 15 Trust Boundaries | 14: file/sandbox/CDR tests | PDF profile and sandbox OPEN |
 | SEC-FILE-004..006 | HIGH | 07 File Security; 12 Open Decisions | 14: temporary lifecycle/resource tests | OPEN; PDF and image implementation blocked |
-| SEC-ALERT-001 | HIGH | 08 Audit Logging; 09 Emergency Export | 14: alert trigger tests | Transport OPEN |
+| SEC-ALERT-001 | HIGH | 08 Audit Logging; 09 Emergency Export; 23 Audit Receipt Proposal | 14: alert trigger and witness-liveness tests | Audit timing PROPOSED; transport OPEN |
 | SEC-ALERT-002 | CRITICAL | 08 Audit Logging | 14: allowlisted-payload tests | No content-bearing alerts permitted |
 | SEC-ALERT-003 | HIGH | 12 Open Decisions | Procedure/failure tests | OPEN |
 | SEC-BROWSER-001..002 | CRITICAL | 05 Recovery Response; 06 Operator Sessions; 16 Django Rules | 14: browser caching tests | Browser guarantee boundary documented |
