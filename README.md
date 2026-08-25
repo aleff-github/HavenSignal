@@ -37,7 +37,8 @@ Read, in order:
 8. `docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`
 9. `docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md`
 10. `docs/22_NO_JAVASCRIPT_CHALLENGE_PROTOCOL.md`
-11. `START-CODEX.md`
+11. `docs/23_AUDIT_RECEIPT_AND_TRANSPARENCY_PROTOCOL.md`
+12. `START-CODEX.md`
 
 ## Source material
 
@@ -80,6 +81,13 @@ global abuse limits in `docs/22_NO_JAVASCRIPT_CHALLENGE_PROTOCOL.md` are
 owner-approved. No CAPTCHA dependency or endpoint is enabled until the pinned
 rendering, audio/accessibility, PostgreSQL-concurrency, and production-boundary
 reviews are complete.
+
+The exact audit-event encoding, durable-acceptance receipt, replay controls,
+Merkle proofs, independently witnessed checkpoints, and signing-key separation
+in `docs/23_AUDIT_RECEIPT_AND_TRANSPARENCY_PROTOCOL.md` are a proposal only.
+No Audit Service, receipt gate, or protected operation is authorized until the
+project owner approves the visible choices and the independent protocol review
+and production gates are complete.
 
 ## Local preview
 

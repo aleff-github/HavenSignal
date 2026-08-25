@@ -60,18 +60,31 @@ OpenBao remains only a candidate. Approval requires a release-blocking proof of 
 
 ## CRITICAL — Audit receipt and tamper-evidence construction
 
-The approved protocol requires pre-action durable receipts and REQUESTED/AUTHORIZED/COMPLETED/FAILED events where needed.
+The approved lifecycle requires pre-action durable receipts and
+REQUESTED/AUTHORIZED/COMPLETED/FAILED events where needed.
 
-Still OPEN:
+`docs/23_AUDIT_RECEIPT_AND_TRANSPARENCY_PROTOCOL.md` now proposes the exact
+version-1 construction. It is **PROPOSED**, not approved or authorizing.
 
-- exact receipt format and anti-replay binding;
-- hash-chain/batch format;
-- signed checkpoint format and cadence;
-- independent verification mechanism and schedule;
-- audit-signing key lifecycle;
-- exact detection/alert behavior for gaps, truncation, and cessation.
+Project-owner decisions still required:
 
-Hash chaining alone is not acceptable.
+- deterministic CBOR, COSE Sign1/Ed25519, separated receipt/checkpoint keys,
+  and the exact event/receipt schemas;
+- idempotency/nonces and per-operation non-sliding receipt lifetimes;
+- RFC 9162 Merkle and RFC 9942 proof profiles plus the 60-second/1,024-event
+  merge rule;
+- five-minute heartbeats, seven-minute witness alerting, and fail-closed
+  cessation of protected receipt issuance within 90 seconds;
+- key rotation and 365-day event / 730-day verification-evidence retention.
+
+Independent cryptographic/protocol review remains mandatory after owner
+approval. Audit topology, HSM/signer, service authentication, PostgreSQL
+durability/concurrency, clock, alert transport, deployment, and dependent-flow
+reviews also remain OPEN.
+
+Hash chaining alone is not acceptable. The proposal instead uses independently
+witnessed signed Merkle checkpoints to detect mutation, gaps, forks,
+truncation, rollback, and cessation.
 
 ## CLOSED — Submission acceptance, audit, and credential-delivery sequencing
 
@@ -192,7 +205,11 @@ Alerts must contain only controlled metadata.
 
 ## HIGH — Audit retention expiry authority
 
-Audit retention is 365 days, while the report application has no historical delete authority. The exact collector/store-controlled expiry mechanism, checkpoint retention behavior, and proof that application/operator roles cannot accelerate deletion remain OPEN.
+Audit retention is 365 days, while the report application has no historical
+delete authority. `docs/23_AUDIT_RECEIPT_AND_TRANSPARENCY_PROTOCOL.md` proposes
+collector-controlled 365-day event retention and 730-day verification-evidence
+retention. The durations, expiry mechanism, and proof that application/operator
+roles cannot accelerate deletion remain unapproved and OPEN.
 
 ## HIGH — Administrator network/session access profile
 

@@ -161,6 +161,26 @@ Test:
 - hash-chain verification detects mutation;
 - independent checkpoints detect suffix truncation, gaps, and audit cessation.
 - collector-controlled 365-day expiry cannot be accelerated by application/operator roles and preserves the approved checkpoint evidence.
+- RFC 8949 deterministic CBOR and closed-schema rejection use published vectors
+  and reject alternate encodings, types, sizes, unknown fields, and trailing data;
+- COSE Sign1/Ed25519 verification rejects altered payloads, signatures, key IDs,
+  algorithms, content types, and key substitution;
+- RFC 9162 roots/inclusion/consistency and RFC 9942 receipts match published
+  vectors and reject malformed or context-mismatched proofs;
+- no receipt bytes are released before the audit event and receipt commit is
+  durably complete, including every injected crash point;
+- 20–100 synchronized retries over multiple PostgreSQL connections and
+  processes produce one leaf and one byte-identical receipt for the same exact
+  request, while mismatched retries and reused nonces fail closed;
+- mutation, middle deletion, duplicate index, suffix truncation, fork, rollback,
+  checkpoint-key substitution, and cessation are detected;
+- proposed maximum merge delay, heartbeats, witness liveness, and fail-closed
+  issuance cutoff are tested with a controlled clock;
+- signer rotations and event/proof retention preserve historical verification
+  without granting early-expiry or signing authority to application roles.
+
+SQLite, a single process, an application cache/lock, or an in-memory collector
+does not satisfy audit concurrency and durability acceptance.
 
 ## Emergency export
 

@@ -54,12 +54,15 @@ When JavaScript is disabled, the approved direction is a completely self-hosted 
 - no IP/device fingerprinting;
 - no third-party tracking.
 
-The exact no-JavaScript CAPTCHA technology and expiry remain OPEN. Its anti-automation strength may be lower than ALTCHA and this difference must be documented honestly.
+The project-owned no-JavaScript protocol and five-minute expiry are
+owner-approved. Its anti-automation strength may be lower than ALTCHA and this
+difference must be documented honestly.
 
-`docs/22_NO_JAVASCRIPT_CHALLENGE_PROTOCOL.md` contains the current proposed
+`docs/22_NO_JAVASCRIPT_CHALLENGE_PROTOCOL.md` contains the owner-approved
 server-side protocol, atomic single-use semantics, five-minute expiry, anonymous
 global limits, and candidate assessment. It remains non-authorizing until its
-owner decisions and dependent rendering/accessibility reviews are complete.
+pinned Pillow/font, self-hosted audio/accessibility, PostgreSQL-concurrency,
+and production-boundary reviews are complete.
 
 Tor Browser at the Safest level must remain usable once the no-JavaScript path is approved.
 
