@@ -71,6 +71,20 @@ pre-normalization copy is retained. This resolves the earlier export wording
 conflict but does not approve the other `docs/26` choices or close its review
 and implementation gates.
 
+## CRITICAL — Emergency Export cryptographic construction and workflow
+
+`docs/28_EMERGENCY_EXPORT_CRYPTOGRAPHIC_PROTOCOL.md` proposes binary
+single-recipient X25519 `age` v1 encryption, a closed uncompressed `ustar`
+profile, RFC 8785 manifest bytes, detached COSE Sign1/Ed25519, exact request
+binding, distinct-role recipient-key activation, fenced streaming generation,
+encrypted-only staging, and one-shot delivery.
+
+Its eight listed choices await consolidated pre-code owner approval and
+independent cryptographic/protocol review. Alert transport/durable acceptance,
+Key Service/export capability, pinned tools, signer/HSM, external private-key
+custody, PostgreSQL concurrency, audit deployment, workstation handling, and
+production isolation remain independently blocking.
+
 ## CRITICAL — Key Service product, topology, and proof of non-resurrection
 
 The policy is approved:

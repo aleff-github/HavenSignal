@@ -42,7 +42,8 @@ Read, in order:
 13. `docs/25_MFA_STEP_UP_AND_CREDENTIAL_LIFECYCLE.md`
 14. `docs/26_REPORT_CONTENT_CRYPTOGRAPHIC_PROTOCOL.md`
 15. `docs/27_KEY_SERVICE_ACCEPTANCE_AND_NON_RESURRECTION_POC.md`
-16. `START-CODEX.md`
+16. `docs/28_EMERGENCY_EXPORT_CRYPTOGRAPHIC_PROTOCOL.md`
+17. `START-CODEX.md`
 
 ## Source material
 
@@ -108,14 +109,23 @@ disabled pending that decision and independent review.
 The exact Report-DEK, per-object subkey, fixed-length text/attachment framing,
 AEAD envelope, staging, and narrow decryption model in
 `docs/26_REPORT_CONTENT_CRYPTOGRAPHIC_PROTOCOL.md` are proposed for the
-consolidated pre-code decision. Report submission and content access remain
-disabled pending approval, independent review, and Key Service/file/deployment
-gates.
+consolidated pre-code decision. Its strict UTF-8/NFC/LF canonical-text and
+no-raw-copy subdecision is owner-approved; the rest of the protocol remains
+proposed. Report submission and content access remain disabled pending approval,
+independent review, and Key Service/file/deployment gates.
 
 `docs/27_KEY_SERVICE_ACCEPTANCE_AND_NON_RESURRECTION_POC.md` proposes the
 candidate-neutral Key Service capability and destructive acceptance plan. No
 product, including OpenBao, is approved without a real production-equivalent
 snapshot/rollback/stale-replica/disaster-recovery PoC and independent review.
+
+The exact Emergency Export request binding, closed `ustar` package, binary
+single-recipient X25519 `age` encryption, RFC 8785 manifest, detached COSE
+Sign1/Ed25519 signature, fenced workflow, encrypted staging, and one-shot
+delivery in `docs/28_EMERGENCY_EXPORT_CRYPTOGRAPHIC_PROTOCOL.md` are proposed
+for the consolidated pre-code decision. Export remains disabled pending owner
+approval, independent review, and the named alert, Key Service, signer, custody,
+concurrency, workstation, and deployment gates.
 
 ## Local preview
 

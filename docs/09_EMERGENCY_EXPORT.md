@@ -86,7 +86,12 @@ The organization holds the corresponding private key under a separately approved
 
 The operator may download the encrypted artifact.
 
-The exact public-key encryption format, manifest-signature construction, key identifiers/versioning, and key-rotation procedure require explicit approval before implementation.
+`docs/28_EMERGENCY_EXPORT_CRYPTOGRAPHIC_PROTOCOL.md` proposes the exact binary
+single-recipient X25519 `age` v1 format, closed `ustar` package, RFC 8785
+manifest, detached COSE Sign1/Ed25519 signature, key identifiers/rotation,
+fenced workflow, and encrypted-only staging/delivery lifecycle. It remains
+non-authorizing pending consolidated owner approval, independent review, and
+all named production gates.
 
 Plaintext package components and temporary files must be minimized, isolated, and deleted through a defined normal/crash/timeout cleanup lifecycle. No unnecessary plaintext export artifact may persist.
 

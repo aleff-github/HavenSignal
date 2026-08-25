@@ -235,6 +235,23 @@ Test:
 - mandatory audit/notification precondition failure blocks artifact release;
 - crash/timeout cleanup removes plaintext temporary package components;
 - accepted residual risk is documented and not misrepresented as prevented.
+- the exact deterministic-CBOR request descriptor binds note, reason, immutable
+  content envelopes, operator/session/lease/state, and active recipient/signer;
+- only the closed uncompressed `ustar` profile and fixed safe member order,
+  paths, metadata, sizes, padding, and end marker are accepted;
+- RFC 8785 manifest bytes, detached tagged COSE Sign1/Ed25519, external key
+  registry, and every exact content hash verify independently;
+- binary `age` v1 contains exactly one native X25519 recipient and rejects
+  passphrase, plugin, SSH, hybrid, multiple-recipient, armored, and unknown
+  profiles for version 1;
+- export/export, export/finalization, export/deletion, stale worker, lease
+  expiry, duplicate request, and delivery replay races have one fenced winner;
+- no plaintext package/member or private recipient key appears in filesystem,
+  swap, core, queue, log, audit, alert, trace, proxy, or backup inspection;
+- the organization-side canary decrypt/signature/content ceremony succeeds,
+  while the production platform demonstrably lacks the recipient private key;
+- encrypted staging is never released before the durable COMPLETED receipt and
+  one-shot POST delivery cannot be resumed, replayed, or served after expiry.
 
 ## Recovery and Response-DEK
 

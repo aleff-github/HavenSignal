@@ -44,6 +44,11 @@ review.
 candidate-neutral Key Service capability and destructive acceptance plan. No
 product/topology is approved until the real production-equivalent PoC passes.
 
+`docs/28_EMERGENCY_EXPORT_CRYPTOGRAPHIC_PROTOCOL.md` is the proposed exact
+request binding, package, public-key encryption, manifest signature, key
+separation, fenced generation, encrypted staging, delivery, and verification
+protocol. It awaits consolidated approval and independent review.
+
 ## Traceability index
 
 | Requirement IDs | Severity | Primary design documents | Verification | Current gate |
@@ -75,8 +80,8 @@ product/topology is approved until the real production-equivalent PoC passes.
 | SEC-RESPONSE-002..008 | CRITICAL | 04 Cryptographic Model; 05 Recovery Response; 24 Response Crypto Protocol | 14: AEAD/context, Response-DEK lifecycle/restore/first-read race/expiry-denial tests | Exact construction owner-approved; independent review OPEN; unread lifetime separately OPEN |
 | SEC-FINALIZE-001..004, SEC-FINALIZE-006 | CRITICAL | 03 Lifecycle; 04 Cryptographic Model; 06 Operator Sessions; 24 Response Crypto Protocol | 14: every crash point, retry, race, immutable staging, activation, visibility tests | Sequence and Response crypto owner-approved; external service gates remain |
 | SEC-FINALIZE-005 | HIGH | 03 Lifecycle; 08 Audit Logging | 14: deletion retry/alert tests | Alert transport details OPEN |
-| SEC-EXPORT-001..005 | CRITICAL/HIGH | 09 Emergency Export; 15 Trust Boundaries | 14: export safeguards, crypto, cleanup tests | Exact crypto format, signing, alert semantics OPEN |
-| SEC-EXPORT-006 | HIGH | 02 Threat Model; 09 Emergency Export | Threat-model acceptance review | Accepted residual risk |
+| SEC-EXPORT-001..005 | CRITICAL/HIGH | 09 Emergency Export; 15 Trust Boundaries; 28 Export Crypto Proposal | 14/28: binding, package, encryption, signature, fencing, delivery, cleanup tests | Exact protocol PROPOSED; owner/review, alert, Key Service, signer, custody, concurrency, and deployment gates OPEN |
+| SEC-EXPORT-006 | HIGH | 02 Threat Model; 09 Emergency Export; 28 Export Crypto Proposal | Threat-model acceptance and workflow review | Accepted residual risk; proposed controls do not claim prevention |
 | SEC-CAPTCHA-001..002 | CRITICAL | 10 Network Anonymity; 11 Technology Decisions; 20 Submission Protocol; 22 No-JS Challenge | 14: self-hosting/mandatory-flow tests | No-JS protocol owner-approved; rendering/audio/accessibility and production reviews remain |
 | SEC-CAPTCHA-003 | HIGH | 10 Network Anonymity; 12 Open Decisions; 22 No-JS Challenge | 14: no-JS expiry/replay/race/Tor tests | Owner-approved; dependent reviews and PostgreSQL concurrency proof required |
 | SEC-CAPTCHA-004 | CRITICAL | 10 Network Anonymity | 14: dependency-failure tests | No fallback permitted |
