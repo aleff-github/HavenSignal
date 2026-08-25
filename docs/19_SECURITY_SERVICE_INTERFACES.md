@@ -318,7 +318,7 @@ Reporter-facing proxy, application, and upstream infrastructure configuration mu
 | Recovery Gateway/verifier | Owner-approved encoding/verifier; independent cryptographic review and dependent gates remain OPEN CRITICAL |
 | Original report protection/use | Exact construction PROPOSED in document 26; consolidated approval/review and Key Service gates OPEN CRITICAL |
 | Response protection/use | Exact construction owner-approved in document 24; independent review and Key Service gates OPEN CRITICAL |
-| Key Service | Product, topology, state-aware policy, replication, backup, and non-resurrection proof — OPEN CRITICAL |
+| Key Service | Exact acceptance/capability plan PROPOSED in document 27; product, topology, real PoC, and independent review OPEN CRITICAL |
 | Audit receipts/checkpoints | Receipt, anti-replay, chain/batch, signatures, independent verification, alerting — OPEN CRITICAL |
 | Emergency Export | Encryption format, signed manifest, key identifiers, rotation, signing-key lifecycle — OPEN CRITICAL |
 | File Processing Sandbox | PDF/image profiles, tools, decoded-resource limits, sandbox and temporary lifecycle — OPEN HIGH |

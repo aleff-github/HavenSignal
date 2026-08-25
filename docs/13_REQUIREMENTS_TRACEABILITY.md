@@ -38,6 +38,10 @@ protocol. It awaits consolidated pre-code owner approval and independent review.
 Report-DEK, per-object subkey, AEAD, fixed-length content framing, staging, and
 narrow decryption protocol. It awaits consolidated approval and review.
 
+`docs/27_KEY_SERVICE_ACCEPTANCE_AND_NON_RESURRECTION_POC.md` is the proposed
+candidate-neutral Key Service capability and destructive acceptance plan. No
+product/topology is approved until the real production-equivalent PoC passes.
+
 ## Traceability index
 
 | Requirement IDs | Severity | Primary design documents | Verification | Current gate |
@@ -58,9 +62,9 @@ narrow decryption protocol. It awaits consolidated approval and review.
 | SEC-AUTH-008 | HIGH | 06 Operator Sessions; 12 Open Decisions; 25 MFA Proposal | Procedure/security review | Enrollment/reset/recovery PROPOSED; organizational procedure OPEN |
 | SEC-AUTH-009 | CRITICAL | 06 Operator Sessions; 11 Technology Decisions; 15 Trust Boundaries; 25 MFA Proposal | 14: administrator MFA/anti-impersonation tests | Exact separation/recovery PROPOSED; approval/review OPEN |
 | SEC-DEL-001..006 | CRITICAL/HIGH | 03 Lifecycle; 04 Cryptographic Model | 14: finalization/key-destruction/blob retry tests | Depends on Key Service and finalization gates |
-| SEC-KEY-001..004 | CRITICAL | 04 Cryptographic Model; 11 Technology Decisions | 14: restore/rollback/stale-replica release gate | Product/topology/PoC OPEN |
-| SEC-KEY-005 | HIGH | 04 Cryptographic Model | Key inventory and lifecycle review | Per-key operational procedures partially OPEN |
-| SEC-KEY-006..007 | CRITICAL | 02 Threat Model; 04 Cryptographic Model; 15 Trust Boundaries | 14: negative capability and combined-backup restoration tests | Exact Key Service policy implementation OPEN |
+| SEC-KEY-001..004 | CRITICAL | 04 Cryptographic Model; 11 Technology Decisions; 27 Key Service PoC Proposal | 14/27: destructive restore/rollback/stale-replica release gate | Acceptance plan PROPOSED; product/topology/real PoC OPEN |
+| SEC-KEY-005 | HIGH | 04 Cryptographic Model; 27 Key Service PoC Proposal | Key inventory, separation, and lifecycle review | Application key roles specified; product procedures OPEN |
+| SEC-KEY-006..007 | CRITICAL | 02 Threat Model; 04 Cryptographic Model; 15 Trust Boundaries; 27 Key Service PoC Proposal | 14/27: negative capability and combined-backup restoration tests | Capability policy PROPOSED; implementation and real proof OPEN |
 | SEC-ROLE-001..003 | CRITICAL | 02 Threat Model; 15 Trust Boundaries | 14: role/capability tests | MFA/admin operational procedures OPEN |
 | SEC-ROLE-004 | HIGH | 02 Threat Model | Threat-model review | Accepted limitation |
 | SEC-RECOVERY-001..004 | CRITICAL | 05 Recovery Response; 20 Submission Protocol; 21 Recovery Credential Construction | 14: recovery enumeration/secret-handling tests | Owner choices approved; independent cryptographic review and dependent gates remain OPEN |

@@ -76,6 +76,11 @@ The approved per-object key policy permits live replication of active Report-DEK
 
 Approval requires a release-blocking proof of concept covering replication, delete, snapshot/restore, rollback, delayed/stale replicas, and disaster recovery. OpenBao is not presumed compliant.
 
+`docs/27_KEY_SERVICE_ACCEPTANCE_AND_NON_RESURRECTION_POC.md` defines the
+proposed exact acceptance environment, capabilities, destructive test matrix,
+evidence, and no-exception verdict rule. No candidate is selected by that
+proposal; a production-equivalent PoC and independent review remain mandatory.
+
 ## Operator MFA
 
 Preferred:

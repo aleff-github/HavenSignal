@@ -41,7 +41,8 @@ Read, in order:
 12. `docs/24_RESPONSE_NOTE_CRYPTOGRAPHIC_PROTOCOL.md`
 13. `docs/25_MFA_STEP_UP_AND_CREDENTIAL_LIFECYCLE.md`
 14. `docs/26_REPORT_CONTENT_CRYPTOGRAPHIC_PROTOCOL.md`
-15. `START-CODEX.md`
+15. `docs/27_KEY_SERVICE_ACCEPTANCE_AND_NON_RESURRECTION_POC.md`
+16. `START-CODEX.md`
 
 ## Source material
 
@@ -110,6 +111,11 @@ AEAD envelope, staging, and narrow decryption model in
 consolidated pre-code decision. Report submission and content access remain
 disabled pending approval, independent review, and Key Service/file/deployment
 gates.
+
+`docs/27_KEY_SERVICE_ACCEPTANCE_AND_NON_RESURRECTION_POC.md` proposes the
+candidate-neutral Key Service capability and destructive acceptance plan. No
+product, including OpenBao, is approved without a real production-equivalent
+snapshot/rollback/stale-replica/disaster-recovery PoC and independent review.
 
 ## Local preview
 

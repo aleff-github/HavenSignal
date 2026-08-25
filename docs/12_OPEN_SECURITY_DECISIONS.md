@@ -81,6 +81,13 @@ Still OPEN:
 
 OpenBao remains only a candidate. Approval requires a release-blocking proof of concept covering delete propagation, snapshot/restore, rollback, delayed/stale replicas, and disaster recovery.
 
+`docs/27_KEY_SERVICE_ACCEPTANCE_AND_NON_RESURRECTION_POC.md` proposes the exact
+candidate-neutral capability matrix, workload authentication, forward-only key
+states, backup prohibition, destructive test environment, and binary verdict.
+It explicitly permits rejection of OpenBao and cannot itself substitute for the
+real PoC. Its six choices await consolidated pre-code owner approval;
+product/topology approval remains OPEN until every test passes independently.
+
 ## CRITICAL — Audit receipt and tamper-evidence construction
 
 The approved lifecycle requires pre-action durable receipts and

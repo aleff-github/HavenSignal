@@ -52,6 +52,11 @@ The project explicitly accepts that catastrophic loss of the complete DEK trust 
 
 No Key Service product is approved until a release-blocking proof of concept demonstrates these properties under every supported restore procedure.
 
+`docs/27_KEY_SERVICE_ACCEPTANCE_AND_NON_RESURRECTION_POC.md` proposes the exact
+candidate-neutral capability, topology, destructive canary, stale-replica,
+snapshot/rollback/disaster-recovery matrix, and binary acceptance rule. A real
+production-equivalent PoC remains mandatory; the document itself cannot pass it.
+
 ## Cryptographic erase and finalization
 
 Finalization is a resumable multi-service protocol, not one distributed atomic transaction. When a report is finalized:
@@ -101,6 +106,9 @@ Python application cryptography candidate:
 Key-service candidate:
 
 - OpenBao or another isolated vault/HSM-capable design.
+
+OpenBao's ordinary persistent/backup-capable topology is not presumed
+compatible. It must pass every `docs/27` restoration test or be rejected.
 
 No key-management product is approved until its snapshot/backup/replication/deletion semantics are proven compatible with non-resurrection.
 
