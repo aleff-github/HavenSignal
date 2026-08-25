@@ -39,7 +39,8 @@ Read, in order:
 10. `docs/22_NO_JAVASCRIPT_CHALLENGE_PROTOCOL.md`
 11. `docs/23_AUDIT_RECEIPT_AND_TRANSPARENCY_PROTOCOL.md`
 12. `docs/24_RESPONSE_NOTE_CRYPTOGRAPHIC_PROTOCOL.md`
-13. `START-CODEX.md`
+13. `docs/25_MFA_STEP_UP_AND_CREDENTIAL_LIFECYCLE.md`
+14. `START-CODEX.md`
 
 ## Source material
 
@@ -95,6 +96,12 @@ Response-DEK operations, staging, and first-read expiry sequence in
 `docs/24_RESPONSE_NOTE_CRYPTOGRAPHIC_PROTOCOL.md` are owner-approved. No
 finalization or recovery-decryption implementation is authorized before the
 independent protocol review and Key Service production gates are complete.
+
+The production WebAuthn profile, exact artifact binding, server-side one-time
+step-up authorization, and factor lifecycle in
+`docs/25_MFA_STEP_UP_AND_CREDENTIAL_LIFECYCLE.md` are proposed for the
+consolidated pre-code decision. Authentication and protected operations remain
+disabled pending that decision and independent review.
 
 ## Local preview
 

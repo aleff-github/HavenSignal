@@ -21,7 +21,11 @@ Before generation:
 5. `EMERGENCY_EXPORT_REQUESTED` must be durably accepted and produce the required audit receipt;
 6. the administrator is notified of the export event.
 
-The exact step-up TTL remains OPEN. The artifact must not be released if a mandatory audit or notification precondition has not reached its approved durable state.
+The proposed exact step-up TTL, WebAuthn ceremony, and canonical export-request
+binding are in `docs/25_MFA_STEP_UP_AND_CREDENTIAL_LIFECYCLE.md`. They remain
+OPEN pending the consolidated pre-code decision and independent review. The
+artifact must not be released if a mandatory audit or notification precondition
+has not reached its approved durable state.
 
 ## Export contents
 

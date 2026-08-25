@@ -121,4 +121,8 @@ After finalization, the original report cannot be reopened.
 
 Once the committed `FINALIZING` transition occurs, ordinary operator rendering/editing, reopen, and Emergency Export are disabled for that report; only the scoped finalization resume path remains valid.
 
-The exact step-up TTL and operator/administrator MFA enrollment, reset, and recovery procedures remain OPEN and must be approved before implementation.
+`docs/25_MFA_STEP_UP_AND_CREDENTIAL_LIFECYCLE.md` contains the proposed exact
+120-second step-up, WebAuthn profile, HMAC artifact binding, enrollment,
+replacement, and recovery procedures. It remains non-authorizing pending the
+consolidated pre-code owner decision, independent authentication/security
+review, hardware/library validation, workstation profile, and deployment gates.
