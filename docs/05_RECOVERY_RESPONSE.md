@@ -4,9 +4,12 @@
 
 Allow a reporter to return later and read exactly one Response Note without an account, email address, phone number, or authenticated identity.
 
-## Current proposed credential model
+## Current owner-approved credential model
 
-The credential model is approved in principle, but its exact encoding and verifier construction remain OPEN CRITICAL and must be confirmed before implementation.
+The exact encoding and verifier choices in
+`docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md` are owner-approved. They remain
+OPEN CRITICAL for implementation until the required independent cryptographic
+review is complete.
 
 Use two independently generated values:
 
@@ -40,7 +43,9 @@ Il Recovery Secret viene mostrato una sola volta.
 Senza questi dati non potrai leggere la risposta.
 ```
 
-The exact displayed encoding is not final.
+The exact displayed encoding is owner-approved in
+`docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md` but remains implementation-gated
+by independent cryptographic review.
 
 ## Display-once rule
 

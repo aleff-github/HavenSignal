@@ -70,16 +70,16 @@ closes only the sequencing decision: dependent CAPTCHA, credential, AEAD, Key
 Service, audit-receipt, request-size, and file/sandbox gates still prevent a
 report form, endpoint, or protected database transition executor.
 
-The exact Ticket ID, Recovery Secret, and keyed-verifier construction is also
-documented as a review-only proposal in
-`docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md`. Recovery remains disabled until
-that proposal, its independent cryptographic review, and every dependent gate
-are complete.
+The exact Ticket ID, Recovery Secret, and keyed-verifier construction in
+`docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md` is owner-approved. Recovery
+remains disabled until its independent cryptographic review and every
+dependent gate are complete.
 
 The self-hosted no-JavaScript challenge, atomic consumption, and anonymous
-global abuse limits are proposed in
-`docs/22_NO_JAVASCRIPT_CHALLENGE_PROTOCOL.md`. No CAPTCHA dependency or endpoint
-is enabled by that proposal.
+global abuse limits in `docs/22_NO_JAVASCRIPT_CHALLENGE_PROTOCOL.md` are
+owner-approved. No CAPTCHA dependency or endpoint is enabled until the pinned
+rendering, audio/accessibility, PostgreSQL-concurrency, and production-boundary
+reviews are complete.
 
 ## Local preview
 

@@ -2,16 +2,18 @@
 
 ## Status
 
-**PROPOSED — project-owner and independent cryptographic review required.**
+**OWNER-APPROVED — project-owner decision recorded on 2026-08-25;
+independent cryptographic review remains required.**
 
-This document selects exact credential encodings and a keyed-verifier
-construction for review. It does not authorize submission or recovery
-endpoints. The dependent submission sequence, CAPTCHA, Response-DEK, Key
-Service, audit-receipt, and deployment gates remain independently blocking.
+This approval records all five owner choices in this document. It does not
+substitute for the independent cryptographic review required by
+`SEC-RECOVERY-005` and does not authorize submission or recovery endpoints.
+CAPTCHA, Response-DEK, Key Service, audit-receipt, deployment, and other
+dependent gates remain independently blocking.
 
 ## Governing requirements
 
-This proposal applies primarily to:
+This owner-approved construction applies primarily to:
 
 - `SEC-CONF-006..008`;
 - `SEC-ANON-001..004`;
@@ -300,9 +302,9 @@ expected HMAC tag   = c05bdf21866a92c9c0b74bdda3bc7ca6
 Test-vector material is public fixture data and must never be accepted as a
 production key or credential.
 
-## Decisions required for approval
+## Recorded project-owner decision
 
-The project owner must explicitly approve:
+On 2026-08-25 the project owner approved:
 
 1. 128-bit Ticket IDs encoded as strict, uppercase, unpadded RFC 4648 Base32;
 2. 256-bit Recovery Secrets encoded as strict, unpadded RFC 4648 base64url;

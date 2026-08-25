@@ -2,18 +2,19 @@
 
 ## Status
 
-**PROPOSED — project-owner review required. No CAPTCHA-protected operation is
-authorized by this document.**
+**OWNER-APPROVED — project-owner decision recorded on 2026-08-25; dependent
+rendering, audio/accessibility, and production-boundary reviews remain
+required.**
 
-This proposal selects the server-side protocol, expiry, one-time semantics,
-anonymous abuse controls, and rendering boundary for the no-JavaScript path.
-It does not approve submission, recovery, finalization, Emergency Export,
-ALTCHA, a production deployment, or any dependent cryptographic/audit/file
-construction.
+This approval records all five owner choices for the server-side protocol,
+expiry, one-time semantics, anonymous abuse controls, and rendering boundary.
+It does not authorize submission, recovery, finalization, Emergency Export,
+ALTCHA, a production deployment, or any dependent cryptographic, audit, file,
+font/Pillow, audio, accessibility, or deployment construction.
 
 ## Governing requirements
 
-This proposal applies primarily to:
+This owner-approved protocol applies primarily to:
 
 - `SEC-ANON-001..004`;
 - `SEC-CAPTCHA-001..004`;
@@ -78,7 +79,7 @@ The upstream package may be reconsidered later as a rendering reference, but
 its validator, model, URLs, refresh endpoint, audio temporary-file behavior,
 test mode, and fallback behavior are not approved implicitly.
 
-### Proposed implementation boundary
+### Approved implementation boundary
 
 Use a small project-owned, separately reviewable Challenge Service behind the
 approved narrow CAPTCHA interface. Production credentials, network policy,
@@ -261,7 +262,7 @@ No IP address, User-Agent, ASN, geography, TLS fingerprint, canvas fingerprint,
 device identifier, persistent cookie, or reporter account is used as a rate
 key.
 
-The proposed baseline uses centralized, server-time token buckets, atomically
+The approved baseline uses centralized, server-time token buckets, atomically
 updated across all Challenge Service replicas. Buckets are separate by public
 purpose and action:
 
@@ -361,9 +362,9 @@ Tests must prove:
   challenge without JavaScript;
 - the approved audio path passes accessibility review without temporary files.
 
-## Decisions required for approval
+## Recorded project-owner decision
 
-The project owner must explicitly approve:
+On 2026-08-25 the project owner approved:
 
 1. the honest limited security claim and the global-denial-of-service residual
    risk caused by refusing IP/device/identity tracking;
