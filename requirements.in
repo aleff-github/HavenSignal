@@ -1,0 +1,2 @@
+# Direct runtime dependencies. Keep this list intentionally minimal.
+Django==5.2.17
