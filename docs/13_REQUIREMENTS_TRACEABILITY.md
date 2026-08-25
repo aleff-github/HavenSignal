@@ -4,6 +4,8 @@
 
 The original questionnaire remains historical evidence under `/source` and is lower precedence than current Markdown decisions.
 
+`docs/19_SECURITY_SERVICE_INTERFACES.md` is the approved cross-cutting capability and dependency map. Its approval does not close any implementation gate in `docs/12_OPEN_SECURITY_DECISIONS.md`.
+
 ## Traceability index
 
 | Requirement IDs | Severity | Primary design documents | Verification | Current gate |
@@ -47,6 +49,21 @@ The original questionnaire remains historical evidence under `/source` and is lo
 | SEC-ALERT-003 | HIGH | 12 Open Decisions | Procedure/failure tests | OPEN |
 | SEC-BROWSER-001..002 | CRITICAL | 05 Recovery Response; 06 Operator Sessions; 16 Django Rules | 14: browser caching tests | Browser guarantee boundary documented |
 | SEC-INPUT-001..006 | HIGH | 00 Scope; 07 File Security; 16 Django Rules | 14: input/upload/body-limit tests | Aggregate and decoded-resource limits OPEN |
+
+## Cross-cutting interface mapping
+
+The approved capability profiles, negative permissions, dependency edges, credential separation, and failure behavior in `19_SECURITY_SERVICE_INTERFACES.md` apply across:
+
+- confidentiality and role separation: `SEC-CONF-001..008`, `SEC-ROLE-001..004`;
+- audit append/read separation and durable receipts: `SEC-LOG-001..012`;
+- state, lease, fencing, and server-authoritative time: `SEC-ACCESS-001..015`;
+- authentication and action-bound step-up: `SEC-AUTH-001..009`;
+- key lifecycle and non-resurrection: `SEC-DEL-001..006`, `SEC-KEY-001..007`;
+- recovery and Response-DEK use: `SEC-RECOVERY-001..005`, `SEC-RESPONSE-001..008`;
+- finalization and export orchestration: `SEC-FINALIZE-001..006`, `SEC-EXPORT-001..006`;
+- CAPTCHA, sandboxing, alerts, and browser persistence: `SEC-CAPTCHA-001..004`, `SEC-FILE-001..006`, `SEC-ALERT-001..003`, `SEC-BROWSER-001..002`.
+
+Every `GATED` capability in that document remains unavailable until its existing traceability gate is closed. The mapping introduces no new implementation approval.
 
 ## Superseded and clarified decisions
 

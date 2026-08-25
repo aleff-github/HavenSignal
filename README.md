@@ -33,7 +33,8 @@ Read, in order:
 4. `docs/02_THREAT_MODEL.md`
 5. `docs/03_DATA_LIFECYCLE.md`
 6. `docs/12_OPEN_SECURITY_DECISIONS.md`
-7. `START-CODEX.md`
+7. `docs/19_SECURITY_SERVICE_INTERFACES.md`
+8. `START-CODEX.md`
 
 ## Source material
 
@@ -43,8 +44,6 @@ The Markdown specification incorporates later clarifications and therefore takes
 
 ## Current implementation status
 
-No production code is included in this handoff.
+The repository contains only an empty Django 5.2.17 development scaffold with no installed application, product route, or business logic.
 
-This is intentional.
-
-Codex should first perform a specification consistency review and threat-boundary review before creating the Django project.
+Security-sensitive components remain blocked by their applicable OPEN decisions. The service interfaces and negative capability boundaries are approved as the implementation boundary, without closing those decisions.
