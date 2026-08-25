@@ -54,6 +54,11 @@ exact JPEG/PNG/PDF admission, resource, parser, disposable-microVM, plaintext
 lifecycle, and PNG-only operator-view protocol. It awaits consolidated approval
 and independent parser/sandbox review.
 
+`docs/30_REQUEST_AND_MULTIPART_ADMISSION_PROTOCOL.md` is the proposed exact
+body/multipart/resource/time ceiling, streaming proxy, bounded Django upload
+handler, and no-spool/failure protocol. It awaits consolidated approval and
+independent HTTP/proxy/Django review.
+
 ## Traceability index
 
 | Requirement IDs | Severity | Primary design documents | Verification | Current gate |
@@ -96,7 +101,7 @@ and independent parser/sandbox review.
 | SEC-ALERT-002 | CRITICAL | 08 Audit Logging | 14: allowlisted-payload tests | No content-bearing alerts permitted |
 | SEC-ALERT-003 | HIGH | 12 Open Decisions | Procedure/failure tests | OPEN |
 | SEC-BROWSER-001..002 | CRITICAL | 05 Recovery Response; 06 Operator Sessions; 16 Django Rules | 14: browser caching tests | Browser guarantee boundary documented |
-| SEC-INPUT-001..006 | HIGH | 00 Scope; 07 File Security; 16 Django Rules; 20 Submission Protocol; 26 Report Crypto Proposal | 14: input/upload/body-limit and fixed-frame tests | Per-file byte interpretation PROPOSED; aggregate and decoded-resource limits OPEN |
+| SEC-INPUT-001..006 | HIGH | 00 Scope; 07 File Security; 16 Django Rules; 20 Submission Protocol; 26 Report Crypto; 29 File/Sandbox; 30 Request Admission proposals | 14/29/30: canonical text, byte/body/multipart/decoded-resource/no-spool tests | Exact profiles PROPOSED; owner/review and production boundary gates OPEN |
 
 ## Cross-cutting interface mapping
 

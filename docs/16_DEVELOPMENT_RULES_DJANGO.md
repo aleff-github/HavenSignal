@@ -64,6 +64,12 @@ Move validation/rendering into isolated workers.
 
 Do not implement PDF upload until the approved structural profile and sandbox/CDR design exist. The web/proxy/worker pipeline must not durably spool unencrypted reporter files.
 
+`docs/30_REQUEST_AND_MULTIPART_ADMISSION_PROTOCOL.md` proposes the exact 21 MiB
+request/multipart profile, streaming proxy behavior, and a single bounded
+`SandboxStreamingUploadHandler`. Django's default memory and temporary upload
+handlers remain forbidden for the submission endpoint. The proposal is
+non-authorizing until owner/review and production no-spool gates close.
+
 ## Logging
 
 Create explicit structured logging schemas.
