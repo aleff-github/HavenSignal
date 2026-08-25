@@ -10,6 +10,11 @@ The original questionnaire remains historical evidence under `/source` and is lo
 sequencing and retry model. It remains non-authorizing while its project-owner
 choices and dependent OPEN constructions are unresolved.
 
+`docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md` is the proposed exact Ticket ID,
+Recovery Secret, and keyed-verifier construction. It remains non-authorizing
+until its project-owner choices and independent cryptographic review are
+complete.
+
 ## Traceability index
 
 | Requirement IDs | Severity | Primary design documents | Verification | Current gate |
@@ -35,8 +40,8 @@ choices and dependent OPEN constructions are unresolved.
 | SEC-KEY-006..007 | CRITICAL | 02 Threat Model; 04 Cryptographic Model; 15 Trust Boundaries | 14: negative capability and combined-backup restoration tests | Exact Key Service policy implementation OPEN |
 | SEC-ROLE-001..003 | CRITICAL | 02 Threat Model; 15 Trust Boundaries | 14: role/capability tests | MFA/admin operational procedures OPEN |
 | SEC-ROLE-004 | HIGH | 02 Threat Model | Threat-model review | Accepted limitation |
-| SEC-RECOVERY-001..004 | CRITICAL | 05 Recovery Response; 20 Submission Protocol | 14: recovery enumeration/secret-handling tests | Encoding/verifier and lost-response decisions still gate implementation |
-| SEC-RECOVERY-005 | CRITICAL | 05 Recovery Response; 12 Open Decisions | Cryptographic design review | OPEN |
+| SEC-RECOVERY-001..004 | CRITICAL | 05 Recovery Response; 20 Submission Protocol; 21 Recovery Credential Construction | 14: recovery enumeration/secret-handling tests | Encoding/verifier and lost-response proposals require approval; dependent gates remain |
+| SEC-RECOVERY-005 | CRITICAL | 05 Recovery Response; 12 Open Decisions; 21 Recovery Credential Construction | Owner decision and independent cryptographic design review | PROPOSED; not authorized |
 | SEC-RESPONSE-001 | CRITICAL | 00 Scope; 05 Recovery Response | Response validation/no-draft tests | No design blocker |
 | SEC-RESPONSE-002..008 | CRITICAL | 04 Cryptographic Model; 05 Recovery Response | 14: Response-DEK lifecycle/restore/first-read race/expiry-denial tests | Exact crypto and unread lifetime OPEN |
 | SEC-FINALIZE-001..004, SEC-FINALIZE-006 | CRITICAL | 03 Lifecycle; 04 Cryptographic Model; 06 Operator Sessions | 14: every crash point, retry, race, immutable staging, visibility tests | Protocol approved; external service interfaces gated by their designs |

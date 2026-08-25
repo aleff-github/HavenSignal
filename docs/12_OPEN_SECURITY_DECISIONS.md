@@ -16,6 +16,12 @@ Still OPEN:
 
 The failure behavior when a report is durably accepted but the one-time credential response does not reach the reporter also remains OPEN.
 
+`docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md` contains the current exact
+encoding, HMAC-SHA-256 verifier, key-separation, rotation, and failure proposal.
+It remains PROPOSED and does not close this gate until its five owner choices
+and an independent cryptographic review are complete. Lost-response sequencing
+remains governed separately by proposed `docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`.
+
 ## CRITICAL — Response Note cryptographic construction
 
 The approved model uses an independent Response-DEK. The Recovery Secret is not the sole material sufficient to decrypt a retained/restored ciphertext indefinitely.
