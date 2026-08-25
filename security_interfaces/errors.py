@@ -1,0 +1,25 @@
+"""Controlled failure types for unavailable mandatory security controls."""
+
+from enum import StrEnum
+
+
+class SecurityDependency(StrEnum):
+    """Allowlisted internal names; never populated from request data."""
+
+    ALERT_SERVICE = "alert_service"
+    AUDIT_RECEIPT_SERVICE = "audit_receipt_service"
+    CAPTCHA_SERVICE = "captcha_service"
+    FILE_SANDBOX = "file_sandbox"
+    KEY_SERVICE = "key_service"
+    RECOVERY_VERIFIER = "recovery_verifier"
+    STEP_UP_SERVICE = "step_up_service"
+
+
+class SecurityControlUnavailable(RuntimeError):
+    """Signal that a protected operation must stop without a weaker fallback."""
+
+    public_code = "security_control_unavailable"
+
+    def __init__(self, dependency: SecurityDependency) -> None:
+        self.dependency = dependency
+        super().__init__(self.public_code)

@@ -48,6 +48,11 @@ The repository contains a Django 5.2.17 development scaffold and one inert,
 read-only reporter landing page. The page has no form, JavaScript, analytics,
 third-party resources, report storage, authentication, or business logic.
 
+Mandatory security integrations whose designs remain OPEN are represented only
+by explicit deny-by-default placeholders under `security_interfaces/`. Every
+placeholder operation raises a controlled failure and provides no plaintext,
+cryptographic, audit-receipt, CAPTCHA, recovery, sandbox, MFA, or alert fallback.
+
 Security-sensitive components remain blocked by their applicable OPEN decisions. The service interfaces and negative capability boundaries are approved as the implementation boundary, without closing those decisions.
 
 ## Local preview
