@@ -119,11 +119,11 @@ Entering `FINALIZING` freezes the exact Response Note bytes and ends ordinary op
 
 Every phase must be idempotent, resumable after crash, safe for retry, fenced by current state/version, and resistant to double submit and export/finalize races.
 
-`docs/24_RESPONSE_NOTE_CRYPTOGRAPHIC_PROTOCOL.md` contains the current proposed
+`docs/24_RESPONSE_NOTE_CRYPTOGRAPHIC_PROTOCOL.md` contains the owner-approved
 exact Response Note byte profile, ciphertext envelope, non-exportable
 Response-DEK operations, staging, and first-read expiry sequence. It remains
-non-authorizing pending owner approval, independent cryptographic/protocol
-review, and its named production gates.
+non-authorizing pending independent cryptographic/protocol review and its named
+production gates.
 
 Required crash outcomes:
 
