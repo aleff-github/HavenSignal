@@ -59,9 +59,10 @@ cryptographic, audit-receipt, CAPTCHA, recovery, sandbox, MFA, or alert fallback
 Security-sensitive components remain blocked by their applicable OPEN decisions. The service interfaces and negative capability boundaries are approved as the implementation boundary, without closing those decisions.
 
 The submission acceptance, audit, retry, and one-time credential-delivery
-sequence is documented as a proposal in
-`docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`; it does not yet authorize a report
-form or endpoint.
+sequence in `docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md` is approved. This
+closes only the sequencing decision: dependent CAPTCHA, credential, AEAD, Key
+Service, audit-receipt, request-size, and file/sandbox gates still prevent a
+report form or endpoint.
 
 The exact Ticket ID, Recovery Secret, and keyed-verifier construction is also
 documented as a review-only proposal in

@@ -14,13 +14,17 @@ Still OPEN:
 - exact copy/display behavior beyond the server-side display-once rule;
 - exact keyed verifier construction, framing, domain separation, key lifecycle, and rotation.
 
-The failure behavior when a report is durably accepted but the one-time credential response does not reach the reporter also remains OPEN.
+The failure behavior when a report is durably accepted but the one-time
+credential response does not reach the reporter is approved in
+`docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`: accept the residual availability
+loss, never reissue or replace credentials, and never duplicate the same
+attempt.
 
 `docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md` contains the current exact
 encoding, HMAC-SHA-256 verifier, key-separation, rotation, and failure proposal.
 It remains PROPOSED and does not close this gate until its five owner choices
 and an independent cryptographic review are complete. Lost-response sequencing
-remains governed separately by proposed `docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`.
+is governed separately by approved `docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`.
 
 ## CRITICAL — Response Note cryptographic construction
 
@@ -68,9 +72,9 @@ Still OPEN:
 
 Hash chaining alone is not acceptable.
 
-## CRITICAL — Submission acceptance, audit, and credential-delivery sequencing
+## CLOSED — Submission acceptance, audit, and credential-delivery sequencing
 
-`SUBMISSION_RECEIVED` is required, but the exact failure-safe sequence between:
+The failure-safe sequence between:
 
 - durable audit acceptance;
 - report encryption/key creation;
@@ -78,13 +82,16 @@ Hash chaining alone is not acceptable.
 - one-time Ticket ID/Recovery Secret delivery;
 - retry after connection loss;
 
-remains OPEN. The design must not accept an unaudited report silently, leak plaintext, duplicate a submission through unsafe retry, or claim that credentials were delivered when the one-time response was lost.
+was approved by the project owner on 2026-08-25. The design must not accept an
+unaudited report silently, leak plaintext, duplicate a submission through
+unsafe retry, or claim that credentials were delivered when the one-time
+response was lost.
 
-`docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md` contains the current recommended
-sequence, failure matrix, and residual-risk option. It remains PROPOSED. This
-sequencing gate is not closed until the project owner explicitly decides its
-five listed approval questions. Dependent construction gates remain
-independently blocking even after sequencing approval.
+`docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md` is the approved authority for the
+sequence, state model, audit phases, retry behavior, reconciliation timing, and
+lost-response residual risk. The dependent CAPTCHA, recovery
+encoding/verifier, AEAD, Key Service, audit receipt, aggregate-size, and
+applicable file/sandbox gates remain independently blocking.
 
 ## CRITICAL — Emergency Export cryptographic formats
 
