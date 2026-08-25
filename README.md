@@ -151,6 +151,15 @@ pre-code decision. Alert-dependent operations remain disabled pending owner
 approval, independent security/operations review, and production deployment
 gates.
 
+The 90-day never-read response expiry, OPEN-only operator deletion without a
+Response Note, exceptional multi-person SEALED flood-deletion ceremony,
+receipt-gated forward key destruction, ciphertext cleanup, terminal metadata
+minimization, and isolated audit-retention authority in
+`docs/32_RETENTION_AND_DELETION_PROTOCOL.md` are proposed for the consolidated
+pre-code decision. They remain disabled pending owner and legal/operational
+approval, independent review, and all named Key Service/audit/MFA/alert and
+deployment gates.
+
 ## Local preview
 
 From this repository directory, using the prepared virtual environment:

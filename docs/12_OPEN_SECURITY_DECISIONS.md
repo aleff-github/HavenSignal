@@ -230,15 +230,29 @@ Need a concrete supported profile covering OS, browser, extensions, disk encrypt
 
 ## HIGH — Never-read Response Note retention
 
-The 72-hour lifetime starts at first successful read. A maximum lifetime for a Response Note that is never read remains undecided and requires operational/legal approval.
+`docs/32_RETENTION_AND_DELETION_PROTOCOL.md` proposes a 90-day deadline from
+`response_available_at` only while no first read has won. A valid first read
+before the boundary receives the full existing 72-hour window. Owner and
+legal/operational approval, independent review, exact Key Service transition,
+trusted clocks, concurrency proof, and deployment remain OPEN.
 
 ## HIGH — SEALED report deletion during floods
 
-The exceptional permission model, selection policy, safeguards, and race behavior remain OPEN. Automated classification/AI deletion remains forbidden.
+`docs/32` proposes closed admission plus infrastructure capacity attestation,
+Application Administrator declaration, two Operator approvals, a 30-minute and
+100-report cap, deterministic newest-first SEALED-only selection inside a fixed
+flood interval, no human content view/AI/scoring, per-report audit receipts,
+and skip-on-race behavior. Its exact choices await owner and independent
+security/operations review.
 
 ## HIGH — Operator deletion without Response Note
 
-`DELETED_WITH_REASON` is approved in principle, but the allowed source states, permission/step-up policy, protected-note behavior, Key Service/audit receipt sequence, recovery-endpoint behavior, and race handling remain OPEN.
+`docs/32` proposes OPEN-only eligibility, the `SPAM`, `EMPTY`, and
+`UNMANAGEABLE_CONTENT` registry, an optional encrypted 150-character note,
+CAPTCHA, exact-descriptor step-up, a forward-only `DELETING` workflow, durable
+pre-destruction audit receipt, generic recovery behavior, and explicit race
+handling. These choices await consolidated owner approval and independent
+review.
 
 ## HIGH — Aggregate request and decoded-resource limits
 
@@ -272,6 +286,10 @@ delete authority. `docs/23_AUDIT_RECEIPT_AND_TRANSPARENCY_PROTOCOL.md` defines
 collector-controlled 365-day event retention and 730-day verification-evidence
 retention. The durations are owner-approved; the expiry implementation and
 proof that application/operator roles cannot accelerate deletion remain OPEN.
+
+`docs/32` proposes the daily isolated retention job, dependency checks,
+controlled batch evidence, distinct-role configuration change, and fail-safe
+retain-longer behavior. Exact implementation and production proof remain OPEN.
 
 ## HIGH — Administrator network/session access profile
 

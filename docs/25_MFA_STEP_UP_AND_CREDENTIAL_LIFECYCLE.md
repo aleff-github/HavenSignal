@@ -207,6 +207,12 @@ expiry, unused state, CSRF, and the operation's other controls.
 The handle is POST-only, never a URL/query value, cookie with cross-operation
 scope, log field, audit field, localStorage value, or downloadable object.
 
+This version-1 row is report/lease-bound. It does not authorize a metadata-only
+administrative batch operation. `docs/32_RETENTION_AND_DELETION_PROTOCOL.md`
+proposes a separately reviewed administrative-batch profile for the exceptional
+flood ceremony; that extension is not approved by this document and cannot be
+implemented by inserting dummy report or lease identifiers into version 1.
+
 ## Step-up issuance and consumption
 
 Issuance:

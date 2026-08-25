@@ -186,6 +186,11 @@ After 30 days, it should be distinguishable internally as urgent.
 
 No automatic deletion occurs solely because the report is old.
 
+`docs/32_RETENTION_AND_DELETION_PROTOCOL.md` proposes retaining this rule,
+adding a 90-day maximum for only a never-read Response Note, and defining the
+separate terminal-metadata cleanup lifecycle. Those changes remain
+non-authorizing pending consolidated approval and review.
+
 ## Interrupted reports
 
 No automatic expiration period is currently defined for INTERRUPTED.
@@ -199,3 +204,8 @@ During a major flood of submissions, deletion of still-SEALED reports may be req
 This MUST NOT be implemented as automated "spam intelligence" in the baseline.
 
 Any deletion mechanism for SEALED content must be exceptional, attributable, audited, and designed with explicit acknowledgment that a legitimate report could be destroyed.
+
+`docs/32_RETENTION_AND_DELETION_PROTOCOL.md` proposes the exact exceptional
+capacity-flood ceremony, content-blind SEALED-only selection, multi-person
+authorization, per-report receipt/destruction flow, and race behavior. No such
+deletion is authorized until that proposal and its dependencies are approved.

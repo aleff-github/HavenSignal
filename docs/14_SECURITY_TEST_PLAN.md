@@ -129,6 +129,22 @@ Destroyed report MUST remain undecryptable.
 
 This test is a release gate for the key-management design.
 
+For `32_RETENTION_AND_DELETION_PROTOCOL.md`, also verify:
+
+- 90-day unread expiry versus first read has one server-authoritative winner,
+  and a winning pre-deadline read receives exactly the existing 72-hour window;
+- operator deletion is OPEN-only and binds the exact reason, protected note,
+  operator/session/lease/generation/state, CAPTCHA, step-up, and audit receipt;
+- committed deletion states never reopen after crash or uncertain key outcome;
+- flood deletion cannot start before closed admission, capacity attestation,
+  administrator declaration, two distinct Operator approvals, and audit gates;
+- flood selection is SEALED-only, content-blind, newest-first, capped, and skips
+  a candidate that loses the state race without substituting another;
+- each report destruction has its own pre-action receipt and partial batches
+  record truthful per-item outcomes;
+- cleanup retry/alert and 30-day metadata expiry cannot recreate keys or shorten
+  audit retention.
+
 For each candidate Key Service, execute the complete production-equivalent
 `docs/27` PoC, including:
 
