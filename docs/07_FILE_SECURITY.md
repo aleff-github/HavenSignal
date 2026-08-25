@@ -8,6 +8,11 @@ Baseline:
 - up to three images, each maximum 5 MB;
 - image formats: JPEG and PNG only.
 
+`docs/26_REPORT_CONTENT_CRYPTOGRAPHIC_PROTOCOL.md` proposes interpreting each
+`5 MB` limit as exactly 5 MiB (5,242,880 server-observed bytes) and encrypting
+each accepted attachment in one fixed-length frame. That choice awaits the
+consolidated pre-code decision; it does not approve any file format or parser.
+
 No DOCX, ZIP, archives, video, audio, SVG, office formats, scripts, or executable content.
 
 ## Filename input policy

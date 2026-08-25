@@ -40,7 +40,8 @@ Read, in order:
 11. `docs/23_AUDIT_RECEIPT_AND_TRANSPARENCY_PROTOCOL.md`
 12. `docs/24_RESPONSE_NOTE_CRYPTOGRAPHIC_PROTOCOL.md`
 13. `docs/25_MFA_STEP_UP_AND_CREDENTIAL_LIFECYCLE.md`
-14. `START-CODEX.md`
+14. `docs/26_REPORT_CONTENT_CRYPTOGRAPHIC_PROTOCOL.md`
+15. `START-CODEX.md`
 
 ## Source material
 
@@ -102,6 +103,13 @@ step-up authorization, and factor lifecycle in
 `docs/25_MFA_STEP_UP_AND_CREDENTIAL_LIFECYCLE.md` are proposed for the
 consolidated pre-code decision. Authentication and protected operations remain
 disabled pending that decision and independent review.
+
+The exact Report-DEK, per-object subkey, fixed-length text/attachment framing,
+AEAD envelope, staging, and narrow decryption model in
+`docs/26_REPORT_CONTENT_CRYPTOGRAPHIC_PROTOCOL.md` are proposed for the
+consolidated pre-code decision. Report submission and content access remain
+disabled pending approval, independent review, and Key Service/file/deployment
+gates.
 
 ## Local preview
 

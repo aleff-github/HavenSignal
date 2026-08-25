@@ -20,6 +20,12 @@ The DEK protects:
 
 A compromise of one report DEK must not decrypt another report.
 
+`docs/26_REPORT_CONTENT_CRYPTOGRAPHIC_PROTOCOL.md` proposes the exact
+Report-DEK, HKDF-SHA-256 per-object subkey, fixed-length frame,
+XChaCha20-Poly1305 envelope, staging, and narrow decrypt construction. It
+remains non-authorizing pending the consolidated pre-code decision, independent
+cryptographic review, and its Key Service/storage/file/deployment gates.
+
 ## Key separation
 
 The report database and attachment storage hold ciphertext.

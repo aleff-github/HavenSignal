@@ -34,11 +34,15 @@ cryptographic/protocol review and named production gates.
 single-use step-up, artifact-binding, enrollment, replacement, and recovery
 protocol. It awaits consolidated pre-code owner approval and independent review.
 
+`docs/26_REPORT_CONTENT_CRYPTOGRAPHIC_PROTOCOL.md` is the proposed exact
+Report-DEK, per-object subkey, AEAD, fixed-length content framing, staging, and
+narrow decryption protocol. It awaits consolidated approval and review.
+
 ## Traceability index
 
 | Requirement IDs | Severity | Primary design documents | Verification | Current gate |
 |---|---|---|---|---|
-| SEC-CONF-001..008 | CRITICAL | 02 Threat Model; 04 Cryptographic Model; 15 Trust Boundaries; 20 Submission Protocol | 14: key destruction, roles/capabilities, deployment checks | Metadata-only attempt model permitted; protected storage and Key Service/capability design remain OPEN |
+| SEC-CONF-001..008 | CRITICAL | 02 Threat Model; 04 Cryptographic Model; 15 Trust Boundaries; 20 Submission Protocol; 26 Report Crypto Proposal | 14: AEAD/context, key destruction, roles/capabilities, deployment checks | Exact report crypto PROPOSED; owner approval/review and Key Service gates OPEN |
 | SEC-ANON-001..003 | CRITICAL | 00 Scope; 05 Recovery; 08 Audit; 10 Network Anonymity | 14: reporter logging, recovery enumeration, browser caching | End-to-end deployment validation required |
 | SEC-ANON-004 | HIGH | 10 Network Anonymity; 11 Technology Decisions | 14: CAPTCHA and dependency/security checks | No-JS product OPEN |
 | SEC-ANON-005 | CRITICAL | 10 Network Anonymity; 15 Trust Boundaries | Deployment/security acceptance test | Production deployment gate |
@@ -76,7 +80,7 @@ protocol. It awaits consolidated pre-code owner approval and independent review.
 | SEC-ALERT-002 | CRITICAL | 08 Audit Logging | 14: allowlisted-payload tests | No content-bearing alerts permitted |
 | SEC-ALERT-003 | HIGH | 12 Open Decisions | Procedure/failure tests | OPEN |
 | SEC-BROWSER-001..002 | CRITICAL | 05 Recovery Response; 06 Operator Sessions; 16 Django Rules | 14: browser caching tests | Browser guarantee boundary documented |
-| SEC-INPUT-001..006 | HIGH | 00 Scope; 07 File Security; 16 Django Rules; 20 Submission Protocol | 14: input/upload/body-limit tests | Aggregate and decoded-resource limits OPEN |
+| SEC-INPUT-001..006 | HIGH | 00 Scope; 07 File Security; 16 Django Rules; 20 Submission Protocol; 26 Report Crypto Proposal | 14: input/upload/body-limit and fixed-frame tests | Per-file byte interpretation PROPOSED; aggregate and decoded-resource limits OPEN |
 
 ## Cross-cutting interface mapping
 
