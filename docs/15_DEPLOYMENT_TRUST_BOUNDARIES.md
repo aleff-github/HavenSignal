@@ -136,3 +136,9 @@ Operator:
 Administrator:
 
 - access model to be hardened; exact network restrictions remain an implementation decision.
+
+The proposed Key Service network/workload identity and candidate acceptance
+requirements are defined in
+`docs/27_KEY_SERVICE_ACCEPTANCE_AND_NON_RESURRECTION_POC.md`. Exact host/HSM/CA
+placement remains unapproved until its production-equivalent PoC and deployment
+review pass.

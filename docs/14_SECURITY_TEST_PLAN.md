@@ -126,6 +126,18 @@ Destroyed report MUST remain undecryptable.
 
 This test is a release gate for the key-management design.
 
+For each candidate Key Service, execute the complete production-equivalent
+`docs/27` PoC, including:
+
+- every caller/operation negative-capability combination;
+- synchronized create/activate/use/expiry/destroy races across nodes;
+- a replica isolated before destruction and rejoined afterward;
+- pre-destruction Raft/product exports plus filesystem, block, VM, memory,
+  HSM/KMS/seal, configuration, and combined-backup restoration;
+- clock rollback, old receipt/capability replay, leader/quorum failure, upgrade,
+  node replacement, seal/key rotation, and complete disaster recovery;
+- a binary failure if any restored environment can decrypt one canary.
+
 ## File upload
 
 Test:
