@@ -106,6 +106,13 @@ PDF upload remains blocked until explicit approval of:
 
 No values may be invented merely to remove this blocker.
 
+`docs/29_FILE_ACCEPTANCE_SANDBOX_AND_SAFE_VIEW_PROTOCOL.md` proposes the exact
+version-1 JPEG/PNG/PDF allowlists and ceilings, qpdf/MuPDF and
+libjpeg-turbo/libpng parser families, disposable Firecracker microVM boundary,
+plaintext lifecycle, and PNG-only safe-view profile. It remains non-authorizing
+pending consolidated owner approval, independent review, and its named
+production gates.
+
 Image upload/processing likewise remains blocked until decoded pixel/dimension limits, decoder/toolchain, viewing transformation policy, and sandbox/resource limits are approved.
 
 ## Sandbox

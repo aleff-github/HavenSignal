@@ -188,28 +188,23 @@ are complete.
 
 ## HIGH — PDF structural acceptance profile and sandbox
 
-PDF upload remains blocked until approval of:
-
-- maximum pages;
-- maximum objects;
-- maximum decompression ratio;
-- maximum dimensions/resource limits;
-- parser/toolchain;
-- structural allowlist;
-- render/CDR strategy;
-- exact sandbox implementation;
-- temporary-workspace lifecycle.
+`docs/29_FILE_ACCEPTANCE_SANDBOX_AND_SAFE_VIEW_PROTOCOL.md` proposes the exact
+page/object/decompression/dimension ceilings, structural deny/allow profile,
+qpdf/MuPDF pipeline, PNG raster view, Firecracker microVM boundary, and
+temporary plaintext lifecycle.
 
 No accepted PDF may be described as absolutely safe.
 
 ## HIGH — Image resource limits and sandbox
 
-Still OPEN:
+The same `docs/29` proposal defines decoded pixel/dimension limits,
+libjpeg-turbo/libpng plus independent scanners, metadata-free PNG re-encoding,
+and exact shared microVM limits.
 
-- maximum decoded pixel count and dimensions;
-- parser/decoder toolchain;
-- re-decode/re-encode viewing policy;
-- exact sandbox implementation and limits.
+The eight consolidated file/sandbox choices await owner approval and
+independent review. Exact supported artifact pinning, fuzz corpus, production
+KVM/jailer/kernel/root-image/broker, Key Service/audit integration, concurrency,
+and deployment remain independently blocking.
 
 ## HIGH — MFA step-up and credential lifecycle
 

@@ -43,7 +43,8 @@ Read, in order:
 14. `docs/26_REPORT_CONTENT_CRYPTOGRAPHIC_PROTOCOL.md`
 15. `docs/27_KEY_SERVICE_ACCEPTANCE_AND_NON_RESURRECTION_POC.md`
 16. `docs/28_EMERGENCY_EXPORT_CRYPTOGRAPHIC_PROTOCOL.md`
-17. `START-CODEX.md`
+17. `docs/29_FILE_ACCEPTANCE_SANDBOX_AND_SAFE_VIEW_PROTOCOL.md`
+18. `START-CODEX.md`
 
 ## Source material
 
@@ -126,6 +127,14 @@ delivery in `docs/28_EMERGENCY_EXPORT_CRYPTOGRAPHIC_PROTOCOL.md` are proposed
 for the consolidated pre-code decision. Export remains disabled pending owner
 approval, independent review, and the named alert, Key Service, signer, custody,
 concurrency, workstation, and deployment gates.
+
+The exact PDF/JPEG/PNG structural profiles, resource ceilings, parser families,
+fresh Firecracker microVM isolation, transient plaintext lifecycle, and
+PNG-only operator view in
+`docs/29_FILE_ACCEPTANCE_SANDBOX_AND_SAFE_VIEW_PROTOCOL.md` are proposed for
+the consolidated pre-code decision. Attachment upload and viewing remain
+disabled pending owner approval, independent review, exact artifact pinning,
+and production sandbox/integration gates.
 
 ## Local preview
 

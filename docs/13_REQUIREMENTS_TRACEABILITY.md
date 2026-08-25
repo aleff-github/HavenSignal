@@ -49,6 +49,11 @@ request binding, package, public-key encryption, manifest signature, key
 separation, fenced generation, encrypted staging, delivery, and verification
 protocol. It awaits consolidated approval and independent review.
 
+`docs/29_FILE_ACCEPTANCE_SANDBOX_AND_SAFE_VIEW_PROTOCOL.md` is the proposed
+exact JPEG/PNG/PDF admission, resource, parser, disposable-microVM, plaintext
+lifecycle, and PNG-only operator-view protocol. It awaits consolidated approval
+and independent parser/sandbox review.
+
 ## Traceability index
 
 | Requirement IDs | Severity | Primary design documents | Verification | Current gate |
@@ -85,8 +90,8 @@ protocol. It awaits consolidated approval and independent review.
 | SEC-CAPTCHA-001..002 | CRITICAL | 10 Network Anonymity; 11 Technology Decisions; 20 Submission Protocol; 22 No-JS Challenge | 14: self-hosting/mandatory-flow tests | No-JS protocol owner-approved; rendering/audio/accessibility and production reviews remain |
 | SEC-CAPTCHA-003 | HIGH | 10 Network Anonymity; 12 Open Decisions; 22 No-JS Challenge | 14: no-JS expiry/replay/race/Tor tests | Owner-approved; dependent reviews and PostgreSQL concurrency proof required |
 | SEC-CAPTCHA-004 | CRITICAL | 10 Network Anonymity | 14: dependency-failure tests | No fallback permitted |
-| SEC-FILE-001..003 | CRITICAL | 07 File Security; 15 Trust Boundaries | 14: file/sandbox/CDR tests | PDF profile and sandbox OPEN |
-| SEC-FILE-004..006 | HIGH | 07 File Security; 12 Open Decisions | 14: temporary lifecycle/resource tests | OPEN; PDF and image implementation blocked |
+| SEC-FILE-001..003 | CRITICAL | 07 File Security; 15 Trust Boundaries; 29 File/Sandbox Proposal | 14/29: profile, parser differential, microVM, CDR and access tests | Exact protocol PROPOSED; owner/review and production sandbox gates OPEN |
+| SEC-FILE-004..006 | HIGH | 07 File Security; 12 Open Decisions; 29 File/Sandbox Proposal | 14/29: plaintext lifecycle, resource, corpus, teardown tests | Exact profiles PROPOSED; artifact pinning and production validation OPEN |
 | SEC-ALERT-001 | HIGH | 08 Audit Logging; 09 Emergency Export; 23 Audit Receipt Protocol | 14: alert trigger and witness-liveness tests | Audit timing owner-approved; transport OPEN |
 | SEC-ALERT-002 | CRITICAL | 08 Audit Logging | 14: allowlisted-payload tests | No content-bearing alerts permitted |
 | SEC-ALERT-003 | HIGH | 12 Open Decisions | Procedure/failure tests | OPEN |

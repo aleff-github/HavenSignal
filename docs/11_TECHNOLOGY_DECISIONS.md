@@ -125,6 +125,12 @@ Tool choice must be validated against sandboxing and parser-risk requirements.
 
 PDF upload is blocked until the structural acceptance profile, page/object/decompression/dimension limits, parser/toolchain, rendering strategy, and sandbox technology are approved.
 
+`docs/29_FILE_ACCEPTANCE_SANDBOX_AND_SAFE_VIEW_PROTOCOL.md` proposes qpdf JSON-v2
+inspection, full MuPDF rasterization, restricted libjpeg-turbo/libpng decoding,
+and one fresh Firecracker microVM per admission/view job. These choices remain
+non-authorizing pending consolidated approval, exact patched artifact pinning,
+independent parser/sandbox review, and production KVM/jailer validation.
+
 ## Audit
 
 Implement as a separate collector/store or equivalent boundary.
