@@ -17,8 +17,9 @@ SECRET_KEY = "django-insecure-development-only-not-for-production"
 DEBUG = True
 ALLOWED_HOSTS: list[str] = []
 
-# No product or Django-contrib application is enabled in this bootstrap.
-INSTALLED_APPS: list[str] = []
+# Static files are served by Django only in local development. Reporter-facing
+# assets remain first-party and contain no JavaScript or tracking resources.
+INSTALLED_APPS = ["django.contrib.staticfiles"]
 
 # Preserve Django's core request, CSRF, and clickjacking protections even in the
 # empty development scaffold.
@@ -27,6 +28,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "reporter_gateway.middleware.ReporterSecurityHeadersMiddleware",
 ]
 
 ROOT_URLCONF = "anonymous_reporting.urls"
@@ -34,7 +36,7 @@ ROOT_URLCONF = "anonymous_reporting.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {"context_processors": []},
     }
@@ -56,6 +58,9 @@ LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
+
+STATIC_URL = "static/"
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 X_FRAME_OPTIONS = "DENY"
 SECURE_CONTENT_TYPE_NOSNIFF = True

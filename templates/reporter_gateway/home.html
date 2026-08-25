@@ -1,0 +1,65 @@
+{% load static %}
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <title>Anonymous Reporting</title>
+    <link rel="stylesheet" href="{% static 'reporter_gateway/home.css' %}">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="hero">
+        <p class="eyebrow">Anonymous Reporting</p>
+        <h1>Un canale riservato, costruito con prudenza.</h1>
+        <p class="intro">
+          Il servizio consentirà di inviare una segnalazione senza creare un
+          account e di recuperare una sola nota di risposta.
+        </p>
+      </header>
+
+      <section class="notice" aria-labelledby="development-status">
+        <h2 id="development-status">Ambiente in costruzione</h2>
+        <p>
+          Le funzioni operative non sono ancora attive. Non inserire o inviare
+          informazioni personali, segnalazioni o allegati in questa fase.
+        </p>
+      </section>
+
+      <section class="actions" aria-label="Funzioni previste">
+        <article class="action-card">
+          <p class="status">Non ancora disponibile</p>
+          <h2>Invia una segnalazione</h2>
+          <p>
+            In futuro conterrà un solo campo di testo e allegati facoltativi
+            ammessi, senza account del segnalante.
+          </p>
+        </article>
+
+        <article class="action-card">
+          <p class="status">Non ancora disponibile</p>
+          <h2>Recupera una risposta</h2>
+          <p>
+            In futuro permetterà di recuperare una sola nota usando le
+            credenziali anonime consegnate dopo l’invio.
+          </p>
+        </article>
+      </section>
+
+      <aside class="anonymity" aria-labelledby="anonymity-title">
+        <h2 id="anonymity-title">Anonimato di rete</h2>
+        <p>
+          Il futuro servizio Tor Onion sarà il canale preferito per un livello
+          più elevato di anonimato di rete. Un normale sito HTTPS non offre le
+          stesse garanzie contro osservatori della rete o dell’infrastruttura.
+        </p>
+      </aside>
+
+      <footer>
+        Questa schermata non contiene form, JavaScript, analytics o risorse di
+        terze parti e non salva contenuti di segnalazione.
+      </footer>
+    </main>
+  </body>
+</html>
