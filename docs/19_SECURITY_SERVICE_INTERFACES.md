@@ -125,14 +125,14 @@ All edges are deny-by-default and require authenticated service identity, least-
 | Operator Console | Key Service | Request in-service report-text decrypt only for the current authorized OPEN/REOPEN context; never receive key bytes | Exact report crypto PROPOSED in document 26; receipt review and Key Service policy OPEN CRITICAL |
 | Operator Console | File Processing Sandbox | Request one controlled safe representation for the current lease | PDF/image profile and sandbox OPEN |
 | Operator Console | Security Workflow Coordinator | Start one fenced finalization workflow | Dependent crypto/MFA/audit gates remain OPEN |
-| Operator Console | Emergency Export Worker | Start one export bound to the current OPEN lease and authorization | Export crypto/MFA/audit/alert gates remain OPEN |
+| Operator Console | Emergency Export Worker | Start one export bound to the current OPEN lease and authorization | Exact construction PROPOSED in document 28; MFA/audit/alert and production gates remain OPEN |
 | Security Workflow Coordinator | Audit Collector | Obtain required receipts and append truthful outcomes | Exact protocol owner-approved in document 23; independent review and production gates OPEN CRITICAL |
 | Security Workflow Coordinator | Key Service | Perform operation-scoped create/verify/activate/expire/destroy calls for the current fenced workflow | Response protocol owner-approved in document 24; independent review and Key product/topology/policy OPEN CRITICAL |
 | Security Workflow Coordinator | Metadata/ciphertext stores | Stage frozen ciphertext, publish state, or delete one scoped object | Must follow approved state machine and idempotency rules |
 | Security Workflow Coordinator | Alert Service | Send an allowlisted required alert | Transport and durable semantics OPEN |
 | Emergency Export Worker | Audit Collector | Obtain the export pre-action receipt and append truthful outcome | Exact protocol owner-approved in document 23; independent review and production gates OPEN CRITICAL |
 | Emergency Export Worker | Key Service | Use one Report-DEK for the exact authorized export context | Key policy and export construction OPEN CRITICAL |
-| Emergency Export Worker | Metadata/ciphertext stores | Read only the objects bound to the current authorized export | Export format and plaintext cleanup OPEN CRITICAL |
+| Emergency Export Worker | Metadata/ciphertext stores | Read only the objects bound to the current authorized export and write one encrypted staging object | Exact streaming/staging profile PROPOSED in document 28; implementation review OPEN CRITICAL |
 | Emergency Export Worker | Alert Service | Satisfy the approved administrator-notification precondition | Transport and durable semantics OPEN |
 | Application Administrator Console | Audit read interface | Read authorized audit evidence | Must not reuse append or retention credentials |
 | Audit Collector | Independent checkpoint verifier | Publish independently verifiable evidence | RFC 9162/9942 construction and cadence owner-approved; independent review and production gates OPEN CRITICAL |
@@ -320,7 +320,7 @@ Reporter-facing proxy, application, and upstream infrastructure configuration mu
 | Response protection/use | Exact construction owner-approved in document 24; independent review and Key Service gates OPEN CRITICAL |
 | Key Service | Exact acceptance/capability plan PROPOSED in document 27; product, topology, real PoC, and independent review OPEN CRITICAL |
 | Audit receipts/checkpoints | Receipt, anti-replay, chain/batch, signatures, independent verification, alerting — OPEN CRITICAL |
-| Emergency Export | Encryption format, signed manifest, key identifiers, rotation, signing-key lifecycle — OPEN CRITICAL |
+| Emergency Export | Exact construction PROPOSED in document 28; owner/review, alert, signer/HSM, custody, Key Service, concurrency, workstation, and deployment gates OPEN CRITICAL |
 | File Processing Sandbox | PDF/image profiles, tools, decoded-resource limits, sandbox and temporary lifecycle — OPEN HIGH |
 | CAPTCHA | Owner-approved no-JavaScript protocol; Pillow/font, audio/accessibility, PostgreSQL concurrency, and production-boundary reviews OPEN HIGH |
 | Authentication/step-up | TTL, canonical artifact bytes/digest, enrollment/reset/recovery/revocation — OPEN HIGH |
