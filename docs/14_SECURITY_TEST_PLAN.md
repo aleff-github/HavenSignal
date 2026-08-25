@@ -215,6 +215,21 @@ Test:
 - concurrent first reads establish one immutable `first_read_at`/expiry and later reads cannot extend it;
 - server never emits the Recovery Secret a second time;
 - verifier key/material is purpose-separated and never logged.
+- XChaCha20-Poly1305 key/nonce/tag sizes, official vectors, combined-mode length,
+  and pinned library behavior match the approved profile;
+- deterministic-CBOR AAD/envelope bytes reject unknown/alternate schemas and
+  any cross-report, response, finalization, or key-handle substitution;
+- canonical NFC/LF/UTF-8 framing rejects invalid scalars, invalid lengths,
+  nonzero padding, malformed UTF-8, and over-limit text;
+- all allowed Response Note lengths produce one constant ciphertext length;
+- the Django/application boundary never receives or persists Response-DEK
+  material and exposes no general decrypt/unwrap operation;
+- provisional create, PostgreSQL `FINALIZING` commit, verification, activation,
+  and every injected crash point remain idempotent and reporter-invisible;
+- 20–100 synchronized first-read attempts across PostgreSQL connections and
+  processes establish one immutable expiry before any decrypt;
+- Key Service expiry remains authoritative while database/workers/cleanup are
+  unavailable, stale, delayed, or rolled back.
 
 ## Roles and capabilities
 

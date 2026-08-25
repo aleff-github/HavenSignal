@@ -118,7 +118,7 @@ All edges are deny-by-default and require authenticated service identity, least-
 | Reporter Gateway | Metadata/ciphertext stores | Create only the new report records/objects required by the approved sequence | `20_SUBMISSION_ACCEPTANCE_PROTOCOL.md` APPROVED; dependent storage/crypto gates remain OPEN CRITICAL |
 | Recovery Gateway | Self-hosted CAPTCHA | Validate retrieval challenge | No-JS protocol owner-approved; dependent reviews OPEN |
 | Recovery Gateway | Recovery state/verifier | Uniformly authorize Ticket ID and Recovery Secret | Owner-approved construction; independent cryptographic review OPEN CRITICAL |
-| Recovery Gateway | Key Service | Use one eligible Response-DEK after approved authorization | Response crypto/lifecycle OPEN CRITICAL |
+| Recovery Gateway | Key Service | Request one eligible in-service Response Note decrypt after approved authorization; never receive the DEK | Exact response protocol PROPOSED in document 24; owner approval/review and Key Service gates OPEN CRITICAL |
 | Operator Console | Authentication/step-up service | Login and operation-bound authorization | Enrollment, reset, recovery, TTL, and digest representation OPEN |
 | Operator Console | Audit Collector | Obtain operation-bound pre-action receipts and append outcomes | Exact protocol owner-approved in document 23; independent review and production gates OPEN CRITICAL |
 | Operator Console | State authority | CLAIM/OPEN/reopen and validate current lease generation using server time | Schema may be designed; security transitions require concurrency tests |
@@ -127,7 +127,7 @@ All edges are deny-by-default and require authenticated service identity, least-
 | Operator Console | Security Workflow Coordinator | Start one fenced finalization workflow | Dependent crypto/MFA/audit gates remain OPEN |
 | Operator Console | Emergency Export Worker | Start one export bound to the current OPEN lease and authorization | Export crypto/MFA/audit/alert gates remain OPEN |
 | Security Workflow Coordinator | Audit Collector | Obtain required receipts and append truthful outcomes | Exact protocol owner-approved in document 23; independent review and production gates OPEN CRITICAL |
-| Security Workflow Coordinator | Key Service | Perform operation-scoped create/use/destroy calls for the current fenced workflow | Key product/topology/policy OPEN CRITICAL |
+| Security Workflow Coordinator | Key Service | Perform operation-scoped create/verify/activate/expire/destroy calls for the current fenced workflow | Response protocol PROPOSED in document 24; Key product/topology/policy OPEN CRITICAL |
 | Security Workflow Coordinator | Metadata/ciphertext stores | Stage frozen ciphertext, publish state, or delete one scoped object | Must follow approved state machine and idempotency rules |
 | Security Workflow Coordinator | Alert Service | Send an allowlisted required alert | Transport and durable semantics OPEN |
 | Emergency Export Worker | Audit Collector | Obtain the export pre-action receipt and append truthful outcome | Exact protocol owner-approved in document 23; independent review and production gates OPEN CRITICAL |
@@ -151,7 +151,7 @@ Legend: `Y` is required by an approved flow; `N` is prohibited; `GATED` means th
 | Read Response Note plaintext | N | GATED one authorized response | N | N | N | N | N | N | N | N |
 | Create per-object protection capability | GATED new report only | N | N | N | GATED response only | N | N | GATED under policy | N | N |
 | Use Report-DEK capability | N | N | GATED current lease/receipt only | N | N | GATED current export only | N | GATED under policy | N | N |
-| Use Response-DEK capability | N | GATED valid recovery only | N | N | GATED lifecycle maintenance only | N | N | GATED under policy | N | N |
+| Use Response-DEK capability | N | GATED in-service decrypt result only; never key bytes | N | N | GATED lifecycle operations only; never key bytes | N | N | GATED non-exportable key under policy | N | N |
 | Destroy per-object DEK | N | N | N | N | GATED fenced workflow only | N | N | GATED under policy | N | Infrastructure only, not object selection |
 | Append audit events | GATED scoped schema | GATED scoped schema | GATED scoped schema | GATED admin schema | GATED scoped schema | GATED export schema | Y | N | GATED result code only | GATED infrastructure schema |
 | Read audit history | N | N | N | Y authorized view | N | N | Y | N | N | N |
