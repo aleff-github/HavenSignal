@@ -47,9 +47,15 @@ The Markdown specification incorporates later clarifications and therefore takes
 
 ## Current implementation status
 
-The repository contains a Django 5.2.17 development scaffold and one inert,
-read-only reporter landing page. The page has no form, JavaScript, analytics,
-third-party resources, report storage, authentication, or business logic.
+The repository contains a Django 5.2.17 development scaffold, one inert,
+read-only reporter landing page, and an internal metadata-only submission
+state model. The page has no form, JavaScript, analytics, third-party
+resources, report storage, authentication, or business logic.
+
+`submission_workflow/` defines only the approved attempt states, database
+shape, constraints, and a pure monotonic transition planner. It has no HTTP
+route or database transition executor and stores no reporter content,
+credential, key, verifier, filename, request metadata, or audit receipt.
 
 Mandatory security integrations whose designs remain OPEN are represented only
 by explicit deny-by-default placeholders under `security_interfaces/`. Every
@@ -62,7 +68,7 @@ The submission acceptance, audit, retry, and one-time credential-delivery
 sequence in `docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md` is approved. This
 closes only the sequencing decision: dependent CAPTCHA, credential, AEAD, Key
 Service, audit-receipt, request-size, and file/sandbox gates still prevent a
-report form or endpoint.
+report form, endpoint, or protected database transition executor.
 
 The exact Ticket ID, Recovery Secret, and keyed-verifier construction is also
 documented as a review-only proposal in

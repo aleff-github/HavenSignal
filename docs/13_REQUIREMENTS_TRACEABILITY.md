@@ -25,7 +25,7 @@ complete.
 
 | Requirement IDs | Severity | Primary design documents | Verification | Current gate |
 |---|---|---|---|---|
-| SEC-CONF-001..008 | CRITICAL | 02 Threat Model; 04 Cryptographic Model; 15 Trust Boundaries; 20 Submission Protocol | 14: key destruction, roles/capabilities, deployment checks | Key Service/capability design OPEN for security component |
+| SEC-CONF-001..008 | CRITICAL | 02 Threat Model; 04 Cryptographic Model; 15 Trust Boundaries; 20 Submission Protocol | 14: key destruction, roles/capabilities, deployment checks | Metadata-only attempt model permitted; protected storage and Key Service/capability design remain OPEN |
 | SEC-ANON-001..003 | CRITICAL | 00 Scope; 05 Recovery; 08 Audit; 10 Network Anonymity | 14: reporter logging, recovery enumeration, browser caching | End-to-end deployment validation required |
 | SEC-ANON-004 | HIGH | 10 Network Anonymity; 11 Technology Decisions | 14: CAPTCHA and dependency/security checks | No-JS product OPEN |
 | SEC-ANON-005 | CRITICAL | 10 Network Anonymity; 15 Trust Boundaries | Deployment/security acceptance test | Production deployment gate |

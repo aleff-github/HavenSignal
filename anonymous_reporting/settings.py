@@ -19,7 +19,10 @@ ALLOWED_HOSTS: list[str] = []
 
 # Static files are served by Django only in local development. Reporter-facing
 # assets remain first-party and contain no JavaScript or tracking resources.
-INSTALLED_APPS = ["django.contrib.staticfiles"]
+INSTALLED_APPS = [
+    "django.contrib.staticfiles",
+    "submission_workflow.apps.SubmissionWorkflowConfig",
+]
 
 # Preserve Django's core request, CSRF, and clickjacking protections even in the
 # empty development scaffold.
@@ -45,8 +48,9 @@ TEMPLATES = [
 WSGI_APPLICATION = "anonymous_reporting.wsgi.application"
 ASGI_APPLICATION = "anonymous_reporting.asgi.application"
 
-# SQLite is used only for local development scaffolding. No application models
-# or business schema are present, and the generated file is ignored by Git.
+# SQLite is used only for local development scaffolding and metadata-model
+# tests; it is not the concurrency acceptance backend. The generated file is
+# ignored by Git.
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
