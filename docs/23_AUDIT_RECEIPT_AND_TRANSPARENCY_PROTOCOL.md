@@ -2,9 +2,9 @@
 
 ## Status
 
-**PROPOSED — project-owner and independent cryptographic/protocol review
-required. No Audit Service or receipt-gated operation is authorized by this
-document.**
+**OWNER-APPROVED — project-owner decision recorded on 2026-08-25;
+independent cryptographic/protocol review remains required. No Audit Service or
+receipt-gated operation is authorized for production by this document alone.**
 
 This proposal selects a version-1 event encoding, durable-acceptance receipt,
 anti-replay policy, append-only Merkle construction, independently witnessed
@@ -523,9 +523,9 @@ At minimum, release-blocking tests must prove:
 SQLite, ordinary Django `TestCase`, one process, or an in-memory collector is
 not sufficient for concurrency, durability, or release acceptance.
 
-## Decisions required for approval
+## Recorded project-owner decision
 
-The project owner must explicitly approve:
+On 2026-08-25 the project owner approved all five visible choices:
 
 1. deterministic CBOR, COSE Sign1/Ed25519, two signing-key roles, and the exact
    version-1 event/acceptance-claim schemas;
@@ -538,8 +538,8 @@ The project owner must explicitly approve:
 5. 90-day receipt-key rotation, annual checkpoint-key rotation, dual-signed
    transition, and 365-day event / 730-day verification-evidence retention.
 
-Independent cryptographic/protocol review remains a release gate even after
-owner approval. Production also remains blocked by the Audit Service topology,
+Independent cryptographic/protocol review remains a release gate. Production
+also remains blocked by the Audit Service topology,
 signer/HSM, service authentication, PostgreSQL durability/concurrency, alert
 transport, clock, deployment, and every protected operation's own gates.
 
