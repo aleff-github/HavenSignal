@@ -30,6 +30,10 @@ Response Note AEAD, envelope, non-exportable Response-DEK, staging, first-read,
 and expiry protocol. It is non-authorizing pending independent
 cryptographic/protocol review and named production gates.
 
+`docs/25_MFA_STEP_UP_AND_CREDENTIAL_LIFECYCLE.md` is the proposed WebAuthn,
+single-use step-up, artifact-binding, enrollment, replacement, and recovery
+protocol. It awaits consolidated pre-code owner approval and independent review.
+
 ## Traceability index
 
 | Requirement IDs | Severity | Primary design documents | Verification | Current gate |
@@ -45,10 +49,10 @@ cryptographic/protocol review and named production gates.
 | SEC-LOG-009..012 | CRITICAL | 03 Lifecycle; 08 Audit Logging; 23 Audit Receipt Protocol | 14: receipt, replay, concurrency, truncation, cessation, and crash tests | Exact construction owner-approved; independent review and production gates OPEN |
 | SEC-ACCESS-001..010 | CRITICAL/HIGH | 03 Lifecycle; 06 Operator Sessions | 14: session controls/finalization | Domain model may be specified; crypto/audit release remains gated |
 | SEC-ACCESS-011..015 | CRITICAL | 03 Lifecycle; 06 Operator Sessions; 16 Django Rules | 14: lease generation, stale request, constraint tests | Exact schema may be designed without implementing decrypt |
-| SEC-AUTH-001..004 | CRITICAL/HIGH | 06 Operator Sessions; 11 Technology Decisions | 14: authentication/session checks | Enrollment/reset/recovery OPEN |
-| SEC-AUTH-005..007 | CRITICAL | 06 Operator Sessions; 09 Emergency Export | 14: step-up binding/replay tests | Exact TTL and artifact-byte/digest construction OPEN; model properties approved |
-| SEC-AUTH-008 | HIGH | 06 Operator Sessions; 12 Open Decisions | Procedure/security review | OPEN |
-| SEC-AUTH-009 | CRITICAL | 06 Operator Sessions; 11 Technology Decisions; 15 Trust Boundaries | 14: administrator MFA/anti-impersonation tests | Enrollment/reset/recovery OPEN |
+| SEC-AUTH-001..004 | CRITICAL/HIGH | 06 Operator Sessions; 11 Technology Decisions; 25 MFA Proposal | 14: WebAuthn/password/session checks | WebAuthn and credential lifecycle PROPOSED; password/session specifics and review OPEN |
+| SEC-AUTH-005..007 | CRITICAL | 06 Operator Sessions; 09 Emergency Export; 25 MFA Proposal | 14: exact binding, expiry, consumption, and replay tests | Exact protocol PROPOSED; consolidated owner approval and independent review OPEN |
+| SEC-AUTH-008 | HIGH | 06 Operator Sessions; 12 Open Decisions; 25 MFA Proposal | Procedure/security review | Enrollment/reset/recovery PROPOSED; organizational procedure OPEN |
+| SEC-AUTH-009 | CRITICAL | 06 Operator Sessions; 11 Technology Decisions; 15 Trust Boundaries; 25 MFA Proposal | 14: administrator MFA/anti-impersonation tests | Exact separation/recovery PROPOSED; approval/review OPEN |
 | SEC-DEL-001..006 | CRITICAL/HIGH | 03 Lifecycle; 04 Cryptographic Model | 14: finalization/key-destruction/blob retry tests | Depends on Key Service and finalization gates |
 | SEC-KEY-001..004 | CRITICAL | 04 Cryptographic Model; 11 Technology Decisions | 14: restore/rollback/stale-replica release gate | Product/topology/PoC OPEN |
 | SEC-KEY-005 | HIGH | 04 Cryptographic Model | Key inventory and lifecycle review | Per-key operational procedures partially OPEN |

@@ -241,6 +241,26 @@ Test:
 - Reporter Gateway cannot invoke general decrypt/unwrap for existing SEALED reports;
 - Key Service authorization is rejected for the wrong role, operation, report, state, lease generation, or receipt.
 
+## WebAuthn, step-up, and credential lifecycle
+
+Test:
+
+- exact RP ID/origin, challenge, ceremony type, UV/UP, signature, COSE
+  algorithm, AAGUID/attestation, device-bound backup flags, credential ownership,
+  and extension validation;
+- challenge and StepUpAuthorization entropy, 120-second non-sliding expiry,
+  single use, and absence from URLs/logs/browser persistence;
+- deterministic-CBOR HMAC artifact binding rejects any byte or
+  operator/session/operation/report/lease/version change;
+- synchronized multi-process consumption has one database winner and resumes
+  only the immutable committed workflow after crashes;
+- operator/admin credential, RP, session, cookie, role, and deployment
+  separation prevents administrator impersonation;
+- two-key enrollment, lost-one replacement, lost-all in-person recovery,
+  separate-role quorum, 24-hour delay, and unavailable-quorum denial;
+- SMS, email, TOTP, recovery links/codes, password-only, remote help-desk, and
+  administrator-only fallback paths do not exist.
+
 ## CAPTCHA
 
 Test:

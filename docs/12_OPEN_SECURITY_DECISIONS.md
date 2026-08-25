@@ -176,14 +176,19 @@ Still OPEN:
 
 The action-bound `StepUpAuthorization` properties are approved.
 
-Still OPEN:
+`docs/25_MFA_STEP_UP_AND_CREDENTIAL_LIFECYCLE.md` proposes:
 
-- exact step-up TTL;
-- exact canonical byte representation and approved digest construction used for artifact binding;
-- operator and administrator MFA enrollment;
-- factor reset;
-- lost-factor recovery;
-- revocation and replacement procedure.
+- a 120-second WebAuthn challenge and non-sliding server-side authorization;
+- deterministic-CBOR HMAC-SHA-256 artifact binding with a separately held key;
+- device-bound hardware WebAuthn keys, two per person, and no weaker fallback;
+- in-person enrollment/replacement/recovery with separate-role quorum and a
+  24-hour delay;
+- explicit administrator anti-impersonation and operator/admin RP separation.
+
+These choices await consolidated pre-code owner approval and independent
+authentication/security review. Authenticator procurement/attestation,
+library pinning, exact RP/origin, workstation, identity-proofing, alert, and
+deployment procedures remain OPEN.
 
 ## HIGH — Operator workstation hardening specification
 

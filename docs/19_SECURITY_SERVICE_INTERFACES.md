@@ -119,7 +119,7 @@ All edges are deny-by-default and require authenticated service identity, least-
 | Recovery Gateway | Self-hosted CAPTCHA | Validate retrieval challenge | No-JS protocol owner-approved; dependent reviews OPEN |
 | Recovery Gateway | Recovery state/verifier | Uniformly authorize Ticket ID and Recovery Secret | Owner-approved construction; independent cryptographic review OPEN CRITICAL |
 | Recovery Gateway | Key Service | Request one eligible in-service Response Note decrypt after approved authorization; never receive the DEK | Exact response protocol owner-approved in document 24; independent review and Key Service gates OPEN CRITICAL |
-| Operator Console | Authentication/step-up service | Login and operation-bound authorization | Enrollment, reset, recovery, TTL, and digest representation OPEN |
+| Operator Console | Authentication/step-up service | Password/WebAuthn login and operation-bound authorization | Exact protocol PROPOSED in document 25; approval/review, hardware, workstation, and deployment gates OPEN |
 | Operator Console | Audit Collector | Obtain operation-bound pre-action receipts and append outcomes | Exact protocol owner-approved in document 23; independent review and production gates OPEN CRITICAL |
 | Operator Console | State authority | CLAIM/OPEN/reopen and validate current lease generation using server time | Schema may be designed; security transitions require concurrency tests |
 | Operator Console | Key Service | Use one Report-DEK only for the current authorized OPEN/REOPEN context | Receipt and Key Service policy OPEN CRITICAL |
