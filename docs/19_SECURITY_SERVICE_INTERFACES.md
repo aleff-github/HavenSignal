@@ -129,11 +129,11 @@ All edges are deny-by-default and require authenticated service identity, least-
 | Security Workflow Coordinator | Audit Collector | Obtain required receipts and append truthful outcomes | Exact protocol owner-approved in document 23; independent review and production gates OPEN CRITICAL |
 | Security Workflow Coordinator | Key Service | Perform operation-scoped create/verify/activate/expire/destroy calls for the current fenced workflow | Response protocol owner-approved in document 24; independent review and Key product/topology/policy OPEN CRITICAL |
 | Security Workflow Coordinator | Metadata/ciphertext stores | Stage frozen ciphertext, publish state, or delete one scoped object | Must follow approved state machine and idempotency rules |
-| Security Workflow Coordinator | Alert Service | Send an allowlisted required alert | Transport and durable semantics OPEN |
+| Security Workflow Coordinator | Alert Service | Send an allowlisted required alert | Exact protocol PROPOSED in document 31; approval/review and production gates OPEN |
 | Emergency Export Worker | Audit Collector | Obtain the export pre-action receipt and append truthful outcome | Exact protocol owner-approved in document 23; independent review and production gates OPEN CRITICAL |
 | Emergency Export Worker | Key Service | Use one Report-DEK for the exact authorized export context | Key policy and export construction OPEN CRITICAL |
 | Emergency Export Worker | Metadata/ciphertext stores | Read only the objects bound to the current authorized export and write one encrypted staging object | Exact streaming/staging profile PROPOSED in document 28; implementation review OPEN CRITICAL |
-| Emergency Export Worker | Alert Service | Satisfy the approved administrator-notification precondition | Transport and durable semantics OPEN |
+| Emergency Export Worker | Alert Service | Satisfy the approved administrator-notification precondition | Exact durable-acceptance protocol PROPOSED in document 31; approval/review and production gates OPEN |
 | Application Administrator Console | Audit read interface | Read authorized audit evidence | Must not reuse append or retention credentials |
 | Audit Collector | Independent checkpoint verifier | Publish independently verifiable evidence | RFC 9162/9942 construction and cadence owner-approved; independent review and production gates OPEN CRITICAL |
 
@@ -248,7 +248,13 @@ Step-up authorization is single-use and bound to operator, ticket, operation, no
 
 ### Alert delivery
 
-The alert interface accepts only allowlisted event codes and system-generated identifiers. It rejects arbitrary strings and sensitive payloads. Operations requiring durable notification cannot claim success until the approved delivery precondition is met. Exact transport, durability, retry, and failure policy remain OPEN.
+The alert interface accepts only allowlisted event codes and system-generated
+identifiers. It rejects arbitrary strings and sensitive payloads. Operations
+requiring durable notification cannot claim success until the approved delivery
+precondition is met. `docs/31_ADMINISTRATOR_ALERT_PROTOCOL.md` proposes the exact
+closed schema, self-hosted inbox/SMTP path, synchronous durable acceptance,
+idempotency, retry, acknowledgement, retention, and failure matrix; it remains
+non-authorizing pending consolidated approval and independent review.
 
 ## Finalization ownership
 
@@ -321,6 +327,7 @@ Reporter-facing proxy, application, and upstream infrastructure configuration mu
 | Key Service | Exact acceptance/capability plan PROPOSED in document 27; product, topology, real PoC, and independent review OPEN CRITICAL |
 | Audit receipts/checkpoints | Receipt, anti-replay, chain/batch, signatures, independent verification, alerting — OPEN CRITICAL |
 | Emergency Export | Exact construction PROPOSED in document 28; owner/review, alert, signer/HSM, custody, Key Service, concurrency, workstation, and deployment gates OPEN CRITICAL |
+| Administrator alerts | Exact self-hosted transport, closed schema, durable acceptance, retry/escalation, and failure policy PROPOSED in document 31; owner/review and production gates OPEN HIGH |
 | File Processing Sandbox | Exact construction PROPOSED in document 29; owner/review, artifact pinning, fuzz corpus, production microVM/broker, Key Service/audit and deployment gates OPEN HIGH |
 | CAPTCHA | Owner-approved no-JavaScript protocol; Pillow/font, audio/accessibility, PostgreSQL concurrency, and production-boundary reviews OPEN HIGH |
 | Authentication/step-up | TTL, canonical artifact bytes/digest, enrollment/reset/recovery/revocation — OPEN HIGH |

@@ -143,6 +143,14 @@ proxy behavior, bounded Django sandbox upload handler, and failure tests in
 consolidated pre-code decision. Submission remains disabled pending owner
 approval, independent HTTP/proxy/Django review, and all dependent gates.
 
+The self-hosted Alert Service, durable administrator inbox, local SMTP wake-up
+queue, closed metadata-only schema, idempotent durable acceptance,
+retry/escalation, acknowledgement, retention, and per-operation failure policy
+in `docs/31_ADMINISTRATOR_ALERT_PROTOCOL.md` are proposed for the consolidated
+pre-code decision. Alert-dependent operations remain disabled pending owner
+approval, independent security/operations review, and production deployment
+gates.
+
 ## Local preview
 
 From this repository directory, using the prepared virtual environment:
