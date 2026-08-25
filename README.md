@@ -44,6 +44,22 @@ The Markdown specification incorporates later clarifications and therefore takes
 
 ## Current implementation status
 
-The repository contains only an empty Django 5.2.17 development scaffold with no installed application, product route, or business logic.
+The repository contains a Django 5.2.17 development scaffold and one inert,
+read-only reporter landing page. The page has no form, JavaScript, analytics,
+third-party resources, report storage, authentication, or business logic.
 
 Security-sensitive components remain blocked by their applicable OPEN decisions. The service interfaces and negative capability boundaries are approved as the implementation boundary, without closing those decisions.
+
+## Local preview
+
+From this repository directory, using the prepared virtual environment:
+
+```powershell
+.\.venv\Scripts\python.exe manage.py check
+.\.venv\Scripts\python.exe manage.py test -v 2
+.\.venv\Scripts\python.exe manage.py runserver 127.0.0.1:8000
+```
+
+Then open `http://127.0.0.1:8000/`. If that port is already occupied, choose a
+different local port such as `8001`. The Django development server is for local
+testing only and must not be used as the production server.

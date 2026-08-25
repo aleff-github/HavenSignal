@@ -1,7 +1,10 @@
-"""Root URL configuration for the empty project."""
+"""Root URL configuration."""
 
-from django.urls import URLPattern, URLResolver
+from django.urls import URLPattern, URLResolver, path
+
+from reporter_gateway.views import home
 
 
-# Product endpoints are intentionally absent from this bootstrap.
-urlpatterns: list[URLPattern | URLResolver] = []
+urlpatterns: list[URLPattern | URLResolver] = [
+    path("", home, name="reporter-home"),
+]
