@@ -15,6 +15,11 @@ Recovery Secret, and keyed-verifier construction. It remains non-authorizing
 until its project-owner choices and independent cryptographic review are
 complete.
 
+`docs/22_NO_JAVASCRIPT_CHALLENGE_PROTOCOL.md` is the proposed no-JavaScript
+challenge and anonymous abuse-control protocol. It remains non-authorizing
+until its project-owner and dependent rendering/accessibility reviews are
+complete.
+
 ## Traceability index
 
 | Requirement IDs | Severity | Primary design documents | Verification | Current gate |
@@ -48,8 +53,8 @@ complete.
 | SEC-FINALIZE-005 | HIGH | 03 Lifecycle; 08 Audit Logging | 14: deletion retry/alert tests | Alert transport details OPEN |
 | SEC-EXPORT-001..005 | CRITICAL/HIGH | 09 Emergency Export; 15 Trust Boundaries | 14: export safeguards, crypto, cleanup tests | Exact crypto format, signing, alert semantics OPEN |
 | SEC-EXPORT-006 | HIGH | 02 Threat Model; 09 Emergency Export | Threat-model acceptance review | Accepted residual risk |
-| SEC-CAPTCHA-001..002 | CRITICAL | 10 Network Anonymity; 11 Technology Decisions; 20 Submission Protocol | 14: self-hosting/mandatory-flow tests | JS candidate only; no-JS product OPEN |
-| SEC-CAPTCHA-003 | HIGH | 10 Network Anonymity; 12 Open Decisions | 14: no-JS expiry/replay/Tor tests | OPEN |
+| SEC-CAPTCHA-001..002 | CRITICAL | 10 Network Anonymity; 11 Technology Decisions; 20 Submission Protocol; 22 No-JS Challenge | 14: self-hosting/mandatory-flow tests | No-JS protocol PROPOSED; owner/rendering/accessibility reviews remain |
+| SEC-CAPTCHA-003 | HIGH | 10 Network Anonymity; 12 Open Decisions; 22 No-JS Challenge | 14: no-JS expiry/replay/race/Tor tests | PROPOSED; not authorized |
 | SEC-CAPTCHA-004 | CRITICAL | 10 Network Anonymity | 14: dependency-failure tests | No fallback permitted |
 | SEC-FILE-001..003 | CRITICAL | 07 File Security; 15 Trust Boundaries | 14: file/sandbox/CDR tests | PDF profile and sandbox OPEN |
 | SEC-FILE-004..006 | HIGH | 07 File Security; 12 Open Decisions | 14: temporary lifecycle/resource tests | OPEN; PDF and image implementation blocked |

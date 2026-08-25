@@ -104,6 +104,13 @@ The no-JavaScript path must be self-hosted, server-side, single-use, briefly exp
 
 The exact product/implementation and exact expiry remain OPEN. ALTCHA remains the JavaScript-enabled candidate.
 
+`docs/22_NO_JAVASCRIPT_CHALLENGE_PROTOCOL.md` proposes an exact five-minute,
+single-attempt, purpose/scope-bound protocol and global anonymous token buckets.
+It rejects direct use of the reviewed `django-simple-captcha` validator because
+its database consumption is not explicitly concurrency-atomic. The proposal
+does not close this gate until the owner choices plus pinned rendering,
+audio/accessibility, and production-boundary reviews are complete.
+
 ## HIGH — PDF structural acceptance profile and sandbox
 
 PDF upload remains blocked until approval of:
