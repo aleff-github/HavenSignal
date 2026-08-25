@@ -1,0 +1,49 @@
+# 18 — Security Review Checklist
+
+Use before accepting any security-sensitive Codex change.
+
+- [ ] The change references applicable requirement IDs.
+- [ ] No reporter-controlled input is added to logs.
+- [ ] No new external reporter-facing dependency is introduced.
+- [ ] No new plaintext persistence of report/attachment/Response Note is introduced.
+- [ ] No secret is placed in URL/query string.
+- [ ] No upload path uses user-controlled filename.
+- [ ] Authorization is enforced server-side.
+- [ ] Race conditions are considered.
+- [ ] Current ReportLease id/generation and server-side expiry are validated for every sensitive OPEN action.
+- [ ] Stale tabs, sessions, retries, and earlier lease generations are fenced.
+- [ ] Failure mode is fail closed where required.
+- [ ] Audit event is defined if the action is security-sensitive.
+- [ ] Disclosure/destruction/export obtains the required durable pre-action audit receipt before the protected action.
+- [ ] REQUESTED/AUTHORIZED/COMPLETED/FAILED events represent the true outcome and cannot be replayed across context.
+- [ ] Audit unavailability behavior is tested.
+- [ ] Tamper evidence covers truncation, gaps, and cessation, not only hash mutation.
+- [ ] Permanent audit contains only allowlisted reason codes; protected operator notes remain encrypted ticket data.
+- [ ] Session timeout behavior is preserved.
+- [ ] No ordinary attachment download is introduced.
+- [ ] File processing remains sandboxed.
+- [ ] Admin role does not gain report decryption.
+- [ ] Operator cannot rewrite audit history.
+- [ ] Key lifecycle/deletion behavior is unchanged or explicitly reviewed.
+- [ ] Backup/restore behavior does not resurrect destroyed report keys.
+- [ ] Backup/restore behavior does not resurrect destroyed Response-DEKs.
+- [ ] Wrapped/encrypted/derived DEK records cannot be resurrected by combining them with retained infrastructure keys or backups.
+- [ ] Response-DEK expiry denies use independently of delayed physical cleanup.
+- [ ] Concurrent first reads establish one immutable Response-DEK expiry and cannot extend it.
+- [ ] Reporter Gateway has no general existing-report decrypt/unwrap capability.
+- [ ] Application Administrator cannot impersonate an operator or obtain report-decryption capability.
+- [ ] Infrastructure / Key Custodian does not inherit operator/application/audit-reader privileges.
+- [ ] Step-up authorization is single-use and bound to operator, ticket, operation, nonce, expiry, and exact artifact digest where applicable.
+- [ ] Finalization uses `FINALIZING`; Response Note is not visible before confirmed and audited Report-DEK destruction.
+- [ ] Each finalization crash point is resumable and idempotent.
+- [ ] A committed `FINALIZING` state always has the immutable staged Response Note needed for resume and blocks further operator access/export.
+- [ ] PDF upload remains disabled unless the approved structural profile and sandbox/CDR design exist.
+- [ ] Image upload remains disabled unless decoded pixel/dimension limits, toolchain, viewing policy, and sandbox limits are approved.
+- [ ] Aggregate HTTP/multipart request size is explicitly limited at reverse-proxy and application layers.
+- [ ] No proxy/web/worker path durably spools plaintext uploads or export packages.
+- [ ] CAPTCHA is self-hosted, non-fingerprinting, and fails closed for mandatory operations.
+- [ ] Alert payloads use only allowlisted controlled metadata.
+- [ ] New dependency is pinned and justified.
+- [ ] Negative/abuse tests are included.
+- [ ] Sensitive error messages are not exposed.
+- [ ] Documentation is updated if a security assumption changes.
