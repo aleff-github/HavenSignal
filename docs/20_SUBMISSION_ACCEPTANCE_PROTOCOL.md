@@ -14,6 +14,11 @@ a CAPTCHA, cryptographic construction, Key Service, audit receipt format,
 recovery verifier, file parser, sandbox, aggregate request limit, or deployment
 topology. Each dependent OPEN decision remains independently blocking.
 
+The current implementation may model these states and validate transitions
+without persisting a protected transition. A database transition executor,
+reconciler, form, and endpoint remain absent until their dependent gates and
+PostgreSQL concurrency/failure tests are complete.
+
 ## Governing requirements
 
 This approved protocol applies primarily to:

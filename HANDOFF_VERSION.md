@@ -22,4 +22,6 @@ Version 0.2 additionally incorporates:
 - action-bound step-up authorization;
 - explicit requirement IDs and traceability for recovery, response, export, CAPTCHA, file sandbox/CDR, roles, keys, alerts, and finalization.
 
-No production implementation code is intentionally included.
+No production-capable security workflow is enabled. The included Django code
+is an inert scaffold plus deny-by-default interfaces and metadata-only domain
+structures whose protected integrations remain gated.

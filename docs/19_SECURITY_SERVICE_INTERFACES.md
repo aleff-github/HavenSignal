@@ -84,9 +84,14 @@ The following separations are required before production capability is granted:
 
 Exact VM, container, namespace, service-mesh, or host placement remains subject to deployment review. Process separation without credential and network-policy separation is not sufficient.
 
-## Proposed Django dependency boundaries
+## Django dependency boundaries
 
-The current `anonymous_reporting` package remains an empty bootstrap. The following are dependency rules for future review, not authorization to create the modules or enable their flows:
+The reporter-facing `anonymous_reporting` package remains an inert bootstrap.
+The internal `submission_workflow` application contains only the approved
+metadata state model, database constraints, and a pure non-persisting
+transition planner. It has no view, URL, protected transition executor, or
+external-service adapter. The following dependency rules are not authorization
+to enable their flows:
 
 - entrypoints for reporter, recovery, operator, and administrator surfaces use separate URL configuration and deployment settings profiles before receiving production credentials;
 - HTTP views call narrowly scoped application services and never call Key Service, Audit Service, blob, or sandbox vendor clients directly;
