@@ -6,6 +6,11 @@
 review required. No report-content encryption, storage, upload, decryption,
 attachment processing, or Report-DEK operation is authorized by this document.**
 
+**OWNER-APPROVED SUBDECISION (2026-08-25) — accepted report text uses the
+strict UTF-8/NFC/LF canonical representation defined below as its sole
+authoritative original. The pre-normalization browser/wire representation is
+not retained. This subdecision does not approve the remaining protocol.**
+
 This proposal defines the version-1 Report-DEK/object-subkey construction,
 fixed-length plaintext frames, AEAD envelopes, immutable context binding,
 provisional staging, operation capabilities, and failure behavior. It does not
@@ -96,6 +101,14 @@ The reporter-facing preview/validation semantics must not claim that NFC or
 line-ending normalization preserves every byte originally typed. Exact
 canonical bytes are validated once and are never used for deduplication,
 correlation, logging, audit, or a public digest.
+
+After successful validation, `canonical-utf8-report-text` is the authoritative
+original report text for encryption, operator viewing, Emergency Export,
+hashing inside an authorized export, and cryptographic destruction. The raw
+pre-normalization input is discarded before durable persistence and is not
+stored, encrypted, queued, logged, audited, backed up, or included as a second
+export object. In documentation, “original report text” means this accepted
+canonical representation unless a document explicitly says otherwise.
 
 The plaintext frame is exactly 20,005 bytes:
 
@@ -308,6 +321,8 @@ cryptographically unusable.
 - exact deterministic-CBOR AAD/envelope bytes and closed-schema rejection;
 - fixed text/attachment ciphertext sizes at all boundary lengths;
 - UTF-8/NFC/line-ending/length framing and attachment kind/length/padding checks;
+- exact reuse of the accepted canonical report-text bytes for OPEN and Emergency
+  Export, with no durable or encrypted pre-normalization copy;
 - single encryption per object, random nonce uniqueness, byte-identical retry,
   and synchronized multi-process idempotency races;
 - bit alteration and cross-report/attempt/object/kind/slot/key-handle substitution
@@ -333,7 +348,8 @@ insufficient for release acceptance.
 2. XChaCha20-Poly1305-IETF combined mode with one random 192-bit nonce per
    immutable object;
 3. canonical fixed-size 20,005-byte text and 5,242,890-byte attachment frames,
-   defining `5 MB` as exactly 5 MiB;
+   defining `5 MB` as exactly 5 MiB; within this choice, NFC/LF normalization
+   and the absence of a second raw-text copy are already owner-approved;
 4. deterministic-CBOR KDF/AAD/envelope schemas and fixed ciphertext sizes;
 5. provisional/inert staging, exact SEALED activation, narrowly separated
    decrypt paths, and no application-visible wrapped DEK;

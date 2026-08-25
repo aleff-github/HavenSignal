@@ -42,7 +42,8 @@ manifest.json
 
 The package preserves:
 
-- original report text as received;
+- authoritative accepted report text byte-for-byte: the strict UTF-8, LF, NFC
+  representation defined by `docs/26_REPORT_CONTENT_CRYPTOGRAPHIC_PROTOCOL.md`;
 - accepted attachment bytes byte-for-byte;
 - relevant system-generated receipt/export metadata;
 - file sizes;
@@ -52,6 +53,12 @@ The package preserves:
 Full protected reopening/export notes may be included in the encrypted package. Permanent audit contains only the system reason code and structured metadata.
 
 Original reporter filenames are not preserved because the system intentionally discards them.
+
+“Original report text” does not mean the transient browser/wire byte sequence
+before canonicalization. The project-owner-approved rule keeps no second raw
+text copy: Emergency Export decrypts and exports exactly the canonical bytes
+that were accepted and encrypted. This avoids creating an additional sensitive
+representation while preserving the exact platform-accepted content.
 
 ## Manifest
 

@@ -36,7 +36,9 @@ protocol. It awaits consolidated pre-code owner approval and independent review.
 
 `docs/26_REPORT_CONTENT_CRYPTOGRAPHIC_PROTOCOL.md` is the proposed exact
 Report-DEK, per-object subkey, AEAD, fixed-length content framing, staging, and
-narrow decryption protocol. It awaits consolidated approval and review.
+narrow decryption protocol. Its NFC/LF canonical-text/no-raw-copy subdecision
+is owner-approved; the remaining protocol awaits consolidated approval and
+review.
 
 `docs/27_KEY_SERVICE_ACCEPTANCE_AND_NON_RESURRECTION_POC.md` is the proposed
 candidate-neutral Key Service capability and destructive acceptance plan. No
@@ -142,3 +144,12 @@ No second operator is required. The ability of a legitimate OPEN operator to del
 ### Recovery secret
 
 The approved model is a public random Ticket ID plus an independent 256-bit Recovery Secret and no short PIN. Exact encodings and verifier construction remain OPEN.
+
+### Authoritative original report text
+
+The project owner decided that accepted report text is normalized to LF and
+NFC, encoded as strict UTF-8, and retained only in that canonical form. That
+canonical byte sequence is the authoritative “original report text” for
+encryption, operator viewing, Emergency Export, and destruction. The transient
+pre-normalization browser/wire representation is not a second original and is
+not persisted. Accepted attachment bytes remain byte-for-byte unchanged.

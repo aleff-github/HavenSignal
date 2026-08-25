@@ -294,7 +294,7 @@ at every transition. At minimum they prove:
 
 | Data | Permitted handling | Prohibited handling |
 |---|---|---|
-| Report text | Transient validation/encryption; durable ciphertext only | Logs, audit, plaintext queues/files/DB |
+| Report text | Transient strict UTF-8/NFC/LF canonicalization and encryption; durable canonical ciphertext only | Pre-normalization/raw copy, logs, audit, plaintext queues/files/DB |
 | Attachment bytes | Transient reviewed pipeline; durable original ciphertext | Django default temp spool, public object, ordinary download |
 | Original filename | Immediate validation only, then discard | Persistence, path use, logs, audit, UI |
 | Attempt credential | One form/POST/retry context; minimal verifier/index | URL, logs, IP/device binding, cross-attempt tracking |
