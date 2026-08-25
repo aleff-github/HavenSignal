@@ -44,7 +44,8 @@ Read, in order:
 15. `docs/27_KEY_SERVICE_ACCEPTANCE_AND_NON_RESURRECTION_POC.md`
 16. `docs/28_EMERGENCY_EXPORT_CRYPTOGRAPHIC_PROTOCOL.md`
 17. `docs/29_FILE_ACCEPTANCE_SANDBOX_AND_SAFE_VIEW_PROTOCOL.md`
-18. `START-CODEX.md`
+18. `docs/30_REQUEST_AND_MULTIPART_ADMISSION_PROTOCOL.md`
+19. `START-CODEX.md`
 
 ## Source material
 
@@ -135,6 +136,12 @@ PNG-only operator view in
 the consolidated pre-code decision. Attachment upload and viewing remain
 disabled pending owner approval, independent review, exact artifact pinning,
 and production sandbox/integration gates.
+
+The exact 21 MiB request ceiling, closed multipart grammar, streaming/no-spool
+proxy behavior, bounded Django sandbox upload handler, and failure tests in
+`docs/30_REQUEST_AND_MULTIPART_ADMISSION_PROTOCOL.md` are proposed for the
+consolidated pre-code decision. Submission remains disabled pending owner
+approval, independent HTTP/proxy/Django review, and all dependent gates.
 
 ## Local preview
 

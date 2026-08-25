@@ -145,6 +145,13 @@ For each candidate Key Service, execute the complete production-equivalent
 
 Test:
 
+- exact encoded-body, aggregate-file, part/header/control, timeout, idle, and
+  bounded-memory limits from `docs/30` at every ingress/application boundary;
+- CL/TE, duplicate/conflicting headers, HTTP/1↔HTTP/2 translation, chunked,
+  compressed, nested, truncated, slow, and multipart differential corpora;
+- reverse proxy, WAF/APM, Django, queue, filesystem, swap, and backup inspection
+  proves no request body/file spool or capture and no automatic POST replay;
+
 - extension spoofing;
 - MIME spoofing;
 - polyglots;

@@ -242,7 +242,15 @@ The exceptional permission model, selection policy, safeguards, and race behavio
 
 ## HIGH — Aggregate request and decoded-resource limits
 
-Per-file size labels are approved. Still OPEN are the exact byte interpretation of `5 MB`, the aggregate HTTP/multipart body limit, and remaining parser-independent decoded-resource limits not covered by the PDF/image decisions above.
+`docs/26` and `docs/30_REQUEST_AND_MULTIPART_ADMISSION_PROTOCOL.md` propose
+defining each `5 MB` as exactly 5 MiB, the complete submission body as 21 MiB,
+the sum of file bodies as 20 MiB, and the exact multipart/time/memory ceilings.
+`docs/29` proposes the remaining decoded-resource limits.
+
+The eight request/multipart decisions await consolidated owner approval and
+independent HTTP/proxy/Django review. Exact reverse-proxy configuration, custom
+upload-handler review, request-smuggling/desynchronization testing, no-spool
+production evidence, and dependent challenge/file/crypto gates remain blocking.
 
 ## MEDIUM — Administrator alert transport
 

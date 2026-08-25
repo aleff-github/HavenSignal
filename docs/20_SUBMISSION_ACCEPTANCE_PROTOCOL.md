@@ -182,6 +182,11 @@ The endpoint remains disabled until the exact aggregate request limit, CAPTCHA,
 and request-upload handling are approved. Django's default temporary upload
 handler is not acceptable because it may durably spool reporter plaintext.
 
+`docs/30_REQUEST_AND_MULTIPART_ADMISSION_PROTOCOL.md` proposes the exact outer
+and multipart limits, streaming/no-retry proxy behavior, bounded custom Django
+handler, and no-spool verification. It remains non-authorizing pending
+consolidated approval and its independent production gates.
+
 ### Phase 2 — validate transient input
 
 8. Enforce the approved text and attachment counts/sizes using server-observed
