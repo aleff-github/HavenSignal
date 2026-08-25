@@ -64,6 +64,13 @@ The six listed choices await consolidated pre-code owner approval and
 independent cryptographic review. Key Service, file/sandbox, storage,
 concurrency, audit, and deployment gates remain independently blocking.
 
+The project owner approved one contained choice on 2026-08-25: report text is
+normalized to LF and NFC, encoded as strict UTF-8, and that accepted canonical
+representation is the sole authoritative original. No separate raw
+pre-normalization copy is retained. This resolves the earlier export wording
+conflict but does not approve the other `docs/26` choices or close its review
+and implementation gates.
+
 ## CRITICAL — Key Service product, topology, and proof of non-resurrection
 
 The policy is approved:

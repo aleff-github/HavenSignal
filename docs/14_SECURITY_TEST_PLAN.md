@@ -51,6 +51,9 @@ Test:
 - deterministic-CBOR KDF/AAD/envelope encoding and rejection of every context,
   object, slot, attempt, or key-handle substitution;
 - canonical UTF-8/NFC text and fixed 20,005-byte frame validation;
+- OPEN and Emergency Export recover the exact same accepted canonical text
+  bytes, while no raw pre-normalization representation is persisted, encrypted,
+  queued, logged, audited, or backed up;
 - attachment framing at 0 and 5,242,880-byte boundaries, fixed ciphertext size,
   kind binding, zero padding, and oversized rejection;
 - Reporter Gateway cannot decrypt existing content, Operator Console cannot
