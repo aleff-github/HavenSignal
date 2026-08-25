@@ -34,7 +34,8 @@ Read, in order:
 5. `docs/03_DATA_LIFECYCLE.md`
 6. `docs/12_OPEN_SECURITY_DECISIONS.md`
 7. `docs/19_SECURITY_SERVICE_INTERFACES.md`
-8. `START-CODEX.md`
+8. `docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`
+9. `START-CODEX.md`
 
 ## Source material
 
@@ -54,6 +55,11 @@ placeholder operation raises a controlled failure and provides no plaintext,
 cryptographic, audit-receipt, CAPTCHA, recovery, sandbox, MFA, or alert fallback.
 
 Security-sensitive components remain blocked by their applicable OPEN decisions. The service interfaces and negative capability boundaries are approved as the implementation boundary, without closing those decisions.
+
+The submission acceptance, audit, retry, and one-time credential-delivery
+sequence is documented as a proposal in
+`docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`; it does not yet authorize a report
+form or endpoint.
 
 ## Local preview
 

@@ -109,8 +109,8 @@ All edges are deny-by-default and require authenticated service identity, least-
 |---|---|---|---|
 | Reporter Gateway | Self-hosted CAPTCHA | Generate/validate submission challenge | No-JS technology and expiry OPEN |
 | Reporter Gateway | Audit Collector | Append only the approved submission event envelope | Submission sequencing and receipt semantics OPEN CRITICAL |
-| Reporter Gateway | Submission coordinator / Key Service | Create protection capability for one new submission only | Submission sequencing and crypto construction OPEN CRITICAL |
-| Reporter Gateway | Metadata/ciphertext stores | Create only the new report records/objects required by the approved sequence | Submission sequencing OPEN CRITICAL |
+| Reporter Gateway | Submission coordinator / Key Service | Create protection capability for one new submission only | `20_SUBMISSION_ACCEPTANCE_PROTOCOL.md` PROPOSED; sequencing and crypto construction OPEN CRITICAL |
+| Reporter Gateway | Metadata/ciphertext stores | Create only the new report records/objects required by the sequence eventually approved for this gate | `20_SUBMISSION_ACCEPTANCE_PROTOCOL.md` PROPOSED; sequencing OPEN CRITICAL |
 | Recovery Gateway | Self-hosted CAPTCHA | Validate retrieval challenge | No-JS technology and expiry OPEN |
 | Recovery Gateway | Recovery state/verifier | Uniformly authorize Ticket ID and Recovery Secret | Encoding/verifier construction OPEN CRITICAL |
 | Recovery Gateway | Key Service | Use one eligible Response-DEK after approved authorization | Response crypto/lifecycle OPEN CRITICAL |
@@ -306,7 +306,7 @@ Reporter-facing proxy, application, and upstream infrastructure configuration mu
 
 | Interface area | Blocking decision |
 |---|---|
-| Submission Gateway to audit/key/storage | Submission acceptance, audit, and one-time credential-delivery sequencing — OPEN CRITICAL |
+| Submission Gateway to audit/key/storage | `20_SUBMISSION_ACCEPTANCE_PROTOCOL.md` PROPOSED; project-owner choices and dependent constructions remain OPEN CRITICAL |
 | Recovery Gateway/verifier | Ticket ID and Recovery Secret encoding, verifier, delivery, and failure behavior — OPEN CRITICAL |
 | Response protection/use | AEAD, nonce, AAD, derivation/separation, wrapping, representation, lifecycle — OPEN CRITICAL |
 | Key Service | Product, topology, state-aware policy, replication, backup, and non-resurrection proof — OPEN CRITICAL |

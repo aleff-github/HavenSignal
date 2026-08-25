@@ -92,6 +92,11 @@ At minimum:
 - OPERATOR_AUTHENTICATION_EVENT
 - ADMIN_AUDIT_ACCESS
 
+`docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md` proposes the additional
+`SUBMISSION_ACCEPTANCE_REQUESTED` and `SUBMISSION_ACCEPTANCE_FAILED` event
+families. They are not approved required events while that document remains
+PROPOSED.
+
 ## Operator attribution
 
 Every operator event records the authenticated operator identity.

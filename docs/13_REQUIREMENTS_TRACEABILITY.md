@@ -6,11 +6,15 @@ The original questionnaire remains historical evidence under `/source` and is lo
 
 `docs/19_SECURITY_SERVICE_INTERFACES.md` is the approved cross-cutting capability and dependency map. Its approval does not close any implementation gate in `docs/12_OPEN_SECURITY_DECISIONS.md`.
 
+`docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md` is the proposed submission
+sequencing and retry model. It remains non-authorizing while its project-owner
+choices and dependent OPEN constructions are unresolved.
+
 ## Traceability index
 
 | Requirement IDs | Severity | Primary design documents | Verification | Current gate |
 |---|---|---|---|---|
-| SEC-CONF-001..008 | CRITICAL | 02 Threat Model; 04 Cryptographic Model; 15 Trust Boundaries | 14: key destruction, roles/capabilities, deployment checks | Key Service/capability design OPEN for security component |
+| SEC-CONF-001..008 | CRITICAL | 02 Threat Model; 04 Cryptographic Model; 15 Trust Boundaries; 20 Submission Protocol | 14: key destruction, roles/capabilities, deployment checks | Key Service/capability design OPEN for security component |
 | SEC-ANON-001..003 | CRITICAL | 00 Scope; 05 Recovery; 08 Audit; 10 Network Anonymity | 14: reporter logging, recovery enumeration, browser caching | End-to-end deployment validation required |
 | SEC-ANON-004 | HIGH | 10 Network Anonymity; 11 Technology Decisions | 14: CAPTCHA and dependency/security checks | No-JS product OPEN |
 | SEC-ANON-005 | CRITICAL | 10 Network Anonymity; 15 Trust Boundaries | Deployment/security acceptance test | Production deployment gate |
@@ -31,7 +35,7 @@ The original questionnaire remains historical evidence under `/source` and is lo
 | SEC-KEY-006..007 | CRITICAL | 02 Threat Model; 04 Cryptographic Model; 15 Trust Boundaries | 14: negative capability and combined-backup restoration tests | Exact Key Service policy implementation OPEN |
 | SEC-ROLE-001..003 | CRITICAL | 02 Threat Model; 15 Trust Boundaries | 14: role/capability tests | MFA/admin operational procedures OPEN |
 | SEC-ROLE-004 | HIGH | 02 Threat Model | Threat-model review | Accepted limitation |
-| SEC-RECOVERY-001..004 | CRITICAL | 05 Recovery Response | 14: recovery enumeration/secret-handling tests | Encoding/verifier construction still gates implementation |
+| SEC-RECOVERY-001..004 | CRITICAL | 05 Recovery Response; 20 Submission Protocol | 14: recovery enumeration/secret-handling tests | Encoding/verifier and lost-response decisions still gate implementation |
 | SEC-RECOVERY-005 | CRITICAL | 05 Recovery Response; 12 Open Decisions | Cryptographic design review | OPEN |
 | SEC-RESPONSE-001 | CRITICAL | 00 Scope; 05 Recovery Response | Response validation/no-draft tests | No design blocker |
 | SEC-RESPONSE-002..008 | CRITICAL | 04 Cryptographic Model; 05 Recovery Response | 14: Response-DEK lifecycle/restore/first-read race/expiry-denial tests | Exact crypto and unread lifetime OPEN |
@@ -39,7 +43,7 @@ The original questionnaire remains historical evidence under `/source` and is lo
 | SEC-FINALIZE-005 | HIGH | 03 Lifecycle; 08 Audit Logging | 14: deletion retry/alert tests | Alert transport details OPEN |
 | SEC-EXPORT-001..005 | CRITICAL/HIGH | 09 Emergency Export; 15 Trust Boundaries | 14: export safeguards, crypto, cleanup tests | Exact crypto format, signing, alert semantics OPEN |
 | SEC-EXPORT-006 | HIGH | 02 Threat Model; 09 Emergency Export | Threat-model acceptance review | Accepted residual risk |
-| SEC-CAPTCHA-001..002 | CRITICAL | 10 Network Anonymity; 11 Technology Decisions | 14: self-hosting/mandatory-flow tests | JS candidate only; no-JS product OPEN |
+| SEC-CAPTCHA-001..002 | CRITICAL | 10 Network Anonymity; 11 Technology Decisions; 20 Submission Protocol | 14: self-hosting/mandatory-flow tests | JS candidate only; no-JS product OPEN |
 | SEC-CAPTCHA-003 | HIGH | 10 Network Anonymity; 12 Open Decisions | 14: no-JS expiry/replay/Tor tests | OPEN |
 | SEC-CAPTCHA-004 | CRITICAL | 10 Network Anonymity | 14: dependency-failure tests | No fallback permitted |
 | SEC-FILE-001..003 | CRITICAL | 07 File Security; 15 Trust Boundaries | 14: file/sandbox/CDR tests | PDF profile and sandbox OPEN |
@@ -48,7 +52,7 @@ The original questionnaire remains historical evidence under `/source` and is lo
 | SEC-ALERT-002 | CRITICAL | 08 Audit Logging | 14: allowlisted-payload tests | No content-bearing alerts permitted |
 | SEC-ALERT-003 | HIGH | 12 Open Decisions | Procedure/failure tests | OPEN |
 | SEC-BROWSER-001..002 | CRITICAL | 05 Recovery Response; 06 Operator Sessions; 16 Django Rules | 14: browser caching tests | Browser guarantee boundary documented |
-| SEC-INPUT-001..006 | HIGH | 00 Scope; 07 File Security; 16 Django Rules | 14: input/upload/body-limit tests | Aggregate and decoded-resource limits OPEN |
+| SEC-INPUT-001..006 | HIGH | 00 Scope; 07 File Security; 16 Django Rules; 20 Submission Protocol | 14: input/upload/body-limit tests | Aggregate and decoded-resource limits OPEN |
 
 ## Cross-cutting interface mapping
 

@@ -26,6 +26,21 @@ Verify:
 - the system never claims one-time credentials were delivered when the response was lost;
 - orphan keys/ciphertexts/metadata are reconciled without logging reporter data.
 
+If `20_SUBMISSION_ACCEPTANCE_PROTOCOL.md` is approved, also verify:
+
+- expired, unknown, consumed, and replayed attempt credentials fail closed;
+- synchronized parallel POST copies create one attempt owner and at most one
+  Report-DEK, metadata record, ciphertext set, and `SEALED` report;
+- `SUBMISSION_ACCEPTANCE_REQUESTED` is durable before key/material creation;
+- `SUBMISSION_RECEIVED` is emitted only after exact staged objects and metadata
+  are durably verified;
+- lost responses never cause credential re-display, replacement credentials,
+  or a duplicate report for the same attempt;
+- no event or state claims that the reporter received or saved credentials;
+- the reconciler cannot obtain plaintext or construct credentials and can only
+  finish the evidenced transition or destroy scoped staged material;
+- crash injection at each proposed phase reaches only an allowed state.
+
 ## Recovery enumeration
 
 Test:

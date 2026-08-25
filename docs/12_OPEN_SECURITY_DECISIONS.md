@@ -74,6 +74,12 @@ Hash chaining alone is not acceptable.
 
 remains OPEN. The design must not accept an unaudited report silently, leak plaintext, duplicate a submission through unsafe retry, or claim that credentials were delivered when the one-time response was lost.
 
+`docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md` contains the current recommended
+sequence, failure matrix, and residual-risk option. It remains PROPOSED. This
+sequencing gate is not closed until the project owner explicitly decides its
+five listed approval questions. Dependent construction gates remain
+independently blocking even after sequencing approval.
+
 ## CRITICAL — Emergency Export cryptographic formats
 
 The organization public-key encryption and signed-manifest properties are approved.
