@@ -113,29 +113,29 @@ All edges are deny-by-default and require authenticated service identity, least-
 | Caller | Callee | Allowed purpose | Gate |
 |---|---|---|---|
 | Reporter Gateway | Self-hosted CAPTCHA | Generate/validate submission challenge | No-JS protocol owner-approved; rendering/audio/accessibility and production reviews OPEN |
-| Reporter Gateway | Audit Collector | Append only the approved submission event envelope | Sequencing APPROVED; exact receipt protocol PROPOSED in document 23 and remains OPEN CRITICAL |
+| Reporter Gateway | Audit Collector | Append only the approved submission event envelope | Sequencing and exact protocol owner-approved; independent review and production gates remain OPEN CRITICAL |
 | Reporter Gateway | Submission coordinator / Key Service | Create protection capability for one new submission only | `20_SUBMISSION_ACCEPTANCE_PROTOCOL.md` APPROVED; crypto and Key Service constructions remain OPEN CRITICAL |
 | Reporter Gateway | Metadata/ciphertext stores | Create only the new report records/objects required by the approved sequence | `20_SUBMISSION_ACCEPTANCE_PROTOCOL.md` APPROVED; dependent storage/crypto gates remain OPEN CRITICAL |
 | Recovery Gateway | Self-hosted CAPTCHA | Validate retrieval challenge | No-JS protocol owner-approved; dependent reviews OPEN |
 | Recovery Gateway | Recovery state/verifier | Uniformly authorize Ticket ID and Recovery Secret | Owner-approved construction; independent cryptographic review OPEN CRITICAL |
 | Recovery Gateway | Key Service | Use one eligible Response-DEK after approved authorization | Response crypto/lifecycle OPEN CRITICAL |
 | Operator Console | Authentication/step-up service | Login and operation-bound authorization | Enrollment, reset, recovery, TTL, and digest representation OPEN |
-| Operator Console | Audit Collector | Obtain operation-bound pre-action receipts and append outcomes | Exact protocol PROPOSED in document 23; approval and independent review OPEN CRITICAL |
+| Operator Console | Audit Collector | Obtain operation-bound pre-action receipts and append outcomes | Exact protocol owner-approved in document 23; independent review and production gates OPEN CRITICAL |
 | Operator Console | State authority | CLAIM/OPEN/reopen and validate current lease generation using server time | Schema may be designed; security transitions require concurrency tests |
 | Operator Console | Key Service | Use one Report-DEK only for the current authorized OPEN/REOPEN context | Receipt and Key Service policy OPEN CRITICAL |
 | Operator Console | File Processing Sandbox | Request one controlled safe representation for the current lease | PDF/image profile and sandbox OPEN |
 | Operator Console | Security Workflow Coordinator | Start one fenced finalization workflow | Dependent crypto/MFA/audit gates remain OPEN |
 | Operator Console | Emergency Export Worker | Start one export bound to the current OPEN lease and authorization | Export crypto/MFA/audit/alert gates remain OPEN |
-| Security Workflow Coordinator | Audit Collector | Obtain required receipts and append truthful outcomes | Exact protocol PROPOSED in document 23; approval and independent review OPEN CRITICAL |
+| Security Workflow Coordinator | Audit Collector | Obtain required receipts and append truthful outcomes | Exact protocol owner-approved in document 23; independent review and production gates OPEN CRITICAL |
 | Security Workflow Coordinator | Key Service | Perform operation-scoped create/use/destroy calls for the current fenced workflow | Key product/topology/policy OPEN CRITICAL |
 | Security Workflow Coordinator | Metadata/ciphertext stores | Stage frozen ciphertext, publish state, or delete one scoped object | Must follow approved state machine and idempotency rules |
 | Security Workflow Coordinator | Alert Service | Send an allowlisted required alert | Transport and durable semantics OPEN |
-| Emergency Export Worker | Audit Collector | Obtain the export pre-action receipt and append truthful outcome | Exact protocol PROPOSED in document 23; approval and independent review OPEN CRITICAL |
+| Emergency Export Worker | Audit Collector | Obtain the export pre-action receipt and append truthful outcome | Exact protocol owner-approved in document 23; independent review and production gates OPEN CRITICAL |
 | Emergency Export Worker | Key Service | Use one Report-DEK for the exact authorized export context | Key policy and export construction OPEN CRITICAL |
 | Emergency Export Worker | Metadata/ciphertext stores | Read only the objects bound to the current authorized export | Export format and plaintext cleanup OPEN CRITICAL |
 | Emergency Export Worker | Alert Service | Satisfy the approved administrator-notification precondition | Transport and durable semantics OPEN |
 | Application Administrator Console | Audit read interface | Read authorized audit evidence | Must not reuse append or retention credentials |
-| Audit Collector | Independent checkpoint verifier | Publish independently verifiable evidence | RFC 9162/9942 construction and cadence PROPOSED in document 23; approval/review OPEN CRITICAL |
+| Audit Collector | Independent checkpoint verifier | Publish independently verifiable evidence | RFC 9162/9942 construction and cadence owner-approved; independent review and production gates OPEN CRITICAL |
 
 No other edge is implicitly allowed. In particular, the Application Administrator Console, Reporter Gateway, and File Processing Sandbox have no general edge to report-key use.
 

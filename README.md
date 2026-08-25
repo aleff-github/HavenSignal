@@ -84,10 +84,10 @@ reviews are complete.
 
 The exact audit-event encoding, durable-acceptance receipt, replay controls,
 Merkle proofs, independently witnessed checkpoints, and signing-key separation
-in `docs/23_AUDIT_RECEIPT_AND_TRANSPARENCY_PROTOCOL.md` are a proposal only.
-No Audit Service, receipt gate, or protected operation is authorized until the
-project owner approves the visible choices and the independent protocol review
-and production gates are complete.
+in `docs/23_AUDIT_RECEIPT_AND_TRANSPARENCY_PROTOCOL.md` are owner-approved.
+No Audit Service, receipt gate, or
+protected operation is authorized until the independent protocol review and
+production gates are complete.
 
 ## Local preview
 

@@ -149,11 +149,11 @@ The receipt must be bound to the applicable operator/service identity, report, o
 
 For OPEN and REOPEN, the Key Service must not release the report-decryption capability without the required valid receipt.
 
-`docs/23_AUDIT_RECEIPT_AND_TRANSPARENCY_PROTOCOL.md` contains the current
-proposed exact event encoding, signed durable-acceptance receipt, atomic
+`docs/23_AUDIT_RECEIPT_AND_TRANSPARENCY_PROTOCOL.md` contains the
+owner-approved exact event encoding, signed durable-acceptance receipt, atomic
 idempotency rules, and per-operation authorization lifetimes. It remains
-non-authorizing until project-owner approval and independent
-cryptographic/protocol review are complete.
+non-authorizing until independent cryptographic/protocol review and its
+production gates are complete.
 
 ## Tamper evidence
 
@@ -167,10 +167,9 @@ Current proposed design:
 
 Hash chaining alone is insufficient because an attacker controlling the store may truncate a valid suffix. The design must also detect gaps, truncation, and cessation through independently verifiable signed checkpoints or an equivalent control.
 
-The exact proposal is specified in
-`docs/23_AUDIT_RECEIPT_AND_TRANSPARENCY_PROTOCOL.md`; its owner decisions,
-independent review, signer/topology, alert transport, and deployment proof
-remain OPEN CRITICAL.
+The exact owner-approved construction is specified in
+`docs/23_AUDIT_RECEIPT_AND_TRANSPARENCY_PROTOCOL.md`; independent review,
+signer/topology, alert transport, and deployment proof remain OPEN CRITICAL.
 
 ## Audit unavailability
 
