@@ -36,7 +36,8 @@ Read, in order:
 7. `docs/19_SECURITY_SERVICE_INTERFACES.md`
 8. `docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`
 9. `docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md`
-10. `START-CODEX.md`
+10. `docs/22_NO_JAVASCRIPT_CHALLENGE_PROTOCOL.md`
+11. `START-CODEX.md`
 
 ## Source material
 
@@ -67,6 +68,11 @@ documented as a review-only proposal in
 `docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md`. Recovery remains disabled until
 that proposal, its independent cryptographic review, and every dependent gate
 are complete.
+
+The self-hosted no-JavaScript challenge, atomic consumption, and anonymous
+global abuse limits are proposed in
+`docs/22_NO_JAVASCRIPT_CHALLENGE_PROTOCOL.md`. No CAPTCHA dependency or endpoint
+is enabled by that proposal.
 
 ## Local preview
 
