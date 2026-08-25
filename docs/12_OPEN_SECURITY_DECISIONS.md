@@ -20,11 +20,12 @@ credential response does not reach the reporter is approved in
 loss, never reissue or replace credentials, and never duplicate the same
 attempt.
 
-`docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md` contains the current exact
-encoding, HMAC-SHA-256 verifier, key-separation, rotation, and failure proposal.
-It remains PROPOSED and does not close this gate until its five owner choices
-and an independent cryptographic review are complete. Lost-response sequencing
-is governed separately by approved `docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`.
+`docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md` contains the owner-approved exact
+encoding, HMAC-SHA-256 verifier, key-separation, rotation, and failure policy.
+Its five owner choices were approved on 2026-08-25. This gate remains OPEN for
+implementation until the independent cryptographic review is complete.
+Lost-response sequencing is governed separately by approved
+`docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`.
 
 ## CRITICAL — Response Note cryptographic construction
 
@@ -109,14 +110,16 @@ Still OPEN:
 
 The no-JavaScript path must be self-hosted, server-side, single-use, briefly expiring, use global abuse controls, and avoid IP/device fingerprinting and third-party tracking.
 
-The exact product/implementation and exact expiry remain OPEN. ALTCHA remains the JavaScript-enabled candidate.
+The project-owned no-JavaScript protocol and exact five-minute expiry are
+owner-approved. ALTCHA remains only the JavaScript-enabled candidate.
 
-`docs/22_NO_JAVASCRIPT_CHALLENGE_PROTOCOL.md` proposes an exact five-minute,
+`docs/22_NO_JAVASCRIPT_CHALLENGE_PROTOCOL.md` defines the owner-approved five-minute,
 single-attempt, purpose/scope-bound protocol and global anonymous token buckets.
 It rejects direct use of the reviewed `django-simple-captcha` validator because
-its database consumption is not explicitly concurrency-atomic. The proposal
-does not close this gate until the owner choices plus pinned rendering,
-audio/accessibility, and production-boundary reviews are complete.
+its database consumption is not explicitly concurrency-atomic. This gate
+remains OPEN for implementation until pinned Pillow/font, self-hosted
+audio/accessibility, PostgreSQL concurrency, and production-boundary reviews
+are complete.
 
 ## HIGH — PDF structural acceptance profile and sandbox
 

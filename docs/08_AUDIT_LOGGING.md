@@ -92,10 +92,9 @@ At minimum:
 - OPERATOR_AUTHENTICATION_EVENT
 - ADMIN_AUDIT_ACCESS
 
-`docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md` proposes the additional
+`docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md` approves the additional
 `SUBMISSION_ACCEPTANCE_REQUESTED` and `SUBMISSION_ACCEPTANCE_FAILED` event
-families. They are not approved required events while that document remains
-PROPOSED.
+families as required controlled events for the submission protocol.
 
 ## Operator attribution
 

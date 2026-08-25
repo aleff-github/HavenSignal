@@ -11,15 +11,14 @@ sequencing and retry model. Its approval authorizes only the internal state and
 sequencing design; submission remains non-authorizing while dependent OPEN
 constructions are unresolved.
 
-`docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md` is the proposed exact Ticket ID,
-Recovery Secret, and keyed-verifier construction. It remains non-authorizing
-until its project-owner choices and independent cryptographic review are
-complete.
+`docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md` is the owner-approved exact
+Ticket ID, Recovery Secret, and keyed-verifier construction. It remains
+non-authorizing until its independent cryptographic review is complete.
 
-`docs/22_NO_JAVASCRIPT_CHALLENGE_PROTOCOL.md` is the proposed no-JavaScript
-challenge and anonymous abuse-control protocol. It remains non-authorizing
-until its project-owner and dependent rendering/accessibility reviews are
-complete.
+`docs/22_NO_JAVASCRIPT_CHALLENGE_PROTOCOL.md` is the owner-approved
+no-JavaScript challenge and anonymous abuse-control protocol. It remains
+non-authorizing until its dependent rendering, audio/accessibility,
+PostgreSQL-concurrency, and production-boundary reviews are complete.
 
 ## Traceability index
 
@@ -46,16 +45,16 @@ complete.
 | SEC-KEY-006..007 | CRITICAL | 02 Threat Model; 04 Cryptographic Model; 15 Trust Boundaries | 14: negative capability and combined-backup restoration tests | Exact Key Service policy implementation OPEN |
 | SEC-ROLE-001..003 | CRITICAL | 02 Threat Model; 15 Trust Boundaries | 14: role/capability tests | MFA/admin operational procedures OPEN |
 | SEC-ROLE-004 | HIGH | 02 Threat Model | Threat-model review | Accepted limitation |
-| SEC-RECOVERY-001..004 | CRITICAL | 05 Recovery Response; 20 Submission Protocol; 21 Recovery Credential Construction | 14: recovery enumeration/secret-handling tests | Lost-response policy approved; encoding/verifier and dependent gates remain OPEN |
-| SEC-RECOVERY-005 | CRITICAL | 05 Recovery Response; 12 Open Decisions; 21 Recovery Credential Construction | Owner decision and independent cryptographic design review | PROPOSED; not authorized |
+| SEC-RECOVERY-001..004 | CRITICAL | 05 Recovery Response; 20 Submission Protocol; 21 Recovery Credential Construction | 14: recovery enumeration/secret-handling tests | Owner choices approved; independent cryptographic review and dependent gates remain OPEN |
+| SEC-RECOVERY-005 | CRITICAL | 05 Recovery Response; 12 Open Decisions; 21 Recovery Credential Construction | Owner decision and independent cryptographic design review | Owner-approved; independent review required before implementation |
 | SEC-RESPONSE-001 | CRITICAL | 00 Scope; 05 Recovery Response | Response validation/no-draft tests | No design blocker |
 | SEC-RESPONSE-002..008 | CRITICAL | 04 Cryptographic Model; 05 Recovery Response | 14: Response-DEK lifecycle/restore/first-read race/expiry-denial tests | Exact crypto and unread lifetime OPEN |
 | SEC-FINALIZE-001..004, SEC-FINALIZE-006 | CRITICAL | 03 Lifecycle; 04 Cryptographic Model; 06 Operator Sessions | 14: every crash point, retry, race, immutable staging, visibility tests | Protocol approved; external service interfaces gated by their designs |
 | SEC-FINALIZE-005 | HIGH | 03 Lifecycle; 08 Audit Logging | 14: deletion retry/alert tests | Alert transport details OPEN |
 | SEC-EXPORT-001..005 | CRITICAL/HIGH | 09 Emergency Export; 15 Trust Boundaries | 14: export safeguards, crypto, cleanup tests | Exact crypto format, signing, alert semantics OPEN |
 | SEC-EXPORT-006 | HIGH | 02 Threat Model; 09 Emergency Export | Threat-model acceptance review | Accepted residual risk |
-| SEC-CAPTCHA-001..002 | CRITICAL | 10 Network Anonymity; 11 Technology Decisions; 20 Submission Protocol; 22 No-JS Challenge | 14: self-hosting/mandatory-flow tests | No-JS protocol PROPOSED; owner/rendering/accessibility reviews remain |
-| SEC-CAPTCHA-003 | HIGH | 10 Network Anonymity; 12 Open Decisions; 22 No-JS Challenge | 14: no-JS expiry/replay/race/Tor tests | PROPOSED; not authorized |
+| SEC-CAPTCHA-001..002 | CRITICAL | 10 Network Anonymity; 11 Technology Decisions; 20 Submission Protocol; 22 No-JS Challenge | 14: self-hosting/mandatory-flow tests | No-JS protocol owner-approved; rendering/audio/accessibility and production reviews remain |
+| SEC-CAPTCHA-003 | HIGH | 10 Network Anonymity; 12 Open Decisions; 22 No-JS Challenge | 14: no-JS expiry/replay/race/Tor tests | Owner-approved; dependent reviews and PostgreSQL concurrency proof required |
 | SEC-CAPTCHA-004 | CRITICAL | 10 Network Anonymity | 14: dependency-failure tests | No fallback permitted |
 | SEC-FILE-001..003 | CRITICAL | 07 File Security; 15 Trust Boundaries | 14: file/sandbox/CDR tests | PDF profile and sandbox OPEN |
 | SEC-FILE-004..006 | HIGH | 07 File Security; 12 Open Decisions | 14: temporary lifecycle/resource tests | OPEN; PDF and image implementation blocked |
