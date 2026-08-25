@@ -35,7 +35,8 @@ Read, in order:
 6. `docs/12_OPEN_SECURITY_DECISIONS.md`
 7. `docs/19_SECURITY_SERVICE_INTERFACES.md`
 8. `docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`
-9. `START-CODEX.md`
+9. `docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md`
+10. `START-CODEX.md`
 
 ## Source material
 
@@ -60,6 +61,12 @@ The submission acceptance, audit, retry, and one-time credential-delivery
 sequence is documented as a proposal in
 `docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`; it does not yet authorize a report
 form or endpoint.
+
+The exact Ticket ID, Recovery Secret, and keyed-verifier construction is also
+documented as a review-only proposal in
+`docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md`. Recovery remains disabled until
+that proposal, its independent cryptographic review, and every dependent gate
+are complete.
 
 ## Local preview
 
