@@ -2,6 +2,8 @@
 
 This is a conceptual decomposition, not a final deployment diagram.
 
+`19_SECURITY_SERVICE_INTERFACES.md` refines these boundaries into approved caller/callee edges, credential profiles, negative capabilities, and fail-closed contracts. It does not approve constructions or products that remain OPEN.
+
 ## Boundary A — Reporter Edge
 
 Responsibilities:
