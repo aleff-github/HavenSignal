@@ -79,3 +79,8 @@ The eighth Stage A slice adds a test-only, UUID-only plan for six future
 PostgreSQL metadata-concurrency scenarios with 20–100 contenders. The runner
 always remains unavailable, adds no driver or credentials, writes no rows, and
 is explicitly not PostgreSQL concurrency or release evidence.
+
+The ninth Stage A slice adds non-executing conformance checks for the exact
+initial lifecycle migration plus a dry Django drift test. It makes new
+migrations, fields, constructors, imports, dynamic/data/SQL operations, and
+model drift explicit without changing or executing production database work.

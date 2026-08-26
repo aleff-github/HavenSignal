@@ -38,3 +38,10 @@ least two requested processes and one dedicated connection per contender, and
 contains no database credentials or reporter fields. Its runner always returns
 a controlled unavailable failure, including on a capability-shaped backend;
 therefore it runs no PostgreSQL test and supplies no release evidence.
+
+`architecture_checks/migrations.py` locks the current single initial migration
+to its empty dependency graph, exact three-model field/type profile, and closed
+`CreateModel`/`AddIndex`/`AddConstraint` operation sequence without importing
+the migration. Tests also run Django's dry no-drift check. This makes schema
+changes explicit for review but is not PostgreSQL execution, concurrency,
+durability, rollback, or production migration evidence.

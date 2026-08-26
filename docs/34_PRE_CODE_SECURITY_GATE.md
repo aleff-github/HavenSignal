@@ -373,3 +373,16 @@ SQLite, backend/configuration failure, and even a capability-shaped PostgreSQL
 mock. No test is skipped and then counted as proof. The real lock ordering,
 isolation level, executor review, multi-process run, cleanup, and result
 evidence remain OPEN and release-blocking.
+
+The ninth Stage A slice adds a non-executing source policy for the inert
+`report_lifecycle` migration graph. It requires exactly the single initial
+migration, an empty dependency graph, the exact three metadata-only models and
+field constructor types, and the reviewed create/index/constraint operation
+sequence. It rejects added numbered migrations, imports, callables, dynamic
+expressions, data/SQL operations, models, fields, or type substitutions. A
+separate dry Django migration check requires no pending model drift.
+
+No migration is generated or changed by this slice, and no PostgreSQL instance,
+driver, credential, write executor, production DDL, rollback, or deployment is
+introduced or proven. The policy is source-level review evidence only; all
+database execution, concurrency, durability, and production gates remain OPEN.

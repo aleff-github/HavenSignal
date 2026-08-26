@@ -105,8 +105,11 @@ challenge, browser handle, WebAuthn credential, artifact bytes, or HMAC output.
 root-URL import allowlists without importing or executing scanned source. It
 also fixes the inert Django app/middleware settings, single reporter-home route,
 passive template subset, and no-resource-loading CSS profile without importing
-or rendering them. These are review guards for the inert codebase, not a
-runtime, browser, process, network, or deployment security boundary.
+or rendering them. The exact initial lifecycle migration graph, field/type
+profile, and closed operation set are likewise checked without importing the
+migration, alongside Django's no-drift check. These are review guards for the
+inert codebase, not a runtime, browser, database, process, network, or
+deployment security boundary.
 
 Security-sensitive components remain blocked by their applicable OPEN decisions. The service interfaces and negative capability boundaries are approved as the implementation boundary, without closing those decisions.
 

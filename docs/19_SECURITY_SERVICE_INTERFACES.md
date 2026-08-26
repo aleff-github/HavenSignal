@@ -408,3 +408,19 @@ backend probing and remains unavailable when a backend capability object is
 mocked as PostgreSQL-capable. Consequently, this slice is a future-test
 contract only: it supplies no concurrency, durability, isolation, lock-order,
 cleanup, or release evidence and closes no PostgreSQL or production gate.
+
+## Stage A lifecycle migration conformance record
+
+The current lifecycle migration is checked as source without importing it. The
+policy requires one `0001_initial.py`, an empty dependency graph, the exact
+Report/ReportLease/SecurityOperation field names and Django field constructors,
+and the reviewed `CreateModel`/`AddIndex`/`AddConstraint` sequence. Any other
+numbered migration, import, callable, dynamic expression, data migration, raw
+SQL, model, field, or constructor fails closed with a controlled content-free
+violation. Django's dry migration detector separately rejects model/migration
+drift.
+
+This policy makes a migration change review-visible. It does not prove the SQL
+emitted by a selected PostgreSQL version, transaction/lock behavior, online
+migration safety, rollback, backup interaction, durability, or production
+deployment. Those reviews and gates remain OPEN.

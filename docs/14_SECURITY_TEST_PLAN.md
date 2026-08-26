@@ -54,6 +54,12 @@ For the metadata-only Stage A described by
 - the scaffold runner remains unavailable on SQLite, configuration/backend
   failure, and a merely capability-shaped PostgreSQL backend, with zero model
   writes and no skipped/placeholder run represented as concurrency evidence;
+- the lifecycle migration package contains exactly one initial migration with
+  no dependency, data/SQL/custom-code operation, additional numbered migration,
+  dynamic expression, unlisted import/call, or field/model/type drift;
+- the migration's exact metadata-only model fields and constructor types match
+  the reviewed profile, and Django `makemigrations --check --dry-run` reports no
+  pending model change;
 - SQLite results are never represented as PostgreSQL concurrency evidence;
 - the application still cannot accept a real report.
 

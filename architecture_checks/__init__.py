@@ -10,6 +10,13 @@ from .imports import (
     scan_python_file,
     scan_python_package,
 )
+from .migrations import (
+    EXPECTED_LIFECYCLE_MIGRATION_FIELDS,
+    MigrationViolation,
+    MigrationViolationCode,
+    analyze_lifecycle_migration_source,
+    scan_lifecycle_migrations,
+)
 from .surfaces import (
     EXPECTED_SETTINGS,
     SurfaceViolation,
@@ -30,6 +37,11 @@ __all__ = [
     "analyze_python_source",
     "scan_python_file",
     "scan_python_package",
+    "EXPECTED_LIFECYCLE_MIGRATION_FIELDS",
+    "MigrationViolation",
+    "MigrationViolationCode",
+    "analyze_lifecycle_migration_source",
+    "scan_lifecycle_migrations",
     "EXPECTED_SETTINGS",
     "SurfaceViolation",
     "SurfaceViolationCode",
