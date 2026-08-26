@@ -2,9 +2,9 @@
 
 ## Status
 
-**PROPOSED — consolidated project-owner and independent parser/sandbox review
-required. No PDF, JPEG, PNG, upload endpoint, attachment decryption, parser,
-renderer, or safe-view endpoint is authorized by this document.**
+**OWNER-APPROVED DESIGN (2026-08-26) — independent parser/sandbox review
+remains required. No PDF, JPEG, PNG, upload endpoint, attachment decryption,
+parser, renderer, or safe-view endpoint is authorized.**
 
 This proposal closes the version-1 structural profiles, decoded-resource
 ceilings, parser families, disposable microVM boundary, transient plaintext
@@ -301,7 +301,7 @@ alerts, traces, crash reports, or third-party scanning.
   and broker artifacts pass SBOM, signature/digest, CVE, fuzz/corpus, and
   reproducibility review on every upgrade.
 
-## Consolidated decisions awaiting the pre-code gate
+## Consolidated decisions approved at the pre-code gate
 
 1. exact JPEG, PNG, and PDF version-1 structural/resource profiles above;
 2. qpdf JSON-v2 semantic inspection plus full MuPDF rasterization for PDF;

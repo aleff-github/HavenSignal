@@ -1,12 +1,12 @@
 # 34 — Consolidated Pre-Code Security Gate
 
-Status: **OWNER DECISION REQUIRED**
+Status: **OWNER APPROVED — STAGE A ONLY (2026-08-26)**
 Prepared: 2026-08-26
 
-This document is a review package. It does not approve its own contents and it
-does not authorize protected endpoints, cryptographic operations, report
-content handling, authentication, file handling, export, deletion, or
-production deployment.
+This document was the owner review package. The explicit decision recorded in
+section 7 authorizes only the inert Stage A boundary. It does not authorize
+protected endpoints, cryptographic operations, report content handling,
+authentication, file handling, export, deletion, or production deployment.
 
 Its purpose is to replace fragmented approvals with one explicit project-owner
 decision and to define the narrow code boundary that may follow that decision.
@@ -33,7 +33,7 @@ These approvals remain non-authorizing wherever independent review, selected
 products, production-equivalent proof, or another named dependency is still
 OPEN.
 
-## 2. Decisions submitted for consolidated owner approval
+## 2. Decisions approved by the project owner
 
 Approval of this package means approval of the exact versioned profiles and
 failure behavior in the following documents, not merely their general intent.
@@ -237,13 +237,13 @@ constraints, and abuse/concurrency tests. It must not duplicate the existing
 SQLite tests may verify pure logic and simple constraints but cannot constitute
 the PostgreSQL concurrency or release proof.
 
-## 7. Required project-owner decision
+## 7. Recorded project-owner decision
 
-Approval may be recorded with this exact decision:
+The project owner recorded the following decision on 2026-08-26:
 
 > Approvo integralmente le decisioni consolidate in docs/34 e autorizzo lo
 > Stage A inerte; mantengo tutti i gate esterni e di produzione indicati.
 
-Any exception must identify the document, subsection, and replacement decision.
-Until approval is recorded, implementation must stop at the existing inert
-scaffold.
+No exception was recorded. Any future change must identify the document,
+subsection, and replacement decision. Implementation may proceed only within
+the inert Stage A boundary in section 5.

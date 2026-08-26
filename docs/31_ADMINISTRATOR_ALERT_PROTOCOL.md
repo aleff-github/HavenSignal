@@ -2,9 +2,8 @@
 
 ## Status
 
-**PROPOSED — consolidated project-owner and independent security/operations
-review required. No alert-dependent operation is authorized for production by
-this document.**
+**OWNER-APPROVED DESIGN (2026-08-26) — independent security/operations review
+remains required. No alert-dependent operation is authorized for production.**
 
 This proposal selects the self-hosted alert boundary, closed payload, durable
 acceptance contract, administrator inbox, local SMTP wake-up channel,
@@ -338,9 +337,9 @@ Release-blocking tests must prove:
 SQLite, an in-memory queue, a mock SMTP sink, one-process concurrency, or a
 best-effort logging handler is insufficient for production acceptance.
 
-## Consolidated decisions awaiting the pre-code gate
+## Consolidated decisions approved at the pre-code gate
 
-The final pre-code owner review must decide:
+The project owner approved the following on 2026-08-26:
 
 1. a separately deployed self-hosted Alert Service with durable administrator
    inbox and organization-operated SMTP wake-up relay;

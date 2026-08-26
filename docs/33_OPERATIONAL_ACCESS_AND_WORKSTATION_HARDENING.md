@@ -2,10 +2,10 @@
 
 ## Status
 
-**PROPOSED — consolidated project-owner and independent endpoint,
-authentication, network, and operations review required. No production
-Operator, Application Administrator, or Infrastructure / Key Custodian access
-is authorized by this document.**
+**OWNER-APPROVED DESIGN (2026-08-26) — independent endpoint, authentication,
+network, and operations review remains required. No production Operator,
+Application Administrator, or Infrastructure / Key Custodian access is
+authorized.**
 
 This proposal defines the supported workstation builds, browser and local-data
 controls, network access, session policy, Emergency Export transfer boundary,
@@ -570,7 +570,7 @@ requires the exact physical hardware, firmware, signed image, browser, FIDO
 keys, VPN/device identity, bastion, network policy, and production-equivalent
 service boundaries.
 
-## Consolidated decisions awaiting the pre-code gate
+## Consolidated decisions approved at the pre-code gate
 
 The final pre-code owner review must decide:
 

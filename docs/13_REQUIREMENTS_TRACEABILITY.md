@@ -30,87 +30,86 @@ Response Note AEAD, envelope, non-exportable Response-DEK, staging, first-read,
 and expiry protocol. It is non-authorizing pending independent
 cryptographic/protocol review and named production gates.
 
-`docs/25_MFA_STEP_UP_AND_CREDENTIAL_LIFECYCLE.md` is the proposed WebAuthn,
+`docs/25_MFA_STEP_UP_AND_CREDENTIAL_LIFECYCLE.md` is the owner-approved WebAuthn,
 single-use step-up, artifact-binding, enrollment, replacement, and recovery
-protocol. It awaits consolidated pre-code owner approval and independent review.
+protocol. Independent review and production gates remain OPEN.
 
-`docs/26_REPORT_CONTENT_CRYPTOGRAPHIC_PROTOCOL.md` is the proposed exact
+`docs/26_REPORT_CONTENT_CRYPTOGRAPHIC_PROTOCOL.md` is the owner-approved exact
 Report-DEK, per-object subkey, AEAD, fixed-length content framing, staging, and
-narrow decryption protocol. Its NFC/LF canonical-text/no-raw-copy subdecision
-is owner-approved; the remaining protocol awaits consolidated approval and
-review.
+narrow decryption protocol. Independent review and its named production gates
+remain OPEN.
 
-`docs/27_KEY_SERVICE_ACCEPTANCE_AND_NON_RESURRECTION_POC.md` is the proposed
+`docs/27_KEY_SERVICE_ACCEPTANCE_AND_NON_RESURRECTION_POC.md` is the owner-approved
 candidate-neutral Key Service capability and destructive acceptance plan. No
 product/topology is approved until the real production-equivalent PoC passes.
 
-`docs/28_EMERGENCY_EXPORT_CRYPTOGRAPHIC_PROTOCOL.md` is the proposed exact
+`docs/28_EMERGENCY_EXPORT_CRYPTOGRAPHIC_PROTOCOL.md` is the owner-approved exact
 request binding, package, public-key encryption, manifest signature, key
 separation, fenced generation, encrypted staging, delivery, and verification
-protocol. It awaits consolidated approval and independent review.
+protocol. Independent review and production gates remain OPEN.
 
-`docs/29_FILE_ACCEPTANCE_SANDBOX_AND_SAFE_VIEW_PROTOCOL.md` is the proposed
+`docs/29_FILE_ACCEPTANCE_SANDBOX_AND_SAFE_VIEW_PROTOCOL.md` is the owner-approved
 exact JPEG/PNG/PDF admission, resource, parser, disposable-microVM, plaintext
-lifecycle, and PNG-only operator-view protocol. It awaits consolidated approval
-and independent parser/sandbox review.
+lifecycle, and PNG-only operator-view protocol. Independent parser/sandbox
+review and production gates remain OPEN.
 
-`docs/30_REQUEST_AND_MULTIPART_ADMISSION_PROTOCOL.md` is the proposed exact
+`docs/30_REQUEST_AND_MULTIPART_ADMISSION_PROTOCOL.md` is the owner-approved exact
 body/multipart/resource/time ceiling, streaming proxy, bounded Django upload
-handler, and no-spool/failure protocol. It awaits consolidated approval and
-independent HTTP/proxy/Django review.
+handler, and no-spool/failure protocol. Independent HTTP/proxy/Django review
+and production gates remain OPEN.
 
 `docs/31_ADMINISTRATOR_ALERT_PROTOCOL.md`,
 `docs/32_RETENTION_AND_DELETION_PROTOCOL.md`, and
-`docs/33_OPERATIONAL_ACCESS_AND_WORKSTATION_HARDENING.md` define the remaining
-alert, retention/deletion, and operational access proposals.
+`docs/33_OPERATIONAL_ACCESS_AND_WORKSTATION_HARDENING.md` define the
+owner-approved alert, retention/deletion, and operational access designs.
 
-`docs/34_PRE_CODE_SECURITY_GATE.md` is the non-authorizing owner review package
-for `docs/25` through `docs/33`. Until its explicit decision is recorded, even
-the metadata-only Stage A described there is not authorized.
+`docs/34_PRE_CODE_SECURITY_GATE.md` records the 2026-08-26 owner approval for
+`docs/25` through `docs/33`. It authorizes only the metadata-only Stage A and
+preserves every independent and production gate.
 
 ## Traceability index
 
 | Requirement IDs | Severity | Primary design documents | Verification | Current gate |
 |---|---|---|---|---|
-| SEC-CONF-001..008 | CRITICAL | 02 Threat Model; 04 Cryptographic Model; 15 Trust Boundaries; 20 Submission Protocol; 26 Report Crypto Proposal | 14: AEAD/context, key destruction, roles/capabilities, deployment checks | Exact report crypto PROPOSED; owner approval/review and Key Service gates OPEN |
+| SEC-CONF-001..008 | CRITICAL | 02 Threat Model; 04 Cryptographic Model; 15 Trust Boundaries; 20 Submission Protocol; 26 Report Crypto | 14: AEAD/context, key destruction, roles/capabilities, deployment checks | Exact report crypto owner-approved; independent review and Key Service gates OPEN |
 | SEC-ANON-001..003 | CRITICAL | 00 Scope; 05 Recovery; 08 Audit; 10 Network Anonymity | 14: reporter logging, recovery enumeration, browser caching | End-to-end deployment validation required |
 | SEC-ANON-004 | HIGH | 10 Network Anonymity; 11 Technology Decisions | 14: CAPTCHA and dependency/security checks | No-JS product OPEN |
 | SEC-ANON-005 | CRITICAL | 10 Network Anonymity; 15 Trust Boundaries | Deployment/security acceptance test | Production deployment gate |
 | SEC-ANON-006..007 | HIGH | 10 Network Anonymity | UI/deployment review | No design blocker |
 | SEC-LOG-001..004 | CRITICAL | 08 Audit Logging; 15 Trust Boundaries; 23 Audit Receipt Protocol | 14: audit failure, durability, and privilege tests | Exact construction owner-approved; independent review and production gates OPEN |
 | SEC-LOG-005 | CRITICAL | 08 Audit Logging; 16 Django Rules; 23 Audit Receipt Protocol | 14: reporter input/logging, closed-schema, and protected-note tests | Owner-approved schema is non-authorizing pending review |
-| SEC-LOG-006..008 | HIGH | 08 Audit Logging; 23 Audit Receipt Protocol; 32 Retention Proposal | 14/32: proofs, checkpoints, witness alerts, retention authority | Cadence/durations owner-approved; exact expiry implementation PROPOSED and review OPEN |
+| SEC-LOG-006..008 | HIGH | 08 Audit Logging; 23 Audit Receipt Protocol; 32 Retention | 14/32: proofs, checkpoints, witness alerts, retention authority | Exact expiry design owner-approved; legal/independent review and implementation proof OPEN |
 | SEC-LOG-009..012 | CRITICAL | 03 Lifecycle; 08 Audit Logging; 23 Audit Receipt Protocol | 14: receipt, replay, concurrency, truncation, cessation, and crash tests | Exact construction owner-approved; independent review and production gates OPEN |
-| SEC-ACCESS-001..010 | CRITICAL/HIGH | 03 Lifecycle; 06 Operator Sessions; 33 Operational Access Proposal | 14/33: session, workstation, stale access, finalization controls | Exact workstation/login profile PROPOSED; crypto/audit and production gates remain |
+| SEC-ACCESS-001..010 | CRITICAL/HIGH | 03 Lifecycle; 06 Operator Sessions; 33 Operational Access | 14/33: session, workstation, stale access, finalization controls | Exact workstation/login profile owner-approved; crypto/audit and production gates remain |
 | SEC-ACCESS-011..015 | CRITICAL | 03 Lifecycle; 06 Operator Sessions; 16 Django Rules | 14: lease generation, stale request, constraint tests | Exact schema may be designed without implementing decrypt |
-| SEC-AUTH-001..004 | CRITICAL/HIGH | 06 Operator Sessions; 11 Technology Decisions; 25 MFA Proposal; 33 Operational Access Proposal | 14/25/33: WebAuthn/password/session/workstation checks | WebAuthn and exact role sessions PROPOSED; approval/review and production gates OPEN |
-| SEC-AUTH-005..007 | CRITICAL | 06 Operator Sessions; 09 Emergency Export; 25 MFA Proposal | 14: exact binding, expiry, consumption, and replay tests | Exact protocol PROPOSED; consolidated owner approval and independent review OPEN |
-| SEC-AUTH-008 | HIGH | 06 Operator Sessions; 12 Open Decisions; 25 MFA Proposal | Procedure/security review | Enrollment/reset/recovery PROPOSED; organizational procedure OPEN |
-| SEC-AUTH-009 | CRITICAL | 06 Operator Sessions; 11 Technology Decisions; 15 Trust Boundaries; 25 MFA Proposal; 33 Operational Access Proposal | 14/33: administrator MFA/session/network/anti-impersonation tests | Exact admin profile and v2 step-up PROPOSED; approval/review OPEN |
-| SEC-DEL-001..006 | CRITICAL/HIGH | 03 Lifecycle; 04 Cryptographic Model; 32 Retention/Deletion Proposal | 14/32: finalization, key destruction/restore, deletion state/race, blob retry tests | Exact operator/flood/cleanup protocol PROPOSED; owner/review and Key Service gates OPEN CRITICAL |
-| SEC-KEY-001..004 | CRITICAL | 04 Cryptographic Model; 11 Technology Decisions; 27 Key Service PoC Proposal | 14/27: destructive restore/rollback/stale-replica release gate | Acceptance plan PROPOSED; product/topology/real PoC OPEN |
+| SEC-AUTH-001..004 | CRITICAL/HIGH | 06 Operator Sessions; 11 Technology Decisions; 25 MFA; 33 Operational Access | 14/25/33: WebAuthn/password/session/workstation checks | WebAuthn and exact role sessions owner-approved; independent review and production gates OPEN |
+| SEC-AUTH-005..007 | CRITICAL | 06 Operator Sessions; 09 Emergency Export; 25 MFA | 14: exact binding, expiry, consumption, and replay tests | Exact protocol owner-approved; independent review and implementation gates OPEN |
+| SEC-AUTH-008 | HIGH | 06 Operator Sessions; 12 Open Decisions; 25 MFA | Procedure/security review | Enrollment/reset/recovery design owner-approved; organizational procedure OPEN |
+| SEC-AUTH-009 | CRITICAL | 06 Operator Sessions; 11 Technology Decisions; 15 Trust Boundaries; 25 MFA; 33 Operational Access | 14/33: administrator MFA/session/network/anti-impersonation tests | Exact admin profile and v2 step-up owner-approved; independent review/production proof OPEN |
+| SEC-DEL-001..006 | CRITICAL/HIGH | 03 Lifecycle; 04 Cryptographic Model; 32 Retention/Deletion | 14/32: finalization, key destruction/restore, deletion state/race, blob retry tests | Exact operator/flood/cleanup design owner-approved; legal/review and Key Service gates OPEN CRITICAL |
+| SEC-KEY-001..004 | CRITICAL | 04 Cryptographic Model; 11 Technology Decisions; 27 Key Service PoC | 14/27: destructive restore/rollback/stale-replica release gate | Acceptance plan owner-approved; product/topology/real PoC OPEN |
 | SEC-KEY-005 | HIGH | 04 Cryptographic Model; 27 Key Service PoC Proposal | Key inventory, separation, and lifecycle review | Application key roles specified; product procedures OPEN |
-| SEC-KEY-006..007 | CRITICAL | 02 Threat Model; 04 Cryptographic Model; 15 Trust Boundaries; 27 Key Service PoC Proposal | 14/27: negative capability and combined-backup restoration tests | Capability policy PROPOSED; implementation and real proof OPEN |
-| SEC-ROLE-001..003 | CRITICAL | 02 Threat Model; 15 Trust Boundaries; 19 Interfaces; 33 Operational Access Proposal | 14/33: cross-role device/network/credential/capability tests | Exact physical/operational separation PROPOSED; production proof OPEN |
+| SEC-KEY-006..007 | CRITICAL | 02 Threat Model; 04 Cryptographic Model; 15 Trust Boundaries; 27 Key Service PoC | 14/27: negative capability and combined-backup restoration tests | Capability policy owner-approved; implementation and real proof OPEN |
+| SEC-ROLE-001..003 | CRITICAL | 02 Threat Model; 15 Trust Boundaries; 19 Interfaces; 33 Operational Access | 14/33: cross-role device/network/credential/capability tests | Exact physical/operational separation owner-approved; production proof OPEN |
 | SEC-ROLE-004 | HIGH | 02 Threat Model | Threat-model review | Accepted limitation |
 | SEC-RECOVERY-001..004 | CRITICAL | 05 Recovery Response; 20 Submission Protocol; 21 Recovery Credential Construction | 14: recovery enumeration/secret-handling tests | Owner choices approved; independent cryptographic review and dependent gates remain OPEN |
 | SEC-RECOVERY-005 | CRITICAL | 05 Recovery Response; 12 Open Decisions; 21 Recovery Credential Construction | Owner decision and independent cryptographic design review | Owner-approved; independent review required before implementation |
 | SEC-RESPONSE-001 | CRITICAL | 00 Scope; 05 Recovery Response | Response validation/no-draft tests | No design blocker |
-| SEC-RESPONSE-002..008 | CRITICAL | 04 Cryptographic Model; 05 Recovery Response; 24 Response Crypto Protocol; 32 Retention Proposal | 14/24/32: AEAD/context, Response-DEK lifecycle/restore, read/unread expiry races | Existing construction owner-approved; 90-day unread extension PROPOSED; review and Key Service gates OPEN |
+| SEC-RESPONSE-002..008 | CRITICAL | 04 Cryptographic Model; 05 Recovery Response; 24 Response Crypto Protocol; 32 Retention | 14/24/32: AEAD/context, Response-DEK lifecycle/restore, read/unread expiry races | Construction and 90-day unread extension owner-approved; legal/review and Key Service gates OPEN |
 | SEC-FINALIZE-001..004, SEC-FINALIZE-006 | CRITICAL | 03 Lifecycle; 04 Cryptographic Model; 06 Operator Sessions; 24 Response Crypto Protocol | 14: every crash point, retry, race, immutable staging, activation, visibility tests | Sequence and Response crypto owner-approved; external service gates remain |
 | SEC-FINALIZE-005 | HIGH | 03 Lifecycle; 08 Audit Logging | 14: deletion retry/alert tests | Alert transport details OPEN |
-| SEC-EXPORT-001..005 | CRITICAL/HIGH | 09 Emergency Export; 15 Trust Boundaries; 28 Export Crypto Proposal | 14/28: binding, package, encryption, signature, fencing, delivery, cleanup tests | Exact protocol PROPOSED; owner/review, alert, Key Service, signer, custody, concurrency, and deployment gates OPEN |
+| SEC-EXPORT-001..005 | CRITICAL/HIGH | 09 Emergency Export; 15 Trust Boundaries; 28 Export Crypto | 14/28: binding, package, encryption, signature, fencing, delivery, cleanup tests | Exact protocol owner-approved; review, alert, Key Service, signer, custody, concurrency, and deployment gates OPEN |
 | SEC-EXPORT-006 | HIGH | 02 Threat Model; 09 Emergency Export; 28 Export Crypto Proposal | Threat-model acceptance and workflow review | Accepted residual risk; proposed controls do not claim prevention |
 | SEC-CAPTCHA-001..002 | CRITICAL | 10 Network Anonymity; 11 Technology Decisions; 20 Submission Protocol; 22 No-JS Challenge | 14: self-hosting/mandatory-flow tests | No-JS protocol owner-approved; rendering/audio/accessibility and production reviews remain |
 | SEC-CAPTCHA-003 | HIGH | 10 Network Anonymity; 12 Open Decisions; 22 No-JS Challenge | 14: no-JS expiry/replay/race/Tor tests | Owner-approved; dependent reviews and PostgreSQL concurrency proof required |
 | SEC-CAPTCHA-004 | CRITICAL | 10 Network Anonymity | 14: dependency-failure tests | No fallback permitted |
-| SEC-FILE-001..003 | CRITICAL | 07 File Security; 15 Trust Boundaries; 29 File/Sandbox Proposal | 14/29: profile, parser differential, microVM, CDR and access tests | Exact protocol PROPOSED; owner/review and production sandbox gates OPEN |
-| SEC-FILE-004..006 | HIGH | 07 File Security; 12 Open Decisions; 29 File/Sandbox Proposal | 14/29: plaintext lifecycle, resource, corpus, teardown tests | Exact profiles PROPOSED; artifact pinning and production validation OPEN |
-| SEC-ALERT-001 | HIGH | 08 Audit Logging; 09 Emergency Export; 23 Audit Receipt Protocol; 31 Alert Proposal | 14/31: alert trigger, witness-liveness, deletion, and export tests | Exact transport and triggers PROPOSED; approval/review and deployment gates OPEN |
-| SEC-ALERT-002 | CRITICAL | 08 Audit Logging; 31 Alert Proposal | 14/31: closed-schema and prohibited-data tests | Content-free schema PROPOSED; approval/review OPEN |
-| SEC-ALERT-003 | HIGH | 12 Open Decisions; 31 Alert Proposal | 31: durability, retry, escalation, acknowledgement, and failure tests | Exact protocol PROPOSED; approval/review and production gates OPEN |
-| SEC-BROWSER-001..002 | CRITICAL | 05 Recovery Response; 06 Operator Sessions; 16 Django Rules; 33 Operational Access Proposal | 14/33: cache, ephemeral profile, clipboard/print/download controls | Exact supported workstation/browser profile PROPOSED; physical acceptance OPEN |
-| SEC-INPUT-001..006 | HIGH | 00 Scope; 07 File Security; 16 Django Rules; 20 Submission Protocol; 26 Report Crypto; 29 File/Sandbox; 30 Request Admission proposals | 14/29/30: canonical text, byte/body/multipart/decoded-resource/no-spool tests | Exact profiles PROPOSED; owner/review and production boundary gates OPEN |
+| SEC-FILE-001..003 | CRITICAL | 07 File Security; 15 Trust Boundaries; 29 File/Sandbox | 14/29: profile, parser differential, microVM, CDR and access tests | Exact protocol owner-approved; independent review and production sandbox gates OPEN |
+| SEC-FILE-004..006 | HIGH | 07 File Security; 12 Open Decisions; 29 File/Sandbox | 14/29: plaintext lifecycle, resource, corpus, teardown tests | Exact profiles owner-approved; artifact pinning and production validation OPEN |
+| SEC-ALERT-001 | HIGH | 08 Audit Logging; 09 Emergency Export; 23 Audit Receipt Protocol; 31 Alert | 14/31: alert trigger, witness-liveness, deletion, and export tests | Exact transport and triggers owner-approved; review and deployment gates OPEN |
+| SEC-ALERT-002 | CRITICAL | 08 Audit Logging; 31 Alert | 14/31: closed-schema and prohibited-data tests | Content-free schema owner-approved; independent review/implementation OPEN |
+| SEC-ALERT-003 | HIGH | 12 Open Decisions; 31 Alert | 31: durability, retry, escalation, acknowledgement, and failure tests | Exact protocol owner-approved; review and production gates OPEN |
+| SEC-BROWSER-001..002 | CRITICAL | 05 Recovery Response; 06 Operator Sessions; 16 Django Rules; 33 Operational Access | 14/33: cache, ephemeral profile, clipboard/print/download controls | Exact supported workstation/browser profile owner-approved; physical acceptance OPEN |
+| SEC-INPUT-001..006 | HIGH | 00 Scope; 07 File Security; 16 Django Rules; 20 Submission Protocol; 26 Report Crypto; 29 File/Sandbox; 30 Request Admission | 14/29/30: canonical text, byte/body/multipart/decoded-resource/no-spool tests | Exact profiles owner-approved; review and production boundary gates OPEN |
 
 ## Cross-cutting interface mapping
 

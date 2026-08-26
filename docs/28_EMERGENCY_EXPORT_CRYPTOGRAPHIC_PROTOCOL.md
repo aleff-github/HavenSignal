@@ -2,9 +2,9 @@
 
 ## Status
 
-**PROPOSED — consolidated project-owner and independent cryptographic/protocol
-review required. No Emergency Export endpoint, key, signing capability,
-plaintext release, or downloadable artifact is authorized by this document.**
+**OWNER-APPROVED DESIGN (2026-08-26) — independent cryptographic/protocol
+review remains required. No Emergency Export endpoint, key, signing capability,
+plaintext release, or downloadable artifact is authorized.**
 
 This proposal fixes the version-1 request binding, package profile, public-key
 encryption, manifest signature, key separation, fenced workflow, encrypted
@@ -414,7 +414,7 @@ General archive extraction, mock signing, a fixed local success receipt,
 password encryption, a plaintext temporary tar, a development private key, or
 an in-process Django export worker is insufficient for release acceptance.
 
-## Consolidated decisions awaiting the pre-code gate
+## Consolidated decisions approved at the pre-code gate
 
 1. binary single-recipient native-X25519 `age` v1 encryption;
 2. closed uncompressed POSIX `ustar` package with fixed safe paths/metadata;

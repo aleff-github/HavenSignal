@@ -60,16 +60,16 @@ non-exportable Report-DEK, RFC 5869 HKDF-SHA-256 object-subkeys,
 XChaCha20-Poly1305, fixed-length frames, deterministic-CBOR context, staging,
 and narrow-use model. It also proposes defining `5 MB` as exactly 5 MiB.
 
-The six listed choices await consolidated pre-code owner approval and
-independent cryptographic review. Key Service, file/sandbox, storage,
+The six listed choices were owner-approved on 2026-08-26. Independent
+cryptographic review remains required. Key Service, file/sandbox, storage,
 concurrency, audit, and deployment gates remain independently blocking.
 
 The project owner approved one contained choice on 2026-08-25: report text is
 normalized to LF and NFC, encoded as strict UTF-8, and that accepted canonical
 representation is the sole authoritative original. No separate raw
-pre-normalization copy is retained. This resolves the earlier export wording
-conflict but does not approve the other `docs/26` choices or close its review
-and implementation gates.
+pre-normalization copy is retained. This resolved the earlier export wording
+conflict before the remaining `docs/26` choices were approved on 2026-08-26;
+review and protected implementation gates remain OPEN.
 
 ## CRITICAL — Emergency Export cryptographic construction and workflow
 
@@ -79,8 +79,8 @@ profile, RFC 8785 manifest bytes, detached COSE Sign1/Ed25519, exact request
 binding, distinct-role recipient-key activation, fenced streaming generation,
 encrypted-only staging, and one-shot delivery.
 
-Its eight listed choices await consolidated pre-code owner approval and
-independent cryptographic/protocol review. Alert transport/durable acceptance,
+Its eight listed choices were owner-approved on 2026-08-26. Independent
+cryptographic/protocol review remains required. Alert transport/durable acceptance,
 Key Service/export capability, pinned tools, signer/HSM, external private-key
 custody, PostgreSQL concurrency, audit deployment, workstation handling, and
 production isolation remain independently blocking.
@@ -106,11 +106,11 @@ OpenBao remains only a candidate. Approval requires a release-blocking proof of 
 candidate-neutral capability matrix, workload authentication, forward-only key
 states, backup prohibition, destructive test environment, and binary verdict.
 It explicitly permits rejection of OpenBao and cannot itself substitute for the
-real PoC. Its six choices await consolidated pre-code owner approval;
+real PoC. Its six acceptance choices were owner-approved on 2026-08-26;
 product/topology approval remains OPEN until every test passes independently.
 
-`docs/33_OPERATIONAL_ACCESS_AND_WORKSTATION_HARDENING.md` separately proposes
-the exact custodian staffing/access/quorum/break-glass procedure. It does not
+`docs/33_OPERATIONAL_ACCESS_AND_WORKSTATION_HARDENING.md` separately defines
+the owner-approved custodian staffing/access/quorum/break-glass procedure. It does not
 select or approve a product/topology and must be exercised by the real PoC.
 
 ## CRITICAL — Audit receipt and tamper-evidence construction
@@ -169,8 +169,8 @@ This former duplicate OPEN section is superseded by the complete
 `CRITICAL — Emergency Export cryptographic construction and workflow` section
 above and by `docs/28_EMERGENCY_EXPORT_CRYPTOGRAPHIC_PROTOCOL.md`. Exact
 formats, identifiers, rotation, revocation, and signing-key lifecycle remain
-blocked by the consolidated owner decision and named independent/production
-gates; no earlier general approval closes them.
+blocked by the named independent/production gates; the 2026-08-26 owner
+approval does not close those gates.
 
 ## HIGH — No-JavaScript anti-bot technology
 
@@ -202,8 +202,8 @@ The same `docs/29` proposal defines decoded pixel/dimension limits,
 libjpeg-turbo/libpng plus independent scanners, metadata-free PNG re-encoding,
 and exact shared microVM limits.
 
-The eight consolidated file/sandbox choices await owner approval and
-independent review. Exact supported artifact pinning, fuzz corpus, production
+The eight consolidated file/sandbox choices were owner-approved on 2026-08-26;
+independent review remains required. Exact supported artifact pinning, fuzz corpus, production
 KVM/jailer/kernel/root-image/broker, Key Service/audit integration, concurrency,
 and deployment remain independently blocking.
 
@@ -220,8 +220,8 @@ The action-bound `StepUpAuthorization` properties are approved.
   24-hour delay;
 - explicit administrator anti-impersonation and operator/admin RP separation.
 
-These choices await consolidated pre-code owner approval and independent
-authentication/security review. Authenticator procurement/attestation,
+These choices were owner-approved on 2026-08-26; independent
+authentication/security review remains required. Authenticator procurement/attestation,
 library pinning, exact RP/origin, workstation, identity-proofing, alert, and
 deployment procedures remain OPEN.
 
@@ -233,16 +233,16 @@ passphrase LUKS2, no swap/hibernate/local admin, an ephemeral one-origin kiosk,
 no clipboard/print/capture/cloud/ordinary download, restricted networking, and
 an encrypted-only Emergency Export transfer broker.
 
-Its exact choices await owner and independent endpoint/authentication/network
-review, hardware/tool validation, artifact pinning, kiosk/broker implementation,
+Its exact choices were owner-approved on 2026-08-26. Independent
+endpoint/authentication/network review, hardware/tool validation, artifact pinning, kiosk/broker implementation,
 physical procedure, and production acceptance.
 
 ## HIGH — Never-read Response Note retention
 
 `docs/32_RETENTION_AND_DELETION_PROTOCOL.md` proposes a 90-day deadline from
 `response_available_at` only while no first read has won. A valid first read
-before the boundary receives the full existing 72-hour window. Owner and
-legal/operational approval, independent review, exact Key Service transition,
+before the boundary receives the full existing 72-hour window. Owner approval
+was recorded on 2026-08-26; legal/operational approval, independent review, exact Key Service transition,
 trusted clocks, concurrency proof, and deployment remain OPEN.
 
 ## HIGH — SEALED report deletion during floods
@@ -251,8 +251,8 @@ trusted clocks, concurrency proof, and deployment remain OPEN.
 Application Administrator declaration, two Operator approvals, a 30-minute and
 100-report cap, deterministic newest-first SEALED-only selection inside a fixed
 flood interval, no human content view/AI/scoring, per-report audit receipts,
-and skip-on-race behavior. Its exact choices await owner and independent
-security/operations review.
+and skip-on-race behavior. Its exact choices were owner-approved on 2026-08-26;
+independent security/operations review remains required.
 
 ## HIGH — Operator deletion without Response Note
 
@@ -260,8 +260,8 @@ security/operations review.
 `UNMANAGEABLE_CONTENT` registry, an optional encrypted 150-character note,
 CAPTCHA, exact-descriptor step-up, a forward-only `DELETING` workflow, durable
 pre-destruction audit receipt, generic recovery behavior, and explicit race
-handling. These choices await consolidated owner approval and independent
-review.
+handling. These choices were owner-approved on 2026-08-26; independent review
+remains required.
 
 ## HIGH — Aggregate request and decoded-resource limits
 
@@ -270,8 +270,8 @@ defining each `5 MB` as exactly 5 MiB, the complete submission body as 21 MiB,
 the sum of file bodies as 20 MiB, and the exact multipart/time/memory ceilings.
 `docs/29` proposes the remaining decoded-resource limits.
 
-The eight request/multipart decisions await consolidated owner approval and
-independent HTTP/proxy/Django review. Exact reverse-proxy configuration, custom
+The eight request/multipart decisions were owner-approved on 2026-08-26;
+independent HTTP/proxy/Django review remains required. Exact reverse-proxy configuration, custom
 upload-handler review, request-smuggling/desynchronization testing, no-spool
 production evidence, and dependent challenge/file/crypto gates remain blocking.
 
@@ -283,8 +283,8 @@ SMTP wake-up queue, a closed content-free schema, synchronous durable
 acceptance, idempotent retry, acknowledgement/escalation, 365-day retention,
 and an exact per-operation failure matrix.
 
-Its six choices await consolidated owner approval and independent
-security/operations review. Service authentication, PostgreSQL durability and
+Its six choices were owner-approved on 2026-08-26; independent
+security/operations review remains required. Service authentication, PostgreSQL durability and
 concurrency, SMTP/mailbox deployment, administrator access hardening,
 retention-job isolation, monitoring, and staffing/runbooks remain blocking.
 
@@ -305,8 +305,9 @@ retain-longer behavior. Exact implementation and production proof remain OPEN.
 `docs/33` proposes a physically separate administrator workstation, distinct
 VPN/device certificate/RP/origin/cookie/account/factor set, ten-minute idle and
 four-hour absolute session, no report route or operator impersonation, and a
-separate 120-second administrative exact-artifact step-up profile. Owner,
-independent review, exact infrastructure, and production proof remain OPEN.
+separate 120-second administrative exact-artifact step-up profile. Owner
+approval was recorded on 2026-08-26; independent review, exact infrastructure,
+and production proof remain OPEN.
 
 ## MEDIUM — Infrastructure / Key Custodian operational procedure
 
@@ -315,5 +316,6 @@ sensitive ceremonies, separate hardened workstations/network, a self-hosted
 bastion, hardware-backed OpenSSH certificates valid at most 15 minutes,
 allowlisted command wrappers, vendor/HSM dual-control break-glass, quarterly
 restore and annual full exercises, and no report/per-object-key authority.
-Owner/operations review, staffing, infrastructure products, HSM/CA, exact
-runbooks, and production-equivalent tests remain OPEN.
+The design was owner-approved on 2026-08-26. Operations review, staffing,
+infrastructure products, HSM/CA, exact runbooks, and production-equivalent
+tests remain OPEN.

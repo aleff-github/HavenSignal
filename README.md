@@ -108,76 +108,73 @@ independent protocol review and Key Service production gates are complete.
 
 The production WebAuthn profile, exact artifact binding, server-side one-time
 step-up authorization, and factor lifecycle in
-`docs/25_MFA_STEP_UP_AND_CREDENTIAL_LIFECYCLE.md` are proposed for the
-consolidated pre-code decision. Authentication and protected operations remain
-disabled pending that decision and independent review.
+`docs/25_MFA_STEP_UP_AND_CREDENTIAL_LIFECYCLE.md` were owner-approved on
+2026-08-26. Authentication and protected operations remain disabled pending
+independent review and their production gates.
 
 The exact Report-DEK, per-object subkey, fixed-length text/attachment framing,
 AEAD envelope, staging, and narrow decryption model in
-`docs/26_REPORT_CONTENT_CRYPTOGRAPHIC_PROTOCOL.md` are proposed for the
-consolidated pre-code decision. Its strict UTF-8/NFC/LF canonical-text and
-no-raw-copy subdecision is owner-approved; the rest of the protocol remains
-proposed. Report submission and content access remain disabled pending approval,
-independent review, and Key Service/file/deployment gates.
+`docs/26_REPORT_CONTENT_CRYPTOGRAPHIC_PROTOCOL.md` were owner-approved on
+2026-08-26. Report submission and content access remain disabled pending
+independent review and Key Service/file/deployment gates.
 
-`docs/27_KEY_SERVICE_ACCEPTANCE_AND_NON_RESURRECTION_POC.md` proposes the
-candidate-neutral Key Service capability and destructive acceptance plan. No
-product, including OpenBao, is approved without a real production-equivalent
-snapshot/rollback/stale-replica/disaster-recovery PoC and independent review.
+`docs/27_KEY_SERVICE_ACCEPTANCE_AND_NON_RESURRECTION_POC.md` is the
+owner-approved candidate-neutral Key Service capability and destructive
+acceptance plan. No product, including OpenBao, is approved without a real
+production-equivalent snapshot/rollback/stale-replica/disaster-recovery PoC
+and independent review.
 
 The exact Emergency Export request binding, closed `ustar` package, binary
 single-recipient X25519 `age` encryption, RFC 8785 manifest, detached COSE
 Sign1/Ed25519 signature, fenced workflow, encrypted staging, and one-shot
-delivery in `docs/28_EMERGENCY_EXPORT_CRYPTOGRAPHIC_PROTOCOL.md` are proposed
-for the consolidated pre-code decision. Export remains disabled pending owner
-approval, independent review, and the named alert, Key Service, signer, custody,
-concurrency, workstation, and deployment gates.
+delivery in `docs/28_EMERGENCY_EXPORT_CRYPTOGRAPHIC_PROTOCOL.md` were
+owner-approved on 2026-08-26. Export remains disabled pending independent
+review and the named alert, Key Service, signer, custody, concurrency,
+workstation, and deployment gates.
 
 The exact PDF/JPEG/PNG structural profiles, resource ceilings, parser families,
 fresh Firecracker microVM isolation, transient plaintext lifecycle, and
 PNG-only operator view in
-`docs/29_FILE_ACCEPTANCE_SANDBOX_AND_SAFE_VIEW_PROTOCOL.md` are proposed for
-the consolidated pre-code decision. Attachment upload and viewing remain
-disabled pending owner approval, independent review, exact artifact pinning,
-and production sandbox/integration gates.
+`docs/29_FILE_ACCEPTANCE_SANDBOX_AND_SAFE_VIEW_PROTOCOL.md` were owner-approved
+on 2026-08-26. Attachment upload and viewing remain disabled pending
+independent review, exact artifact pinning, and production sandbox/integration
+gates.
 
 The exact 21 MiB request ceiling, closed multipart grammar, streaming/no-spool
 proxy behavior, bounded Django sandbox upload handler, and failure tests in
-`docs/30_REQUEST_AND_MULTIPART_ADMISSION_PROTOCOL.md` are proposed for the
-consolidated pre-code decision. Submission remains disabled pending owner
-approval, independent HTTP/proxy/Django review, and all dependent gates.
+`docs/30_REQUEST_AND_MULTIPART_ADMISSION_PROTOCOL.md` were owner-approved on
+2026-08-26. Submission remains disabled pending independent HTTP/proxy/Django
+review and all dependent gates.
 
 The self-hosted Alert Service, durable administrator inbox, local SMTP wake-up
 queue, closed metadata-only schema, idempotent durable acceptance,
 retry/escalation, acknowledgement, retention, and per-operation failure policy
-in `docs/31_ADMINISTRATOR_ALERT_PROTOCOL.md` are proposed for the consolidated
-pre-code decision. Alert-dependent operations remain disabled pending owner
-approval, independent security/operations review, and production deployment
-gates.
+in `docs/31_ADMINISTRATOR_ALERT_PROTOCOL.md` were owner-approved on 2026-08-26.
+Alert-dependent operations remain disabled pending independent
+security/operations review and production deployment gates.
 
 The 90-day never-read response expiry, OPEN-only operator deletion without a
 Response Note, exceptional multi-person SEALED flood-deletion ceremony,
 receipt-gated forward key destruction, ciphertext cleanup, terminal metadata
 minimization, and isolated audit-retention authority in
-`docs/32_RETENTION_AND_DELETION_PROTOCOL.md` are proposed for the consolidated
-pre-code decision. They remain disabled pending owner and legal/operational
-approval, independent review, and all named Key Service/audit/MFA/alert and
-deployment gates.
+`docs/32_RETENTION_AND_DELETION_PROTOCOL.md` were owner-approved on 2026-08-26.
+They remain disabled pending legal/operational approval, independent review,
+and all named Key Service/audit/MFA/alert and deployment gates.
 
 The physically separate Operator, Application Administrator, and Key Custodian
 workstation classes, Ubuntu/Firefox hardened builds, ephemeral browser and
 peripheral/network controls, exact role sessions, encrypted-only export
 transfer broker, administrative step-up, custodian quorum/bastion, break-glass,
 patching, and periodic reviews in
-`docs/33_OPERATIONAL_ACCESS_AND_WORKSTATION_HARDENING.md` are proposed for the
-consolidated pre-code decision. Production access remains disabled pending
-owner approval, independent review, exact hardware/software/infrastructure
-selection, and physical acceptance testing.
+`docs/33_OPERATIONAL_ACCESS_AND_WORKSTATION_HARDENING.md` were owner-approved
+on 2026-08-26. Production access remains disabled pending independent review,
+exact hardware/software/infrastructure selection, and physical acceptance
+testing.
 
-`docs/34_PRE_CODE_SECURITY_GATE.md` consolidates the owner decision still
-required for `docs/25` through `docs/33`, preserves all external and production
-gates, and defines the metadata-only Stage A that may begin after explicit
-approval. It does not authorize code or close any gate by itself.
+`docs/34_PRE_CODE_SECURITY_GATE.md` records the 2026-08-26 owner approval for
+`docs/25` through `docs/33`, preserves all external and production gates, and
+authorizes only the metadata-only Stage A. It does not authorize protected
+workflows or close any external gate.
 
 ## Local preview
 

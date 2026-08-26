@@ -2,9 +2,9 @@
 
 ## Status
 
-**PROPOSED — consolidated project-owner and independent cryptographic/protocol
-review required. No report-content encryption, storage, upload, decryption,
-attachment processing, or Report-DEK operation is authorized by this document.**
+**OWNER-APPROVED DESIGN (2026-08-26) — independent cryptographic/protocol
+review remains required. No report-content encryption, storage, upload,
+decryption, attachment processing, or Report-DEK operation is authorized.**
 
 **OWNER-APPROVED SUBDECISION (2026-08-25) — accepted report text uses the
 strict UTF-8/NFC/LF canonical representation defined below as its sole
@@ -341,7 +341,7 @@ cryptographically unusable.
 SQLite, one process, mock deletion, or a local plaintext crypto adapter is
 insufficient for release acceptance.
 
-## Consolidated decisions awaiting the pre-code gate
+## Consolidated decisions approved at the pre-code gate
 
 1. random 256-bit non-exportable Report-DEK with RFC 5869 HKDF-SHA-256
    per-object subkeys;
