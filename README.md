@@ -80,7 +80,9 @@ nominally capable backend until the PostgreSQL executor is independently
 reviewed and tested. A test-only concurrency scaffold defines six closed
 metadata races, generates only ephemeral UUIDs for 20–100 contenders, and keeps
 its runner unavailable even for a capability-shaped backend. It is not
-PostgreSQL evidence. The app has no views, URLs, authentication, content, file,
+PostgreSQL evidence. A pure finalization-sequence contract fixes the approved
+order but neither persists checkpoints nor authorizes execution; its executor
+always fails closed. The app has no views, URLs, authentication, content, file,
 recovery, cryptographic, audit, alert, export, deletion, or background-job
 capability.
 

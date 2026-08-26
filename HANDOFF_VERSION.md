@@ -84,3 +84,8 @@ The ninth Stage A slice adds non-executing conformance checks for the exact
 initial lifecycle migration plus a dry Django drift test. It makes new
 migrations, fields, constructors, imports, dynamic/data/SQL operations, and
 model drift explicit without changing or executing production database work.
+
+The tenth Stage A slice adds the exact inert finalization sequence as immutable,
+content-free, non-authorizing and non-persisting edges. Its executor always
+fails closed; no receipt, staging, key, publication, cleanup, or resume
+capability is implemented.

@@ -424,3 +424,21 @@ This policy makes a migration change review-visible. It does not prove the SQL
 emitted by a selected PostgreSQL version, transaction/lock behavior, online
 migration safety, rollback, backup interaction, durability, or production
 deployment. Those reviews and gates remain OPEN.
+
+## Stage A finalization sequence record
+
+The approved `FINALIZING` order is represented as one received-request
+checkpoint followed by the exact twelve actions in `docs/03`: validate OPEN
+context, validate CAPTCHA, consume exact-artifact step-up, durably audit the
+request, atomically commit protected staging plus `FINALIZING`, verify staging,
+request and confirm Report-DEK destruction, durably audit that destruction,
+publish availability, invalidate lease capabilities, and start ciphertext
+deletion. Every other edge is denied.
+
+These checkpoint names are not Report states, database rows, service receipts,
+or assertions that an action happened. Plans contain only operation/report/
+operator/lease UUIDs and version/generation counters, and explicitly authorize
+nothing and persist nothing. The executor always fails closed. Actual CAPTCHA,
+step-up consumption, audit receipts, protected response bytes, PostgreSQL
+commit, Key Service destruction, availability, invalidation, cleanup, retries,
+and crash resumption remain absent and gated.

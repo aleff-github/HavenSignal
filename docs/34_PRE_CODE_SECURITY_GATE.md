@@ -386,3 +386,19 @@ No migration is generated or changed by this slice, and no PostgreSQL instance,
 driver, credential, write executor, production DDL, rollback, or deployment is
 introduced or proven. The policy is source-level review evidence only; all
 database execution, concurrency, durability, and production gates remain OPEN.
+
+The tenth Stage A slice adds a pure, non-persisting finalization sequence
+contract for the exact request-plus-twelve-action order already approved in
+`docs/03`. It accepts only the existing structurally validated
+`FINALIZE_RESPONSE` binding for an OPEN report and matching active lease, and
+rejects every skipped, reversed, repeated, unknown, wrong-operation,
+wrong-state, internally inconsistent version, or malformed-binding edge.
+Returned plans contain only internal UUIDs and counters and explicitly
+authorize no execution.
+
+The checkpoints are not lifecycle/database states or evidence that CAPTCHA,
+step-up, audit, staging, key destruction, publication, invalidation, or cleanup
+occurred. They are not persisted. The executor always raises the same
+controlled unavailable error and calls no database or external service. The
+real finalization/resume workflow and every dependent review and production
+gate remain OPEN.

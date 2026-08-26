@@ -10,3 +10,10 @@ class LifecyclePersistenceUnavailable(Exception):
 
     def __init__(self) -> None:
         super().__init__("lifecycle_persistence_unavailable")
+
+
+class FinalizationOrchestrationUnavailable(Exception):
+    """Controlled denial while protected finalization remains gated."""
+
+    def __init__(self) -> None:
+        super().__init__("finalization_orchestration_unavailable")
