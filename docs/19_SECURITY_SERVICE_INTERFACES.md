@@ -379,3 +379,16 @@ reviewed policy change.
 This is source-level defense-in-depth only. It does not establish production
 process, credential, network, deployment, or runtime isolation and does not
 authorize any currently gated edge in this document.
+
+The next Stage A guard statically fixes the current development
+`INSTALLED_APPS`/`MIDDLEWARE` security profile, the single inert reporter-home
+route, a closed passive landing-template profile, and CSS without external
+resource or legacy active-content constructs. Target Python is parsed as AST
+and never imported; the template is parsed but never rendered. Targeted
+assignments and URL patterns cannot be changed after their literal definition.
+
+The scanner returns only controlled reason codes for missing, malformed,
+dynamic, mutated, unreadable, or out-of-root input and does not copy source
+snippets into violations. This remains a narrow source-review guard, not a
+general HTML/CSS sanitizer, browser execution proof, settings hardening for
+production, or authorization to add any protected interface.

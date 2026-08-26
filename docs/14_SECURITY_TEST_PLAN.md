@@ -448,6 +448,29 @@ Test headers and browser behavior for:
 
 Verify no-store behavior and absence of intentional local persistence.
 
+## Stage A inert reporter surface
+
+While only the owner-approved inert Stage A is enabled, statically verify
+without importing or rendering the target source that:
+
+- the development `INSTALLED_APPS` and `MIDDLEWARE` lists remain exact and do
+  not add authentication, administrator, session, message, or protected-domain
+  capability;
+- the root URL configuration contains exactly the read-only reporter home and
+  cannot be extended through a later mutation;
+- the landing template contains only the closed passive tag, attribute, meta,
+  first-party stylesheet, and Django-static-directive profile;
+- form, input, script, iframe, link, image, event/style attribute, template
+  variable/include, processing instruction, malformed nesting, and external or
+  active URL scheme injections fail closed;
+- CSS `@import`, `@font-face`, `url()`, legacy expression/behavior/binding, and
+  JavaScript-scheme constructs fail closed;
+- missing, unreadable, malformed, dynamic, mutated, and out-of-root policy
+  inputs return controlled violations without source excerpts.
+
+Passing this source policy is not browser, runtime, process, network, or
+deployment proof and cannot close any external gate.
+
 ## Dependency/security checks
 
 Before release:

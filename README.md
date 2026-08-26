@@ -99,9 +99,11 @@ algorithm codes, and artifact-binding profile metadata. They contain no
 challenge, browser handle, WebAuthn credential, artifact bytes, or HMAC output.
 
 `architecture_checks/` statically enforces the current Reporter Gateway and
-root-URL import allowlists without importing or executing scanned source. This
-is a review guard for the inert codebase, not a runtime/process/network security
-boundary.
+root-URL import allowlists without importing or executing scanned source. It
+also fixes the inert Django app/middleware settings, single reporter-home route,
+passive template subset, and no-resource-loading CSS profile without importing
+or rendering them. These are review guards for the inert codebase, not a
+runtime, browser, process, network, or deployment security boundary.
 
 Security-sensitive components remain blocked by their applicable OPEN decisions. The service interfaces and negative capability boundaries are approved as the implementation boundary, without closing those decisions.
 

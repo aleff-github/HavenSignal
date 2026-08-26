@@ -69,3 +69,8 @@ authentication or authorization capability.
 The sixth Stage A slice adds non-executing AST import allowlists for the inert
 Reporter Gateway and root URL configuration. The checks make new source-level
 dependency edges explicit but do not claim runtime or deployment isolation.
+
+The seventh Stage A slice adds non-executing static policies for the inert
+Django settings, single reporter-home route, passive template subset, and
+no-resource-loading CSS. It adds controlled fail-closed abuse tests but no
+browser, runtime, protected workflow, or production capability.
