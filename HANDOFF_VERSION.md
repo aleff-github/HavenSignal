@@ -38,3 +38,7 @@ Version 0.3 additionally incorporates exact proposals for:
 No production-capable security workflow is enabled. The included Django code
 is an inert scaffold plus deny-by-default interfaces and metadata-only domain
 structures whose protected integrations remain gated.
+
+The project owner approved `docs/25` through `docs/34` on 2026-08-26 and
+authorized only the inert metadata-only Stage A. All independent, product,
+production-equivalent, legal, operational, and release gates remain in force.

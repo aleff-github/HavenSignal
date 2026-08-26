@@ -2,10 +2,10 @@
 
 ## Status
 
-**PROPOSED ACCEPTANCE SPECIFICATION — consolidated project-owner and independent
-cryptographic/infrastructure review required. No Key Service product or topology
-is approved. A real release-blocking PoC must pass before protected code is
-enabled.**
+**OWNER-APPROVED ACCEPTANCE SPECIFICATION (2026-08-26) — independent
+cryptographic/infrastructure review remains required. No Key Service product or
+topology is approved. A real release-blocking PoC must pass before protected
+code is enabled.**
 
 This document does not select OpenBao, an HSM, a cloud KMS, storage backend, or
 vendor. It defines the minimum capabilities, trust separation, service
@@ -319,7 +319,7 @@ untested, vendor-asserted, policy-only, or mock result is not acceptance.
 | HSM/KMS/seal unavailable | Fail closed; accept active-report loss if permanent |
 | PoC evidence incomplete or topology changed | Approval invalid; retest before enablement |
 
-## Consolidated decisions awaiting the pre-code gate
+## Consolidated decisions approved at the pre-code gate
 
 1. candidate-neutral acceptance criteria and willingness to reject OpenBao;
 2. mTLS workload identity, 24-hour certificates, optional 15-minute

@@ -2,10 +2,9 @@
 
 ## Status
 
-**PROPOSED — consolidated project-owner, legal/operational, and independent
-security/protocol review required. No unread-response expiry, operator deletion,
-flood deletion, or retention-expiry implementation is authorized by this
-document.**
+**OWNER-APPROVED DESIGN (2026-08-26) — legal/operational and independent
+security/protocol review remain required. No unread-response expiry, operator
+deletion, flood deletion, or retention-expiry implementation is authorized.**
 
 This proposal defines maximum never-read Response Note retention, operator
 deletion without a Response Note, exceptional SEALED deletion during a declared
@@ -461,9 +460,9 @@ SQLite, one-process tests, mock key destruction, soft-delete flags, ordinary
 application backups, or a single successful object-store delete is
 insufficient for release acceptance.
 
-## Consolidated decisions awaiting the pre-code gate
+## Consolidated decisions approved at the pre-code gate
 
-The final pre-code owner review must decide:
+The project owner approved the following on 2026-08-26:
 
 1. 90-day never-read Response Note expiry, with a valid pre-deadline first read
    receiving the full existing 72-hour window;

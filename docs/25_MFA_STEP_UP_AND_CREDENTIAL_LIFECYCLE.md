@@ -2,9 +2,9 @@
 
 ## Status
 
-**PROPOSED — consolidated project-owner and independent authentication/security
-review required. No login, enrollment, reset, recovery, step-up, finalization,
-export, deletion, or administrator endpoint is authorized by this document.**
+**OWNER-APPROVED DESIGN (2026-08-26) — independent authentication/security
+review remains required. No login, enrollment, reset, recovery, step-up,
+finalization, export, deletion, or administrator endpoint is authorized.**
 
 This proposal defines the supported production WebAuthn profile, exact
 step-up/artifact binding, server-side one-time authorization, credential
@@ -376,9 +376,9 @@ authenticators, pinned browsers, the hardened workstation profile, PostgreSQL
 multi-process concurrency, and an isolated test RP/origin matching production
 semantics.
 
-## Consolidated decisions awaiting the pre-code gate
+## Consolidated decisions approved at the pre-code gate
 
-The final pre-code owner review must decide:
+The project owner approved the following on 2026-08-26:
 
 1. hardware-backed device-bound WebAuthn keys, two per person, with no weaker
    fallback or syncable passkey in the supported production profile;

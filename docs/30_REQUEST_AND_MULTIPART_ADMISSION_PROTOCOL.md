@@ -2,9 +2,9 @@
 
 ## Status
 
-**PROPOSED — consolidated project-owner and independent HTTP/proxy/Django
-review required. No reporter submission endpoint or attachment upload is
-authorized by this document.**
+**OWNER-APPROVED DESIGN (2026-08-26) — independent HTTP/proxy/Django review
+remains required. No reporter submission endpoint or attachment upload is
+authorized.**
 
 This proposal fixes the version-1 aggregate body ceiling, multipart grammar,
 streaming behavior, time/resource limits, Django upload-handler boundary, and
@@ -191,7 +191,7 @@ submission.
 - reporter-facing responses/logs remain generic and contain none of the
   forbidden request/header/body/filename/metadata values.
 
-## Consolidated decisions awaiting the pre-code gate
+## Consolidated decisions approved at the pre-code gate
 
 1. exact 21 MiB encoded-body and 20 MiB aggregate-file ceilings;
 2. closed `Content-Length`-required, uncompressed, non-chunked multipart profile;
