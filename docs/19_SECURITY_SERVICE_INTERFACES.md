@@ -366,3 +366,16 @@ These tests supplement, and do not replace, `14_SECURITY_TEST_PLAN.md` and `18_S
 5. Run the applicable security checklist and abuse/failure tests before enabling the next edge.
 
 No step in this order authorizes report submission, recovery, key management, audit receipts, authentication, file processing, finalization, export, or deletion by itself.
+
+## Stage A static conformance record
+
+`architecture_checks/` now applies exact AST import allowlists to the current
+read-only `reporter_gateway` package and reporter-only root URL configuration.
+The check denies every unlisted absolute import, parent-relative/star import,
+and direct built-in dynamic import or code-execution call without importing or
+executing scanned source. Any future dependency edge requires an explicit
+reviewed policy change.
+
+This is source-level defense-in-depth only. It does not establish production
+process, credential, network, deployment, or runtime isolation and does not
+authorize any currently gated edge in this document.

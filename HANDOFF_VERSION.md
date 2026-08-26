@@ -65,3 +65,7 @@ The fifth Stage A slice adds report-bound step-up-v1 metadata components and
 strict 120-second timing/algorithm validation while excluding challenges,
 handles, credentials, artifact/HMAC bytes, consumed state, persistence, and all
 authentication or authorization capability.
+
+The sixth Stage A slice adds non-executing AST import allowlists for the inert
+Reporter Gateway and root URL configuration. The checks make new source-level
+dependency edges explicit but do not claim runtime or deployment isolation.

@@ -39,6 +39,12 @@ For the metadata-only Stage A described by
 - Stage A step-up types cannot hold challenges, opaque browser handles,
   credentials, artifact bytes, HMAC bindings, consumed authorizations, or
   incomplete operation/state/artifact registry values, and authorize nothing;
+- the current Reporter Gateway and root URL configuration pass exact
+  deny-by-default import allowlists; sensitive/model/service/network imports,
+  star/parent-relative imports, dynamic imports, `eval`, and `exec` fail;
+- static architecture scanning parses but never imports or executes the target
+  source, fails closed for syntax/path/read errors, and is never represented as
+  runtime credential/process/network isolation;
 - SQLite results are never represented as PostgreSQL concurrency evidence;
 - the application still cannot accept a real report.
 
