@@ -22,6 +22,12 @@ For the metadata-only Stage A described by
   and absolute deadline;
 - SQLite and a merely capability-shaped backend cannot enable a persistence
   write before the reviewed PostgreSQL executor and multi-process proof exist;
+- audit-v1 structural descriptors accept only the closed event/actor registry,
+  exact immutable identifier/nonce lengths, CBOR-uint range, and exact
+  unambiguous non-sliding authorization lifetime;
+- structural audit validation never becomes receipt/signature verification or
+  protected-action authorization, and context-dependent/incomplete profiles
+  remain fail closed;
 - SQLite results are never represented as PostgreSQL concurrency evidence;
 - the application still cannot accept a real report.
 

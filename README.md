@@ -85,6 +85,10 @@ Mandatory security integrations whose designs remain OPEN are represented only
 by explicit deny-by-default placeholders under `security_interfaces/`. Every
 placeholder operation raises a controlled failure and provides no plaintext,
 cryptographic, audit-receipt, CAPTCHA, recovery, sandbox, MFA, or alert fallback.
+The same package now contains inert audit-v1 structural types for the exact
+event/actor registries, replay identifiers, and acceptance-claim lifetimes
+already fixed by `docs/23`. They do not encode CBOR, parse or verify COSE,
+append an event, or authorize an operation.
 
 Security-sensitive components remain blocked by their applicable OPEN decisions. The service interfaces and negative capability boundaries are approved as the implementation boundary, without closing those decisions.
 
@@ -108,9 +112,11 @@ reviews are complete.
 The exact audit-event encoding, durable-acceptance receipt, replay controls,
 Merkle proofs, independently witnessed checkpoints, and signing-key separation
 in `docs/23_AUDIT_RECEIPT_AND_TRANSPARENCY_PROTOCOL.md` are owner-approved.
-No Audit Service, receipt gate, or
-protected operation is authorized until the independent protocol review and
-production gates are complete.
+The inert structural types deliberately reject the context-dependent
+`REPORT_KEY_DESTROYED` lifetime until the exact operation profile can
+distinguish response publication from other destruction outcomes. No Audit
+Service, receipt gate, or protected operation is authorized until the
+independent protocol review and production gates are complete.
 
 The exact Response Note byte profile, AEAD envelope, non-exportable
 Response-DEK operations, staging, and first-read expiry sequence in

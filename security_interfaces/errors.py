@@ -23,3 +23,12 @@ class SecurityControlUnavailable(RuntimeError):
     def __init__(self, dependency: SecurityDependency) -> None:
         self.dependency = dependency
         super().__init__(self.public_code)
+
+
+class AuditDescriptorRejected(ValueError):
+    """Controlled rejection for an invalid inert audit descriptor."""
+
+    public_code = "audit_descriptor_rejected"
+
+    def __init__(self) -> None:
+        super().__init__(self.public_code)
