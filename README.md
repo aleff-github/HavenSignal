@@ -45,7 +45,11 @@ Read, in order:
 16. `docs/28_EMERGENCY_EXPORT_CRYPTOGRAPHIC_PROTOCOL.md`
 17. `docs/29_FILE_ACCEPTANCE_SANDBOX_AND_SAFE_VIEW_PROTOCOL.md`
 18. `docs/30_REQUEST_AND_MULTIPART_ADMISSION_PROTOCOL.md`
-19. `START-CODEX.md`
+19. `docs/31_ADMINISTRATOR_ALERT_PROTOCOL.md`
+20. `docs/32_RETENTION_AND_DELETION_PROTOCOL.md`
+21. `docs/33_OPERATIONAL_ACCESS_AND_WORKSTATION_HARDENING.md`
+22. `docs/34_PRE_CODE_SECURITY_GATE.md`
+23. `START-CODEX.md`
 
 ## Source material
 
@@ -169,6 +173,11 @@ patching, and periodic reviews in
 consolidated pre-code decision. Production access remains disabled pending
 owner approval, independent review, exact hardware/software/infrastructure
 selection, and physical acceptance testing.
+
+`docs/34_PRE_CODE_SECURITY_GATE.md` consolidates the owner decision still
+required for `docs/25` through `docs/33`, preserves all external and production
+gates, and defines the metadata-only Stage A that may begin after explicit
+approval. It does not authorize code or close any gate by itself.
 
 ## Local preview
 
