@@ -1,0 +1,24 @@
+name: Documentation improvement
+description: Report unclear, inconsistent, or missing documentation
+title: "[docs] "
+labels: ["documentation"]
+body:
+  - type: textarea
+    id: location
+    attributes:
+      label: Document / section
+      description: Which file or requirement is affected?
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: Describe the ambiguity, inconsistency, or missing information.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Suggested improvement
+      description: Optional proposed wording or resolution.
