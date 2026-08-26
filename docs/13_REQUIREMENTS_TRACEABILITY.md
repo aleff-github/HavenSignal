@@ -59,6 +59,15 @@ body/multipart/resource/time ceiling, streaming proxy, bounded Django upload
 handler, and no-spool/failure protocol. It awaits consolidated approval and
 independent HTTP/proxy/Django review.
 
+`docs/31_ADMINISTRATOR_ALERT_PROTOCOL.md`,
+`docs/32_RETENTION_AND_DELETION_PROTOCOL.md`, and
+`docs/33_OPERATIONAL_ACCESS_AND_WORKSTATION_HARDENING.md` define the remaining
+alert, retention/deletion, and operational access proposals.
+
+`docs/34_PRE_CODE_SECURITY_GATE.md` is the non-authorizing owner review package
+for `docs/25` through `docs/33`. Until its explicit decision is recorded, even
+the metadata-only Stage A described there is not authorized.
+
 ## Traceability index
 
 | Requirement IDs | Severity | Primary design documents | Verification | Current gate |

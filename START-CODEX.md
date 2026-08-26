@@ -40,3 +40,8 @@ Suggested third prompt:
 Never ask Codex to "build the whole app" in one step.
 
 Implement one security boundary at a time and require tests before moving to the next.
+
+The current repository has progressed beyond these initial prompts. Before any
+new implementation, read `docs/34_PRE_CODE_SECURITY_GATE.md`: its explicit
+project-owner decision is required before the metadata-only Stage A may begin,
+and it does not waive any external or production gate.

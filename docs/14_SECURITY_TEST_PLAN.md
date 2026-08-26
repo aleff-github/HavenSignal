@@ -2,6 +2,24 @@
 
 This is a minimum plan, not a complete penetration-test program.
 
+## Pre-code Stage A boundary
+
+For the metadata-only Stage A described by
+`docs/34_PRE_CODE_SECURITY_GATE.md`, test that:
+
+- no model, migration, fixture, descriptor, log, or error field can contain
+  report text, attachment bytes, original filenames, recovery credentials,
+  verifier material, cryptographic keys, protected notes, or untrusted request
+  metadata;
+- every protected external-service adapter remains unavailable and fails
+  closed without a fallback;
+- no reporter submission, recovery, operator authentication/content, export,
+  deletion, file handling, alert, or finalization endpoint exists;
+- lifecycle transitions reject stale state, stale lease generation, duplicate
+  operation IDs, cross-report binding, and conflicting concurrent intent;
+- SQLite results are never represented as PostgreSQL concurrency evidence;
+- the application still cannot accept a real report.
+
 ## Reporter input / logging
 
 Test that:

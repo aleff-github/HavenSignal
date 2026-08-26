@@ -163,17 +163,14 @@ lost-response residual risk. The dependent CAPTCHA, recovery
 encoding/verifier, report crypto, Key Service, audit receipt, aggregate-size, and
 applicable file/sandbox gates remain independently blocking.
 
-## CRITICAL — Emergency Export cryptographic formats
+## CONSOLIDATED — Emergency Export cryptographic formats
 
-The organization public-key encryption and signed-manifest properties are approved.
-
-Still OPEN:
-
-- exact public-key encryption tool/format;
-- exact manifest-signature construction;
-- key identifiers and artifact format versioning;
-- organization public-key rotation/revocation procedure;
-- export-signing key lifecycle.
+This former duplicate OPEN section is superseded by the complete
+`CRITICAL — Emergency Export cryptographic construction and workflow` section
+above and by `docs/28_EMERGENCY_EXPORT_CRYPTOGRAPHIC_PROTOCOL.md`. Exact
+formats, identifiers, rotation, revocation, and signing-key lifecycle remain
+blocked by the consolidated owner decision and named independent/production
+gates; no earlier general approval closes them.
 
 ## HIGH — No-JavaScript anti-bot technology
 
