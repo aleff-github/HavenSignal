@@ -160,6 +160,16 @@ pre-code decision. They remain disabled pending owner and legal/operational
 approval, independent review, and all named Key Service/audit/MFA/alert and
 deployment gates.
 
+The physically separate Operator, Application Administrator, and Key Custodian
+workstation classes, Ubuntu/Firefox hardened builds, ephemeral browser and
+peripheral/network controls, exact role sessions, encrypted-only export
+transfer broker, administrative step-up, custodian quorum/bastion, break-glass,
+patching, and periodic reviews in
+`docs/33_OPERATIONAL_ACCESS_AND_WORKSTATION_HARDENING.md` are proposed for the
+consolidated pre-code decision. Production access remains disabled pending
+owner approval, independent review, exact hardware/software/infrastructure
+selection, and physical acceptance testing.
+
 ## Local preview
 
 From this repository directory, using the prepared virtual environment:

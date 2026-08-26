@@ -315,6 +315,30 @@ Test:
 - Reporter Gateway cannot invoke general decrypt/unwrap for existing SEALED reports;
 - Key Service authorization is rejected for the wrong role, operation, report, state, lease generation, or receipt.
 
+For `33_OPERATIONAL_ACCESS_AND_WORKSTATION_HARDENING.md`, also verify on the
+exact physical production candidates:
+
+- Ubuntu image, Secure Boot, LUKS2, no swap/hibernate/dumps, AppArmor, firewall,
+  firmware, IOMMU, patch deadlines, signed inventory, and drift quarantine;
+- Operator/Admin/Custodian workstations, networks, device certificates,
+  RP/origins, cookies, accounts, hardware factors, and routes reject every
+  cross-role use;
+- Firefox ESR policies block alternate profiles, extensions, telemetry, sync,
+  persistence, PDF, developer tools, print, clipboard, screenshot, drag/drop,
+  external protocols, and ordinary downloads;
+- ephemeral profile, safe views, cookies, cache, clipboard, and export `tmpfs`
+  disappear after logout, crash, lock failure, disconnect, power loss, and
+  reboot without swap/core/thumbnail/index leakage;
+- Operator and Administrator idle/absolute/one-session/revocation rules are
+  server-authoritative and never extend ReportLease or step-up;
+- administrative version-2 step-up rejects cross-actor/device/session/
+  operation/target/artifact/batch replay and cannot grant report access;
+- export transfer accepts only the exact encrypted artifact/capability/hash/
+  media and never exposes the private recipient key;
+- custodian quorum, 15-minute hardware-backed SSH certificates, command
+  wrappers, break-glass expiry, infrastructure restore, and non-resurrection
+  work at every crash/failure boundary.
+
 ## WebAuthn, step-up, and credential lifecycle
 
 Test:

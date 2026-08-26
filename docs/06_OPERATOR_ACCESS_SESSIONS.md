@@ -6,6 +6,12 @@ The security baseline assumes a dedicated, hardened operator workstation.
 
 The application may technically run on ordinary workstations, but the project MUST NOT claim equivalent protection outside the supported hardened profile.
 
+`docs/33_OPERATIONAL_ACCESS_AND_WORKSTATION_HARDENING.md` proposes the exact
+supported Ubuntu/Firefox build, ephemeral kiosk, local-data/peripheral/network
+controls, Operator login-session limits, encrypted Emergency Export transfer,
+and separate Administrator/Key Custodian profiles. It remains non-authorizing
+pending consolidated owner approval and physical production acceptance.
+
 ## Authentication
 
 Operator login requires:

@@ -135,7 +135,15 @@ Operator:
 
 Administrator:
 
-- access model to be hardened; exact network restrictions remain an implementation decision.
+- reachable only through the proposed administrator-only VPN/device-identity
+  boundary and physically separate hardened workstation in `docs/33`; exact
+  products and production validation remain unapproved.
+
+Infrastructure / Key Custodian:
+
+- reachable only through the proposed custodian-only VPN, self-hosted bastion,
+  short-lived hardware-backed certificate, and isolated management network in
+  `docs/33`; no application/report route is permitted.
 
 The proposed Key Service network/workload identity and candidate acceptance
 requirements are defined in

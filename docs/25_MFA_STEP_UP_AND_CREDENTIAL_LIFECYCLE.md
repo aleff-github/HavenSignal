@@ -213,6 +213,11 @@ proposes a separately reviewed administrative-batch profile for the exceptional
 flood ceremony; that extension is not approved by this document and cannot be
 implemented by inserting dummy report or lease identifiers into version 1.
 
+`docs/33_OPERATIONAL_ACCESS_AND_WORKSTATION_HARDENING.md` proposes the exact
+version-2 administrative row/profile needed for non-report security operations,
+plus the supported role workstations and session lifetimes. That proposal does
+not amend this document until consolidated approval and independent review.
+
 ## Step-up issuance and consumption
 
 Issuance:
