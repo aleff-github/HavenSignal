@@ -8,7 +8,9 @@ They are not part of the decision path for reporter disclosures.
 
 ## Sensitive-data boundary
 
-The HavenSignal product must not send the following to OpenAI APIs as part of normal reporting operation:
+Real reporter or production-sensitive data MUST NOT be sent to OpenAI or any other external AI service in any context. This prohibition applies to product operation, development, debugging, support, issue triage, incident response, testing, maintenance, and model evaluation.
+
+Prohibited material includes:
 
 - reporter submissions;
 - report attachments;
@@ -17,6 +19,8 @@ The HavenSignal product must not send the following to OpenAI APIs as part of no
 - operator authentication secrets;
 - private audit artifacts that could expose sensitive report relationships;
 - other sensitive disclosure material.
+
+This boundary also prohibits sending excerpts, screenshots, logs, traces, database exports, derived summaries, embeddings, or other transformations when they contain or can reveal prohibited material. Agent-assisted work must use only synthetic, non-identifying data created for development and testing.
 
 AI-based report classification, guilt determination, risk scoring, accusation counting, or automated disciplinary decisions are outside the project's approved baseline.
 

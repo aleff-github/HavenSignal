@@ -50,13 +50,12 @@ Without an explicit approved design change, do not introduce:
 ```bash
 python -m venv .venv
 # activate the environment for your platform
-python -m pip install --upgrade pip
-python -m pip install -r requirements.lock
+python -m pip install --require-hashes -r requirements.lock
 python manage.py check
 python manage.py test -v 2
 ```
 
-Use synthetic data only.
+Use synthetic, non-identifying data only. Never send real reporter data, production-sensitive material, or transformations of that material to OpenAI or another external AI service for development, debugging, support, review, testing, or maintenance.
 
 ## Pull request expectations
 

@@ -112,7 +112,7 @@ This repository uses a staged security workflow:
 
 HavenSignal uses Codex and OpenAI models as **development and maintenance tools**, not as decision-makers inside the reporting product.
 
-Reporter submissions, attachments, recovery secrets, cryptographic keys, and other sensitive disclosure material must not be sent to OpenAI APIs as part of the HavenSignal product flow.
+Real reporter submissions, attachments, recovery material, cryptographic keys, audit artifacts, operator secrets, and any other sensitive or identifying disclosure data MUST NOT be sent to OpenAI or any other external AI service in any context. This prohibition includes product operation, development, debugging, support, issue triage, incident response, testing, and maintenance. Agent-assisted work must use only synthetic, non-identifying data.
 
 Intended agent-assisted maintenance work includes code review, regression-test generation, specification consistency checks, secure refactoring, dependency maintenance, issue triage, documentation, and release engineering under human review.
 
@@ -143,8 +143,7 @@ Create an isolated environment and install the locked dependencies.
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -r requirements.lock
+python -m pip install --require-hashes -r requirements.lock
 python manage.py check
 python manage.py test -v 2
 python manage.py runserver 127.0.0.1:8000
@@ -155,8 +154,7 @@ python manage.py runserver 127.0.0.1:8000
 ```powershell
 py -m venv .venv
 .\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-python -m pip install -r requirements.lock
+python -m pip install --require-hashes -r requirements.lock
 python manage.py check
 python manage.py test -v 2
 python manage.py runserver 127.0.0.1:8000

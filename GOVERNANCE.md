@@ -8,7 +8,7 @@ During this bootstrap phase, the project maintainer is responsible for:
 
 - scope and product decisions;
 - accepting or rejecting specification changes;
-- security-gate approvals;
+- recording project-owner decisions and enforcing the documented status of security gates;
 - pull request review;
 - issue triage;
 - releases;
@@ -39,9 +39,9 @@ Security-sensitive behavior should be documented before it becomes an enabled pr
 
 ## Pull requests
 
-Normal changes should enter `main` through pull requests and automated checks.
+Normal changes must enter `main` through pull requests and automated checks.
 
-As soon as repository settings permit, `main` should:
+The `main` branch must:
 
 - block force pushes;
 - require CI status checks;
@@ -61,6 +61,8 @@ Changes affecting authentication, authorization, cryptography, key lifecycle, re
 - review against the relevant security protocol.
 
 A merge does not by itself authorize production deployment.
+
+The maintainer or project owner may close only the internal decision gates that the specifications explicitly place within that role's authority. Neither a maintainer decision nor a merge may substitute for, waive, or mark complete any required independent review, legal or operational approval, product selection, production-equivalent proof, service acceptance, staffing or custody requirement, or production deployment gate. The open gates recorded in `docs/34_PRE_CODE_SECURITY_GATE.md` remain blocking until their named evidence and authority are present.
 
 ## Becoming a maintainer
 
