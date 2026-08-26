@@ -265,3 +265,19 @@ executor, content field, file handler, cryptographic operation, audit/alert
 payload, export/deletion workflow, or background worker is added. The local
 SQLite suite is development evidence only; PostgreSQL multi-process
 concurrency remains an explicit external gate.
+
+The second Stage A slice adds immutable, content-free operation/report/lease
+descriptors and a closed operation-binding policy. Validation requires exact
+report ID/state/version, actor, active lease ID/owner/state/generation, current
+report generation, and server-authoritative idle/absolute time. Reopen and
+exceptional flood-delete metadata profiles reject an existing lease; OPEN-only
+profiles require the exact current lease. Validation is necessary metadata
+evidence and never an authorization grant.
+
+The persistence boundary rejects any backend without PostgreSQL transactions,
+row locking, and partial indexes. It remains deliberately write-disabled even
+when those capability flags are present: no PostgreSQL driver or
+production-equivalent test service is currently configured, so implementing a
+write path would falsely elevate SQLite/unit evidence. The reviewed executor,
+lock ordering, retry behavior, and 20–100 synchronized multi-process tests
+remain OPEN.

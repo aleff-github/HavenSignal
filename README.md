@@ -73,9 +73,13 @@ credential, key, verifier, filename, request metadata, or audit receipt.
 metadata-only Report, ReportLease, and SecurityOperation concepts. It provides
 explicit state edges, monotonically versioned pure planners, server-time lease
 validation, and database constraints for one active report/lease/operation
-fence. It has no views, URLs, authentication, persistence executor, content,
-file, recovery, cryptographic, audit, alert, export, deletion, or background-job
-capability. Its SQLite tests are not PostgreSQL concurrency evidence.
+fence. Immutable descriptors additionally reject cross-report, cross-actor,
+stale-version, stale-generation, wrong-lease, and expired-lease bindings. The
+persistence boundary rejects SQLite and remains write-disabled even for a
+nominally capable backend until the PostgreSQL executor is independently
+reviewed and tested. The app has no views, URLs, authentication, content, file,
+recovery, cryptographic, audit, alert, export, deletion, or background-job
+capability.
 
 Mandatory security integrations whose designs remain OPEN are represented only
 by explicit deny-by-default placeholders under `security_interfaces/`. Every

@@ -17,6 +17,11 @@ For the metadata-only Stage A described by
   deletion, file handling, alert, or finalization endpoint exists;
 - lifecycle transitions reject stale state, stale lease generation, duplicate
   operation IDs, cross-report binding, and conflicting concurrent intent;
+- immutable operation descriptors reject the wrong actor, report, state
+  version, lease ID, lease owner, lease generation, lease state, idle deadline,
+  and absolute deadline;
+- SQLite and a merely capability-shaped backend cannot enable a persistence
+  write before the reviewed PostgreSQL executor and multi-process proof exist;
 - SQLite results are never represented as PostgreSQL concurrency evidence;
 - the application still cannot accept a real report.
 
