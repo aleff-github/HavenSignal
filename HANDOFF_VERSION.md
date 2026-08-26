@@ -60,3 +60,8 @@ The fourth Stage A slice adds immutable, content-free alert-v1 registry and
 component descriptors. Structural acceptance proves no durable commit,
 delivery, acknowledgement, or authorization; all Alert Service integrations
 and incomplete source/object/condition profiles remain unavailable.
+
+The fifth Stage A slice adds report-bound step-up-v1 metadata components and
+strict 120-second timing/algorithm validation while excluding challenges,
+handles, credentials, artifact/HMAC bytes, consumed state, persistence, and all
+authentication or authorization capability.

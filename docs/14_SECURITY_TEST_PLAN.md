@@ -33,6 +33,12 @@ For the metadata-only Stage A described by
   acknowledgement pairing while rejecting unknown/arbitrary values;
 - a structural alert acceptance response never proves durable inbox/outbox
   commit, SMTP delivery, human acknowledgement, or protected authorization;
+- report-bound step-up-v1 components accept only exact identifier/counter
+  shapes, approved COSE algorithm codes, binding-purpose metadata, and the
+  non-sliding 120-second lifetime;
+- Stage A step-up types cannot hold challenges, opaque browser handles,
+  credentials, artifact bytes, HMAC bindings, consumed authorizations, or
+  incomplete operation/state/artifact registry values, and authorize nothing;
 - SQLite results are never represented as PostgreSQL concurrency evidence;
 - the application still cannot accept a real report.
 
