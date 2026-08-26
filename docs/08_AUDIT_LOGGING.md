@@ -191,6 +191,7 @@ Audit events retained for 365 days from generation under current baseline.
 
 The log must remain useful after report content itself has been destroyed.
 
-The current proposal retains verification evidence needed to prove retained
-events for longer than the event row itself. The collector-controlled expiry
-authority and exact durations in that proposal are not approved yet.
+The owner-approved design retains verification evidence needed to prove
+retained events for longer than the event row itself. Collector-controlled
+expiry implementation and its legal, independent-review, and production proof
+remain OPEN.

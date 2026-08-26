@@ -20,11 +20,11 @@ The DEK protects:
 
 A compromise of one report DEK must not decrypt another report.
 
-`docs/26_REPORT_CONTENT_CRYPTOGRAPHIC_PROTOCOL.md` proposes the exact
+`docs/26_REPORT_CONTENT_CRYPTOGRAPHIC_PROTOCOL.md` defines the owner-approved exact
 Report-DEK, HKDF-SHA-256 per-object subkey, fixed-length frame,
 XChaCha20-Poly1305 envelope, staging, and narrow decrypt construction. It
-remains non-authorizing pending the consolidated pre-code decision, independent
-cryptographic review, and its Key Service/storage/file/deployment gates.
+remains non-authorizing pending independent cryptographic review and its Key
+Service/storage/file/deployment gates.
 
 ## Key separation
 
@@ -52,7 +52,7 @@ The project explicitly accepts that catastrophic loss of the complete DEK trust 
 
 No Key Service product is approved until a release-blocking proof of concept demonstrates these properties under every supported restore procedure.
 
-`docs/27_KEY_SERVICE_ACCEPTANCE_AND_NON_RESURRECTION_POC.md` proposes the exact
+`docs/27_KEY_SERVICE_ACCEPTANCE_AND_NON_RESURRECTION_POC.md` defines the owner-approved exact
 candidate-neutral capability, topology, destructive canary, stale-replica,
 snapshot/rollback/disaster-recovery matrix, and binary acceptance rule. A real
 production-equivalent PoC remains mandatory; the document itself cannot pass it.

@@ -252,10 +252,10 @@ Step-up authorization is single-use and bound to operator, ticket, operation, no
 The alert interface accepts only allowlisted event codes and system-generated
 identifiers. It rejects arbitrary strings and sensitive payloads. Operations
 requiring durable notification cannot claim success until the approved delivery
-precondition is met. `docs/31_ADMINISTRATOR_ALERT_PROTOCOL.md` proposes the exact
+precondition is met. `docs/31_ADMINISTRATOR_ALERT_PROTOCOL.md` defines the owner-approved exact
 closed schema, self-hosted inbox/SMTP path, synchronous durable acceptance,
 idempotency, retry, acknowledgement, retention, and failure matrix; it remains
-non-authorizing pending consolidated approval and independent review.
+non-authorizing pending independent review and production gates.
 
 ## Finalization ownership
 

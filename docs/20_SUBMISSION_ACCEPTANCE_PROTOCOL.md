@@ -182,10 +182,10 @@ The endpoint remains disabled until the exact aggregate request limit, CAPTCHA,
 and request-upload handling are approved. Django's default temporary upload
 handler is not acceptable because it may durably spool reporter plaintext.
 
-`docs/30_REQUEST_AND_MULTIPART_ADMISSION_PROTOCOL.md` proposes the exact outer
+`docs/30_REQUEST_AND_MULTIPART_ADMISSION_PROTOCOL.md` defines the owner-approved exact outer
 and multipart limits, streaming/no-retry proxy behavior, bounded custom Django
-handler, and no-spool verification. It remains non-authorizing pending
-consolidated approval and its independent production gates.
+handler, and no-spool verification. It remains non-authorizing pending its
+independent production gates.
 
 ### Phase 2 — validate transient input
 
@@ -224,9 +224,9 @@ is no in-process or text-only fallback that silently drops submitted files.
     reference as `CIPHERTEXT_STAGED`. The row is not operator/recovery visible.
 
 The exact report AEAD, nonce/AAD, subkey, fixed-frame, and ciphertext-envelope
-construction is proposed in `docs/26_REPORT_CONTENT_CRYPTOGRAPHIC_PROTOCOL.md`.
-It remains independently OPEN alongside its review, Key Service, verifier, and
-durability gates.
+construction is owner-approved in
+`docs/26_REPORT_CONTENT_CRYPTOGRAPHIC_PROTOCOL.md`. It remains non-authorizing
+pending independent review, Key Service, verifier, and durability gates.
 
 ### Phase 5 — audit and commit acceptance
 
