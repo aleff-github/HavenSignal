@@ -46,3 +46,7 @@ production-equivalent, legal, operational, and release gates remain in force.
 The first Stage A slice now includes the inert `report_lifecycle` metadata
 schema, pure transition/lease planners, database constraints, and negative
 tests. It exposes no protected endpoint or content-handling capability.
+
+The second Stage A slice adds immutable cross-object binding validators and a
+PostgreSQL capability gate whose persistence entry point always fails closed.
+No SQLite or mocked-backend result can enable metadata writes.
