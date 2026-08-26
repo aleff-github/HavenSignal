@@ -93,6 +93,10 @@ It also contains inert alert-v1 components for the fixed alert/severity and
 delivery-state registries, actor/operation identifiers, acceptance response,
 and acknowledgement pairing from `docs/31`. They do not send, persist, queue,
 deliver, or acknowledge an alert.
+Inert report-bound step-up-v1 components model only approved identifier shapes,
+lease/state counters, the 120-second non-sliding lifetime, allowed COSE
+algorithm codes, and artifact-binding profile metadata. They contain no
+challenge, browser handle, WebAuthn credential, artifact bytes, or HMAC output.
 
 Security-sensitive components remain blocked by their applicable OPEN decisions. The service interfaces and negative capability boundaries are approved as the implementation boundary, without closing those decisions.
 

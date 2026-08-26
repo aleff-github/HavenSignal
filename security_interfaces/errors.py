@@ -41,3 +41,12 @@ class AlertDescriptorRejected(ValueError):
 
     def __init__(self) -> None:
         super().__init__(self.public_code)
+
+
+class StepUpDescriptorRejected(ValueError):
+    """Controlled rejection for an invalid inert step-up descriptor."""
+
+    public_code = "step_up_descriptor_rejected"
+
+    def __init__(self) -> None:
+        super().__init__(self.public_code)

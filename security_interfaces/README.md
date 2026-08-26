@@ -39,3 +39,10 @@ Likewise, a structurally valid alert acceptance response proves neither a
 durable database/queue commit nor SMTP delivery and never authorizes a
 protected action. There is no Alert Service client, outbox, persistence,
 transport, acknowledgement mutation, or development success adapter.
+
+`step_up_descriptors.py` models only the report-bound v1 UUID/counter context,
+the exact 120-second lifetime, ES256/EdDSA algorithm registry, binding purpose
+and key epoch, and an unused-only Stage A state. It deliberately contains no
+challenge, POST handle, credential row, artifact bytes, HMAC output, operation,
+report-state, or artifact-kind value. A structurally valid component set does
+not verify WebAuthn or an artifact binding and authorizes nothing.

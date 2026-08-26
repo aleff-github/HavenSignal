@@ -309,3 +309,18 @@ PostgreSQL/outbox persistence, SMTP delivery, retry/escalation, inbox,
 acknowledgement mutation, retention job, or real Alert Service adapter exists.
 A structurally valid response proves no durable acceptance and authorizes
 nothing.
+
+The fifth Stage A slice adds report-bound step-up-v1 structural components for
+the explicit 16-byte authorization/operator/session/report/response/
+finalization/lease identifier shapes, lease/state counters, exact 120-second
+non-sliding lifetime, ES256 (`-7`) and EdDSA (`-8`) registry, and the approved
+artifact-binding purpose/key-epoch metadata from `docs/25`.
+
+To preserve the Stage A prohibition on verifier/authentication material, these
+types cannot contain the HMAC binding itself, artifact bytes, a WebAuthn
+challenge or credential, the browser handle, or a consumed authorization. The
+closed operation/report-state/artifact-kind profiles are not fully enumerated
+and are therefore omitted rather than guessed. No CBOR, HMAC, WebAuthn,
+password/session flow, database row, issuance, consumption, endpoint, or real
+Step-Up service exists. The administrative v2 profile is likewise not modeled
+with dummy report/lease context or incomplete target/operation registries.
