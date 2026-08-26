@@ -324,3 +324,16 @@ and are therefore omitted rather than guessed. No CBOR, HMAC, WebAuthn,
 password/session flow, database row, issuance, consumption, endpoint, or real
 Step-Up service exists. The administrative v2 profile is likewise not modeled
 with dummy report/lease context or incomplete target/operation registries.
+
+The sixth Stage A slice adds a static AST architecture guard for the current
+inert Reporter Gateway and reporter-only root URL configuration. The policy is
+an exact allowlist of the existing HTTP/rendering imports, with single-level
+local relative imports permitted only inside `reporter_gateway`. Every other
+absolute import, parent-relative import, star import, direct `__import__`,
+`eval`, or `exec` call fails the test suite.
+
+The scanner never imports or executes target source and returns controlled
+violations for parse, read, or out-of-root path failure. The allowlist is
+intentionally narrow: a future approved capability must change it explicitly.
+It is not a runtime sandbox and does not replace credential, process, network,
+deployment, or service-policy separation.

@@ -98,6 +98,11 @@ lease/state counters, the 120-second non-sliding lifetime, allowed COSE
 algorithm codes, and artifact-binding profile metadata. They contain no
 challenge, browser handle, WebAuthn credential, artifact bytes, or HMAC output.
 
+`architecture_checks/` statically enforces the current Reporter Gateway and
+root-URL import allowlists without importing or executing scanned source. This
+is a review guard for the inert codebase, not a runtime/process/network security
+boundary.
+
 Security-sensitive components remain blocked by their applicable OPEN decisions. The service interfaces and negative capability boundaries are approved as the implementation boundary, without closing those decisions.
 
 The submission acceptance, audit, retry, and one-time credential-delivery
