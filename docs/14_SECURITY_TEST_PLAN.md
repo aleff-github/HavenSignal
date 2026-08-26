@@ -45,6 +45,15 @@ For the metadata-only Stage A described by
 - static architecture scanning parses but never imports or executes the target
   source, fails closed for syntax/path/read errors, and is never represented as
   runtime credential/process/network isolation;
+- the test-only PostgreSQL concurrency scaffold contains exactly the active
+  report/lease/operation exclusions and stale report-version/lease-generation
+  scenarios currently modeled, using only internally generated UUID metadata;
+- every scaffold case requires 20–100 unique contenders, a synchronized start,
+  at least two requested processes, and a dedicated connection count equal to
+  the contender count;
+- the scaffold runner remains unavailable on SQLite, configuration/backend
+  failure, and a merely capability-shaped PostgreSQL backend, with zero model
+  writes and no skipped/placeholder run represented as concurrency evidence;
 - SQLite results are never represented as PostgreSQL concurrency evidence;
 - the application still cannot accept a real report.
 

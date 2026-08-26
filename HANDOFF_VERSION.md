@@ -74,3 +74,8 @@ The seventh Stage A slice adds non-executing static policies for the inert
 Django settings, single reporter-home route, passive template subset, and
 no-resource-loading CSS. It adds controlled fail-closed abuse tests but no
 browser, runtime, protected workflow, or production capability.
+
+The eighth Stage A slice adds a test-only, UUID-only plan for six future
+PostgreSQL metadata-concurrency scenarios with 20–100 contenders. The runner
+always remains unavailable, adds no driver or credentials, writes no rows, and
+is explicitly not PostgreSQL concurrency or release evidence.

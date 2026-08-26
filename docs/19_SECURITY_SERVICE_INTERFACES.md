@@ -392,3 +392,19 @@ dynamic, mutated, unreadable, or out-of-root input and does not copy source
 snippets into violations. This remains a narrow source-review guard, not a
 general HTML/CSS sanitizer, browser execution proof, settings hardening for
 production, or authorization to add any protected interface.
+
+## Stage A PostgreSQL concurrency scaffold record
+
+The test-only scaffold fixes six current metadata races: one active report per
+operator, one active lease per report and per operator, one active security
+operation per report, stale report-version rejection, and stale lease-generation
+rejection. It constructs only fresh ephemeral UUID metadata for 20–100 unique
+contenders and records the requirement for synchronized multi-process,
+dedicated-connection execution.
+
+The scaffold has no driver, DSN, credential, executor, lock implementation, or
+database mutation. Its runner returns one controlled unavailable result after
+backend probing and remains unavailable when a backend capability object is
+mocked as PostgreSQL-capable. Consequently, this slice is a future-test
+contract only: it supplies no concurrency, durability, isolation, lock-order,
+cleanup, or release evidence and closes no PostgreSQL or production gate.

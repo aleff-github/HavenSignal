@@ -357,3 +357,19 @@ This slice does not render a template, run a browser, make development settings
 production-safe, prove CSP/network isolation, or add a route, form, protected
 action, credential, persistence, or service capability. All external and
 production gates remain OPEN.
+
+The eighth Stage A slice adds a test-only PostgreSQL concurrency scaffold for
+the current metadata constraints and fences. Its closed registry covers one
+active report per operator, one active lease per report/operator, one active
+security operation per report, stale report-version rejection, and stale
+lease-generation rejection. Cases contain only fresh ephemeral UUIDs for
+20–100 unique contenders, request at least two processes, and describe a
+synchronized start with a dedicated connection per contender.
+
+The scaffold contains no PostgreSQL driver, DSN, credential, transition
+executor, row-lock implementation, retry loop, process launcher, or database
+write. The runner always fails with one controlled unavailable result on
+SQLite, backend/configuration failure, and even a capability-shaped PostgreSQL
+mock. No test is skipped and then counted as proof. The real lock ordering,
+isolation level, executor review, multi-process run, cleanup, and result
+evidence remain OPEN and release-blocking.
