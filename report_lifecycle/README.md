@@ -30,3 +30,11 @@ replace the missing reviewed executor and multi-process integration evidence.
 SQLite tests validate pure behavior and ordinary constraints only. They are not
 PostgreSQL concurrency or release evidence. Protected workflows remain blocked
 by the independent and production gates in `docs/34`.
+
+`tests/postgresql_concurrency_scaffold.py` is a test-only, content-free plan for
+the future multi-process proof. It fixes the current constraint/version/fence
+scenarios, generates fresh UUID-only cases for 20–100 contenders, requires at
+least two requested processes and one dedicated connection per contender, and
+contains no database credentials or reporter fields. Its runner always returns
+a controlled unavailable failure, including on a capability-shaped backend;
+therefore it runs no PostgreSQL test and supplies no release evidence.

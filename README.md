@@ -77,7 +77,10 @@ fence. Immutable descriptors additionally reject cross-report, cross-actor,
 stale-version, stale-generation, wrong-lease, and expired-lease bindings. The
 persistence boundary rejects SQLite and remains write-disabled even for a
 nominally capable backend until the PostgreSQL executor is independently
-reviewed and tested. The app has no views, URLs, authentication, content, file,
+reviewed and tested. A test-only concurrency scaffold defines six closed
+metadata races, generates only ephemeral UUIDs for 20–100 contenders, and keeps
+its runner unavailable even for a capability-shaped backend. It is not
+PostgreSQL evidence. The app has no views, URLs, authentication, content, file,
 recovery, cryptographic, audit, alert, export, deletion, or background-job
 capability.
 
