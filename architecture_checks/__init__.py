@@ -10,6 +10,16 @@ from .imports import (
     scan_python_file,
     scan_python_package,
 )
+from .surfaces import (
+    EXPECTED_SETTINGS,
+    SurfaceViolation,
+    SurfaceViolationCode,
+    analyze_css_source,
+    analyze_settings_source,
+    analyze_template_source,
+    analyze_urlconf_source,
+    scan_surface_file,
+)
 
 __all__ = [
     "REPORTER_GATEWAY_IMPORT_POLICY",
@@ -20,4 +30,12 @@ __all__ = [
     "analyze_python_source",
     "scan_python_file",
     "scan_python_package",
+    "EXPECTED_SETTINGS",
+    "SurfaceViolation",
+    "SurfaceViolationCode",
+    "analyze_css_source",
+    "analyze_settings_source",
+    "analyze_template_source",
+    "analyze_urlconf_source",
+    "scan_surface_file",
 ]

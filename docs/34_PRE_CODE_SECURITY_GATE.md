@@ -337,3 +337,23 @@ violations for parse, read, or out-of-root path failure. The allowlist is
 intentionally narrow: a future approved capability must change it explicitly.
 It is not a runtime sandbox and does not replace credential, process, network,
 deployment, or service-policy separation.
+
+The seventh Stage A slice adds non-executing source policies for the current
+development Django settings, root URL patterns, reporter landing template, and
+CSS. Exact literal app/middleware lists keep authentication, administrator,
+session, and protected-domain components absent; targeted post-assignment
+mutation is rejected. The root URL configuration remains exactly one inert
+home route and rejects later mutation or dynamic construction.
+
+The template policy accepts only the present passive tags, attributes, meta
+profile, and first-party static stylesheet directive. It rejects interactive
+or active tags, template variables/includes, event/style attributes, external
+schemes, malformed structure, processing instructions, and altered head
+resources. The CSS policy rejects resource loading and legacy active-content
+constructs. Missing, unreadable, dynamic, malformed, mutated, and out-of-root
+inputs fail closed with controlled content-free violations.
+
+This slice does not render a template, run a browser, make development settings
+production-safe, prove CSP/network isolation, or add a route, form, protected
+action, credential, persistence, or service capability. All external and
+production gates remain OPEN.
