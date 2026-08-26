@@ -92,6 +92,12 @@ The custom operator/admin interfaces must enforce MFA.
 
 Do not assume Django Admin automatically inherits a separate MFA layer.
 
+The proposed supported endpoint/access profile is Ubuntu Desktop 26.04 LTS and
+Firefox ESR 153 at their latest validated security updates, with physically
+separate Operator, Application Administrator, and Key Custodian workstations.
+Exact controls and remaining gates are in
+`docs/33_OPERATIONAL_ACCESS_AND_WORKSTATION_HARDENING.md`.
+
 ## Password hashing
 
 Preferred:

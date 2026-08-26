@@ -68,6 +68,12 @@ Root/recovery/seal authority, if the product has it, requires a documented
 multi-person ceremony and is absent from normal runtime/application roles. It
 must not provide a supported path to restore a destroyed per-object key.
 
+`docs/33_OPERATIONAL_ACCESS_AND_WORKSTATION_HARDENING.md` proposes the staffing,
+workstation, bastion, short-lived certificate, command-wrapper, quorum,
+break-glass, infrastructure-backup, and periodic-review procedure for this
+control plane. The real PoC must use the accepted production profile;
+documentation alone cannot satisfy this plan.
+
 ## Network and workload authentication proposal
 
 The supported profile uses mutually authenticated TLS with a private,

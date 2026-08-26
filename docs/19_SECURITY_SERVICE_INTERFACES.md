@@ -330,9 +330,10 @@ Reporter-facing proxy, application, and upstream infrastructure configuration mu
 | Emergency Export | Exact construction PROPOSED in document 28; owner/review, alert, signer/HSM, custody, Key Service, concurrency, workstation, and deployment gates OPEN CRITICAL |
 | Administrator alerts | Exact self-hosted transport, closed schema, durable acceptance, retry/escalation, and failure policy PROPOSED in document 31; owner/review and production gates OPEN HIGH |
 | Retention and deletion | 90-day unread expiry, OPEN-only operator deletion, exceptional SEALED flood ceremony, cleanup, metadata minimization, and audit expiry authority PROPOSED in document 32; owner/legal/review and production gates OPEN CRITICAL |
+| Operational access/workstations | Three separate Ubuntu/Firefox device classes, exact role sessions, admin v2 step-up, export transfer broker, custodian quorum/bastion/break-glass PROPOSED in document 33; owner/review and physical production gates OPEN CRITICAL |
 | File Processing Sandbox | Exact construction PROPOSED in document 29; owner/review, artifact pinning, fuzz corpus, production microVM/broker, Key Service/audit and deployment gates OPEN HIGH |
 | CAPTCHA | Owner-approved no-JavaScript protocol; Pillow/font, audio/accessibility, PostgreSQL concurrency, and production-boundary reviews OPEN HIGH |
-| Authentication/step-up | TTL, canonical artifact bytes/digest, enrollment/reset/recovery/revocation — OPEN HIGH |
+| Authentication/step-up | Exact report-bound protocol PROPOSED in document 25 and admin/workstation extension PROPOSED in document 33; owner/review and production gates OPEN HIGH |
 | Alerts | Exact protocol PROPOSED in document 31; owner/review and production gates OPEN HIGH |
 
 An OPEN gate blocks only its affected interface. It does not authorize a mock that stores plaintext, returns a fixed success receipt, exposes a permissive key call, disables verification, or silently falls back.

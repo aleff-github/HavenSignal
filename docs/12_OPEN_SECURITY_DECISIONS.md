@@ -109,6 +109,10 @@ It explicitly permits rejection of OpenBao and cannot itself substitute for the
 real PoC. Its six choices await consolidated pre-code owner approval;
 product/topology approval remains OPEN until every test passes independently.
 
+`docs/33_OPERATIONAL_ACCESS_AND_WORKSTATION_HARDENING.md` separately proposes
+the exact custodian staffing/access/quorum/break-glass procedure. It does not
+select or approve a product/topology and must be exercised by the real PoC.
+
 ## CRITICAL — Audit receipt and tamper-evidence construction
 
 The approved lifecycle requires pre-action durable receipts and
@@ -226,7 +230,15 @@ deployment procedures remain OPEN.
 
 ## HIGH — Operator workstation hardening specification
 
-Need a concrete supported profile covering OS, browser, extensions, disk encryption, screen lock, clipboard, printing, cloud sync, local administrator rights, patching, and network controls.
+`docs/33_OPERATIONAL_ACCESS_AND_WORKSTATION_HARDENING.md` proposes Ubuntu
+Desktop 26.04 LTS, Firefox ESR 153, signed/drift-controlled images, Secure Boot,
+passphrase LUKS2, no swap/hibernate/local admin, an ephemeral one-origin kiosk,
+no clipboard/print/capture/cloud/ordinary download, restricted networking, and
+an encrypted-only Emergency Export transfer broker.
+
+Its exact choices await owner and independent endpoint/authentication/network
+review, hardware/tool validation, artifact pinning, kiosk/broker implementation,
+physical procedure, and production acceptance.
 
 ## HIGH — Never-read Response Note retention
 
@@ -293,8 +305,18 @@ retain-longer behavior. Exact implementation and production proof remain OPEN.
 
 ## HIGH — Administrator network/session access profile
 
-The Application Administrator interface requires strong MFA and anti-impersonation controls. Exact network restrictions, session policy, and hardened access profile remain OPEN.
+`docs/33` proposes a physically separate administrator workstation, distinct
+VPN/device certificate/RP/origin/cookie/account/factor set, ten-minute idle and
+four-hour absolute session, no report route or operator impersonation, and a
+separate 120-second administrative exact-artifact step-up profile. Owner,
+independent review, exact infrastructure, and production proof remain OPEN.
 
 ## MEDIUM — Infrastructure / Key Custodian operational procedure
 
-The trust role is approved, but staffing, access ceremony, break-glass controls, monitoring, credential lifecycle, and periodic review remain OPEN.
+`docs/33` proposes at least three individually named custodians, two-person
+sensitive ceremonies, separate hardened workstations/network, a self-hosted
+bastion, hardware-backed OpenSSH certificates valid at most 15 minutes,
+allowlisted command wrappers, vendor/HSM dual-control break-glass, quarterly
+restore and annual full exercises, and no report/per-object-key authority.
+Owner/operations review, staffing, infrastructure products, HSM/CA, exact
+runbooks, and production-equivalent tests remain OPEN.
