@@ -281,3 +281,17 @@ production-equivalent test service is currently configured, so implementing a
 write path would falsely elevate SQLite/unit evidence. The reviewed executor,
 lock ordering, retry behavior, and 20–100 synchronized multi-process tests
 remain OPEN.
+
+The third Stage A slice adds content-free audit-v1 structural descriptors for
+the exact 40-event registry, four actor kinds, 16-byte idempotency IDs, 32-byte
+action nonces, acceptance-claim byte lengths/unsigned-integer bounds, and the
+unambiguous non-sliding authorization lifetimes in `docs/23`. These frozen
+types do not contain caller/object/operation/reason/outcome free text.
+
+The slice does not implement deterministic CBOR, COSE, Ed25519, receipt
+verification, append/durability/idempotency storage, an Audit Service adapter,
+or a protected consumer. Structural validation always remains
+non-authorizing. `REPORT_KEY_DESTROYED` stays denied because its five-minute
+lifetime is conditional on use before response publication and the complete
+per-operation profile needed to distinguish that context is not yet closed.
+The incomplete object/operation/state/reason/outcome registries are not guessed.

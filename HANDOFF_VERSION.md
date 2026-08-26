@@ -50,3 +50,8 @@ tests. It exposes no protected endpoint or content-handling capability.
 The second Stage A slice adds immutable cross-object binding validators and a
 PostgreSQL capability gate whose persistence entry point always fails closed.
 No SQLite or mocked-backend result can enable metadata writes.
+
+The third Stage A slice adds immutable, content-free audit-v1 registry/replay/
+acceptance-claim descriptors and strict structural validation. It contains no
+CBOR/COSE implementation, signature verification, audit append, durable
+receipt, or authorization capability; incomplete context profiles fail closed.
