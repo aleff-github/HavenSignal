@@ -63,8 +63,8 @@ For the metadata-only Stage A described by
 - the inert finalization sequence contains only the received-request checkpoint
   followed by the exact twelve approved actions, rejects every skip, reverse,
   repeat, unknown value, wrong operation, non-OPEN state, internally
-  inconsistent version, or malformed lease binding, and never echoes rejected
-  values;
+  inconsistent version, forged idempotency ID, or malformed lease binding, and
+  never echoes rejected values;
 - an inert finalization edge is immutable, content-free, non-authorizing and
   non-persisting; its executor always returns the same controlled unavailable
   failure and leaves all lifecycle tables empty;

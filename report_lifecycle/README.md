@@ -49,8 +49,9 @@ durability, rollback, or production migration evidence.
 `finalization.py` represents only the approved request-plus-twelve-step
 `FINALIZING` order as an immutable, content-free sequence. It accepts only the
 existing structurally validated `FINALIZE_RESPONSE`/OPEN/lease binding, rejects
-every skipped, reversed, unknown, or malformed edge, and returns plans that
-explicitly neither authorize execution nor persist a checkpoint. The executor
+every skipped, reversed, unknown, forged-idempotency, or malformed edge, and
+returns plans that retain only content-free operation context and explicitly
+neither authorize execution nor persist a checkpoint. The executor
 always raises a controlled unavailable error and performs no database or
 external-service operation. The sequence is conformance metadata, not current
 lease/receipt/key/staging evidence or a resumable workflow implementation.

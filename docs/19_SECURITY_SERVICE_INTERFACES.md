@@ -437,8 +437,8 @@ deletion. Every other edge is denied.
 
 These checkpoint names are not Report states, database rows, service receipts,
 or assertions that an action happened. Plans contain only operation/report/
-operator/lease UUIDs and version/generation counters, and explicitly authorize
-nothing and persist nothing. The executor always fails closed. Actual CAPTCHA,
+idempotency/operator/lease UUIDs and version/generation counters, and explicitly
+authorize nothing and persist nothing. The executor always fails closed. Actual CAPTCHA,
 step-up consumption, audit receipts, protected response bytes, PostgreSQL
 commit, Key Service destruction, availability, invalidation, cleanup, retries,
 and crash resumption remain absent and gated.

@@ -392,9 +392,10 @@ contract for the exact request-plus-twelve-action order already approved in
 `docs/03`. It accepts only the existing structurally validated
 `FINALIZE_RESPONSE` binding for an OPEN report and matching active lease, and
 rejects every skipped, reversed, repeated, unknown, wrong-operation,
-wrong-state, internally inconsistent version, or malformed-binding edge.
-Returned plans contain only internal UUIDs and counters and explicitly
-authorize no execution.
+wrong-state, internally inconsistent version, forged-idempotency, or
+malformed-binding edge. Returned plans retain the internal operation
+idempotency UUID alongside the existing internal UUIDs and counters and
+explicitly authorize no execution.
 
 The checkpoints are not lifecycle/database states or evidence that CAPTCHA,
 step-up, audit, staging, key destruction, publication, invalidation, or cleanup

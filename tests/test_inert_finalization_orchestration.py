@@ -130,6 +130,10 @@ class InertFinalizationOrchestrationTests(TestCase):
         wrong_bindings = (
             object(),
             replace(self.binding, command=wrong_command),
+            replace(
+                self.binding,
+                command=replace(self.binding.command, idempotency_id="not-a-uuid"),
+            ),
             replace(self.binding, report_state=ReportState.FINALIZING),
             replace(self.binding, report_state_version=True),
             replace(self.binding, lease_activity=None),
@@ -167,6 +171,7 @@ class InertFinalizationOrchestrationTests(TestCase):
             {field.name for field in fields(plan)},
             {
                 "operation_id",
+                "idempotency_id",
                 "report_id",
                 "operator_id",
                 "lease_id",
@@ -176,6 +181,7 @@ class InertFinalizationOrchestrationTests(TestCase):
                 "target_checkpoint",
             },
         )
+        self.assertEqual(plan.idempotency_id, self.binding.command.idempotency_id)
         with self.assertRaises(FrozenInstanceError):
             plan.report_state_version = 8
         with self.assertRaises(TypeError):

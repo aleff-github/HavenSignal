@@ -68,6 +68,7 @@ FINALIZATION_TRANSITIONS = MappingProxyType(
 @dataclass(frozen=True, slots=True)
 class InertFinalizationStepPlan:
     operation_id: UUID
+    idempotency_id: UUID
     report_id: UUID
     operator_id: UUID
     lease_id: UUID
@@ -95,6 +96,7 @@ def _require_finalization_binding(
         type(command) is SecurityOperationCommand
         and type(activity) is LeaseActivityPlan
         and type(command.operation_id) is UUID
+        and type(command.idempotency_id) is UUID
         and type(command.report_id) is UUID
         and type(command.actor_id) is UUID
         and type(command.lease_id) is UUID
@@ -142,6 +144,7 @@ def plan_inert_finalization_step(
         raise LifecycleTransitionDenied()
     return InertFinalizationStepPlan(
         operation_id=command.operation_id,
+        idempotency_id=command.idempotency_id,
         report_id=command.report_id,
         operator_id=command.actor_id,
         lease_id=activity.lease_id,

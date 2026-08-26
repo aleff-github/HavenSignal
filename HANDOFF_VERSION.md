@@ -86,9 +86,10 @@ migrations, fields, constructors, imports, dynamic/data/SQL operations, and
 model drift explicit without changing or executing production database work.
 
 The tenth Stage A slice adds the exact inert finalization sequence as immutable,
-content-free, non-authorizing and non-persisting edges. Its executor always
-fails closed; no receipt, staging, key, publication, cleanup, or resume
-capability is implemented.
+content-free, non-authorizing and non-persisting edges, retaining and strictly
+checking the existing operation idempotency UUID. Its executor always fails
+closed; no receipt, staging, key, publication, cleanup, or resume capability is
+implemented.
 
 The eleventh Stage A slice adds the exact OPEN-only operator-deletion sequence
 as immutable, content-free, non-authorizing, non-persisting, and explicitly
