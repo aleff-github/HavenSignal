@@ -32,3 +32,12 @@ class AuditDescriptorRejected(ValueError):
 
     def __init__(self) -> None:
         super().__init__(self.public_code)
+
+
+class AlertDescriptorRejected(ValueError):
+    """Controlled rejection for an invalid inert alert descriptor."""
+
+    public_code = "alert_descriptor_rejected"
+
+    def __init__(self) -> None:
+        super().__init__(self.public_code)
