@@ -247,3 +247,21 @@ The project owner recorded the following decision on 2026-08-26:
 No exception was recorded. Any future change must identify the document,
 subsection, and replacement decision. Implementation may proceed only within
 the inert Stage A boundary in section 5.
+
+## 8. Stage A implementation record
+
+The first metadata-only slice adds the `report_lifecycle` Django app with:
+
+- explicit Report, ReportLease, and SecurityOperation enums and allowed edges;
+- internal UUID/state/version/generation/timestamp-only models;
+- uniqueness and shape constraints for active operator ownership, leases, and
+  operation fences;
+- pure server-time transition and lease-activity planners;
+- negative tests for unknown/skipped states, stale generations, timeout
+  boundaries, invalid shapes, duplicate active ownership, and duplicate fences.
+
+No route, view, authentication flow, protected service call, persistence
+executor, content field, file handler, cryptographic operation, audit/alert
+payload, export/deletion workflow, or background worker is added. The local
+SQLite suite is development evidence only; PostgreSQL multi-process
+concurrency remains an explicit external gate.

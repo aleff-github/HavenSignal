@@ -69,6 +69,14 @@ shape, constraints, and a pure monotonic transition planner. It has no HTTP
 route or database transition executor and stores no reporter content,
 credential, key, verifier, filename, request metadata, or audit receipt.
 
+`report_lifecycle/` implements the owner-authorized inert Stage A for
+metadata-only Report, ReportLease, and SecurityOperation concepts. It provides
+explicit state edges, monotonically versioned pure planners, server-time lease
+validation, and database constraints for one active report/lease/operation
+fence. It has no views, URLs, authentication, persistence executor, content,
+file, recovery, cryptographic, audit, alert, export, deletion, or background-job
+capability. Its SQLite tests are not PostgreSQL concurrency evidence.
+
 Mandatory security integrations whose designs remain OPEN are represented only
 by explicit deny-by-default placeholders under `security_interfaces/`. Every
 placeholder operation raises a controlled failure and provides no plaintext,
