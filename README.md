@@ -82,9 +82,11 @@ metadata races, generates only ephemeral UUIDs for 20–100 contenders, and keep
 its runner unavailable even for a capability-shaped backend. It is not
 PostgreSQL evidence. A pure finalization-sequence contract fixes the approved
 order but neither persists checkpoints nor authorizes execution; its executor
-always fails closed. The app has no views, URLs, authentication, content, file,
-recovery, cryptographic, audit, alert, export, deletion, or background-job
-capability.
+always fails closed. A separate pure operator-deletion sequence fixes only the
+approved OPEN-only order and explicitly cannot persist, destroy keys/content,
+or authorize execution. The app has no views, URLs, authentication, content,
+file, recovery, cryptographic, audit, alert, export, deletion, or
+background-job capability.
 
 Mandatory security integrations whose designs remain OPEN are represented only
 by explicit deny-by-default placeholders under `security_interfaces/`. Every

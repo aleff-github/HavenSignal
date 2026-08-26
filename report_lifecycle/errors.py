@@ -17,3 +17,10 @@ class FinalizationOrchestrationUnavailable(Exception):
 
     def __init__(self) -> None:
         super().__init__("finalization_orchestration_unavailable")
+
+
+class DeletionOrchestrationUnavailable(Exception):
+    """Controlled denial while protected deletion remains gated."""
+
+    def __init__(self) -> None:
+        super().__init__("deletion_orchestration_unavailable")

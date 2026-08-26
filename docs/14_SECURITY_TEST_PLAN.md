@@ -68,6 +68,14 @@ For the metadata-only Stage A described by
 - an inert finalization edge is immutable, content-free, non-authorizing and
   non-persisting; its executor always returns the same controlled unavailable
   failure and leaves all lifecycle tables empty;
+- the inert operator-deletion sequence contains only the received-request
+  checkpoint followed by the exact ten approved actions in `docs/32`, accepts
+  only an existing `DELETE_REPORT`/OPEN/current-lease binding, and rejects every
+  skip, reverse, repeat, unknown value, flood/finalization operation,
+  internally inconsistent version, malformed lease, or forged idempotency ID;
+- an inert operator-deletion edge is immutable, content-free, non-authorizing,
+  non-persisting, and explicitly non-destructive; its executor always returns
+  the same controlled unavailable failure and leaves all lifecycle tables empty;
 - SQLite results are never represented as PostgreSQL concurrency evidence;
 - the application still cannot accept a real report.
 

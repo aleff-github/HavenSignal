@@ -402,3 +402,21 @@ occurred. They are not persisted. The executor always raises the same
 controlled unavailable error and calls no database or external service. The
 real finalization/resume workflow and every dependent review and production
 gate remain OPEN.
+
+The eleventh Stage A slice adds a pure, non-persisting sequence contract for
+the exact request-plus-ten-action OPEN-only operator-deletion order already
+approved in `docs/32`. It accepts only the existing structurally validated
+`DELETE_REPORT` binding for an OPEN report and matching active lease, and
+rejects every skipped, reversed, repeated, unknown, flood/finalization,
+wrong-state, internally inconsistent version, forged-idempotency, or
+malformed-binding edge. Returned plans contain only internal UUIDs and counters
+and explicitly authorize no execution, persist no checkpoint, and destroy no
+key or content.
+
+The checkpoints are not lifecycle/database states or evidence that input,
+CAPTCHA, step-up, audit, locking, `DELETING`, key destruction, recovery
+invalidation, terminal transition, or cleanup occurred. The executor always
+raises the same controlled unavailable error and calls no database or external
+service. The real deletion/resume workflow and every legal, independent-review,
+PostgreSQL, MFA, CAPTCHA, Audit Service, Key Service, Alert Service, cleanup,
+and production gate remain OPEN.

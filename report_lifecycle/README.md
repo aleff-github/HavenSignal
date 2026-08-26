@@ -54,3 +54,13 @@ explicitly neither authorize execution nor persist a checkpoint. The executor
 always raises a controlled unavailable error and performs no database or
 external-service operation. The sequence is conformance metadata, not current
 lease/receipt/key/staging evidence or a resumable workflow implementation.
+
+`deletion.py` represents only the approved request-plus-ten-step OPEN-only
+operator-deletion order as immutable, content-free sequence metadata. It
+accepts only the existing structurally validated `DELETE_REPORT`/OPEN/current-
+lease binding, rejects every skipped, reversed, unknown, flood/finalization, or
+malformed edge, and returns plans that explicitly authorize nothing, persist
+nothing, and destroy no key or content. Its executor always raises one
+controlled unavailable error and performs no database or external-service
+operation. No reason, protected note, CAPTCHA, step-up, receipt, state write,
+key operation, recovery change, cleanup, or resumable workflow exists.

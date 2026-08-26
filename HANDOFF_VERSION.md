@@ -89,3 +89,9 @@ The tenth Stage A slice adds the exact inert finalization sequence as immutable,
 content-free, non-authorizing and non-persisting edges. Its executor always
 fails closed; no receipt, staging, key, publication, cleanup, or resume
 capability is implemented.
+
+The eleventh Stage A slice adds the exact OPEN-only operator-deletion sequence
+as immutable, content-free, non-authorizing, non-persisting, and explicitly
+non-destructive edges. Its executor always fails closed; no reason or protected
+note, CAPTCHA, step-up, receipt, database transition, key destruction, recovery
+invalidation, cleanup, or resume capability is implemented.

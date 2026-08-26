@@ -442,3 +442,23 @@ nothing and persist nothing. The executor always fails closed. Actual CAPTCHA,
 step-up consumption, audit receipts, protected response bytes, PostgreSQL
 commit, Key Service destruction, availability, invalidation, cleanup, retries,
 and crash resumption remain absent and gated.
+
+## Stage A operator-deletion sequence record
+
+The approved OPEN-only operator-deletion order in `docs/32` is represented as
+one received-request checkpoint followed by the exact ten actions: validate
+the current OPEN/input/CAPTCHA context, verify step-up, durably audit the
+request, lock and revalidate, commit the fenced `DELETING` workflow, invalidate
+ordinary capabilities, confirm Report-DEK destruction, audit the destruction
+outcome, invalidate recovery eligibility, and enter the terminal state while
+starting cleanup. Every other edge is denied.
+
+Checkpoint names are conformance labels only, not Report states, database
+rows, receipts, destruction evidence, or claims that input, CAPTCHA, step-up,
+audit, locking, key handling, recovery invalidation, or cleanup occurred. Plans
+contain only internal operation/idempotency/report/operator/lease UUIDs and
+version/generation counters. They authorize nothing, persist nothing, and
+explicitly destroy no key or content. The executor always fails closed. The
+real operator-deletion workflow and every legal, independent-review,
+PostgreSQL, MFA, CAPTCHA, audit, Key Service, alert, cleanup, and production
+gate remain OPEN.
