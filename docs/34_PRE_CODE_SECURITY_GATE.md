@@ -295,3 +295,17 @@ non-authorizing. `REPORT_KEY_DESTROYED` stays denied because its five-minute
 lifetime is conditional on use before response publication and the complete
 per-operation profile needed to distinguish that context is not yet closed.
 The incomplete object/operation/state/reason/outcome registries are not guessed.
+
+The fourth Stage A slice adds content-free alert-v1 structural descriptors for
+the exact ten alert types and fixed severities, three delivery states, four
+actor kinds, 16-byte operation/idempotency/source-event identifiers, the
+Alert-Service-controlled acceptance response shape, and the exact nil/present
+acknowledgement-field pairing in `docs/31`.
+
+No full submit request is created because the exact `source-profile`,
+`object-kind`, `condition-code`, and per-type field/source combinations are not
+fully enumerated as formal registries. No CBOR, service authentication,
+PostgreSQL/outbox persistence, SMTP delivery, retry/escalation, inbox,
+acknowledgement mutation, retention job, or real Alert Service adapter exists.
+A structurally valid response proves no durable acceptance and authorizes
+nothing.

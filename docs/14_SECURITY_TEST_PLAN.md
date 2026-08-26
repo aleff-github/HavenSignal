@@ -28,6 +28,11 @@ For the metadata-only Stage A described by
 - structural audit validation never becomes receipt/signature verification or
   protected-action authorization, and context-dependent/incomplete profiles
   remain fail closed;
+- alert-v1 descriptors enforce the exact ten alert/severity pairs, delivery
+  states, actor pairing, identifier lengths, timestamp range, and
+  acknowledgement pairing while rejecting unknown/arbitrary values;
+- a structural alert acceptance response never proves durable inbox/outbox
+  commit, SMTP delivery, human acknowledgement, or protected authorization;
 - SQLite results are never represented as PostgreSQL concurrency evidence;
 - the application still cannot accept a real report.
 

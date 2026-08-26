@@ -1,5 +1,23 @@
 """Deny-by-default boundaries for security controls that remain OPEN."""
 
+from .alert_descriptors import (
+    ALERT_SEVERITY_BY_TYPE,
+    AlertAcceptanceConfirmationV1,
+    AlertAcknowledgementReferenceV1,
+    AlertActorReferenceV1,
+    AlertDeliveryState,
+    AlertOperationReferenceV1,
+    AlertProfileReferenceV1,
+    AlertSeverity,
+    AlertType,
+    StructurallyValidAlertAcceptanceConfirmationV1,
+    validate_alert_acceptance_confirmation_v1,
+    validate_alert_acknowledgement_reference_v1,
+    validate_alert_actor_reference_v1,
+    validate_alert_delivery_state_v1,
+    validate_alert_operation_reference_v1,
+    validate_alert_profile_reference_v1,
+)
 from .audit_descriptors import (
     AUDIT_PROTOCOL_VERSION,
     AUTHORIZATION_WINDOWS_MS,
@@ -16,6 +34,7 @@ from .audit_descriptors import (
     validate_audit_replay_context_v1,
 )
 from .errors import (
+    AlertDescriptorRejected,
     AuditDescriptorRejected,
     SecurityControlUnavailable,
     SecurityDependency,
@@ -31,6 +50,7 @@ from .unavailable import (
 )
 
 __all__ = [
+    "ALERT_SEVERITY_BY_TYPE",
     "AUDIT_PROTOCOL_VERSION",
     "AUTHORIZATION_WINDOWS_MS",
     "CONTEXT_DEPENDENT_AUTHORIZATION_EVENTS",
@@ -41,9 +61,19 @@ __all__ = [
     "AuditDescriptorRejected",
     "AuditEventType",
     "AuditReplayContextV1",
+    "AlertAcceptanceConfirmationV1",
+    "AlertAcknowledgementReferenceV1",
+    "AlertActorReferenceV1",
+    "AlertDeliveryState",
+    "AlertDescriptorRejected",
+    "AlertOperationReferenceV1",
+    "AlertProfileReferenceV1",
+    "AlertSeverity",
+    "AlertType",
     "SecurityControlUnavailable",
     "SecurityDependency",
     "StructurallyValidAuditAcceptanceClaimsV1",
+    "StructurallyValidAlertAcceptanceConfirmationV1",
     "UnavailableAlertService",
     "UnavailableAuditReceiptService",
     "UnavailableCaptchaService",
@@ -54,4 +84,10 @@ __all__ = [
     "validate_audit_acceptance_claims_v1",
     "validate_audit_actor_reference_v1",
     "validate_audit_replay_context_v1",
+    "validate_alert_acceptance_confirmation_v1",
+    "validate_alert_acknowledgement_reference_v1",
+    "validate_alert_actor_reference_v1",
+    "validate_alert_delivery_state_v1",
+    "validate_alert_operation_reference_v1",
+    "validate_alert_profile_reference_v1",
 ]

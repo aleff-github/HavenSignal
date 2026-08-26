@@ -11,6 +11,12 @@ acceptance-claim lifetimes already fixed by `docs/23`. It intentionally does
 not define the still-incomplete per-event request profiles, wire encodings,
 credentials, cryptographic verification, or deployment topology.
 
+`alert_descriptors.py` models only the ten fixed alert types and severities,
+delivery-state names, actor/operation identifier shapes, acceptance response,
+and acknowledgement pairing already exact in `docs/31`. The complete submit
+request remains unavailable because the formal source-profile, object-kind,
+condition-code, and per-type combination registries are not fully enumerated.
+
 Every call raises the same controlled `SecurityControlUnavailable` error. The
 placeholders:
 
@@ -28,3 +34,8 @@ COSE parsing/signature verification, event append, durable commit, receipt
 release, and all protected consumers remain absent. The context-dependent
 `REPORT_KEY_DESTROYED` authorization lifetime is rejected until its exact
 operation profile is closed rather than guessed.
+
+Likewise, a structurally valid alert acceptance response proves neither a
+durable database/queue commit nor SMTP delivery and never authorizes a
+protected action. There is no Alert Service client, outbox, persistence,
+transport, acknowledgement mutation, or development success adapter.

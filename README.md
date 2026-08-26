@@ -89,6 +89,10 @@ The same package now contains inert audit-v1 structural types for the exact
 event/actor registries, replay identifiers, and acceptance-claim lifetimes
 already fixed by `docs/23`. They do not encode CBOR, parse or verify COSE,
 append an event, or authorize an operation.
+It also contains inert alert-v1 components for the fixed alert/severity and
+delivery-state registries, actor/operation identifiers, acceptance response,
+and acknowledgement pairing from `docs/31`. They do not send, persist, queue,
+deliver, or acknowledge an alert.
 
 Security-sensitive components remain blocked by their applicable OPEN decisions. The service interfaces and negative capability boundaries are approved as the implementation boundary, without closing those decisions.
 

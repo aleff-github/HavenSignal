@@ -55,3 +55,8 @@ The third Stage A slice adds immutable, content-free audit-v1 registry/replay/
 acceptance-claim descriptors and strict structural validation. It contains no
 CBOR/COSE implementation, signature verification, audit append, durable
 receipt, or authorization capability; incomplete context profiles fail closed.
+
+The fourth Stage A slice adds immutable, content-free alert-v1 registry and
+component descriptors. Structural acceptance proves no durable commit,
+delivery, acknowledgement, or authorization; all Alert Service integrations
+and incomplete source/object/condition profiles remain unavailable.
