@@ -77,9 +77,9 @@ The approved per-object key policy permits live replication of active Report-DEK
 Approval requires a release-blocking proof of concept covering replication, delete, snapshot/restore, rollback, delayed/stale replicas, and disaster recovery. OpenBao is not presumed compliant.
 
 `docs/27_KEY_SERVICE_ACCEPTANCE_AND_NON_RESURRECTION_POC.md` defines the
-proposed exact acceptance environment, capabilities, destructive test matrix,
-evidence, and no-exception verdict rule. No candidate is selected by that
-proposal; a production-equivalent PoC and independent review remain mandatory.
+owner-approved exact acceptance environment, capabilities, destructive test
+matrix, evidence, and no-exception verdict rule. No candidate is selected; a
+production-equivalent PoC and independent review remain mandatory.
 
 ## Operator MFA
 
@@ -131,11 +131,11 @@ Tool choice must be validated against sandboxing and parser-risk requirements.
 
 PDF upload is blocked until the structural acceptance profile, page/object/decompression/dimension limits, parser/toolchain, rendering strategy, and sandbox technology are approved.
 
-`docs/29_FILE_ACCEPTANCE_SANDBOX_AND_SAFE_VIEW_PROTOCOL.md` proposes qpdf JSON-v2
+`docs/29_FILE_ACCEPTANCE_SANDBOX_AND_SAFE_VIEW_PROTOCOL.md` defines the owner-approved qpdf JSON-v2
 inspection, full MuPDF rasterization, restricted libjpeg-turbo/libpng decoding,
 and one fresh Firecracker microVM per admission/view job. These choices remain
-non-authorizing pending consolidated approval, exact patched artifact pinning,
-independent parser/sandbox review, and production KVM/jailer validation.
+non-authorizing pending exact patched artifact pinning, independent
+parser/sandbox review, and production KVM/jailer validation.
 
 ## Audit
 

@@ -21,9 +21,10 @@ Before generation:
 5. `EMERGENCY_EXPORT_REQUESTED` must be durably accepted and produce the required audit receipt;
 6. the administrator is notified of the export event.
 
-The proposed exact step-up TTL, WebAuthn ceremony, and canonical export-request
-binding are in `docs/25_MFA_STEP_UP_AND_CREDENTIAL_LIFECYCLE.md`. They remain
-OPEN pending the consolidated pre-code decision and independent review. The
+The owner-approved exact step-up TTL, WebAuthn ceremony, and canonical
+export-request binding are in
+`docs/25_MFA_STEP_UP_AND_CREDENTIAL_LIFECYCLE.md`. They remain non-authorizing
+pending independent review and production gates. The
 artifact must not be released if a mandatory audit or notification precondition
 has not reached its approved durable state.
 
@@ -86,12 +87,11 @@ The organization holds the corresponding private key under a separately approved
 
 The operator may download the encrypted artifact.
 
-`docs/28_EMERGENCY_EXPORT_CRYPTOGRAPHIC_PROTOCOL.md` proposes the exact binary
+`docs/28_EMERGENCY_EXPORT_CRYPTOGRAPHIC_PROTOCOL.md` defines the owner-approved exact binary
 single-recipient X25519 `age` v1 format, closed `ustar` package, RFC 8785
 manifest, detached COSE Sign1/Ed25519 signature, key identifiers/rotation,
 fenced workflow, and encrypted-only staging/delivery lifecycle. It remains
-non-authorizing pending consolidated owner approval, independent review, and
-all named production gates.
+non-authorizing pending independent review and all named production gates.
 
 Plaintext package components and temporary files must be minimized, isolated, and deleted through a defined normal/crash/timeout cleanup lifecycle. No unnecessary plaintext export artifact may persist.
 

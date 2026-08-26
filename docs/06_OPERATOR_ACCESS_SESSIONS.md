@@ -6,11 +6,11 @@ The security baseline assumes a dedicated, hardened operator workstation.
 
 The application may technically run on ordinary workstations, but the project MUST NOT claim equivalent protection outside the supported hardened profile.
 
-`docs/33_OPERATIONAL_ACCESS_AND_WORKSTATION_HARDENING.md` proposes the exact
+`docs/33_OPERATIONAL_ACCESS_AND_WORKSTATION_HARDENING.md` defines the owner-approved exact
 supported Ubuntu/Firefox build, ephemeral kiosk, local-data/peripheral/network
 controls, Operator login-session limits, encrypted Emergency Export transfer,
 and separate Administrator/Key Custodian profiles. It remains non-authorizing
-pending consolidated owner approval and physical production acceptance.
+pending independent review and physical production acceptance.
 
 ## Authentication
 
@@ -127,8 +127,8 @@ After finalization, the original report cannot be reopened.
 
 Once the committed `FINALIZING` transition occurs, ordinary operator rendering/editing, reopen, and Emergency Export are disabled for that report; only the scoped finalization resume path remains valid.
 
-`docs/25_MFA_STEP_UP_AND_CREDENTIAL_LIFECYCLE.md` contains the proposed exact
+`docs/25_MFA_STEP_UP_AND_CREDENTIAL_LIFECYCLE.md` contains the owner-approved exact
 120-second step-up, WebAuthn profile, HMAC artifact binding, enrollment,
-replacement, and recovery procedures. It remains non-authorizing pending the
-consolidated pre-code owner decision, independent authentication/security
+replacement, and recovery procedures. It remains non-authorizing pending
+independent authentication/security
 review, hardware/library validation, workstation profile, and deployment gates.

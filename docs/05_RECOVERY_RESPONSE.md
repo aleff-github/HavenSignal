@@ -187,11 +187,11 @@ If the reporter never reads the Response Note, the current business rule does no
 
 Long-term retention of never-read Response Notes remains an operational risk to revisit.
 
-`docs/32_RETENTION_AND_DELETION_PROTOCOL.md` proposes expiry at 90 days after
+`docs/32_RETENTION_AND_DELETION_PROTOCOL.md` defines expiry at 90 days after
 `response_available_at` only when no first read has won. A valid first read
-before that boundary would retain the full existing 72-hour window. This is not
-yet owner-approved and does not change the current rule until the consolidated
-pre-code decision and legal/operational review.
+before that boundary retains the full existing 72-hour window. This design was
+owner-approved on 2026-08-26 but remains non-authorizing pending
+legal/operational and independent review and all production gates.
 
 ## Display-once guarantee boundary
 

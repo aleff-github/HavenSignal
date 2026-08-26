@@ -332,11 +332,11 @@ or return plaintext.
 The current rule for a never-read Response Note is unchanged: no 72-hour clock
 starts. Its maximum unread retention remains a separate OPEN HIGH decision.
 
-`docs/32_RETENTION_AND_DELETION_PROTOCOL.md` proposes resolving that OPEN item
+`docs/32_RETENTION_AND_DELETION_PROTOCOL.md` resolves that design item
 with a 90-day unread deadline and one narrow pre-deadline conversion to the
-existing full 72-hour read window. This does not amend this owner-approved
-protocol unless and until the consolidated owner, legal/operational, and
-independent reviews approve the change.
+existing full 72-hour read window. The change was owner-approved on 2026-08-26
+but remains non-authorizing pending legal/operational and independent review
+and every named production gate.
 
 ## Atomicity, concurrency, and replay
 
