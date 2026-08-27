@@ -155,3 +155,11 @@ trusted collector time, while a required verification dependency retains longer.
 Every capability flag is false and the executor always fails closed. No audit
 expiry, retention batch, isolated credential, witness output, database write,
 service integration, legal approval, or production authority is introduced.
+
+The twentieth Stage A slice extends the non-executing AST purity policy to the
+audit-retention planner. Exact imports/members, both closed enums, immutable
+content-free snapshot/plan fields, five false capability flags, closed calls,
+protected bindings, and the always-unavailable executor are required. The
+scanner never imports or executes the target and provides no audit expiry,
+trusted-clock proof, isolated credential, retention batch, witness integration,
+legal approval, or production authority.

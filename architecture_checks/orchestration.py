@@ -81,6 +81,120 @@ _COMMON_PLAN_FIELDS = (
     ("lease_generation", "int"),
 )
 
+AUDIT_RETENTION_SOURCE_POLICY = OrchestrationSourcePolicy(
+    name="AUDIT_RETENTION_INERT_SOURCE_V1",
+    relative_path="report_lifecycle/audit_retention.py",
+    expected_imports=(
+        (0, "dataclasses", (("dataclass", None),)),
+        (
+            0,
+            "datetime",
+            (("UTC", None), ("datetime", None), ("timedelta", None)),
+        ),
+        (0, "enum", (("StrEnum", None),)),
+        (0, "typing", (("ClassVar", None), ("Never", None))),
+        (0, "uuid", (("UUID", None),)),
+        (0, "django.utils", (("timezone", None),)),
+        (
+            1,
+            "errors",
+            (
+                ("AuditRetentionOrchestrationUnavailable", None),
+                ("LifecycleTransitionDenied", None),
+            ),
+        ),
+    ),
+    expected_module_members=(
+        ("assign", "EVENT_RETENTION_LIMIT"),
+        ("assign", "VERIFICATION_RETENTION_LIMIT"),
+        ("class", "AuditRetentionClass"),
+        ("class", "AuditRetentionDisposition"),
+        ("class", "AuditRetentionSnapshot"),
+        ("class", "InertAuditRetentionPlan"),
+        ("function", "_require_timestamp"),
+        ("function", "_retention_limit"),
+        ("function", "plan_inert_audit_retention"),
+        ("function", "execute_audit_retention"),
+    ),
+    allowed_calls=frozenset(
+        {
+            "AuditRetentionOrchestrationUnavailable",
+            "InertAuditRetentionPlan",
+            "LifecycleTransitionDenied",
+            "_require_timestamp",
+            "_retention_limit",
+            "dataclass",
+            "timedelta",
+            "timezone.is_aware",
+            "timezone.localtime",
+            "timezone.now",
+            "type",
+        }
+    ),
+    allowed_raises=frozenset(
+        {
+            "AuditRetentionOrchestrationUnavailable",
+            "LifecycleTransitionDenied",
+        }
+    ),
+    plan_class_name="InertAuditRetentionPlan",
+    plan_fields=(
+        ("retention_id", "UUID"),
+        ("evidence_id", "UUID"),
+        ("evidence_class", "AuditRetentionClass"),
+        ("collector_recorded_at", "datetime"),
+        ("observed_at", "datetime"),
+        ("earliest_expiry_review_at", "datetime"),
+        ("verification_dependency_required", "bool"),
+        ("disposition", "AuditRetentionDisposition"),
+    ),
+    plan_false_classvars=(
+        "authorizes_expiry",
+        "deletes_audit_evidence",
+        "persists_retention_batch",
+        "exposes_witness_evidence",
+        "calls_external_service",
+    ),
+    executor_name="execute_audit_retention",
+    unavailable_error_name="AuditRetentionOrchestrationUnavailable",
+    additional_dataclasses=(
+        (
+            "AuditRetentionSnapshot",
+            (
+                ("retention_id", "UUID"),
+                ("evidence_id", "UUID"),
+                ("evidence_class", "AuditRetentionClass"),
+                ("collector_recorded_at", "datetime"),
+                ("verification_dependency_required", "bool"),
+            ),
+            (),
+        ),
+    ),
+    expected_str_enums=(
+        (
+            "AuditRetentionClass",
+            (
+                ("EVENT_RECEIPT_OR_PROOF", "EVENT_RECEIPT_OR_PROOF"),
+                (
+                    "CHECKPOINT_CONSISTENCY_KEY_OR_WITNESS",
+                    "CHECKPOINT_CONSISTENCY_KEY_OR_WITNESS",
+                ),
+            ),
+        ),
+        (
+            "AuditRetentionDisposition",
+            (
+                ("RETAIN_MINIMUM_PERIOD", "RETAIN_MINIMUM_PERIOD"),
+                (
+                    "RETAIN_VERIFICATION_DEPENDENCY",
+                    "RETAIN_VERIFICATION_DEPENDENCY",
+                ),
+                ("EXPIRY_REVIEW_DUE", "EXPIRY_REVIEW_DUE"),
+            ),
+        ),
+    ),
+)
+
 CLEANUP_SOURCE_POLICY = OrchestrationSourcePolicy(
     name="CIPHERTEXT_CLEANUP_INERT_SOURCE_V1",
     relative_path="report_lifecycle/cleanup.py",
@@ -479,6 +593,7 @@ METADATA_RETENTION_SOURCE_POLICY = OrchestrationSourcePolicy(
 )
 
 ORCHESTRATION_SOURCE_POLICIES = MappingProxyType({
+    "audit_retention": AUDIT_RETENTION_SOURCE_POLICY,
     "cleanup": CLEANUP_SOURCE_POLICY,
     "deletion": DELETION_SOURCE_POLICY,
     "finalization": FINALIZATION_SOURCE_POLICY,

@@ -77,10 +77,10 @@ For the metadata-only Stage A described by
   non-persisting, and explicitly non-destructive; its executor always returns
   the same controlled unavailable failure and leaves all lifecycle tables empty;
 - non-executing orchestration scanning accepts only the exact current
-  `finalization.py`, `deletion.py`, `retention.py`, `cleanup.py`, and
-  `metadata_retention.py` import/member/call profiles, content-free immutable
-  snapshot/plan fields, false capability flags, and executors whose only result
-  is the controlled unavailable exception;
+  `finalization.py`, `deletion.py`, `retention.py`, `cleanup.py`,
+  `metadata_retention.py`, and `audit_retention.py` import/member/call profiles,
+  closed enums, content-free immutable snapshot/plan fields, false capability
+  flags, and executors whose only result is the controlled unavailable exception;
 - nested/star imports, database/network/crypto/I/O or self-selected-time calls,
   dynamic/effectful syntax, attribute/subscript mutation, content/authorizing
   fields, altered executor bodies, missing targets, malformed source, and
@@ -94,6 +94,9 @@ For the metadata-only Stage A described by
 - terminal-metadata database/scheduler/audit/Key-Service/I/O/logging calls,
   imported constant/member shadowing, public-ticket/recovery/path/content fields,
   changed capability flags, and altered executor behavior fail the same policy;
+- audit-retention database/scheduler/witness/I/O/logging calls, imported timing
+  or member shadowing, receipt/content/key fields, changed evidence/disposition
+  registries or capability flags, and altered executor behavior fail the policy;
 - response-retention planning fixes unread expiry at exactly 90 times 24 hours
   after response availability, recognizes a stored first read strictly before
   that boundary only with one full non-sliding 72-hour window, never proposes a

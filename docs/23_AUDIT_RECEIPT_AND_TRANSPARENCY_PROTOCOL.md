@@ -541,6 +541,17 @@ The isolated credential, daily job, dependency proof, controlled retention
 batch record, witness interface, legal approval, independent review, and all
 Audit Service/production gates remain OPEN.
 
+The following source-policy slice parses but never imports or executes
+`audit_retention.py`. It fixes the exact target/import/member set, both closed
+enums, immutable snapshot and plan fields, five false capability flags, allowed
+calls and raises, protected bindings, and always-unavailable executor. Database
+expiry, scheduler, witness, network, I/O, logging, mutation, dynamic syntax,
+receipt/content/key fields, and executable executor changes fail closed.
+
+Passing is static source conformance only. It proves no trusted Audit Collector
+clock, isolated identity, dependency graph, persistence, controlled retention
+record, witness evidence, legal approval, or production Audit Service behavior.
+
 ## Recorded project-owner decision
 
 On 2026-08-25 the project owner approved all five visible choices:

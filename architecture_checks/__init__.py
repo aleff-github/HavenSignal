@@ -18,6 +18,7 @@ from .migrations import (
     scan_lifecycle_migrations,
 )
 from .orchestration import (
+    AUDIT_RETENTION_SOURCE_POLICY,
     CLEANUP_SOURCE_POLICY,
     DELETION_SOURCE_POLICY,
     FINALIZATION_SOURCE_POLICY,
@@ -55,6 +56,7 @@ __all__ = [
     "MigrationViolationCode",
     "analyze_lifecycle_migration_source",
     "scan_lifecycle_migrations",
+    "AUDIT_RETENTION_SOURCE_POLICY",
     "CLEANUP_SOURCE_POLICY",
     "DELETION_SOURCE_POLICY",
     "FINALIZATION_SOURCE_POLICY",

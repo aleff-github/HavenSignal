@@ -68,11 +68,12 @@ key operation, recovery change, cleanup, or resumable workflow exists.
 
 `architecture_checks/orchestration.py` statically parses `finalization.py`,
 `deletion.py`, `retention.py`, `cleanup.py`, and `metadata_retention.py` without
-importing any target. The exact import/member/call, snapshot/plan-field/
-capability-flag, mutation/dynamic-syntax/shadowing, and always-unavailable
-executor profiles are closed. A change outside that reviewed source profile
-fails the test suite; passing it is source conformance only, never protected
-workflow authorization or runtime isolation.
+importing any target, and now applies the same boundary to `audit_retention.py`.
+The exact import/member/call, enum, snapshot/plan-field/capability-flag,
+mutation/dynamic-syntax/shadowing, and always-unavailable executor profiles are
+closed. A change outside that reviewed source profile fails the test suite;
+passing it is source conformance only, never protected workflow authorization
+or runtime isolation.
 
 `retention.py` validates only internal UUID/state/version/timestamp metadata and
 describes the exact 90-day unread or stored non-sliding 72-hour read-window

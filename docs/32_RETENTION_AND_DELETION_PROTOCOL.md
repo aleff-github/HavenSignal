@@ -544,6 +544,18 @@ is unavailable. No credential, job, dependency graph, database mutation,
 controlled retention evidence, witness integration, legal policy, or Audit
 Service is implemented. Every dependent gate remains OPEN.
 
+The subsequent non-executing source-policy slice fixes the audit-retention
+target, imports, timing/type members, both closed enums, immutable snapshot/plan
+fields, five false capability flags, allowed calls/raises, protected bindings,
+and always-unavailable executor. It rejects database expiry, scheduler, witness,
+network, I/O, logging, mutation, receipt/content/key fields, and executable
+behavior without importing or running `audit_retention.py`.
+
+Passing is static source evidence only. It does not prove trusted collector
+time, isolated credentials, dependency correctness, persistence, retention-batch
+evidence, witness integration, legal policy, or Audit Service behavior, and
+closes no dependent gate.
+
 The project owner approved the following on 2026-08-26:
 
 1. 90-day never-read Response Note expiry, with a valid pre-deadline first read

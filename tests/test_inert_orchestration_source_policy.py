@@ -7,6 +7,7 @@ from tempfile import TemporaryDirectory
 from django.test import SimpleTestCase
 
 from architecture_checks import (
+    AUDIT_RETENTION_SOURCE_POLICY,
     CLEANUP_SOURCE_POLICY,
     DELETION_SOURCE_POLICY,
     FINALIZATION_SOURCE_POLICY,
@@ -21,6 +22,7 @@ from architecture_checks import (
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+AUDIT_RETENTION_PATH = BASE_DIR / "report_lifecycle" / "audit_retention.py"
 CLEANUP_PATH = BASE_DIR / "report_lifecycle" / "cleanup.py"
 FINALIZATION_PATH = BASE_DIR / "report_lifecycle" / "finalization.py"
 DELETION_PATH = BASE_DIR / "report_lifecycle" / "deletion.py"
@@ -42,12 +44,17 @@ class CurrentInertOrchestrationSourcePolicyTests(SimpleTestCase):
         self.assertEqual(
             tuple(ORCHESTRATION_SOURCE_POLICIES),
             (
+                "audit_retention",
                 "cleanup",
                 "deletion",
                 "finalization",
                 "metadata_retention",
                 "retention",
             ),
+        )
+        self.assertEqual(
+            AUDIT_RETENTION_SOURCE_POLICY.relative_path,
+            "report_lifecycle/audit_retention.py",
         )
         self.assertEqual(
             CLEANUP_SOURCE_POLICY.relative_path,
@@ -90,6 +97,7 @@ class CurrentInertOrchestrationSourcePolicyTests(SimpleTestCase):
                 self.assertNotIn("open", policy.allowed_calls)
                 self.assertNotIn("Report.objects.create", policy.allowed_calls)
                 if policy in (
+                    AUDIT_RETENTION_SOURCE_POLICY,
                     CLEANUP_SOURCE_POLICY,
                     METADATA_RETENTION_SOURCE_POLICY,
                     RETENTION_SOURCE_POLICY,
@@ -111,8 +119,18 @@ class CurrentInertOrchestrationSourcePolicyTests(SimpleTestCase):
             for name, _ in fields
         }
         self.assertTrue(metadata_snapshot_names.isdisjoint(prohibited))
+        audit_snapshot_names = {
+            name
+            for _, fields, _ in (
+                AUDIT_RETENTION_SOURCE_POLICY.additional_dataclasses
+            )
+            for name, _ in fields
+        }
+        self.assertTrue(audit_snapshot_names.isdisjoint(prohibited))
 
     def test_policy_objects_and_registry_are_immutable(self) -> None:
+        with self.assertRaises(FrozenInstanceError):
+            AUDIT_RETENTION_SOURCE_POLICY.name = "WEAKENED"
         with self.assertRaises(FrozenInstanceError):
             FINALIZATION_SOURCE_POLICY.name = "WEAKENED"
         with self.assertRaises(FrozenInstanceError):
@@ -127,6 +145,9 @@ class CurrentInertOrchestrationSourcePolicyTests(SimpleTestCase):
 
 class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
     def setUp(self) -> None:
+        self.audit_retention_source = AUDIT_RETENTION_PATH.read_text(
+            encoding="utf-8"
+        )
         self.cleanup_source = CLEANUP_PATH.read_text(encoding="utf-8")
         self.finalization_source = FINALIZATION_PATH.read_text(encoding="utf-8")
         self.deletion_source = DELETION_PATH.read_text(encoding="utf-8")
@@ -140,6 +161,13 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
             source=source,
             relative_path=FINALIZATION_SOURCE_POLICY.relative_path,
             policy=FINALIZATION_SOURCE_POLICY,
+        )
+
+    def analyze_audit_retention(self, source: str):
+        return analyze_inert_orchestration_source(
+            source=source,
+            relative_path=AUDIT_RETENTION_SOURCE_POLICY.relative_path,
+            policy=AUDIT_RETENTION_SOURCE_POLICY,
         )
 
     def analyze_cleanup(self, source: str):
@@ -233,6 +261,23 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
             metadata_codes,
         )
 
+        audit_source = (
+            "from report_lifecycle.models import Report\n"
+            + self.audit_retention_source
+            + "\nReport.objects.update()\n"
+        )
+        audit_codes = {
+            item.code for item in self.analyze_audit_retention(audit_source)
+        }
+        self.assertIn(
+            OrchestrationViolationCode.IMPORT_PROFILE_MISMATCH,
+            audit_codes,
+        )
+        self.assertIn(
+            OrchestrationViolationCode.CALL_DISALLOWED,
+            audit_codes,
+        )
+
     def test_nested_or_star_import_cannot_bypass_the_exact_import_profile(self) -> None:
         marker = "    command, activity = _require_finalization_binding(binding)"
         sources = (
@@ -323,6 +368,19 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
         self.assertIn(
             OrchestrationViolationCode.EXECUTOR_PROFILE_MISMATCH,
             metadata_codes,
+        )
+
+        audit_source = self.audit_retention_source.replace(
+            "        raise AuditRetentionOrchestrationUnavailable()",
+            "        return plan",
+            1,
+        )
+        audit_codes = {
+            item.code for item in self.analyze_audit_retention(audit_source)
+        }
+        self.assertIn(
+            OrchestrationViolationCode.EXECUTOR_PROFILE_MISMATCH,
+            audit_codes,
         )
 
     def test_plan_cannot_gain_content_or_authorizing_fields(self) -> None:
@@ -437,6 +495,40 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
                     codes,
                 )
 
+    def test_audit_retention_profiles_and_registries_are_closed(self) -> None:
+        sources_and_codes = (
+            (
+                self.audit_retention_source.replace(
+                    "    evidence_id: UUID",
+                    "    evidence_id: UUID\n    raw_receipt: bytes",
+                    1,
+                ),
+                OrchestrationViolationCode.PLAN_PROFILE_MISMATCH,
+            ),
+            (
+                self.audit_retention_source.replace(
+                    "    authorizes_expiry: ClassVar[bool] = False",
+                    "    authorizes_expiry: ClassVar[bool] = True",
+                    1,
+                ),
+                OrchestrationViolationCode.PLAN_PROFILE_MISMATCH,
+            ),
+            (
+                self.audit_retention_source.replace(
+                    '    EXPIRY_REVIEW_DUE = "EXPIRY_REVIEW_DUE"',
+                    '    EXPIRE_NOW = "EXPIRE_NOW"',
+                    1,
+                ),
+                OrchestrationViolationCode.ENUM_PROFILE_MISMATCH,
+            ),
+        )
+        for source, expected_code in sources_and_codes:
+            with self.subTest(expected_code=expected_code):
+                codes = {
+                    item.code for item in self.analyze_audit_retention(source)
+                }
+                self.assertIn(expected_code, codes)
+
     def test_cleanup_effectful_calls_and_mutation_are_rejected(self) -> None:
         marker = "    observed_at = _require_timestamp(timezone.now())"
         injections = (
@@ -510,6 +602,33 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
             )
             with self.subTest(injection=injection):
                 violations = self.analyze_metadata_retention(source)
+                self.assertTrue(violations)
+                self.assertTrue(
+                    {
+                        OrchestrationViolationCode.CALL_DISALLOWED,
+                        OrchestrationViolationCode.DYNAMIC_CONSTRUCT,
+                    }
+                    & {item.code for item in violations}
+                )
+
+    def test_audit_retention_effects_and_mutation_are_rejected(self) -> None:
+        marker = "    observed_at = _require_timestamp(timezone.now())"
+        injections = (
+            "open('receipt.cbor', 'wb')",
+            "AuditEvent.objects.filter().delete()",
+            "scheduler.enqueue()",
+            "witness.publish()",
+            "logger.info(snapshot)",
+            "snapshot.evidence_id = UUID(int=0)",
+        )
+        for injection in injections:
+            source = self.audit_retention_source.replace(
+                marker,
+                f"{marker}\n    {injection}",
+                1,
+            )
+            with self.subTest(injection=injection):
+                violations = self.analyze_audit_retention(source)
                 self.assertTrue(violations)
                 self.assertTrue(
                     {
@@ -597,6 +716,20 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
             },
         )
 
+        audit_source = self.audit_retention_source.replace(
+            "    observed_at = _require_timestamp(timezone.now())",
+            "    observed_at = _require_timestamp(timezone.now())\n"
+            "    EVENT_RETENTION_LIMIT = timedelta(hours=1)",
+            1,
+        )
+        self.assertIn(
+            "PROTECTED_NAME_REBOUND",
+            {
+                item.detail_code
+                for item in self.analyze_audit_retention(audit_source)
+            },
+        )
+
         metadata_source = self.metadata_retention_source.replace(
             "    observed_at = _require_timestamp(timezone.now())",
             "    observed_at = _require_timestamp(timezone.now())\n"
@@ -637,6 +770,14 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
         metadata_violations = self.analyze_metadata_retention(metadata_source)
         self.assertTrue(metadata_violations)
         self.assertNotIn(sentinel, repr(metadata_violations))
+
+        audit_source = (
+            f"raise RuntimeError('{sentinel}')\n"
+            + self.audit_retention_source
+        )
+        audit_violations = self.analyze_audit_retention(audit_source)
+        self.assertTrue(audit_violations)
+        self.assertNotIn(sentinel, repr(audit_violations))
 
     def test_parse_path_and_missing_target_fail_closed(self) -> None:
         sentinel = "REPORT_TEXT_SENTINEL"

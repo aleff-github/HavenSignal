@@ -467,22 +467,23 @@ gate remain OPEN.
 
 `architecture_checks/orchestration.py` parses, but never imports or executes,
 the current inert finalization, OPEN-only operator-deletion, response-retention,
-ciphertext-cleanup, and terminal-metadata retention modules. The policy fixes the
-five exact target paths, imports and top-level members; the content-free
-immutable snapshot/plan fields; every false capability flag; a closed call/
-raise set; and the executor signature/body whose only outcome is its controlled
-unavailable exception.
+ciphertext-cleanup, terminal-metadata retention, and audit-retention modules. The
+policy fixes the six exact target paths, imports and top-level members; closed
+enum members; content-free immutable snapshot/plan fields; every false
+capability flag; a closed call/raise set; and the executor signature/body whose
+only outcome is its controlled unavailable exception.
 
 Nested or altered imports, database/network/cryptographic/I/O and locally
 selected time calls, dynamic/effectful syntax, attribute or subscript writes,
 new content or authorization fields, and any executable executor body fail
 closed with controlled source-free violations. Imported types, constants,
 top-level members, and allowed call names cannot be shadowed. Response retention,
-cleanup, and terminal-metadata retention alone may read server time and convert
-an already aware timestamp to UTC through their exact timezone calls. This is
-static review evidence, not a runtime sandbox, semantic proof, external-service
-control, or authority to finalize, recover, schedule, alert, expire, clean up,
-or delete a report. Every external and production gate remains OPEN.
+cleanup, terminal-metadata retention, and audit retention alone may read server
+time and convert an already aware timestamp to UTC through their exact timezone
+calls. This is static review evidence, not a runtime sandbox, semantic proof,
+external-service control, or authority to finalize, recover, schedule, alert,
+expire, clean up, or delete a report. Every external and production gate remains
+OPEN.
 
 ## Stage A response-retention planning record
 
@@ -563,3 +564,12 @@ executor always fails closed. This does not implement the isolated credential,
 daily job, dependency graph, controlled retention record, witness interface,
 database mutation, legal policy, or Audit Service. Every dependent gate remains
 OPEN.
+
+The non-executing source policy now fixes the exact audit-retention target,
+imports, top-level timing and type members, both closed enums, immutable
+snapshot/plan fields, all five false capability flags, allowed calls/raises,
+protected binding names, and always-unavailable executor. Database expiry,
+scheduler, witness, network, I/O, logging, mutation, dynamic syntax, receipt/
+content/key fields, or executable executor changes fail closed. Passing is
+static source evidence only and closes no clock, identity, dependency, database,
+retention-batch, witness, legal, Audit Service, or production gate.

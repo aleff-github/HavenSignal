@@ -544,3 +544,18 @@ external service; its executor always raises one controlled unavailable error.
 No isolated credential, daily job, dependency graph, database mutation,
 controlled retention evidence, witness integration, legal policy, Audit Service,
 or production capability is implemented. Every dependent gate remains OPEN.
+
+The twentieth Stage A slice extends the non-executing orchestration-source policy
+to `report_lifecycle/audit_retention.py`. It fixes the exact target, imports,
+top-level timing/type members, both closed enums, immutable content-free snapshot
+and plan, all five false capability flags, closed call/raise profile, protected
+binding names, and the executor whose only outcome is the controlled unavailable
+error.
+
+Only the exact server-time, aware-to-UTC, and closed retention-limit calls used
+by the pure planner are allowed. Database expiry, scheduler, witness, network,
+cryptographic, I/O, logging, mutation, dynamic syntax, receipt/content/key fields,
+and executable executor changes fail closed. The target is parsed but never
+imported or executed. Passing is static source evidence only and closes no
+trusted-clock, isolated-identity, dependency, persistence, retention-batch,
+witness, legal/operational, Audit Service, or production gate.
