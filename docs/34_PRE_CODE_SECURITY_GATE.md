@@ -513,3 +513,18 @@ unavailable error. No cleanup proof, separately credentialed retention job,
 database mutation, generic recovery behavior, audit expiry, or Key Service
 tombstone handling is implemented. Legal/operational, independent-review,
 external-service, concurrency, and production gates remain OPEN.
+
+The eighteenth Stage A slice extends the non-executing orchestration-source
+policy to `report_lifecycle/metadata_retention.py`. It fixes the exact target,
+imports, top-level members, closed disposition enum, immutable content-free
+snapshot and plan, all five false capability flags, closed call/raise profile,
+protected binding names, and the executor whose only outcome is the controlled
+unavailable error.
+
+Only the exact server-time and aware-to-UTC calls used by the pure planner are
+allowed. Database deletion, scheduler, Audit Service, Key Service, network,
+cryptographic, I/O, logging, mutation, dynamic syntax, public-ticket/recovery/
+path/content fields, and executable executor changes fail closed. The target is
+parsed but never imported or executed. Passing is static source evidence only
+and closes no cleanup-proof, retention-job, database, recovery, Key Service,
+legal/operational, external-service, concurrency, or production gate.

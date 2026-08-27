@@ -10,6 +10,7 @@ from types import MappingProxyType
 class OrchestrationViolationCode(StrEnum):
     CALL_DISALLOWED = "CALL_DISALLOWED"
     DYNAMIC_CONSTRUCT = "DYNAMIC_CONSTRUCT"
+    ENUM_PROFILE_MISMATCH = "ENUM_PROFILE_MISMATCH"
     EXECUTOR_PROFILE_MISMATCH = "EXECUTOR_PROFILE_MISMATCH"
     IMPORT_PROFILE_MISMATCH = "IMPORT_PROFILE_MISMATCH"
     MODULE_PROFILE_MISMATCH = "MODULE_PROFILE_MISMATCH"
@@ -32,6 +33,7 @@ DataclassIdentity = tuple[
     tuple[tuple[str, str], ...],
     tuple[str, ...],
 ]
+StrEnumIdentity = tuple[str, tuple[tuple[str, str], ...]]
 
 
 @dataclass(frozen=True, slots=True)
@@ -48,6 +50,7 @@ class OrchestrationSourcePolicy:
     executor_name: str
     unavailable_error_name: str
     additional_dataclasses: tuple[DataclassIdentity, ...] = ()
+    expected_str_enums: tuple[StrEnumIdentity, ...] = ()
 
 
 _COMMON_IMPORTS: tuple[ImportIdentity, ...] = (
@@ -180,6 +183,27 @@ CLEANUP_SOURCE_POLICY = OrchestrationSourcePolicy(
                 ("persistent_alert_recorded_at", "datetime | None"),
             ),
             (),
+        ),
+    ),
+    expected_str_enums=(
+        (
+            "CleanupRetryTier",
+            (
+                ("FIRST_FIVE_SECONDS", "FIRST_FIVE_SECONDS"),
+                ("SECOND_THIRTY_SECONDS", "SECOND_THIRTY_SECONDS"),
+                ("THIRD_TWO_MINUTES", "THIRD_TWO_MINUTES"),
+                ("FIVE_MINUTES_FIRST_HOUR", "FIVE_MINUTES_FIRST_HOUR"),
+                ("HOURLY_THROUGH_FIRST_DAY", "HOURLY_THROUGH_FIRST_DAY"),
+                ("SIX_HOURLY_INDEFINITE", "SIX_HOURLY_INDEFINITE"),
+            ),
+        ),
+        (
+            "CleanupAlertDisposition",
+            (
+                ("NOT_DUE", "NOT_DUE"),
+                ("SUBMISSION_DUE", "SUBMISSION_DUE"),
+                ("RECORDED", "RECORDED"),
+            ),
         ),
     ),
 )
@@ -345,12 +369,120 @@ RETENTION_SOURCE_POLICY = OrchestrationSourcePolicy(
             (),
         ),
     ),
+    expected_str_enums=(
+        (
+            "ResponseRetentionDisposition",
+            (
+                ("UNREAD_WINDOW_OPEN", "UNREAD_WINDOW_OPEN"),
+                ("READ_WINDOW_OPEN", "READ_WINDOW_OPEN"),
+                ("UNREAD_EXPIRY_DUE", "UNREAD_EXPIRY_DUE"),
+                ("READ_EXPIRY_DUE", "READ_EXPIRY_DUE"),
+            ),
+        ),
+    ),
+)
+
+METADATA_RETENTION_SOURCE_POLICY = OrchestrationSourcePolicy(
+    name="TERMINAL_METADATA_RETENTION_INERT_SOURCE_V1",
+    relative_path="report_lifecycle/metadata_retention.py",
+    expected_imports=(
+        (0, "dataclasses", (("dataclass", None),)),
+        (
+            0,
+            "datetime",
+            (("UTC", None), ("datetime", None), ("timedelta", None)),
+        ),
+        (0, "enum", (("StrEnum", None),)),
+        (0, "typing", (("ClassVar", None), ("Never", None))),
+        (0, "uuid", (("UUID", None),)),
+        (0, "django.utils", (("timezone", None),)),
+        (
+            1,
+            "errors",
+            (
+                ("LifecycleTransitionDenied", None),
+                ("MetadataRetentionOrchestrationUnavailable", None),
+            ),
+        ),
+    ),
+    expected_module_members=(
+        ("assign", "TERMINAL_METADATA_RETENTION_LIMIT"),
+        ("class", "TerminalMetadataRetentionDisposition"),
+        ("class", "TerminalMetadataRetentionSnapshot"),
+        ("class", "InertTerminalMetadataRetentionPlan"),
+        ("function", "_require_timestamp"),
+        ("function", "plan_inert_terminal_metadata_retention"),
+        ("function", "execute_terminal_metadata_retention"),
+    ),
+    allowed_calls=frozenset(
+        {
+            "InertTerminalMetadataRetentionPlan",
+            "LifecycleTransitionDenied",
+            "MetadataRetentionOrchestrationUnavailable",
+            "_require_timestamp",
+            "dataclass",
+            "timedelta",
+            "timezone.is_aware",
+            "timezone.localtime",
+            "timezone.now",
+            "type",
+        }
+    ),
+    allowed_raises=frozenset(
+        {
+            "LifecycleTransitionDenied",
+            "MetadataRetentionOrchestrationUnavailable",
+        }
+    ),
+    plan_class_name="InertTerminalMetadataRetentionPlan",
+    plan_fields=(
+        ("retention_id", "UUID"),
+        ("cleanup_id", "UUID"),
+        ("observed_at", "datetime"),
+        ("cleanup_confirmed_at", "datetime | None"),
+        ("earliest_removal_at", "datetime | None"),
+        ("disposition", "TerminalMetadataRetentionDisposition"),
+    ),
+    plan_false_classvars=(
+        "authorizes_removal",
+        "deletes_ticket_lookup",
+        "persists_state",
+        "schedules_job",
+        "calls_external_service",
+    ),
+    executor_name="execute_terminal_metadata_retention",
+    unavailable_error_name="MetadataRetentionOrchestrationUnavailable",
+    additional_dataclasses=(
+        (
+            "TerminalMetadataRetentionSnapshot",
+            (
+                ("retention_id", "UUID"),
+                ("cleanup_id", "UUID"),
+                ("cleanup_confirmed_at", "datetime | None"),
+            ),
+            (),
+        ),
+    ),
+    expected_str_enums=(
+        (
+            "TerminalMetadataRetentionDisposition",
+            (
+                (
+                    "RETAIN_CLEANUP_INCOMPLETE",
+                    "RETAIN_CLEANUP_INCOMPLETE",
+                ),
+                ("RETAIN_MINIMUM_PERIOD", "RETAIN_MINIMUM_PERIOD"),
+                ("REMOVAL_REVIEW_DUE", "REMOVAL_REVIEW_DUE"),
+            ),
+        ),
+    ),
 )
 
 ORCHESTRATION_SOURCE_POLICIES = MappingProxyType({
     "cleanup": CLEANUP_SOURCE_POLICY,
     "deletion": DELETION_SOURCE_POLICY,
     "finalization": FINALIZATION_SOURCE_POLICY,
+    "metadata_retention": METADATA_RETENTION_SOURCE_POLICY,
     "retention": RETENTION_SOURCE_POLICY,
 })
 
@@ -491,6 +623,56 @@ def _plan_profile_is_exact(
     )
 
 
+def _str_enum_source_profile_is_exact(
+    tree: ast.Module,
+    *,
+    class_name: str,
+    expected_members: tuple[tuple[str, str], ...],
+) -> bool:
+    matches = [
+        node
+        for node in tree.body
+        if isinstance(node, ast.ClassDef) and node.name == class_name
+    ]
+    if len(matches) != 1:
+        return False
+    enum_class = matches[0]
+    if (
+        enum_class.decorator_list
+        or enum_class.keywords
+        or len(enum_class.bases) != 1
+        or not isinstance(enum_class.bases[0], ast.Name)
+        or enum_class.bases[0].id != "StrEnum"
+    ):
+        return False
+    members: list[tuple[str, str]] = []
+    for node in enum_class.body:
+        if not (
+            isinstance(node, ast.Assign)
+            and len(node.targets) == 1
+            and isinstance(node.targets[0], ast.Name)
+            and isinstance(node.value, ast.Constant)
+            and type(node.value.value) is str
+        ):
+            return False
+        members.append((node.targets[0].id, node.value.value))
+    return tuple(members) == expected_members
+
+
+def _enum_profiles_are_exact(
+    tree: ast.Module,
+    policy: OrchestrationSourcePolicy,
+) -> bool:
+    return all(
+        _str_enum_source_profile_is_exact(
+            tree,
+            class_name=class_name,
+            expected_members=members,
+        )
+        for class_name, members in policy.expected_str_enums
+    )
+
+
 def _is_unavailable_raise(node: ast.stmt, policy: OrchestrationSourcePolicy) -> bool:
     return (
         isinstance(node, ast.Raise) and node.cause is None and isinstance(node.exc, ast.Call)
@@ -562,6 +744,8 @@ def analyze_inert_orchestration_source(*, source: str, relative_path: str, polic
         violations.append(_violation(code=OrchestrationViolationCode.MODULE_PROFILE_MISMATCH, relative_path=relative_path, line=0, detail_code="TOP_LEVEL_MEMBER_PROFILE"))
     if not _plan_profile_is_exact(tree, policy):
         violations.append(_violation(code=OrchestrationViolationCode.PLAN_PROFILE_MISMATCH, relative_path=relative_path, line=0, detail_code="PLAN_DATACLASS_PROFILE"))
+    if not _enum_profiles_are_exact(tree, policy):
+        violations.append(_violation(code=OrchestrationViolationCode.ENUM_PROFILE_MISMATCH, relative_path=relative_path, line=0, detail_code="STRENUM_MEMBER_PROFILE"))
     if not _executor_profile_is_exact(tree, policy):
         violations.append(_violation(code=OrchestrationViolationCode.EXECUTOR_PROFILE_MISMATCH, relative_path=relative_path, line=0, detail_code="FAIL_CLOSED_EXECUTOR_PROFILE"))
 

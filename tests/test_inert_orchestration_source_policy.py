@@ -10,6 +10,7 @@ from architecture_checks import (
     CLEANUP_SOURCE_POLICY,
     DELETION_SOURCE_POLICY,
     FINALIZATION_SOURCE_POLICY,
+    METADATA_RETENTION_SOURCE_POLICY,
     ORCHESTRATION_SOURCE_POLICIES,
     RETENTION_SOURCE_POLICY,
     OrchestrationSourceViolation,
@@ -24,6 +25,9 @@ CLEANUP_PATH = BASE_DIR / "report_lifecycle" / "cleanup.py"
 FINALIZATION_PATH = BASE_DIR / "report_lifecycle" / "finalization.py"
 DELETION_PATH = BASE_DIR / "report_lifecycle" / "deletion.py"
 RETENTION_PATH = BASE_DIR / "report_lifecycle" / "retention.py"
+METADATA_RETENTION_PATH = (
+    BASE_DIR / "report_lifecycle" / "metadata_retention.py"
+)
 
 
 class CurrentInertOrchestrationSourcePolicyTests(SimpleTestCase):
@@ -37,7 +41,13 @@ class CurrentInertOrchestrationSourcePolicyTests(SimpleTestCase):
     def test_policy_set_and_content_free_plan_fields_are_exact(self) -> None:
         self.assertEqual(
             tuple(ORCHESTRATION_SOURCE_POLICIES),
-            ("cleanup", "deletion", "finalization", "retention"),
+            (
+                "cleanup",
+                "deletion",
+                "finalization",
+                "metadata_retention",
+                "retention",
+            ),
         )
         self.assertEqual(
             CLEANUP_SOURCE_POLICY.relative_path,
@@ -54,6 +64,10 @@ class CurrentInertOrchestrationSourcePolicyTests(SimpleTestCase):
         self.assertEqual(
             RETENTION_SOURCE_POLICY.relative_path,
             "report_lifecycle/retention.py",
+        )
+        self.assertEqual(
+            METADATA_RETENTION_SOURCE_POLICY.relative_path,
+            "report_lifecycle/metadata_retention.py",
         )
         prohibited = {
             "attachment",
@@ -75,7 +89,11 @@ class CurrentInertOrchestrationSourcePolicyTests(SimpleTestCase):
                 self.assertTrue(field_names.isdisjoint(prohibited))
                 self.assertNotIn("open", policy.allowed_calls)
                 self.assertNotIn("Report.objects.create", policy.allowed_calls)
-                if policy in (CLEANUP_SOURCE_POLICY, RETENTION_SOURCE_POLICY):
+                if policy in (
+                    CLEANUP_SOURCE_POLICY,
+                    METADATA_RETENTION_SOURCE_POLICY,
+                    RETENTION_SOURCE_POLICY,
+                ):
                     self.assertIn("timezone.now", policy.allowed_calls)
                 else:
                     self.assertNotIn("timezone.now", policy.allowed_calls)
@@ -85,6 +103,14 @@ class CurrentInertOrchestrationSourcePolicyTests(SimpleTestCase):
             for name, _ in fields
         }
         self.assertTrue(snapshot_names.isdisjoint(prohibited))
+        metadata_snapshot_names = {
+            name
+            for _, fields, _ in (
+                METADATA_RETENTION_SOURCE_POLICY.additional_dataclasses
+            )
+            for name, _ in fields
+        }
+        self.assertTrue(metadata_snapshot_names.isdisjoint(prohibited))
 
     def test_policy_objects_and_registry_are_immutable(self) -> None:
         with self.assertRaises(FrozenInstanceError):
@@ -93,6 +119,8 @@ class CurrentInertOrchestrationSourcePolicyTests(SimpleTestCase):
             CLEANUP_SOURCE_POLICY.name = "WEAKENED"
         with self.assertRaises(FrozenInstanceError):
             RETENTION_SOURCE_POLICY.name = "WEAKENED"
+        with self.assertRaises(FrozenInstanceError):
+            METADATA_RETENTION_SOURCE_POLICY.name = "WEAKENED"
         with self.assertRaises(TypeError):
             ORCHESTRATION_SOURCE_POLICIES["runtime"] = FINALIZATION_SOURCE_POLICY
 
@@ -103,6 +131,9 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
         self.finalization_source = FINALIZATION_PATH.read_text(encoding="utf-8")
         self.deletion_source = DELETION_PATH.read_text(encoding="utf-8")
         self.retention_source = RETENTION_PATH.read_text(encoding="utf-8")
+        self.metadata_retention_source = METADATA_RETENTION_PATH.read_text(
+            encoding="utf-8"
+        )
 
     def analyze_finalization(self, source: str):
         return analyze_inert_orchestration_source(
@@ -130,6 +161,13 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
             source=source,
             relative_path=RETENTION_SOURCE_POLICY.relative_path,
             policy=RETENTION_SOURCE_POLICY,
+        )
+
+    def analyze_metadata_retention(self, source: str):
+        return analyze_inert_orchestration_source(
+            source=source,
+            relative_path=METADATA_RETENTION_SOURCE_POLICY.relative_path,
+            policy=METADATA_RETENTION_SOURCE_POLICY,
         )
 
     def test_model_import_and_database_call_are_rejected(self) -> None:
@@ -175,6 +213,24 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
         self.assertIn(
             OrchestrationViolationCode.CALL_DISALLOWED,
             cleanup_codes,
+        )
+
+        metadata_source = (
+            "from report_lifecycle.models import Report\n"
+            + self.metadata_retention_source
+            + "\nReport.objects.update()\n"
+        )
+        metadata_codes = {
+            item.code
+            for item in self.analyze_metadata_retention(metadata_source)
+        }
+        self.assertIn(
+            OrchestrationViolationCode.IMPORT_PROFILE_MISMATCH,
+            metadata_codes,
+        )
+        self.assertIn(
+            OrchestrationViolationCode.CALL_DISALLOWED,
+            metadata_codes,
         )
 
     def test_nested_or_star_import_cannot_bypass_the_exact_import_profile(self) -> None:
@@ -255,6 +311,20 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
             cleanup_codes,
         )
 
+        metadata_source = self.metadata_retention_source.replace(
+            "        raise MetadataRetentionOrchestrationUnavailable()",
+            "        return plan",
+            1,
+        )
+        metadata_codes = {
+            item.code
+            for item in self.analyze_metadata_retention(metadata_source)
+        }
+        self.assertIn(
+            OrchestrationViolationCode.EXECUTOR_PROFILE_MISMATCH,
+            metadata_codes,
+        )
+
     def test_plan_cannot_gain_content_or_authorizing_fields(self) -> None:
         sources = (
             self.finalization_source.replace(
@@ -317,6 +387,56 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
                     codes,
                 )
 
+    def test_metadata_retention_snapshot_and_capability_profiles_are_closed(
+        self,
+    ) -> None:
+        sources = (
+            self.metadata_retention_source.replace(
+                "    cleanup_id: UUID",
+                "    cleanup_id: UUID\n    public_ticket_id: str",
+                1,
+            ),
+            self.metadata_retention_source.replace(
+                "    authorizes_removal: ClassVar[bool] = False",
+                "    authorizes_removal: ClassVar[bool] = True",
+                1,
+            ),
+        )
+        for source in sources:
+            with self.subTest(source=source):
+                codes = {
+                    item.code
+                    for item in self.analyze_metadata_retention(source)
+                }
+                self.assertIn(
+                    OrchestrationViolationCode.PLAN_PROFILE_MISMATCH,
+                    codes,
+                )
+
+    def test_metadata_retention_disposition_registry_is_closed(self) -> None:
+        sources = (
+            self.metadata_retention_source.replace(
+                '    REMOVAL_REVIEW_DUE = "REMOVAL_REVIEW_DUE"',
+                '    REMOVE_NOW = "REMOVE_NOW"',
+                1,
+            ),
+            self.metadata_retention_source.replace(
+                '    RETAIN_MINIMUM_PERIOD = "RETAIN_MINIMUM_PERIOD"',
+                '    RETAIN_MINIMUM_PERIOD = "RETAIN_SHORTER_PERIOD"',
+                1,
+            ),
+        )
+        for source in sources:
+            with self.subTest(source=source):
+                codes = {
+                    item.code
+                    for item in self.analyze_metadata_retention(source)
+                }
+                self.assertIn(
+                    OrchestrationViolationCode.ENUM_PROFILE_MISMATCH,
+                    codes,
+                )
+
     def test_cleanup_effectful_calls_and_mutation_are_rejected(self) -> None:
         marker = "    observed_at = _require_timestamp(timezone.now())"
         injections = (
@@ -362,6 +482,34 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
             )
             with self.subTest(injection=injection):
                 violations = self.analyze_retention(source)
+                self.assertTrue(violations)
+                self.assertTrue(
+                    {
+                        OrchestrationViolationCode.CALL_DISALLOWED,
+                        OrchestrationViolationCode.DYNAMIC_CONSTRUCT,
+                    }
+                    & {item.code for item in violations}
+                )
+
+    def test_metadata_retention_effects_and_mutation_are_rejected(self) -> None:
+        marker = "    observed_at = _require_timestamp(timezone.now())"
+        injections = (
+            "open('lookup.bin', 'wb')",
+            "Report.objects.filter().delete()",
+            "scheduler.enqueue()",
+            "audit_retention.expire()",
+            "key_service.delete_tombstone()",
+            "logger.info(snapshot)",
+            "snapshot.cleanup_id = UUID(int=0)",
+        )
+        for injection in injections:
+            source = self.metadata_retention_source.replace(
+                marker,
+                f"{marker}\n    {injection}",
+                1,
+            )
+            with self.subTest(injection=injection):
+                violations = self.analyze_metadata_retention(source)
                 self.assertTrue(violations)
                 self.assertTrue(
                     {
@@ -449,6 +597,20 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
             },
         )
 
+        metadata_source = self.metadata_retention_source.replace(
+            "    observed_at = _require_timestamp(timezone.now())",
+            "    observed_at = _require_timestamp(timezone.now())\n"
+            "    TERMINAL_METADATA_RETENTION_LIMIT = timedelta(hours=1)",
+            1,
+        )
+        self.assertIn(
+            "PROTECTED_NAME_REBOUND",
+            {
+                item.detail_code
+                for item in self.analyze_metadata_retention(metadata_source)
+            },
+        )
+
     def test_source_is_parsed_but_never_executed_or_echoed(self) -> None:
         sentinel = "REPORT_TEXT_SENTINEL"
         source = f"raise RuntimeError('{sentinel}')\n" + self.deletion_source
@@ -467,6 +629,14 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
         cleanup_violations = self.analyze_cleanup(cleanup_source)
         self.assertTrue(cleanup_violations)
         self.assertNotIn(sentinel, repr(cleanup_violations))
+
+        metadata_source = (
+            f"raise RuntimeError('{sentinel}')\n"
+            + self.metadata_retention_source
+        )
+        metadata_violations = self.analyze_metadata_retention(metadata_source)
+        self.assertTrue(metadata_violations)
+        self.assertNotIn(sentinel, repr(metadata_violations))
 
     def test_parse_path_and_missing_target_fail_closed(self) -> None:
         sentinel = "REPORT_TEXT_SENTINEL"

@@ -89,10 +89,11 @@ file, recovery, cryptographic, audit, alert, export, deletion, or
 background-job capability.
 
 A non-executing AST purity policy locks the finalization, operator-deletion,
-response-retention, and ciphertext-cleanup modules to their exact imports,
-content-free snapshots and plans, false capability flags, closed calls, and
-always-unavailable executors. It never imports the targets and is static review
-evidence only, not a runtime sandbox or implementation of a protected workflow.
+response-retention, ciphertext-cleanup, and terminal-metadata retention modules
+to their exact imports, content-free snapshots and plans, false capability
+flags, closed calls, and always-unavailable executors. It never imports the
+targets and is static review evidence only, not a runtime sandbox or
+implementation of a protected workflow.
 
 The metadata-only response-retention planner enforces the owner-approved exact
 90-day never-read boundary and validates one stored, non-sliding 72-hour window

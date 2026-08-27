@@ -139,3 +139,11 @@ hours in UTC, after which only a removal review is marked due. All capability
 flags are false and the executor always fails closed. No Ticket ID lookup or
 metadata deletion, persistence, job, service call, recovery change, Key Service
 tombstone handling, or production authority is introduced.
+
+The eighteenth Stage A slice extends the non-executing AST purity policy to the
+terminal-metadata retention planner. Exact imports/members, the closed
+disposition enum, immutable content-free snapshot/plan fields, five false
+capability flags, closed calls, protected bindings, and the always-unavailable
+executor are required. The scanner never imports or executes the target and
+provides no database deletion, retention job, recovery change, Key Service
+tombstone handling, or production authority.

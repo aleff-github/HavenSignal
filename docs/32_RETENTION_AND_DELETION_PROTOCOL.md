@@ -516,6 +516,19 @@ recovery behavior, audit expiry, or Key Service tombstone handling. The
 legal/operational, independent-review, service, concurrency, and production
 gates remain OPEN.
 
+The following non-executing source-policy slice fixes the terminal-metadata
+planner's exact target/import/member profile, closed disposition enum, immutable
+snapshot and plan fields, five false capability flags, allowed call/raise set,
+protected bindings, and always-unavailable executor. It parses but never imports
+or executes `metadata_retention.py`.
+
+Database deletion, scheduling, audit/key-service calls, I/O, logging, mutation,
+dynamic syntax, public Ticket ID/recovery/path/content fields, and any executable
+executor fail closed. Passing is static review evidence only: it does not prove
+durable cleanup confirmation, implement the separately credentialed retention
+job, alter generic recovery behavior, or authorize metadata removal. Every
+dependent gate remains OPEN.
+
 The project owner approved the following on 2026-08-26:
 
 1. 90-day never-read Response Note expiry, with a valid pre-deadline first read
