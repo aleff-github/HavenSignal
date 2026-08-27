@@ -38,3 +38,10 @@ class CleanupOrchestrationUnavailable(Exception):
 
     def __init__(self) -> None:
         super().__init__("cleanup_orchestration_unavailable")
+
+
+class MetadataRetentionOrchestrationUnavailable(Exception):
+    """Controlled denial while terminal metadata retention remains gated."""
+
+    def __init__(self) -> None:
+        super().__init__("metadata_retention_orchestration_unavailable")

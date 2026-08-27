@@ -500,6 +500,22 @@ executor. It rejects storage, scheduler, audit, alert, logging, path/object,
 mutation, and executable behavior without importing or running `cleanup.py`.
 Passing is static source evidence only and closes none of the cleanup gates.
 
+The terminal-metadata Stage A slice represents only the minimum retention edge.
+Its immutable snapshot contains internal retention/cleanup UUIDs and an optional
+trusted cleanup-confirmation timestamp. Without durable cleanup confirmation it
+retains metadata indefinitely and exposes no removal time. With confirmation it
+computes exactly 30 times 24 elapsed hours in UTC; equality marks only that a
+separately credentialed removal review is due.
+
+The returned plan has false removal, Ticket-ID-lookup deletion, persistence,
+scheduling, and external-service capability flags, and its executor is always
+unavailable. It contains no public Ticket ID, Recovery Secret, verifier,
+protected content, filename, path, key, or provider error. This slice does not
+implement cleanup confirmation, database mutation, the retention job, generic
+recovery behavior, audit expiry, or Key Service tombstone handling. The
+legal/operational, independent-review, service, concurrency, and production
+gates remain OPEN.
+
 The project owner approved the following on 2026-08-26:
 
 1. 90-day never-read Response Note expiry, with a valid pre-deadline first read

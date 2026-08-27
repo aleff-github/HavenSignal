@@ -89,3 +89,12 @@ jitter and has no object identifier, filename, path, provider error, receipt,
 key, or content field. Its plans schedule nothing, persist nothing, call no
 service, submit no alert, and authorize no deletion; its executor is always
 unavailable.
+
+`metadata_retention.py` describes only the minimum terminal application
+metadata period from internal retention/cleanup UUIDs and trusted timestamps.
+Cleanup that is not durably confirmed is retained without a removal time. A
+confirmed cleanup uses exactly 30 times 24 elapsed hours in UTC, after which the
+plan marks only a removal review as due. It does not hold a public Ticket ID,
+Recovery Secret, verifier, content, filename, path, key, or provider error; it
+cannot remove lookup state or metadata, persist, schedule, or call a service,
+and its executor is always unavailable.

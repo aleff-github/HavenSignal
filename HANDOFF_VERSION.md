@@ -131,3 +131,11 @@ content-free snapshot/plan fields, false capability flags, closed calls,
 protected bindings, and the always-unavailable executor are required. The
 scanner never imports or executes the target and provides no scheduling, alert,
 storage, deletion, cleanup, or production authority.
+
+The seventeenth Stage A slice adds immutable UUID/timestamp-only terminal
+application metadata retention planning. Incomplete cleanup is retained with no
+removal time; durable cleanup confirmation starts exactly 30 times 24 elapsed
+hours in UTC, after which only a removal review is marked due. All capability
+flags are false and the executor always fails closed. No Ticket ID lookup or
+metadata deletion, persistence, job, service call, recovery change, Key Service
+tombstone handling, or production authority is introduced.

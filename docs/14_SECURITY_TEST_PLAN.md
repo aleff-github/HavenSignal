@@ -106,6 +106,13 @@ For the metadata-only Stage A described by
   premature/future alert records, untrusted time, and every execution attempt
   fail closed without selecting jitter, scheduling, persistence, service calls,
   alert submission, deletion, database writes, or echoed input;
+- terminal metadata remains retained without a removal time until cleanup is
+  durably confirmed; once confirmed, the earliest review boundary is exactly
+  30 times 24 elapsed hours in UTC and equality does not authorize removal;
+- malformed retention/cleanup UUIDs, naive, caller-shaped, or future timestamps,
+  and every execution attempt fail closed without Ticket ID lookup deletion,
+  metadata mutation, persistence, job scheduling, service calls, database
+  writes, or echoed input;
 - SQLite results are never represented as PostgreSQL concurrency evidence;
 - the application still cannot accept a real report.
 

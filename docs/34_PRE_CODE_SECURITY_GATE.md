@@ -497,3 +497,19 @@ provider/content fields, and executable executor changes fail closed. The target
 is parsed but never imported or executed. Passing is static source evidence only
 and closes no receipt, storage, alert, exactly-once, concurrency, worker,
 reconciler, cleanup, deletion, or production gate.
+
+The seventeenth Stage A slice adds a pure terminal application metadata
+retention planner for the exact minimum in `docs/32`. It accepts only internal
+retention/cleanup UUIDs and an optional trusted cleanup-confirmation timestamp.
+Incomplete cleanup is retained with no removal time. A durable confirmation
+starts exactly 30 times 24 elapsed hours in UTC, and equality produces only a
+`REMOVAL_REVIEW_DUE` classification.
+
+The immutable plan explicitly authorizes no removal, deletes no public Ticket
+ID lookup, persists no state, schedules no job, and calls no external service.
+It contains no public Ticket ID, Recovery Secret, verifier, content, filename,
+path, key, or provider error; its executor always raises one controlled
+unavailable error. No cleanup proof, separately credentialed retention job,
+database mutation, generic recovery behavior, audit expiry, or Key Service
+tombstone handling is implemented. Legal/operational, independent-review,
+external-service, concurrency, and production gates remain OPEN.

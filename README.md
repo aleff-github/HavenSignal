@@ -108,6 +108,13 @@ policy maximum. It exposes the 10% jitter ceiling, one-minute reconciler ceiling
 and 15-minute persistent-failure alert boundary but chooses no jitter, schedules
 no task, submits no alert, and authorizes no deletion.
 
+The inert terminal-metadata retention planner represents the minimum 30-times-
+24-hour period after cleanup is durably confirmed. Incomplete cleanup has no
+removal time, and uncertain or untrusted time fails closed. Reaching the exact
+boundary marks only a separately credentialed removal review as due: the plan
+cannot remove the public Ticket ID lookup or any metadata, persist state,
+schedule a job, or call an external service.
+
 Mandatory security integrations whose designs remain OPEN are represented only
 by explicit deny-by-default placeholders under `security_interfaces/`. Every
 placeholder operation raises a controlled failure and provides no plaintext,

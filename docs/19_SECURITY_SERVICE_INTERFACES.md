@@ -518,3 +518,20 @@ alert, and calls no service; its executor always fails closed. It does not prove
 exactly-once alert acceptance, choose a cleanup scope, obtain an audit receipt,
 delete ciphertext, or implement a worker/reconciler. All audit, alert, storage,
 concurrency, external-service, and production gates remain OPEN.
+
+## Stage A terminal-metadata retention planning record
+
+`report_lifecycle/metadata_retention.py` represents only the owner-approved
+minimum terminal application metadata period in `docs/32`. It accepts internal
+retention/cleanup UUIDs and a trusted cleanup-confirmation timestamp. Until
+cleanup is durably confirmed it returns a retain classification with no removal
+time. A confirmation establishes the earliest review boundary at exactly
+30 times 24 elapsed hours in UTC; equality marks only `REMOVAL_REVIEW_DUE`.
+
+The immutable plan explicitly authorizes no removal, deletes no public Ticket
+ID lookup, persists no state, schedules no job, and calls no external service.
+It contains no public Ticket ID, Recovery Secret, verifier, content, filename,
+path, key, or provider error. Its executor always fails closed. This does not
+implement the separately credentialed retention job, a durable cleanup proof,
+database deletion, generic recovery behavior, Key Service tombstone retention,
+or legal/operational policy enforcement. Every dependent gate remains OPEN.
