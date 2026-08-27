@@ -435,3 +435,19 @@ and altered executor bodies fail closed. Passing is source-level conformance
 only: it does not implement or authorize CAPTCHA, MFA, audit receipts,
 persistence, staging, key destruction, recovery invalidation, cleanup,
 finalization, deletion, or production use.
+
+The thirteenth Stage A slice adds a pure, metadata-only Response Note retention
+planner for the exact owner-approved rules in `docs/32`. It accepts only
+internal UUIDs, `RESPONSE_AVAILABLE`, state/version, and trusted timestamps. It
+requires the immutable unread deadline to be exactly 90 times 24 hours after
+availability, never proposes a first read, recognizes an already stored first
+read strictly before that deadline only with one full non-sliding 72-hour
+window, and treats equality at either deadline as expired.
+
+Returned plans are immutable and explicitly authorize no recovery, persist no
+deadline, decrypt no response, and destroy no key or content. The executor
+always raises one controlled unavailable error. No PostgreSQL first-read race,
+recovery validation, audit receipt, Key Service conversion/destruction,
+verifier invalidation, cleanup, endpoint, or background worker is added; every
+legal/operational, independent, external-service, concurrency, and production
+gate remains OPEN.

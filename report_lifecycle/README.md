@@ -72,3 +72,11 @@ plan-field/capability-flag, mutation/dynamic-syntax, and always-unavailable
 executor profiles are closed. A change outside that reviewed source profile
 fails the test suite; passing it is source conformance only, never protected
 workflow authorization or runtime isolation.
+
+`retention.py` validates only internal UUID/state/version/timestamp metadata and
+describes the exact 90-day unread or stored non-sliding 72-hour read-window
+boundary using server time. It never proposes or commits a first read. Its
+immutable plans authorize no recovery, persist no deadline, decrypt no
+response, and destroy no key or content. The executor is always unavailable.
+No response row, recovery verifier, Key Service call, audit receipt, cleanup
+job, or reporter endpoint is implemented.

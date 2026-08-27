@@ -102,3 +102,11 @@ finalization and operator-deletion modules. Exact imports, members,
 UUID/counter/checkpoint-only plans, false capability flags, closed calls, and
 always-unavailable executors are required. The scanner imports and executes no
 target and provides no runtime or protected-workflow authority.
+
+The thirteenth Stage A slice adds immutable, metadata-only Response Note
+retention planning for the exact 90-times-24-hour unread boundary and validation
+of one stored non-sliding 72-hour window after a pre-deadline first read. It
+never proposes a first read. Exact-boundary expiry wins, every capability flag
+is false, and the executor always fails closed. No persistence, recovery,
+decryption, destruction, cleanup, endpoint, external-service call, or
+production authority is introduced.

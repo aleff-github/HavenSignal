@@ -24,3 +24,10 @@ class DeletionOrchestrationUnavailable(Exception):
 
     def __init__(self) -> None:
         super().__init__("deletion_orchestration_unavailable")
+
+
+class ResponseRetentionOrchestrationUnavailable(Exception):
+    """Controlled denial while protected response retention remains gated."""
+
+    def __init__(self) -> None:
+        super().__init__("response_retention_orchestration_unavailable")

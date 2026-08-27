@@ -94,6 +94,13 @@ and always-unavailable executors. It never imports the targets and is static
 review evidence only, not a runtime sandbox or implementation of finalization
 or deletion.
 
+The metadata-only response-retention planner enforces the owner-approved exact
+90-day never-read boundary and validates one stored, non-sliding 72-hour window
+after a pre-deadline first read. It never proposes a first read. It uses trusted
+server time, returns an immutable plan whose capability flags are all false,
+and has an executor that always fails closed. It does not persist a deadline,
+authorize recovery, decrypt a response, or destroy a key or ciphertext.
+
 Mandatory security integrations whose designs remain OPEN are represented only
 by explicit deny-by-default placeholders under `security_interfaces/`. Every
 placeholder operation raises a controlled failure and provides no plaintext,

@@ -479,3 +479,21 @@ closed with controlled source-free violations. This is static review evidence,
 not a runtime sandbox, semantic proof, external-service control, or authority
 to finalize or delete a report. Every external and production gate remains
 OPEN.
+
+## Stage A response-retention planning record
+
+`report_lifecycle/retention.py` represents the owner-approved 90-day unread and
+72-hour read-window rules using only internal UUIDs, `RESPONSE_AVAILABLE`, a
+state version, and trusted timestamps. It requires the stored unread deadline
+to equal exactly `response_available_at + 90 * 24 hours`; an already stored
+first read must be strictly before that deadline and its stored expiry must
+equal exactly `first_read_at + 72 hours`. It never proposes a first read. At
+either exact deadline, expiry wins.
+
+The result is immutable and explicitly authorizes no recovery, persists no
+deadline, decrypts no response, and destroys no key or content. Its executor
+always returns one controlled unavailable failure. It does not implement the
+PostgreSQL first-read race, recovery authorization, audit receipt, Key Service
+conversion/destruction, verifier invalidation, ciphertext cleanup, or any
+reporter endpoint. All independent, legal/operational, external-service,
+concurrency, and production gates remain OPEN.

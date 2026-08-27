@@ -462,6 +462,23 @@ insufficient for release acceptance.
 
 ## Consolidated decisions approved at the pre-code gate
 
+### Inert Stage A implementation record
+
+The metadata-only Stage A represents the exact never-read/read-window time
+rules in `report_lifecycle/retention.py`. The pure planner accepts only internal
+UUID, `RESPONSE_AVAILABLE`, state-version, and trusted-timestamp metadata. It
+requires an exact 90-times-24-hour unread deadline, never proposes a first read,
+recognizes an already stored first-read time only strictly before that boundary
+with the full exact 72-hour window, and treats equality at either deadline as
+expired.
+
+Plans are immutable and have false recovery, persistence, decryption, and
+destruction capability flags. The executor is deliberately unavailable. This
+record is not the PostgreSQL first-read winner, expiry workflow, recovery
+authorization, audit event/receipt, Key Service call, verifier invalidation,
+ciphertext cleanup, endpoint, or production evidence; every named gate below
+remains in force.
+
 The project owner approved the following on 2026-08-26:
 
 1. 90-day never-read Response Note expiry, with a valid pre-deadline first read

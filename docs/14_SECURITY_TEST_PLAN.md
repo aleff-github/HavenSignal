@@ -84,6 +84,14 @@ For the metadata-only Stage A described by
   dynamic/effectful syntax, attribute/subscript mutation, content/authorizing
   fields, altered executor bodies, missing targets, malformed source, and
   out-of-root paths fail closed without importing, executing, or echoing source;
+- response-retention planning fixes unread expiry at exactly 90 times 24 hours
+  after response availability, recognizes a stored first read strictly before
+  that boundary only with one full non-sliding 72-hour window, never proposes a
+  first read, and makes expiry win at either exact boundary;
+- malformed identifiers/state/version/timestamps, caller-shaped or naive time,
+  a future availability/first-read time, inconsistent stored deadlines, a first
+  read at or after unread expiry, and every attempt to execute the plan fail
+  closed without persistence, decryption, destruction, or echoed input;
 - SQLite results are never represented as PostgreSQL concurrency evidence;
 - the application still cannot accept a real report.
 
