@@ -358,6 +358,21 @@ for each required administrator/operator approval, with actor role fixed by the
 specific profile. Cross-role, cross-operation, cross-batch, or dummy-context
 reuse fails closed. Independent authentication/protocol review is mandatory.
 
+### Inert Stage A v2 foundation record
+
+`security_interfaces/administrative_step_up_descriptors.py` represents only the
+structural v2 foundation that can be validated without inventing a missing
+operation profile: exact 16-byte authorization, administrator, session, and
+device identifiers; the approved binding purpose and unsigned key epoch; exact
+120-second non-sliding timing; and an unused-only state.
+
+The structurally valid result explicitly has no complete operation profile,
+does not verify WebAuthn or artifact binding, and authorizes neither an
+administrative action nor flood deletion. Operation, target kind/ID, artifact
+kind/binding, credential-row ID, challenge, handle, persistence, consumption,
+actor-role-specific flood approvals, workstation/session proof, and every
+external or production gate remain absent and OPEN.
+
 ## Infrastructure / Key Custodian staffing and access
 
 Production requires at least three individually named Key Custodians so two

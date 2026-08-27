@@ -39,6 +39,13 @@ For the metadata-only Stage A described by
 - Stage A step-up types cannot hold challenges, opaque browser handles,
   credentials, artifact bytes, HMAC bindings, consumed authorizations, or
   incomplete operation/state/artifact registry values, and authorize nothing;
+- administrative step-up-v2 foundations accept only exact 16-byte authorization,
+  administrator, session, and device identifiers, binding-purpose/key-epoch
+  metadata, a non-sliding 120-second lifetime, and an unused-only state;
+- v2 foundations reject unknown purposes, malformed identifiers/counters/times,
+  consumed state, and sensitive values; they contain no operation/target/
+  artifact profile, credential, challenge, handle, binding bytes, persistence,
+  consumption, WebAuthn verification, or flood/administrative authorization;
 - the current Reporter Gateway and root URL configuration pass exact
   deny-by-default import allowlists; sensitive/model/service/network imports,
   star/parent-relative imports, dynamic imports, `eval`, and `exec` fail;

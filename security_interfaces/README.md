@@ -46,3 +46,12 @@ and key epoch, and an unused-only Stage A state. It deliberately contains no
 challenge, POST handle, credential row, artifact bytes, HMAC output, operation,
 report-state, or artifact-kind value. A structurally valid component set does
 not verify WebAuthn or an artifact binding and authorizes nothing.
+
+`administrative_step_up_descriptors.py` models only the approved version-2
+foundations that are already exact without inventing an operation profile:
+16-byte authorization/administrator/session/device identifiers, binding purpose
+and key epoch, the non-sliding 120-second lifetime, and an unused-only Stage A
+state. Operation, target kind/ID, artifact kind/binding, credential-row ID,
+challenge, opaque handle, persistence, consumption, and actor-role-specific
+flood profiles remain absent. Structural validity verifies nothing and
+authorizes neither an administrative action nor flood deletion.

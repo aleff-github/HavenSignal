@@ -573,3 +573,19 @@ scheduler, witness, network, I/O, logging, mutation, dynamic syntax, receipt/
 content/key fields, or executable executor changes fail closed. Passing is
 static source evidence only and closes no clock, identity, dependency, database,
 retention-batch, witness, legal, Audit Service, or production gate.
+
+## Stage A administrative step-up v2 foundation record
+
+`security_interfaces/administrative_step_up_descriptors.py` validates only the
+version-2 fields that are exact without selecting an operation profile: 16-byte
+authorization, administrator, session, and device identifiers; the existing
+binding purpose and unsigned key epoch; exact non-sliding 120-second timing; and
+an unused-only state.
+
+The immutable structural result reports no complete operation profile, performs
+no WebAuthn or artifact-binding verification, and authorizes neither an
+administrative action nor flood deletion. It has no operation, target,
+artifact-kind/binding, credential-row, challenge, handle, persistence, or
+consumption field. Actor-role-specific flood profiles, MFA/session/device proof,
+database concurrency, service integration, independent review, and production
+gates remain OPEN.

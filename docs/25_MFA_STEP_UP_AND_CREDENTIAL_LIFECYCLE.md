@@ -218,6 +218,15 @@ version-2 administrative row/profile needed for non-report security operations,
 plus the supported role workstations and session lifetimes. That proposal does
 not amend this document until consolidated approval and independent review.
 
+The later owner decision in `docs/34` supplies that consolidated design approval
+while retaining independent and production gates. The inert Stage A now models
+only the v2 foundations whose shape is already exact: authorization,
+administrator, session, and device identifiers; binding purpose/key epoch; the
+120-second non-sliding timing; and unused state. It does not guess the closed
+operation, target, artifact, or actor-role-specific flood profiles and contains
+no challenge, credential, handle, binding bytes, persistence, consumption,
+WebAuthn verification, or authorization capability.
+
 ## Step-up issuance and consumption
 
 Issuance:

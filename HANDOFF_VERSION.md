@@ -163,3 +163,11 @@ protected bindings, and the always-unavailable executor are required. The
 scanner never imports or executes the target and provides no audit expiry,
 trusted-clock proof, isolated credential, retention batch, witness integration,
 legal approval, or production authority.
+
+The twenty-first Stage A slice adds immutable administrative step-up-v2
+foundations for exact internal identity shapes, binding-purpose/key-epoch
+metadata, the 120-second non-sliding lifetime, and unused-only state. It omits
+operation/target/artifact profiles, credentials, challenges, handles, binding
+bytes, persistence, and consumption; it verifies nothing and authorizes neither
+administrative action nor flood deletion. All authentication, batch-profile,
+database, independent-review, and production gates remain OPEN.

@@ -559,3 +559,17 @@ and executable executor changes fail closed. The target is parsed but never
 imported or executed. Passing is static source evidence only and closes no
 trusted-clock, isolated-identity, dependency, persistence, retention-batch,
 witness, legal/operational, Audit Service, or production gate.
+
+The twenty-first Stage A slice adds inert foundations for the owner-approved
+`AdministrativeStepUpAuthorization v2` in `docs/33`. It validates exact 16-byte
+authorization, administrator, session, and device identifiers; the existing
+binding purpose and unsigned key epoch; a non-sliding 120-second lifetime; and
+an unused-only state.
+
+The immutable structural result explicitly has no complete operation profile,
+does not verify WebAuthn or artifact binding, and authorizes neither an
+administrative action nor flood deletion. Operation, target kind/ID, artifact
+kind/binding, credential-row ID, challenge, opaque handle, persistence,
+consumption, actor-role-specific flood approvals, authentication/session/device
+proof, database concurrency, external services, independent review, and
+production capability remain absent and OPEN.

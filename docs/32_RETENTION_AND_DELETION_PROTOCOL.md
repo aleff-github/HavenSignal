@@ -243,6 +243,14 @@ exact batch descriptor instead of report/lease fields. It grants no report read
 or Key Service capability. Until that profile is owner-approved and
 independently reviewed, the flood ceremony remains unavailable.
 
+`docs/34` later records the consolidated owner approval and resolves the design
+dependency through `docs/33`; independent and production review remain open.
+The current inert Stage A represents only common administrative-v2 identity,
+binding-purpose, timing, and unused-state foundations. It does not define the
+actor-role-specific batch operation/target/artifact registries, verify step-up,
+or authorize the flood ceremony. Candidate admission, selection, quorum, audit,
+and destruction remain unavailable.
+
 The system selects candidates without exposing or processing content:
 
 - state must still be exactly `SEALED` with no claim, lease, export,

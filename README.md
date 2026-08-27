@@ -139,6 +139,11 @@ Inert report-bound step-up-v1 components model only approved identifier shapes,
 lease/state counters, the 120-second non-sliding lifetime, allowed COSE
 algorithm codes, and artifact-binding profile metadata. They contain no
 challenge, browser handle, WebAuthn credential, artifact bytes, or HMAC output.
+Separate inert administrative step-up-v2 foundations model only administrator,
+session, device, and authorization identifiers plus the same binding purpose,
+key epoch, exact 120-second lifetime, and unused state. They deliberately omit
+operation/target/artifact registries, binding bytes, credentials, challenges,
+handles, persistence, consumption, and every authorization capability.
 
 `architecture_checks/` statically enforces the current Reporter Gateway and
 root-URL import allowlists without importing or executing scanned source. It
