@@ -96,3 +96,9 @@ as immutable, content-free, non-authorizing, non-persisting, and explicitly
 non-destructive edges. Its executor always fails closed; no reason or protected
 note, CAPTCHA, step-up, receipt, database transition, key destruction, recovery
 invalidation, cleanup, or resume capability is implemented.
+
+The twelfth Stage A slice adds non-executing AST purity checks for the inert
+finalization and operator-deletion modules. Exact imports, members,
+UUID/counter/checkpoint-only plans, false capability flags, closed calls, and
+always-unavailable executors are required. The scanner imports and executes no
+target and provides no runtime or protected-workflow authority.

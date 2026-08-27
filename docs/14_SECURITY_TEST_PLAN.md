@@ -76,6 +76,14 @@ For the metadata-only Stage A described by
 - an inert operator-deletion edge is immutable, content-free, non-authorizing,
   non-persisting, and explicitly non-destructive; its executor always returns
   the same controlled unavailable failure and leaves all lifecycle tables empty;
+- non-executing orchestration scanning accepts only the exact current
+  `finalization.py` and `deletion.py` import/member/call profiles, content-free
+  immutable plan fields, false capability flags, and executors whose only
+  result is the controlled unavailable exception;
+- nested/star imports, database/network/crypto/I/O or self-selected-time calls,
+  dynamic/effectful syntax, attribute/subscript mutation, content/authorizing
+  fields, altered executor bodies, missing targets, malformed source, and
+  out-of-root paths fail closed without importing, executing, or echoing source;
 - SQLite results are never represented as PostgreSQL concurrency evidence;
 - the application still cannot accept a real report.
 

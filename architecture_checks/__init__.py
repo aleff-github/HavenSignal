@@ -17,6 +17,16 @@ from .migrations import (
     analyze_lifecycle_migration_source,
     scan_lifecycle_migrations,
 )
+from .orchestration import (
+    DELETION_SOURCE_POLICY,
+    FINALIZATION_SOURCE_POLICY,
+    ORCHESTRATION_SOURCE_POLICIES,
+    OrchestrationSourcePolicy,
+    OrchestrationSourceViolation,
+    OrchestrationViolationCode,
+    analyze_inert_orchestration_source,
+    scan_inert_orchestration_sources,
+)
 from .surfaces import (
     EXPECTED_SETTINGS,
     SurfaceViolation,
@@ -42,6 +52,14 @@ __all__ = [
     "MigrationViolationCode",
     "analyze_lifecycle_migration_source",
     "scan_lifecycle_migrations",
+    "DELETION_SOURCE_POLICY",
+    "FINALIZATION_SOURCE_POLICY",
+    "ORCHESTRATION_SOURCE_POLICIES",
+    "OrchestrationSourcePolicy",
+    "OrchestrationSourceViolation",
+    "OrchestrationViolationCode",
+    "analyze_inert_orchestration_source",
+    "scan_inert_orchestration_sources",
     "EXPECTED_SETTINGS",
     "SurfaceViolation",
     "SurfaceViolationCode",

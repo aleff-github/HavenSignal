@@ -462,3 +462,20 @@ explicitly destroy no key or content. The executor always fails closed. The
 real operator-deletion workflow and every legal, independent-review,
 PostgreSQL, MFA, CAPTCHA, audit, Key Service, alert, cleanup, and production
 gate remain OPEN.
+
+## Stage A orchestration-source purity record
+
+`architecture_checks/orchestration.py` parses, but never imports or executes,
+the current inert finalization and OPEN-only operator-deletion modules. The
+policy fixes the two exact target paths, imports and top-level members; the
+UUID/counter/checkpoint-only immutable plan fields; every false capability
+flag; a closed call/raise set; and the executor signature/body whose only
+outcome is its controlled unavailable exception.
+
+Nested or altered imports, database/network/cryptographic/I/O and locally
+selected time calls, dynamic/effectful syntax, attribute or subscript writes,
+new content or authorization fields, and any executable executor body fail
+closed with controlled source-free violations. This is static review evidence,
+not a runtime sandbox, semantic proof, external-service control, or authority
+to finalize or delete a report. Every external and production gate remains
+OPEN.

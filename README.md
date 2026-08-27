@@ -88,6 +88,12 @@ or authorize execution. The app has no views, URLs, authentication, content,
 file, recovery, cryptographic, audit, alert, export, deletion, or
 background-job capability.
 
+A non-executing AST purity policy locks both inert orchestration modules to
+their exact imports, content-free plans, false capability flags, closed calls,
+and always-unavailable executors. It never imports the targets and is static
+review evidence only, not a runtime sandbox or implementation of finalization
+or deletion.
+
 Mandatory security integrations whose designs remain OPEN are represented only
 by explicit deny-by-default placeholders under `security_interfaces/`. Every
 placeholder operation raises a controlled failure and provides no plaintext,

@@ -23,9 +23,17 @@ operation sequence, closed migration/model constructor calls, and absence of
 additional numbered migrations. A separate Django drift test requires
 `makemigrations --check --dry-run` to report no model changes.
 
+The orchestration-source policy parses only `report_lifecycle/finalization.py`
+and `report_lifecycle/deletion.py`. It fixes their exact imports, top-level
+members, content-free immutable plan fields, false capability flags, closed
+call/raise allowlists, and executors whose only outcome is the reviewed
+unavailable exception. Nested imports, database/network/crypto/time calls,
+dynamic or mutating syntax, and altered executor bodies fail closed.
+
 Passing these checks proves only source-level conformance for the exact files
 that were scanned. It is not a complete HTML/CSS security parser, browser
-behavior proof, PostgreSQL schema/durability proof, or production migration
-review and does not authorize a reporter form, persistence, protected service
-call, authentication, recovery, upload, operator/admin route, or deployment
+behavior proof, PostgreSQL schema/durability proof, production migration
+review, runtime sandbox, or semantic proof of a protected protocol. It does
+not authorize a reporter form, persistence, protected service call,
+authentication, recovery, upload, operator/admin route, or deployment
 capability.

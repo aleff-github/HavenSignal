@@ -421,3 +421,17 @@ raises the same controlled unavailable error and calls no database or external
 service. The real deletion/resume workflow and every legal, independent-review,
 PostgreSQL, MFA, CAPTCHA, Audit Service, Key Service, Alert Service, cleanup,
 and production gate remain OPEN.
+
+The twelfth Stage A slice adds a non-executing AST purity policy for the two
+current inert orchestration modules. It requires their exact target paths,
+imports, top-level members, UUID/counter/checkpoint-only immutable plan fields,
+false capability flags, closed calls and raises, and executors that can only
+raise the reviewed controlled unavailable errors.
+
+The scanner never imports or executes `finalization.py` or `deletion.py`.
+Nested/star imports, database/network/cryptographic/I/O or self-selected-time
+calls, dynamic/effectful syntax, mutating targets, content/authorizing fields,
+and altered executor bodies fail closed. Passing is source-level conformance
+only: it does not implement or authorize CAPTCHA, MFA, audit receipts,
+persistence, staging, key destruction, recovery invalidation, cleanup,
+finalization, deletion, or production use.
