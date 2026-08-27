@@ -77,13 +77,17 @@ For the metadata-only Stage A described by
   non-persisting, and explicitly non-destructive; its executor always returns
   the same controlled unavailable failure and leaves all lifecycle tables empty;
 - non-executing orchestration scanning accepts only the exact current
-  `finalization.py` and `deletion.py` import/member/call profiles, content-free
-  immutable plan fields, false capability flags, and executors whose only
-  result is the controlled unavailable exception;
+  `finalization.py`, `deletion.py`, and `retention.py` import/member/call
+  profiles, content-free immutable snapshot/plan fields, false capability
+  flags, and executors whose only result is the controlled unavailable
+  exception;
 - nested/star imports, database/network/crypto/I/O or self-selected-time calls,
   dynamic/effectful syntax, attribute/subscript mutation, content/authorizing
   fields, altered executor bodies, missing targets, malformed source, and
   out-of-root paths fail closed without importing, executing, or echoing source;
+- retention database/key/I/O/logging calls, imported type/constant/member
+  shadowing, recovery/verifier/content fields, changed capability flags, and
+  altered executor behavior fail the same non-executing source policy;
 - response-retention planning fixes unread expiry at exactly 90 times 24 hours
   after response availability, recognizes a stored first read strictly before
   that boundary only with one full non-sliding 72-hour window, never proposes a

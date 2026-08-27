@@ -110,3 +110,10 @@ never proposes a first read. Exact-boundary expiry wins, every capability flag
 is false, and the executor always fails closed. No persistence, recovery,
 decryption, destruction, cleanup, endpoint, external-service call, or
 production authority is introduced.
+
+The fourteenth Stage A slice extends the non-executing AST purity policy to the
+retention module. Exact imports/members, immutable content-free snapshot and
+plan fields, false capability flags, closed calls, protected binding names, and
+the always-unavailable executor are required. The scanner never imports or
+executes the target and provides no recovery, expiry, persistence, decryption,
+destruction, cleanup, or production authority.

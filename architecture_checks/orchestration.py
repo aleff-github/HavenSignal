@@ -27,6 +27,11 @@ class OrchestrationSourceViolation:
 
 
 ImportIdentity = tuple[int, str | None, tuple[tuple[str, str | None], ...]]
+DataclassIdentity = tuple[
+    str,
+    tuple[tuple[str, str], ...],
+    tuple[str, ...],
+]
 
 
 @dataclass(frozen=True, slots=True)
@@ -42,6 +47,7 @@ class OrchestrationSourcePolicy:
     plan_false_classvars: tuple[str, ...]
     executor_name: str
     unavailable_error_name: str
+    additional_dataclasses: tuple[DataclassIdentity, ...] = ()
 
 
 _COMMON_IMPORTS: tuple[ImportIdentity, ...] = (
@@ -138,15 +144,113 @@ DELETION_SOURCE_POLICY = OrchestrationSourcePolicy(
     unavailable_error_name="DeletionOrchestrationUnavailable",
 )
 
+RETENTION_SOURCE_POLICY = OrchestrationSourcePolicy(
+    name="RESPONSE_RETENTION_INERT_SOURCE_V1",
+    relative_path="report_lifecycle/retention.py",
+    expected_imports=(
+        (0, "dataclasses", (("dataclass", None),)),
+        (
+            0,
+            "datetime",
+            (("UTC", None), ("datetime", None), ("timedelta", None)),
+        ),
+        (0, "enum", (("StrEnum", None),)),
+        (0, "typing", (("ClassVar", None), ("Never", None))),
+        (0, "uuid", (("UUID", None),)),
+        (0, "django.utils", (("timezone", None),)),
+        (
+            1,
+            "errors",
+            (
+                ("LifecycleTransitionDenied", None),
+                ("ResponseRetentionOrchestrationUnavailable", None),
+            ),
+        ),
+        (1, "states", (("ReportState", None),)),
+        (1, "transitions", (("MAX_STATE_VERSION", None),)),
+    ),
+    expected_module_members=(
+        ("assign", "UNREAD_RESPONSE_LIMIT"),
+        ("assign", "READ_RESPONSE_LIMIT"),
+        ("class", "ResponseRetentionDisposition"),
+        ("class", "ResponseRetentionSnapshot"),
+        ("class", "InertResponseRetentionPlan"),
+        ("function", "_require_timestamp"),
+        ("function", "_elapsed_deadline"),
+        ("function", "_require_snapshot"),
+        ("function", "plan_inert_response_retention"),
+        ("function", "execute_response_retention"),
+    ),
+    allowed_calls=frozenset(
+        {
+            "InertResponseRetentionPlan",
+            "LifecycleTransitionDenied",
+            "ResponseRetentionOrchestrationUnavailable",
+            "_elapsed_deadline",
+            "_require_snapshot",
+            "_require_timestamp",
+            "dataclass",
+            "timedelta",
+            "timezone.is_aware",
+            "timezone.localtime",
+            "timezone.now",
+            "type",
+        }
+    ),
+    allowed_raises=frozenset(
+        {
+            "LifecycleTransitionDenied",
+            "ResponseRetentionOrchestrationUnavailable",
+        }
+    ),
+    plan_class_name="InertResponseRetentionPlan",
+    plan_fields=(
+        ("report_id", "UUID"),
+        ("response_id", "UUID"),
+        ("report_state", "ReportState"),
+        ("state_version", "int"),
+        ("observed_at", "datetime"),
+        ("unread_expires_at", "datetime"),
+        ("first_read_at", "datetime | None"),
+        ("response_expires_at", "datetime | None"),
+        ("disposition", "ResponseRetentionDisposition"),
+    ),
+    plan_false_classvars=(
+        "authorizes_recovery",
+        "persists_deadline",
+        "decrypts_response",
+        "destroys_key_or_content",
+    ),
+    executor_name="execute_response_retention",
+    unavailable_error_name="ResponseRetentionOrchestrationUnavailable",
+    additional_dataclasses=(
+        (
+            "ResponseRetentionSnapshot",
+            (
+                ("report_id", "UUID"),
+                ("response_id", "UUID"),
+                ("report_state", "ReportState"),
+                ("state_version", "int"),
+                ("response_available_at", "datetime"),
+                ("unread_expires_at", "datetime"),
+                ("first_read_at", "datetime | None"),
+                ("response_expires_at", "datetime | None"),
+            ),
+            (),
+        ),
+    ),
+)
+
 ORCHESTRATION_SOURCE_POLICIES = MappingProxyType({
     "deletion": DELETION_SOURCE_POLICY,
     "finalization": FINALIZATION_SOURCE_POLICY,
+    "retention": RETENTION_SOURCE_POLICY,
 })
 
 _DYNAMIC_NODE_TYPES = (
     ast.Assert, ast.AsyncFor, ast.AsyncFunctionDef, ast.AsyncWith, ast.AugAssign,
-    ast.Await, ast.Delete, ast.For, ast.Global, ast.Lambda, ast.NamedExpr,
-    ast.Nonlocal, ast.Try, ast.TryStar, ast.While, ast.With, ast.Yield,
+    ast.Await, ast.Delete, ast.For, ast.Global, ast.Lambda, ast.Match,
+    ast.NamedExpr, ast.Nonlocal, ast.Try, ast.TryStar, ast.While, ast.With, ast.Yield,
     ast.YieldFrom,
 )
 
@@ -218,8 +322,18 @@ def _dataclass_profile_is_exact(node: ast.ClassDef) -> bool:
     )
 
 
-def _plan_profile_is_exact(tree: ast.Module, policy: OrchestrationSourcePolicy) -> bool:
-    matches = [node for node in tree.body if isinstance(node, ast.ClassDef) and node.name == policy.plan_class_name]
+def _dataclass_source_profile_is_exact(
+    tree: ast.Module,
+    *,
+    class_name: str,
+    expected_fields: tuple[tuple[str, str], ...],
+    expected_false_classvars: tuple[str, ...],
+) -> bool:
+    matches = [
+        node
+        for node in tree.body
+        if isinstance(node, ast.ClassDef) and node.name == class_name
+    ]
     if len(matches) != 1 or not _dataclass_profile_is_exact(matches[0]):
         return False
     annotations = matches[0].body
@@ -241,7 +355,33 @@ def _plan_profile_is_exact(tree: ast.Module, policy: OrchestrationSourcePolicy) 
             false_classvars.append(name)
         else:
             return False
-    return tuple(fields) == policy.plan_fields and tuple(false_classvars) == policy.plan_false_classvars
+    return (
+        tuple(fields) == expected_fields
+        and tuple(false_classvars) == expected_false_classvars
+    )
+
+
+def _plan_profile_is_exact(
+    tree: ast.Module,
+    policy: OrchestrationSourcePolicy,
+) -> bool:
+    profiles: tuple[DataclassIdentity, ...] = (
+        (
+            policy.plan_class_name,
+            policy.plan_fields,
+            policy.plan_false_classvars,
+        ),
+        *policy.additional_dataclasses,
+    )
+    return all(
+        _dataclass_source_profile_is_exact(
+            tree,
+            class_name=class_name,
+            expected_fields=fields,
+            expected_false_classvars=false_classvars,
+        )
+        for class_name, fields, false_classvars in profiles
+    )
 
 
 def _is_unavailable_raise(node: ast.stmt, policy: OrchestrationSourcePolicy) -> bool:
@@ -321,6 +461,22 @@ def analyze_inert_orchestration_source(*, source: str, relative_path: str, polic
     protected_call_roots = frozenset(
         call_name.partition(".")[0] for call_name in policy.allowed_calls
     )
+    protected_imports = frozenset(
+        alias or name
+        for _, _, names in policy.expected_imports
+        for name, alias in names
+    )
+    protected_members = frozenset(name for _, name in policy.expected_module_members)
+    protected_bindings = (
+        protected_call_roots | protected_imports | protected_members
+    )
+    top_level_assignment_targets = frozenset(
+        id(target)
+        for node in tree.body
+        if isinstance(node, ast.Assign)
+        for target in node.targets
+        if isinstance(target, ast.Name)
+    )
     top_level_definitions = frozenset(
         id(node)
         for node in tree.body
@@ -334,14 +490,25 @@ def analyze_inert_orchestration_source(*, source: str, relative_path: str, polic
             and id(node) not in top_level_definitions
         ):
             violations.append(_violation(code=OrchestrationViolationCode.DYNAMIC_CONSTRUCT, relative_path=relative_path, line=node.lineno, detail_code="NESTED_DEFINITION"))
-        elif isinstance(node, ast.arg) and node.arg in protected_call_roots:
-            violations.append(_violation(code=OrchestrationViolationCode.DYNAMIC_CONSTRUCT, relative_path=relative_path, line=node.lineno, detail_code="CALL_NAME_REBOUND"))
+        elif isinstance(node, ast.arg) and node.arg in protected_bindings:
+            detail_code = (
+                "CALL_NAME_REBOUND"
+                if node.arg in protected_call_roots
+                else "PROTECTED_NAME_REBOUND"
+            )
+            violations.append(_violation(code=OrchestrationViolationCode.DYNAMIC_CONSTRUCT, relative_path=relative_path, line=node.lineno, detail_code=detail_code))
         elif (
             isinstance(node, ast.Name)
             and isinstance(node.ctx, ast.Store)
-            and node.id in protected_call_roots
+            and id(node) not in top_level_assignment_targets
+            and node.id in protected_bindings
         ):
-            violations.append(_violation(code=OrchestrationViolationCode.DYNAMIC_CONSTRUCT, relative_path=relative_path, line=node.lineno, detail_code="CALL_NAME_REBOUND"))
+            detail_code = (
+                "CALL_NAME_REBOUND"
+                if node.id in protected_call_roots
+                else "PROTECTED_NAME_REBOUND"
+            )
+            violations.append(_violation(code=OrchestrationViolationCode.DYNAMIC_CONSTRUCT, relative_path=relative_path, line=node.lineno, detail_code=detail_code))
         elif isinstance(node, ast.Call) and _call_name(node) not in policy.allowed_calls:
             violations.append(_violation(code=OrchestrationViolationCode.CALL_DISALLOWED, relative_path=relative_path, line=node.lineno, detail_code="CALL_NOT_ALLOWLISTED"))
         elif isinstance(node, ast.Raise) and not _raise_is_allowlisted(node, policy):
@@ -352,7 +519,7 @@ def analyze_inert_orchestration_source(*, source: str, relative_path: str, polic
 
 
 def scan_inert_orchestration_sources(*, lifecycle_root: Path, relative_to: Path) -> tuple[OrchestrationSourceViolation, ...]:
-    """Scan only the two approved inert orchestration source targets."""
+    """Scan only the approved inert orchestration source targets."""
     try:
         resolved_root = relative_to.resolve(strict=True)
         resolved_lifecycle = lifecycle_root.resolve(strict=True)

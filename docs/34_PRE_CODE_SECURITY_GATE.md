@@ -451,3 +451,18 @@ recovery validation, audit receipt, Key Service conversion/destruction,
 verifier invalidation, cleanup, endpoint, or background worker is added; every
 legal/operational, independent, external-service, concurrency, and production
 gate remains OPEN.
+
+The fourteenth Stage A slice extends the non-executing orchestration-source
+policy to `report_lifecycle/retention.py`. It fixes the exact target/import/
+top-level-member set, both immutable content-free dataclasses, all four false
+capability flags, the closed call/raise profile, and the executor whose only
+outcome is the controlled unavailable error. Imported types/constants,
+top-level members, and allowed call names cannot be shadowed.
+
+The scanner permits retention to obtain server time and convert an already
+aware timestamp to UTC only through its exact timezone calls. Database, Key
+Service, network, cryptographic, I/O, logging, mutation, dynamic syntax,
+content/recovery/verifier fields, and executable executor changes fail closed.
+The target is parsed but never imported or executed. Passing remains static
+source evidence only and closes no recovery, expiry, audit, persistence,
+concurrency, cleanup, external-service, or production gate.

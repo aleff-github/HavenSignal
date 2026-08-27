@@ -1,4 +1,4 @@
-"""Static purity checks for the two inert lifecycle orchestrators."""
+"""Static purity checks for the inert lifecycle orchestrators."""
 
 from dataclasses import FrozenInstanceError
 from pathlib import Path
@@ -10,6 +10,7 @@ from architecture_checks import (
     DELETION_SOURCE_POLICY,
     FINALIZATION_SOURCE_POLICY,
     ORCHESTRATION_SOURCE_POLICIES,
+    RETENTION_SOURCE_POLICY,
     OrchestrationSourceViolation,
     OrchestrationViolationCode,
     analyze_inert_orchestration_source,
@@ -20,6 +21,7 @@ from architecture_checks import (
 BASE_DIR = Path(__file__).resolve().parent.parent
 FINALIZATION_PATH = BASE_DIR / "report_lifecycle" / "finalization.py"
 DELETION_PATH = BASE_DIR / "report_lifecycle" / "deletion.py"
+RETENTION_PATH = BASE_DIR / "report_lifecycle" / "retention.py"
 
 
 class CurrentInertOrchestrationSourcePolicyTests(SimpleTestCase):
@@ -33,7 +35,7 @@ class CurrentInertOrchestrationSourcePolicyTests(SimpleTestCase):
     def test_policy_set_and_content_free_plan_fields_are_exact(self) -> None:
         self.assertEqual(
             tuple(ORCHESTRATION_SOURCE_POLICIES),
-            ("deletion", "finalization"),
+            ("deletion", "finalization", "retention"),
         )
         self.assertEqual(
             FINALIZATION_SOURCE_POLICY.relative_path,
@@ -42,6 +44,10 @@ class CurrentInertOrchestrationSourcePolicyTests(SimpleTestCase):
         self.assertEqual(
             DELETION_SOURCE_POLICY.relative_path,
             "report_lifecycle/deletion.py",
+        )
+        self.assertEqual(
+            RETENTION_SOURCE_POLICY.relative_path,
+            "report_lifecycle/retention.py",
         )
         prohibited = {
             "attachment",
@@ -59,12 +65,23 @@ class CurrentInertOrchestrationSourcePolicyTests(SimpleTestCase):
                 field_names = {name for name, _ in policy.plan_fields}
                 self.assertTrue(field_names.isdisjoint(prohibited))
                 self.assertNotIn("open", policy.allowed_calls)
-                self.assertNotIn("timezone.now", policy.allowed_calls)
                 self.assertNotIn("Report.objects.create", policy.allowed_calls)
+                if policy is RETENTION_SOURCE_POLICY:
+                    self.assertIn("timezone.now", policy.allowed_calls)
+                else:
+                    self.assertNotIn("timezone.now", policy.allowed_calls)
+        snapshot_names = {
+            name
+            for _, fields, _ in RETENTION_SOURCE_POLICY.additional_dataclasses
+            for name, _ in fields
+        }
+        self.assertTrue(snapshot_names.isdisjoint(prohibited))
 
     def test_policy_objects_and_registry_are_immutable(self) -> None:
         with self.assertRaises(FrozenInstanceError):
             FINALIZATION_SOURCE_POLICY.name = "WEAKENED"
+        with self.assertRaises(FrozenInstanceError):
+            RETENTION_SOURCE_POLICY.name = "WEAKENED"
         with self.assertRaises(TypeError):
             ORCHESTRATION_SOURCE_POLICIES["runtime"] = FINALIZATION_SOURCE_POLICY
 
@@ -73,6 +90,7 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
     def setUp(self) -> None:
         self.finalization_source = FINALIZATION_PATH.read_text(encoding="utf-8")
         self.deletion_source = DELETION_PATH.read_text(encoding="utf-8")
+        self.retention_source = RETENTION_PATH.read_text(encoding="utf-8")
 
     def analyze_finalization(self, source: str):
         return analyze_inert_orchestration_source(
@@ -88,6 +106,13 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
             policy=DELETION_SOURCE_POLICY,
         )
 
+    def analyze_retention(self, source: str):
+        return analyze_inert_orchestration_source(
+            source=source,
+            relative_path=RETENTION_SOURCE_POLICY.relative_path,
+            policy=RETENTION_SOURCE_POLICY,
+        )
+
     def test_model_import_and_database_call_are_rejected(self) -> None:
         source = (
             "from report_lifecycle.models import Report\n"
@@ -98,6 +123,23 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
         self.assertIn(OrchestrationViolationCode.IMPORT_PROFILE_MISMATCH, codes)
         self.assertIn(OrchestrationViolationCode.CALL_DISALLOWED, codes)
         self.assertIn(OrchestrationViolationCode.MODULE_PROFILE_MISMATCH, codes)
+
+        retention_source = (
+            "from report_lifecycle.models import Report\n"
+            + self.retention_source
+            + "\nReport.objects.update()\n"
+        )
+        retention_codes = {
+            item.code for item in self.analyze_retention(retention_source)
+        }
+        self.assertIn(
+            OrchestrationViolationCode.IMPORT_PROFILE_MISMATCH,
+            retention_codes,
+        )
+        self.assertIn(
+            OrchestrationViolationCode.CALL_DISALLOWED,
+            retention_codes,
+        )
 
     def test_nested_or_star_import_cannot_bypass_the_exact_import_profile(self) -> None:
         marker = "    command, activity = _require_finalization_binding(binding)"
@@ -151,6 +193,19 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
             codes,
         )
 
+        retention_source = self.retention_source.replace(
+            "        raise ResponseRetentionOrchestrationUnavailable()",
+            "        return plan",
+            1,
+        )
+        retention_codes = {
+            item.code for item in self.analyze_retention(retention_source)
+        }
+        self.assertIn(
+            OrchestrationViolationCode.EXECUTOR_PROFILE_MISMATCH,
+            retention_codes,
+        )
+
     def test_plan_cannot_gain_content_or_authorizing_fields(self) -> None:
         sources = (
             self.finalization_source.replace(
@@ -170,6 +225,53 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
             with self.subTest(analyzer=analyzer.__name__):
                 codes = {item.code for item in analyzer(source)}
                 self.assertIn(OrchestrationViolationCode.PLAN_PROFILE_MISMATCH, codes)
+
+    def test_retention_snapshot_and_capability_profiles_are_closed(self) -> None:
+        sources = (
+            self.retention_source.replace(
+                "    response_id: UUID",
+                "    response_id: UUID\n    recovery_secret: str",
+                1,
+            ),
+            self.retention_source.replace(
+                "    decrypts_response: ClassVar[bool] = False",
+                "    decrypts_response: ClassVar[bool] = True",
+                1,
+            ),
+        )
+        for source in sources:
+            with self.subTest(source=source):
+                codes = {item.code for item in self.analyze_retention(source)}
+                self.assertIn(
+                    OrchestrationViolationCode.PLAN_PROFILE_MISMATCH,
+                    codes,
+                )
+
+    def test_retention_io_crypto_logging_and_mutation_are_rejected(self) -> None:
+        marker = "    observed_at = timezone.now()"
+        injections = (
+            "open('response.bin', 'wb')",
+            "key_service.destroy()",
+            "logger.info(snapshot)",
+            "snapshot.response_id = UUID(int=0)",
+            "match observed_at:\n        case _:\n            pass",
+        )
+        for injection in injections:
+            source = self.retention_source.replace(
+                marker,
+                f"{marker}\n    {injection}",
+                1,
+            )
+            with self.subTest(injection=injection):
+                violations = self.analyze_retention(source)
+                self.assertTrue(violations)
+                self.assertTrue(
+                    {
+                        OrchestrationViolationCode.CALL_DISALLOWED,
+                        OrchestrationViolationCode.DYNAMIC_CONSTRUCT,
+                    }
+                    & {item.code for item in violations}
+                )
 
     def test_dynamic_flow_and_mutating_targets_are_rejected(self) -> None:
         marker = "    command, activity = _require_operator_deletion_binding(binding)"
@@ -213,12 +315,41 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
                     & {item.detail_code for item in violations}
                 )
 
+    def test_imported_types_constants_and_members_cannot_be_rebound(self) -> None:
+        marker = "    observed_at = timezone.now()"
+        sources = (
+            self.retention_source.replace(
+                marker,
+                f"{marker}\n    UUID = type(validated.response_id)",
+                1,
+            ),
+            self.retention_source.replace(
+                marker,
+                f"{marker}\n    UNREAD_RESPONSE_LIMIT = READ_RESPONSE_LIMIT",
+                1,
+            ),
+        )
+        for source in sources:
+            with self.subTest(source=source):
+                violations = self.analyze_retention(source)
+                self.assertIn(
+                    "PROTECTED_NAME_REBOUND",
+                    {item.detail_code for item in violations},
+                )
+
     def test_source_is_parsed_but_never_executed_or_echoed(self) -> None:
         sentinel = "REPORT_TEXT_SENTINEL"
         source = f"raise RuntimeError('{sentinel}')\n" + self.deletion_source
         violations = self.analyze_deletion(source)
         self.assertTrue(violations)
         self.assertNotIn(sentinel, repr(violations))
+
+        retention_source = (
+            f"raise RuntimeError('{sentinel}')\n" + self.retention_source
+        )
+        retention_violations = self.analyze_retention(retention_source)
+        self.assertTrue(retention_violations)
+        self.assertNotIn(sentinel, repr(retention_violations))
 
     def test_parse_path_and_missing_target_fail_closed(self) -> None:
         sentinel = "REPORT_TEXT_SENTINEL"
@@ -246,6 +377,10 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
             lifecycle.mkdir()
             (lifecycle / "finalization.py").write_text(
                 self.finalization_source,
+                encoding="utf-8",
+            )
+            (lifecycle / "deletion.py").write_text(
+                self.deletion_source,
                 encoding="utf-8",
             )
             missing = scan_inert_orchestration_sources(

@@ -64,7 +64,7 @@ def _require_timestamp(value: object) -> datetime:
 
 
 def _elapsed_deadline(value: datetime, *, limit: timedelta) -> datetime:
-    return value.astimezone(UTC) + limit
+    return timezone.localtime(value, timezone=UTC) + limit
 
 
 def _require_snapshot(

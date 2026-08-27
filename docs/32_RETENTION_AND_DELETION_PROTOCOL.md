@@ -479,6 +479,12 @@ authorization, audit event/receipt, Key Service call, verifier invalidation,
 ciphertext cleanup, endpoint, or production evidence; every named gate below
 remains in force.
 
+The following Stage A source-policy slice statically fixes the exact retention
+imports, module members, snapshot/plan fields, calls, false flags, and
+always-unavailable executor without importing or executing the module. It also
+rejects binding shadowing and database, key, I/O, or logging calls. This adds
+review evidence only and closes none of the retained gates.
+
 The project owner approved the following on 2026-08-26:
 
 1. 90-day never-read Response Note expiry, with a valid pre-deadline first read
