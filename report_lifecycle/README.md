@@ -81,3 +81,11 @@ immutable plans authorize no recovery, persist no deadline, decrypt no
 response, and destroy no key or content. The executor is always unavailable.
 No response row, recovery verifier, Key Service call, audit receipt, cleanup
 job, or reporter endpoint is implemented.
+
+`cleanup.py` describes only the owner-approved ciphertext-cleanup retry tiers,
+10% maximum jitter, one-minute reconciler ceiling, and the exact 15-minute alert
+boundary from internal UUID/counter/timestamp metadata. It selects no random
+jitter and has no object identifier, filename, path, provider error, receipt,
+key, or content field. Its plans schedule nothing, persist nothing, call no
+service, submit no alert, and authorize no deletion; its executor is always
+unavailable.

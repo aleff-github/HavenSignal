@@ -117,3 +117,10 @@ plan fields, false capability flags, closed calls, protected binding names, and
 the always-unavailable executor are required. The scanner never imports or
 executes the target and provides no recovery, expiry, persistence, decryption,
 destruction, cleanup, or production authority.
+
+The fifteenth Stage A slice adds immutable UUID/counter/timestamp-only planning
+for the exact ciphertext-cleanup retry tiers, 10% jitter ceiling, one-minute
+reconciler ceiling, and 15-minute persistent-failure alert boundary. It chooses
+no jitter, schedules/persists nothing, submits no alert, calls no service, and
+authorizes no deletion. Its executor always fails closed; no cleanup runtime or
+production evidence is introduced.

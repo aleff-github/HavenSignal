@@ -96,6 +96,13 @@ For the metadata-only Stage A described by
   a future availability/first-read time, inconsistent stored deadlines, a first
   read at or after unread expiry, and every attempt to execute the plan fail
   closed without persistence, decryption, destruction, or echoed input;
+- inert ciphertext-cleanup timing fixes the first three base delays, the exact
+  one-hour/24-hour tier boundaries, indefinite six-hour tier, 10% jitter ceiling,
+  one-minute reconciler ceiling, and the alert transition at exactly 15 minutes;
+- malformed cleanup UUIDs/counters/timestamps, reversed or future failures,
+  premature/future alert records, untrusted time, and every execution attempt
+  fail closed without selecting jitter, scheduling, persistence, service calls,
+  alert submission, deletion, database writes, or echoed input;
 - SQLite results are never represented as PostgreSQL concurrency evidence;
 - the application still cannot accept a real report.
 

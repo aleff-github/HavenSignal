@@ -485,6 +485,14 @@ always-unavailable executor without importing or executing the module. It also
 rejects binding shadowing and database, key, I/O, or logging calls. This adds
 review evidence only and closes none of the retained gates.
 
+The next inert Stage A slice represents the cleanup schedule as immutable timing
+metadata only. It fixes the three initial delays, one-hour and 24-hour tier
+boundaries, indefinite six-hour tier, 10% jitter ceiling, one-minute reconciler
+ceiling, and 15-minute alert boundary. It does not choose jitter, schedule a
+retry, submit an alert, select an object, obtain a receipt, persist state, or
+perform deletion; its executor is unavailable. Consequently it is not evidence
+for storage, audit, alert, concurrency, worker, cleanup, or production behavior.
+
 The project owner approved the following on 2026-08-26:
 
 1. 90-day never-read Response Note expiry, with a valid pre-deadline first read

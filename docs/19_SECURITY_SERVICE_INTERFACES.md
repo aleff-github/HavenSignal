@@ -499,3 +499,21 @@ PostgreSQL first-read race, recovery authorization, audit receipt, Key Service
 conversion/destruction, verifier invalidation, ciphertext cleanup, or any
 reporter endpoint. All independent, legal/operational, external-service,
 concurrency, and production gates remain OPEN.
+
+## Stage A ciphertext-cleanup timing record
+
+`report_lifecycle/cleanup.py` represents only the timing metadata approved in
+`docs/32`: base delays of 5 seconds, 30 seconds, 2 minutes, then five minutes
+inside the first hour, one hour until the 24-hour boundary, and six hours
+thereafter without a policy retry maximum. It also fixes the 10% maximum jitter,
+one-minute maximum reconciler interval, and the persistent-failure alert boundary
+at exactly 15 minutes after the first failure.
+
+The planner receives only internal cleanup/idempotency UUIDs, a bounded counter,
+and trusted timestamps. It chooses no jitter and contains no target object ID,
+path, filename, provider error, receipt, key, or protected data. Its immutable
+plan explicitly authorizes no deletion, schedules/persists nothing, submits no
+alert, and calls no service; its executor always fails closed. It does not prove
+exactly-once alert acceptance, choose a cleanup scope, obtain an audit receipt,
+delete ciphertext, or implement a worker/reconciler. All audit, alert, storage,
+concurrency, external-service, and production gates remain OPEN.

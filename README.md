@@ -101,6 +101,13 @@ server time, returns an immutable plan whose capability flags are all false,
 and has an executor that always fails closed. It does not persist a deadline,
 authorize recovery, decrypt a response, or destroy a key or ciphertext.
 
+The inert ciphertext-cleanup planner represents only the approved retry timing:
+5 seconds, 30 seconds, 2 minutes, five-minute retries during the first hour,
+hourly retries through 24 hours, and six-hour retries thereafter without a
+policy maximum. It exposes the 10% jitter ceiling, one-minute reconciler ceiling,
+and 15-minute persistent-failure alert boundary but chooses no jitter, schedules
+no task, submits no alert, and authorizes no deletion.
+
 Mandatory security integrations whose designs remain OPEN are represented only
 by explicit deny-by-default placeholders under `security_interfaces/`. Every
 placeholder operation raises a controlled failure and provides no plaintext,

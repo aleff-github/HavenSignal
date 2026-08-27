@@ -466,3 +466,19 @@ content/recovery/verifier fields, and executable executor changes fail closed.
 The target is parsed but never imported or executed. Passing remains static
 source evidence only and closes no recovery, expiry, audit, persistence,
 concurrency, cleanup, external-service, or production gate.
+
+The fifteenth Stage A slice adds a pure metadata-only planner for the ciphertext
+cleanup timing in `docs/32`. It fixes base delays of 5 seconds, 30 seconds,
+2 minutes, five minutes during the first hour, one hour through the 24-hour
+boundary, and six hours thereafter without a policy maximum. It exposes only
+the 10% maximum jitter, one-minute reconciler ceiling, and the transition to an
+alert-due classification at exactly 15 minutes after the first failure.
+
+The snapshot and immutable plan contain only internal cleanup/idempotency UUIDs,
+a bounded failure counter, trusted timestamps, closed tier/disposition enums,
+and durations. There is no target object ID, path, filename, provider error,
+receipt, key, or protected content. The planner chooses no jitter, schedules or
+persists nothing, submits no alert, calls no external service, and authorizes no
+deletion; its executor always raises one controlled unavailable error. Audit,
+alert, storage, exactly-once, concurrency, worker/reconciler, deletion, and
+production gates remain OPEN.

@@ -31,3 +31,10 @@ class ResponseRetentionOrchestrationUnavailable(Exception):
 
     def __init__(self) -> None:
         super().__init__("response_retention_orchestration_unavailable")
+
+
+class CleanupOrchestrationUnavailable(Exception):
+    """Controlled denial while protected ciphertext cleanup remains gated."""
+
+    def __init__(self) -> None:
+        super().__init__("cleanup_orchestration_unavailable")
