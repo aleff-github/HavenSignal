@@ -124,3 +124,10 @@ reconciler ceiling, and 15-minute persistent-failure alert boundary. It chooses
 no jitter, schedules/persists nothing, submits no alert, calls no service, and
 authorizes no deletion. Its executor always fails closed; no cleanup runtime or
 production evidence is introduced.
+
+The sixteenth Stage A slice extends the non-executing AST purity policy to the
+cleanup planner. Exact imports/timing members, closed enums, immutable
+content-free snapshot/plan fields, false capability flags, closed calls,
+protected bindings, and the always-unavailable executor are required. The
+scanner never imports or executes the target and provides no scheduling, alert,
+storage, deletion, cleanup, or production authority.

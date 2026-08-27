@@ -71,6 +71,25 @@ class InertCleanupRetryTests(TestCase):
         self.assertEqual(PERSISTENT_FAILURE_ALERT_DELAY, timedelta(minutes=15))
         self.assertEqual(MAXIMUM_RECONCILER_INTERVAL, timedelta(minutes=1))
         self.assertEqual(MAXIMUM_JITTER_FRACTION, (1, 10))
+        self.assertEqual(
+            tuple(CleanupRetryTier),
+            (
+                CleanupRetryTier.FIRST_FIVE_SECONDS,
+                CleanupRetryTier.SECOND_THIRTY_SECONDS,
+                CleanupRetryTier.THIRD_TWO_MINUTES,
+                CleanupRetryTier.FIVE_MINUTES_FIRST_HOUR,
+                CleanupRetryTier.HOURLY_THROUGH_FIRST_DAY,
+                CleanupRetryTier.SIX_HOURLY_INDEFINITE,
+            ),
+        )
+        self.assertEqual(
+            tuple(CleanupAlertDisposition),
+            (
+                CleanupAlertDisposition.NOT_DUE,
+                CleanupAlertDisposition.SUBMISSION_DUE,
+                CleanupAlertDisposition.RECORDED,
+            ),
+        )
 
     def test_first_three_failures_use_the_exact_initial_delays(self) -> None:
         cases = (

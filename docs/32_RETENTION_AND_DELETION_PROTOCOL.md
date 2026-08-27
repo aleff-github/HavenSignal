@@ -493,6 +493,13 @@ retry, submit an alert, select an object, obtain a receipt, persist state, or
 perform deletion; its executor is unavailable. Consequently it is not evidence
 for storage, audit, alert, concurrency, worker, cleanup, or production behavior.
 
+The subsequent non-executing source-policy slice fixes the exact cleanup target,
+imports, timing members, closed enums, immutable snapshot/plan fields, false
+capability flags, allowed calls/raises, protected binding names, and unavailable
+executor. It rejects storage, scheduler, audit, alert, logging, path/object,
+mutation, and executable behavior without importing or running `cleanup.py`.
+Passing is static source evidence only and closes none of the cleanup gates.
+
 The project owner approved the following on 2026-08-26:
 
 1. 90-day never-read Response Note expiry, with a valid pre-deadline first read

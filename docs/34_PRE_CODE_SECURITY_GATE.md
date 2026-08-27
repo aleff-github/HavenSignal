@@ -482,3 +482,18 @@ persists nothing, submits no alert, calls no external service, and authorizes no
 deletion; its executor always raises one controlled unavailable error. Audit,
 alert, storage, exactly-once, concurrency, worker/reconciler, deletion, and
 production gates remain OPEN.
+
+The sixteenth Stage A slice extends the non-executing orchestration-source policy
+to `report_lifecycle/cleanup.py`. It fixes the exact target/import/top-level
+timing-member set, closed retry/alert enums, both immutable content-free
+dataclasses, all five false capability flags, the closed call/raise profile, and
+the executor whose only outcome is the controlled unavailable error. Imported
+types/constants, top-level members, and allowed call names cannot be shadowed.
+
+Only the exact server-time and aware-to-UTC calls used by the pure planner are
+allowed. Database/storage deletion, scheduler, Audit Service, Alert Service,
+network, cryptographic, I/O, logging, mutation, dynamic syntax, path/object/
+provider/content fields, and executable executor changes fail closed. The target
+is parsed but never imported or executed. Passing is static source evidence only
+and closes no receipt, storage, alert, exactly-once, concurrency, worker,
+reconciler, cleanup, deletion, or production gate.

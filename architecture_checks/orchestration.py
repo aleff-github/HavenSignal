@@ -78,6 +78,112 @@ _COMMON_PLAN_FIELDS = (
     ("lease_generation", "int"),
 )
 
+CLEANUP_SOURCE_POLICY = OrchestrationSourcePolicy(
+    name="CIPHERTEXT_CLEANUP_INERT_SOURCE_V1",
+    relative_path="report_lifecycle/cleanup.py",
+    expected_imports=(
+        (0, "dataclasses", (("dataclass", None),)),
+        (
+            0,
+            "datetime",
+            (("UTC", None), ("datetime", None), ("timedelta", None)),
+        ),
+        (0, "enum", (("StrEnum", None),)),
+        (0, "typing", (("ClassVar", None), ("Never", None))),
+        (0, "uuid", (("UUID", None),)),
+        (0, "django.utils", (("timezone", None),)),
+        (
+            1,
+            "errors",
+            (
+                ("CleanupOrchestrationUnavailable", None),
+                ("LifecycleTransitionDenied", None),
+            ),
+        ),
+        (1, "transitions", (("MAX_STATE_VERSION", None),)),
+    ),
+    expected_module_members=(
+        ("assign", "FIRST_RETRY_DELAY"),
+        ("assign", "SECOND_RETRY_DELAY"),
+        ("assign", "THIRD_RETRY_DELAY"),
+        ("assign", "FIRST_HOUR_RETRY_DELAY"),
+        ("assign", "FIRST_DAY_RETRY_DELAY"),
+        ("assign", "LONG_TERM_RETRY_DELAY"),
+        ("assign", "FIRST_HOUR_BOUNDARY"),
+        ("assign", "FIRST_DAY_BOUNDARY"),
+        ("assign", "PERSISTENT_FAILURE_ALERT_DELAY"),
+        ("assign", "MAXIMUM_RECONCILER_INTERVAL"),
+        ("assign", "MAXIMUM_JITTER_FRACTION"),
+        ("class", "CleanupRetryTier"),
+        ("class", "CleanupAlertDisposition"),
+        ("class", "CleanupFailureSnapshot"),
+        ("class", "InertCleanupRetryPlan"),
+        ("function", "_require_timestamp"),
+        ("function", "_retry_profile"),
+        ("function", "plan_inert_cleanup_retry"),
+        ("function", "execute_cleanup_retry"),
+    ),
+    allowed_calls=frozenset(
+        {
+            "CleanupOrchestrationUnavailable",
+            "InertCleanupRetryPlan",
+            "LifecycleTransitionDenied",
+            "_require_timestamp",
+            "_retry_profile",
+            "dataclass",
+            "timedelta",
+            "timezone.is_aware",
+            "timezone.localtime",
+            "timezone.now",
+            "type",
+        }
+    ),
+    allowed_raises=frozenset(
+        {
+            "CleanupOrchestrationUnavailable",
+            "LifecycleTransitionDenied",
+        }
+    ),
+    plan_class_name="InertCleanupRetryPlan",
+    plan_fields=(
+        ("cleanup_id", "UUID"),
+        ("idempotency_id", "UUID"),
+        ("failure_count", "int"),
+        ("first_failed_at", "datetime"),
+        ("last_failed_at", "datetime"),
+        ("observed_at", "datetime"),
+        ("retry_tier", "CleanupRetryTier"),
+        ("base_retry_delay", "timedelta"),
+        ("maximum_jitter", "timedelta"),
+        ("next_base_retry_at", "datetime"),
+        ("persistent_alert_due_at", "datetime"),
+        ("alert_disposition", "CleanupAlertDisposition"),
+    ),
+    plan_false_classvars=(
+        "authorizes_deletion",
+        "schedules_task",
+        "persists_state",
+        "submits_alert",
+        "calls_external_service",
+    ),
+    executor_name="execute_cleanup_retry",
+    unavailable_error_name="CleanupOrchestrationUnavailable",
+    additional_dataclasses=(
+        (
+            "CleanupFailureSnapshot",
+            (
+                ("cleanup_id", "UUID"),
+                ("idempotency_id", "UUID"),
+                ("failure_count", "int"),
+                ("first_failed_at", "datetime"),
+                ("last_failed_at", "datetime"),
+                ("persistent_alert_recorded_at", "datetime | None"),
+            ),
+            (),
+        ),
+    ),
+)
+
 FINALIZATION_SOURCE_POLICY = OrchestrationSourcePolicy(
     name="FINALIZATION_INERT_SOURCE_V1",
     relative_path="report_lifecycle/finalization.py",
@@ -242,6 +348,7 @@ RETENTION_SOURCE_POLICY = OrchestrationSourcePolicy(
 )
 
 ORCHESTRATION_SOURCE_POLICIES = MappingProxyType({
+    "cleanup": CLEANUP_SOURCE_POLICY,
     "deletion": DELETION_SOURCE_POLICY,
     "finalization": FINALIZATION_SOURCE_POLICY,
     "retention": RETENTION_SOURCE_POLICY,

@@ -466,8 +466,8 @@ gate remain OPEN.
 ## Stage A orchestration-source purity record
 
 `architecture_checks/orchestration.py` parses, but never imports or executes,
-the current inert finalization, OPEN-only operator-deletion, and
-response-retention modules. The policy fixes the three exact target paths,
+the current inert finalization, OPEN-only operator-deletion, response-retention,
+and ciphertext-cleanup modules. The policy fixes the four exact target paths,
 imports and top-level members; the content-free immutable snapshot/plan fields;
 every false capability flag; a closed call/raise set; and the executor
 signature/body whose only outcome is its controlled unavailable exception.
@@ -476,11 +476,12 @@ Nested or altered imports, database/network/cryptographic/I/O and locally
 selected time calls, dynamic/effectful syntax, attribute or subscript writes,
 new content or authorization fields, and any executable executor body fail
 closed with controlled source-free violations. Imported types, constants,
-top-level members, and allowed call names cannot be shadowed. Retention alone
-may read server time and convert an already aware timestamp to UTC through its
-two exact timezone calls. This is static review evidence, not a runtime sandbox,
-semantic proof, external-service control, or authority to finalize, recover,
-expire, or delete a report. Every external and production gate remains OPEN.
+top-level members, and allowed call names cannot be shadowed. Retention and
+cleanup alone may read server time and convert an already aware timestamp to UTC
+through their exact timezone calls. This is static review evidence, not a
+runtime sandbox, semantic proof, external-service control, or authority to
+finalize, recover, schedule, alert, expire, clean up, or delete a report. Every
+external and production gate remains OPEN.
 
 ## Stage A response-retention planning record
 

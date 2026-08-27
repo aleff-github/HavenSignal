@@ -7,6 +7,7 @@ from tempfile import TemporaryDirectory
 from django.test import SimpleTestCase
 
 from architecture_checks import (
+    CLEANUP_SOURCE_POLICY,
     DELETION_SOURCE_POLICY,
     FINALIZATION_SOURCE_POLICY,
     ORCHESTRATION_SOURCE_POLICIES,
@@ -19,6 +20,7 @@ from architecture_checks import (
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+CLEANUP_PATH = BASE_DIR / "report_lifecycle" / "cleanup.py"
 FINALIZATION_PATH = BASE_DIR / "report_lifecycle" / "finalization.py"
 DELETION_PATH = BASE_DIR / "report_lifecycle" / "deletion.py"
 RETENTION_PATH = BASE_DIR / "report_lifecycle" / "retention.py"
@@ -35,7 +37,11 @@ class CurrentInertOrchestrationSourcePolicyTests(SimpleTestCase):
     def test_policy_set_and_content_free_plan_fields_are_exact(self) -> None:
         self.assertEqual(
             tuple(ORCHESTRATION_SOURCE_POLICIES),
-            ("deletion", "finalization", "retention"),
+            ("cleanup", "deletion", "finalization", "retention"),
+        )
+        self.assertEqual(
+            CLEANUP_SOURCE_POLICY.relative_path,
+            "report_lifecycle/cleanup.py",
         )
         self.assertEqual(
             FINALIZATION_SOURCE_POLICY.relative_path,
@@ -55,6 +61,9 @@ class CurrentInertOrchestrationSourcePolicyTests(SimpleTestCase):
             "filename",
             "key",
             "note",
+            "object_id",
+            "path",
+            "provider_error",
             "request_body",
             "secret",
             "text",
@@ -66,7 +75,7 @@ class CurrentInertOrchestrationSourcePolicyTests(SimpleTestCase):
                 self.assertTrue(field_names.isdisjoint(prohibited))
                 self.assertNotIn("open", policy.allowed_calls)
                 self.assertNotIn("Report.objects.create", policy.allowed_calls)
-                if policy is RETENTION_SOURCE_POLICY:
+                if policy in (CLEANUP_SOURCE_POLICY, RETENTION_SOURCE_POLICY):
                     self.assertIn("timezone.now", policy.allowed_calls)
                 else:
                     self.assertNotIn("timezone.now", policy.allowed_calls)
@@ -81,6 +90,8 @@ class CurrentInertOrchestrationSourcePolicyTests(SimpleTestCase):
         with self.assertRaises(FrozenInstanceError):
             FINALIZATION_SOURCE_POLICY.name = "WEAKENED"
         with self.assertRaises(FrozenInstanceError):
+            CLEANUP_SOURCE_POLICY.name = "WEAKENED"
+        with self.assertRaises(FrozenInstanceError):
             RETENTION_SOURCE_POLICY.name = "WEAKENED"
         with self.assertRaises(TypeError):
             ORCHESTRATION_SOURCE_POLICIES["runtime"] = FINALIZATION_SOURCE_POLICY
@@ -88,6 +99,7 @@ class CurrentInertOrchestrationSourcePolicyTests(SimpleTestCase):
 
 class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
     def setUp(self) -> None:
+        self.cleanup_source = CLEANUP_PATH.read_text(encoding="utf-8")
         self.finalization_source = FINALIZATION_PATH.read_text(encoding="utf-8")
         self.deletion_source = DELETION_PATH.read_text(encoding="utf-8")
         self.retention_source = RETENTION_PATH.read_text(encoding="utf-8")
@@ -97,6 +109,13 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
             source=source,
             relative_path=FINALIZATION_SOURCE_POLICY.relative_path,
             policy=FINALIZATION_SOURCE_POLICY,
+        )
+
+    def analyze_cleanup(self, source: str):
+        return analyze_inert_orchestration_source(
+            source=source,
+            relative_path=CLEANUP_SOURCE_POLICY.relative_path,
+            policy=CLEANUP_SOURCE_POLICY,
         )
 
     def analyze_deletion(self, source: str):
@@ -139,6 +158,23 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
         self.assertIn(
             OrchestrationViolationCode.CALL_DISALLOWED,
             retention_codes,
+        )
+
+        cleanup_source = (
+            "from report_lifecycle.models import Report\n"
+            + self.cleanup_source
+            + "\nReport.objects.update()\n"
+        )
+        cleanup_codes = {
+            item.code for item in self.analyze_cleanup(cleanup_source)
+        }
+        self.assertIn(
+            OrchestrationViolationCode.IMPORT_PROFILE_MISMATCH,
+            cleanup_codes,
+        )
+        self.assertIn(
+            OrchestrationViolationCode.CALL_DISALLOWED,
+            cleanup_codes,
         )
 
     def test_nested_or_star_import_cannot_bypass_the_exact_import_profile(self) -> None:
@@ -206,6 +242,19 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
             retention_codes,
         )
 
+        cleanup_source = self.cleanup_source.replace(
+            "        raise CleanupOrchestrationUnavailable()",
+            "        return plan",
+            1,
+        )
+        cleanup_codes = {
+            item.code for item in self.analyze_cleanup(cleanup_source)
+        }
+        self.assertIn(
+            OrchestrationViolationCode.EXECUTOR_PROFILE_MISMATCH,
+            cleanup_codes,
+        )
+
     def test_plan_cannot_gain_content_or_authorizing_fields(self) -> None:
         sources = (
             self.finalization_source.replace(
@@ -245,6 +294,55 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
                 self.assertIn(
                     OrchestrationViolationCode.PLAN_PROFILE_MISMATCH,
                     codes,
+                )
+
+    def test_cleanup_snapshot_and_capability_profiles_are_closed(self) -> None:
+        sources = (
+            self.cleanup_source.replace(
+                "    cleanup_id: UUID",
+                "    cleanup_id: UUID\n    object_path: str",
+                1,
+            ),
+            self.cleanup_source.replace(
+                "    authorizes_deletion: ClassVar[bool] = False",
+                "    authorizes_deletion: ClassVar[bool] = True",
+                1,
+            ),
+        )
+        for source in sources:
+            with self.subTest(source=source):
+                codes = {item.code for item in self.analyze_cleanup(source)}
+                self.assertIn(
+                    OrchestrationViolationCode.PLAN_PROFILE_MISMATCH,
+                    codes,
+                )
+
+    def test_cleanup_effectful_calls_and_mutation_are_rejected(self) -> None:
+        marker = "    observed_at = _require_timestamp(timezone.now())"
+        injections = (
+            "open('ciphertext.bin', 'wb')",
+            "storage.delete()",
+            "audit.append()",
+            "alert_service.submit()",
+            "scheduler.enqueue()",
+            "logger.error(snapshot)",
+            "snapshot.cleanup_id = UUID(int=0)",
+        )
+        for injection in injections:
+            source = self.cleanup_source.replace(
+                marker,
+                f"{marker}\n    {injection}",
+                1,
+            )
+            with self.subTest(injection=injection):
+                violations = self.analyze_cleanup(source)
+                self.assertTrue(violations)
+                self.assertTrue(
+                    {
+                        OrchestrationViolationCode.CALL_DISALLOWED,
+                        OrchestrationViolationCode.DYNAMIC_CONSTRUCT,
+                    }
+                    & {item.code for item in violations}
                 )
 
     def test_retention_io_crypto_logging_and_mutation_are_rejected(self) -> None:
@@ -337,6 +435,20 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
                     {item.detail_code for item in violations},
                 )
 
+        cleanup_source = self.cleanup_source.replace(
+            "    observed_at = _require_timestamp(timezone.now())",
+            "    observed_at = _require_timestamp(timezone.now())\n"
+            "    MAXIMUM_JITTER_FRACTION = (1, 1)",
+            1,
+        )
+        self.assertIn(
+            "PROTECTED_NAME_REBOUND",
+            {
+                item.detail_code
+                for item in self.analyze_cleanup(cleanup_source)
+            },
+        )
+
     def test_source_is_parsed_but_never_executed_or_echoed(self) -> None:
         sentinel = "REPORT_TEXT_SENTINEL"
         source = f"raise RuntimeError('{sentinel}')\n" + self.deletion_source
@@ -350,6 +462,11 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
         retention_violations = self.analyze_retention(retention_source)
         self.assertTrue(retention_violations)
         self.assertNotIn(sentinel, repr(retention_violations))
+
+        cleanup_source = f"raise RuntimeError('{sentinel}')\n" + self.cleanup_source
+        cleanup_violations = self.analyze_cleanup(cleanup_source)
+        self.assertTrue(cleanup_violations)
+        self.assertNotIn(sentinel, repr(cleanup_violations))
 
     def test_parse_path_and_missing_target_fail_closed(self) -> None:
         sentinel = "REPORT_TEXT_SENTINEL"
@@ -381,6 +498,10 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
             )
             (lifecycle / "deletion.py").write_text(
                 self.deletion_source,
+                encoding="utf-8",
+            )
+            (lifecycle / "retention.py").write_text(
+                self.retention_source,
                 encoding="utf-8",
             )
             missing = scan_inert_orchestration_sources(
