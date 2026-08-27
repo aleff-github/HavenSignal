@@ -528,3 +528,19 @@ path/content fields, and executable executor changes fail closed. The target is
 parsed but never imported or executed. Passing is static source evidence only
 and closes no cleanup-proof, retention-job, database, recovery, Key Service,
 legal/operational, external-service, concurrency, or production gate.
+
+The nineteenth Stage A slice adds a pure audit-retention planner for the exact
+minima in `docs/23` and `docs/32`. It accepts only internal retention/evidence
+UUIDs, a closed evidence class, a trusted collector timestamp, and a strict
+verification-dependency flag. It computes 365 times 24 elapsed hours for event/
+receipt/proof material and 730 times 24 elapsed hours for checkpoint,
+consistency, public-key-manifest, and witness evidence.
+
+Before the minimum boundary the classification retains. At or after it, a
+required verification dependency still retains; otherwise the result marks only
+`EXPIRY_REVIEW_DUE`. The immutable plan authorizes no expiry, deletes no audit
+evidence, persists no retention batch, exposes no witness evidence, and calls no
+external service; its executor always raises one controlled unavailable error.
+No isolated credential, daily job, dependency graph, database mutation,
+controlled retention evidence, witness integration, legal policy, Audit Service,
+or production capability is implemented. Every dependent gate remains OPEN.

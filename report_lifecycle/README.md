@@ -98,3 +98,11 @@ plan marks only a removal review as due. It does not hold a public Ticket ID,
 Recovery Secret, verifier, content, filename, path, key, or provider error; it
 cannot remove lookup state or metadata, persist, schedule, or call a service,
 and its executor is always unavailable.
+
+`audit_retention.py` describes only the exact 365-times-24-hour event/receipt/
+proof minimum and 730-times-24-hour checkpoint/consistency/key-manifest/witness
+minimum from internal UUIDs, closed evidence classes, a dependency flag, and
+trusted Audit Collector timestamps. A required verification dependency retains
+evidence after its minimum period. Its plan authorizes no expiry, deletes no
+audit evidence, persists no retention batch, exposes no witness evidence, and
+calls no service; its executor is always unavailable.

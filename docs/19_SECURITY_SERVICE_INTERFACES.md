@@ -545,3 +545,21 @@ scheduler, Audit Service, Key Service, I/O, logging, mutation, dynamic syntax,
 public-ticket/recovery/path/content fields, or an executable executor fail
 closed. Passing is static source evidence only and closes no retention-job,
 cleanup-proof, database, recovery, Key Service, legal, or production gate.
+
+## Stage A audit-retention planning record
+
+`report_lifecycle/audit_retention.py` represents only the exact minima approved
+in `docs/23` and `docs/32`: 365 times 24 elapsed hours for event/receipt/proof
+material and 730 times 24 elapsed hours for signed checkpoint, consistency,
+public-key-manifest, and witness evidence. It accepts only internal retention/
+evidence UUIDs, one closed evidence class, trusted collector time, and a strict
+boolean stating whether retained verification still requires the evidence.
+
+Before the minimum boundary it retains. At or after the boundary, a required
+dependency still retains; otherwise the planner marks only `EXPIRY_REVIEW_DUE`.
+The immutable plan authorizes no expiry, deletes no audit evidence, persists no
+retention batch, exposes no witness evidence, and calls no external service. Its
+executor always fails closed. This does not implement the isolated credential,
+daily job, dependency graph, controlled retention record, witness interface,
+database mutation, legal policy, or Audit Service. Every dependent gate remains
+OPEN.

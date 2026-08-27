@@ -116,6 +116,13 @@ boundary marks only a separately credentialed removal review as due: the plan
 cannot remove the public Ticket ID lookup or any metadata, persist state,
 schedule a job, or call an external service.
 
+The inert audit-retention planner represents the isolated Audit Collector clock
+boundaries: 365 times 24 hours for event/receipt/proof material and 730 times
+24 hours for checkpoint/consistency/key-manifest/witness evidence. A required
+verification dependency always retains the evidence. Boundary equality marks
+only an expiry review as due; no audit evidence is deleted and no retention
+batch, witness output, job, credential, or service call exists.
+
 Mandatory security integrations whose designs remain OPEN are represented only
 by explicit deny-by-default placeholders under `security_interfaces/`. Every
 placeholder operation raises a controlled failure and provides no plaintext,

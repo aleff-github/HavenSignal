@@ -529,6 +529,21 @@ durable cleanup confirmation, implement the separately credentialed retention
 job, alter generic recovery behavior, or authorize metadata removal. Every
 dependent gate remains OPEN.
 
+The audit-retention Stage A slice represents only the exact minimum timing and
+dependency decision. Its immutable snapshot contains internal retention/
+evidence UUIDs, one closed evidence class, a trusted collector timestamp, and a
+strict flag for evidence still required to verify retained material. It fixes
+365 times 24 elapsed hours for event/receipt/proof material and 730 times 24
+elapsed hours for checkpoint/consistency/public-key-manifest/witness evidence.
+
+Before the minimum, or after it while a verification dependency remains, the
+classification retains. Otherwise equality marks only that an isolated expiry
+review is due. The plan authorizes no expiry, deletes no evidence, persists no
+retention batch, exposes no witness evidence, and calls no service; its executor
+is unavailable. No credential, job, dependency graph, database mutation,
+controlled retention evidence, witness integration, legal policy, or Audit
+Service is implemented. Every dependent gate remains OPEN.
+
 The project owner approved the following on 2026-08-26:
 
 1. 90-day never-read Response Note expiry, with a valid pre-deadline first read

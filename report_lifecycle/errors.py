@@ -45,3 +45,10 @@ class MetadataRetentionOrchestrationUnavailable(Exception):
 
     def __init__(self) -> None:
         super().__init__("metadata_retention_orchestration_unavailable")
+
+
+class AuditRetentionOrchestrationUnavailable(Exception):
+    """Controlled denial while isolated audit retention remains gated."""
+
+    def __init__(self) -> None:
+        super().__init__("audit_retention_orchestration_unavailable")

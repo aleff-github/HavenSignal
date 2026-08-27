@@ -116,6 +116,13 @@ For the metadata-only Stage A described by
   and every execution attempt fail closed without Ticket ID lookup deletion,
   metadata mutation, persistence, job scheduling, service calls, database
   writes, or echoed input;
+- audit-retention planning fixes event/receipt/proof review at exactly 365 times
+  24 elapsed hours and checkpoint/consistency/key-manifest/witness review at
+  exactly 730 times 24 elapsed hours from trusted collector time;
+- an evidence dependency required for retained verification blocks expiry review
+  after the minimum period; malformed UUID/class/dependency/timestamps and every
+  execution attempt fail closed without audit deletion, batch persistence,
+  witness exposure, service calls, database writes, or echoed input;
 - SQLite results are never represented as PostgreSQL concurrency evidence;
 - the application still cannot accept a real report.
 

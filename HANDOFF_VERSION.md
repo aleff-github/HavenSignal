@@ -147,3 +147,11 @@ capability flags, closed calls, protected bindings, and the always-unavailable
 executor are required. The scanner never imports or executes the target and
 provides no database deletion, retention job, recovery change, Key Service
 tombstone handling, or production authority.
+
+The nineteenth Stage A slice adds immutable UUID/class/dependency/timestamp-only
+audit-retention planning. It fixes exact 365-times-24-hour event/receipt/proof
+and 730-times-24-hour checkpoint/consistency/key-manifest/witness minima from
+trusted collector time, while a required verification dependency retains longer.
+Every capability flag is false and the executor always fails closed. No audit
+expiry, retention batch, isolated credential, witness output, database write,
+service integration, legal approval, or production authority is introduced.

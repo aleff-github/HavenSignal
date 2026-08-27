@@ -523,6 +523,24 @@ At minimum, release-blocking tests must prove:
 SQLite, ordinary Django `TestCase`, one process, or an in-memory collector is
 not sufficient for concurrency, durability, or release acceptance.
 
+## Inert Stage A audit-retention planning record
+
+The metadata-only Stage A represents the exact retention minima in
+`report_lifecycle/audit_retention.py`. The pure planner accepts only internal
+retention/evidence UUIDs, a closed evidence class, trusted collector timestamps,
+and a strict verification-dependency flag. It calculates 365 times 24 elapsed
+hours for event/receipt/proof material and 730 times 24 elapsed hours for signed
+checkpoint, consistency, public-key-manifest, and witness evidence.
+
+Before the minimum boundary the evidence remains retained. At or after that
+boundary, any required verification dependency still retains it; otherwise the
+result says only that expiry review is due. Every capability flag is false and
+the executor is deliberately unavailable. No audit row, receipt, proof,
+checkpoint, manifest, or witness result is read, persisted, exposed, or deleted.
+The isolated credential, daily job, dependency proof, controlled retention
+batch record, witness interface, legal approval, independent review, and all
+Audit Service/production gates remain OPEN.
+
 ## Recorded project-owner decision
 
 On 2026-08-25 the project owner approved all five visible choices:
