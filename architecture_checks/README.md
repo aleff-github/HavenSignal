@@ -24,8 +24,9 @@ additional numbered migrations. A separate Django drift test requires
 `makemigrations --check --dry-run` to report no model changes.
 
 The orchestration-source policy parses only `report_lifecycle/finalization.py`,
-`report_lifecycle/deletion.py`, `report_lifecycle/retention.py`, and
-`report_lifecycle/cleanup.py`. It fixes their exact imports, top-level members,
+`report_lifecycle/deletion.py`, `report_lifecycle/retention.py`,
+`report_lifecycle/cleanup.py`, `report_lifecycle/metadata_retention.py`, and
+`report_lifecycle/audit_retention.py`. It fixes their exact imports, top-level members,
 content-free immutable snapshot/plan fields, false capability flags, closed
 call/raise allowlists, and executors whose only outcome is the reviewed
 unavailable exception. Nested imports, database/network/crypto/I/O/logging/
@@ -33,6 +34,13 @@ scheduler calls, dynamic or mutating syntax, binding shadowing, and altered
 executor bodies fail closed. Retention and cleanup alone may obtain server time
 and normalize an aware timestamp to UTC through their exact allowlisted
 `django.utils.timezone` calls.
+
+The descriptor-source policy parses only
+`security_interfaces/administrative_step_up_descriptors.py`. It fixes the
+version-2 constants, imports, top-level members, immutable class profiles,
+validator bodies, and closed call set. Added authentication, persistence,
+network, file, logging, dynamic, or authorization behavior fails closed without
+importing or executing the descriptor module.
 
 Passing these checks proves only source-level conformance for the exact files
 that were scanned. It is not a complete HTML/CSS security parser, browser

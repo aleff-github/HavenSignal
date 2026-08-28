@@ -171,3 +171,11 @@ operation/target/artifact profiles, credentials, challenges, handles, binding
 bytes, persistence, and consumption; it verifies nothing and authorizes neither
 administrative action nor flood deletion. All authentication, batch-profile,
 database, independent-review, and production gates remain OPEN.
+
+The twenty-second Stage A slice adds a non-executing source policy for the
+administrative step-up-v2 foundation. Exact target/imports, version and lifetime
+constants, module members, immutable classes, false capabilities, validator
+bodies, and closed calls are required. Added effectful or dynamic behavior
+fails closed; the target is never imported or executed. This provides only
+source-conformance evidence and no authentication, authorization, persistence,
+concurrency, independent-review, or production authority.

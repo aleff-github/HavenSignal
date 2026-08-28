@@ -385,6 +385,21 @@ authenticators, pinned browsers, the hardened workstation profile, PostgreSQL
 multi-process concurrency, and an isolated test RP/origin matching production
 semantics.
 
+## Inert Stage A administrative source conformance
+
+The current non-executing source policy for
+`security_interfaces/administrative_step_up_descriptors.py` fixes only the
+exact version-2 inert foundation: imports, constants, top-level members,
+immutable class profiles, false capability results, validator bodies, and a
+closed call set. It rejects added effectful or dynamic behavior without
+importing or executing the target.
+
+This is review evidence for source shape only. It does not implement or prove
+WebAuthn, administrator identity, RP/origin checks, session/device binding,
+operation profiles, artifact binding, persistence, single-use consumption,
+concurrency, independent review, or production acceptance. Those gates remain
+OPEN.
+
 ## Consolidated decisions approved at the pre-code gate
 
 The project owner approved the following on 2026-08-26:

@@ -1,5 +1,13 @@
 """Static architecture checks for deny-by-default dependency boundaries."""
 
+from .descriptors import (
+    ADMINISTRATIVE_STEP_UP_DESCRIPTOR_PATH,
+    DescriptorSourceViolation,
+    DescriptorViolationCode,
+    analyze_administrative_step_up_descriptor_source,
+    scan_administrative_step_up_descriptor_source,
+)
+
 from .imports import (
     REPORTER_GATEWAY_IMPORT_POLICY,
     REPORTER_ROOT_URL_IMPORT_POLICY,
@@ -43,6 +51,11 @@ from .surfaces import (
 )
 
 __all__ = [
+    "ADMINISTRATIVE_STEP_UP_DESCRIPTOR_PATH",
+    "DescriptorSourceViolation",
+    "DescriptorViolationCode",
+    "analyze_administrative_step_up_descriptor_source",
+    "scan_administrative_step_up_descriptor_source",
     "REPORTER_GATEWAY_IMPORT_POLICY",
     "REPORTER_ROOT_URL_IMPORT_POLICY",
     "ArchitectureImportViolation",

@@ -559,6 +559,26 @@ without importing or rendering the target source that:
 Passing this source policy is not browser, runtime, process, network, or
 deployment proof and cannot close any external gate.
 
+## Stage A administrative step-up source conformance
+
+While the administrative step-up-v2 implementation remains an inert structural
+foundation, statically verify without importing or executing the target that:
+
+- the target path, imports, protocol version `2`, and `120 * 1000` millisecond
+  lifetime remain exact;
+- the complete top-level member set, immutable slotted class profiles, false
+  capability properties, and validator bodies remain exact;
+- only the closed constructor, validator, type-check, length, and timing calls
+  are present;
+- nested imports, dynamic constructs, added members, persistence, network,
+  cryptographic, file, logging, and authorization behavior fail closed;
+- missing, unreadable, malformed, and out-of-root inputs return controlled,
+  content-free violations.
+
+Passing this policy proves only exact source conformance. It does not prove
+administrator identity, WebAuthn, session/device binding, persistence,
+single-use consumption, concurrency, or production readiness.
+
 ## Dependency/security checks
 
 Before release:

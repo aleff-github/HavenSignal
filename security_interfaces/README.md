@@ -55,3 +55,9 @@ state. Operation, target kind/ID, artifact kind/binding, credential-row ID,
 challenge, opaque handle, persistence, consumption, and actor-role-specific
 flood profiles remain absent. Structural validity verifies nothing and
 authorizes neither an administrative action nor flood deletion.
+
+The non-executing descriptor-source policy locks that exact inert source shape,
+including its imports, constants, immutable classes, validators, and closed
+call profile. Passing the policy is source-conformance evidence only; it is not
+authentication, WebAuthn, session, persistence, concurrency, or production
+proof.

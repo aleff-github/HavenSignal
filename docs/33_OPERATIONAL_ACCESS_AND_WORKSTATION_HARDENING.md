@@ -373,6 +373,18 @@ kind/binding, credential-row ID, challenge, handle, persistence, consumption,
 actor-role-specific flood approvals, workstation/session proof, and every
 external or production gate remain absent and OPEN.
 
+The non-executing descriptor-source policy fixes this foundation's exact target,
+imports, version and lifetime expressions, complete member set, immutable class
+profiles, false capability results, validator bodies, and closed call profile.
+Nested imports, dynamic constructs, added fields or members, persistence,
+network, file, logging, cryptographic, or authorization behavior fail closed;
+the target is parsed but never imported or executed.
+
+Passing this policy is source-conformance evidence only. Administrator identity,
+WebAuthn, RP/origin, workstation/session/device binding, operation and flood
+profiles, persistence, consumption, concurrency, independent review, and all
+production gates remain OPEN.
+
 ## Infrastructure / Key Custodian staffing and access
 
 Production requires at least three individually named Key Custodians so two

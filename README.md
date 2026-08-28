@@ -92,6 +92,8 @@ The repository currently contains:
   terminal-metadata review, and isolated audit-retention review;
 - administrative step-up-v2 foundations that validate only content-free
   identity, timing, binding-purpose, and unused-state shapes;
+- a non-executing descriptor-source guard that locks those administrative
+  step-up foundations to their exact inert source profile;
 - architecture checks that constrain the reporter-facing surface;
 - non-executing AST policies that keep lifecycle orchestration incapable of
   persistence, cryptography, deletion, scheduling, logging, or service calls;

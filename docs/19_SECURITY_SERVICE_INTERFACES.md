@@ -589,3 +589,14 @@ artifact-kind/binding, credential-row, challenge, handle, persistence, or
 consumption field. Actor-role-specific flood profiles, MFA/session/device proof,
 database concurrency, service integration, independent review, and production
 gates remain OPEN.
+
+The non-executing descriptor-source policy fixes the exact target, imports,
+protocol-version and lifetime expressions, top-level member set, immutable
+class profiles, false capability results, validator bodies, and closed calls.
+Nested imports, dynamic constructs, added fields or members, persistence,
+network, file, logging, cryptographic, or authorization behavior fail closed.
+The target is parsed but never imported or executed.
+
+Passing this source policy closes no administrator-identity, authentication,
+WebAuthn, session/device, operation-profile, persistence, consumption,
+concurrency, independent-review, or production gate.

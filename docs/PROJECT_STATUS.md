@@ -80,6 +80,10 @@ members, immutable metadata-only fields, false capability flags and
 always-unavailable executors. Scanned target modules are parsed but never
 imported or executed.
 
+It also locks the administrative step-up-v2 descriptor to its exact imports,
+constants, immutable classes, validators, and closed call profile without
+executing the descriptor source.
+
 These checks are review guards, not production network/process security boundaries.
 
 ## Approved designs versus enabled capability

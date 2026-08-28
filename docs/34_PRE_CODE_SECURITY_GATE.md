@@ -573,3 +573,18 @@ kind/binding, credential-row ID, challenge, opaque handle, persistence,
 consumption, actor-role-specific flood approvals, authentication/session/device
 proof, database concurrency, external services, independent review, and
 production capability remain absent and OPEN.
+
+The twenty-second Stage A slice adds a non-executing source policy for the
+administrative step-up-v2 foundation. It fixes the exact target and imports,
+protocol version `2`, the `120 * 1000` millisecond lifetime expression, complete
+top-level member set, immutable class profiles, false capability results,
+validator bodies, and closed constructor/validator/type/timing call profile.
+
+Nested imports, dynamic constructs, added members or fields, persistence,
+network, file, logging, cryptographic, and authorization behavior fail closed.
+Missing, unreadable, malformed, and out-of-root inputs produce controlled,
+content-free violations. The target is parsed but never imported or executed.
+Passing is static source evidence only and closes no administrator-identity,
+authentication, WebAuthn, session/device, operation/flood-profile, persistence,
+consumption, concurrency, independent-review, external-service, or production
+gate.
