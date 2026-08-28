@@ -380,6 +380,23 @@ These tests supplement, and do not replace, `14_SECURITY_TEST_PLAN.md` and `18_S
 
 No step in this order authorizes report submission, recovery, key management, audit receipts, authentication, file processing, finalization, export, or deletion by itself.
 
+## Stage A negative-capability source conformance
+
+`architecture_checks/negative_capabilities.py` parses only
+`security_interfaces/errors.py` and `security_interfaces/unavailable.py`. It
+fixes the exact executable AST of the controlled dependency/error registry and
+all mandatory unavailable adapters. A success return, weaker or plaintext
+development fallback, added service/method, dependency reassignment,
+input-bearing error, logging/import side effect, or any other executable change
+fails closed pending an explicit policy review.
+
+Missing roots, unknown targets, malformed source, and unreadable inputs produce
+controlled content-free violations. Neither target is imported or executed.
+Passing this policy proves only the current negative-capability source shape; it
+does not prove process/network/credential isolation, service authentication,
+durability, cryptography, or any real external-service integration. Every
+dependent and production gate remains OPEN.
+
 ## Stage A static conformance record
 
 `architecture_checks/` now applies exact AST import allowlists to the current

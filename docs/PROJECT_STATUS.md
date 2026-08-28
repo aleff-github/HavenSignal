@@ -53,6 +53,9 @@ A test-only PostgreSQL concurrency scaffold exists, but it is not itself Postgre
 Mandatory security integrations whose production designs or evidence remain gated are represented by deny-by-default interfaces under `security_interfaces/`.
 
 Unavailable operations fail explicitly rather than providing weaker fallbacks.
+Their controlled errors and unavailable adapters are also locked by a
+non-executing exact-AST policy, so a success path, development fallback, added
+method, logging operation, or other side effect requires explicit review.
 
 The package includes inert structural descriptors for approved audit, alert, and step-up concepts, but these types do not themselves:
 
@@ -86,6 +89,10 @@ imported or executed.
 It also locks the administrative step-up-v2 descriptor to its exact imports,
 constants, immutable classes, validators, and closed call profile without
 executing the descriptor source.
+
+The controlled security-interface errors and unavailable external-service
+adapters are likewise parsed but never imported or executed and must retain
+their exact generic fail-closed behavior.
 
 These checks are review guards, not production network/process security boundaries.
 

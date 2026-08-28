@@ -25,6 +25,13 @@ from .migrations import (
     analyze_lifecycle_migration_source,
     scan_lifecycle_migrations,
 )
+from .negative_capabilities import (
+    NEGATIVE_CAPABILITY_SOURCE_DIGESTS,
+    NegativeCapabilitySourceViolation,
+    NegativeCapabilityViolationCode,
+    analyze_negative_capability_source,
+    scan_negative_capability_sources,
+)
 from .orchestration import (
     AUDIT_RETENTION_SOURCE_POLICY,
     CLEANUP_SOURCE_POLICY,
@@ -71,6 +78,11 @@ __all__ = [
     "MigrationViolationCode",
     "analyze_lifecycle_migration_source",
     "scan_lifecycle_migrations",
+    "NEGATIVE_CAPABILITY_SOURCE_DIGESTS",
+    "NegativeCapabilitySourceViolation",
+    "NegativeCapabilityViolationCode",
+    "analyze_negative_capability_source",
+    "scan_negative_capability_sources",
     "AUDIT_RETENTION_SOURCE_POLICY",
     "CLEANUP_SOURCE_POLICY",
     "DELETION_SOURCE_POLICY",

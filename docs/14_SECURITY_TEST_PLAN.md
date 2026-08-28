@@ -13,6 +13,13 @@ For the metadata-only Stage A described by
   metadata;
 - every protected external-service adapter remains unavailable and fails
   closed without a fallback;
+- the controlled dependency/error registry and unavailable-adapter executable
+  AST remain exact; success returns, plaintext/development fallbacks, added
+  methods, dependency remapping, input-bearing errors, logging, imports, and
+  other side effects fail closed under a non-executing source policy;
+- missing roots, unknown targets, malformed source, and policy mutations return
+  controlled content-free violations without importing, executing, or echoing
+  either security-interface source;
 - no reporter submission, recovery, operator authentication/content, export,
   deletion, file handling, alert, or finalization endpoint exists;
 - lifecycle transitions reject stale state, stale lease generation, duplicate

@@ -28,6 +28,12 @@ placeholders:
 - must not be replaced until the specific OPEN gate is approved and its
   negative/failure tests exist.
 
+A non-executing source policy additionally locks the controlled error registry
+and every unavailable adapter to their exact fail-closed executable AST. It
+rejects success returns, fallback services, new public methods, input-bearing
+errors, logging, and other side effects without importing or executing either
+target. Passing this policy does not prove a real service boundary.
+
 A structurally valid acceptance-claims object is not a verified receipt and
 always reports that it cannot authorize a protected action. CBOR encoding,
 COSE parsing/signature verification, event append, durable commit, receipt

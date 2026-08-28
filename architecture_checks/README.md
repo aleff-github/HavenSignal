@@ -48,6 +48,13 @@ validator bodies, and closed call set. Added authentication, persistence,
 network, file, logging, dynamic, or authorization behavior fails closed without
 importing or executing the descriptor module.
 
+The negative-capability policy parses only `security_interfaces/errors.py` and
+`security_interfaces/unavailable.py`. It locks the controlled dependency/error
+registry and every mandatory unavailable adapter to the exact executable AST
+that raises the generic fail-closed error. Success returns, plaintext/development
+fallbacks, added methods, logging, and other side effects require an explicit
+reviewed policy change.
+
 Passing these checks proves only source-level conformance for the exact files
 that were scanned. It is not a complete HTML/CSS security parser, browser
 behavior proof, PostgreSQL schema/durability proof, production migration

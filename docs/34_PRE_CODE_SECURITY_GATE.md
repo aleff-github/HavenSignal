@@ -603,3 +603,19 @@ with controlled, content-free violations. Both targets are parsed but never
 imported or executed. Passing is static source evidence only and closes no
 browser, proxy, logging, anonymity, process-isolation, submission, deployment,
 independent-review, external-service, or production gate.
+
+The twenty-fourth Stage A slice adds a non-executing source policy for the
+mandatory negative-capability boundary. It fixes the exact executable AST of
+`security_interfaces/errors.py` and `security_interfaces/unavailable.py`,
+including the closed dependency registry, generic controlled error, exact
+service families and public method set, dependency mapping, and deny-only
+method bodies.
+
+Success returns, plaintext or development fallbacks, new service methods,
+dependency reassignment, input-bearing errors, logging/import side effects, and
+all other executable changes fail closed. Missing roots, unknown targets,
+malformed source, and unreadable inputs produce controlled content-free
+violations. The targets are parsed but never imported or executed. Passing is
+static source evidence only and closes no service-authentication, process,
+network, credential, durability, cryptographic, external-service, independent-
+review, or production gate.

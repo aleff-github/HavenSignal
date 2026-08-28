@@ -85,7 +85,8 @@ The repository currently contains:
 - metadata-only submission and report lifecycle models;
 - pure monotonic transition planners;
 - explicit fail-closed persistence boundaries;
-- negative-capability placeholders for security services;
+- negative-capability placeholders for security services, with a non-executing
+  guard that locks their exact fail-closed behavior;
 - inert audit, alert, and step-up structural descriptors;
 - pure, non-executing sequence contracts for finalization and OPEN-only operator deletion;
 - inert planners for Response Note expiry, ciphertext-cleanup retry timing,

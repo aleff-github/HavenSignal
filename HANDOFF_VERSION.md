@@ -186,3 +186,11 @@ executing either target. Added endpoint/input/context/persistence/cookie/logging
 behavior, unsafe methods, header relaxation, unknown targets, and malformed
 source fail closed. This is source-conformance evidence only and provides no
 browser, proxy, anonymity, submission, deployment, or production authority.
+
+The twenty-fourth Stage A slice locks the executable AST of the controlled
+security-interface errors and every mandatory unavailable adapter. Success
+returns, plaintext/development fallbacks, new methods, dependency remapping,
+input-bearing errors, logging/import side effects, unknown targets, and
+malformed source fail closed without importing or executing either target.
+This is negative-capability source evidence only and enables no real service or
+production authority.
