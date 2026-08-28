@@ -1,0 +1,36 @@
+name: Scoped proposal
+description: Propose a narrowly bounded project or implementation change
+title: "[proposal] "
+labels: ["proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        HavenSignal intentionally resists feature expansion. Proposals should explain why the change is necessary within the approved project scope.
+        Do not use this form for vulnerabilities.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What concrete problem inside the existing scope needs to be solved?
+    validations:
+      required: true
+  - type: textarea
+    id: requirements
+    attributes:
+      label: Relevant requirements
+      description: Link relevant docs/requirements, if known.
+  - type: textarea
+    id: security
+    attributes:
+      label: Security / privacy impact
+      description: What new data, authority, dependency, or attack surface would this introduce?
+    validations:
+      required: true
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope confirmation
+      options:
+        - label: This proposal does not require reporter accounts, chat, analytics, report scoring, or AI decision-making.
+          required: true
