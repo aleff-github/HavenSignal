@@ -179,3 +179,10 @@ bodies, and closed calls are required. Added effectful or dynamic behavior
 fails closed; the target is never imported or executed. This provides only
 source-conformance evidence and no authentication, authorization, persistence,
 concurrency, independent-review, or production authority.
+
+The twenty-third Stage A slice locks the executable AST of the read-only
+reporter view and restrictive response-header middleware without importing or
+executing either target. Added endpoint/input/context/persistence/cookie/logging
+behavior, unsafe methods, header relaxation, unknown targets, and malformed
+source fail closed. This is source-conformance evidence only and provides no
+browser, proxy, anonymity, submission, deployment, or production authority.

@@ -94,7 +94,8 @@ The repository currently contains:
   identity, timing, binding-purpose, and unused-state shapes;
 - a non-executing descriptor-source guard that locks those administrative
   step-up foundations to their exact inert source profile;
-- architecture checks that constrain the reporter-facing surface;
+- architecture checks that constrain the reporter-facing settings, route,
+  passive assets, read-only view, and restrictive response-header middleware;
 - non-executing AST policies that keep lifecycle orchestration incapable of
   persistence, cryptography, deletion, scheduling, logging, or service calls;
 - a test-only PostgreSQL concurrency scaffold.

@@ -317,6 +317,19 @@ Reporter IP address, User-Agent, request body, report text, attachment data, Rec
 
 Reporter-facing proxy, application, and upstream infrastructure configuration must be reviewed end to end; disabling logging only in Django is insufficient for `SEC-ANON-002`.
 
+During inert Stage A, a non-executing source policy fixes the exact executable
+AST of `reporter_gateway/views.py` and `reporter_gateway/middleware.py`. It
+therefore fails closed on added endpoint/input/persistence/cookie/logging
+behavior, request-derived render context, unsafe-method acceptance, or a change
+to the current restrictive cache, CSP, referrer, permissions, cross-origin, or
+cross-domain response headers. The policy parses but never imports or executes
+either target.
+
+Passing this policy is source-conformance evidence only. It does not prove
+browser behavior, reverse-proxy/header behavior, access-log suppression,
+network anonymity, process isolation, deployment configuration, or any future
+submission endpoint.
+
 ## OPEN implementation gates
 
 | Interface area | Blocking decision |

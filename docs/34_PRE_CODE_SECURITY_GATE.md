@@ -588,3 +588,18 @@ Passing is static source evidence only and closes no administrator-identity,
 authentication, WebAuthn, session/device, operation/flood-profile, persistence,
 consumption, concurrency, independent-review, external-service, or production
 gate.
+
+The twenty-third Stage A slice extends the non-executing reporter-surface policy
+to the exact executable AST of `reporter_gateway/views.py` and
+`reporter_gateway/middleware.py`. The view remains one safe-method-only render
+of the passive landing template, with no request-derived context, input,
+persistence, cookie, redirect, or added endpoint behavior. The middleware
+retains the exact no-store, CSP, referrer, permissions, cross-origin, and
+cross-domain response-header profile and performs no request logging or other
+side effect.
+
+Unknown targets, malformed source, and any executable AST change fail closed
+with controlled, content-free violations. Both targets are parsed but never
+imported or executed. Passing is static source evidence only and closes no
+browser, proxy, logging, anonymity, process-isolation, submission, deployment,
+independent-review, external-service, or production gate.

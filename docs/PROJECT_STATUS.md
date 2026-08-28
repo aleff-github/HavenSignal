@@ -72,7 +72,10 @@ authorization capabilities remain absent.
 
 ## Architecture checks
 
-`architecture_checks/` statically constrains the current Reporter Gateway and root URL surface, including import allowlists and passive page expectations.
+`architecture_checks/` statically constrains the current Reporter Gateway and
+root URL surface, including import allowlists, passive page expectations, and
+the exact executable AST of the read-only view and restrictive response-header
+middleware.
 
 The same package statically locks the initial lifecycle migration and the inert
 finalization, operator-deletion and retention planners to closed imports,

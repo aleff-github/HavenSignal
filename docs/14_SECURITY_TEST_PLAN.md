@@ -546,6 +546,12 @@ without importing or rendering the target source that:
   capability;
 - the root URL configuration contains exactly the read-only reporter home and
   cannot be extended through a later mutation;
+- the reporter view remains exactly one safe-method-only template render with
+  no request-derived context, input handling, persistence, cookies, redirect,
+  or additional endpoint behavior;
+- the response middleware retains the exact no-store, CSP, referrer,
+  permissions, cross-origin, and cross-domain header profile and performs no
+  request logging or other side effect;
 - the landing template contains only the closed passive tag, attribute, meta,
   first-party stylesheet, and Django-static-directive profile;
 - form, input, script, iframe, link, image, event/style attribute, template
@@ -554,7 +560,11 @@ without importing or rendering the target source that:
 - CSS `@import`, `@font-face`, `url()`, legacy expression/behavior/binding, and
   JavaScript-scheme constructs fail closed;
 - missing, unreadable, malformed, dynamic, mutated, and out-of-root policy
-  inputs return controlled violations without source excerpts.
+inputs return controlled violations without source excerpts.
+
+The reporter view and middleware checks compare their executable AST against
+the reviewed inert profile. Comments may change without altering that profile;
+any executable change requires an explicit reviewed policy update.
 
 Passing this source policy is not browser, runtime, process, network, or
 deployment proof and cannot close any external gate.
