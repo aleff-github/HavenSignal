@@ -50,3 +50,12 @@ class StepUpDescriptorRejected(ValueError):
 
     def __init__(self) -> None:
         super().__init__(self.public_code)
+
+
+class RecoveryDescriptorRejected(ValueError):
+    """Controlled rejection for an invalid inert recovery descriptor."""
+
+    public_code = "recovery_descriptor_rejected"
+
+    def __init__(self) -> None:
+        super().__init__(self.public_code)

@@ -31,6 +31,7 @@ class ArchitectureCheckRunnerTests(SimpleTestCase):
                 "repository-hygiene",
                 "verification-script",
                 "ci-workflow",
+                "recovery-descriptor",
                 "root-url-imports",
                 "reporter-gateway-imports",
                 "settings-surface",

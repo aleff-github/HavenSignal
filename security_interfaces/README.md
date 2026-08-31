@@ -86,6 +86,22 @@ call profile. Passing the policy is source-conformance evidence only; it is not
 authentication, WebAuthn, session, persistence, concurrency, or production
 proof.
 
+`recovery_descriptors.py` validates only the strict structural shape of the
+owner-approved recovery credentials: a 16-byte, 26-character uppercase
+unpadded RFC 4648 Base32 Ticket ID and a 32-byte, 43-character unpadded
+base64url Recovery Secret. Successful validation returns content-free shape
+evidence only. It does not retain the supplied credential text or decoded
+bytes, generate credentials, compute an HMAC/verifier, store a plaintext
+secret, perform lookup, authorize recovery, expose an endpoint, or call a
+service.
+
+The recovery descriptor source is also locked by a non-executing exact-AST
+policy. Imports, constants, immutable classes, validators, false capability
+results, and absence of generation/verifier/storage/authorization behavior
+cannot change silently. Passing is only source-conformance evidence and closes
+no recovery, cryptographic-review, persistence, external-service, or production
+gate.
+
 The package initializer is also locked by a non-executing exact-AST policy so
 its reviewed re-export surface cannot gain a production service, side effect,
 dynamic behavior, or widened public capability without an explicit policy

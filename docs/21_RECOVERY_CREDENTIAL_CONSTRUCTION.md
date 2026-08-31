@@ -319,6 +319,20 @@ Independent cryptographic review remains a release gate even after owner
 approval. Endpoint implementation also remains blocked by all dependent OPEN
 decisions.
 
+## Stage A inert implementation evidence
+
+The current implementation may validate only the canonical text shape of public
+Ticket IDs and Recovery Secrets and return content-free shape descriptors. It
+must not return or persist supplied credential text, decoded bytes, verifier
+tags, verifier keys, or raw HMAC messages.
+
+The Stage A descriptor and its non-executing source policy provide review
+evidence for exact sizes, encodings, domain label, tag size, generic rejection,
+and absence of generation, HMAC/verifier computation, storage, lookup, endpoint,
+service-call, and authorization behavior. They do not implement or approve
+credential generation, verifier creation or verification, recovery lookup,
+Response-DEK use, persistence, deployment, or production recovery.
+
 ## External design references
 
 - [RFC 4648 — Base-N Encodings](https://www.rfc-editor.org/rfc/rfc4648.html)

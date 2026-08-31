@@ -112,6 +112,15 @@ from .repository_hygiene import (
     analyze_tracked_paths,
     scan_repository_hygiene,
 )
+from .recovery_descriptors import (
+    EXPECTED_RECOVERY_DESCRIPTOR_AST_DIGEST,
+    RECOVERY_DESCRIPTOR_PATH,
+    RecoveryDescriptorSourceViolation,
+    RecoveryDescriptorSourceViolationCode,
+    analyze_recovery_descriptor_source,
+    scan_recovery_descriptor_source,
+    scan_repository_recovery_descriptor,
+)
 from .surfaces import (
     EXPECTED_REPORTER_PYTHON_AST_DIGESTS,
     EXPECTED_SETTINGS,
@@ -231,6 +240,13 @@ __all__ = [
     "analyze_gitignore_source",
     "analyze_tracked_paths",
     "scan_repository_hygiene",
+    "EXPECTED_RECOVERY_DESCRIPTOR_AST_DIGEST",
+    "RECOVERY_DESCRIPTOR_PATH",
+    "RecoveryDescriptorSourceViolation",
+    "RecoveryDescriptorSourceViolationCode",
+    "analyze_recovery_descriptor_source",
+    "scan_recovery_descriptor_source",
+    "scan_repository_recovery_descriptor",
     "EXPECTED_SETTINGS",
     "EXPECTED_REPORTER_PYTHON_AST_DIGESTS",
     "SurfaceViolation",
