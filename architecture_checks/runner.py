@@ -34,6 +34,7 @@ from .migrations import (
 )
 from .negative_capabilities import scan_negative_capability_sources
 from .orchestration import scan_inert_orchestration_sources
+from .repository_hygiene import scan_repository_hygiene
 from .submission import scan_submission_sources
 from .surfaces import (
     analyze_css_source,
@@ -240,6 +241,7 @@ def _report_step_up_descriptor(root: Path) -> tuple[object, ...]:
 
 ARCHITECTURE_CHECKS = (
     ArchitectureCheck("dependency-policy", scan_repository),
+    ArchitectureCheck("repository-hygiene", scan_repository_hygiene),
     ArchitectureCheck("root-url-imports", _root_url_imports),
     ArchitectureCheck("reporter-gateway-imports", _reporter_gateway_imports),
     ArchitectureCheck("settings-surface", _settings_surface),

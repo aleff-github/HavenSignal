@@ -636,6 +636,22 @@ single-use consumption, concurrency, or production readiness.
 
 ## Dependency/security checks
 
+During inert Stage A, CI must run `python -m architecture_checks .`. The
+aggregate static gate includes repository-hygiene checks that:
+
+- inspect only tracked path names and `.gitignore` rules;
+- reject tracked local databases, logs, virtual environments, secret/config
+  material, export artifacts, temporary workspaces, quarantine areas, user
+  media, collected static output, and cache/test artifacts;
+- preserve the reviewed `.gitignore` baseline for local-sensitive artifacts;
+- fail closed when `.gitignore` or tracked-file enumeration is unavailable;
+- return controlled, content-free violations without reading or echoing file
+  contents.
+
+This is repository hygiene only. It is not a replacement for secret scanning,
+dependency vulnerability scanning, code review, deployment validation, or
+incident-response handling of sensitive material.
+
 Before release:
 
 - dependency vulnerability scanning;
