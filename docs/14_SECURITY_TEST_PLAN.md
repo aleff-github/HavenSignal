@@ -88,6 +88,11 @@ For the metadata-only Stage A described by
   timestamp, import, dynamic, data/SQL/custom-code, dependency, additional-file,
   malformed-source, and out-of-root changes fail closed without execution or
   echoed source;
+- the submission error, states, transition planner, and metadata model retain
+  their exact executable AST; new states/edges, backward acceptance, sensitive
+  fields, caller-selected time, logging, weakened constraints, successful
+  existing-row mutation, database capability, malformed source, unknown target,
+  and missing-root changes fail closed without import, execution, or echo;
 - the inert finalization sequence contains only the received-request checkpoint
   followed by the exact twelve approved actions, rejects every skip, reverse,
   repeat, unknown value, wrong operation, non-OPEN state, internally

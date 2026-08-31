@@ -226,3 +226,11 @@ states, state/version constraints, terminal timestamp pairing, imports, and
 empty dependencies are fixed without importing or executing the source. This
 provides no endpoint, credential, protected persistence, reconciliation,
 PostgreSQL concurrency, external-service, or production authority.
+
+The twenty-ninth Stage A slice locks the complete executable AST of the inert
+submission error, state graph, pure transition planner, and metadata model. The
+generic failure, one-way edges, single version increment, server time,
+metadata-only constraints, and creation-only persistence boundary remain exact
+without importing or executing target modules. This provides no endpoint,
+credential, protected executor, reconciliation, concurrency, or production
+authority.

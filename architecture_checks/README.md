@@ -36,6 +36,14 @@ timestamps, imports, and sole numbered-file set are fixed. Any schema, state,
 constraint, data/SQL/custom-code, dynamic, import, or graph change requires an
 explicit policy update, while malformed and out-of-root inputs fail closed.
 
+The submission-source policy locks the complete executable AST of
+`submission_workflow/errors.py`, `states.py`, `transitions.py`, and `models.py`.
+It fixes the generic controlled error, closed state/edge registry, monotonic
+server-time planner, metadata-only schema constraints, creation-only model
+behavior, and absence of a protected persistence executor. Added states,
+backward edges, sensitive fields, logging, caller-selected time, database
+capability, weakened constraints, or success paths require explicit review.
+
 The orchestration-source policy parses only `report_lifecycle/finalization.py`,
 `report_lifecycle/deletion.py`, `report_lifecycle/retention.py`,
 `report_lifecycle/cleanup.py`, `report_lifecycle/metadata_retention.py`, and

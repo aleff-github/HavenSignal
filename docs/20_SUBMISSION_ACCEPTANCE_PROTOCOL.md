@@ -342,6 +342,14 @@ This evidence does not enable a form, endpoint, attempt credential, protected
 transition executor, reconciler, encryption, audit call, external service,
 PostgreSQL concurrency claim, or production submission capability.
 
+The controlled transition error, closed attempt-state graph, pure monotonic
+server-time planner, and metadata-only model are separately guarded by a
+non-executing exact-AST policy. It makes any new state or edge, sensitive field,
+caller-selected time, logging effect, weakened constraint, mutation success,
+database capability, or other executable change an explicit review event.
+Passing remains static source evidence and adds no protected executor or
+runtime authority.
+
 ## External design references
 
 - [RFC 9110, HTTP Semantics — idempotent methods and retry](https://www.rfc-editor.org/rfc/rfc9110.html#section-9.2.2)

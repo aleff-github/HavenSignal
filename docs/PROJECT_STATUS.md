@@ -31,6 +31,11 @@ also rejects additional numbered migrations. Schema, state/version,
 constraint, timestamp, import, dynamic, data, SQL, or custom-code changes
 require explicit review; passing provides no PostgreSQL or runtime evidence.
 
+The complete executable AST of its controlled error, state graph, pure planner,
+and metadata model is likewise locked without importing or executing those
+modules. New states, edges, sensitive fields, caller-selected time, logging,
+weakened constraints, mutation success, or database capability fail closed.
+
 ## Report lifecycle
 
 `report_lifecycle/` implements the owner-authorized inert Stage A for metadata-only `Report`, `ReportLease`, and `SecurityOperation` concepts.

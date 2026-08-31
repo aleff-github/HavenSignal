@@ -75,6 +75,13 @@ from .surfaces import (
     analyze_urlconf_source,
     scan_surface_file,
 )
+from .submission import (
+    EXPECTED_SUBMISSION_SOURCE_AST_DIGESTS,
+    SubmissionSourceViolation,
+    SubmissionSourceViolationCode,
+    analyze_submission_source,
+    scan_submission_sources,
+)
 
 __all__ = [
     "ADMINISTRATIVE_STEP_UP_DESCRIPTOR_PATH",
@@ -139,4 +146,9 @@ __all__ = [
     "analyze_template_source",
     "analyze_urlconf_source",
     "scan_surface_file",
+    "EXPECTED_SUBMISSION_SOURCE_AST_DIGESTS",
+    "SubmissionSourceViolation",
+    "SubmissionSourceViolationCode",
+    "analyze_submission_source",
+    "scan_submission_sources",
 ]

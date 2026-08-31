@@ -676,3 +676,17 @@ echoes the migration. Passing is static evidence only and closes no endpoint,
 attempt-credential, persistence-executor, reconciler, audit, cryptographic,
 external-service, PostgreSQL-concurrency, independent-review, or production
 gate.
+
+The twenty-ninth Stage A slice adds a non-executing exact-AST policy for the
+current `submission_workflow` controlled error, state registry, transition
+planner, and metadata model. It fixes the generic public failure, closed
+one-way graph, exact single version increment, server-selected time, immutable
+plan, metadata-only constraints, creation-only save behavior, and absence of a
+protected persistence executor.
+
+New states or edges, backward acceptance, sensitive fields, caller-selected
+time, logging, weaker constraints, successful existing-row mutation, database
+capability, dynamic behavior, unknown targets, malformed source, and missing
+roots fail closed. The scanner never imports, executes, or echoes its targets.
+Passing closes no endpoint, credential, concurrency, reconciliation, audit,
+cryptographic, external-service, independent-review, or production gate.

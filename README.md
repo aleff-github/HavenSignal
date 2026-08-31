@@ -101,6 +101,7 @@ The repository currently contains:
 - architecture checks that constrain the reporter-facing settings, route,
   passive assets, read-only view, and restrictive response-header middleware;
 - a non-executing exact-AST guard for the sole inert submission migration;
+- a non-executing exact-AST guard for the inert submission state machine;
 - non-executing AST policies that keep lifecycle orchestration incapable of
   persistence, cryptography, deletion, scheduling, logging, or service calls;
 - a test-only PostgreSQL concurrency scaffold.

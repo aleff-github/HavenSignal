@@ -11,7 +11,9 @@ sequencing and retry model. Its approval authorizes only the internal state and
 sequencing design; submission remains non-authorizing while dependent OPEN
 constructions are unresolved. The current metadata-only initial migration and
 sole-file graph are locked to their complete executable AST without importing
-or executing the source; this is static conformance evidence only.
+or executing the source. The controlled error, closed state graph, pure
+monotonic planner, and metadata-only model are also locked to exact executable
+AST profiles; all of this is static conformance evidence only.
 
 `docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md` is the owner-approved exact
 Ticket ID, Recovery Secret, and keyed-verifier construction. It remains
