@@ -52,6 +52,9 @@ For the metadata-only Stage A described by
 - Stage A step-up types cannot hold challenges, opaque browser handles,
   credentials, artifact bytes, HMAC bindings, consumed authorizations, or
   incomplete operation/state/artifact registry values, and authorize nothing;
+- the complete executable AST of the report-bound step-up-v1 descriptor module
+  remains exact; field, registry, timing, validator, false verification or
+  authorization result, import, dynamic, and effect changes fail closed;
 - administrative step-up-v2 foundations accept only exact 16-byte authorization,
   administrator, session, and device identifiers, binding-purpose/key-epoch
   metadata, a non-sliding 120-second lifetime, and an unused-only state;

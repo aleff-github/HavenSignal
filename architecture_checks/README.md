@@ -59,6 +59,11 @@ boundary to `security_interfaces/alert_descriptors.py`. It makes every change to
 the alert/severity/delivery registry, content-free fields, validators, false
 durability/authorization results, imports, or effects an explicit review event.
 
+The report step-up source policy locks the complete executable AST of
+`security_interfaces/step_up_descriptors.py`. Identifier/counter fields,
+algorithm and purpose registries, timing, unused state, validators, and every
+false verification/authorization result remain inert unless explicitly reviewed.
+
 The negative-capability policy parses only `security_interfaces/errors.py` and
 `security_interfaces/unavailable.py`. It locks the controlled dependency/error
 registry and every mandatory unavailable adapter to the exact executable AST

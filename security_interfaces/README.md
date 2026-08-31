@@ -65,6 +65,12 @@ challenge, POST handle, credential row, artifact bytes, HMAC output, operation,
 report-state, or artifact-kind value. A structurally valid component set does
 not verify WebAuthn or an artifact binding and authorizes nothing.
 
+A non-executing exact-AST policy locks this report-bound v1 source profile.
+Identifier/counter fields, registries, timing, unused state, validators, false
+verification/authorization results, imports, and absence of dynamic/effectful
+behavior cannot change silently. Passing proves no WebAuthn, binding, session,
+persistence, consumption, or protected authorization.
+
 `administrative_step_up_descriptors.py` models only the approved version-2
 foundations that are already exact without inventing an operation profile:
 16-byte authorization/administrator/session/device identifiers, binding purpose

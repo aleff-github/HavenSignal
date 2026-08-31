@@ -211,3 +211,11 @@ results, imports, and absence of dynamic/effectful behavior are fixed. The
 scanner never imports, executes, or echoes the target. This provides no full
 request profile, persistence, durable acceptance, delivery, acknowledgement,
 Alert Service, or production authority.
+
+The twenty-seventh Stage A slice locks the complete executable AST of the inert
+report-bound step-up-v1 descriptor module. Protocol/lifetime, algorithms,
+binding purpose, internal identifier/counter fields, timing, unused state,
+validators, and every false verification/authorization result are fixed. The
+scanner never imports, executes, or echoes the target. This provides no
+challenge, credential, WebAuthn, artifact binding, session, persistence,
+consumption, concurrency, external-service, or production authority.

@@ -97,6 +97,7 @@ The repository currently contains:
   step-up foundations to their exact inert source profile;
 - a non-executing exact-AST guard for the inert audit-v1 descriptors;
 - a non-executing exact-AST guard for the inert alert-v1 descriptors;
+- a non-executing exact-AST guard for report-bound step-up-v1 descriptors;
 - architecture checks that constrain the reporter-facing settings, route,
   passive assets, read-only view, and restrictive response-header middleware;
 - non-executing AST policies that keep lifecycle orchestration incapable of

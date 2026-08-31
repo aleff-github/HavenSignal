@@ -400,6 +400,22 @@ operation profiles, artifact binding, persistence, single-use consumption,
 concurrency, independent review, or production acceptance. Those gates remain
 OPEN.
 
+## Inert Stage A report step-up source conformance
+
+The non-executing Stage A policy parses but never imports or executes
+`security_interfaces/step_up_descriptors.py`. It fixes the complete executable
+AST of the report-bound version-1 foundations: protocol/lifetime, ES256/EdDSA
+and binding-purpose registries, internal identifier/counter context, exact
+timing, unused-only state, validators, and false operation-profile, WebAuthn,
+artifact-binding, and protected-authorization results.
+
+Field, registry, timing, validator, success-return, import, challenge,
+credential, handle, HMAC/binding, persistence, consumption, logging, network,
+I/O, cryptographic, dynamic, and other effect changes fail closed. Passing is
+source conformance only and implements no authentication, artifact binding,
+session, database, single-use consumption, concurrency, external service,
+independent review, or production capability.
+
 ## Consolidated decisions approved at the pre-code gate
 
 The project owner approved the following on 2026-08-26:

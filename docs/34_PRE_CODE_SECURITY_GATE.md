@@ -646,3 +646,18 @@ and malformed sources yield controlled content-free violations; the target is
 never imported or executed. Passing closes no full request-profile, durable
 acceptance, delivery, acknowledgement, service-authentication, PostgreSQL,
 independent-review, Alert Service, external-service, or production gate.
+
+The twenty-seventh Stage A slice adds the non-executing source policy for the
+inert report-bound step-up-v1 descriptor module. It fixes the exact target and
+complete executable AST: protocol/lifetime, algorithm and binding-purpose
+registries, internal identifier/counter fields, timing, unused-only state,
+validators, and every false operation-profile, WebAuthn, artifact-binding, and
+protected-action result.
+
+Field, registry, timing, validator, success-return, import, challenge,
+credential, handle, binding, persistence, consumption, cryptographic, logging,
+network, I/O, dynamic, and other side-effect changes fail closed. The scanner
+never imports or executes the target and returns only controlled content-free
+violations. Passing closes no authentication, WebAuthn, artifact binding,
+session, database, concurrency, independent-review, external-service, or
+production gate.

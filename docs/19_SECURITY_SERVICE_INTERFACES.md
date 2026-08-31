@@ -659,3 +659,17 @@ The scanner parses but never imports, executes, or echoes the target. Passing
 does not create a full submit request, prove durable acceptance, deliver or
 acknowledge an alert, authorize a protected operation, or close PostgreSQL,
 service-authentication, independent-review, Alert Service, or production gates.
+
+## Stage A report step-up descriptor source-conformance record
+
+The non-executing report-step-up policy fixes the complete executable AST of
+`security_interfaces/step_up_descriptors.py`. It locks the version/lifetime,
+ES256/EdDSA and binding-purpose registries, internal identifier/counter fields,
+immutable timing and unused-only state, validator logic, and every false
+WebAuthn, artifact-binding, operation-profile, and authorization result.
+
+Added challenge, credential, handle, binding, persistence, consumption,
+cryptographic, logging, network, I/O, dynamic, or success behavior fails closed.
+The scanner never imports, executes, or echoes the target. Passing closes no
+authentication, WebAuthn, artifact binding, session, database, concurrency,
+independent-review, external-service, or production gate.
