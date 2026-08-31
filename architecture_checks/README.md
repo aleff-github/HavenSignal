@@ -29,6 +29,13 @@ operation sequence, closed migration/model constructor calls, and absence of
 additional numbered migrations. A separate Django drift test requires
 `makemigrations --check --dry-run` to report no model changes.
 
+The submission-migration policy likewise parses but never imports or executes
+the sole `submission_workflow` migration. Its complete executable AST, empty
+dependency graph, exact metadata-only fields, constraints, state/version shape,
+timestamps, imports, and sole numbered-file set are fixed. Any schema, state,
+constraint, data/SQL/custom-code, dynamic, import, or graph change requires an
+explicit policy update, while malformed and out-of-root inputs fail closed.
+
 The orchestration-source policy parses only `report_lifecycle/finalization.py`,
 `report_lifecycle/deletion.py`, `report_lifecycle/retention.py`,
 `report_lifecycle/cleanup.py`, `report_lifecycle/metadata_retention.py`, and

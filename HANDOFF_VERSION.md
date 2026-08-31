@@ -219,3 +219,10 @@ validators, and every false verification/authorization result are fixed. The
 scanner never imports, executes, or echoes the target. This provides no
 challenge, credential, WebAuthn, artifact binding, session, persistence,
 consumption, concurrency, external-service, or production authority.
+
+The twenty-eighth Stage A slice locks the complete executable AST and sole-file
+graph of the inert submission initial migration. Exact metadata-only fields,
+states, state/version constraints, terminal timestamp pairing, imports, and
+empty dependencies are fixed without importing or executing the source. This
+provides no endpoint, credential, protected persistence, reconciliation,
+PostgreSQL concurrency, external-service, or production authority.

@@ -83,6 +83,11 @@ For the metadata-only Stage A described by
 - the migration's exact metadata-only model fields and constructor types match
   the reviewed profile, and Django `makemigrations --check --dry-run` reports no
   pending model change;
+- the submission migration package likewise contains exactly its reviewed
+  initial migration and complete executable AST; field, state, constraint,
+  timestamp, import, dynamic, data/SQL/custom-code, dependency, additional-file,
+  malformed-source, and out-of-root changes fail closed without execution or
+  echoed source;
 - the inert finalization sequence contains only the received-request checkpoint
   followed by the exact twelve approved actions, rejects every skip, reverse,
   repeat, unknown value, wrong operation, non-OPEN state, internally

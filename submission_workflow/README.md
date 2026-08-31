@@ -19,3 +19,9 @@ an unevidenced protected transition. This package does not authorize
 submission. Multi-process concurrency and crash testing on PostgreSQL remains
 a release gate before any endpoint or security-service edge can be enabled;
 SQLite is only the local scaffold.
+
+The initial migration is protected by a non-executing exact-AST policy. It
+requires the sole reviewed numbered migration and fixes the empty dependency
+graph, metadata-only fields, state/version constraints, and terminal timestamp
+pairing. The scanner never imports or executes migration source; passing is
+source-conformance evidence only and is not PostgreSQL or production proof.

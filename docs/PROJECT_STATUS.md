@@ -26,6 +26,11 @@ The current surface must not be used for real sensitive reports.
 
 It has no public submission endpoint or database transition executor and stores no reporter content, credential, key, verifier, filename, request metadata, or audit receipt.
 
+Its sole initial migration is locked by a non-executing exact-AST policy that
+also rejects additional numbered migrations. Schema, state/version,
+constraint, timestamp, import, dynamic, data, SQL, or custom-code changes
+require explicit review; passing provides no PostgreSQL or runtime evidence.
+
 ## Report lifecycle
 
 `report_lifecycle/` implements the owner-authorized inert Stage A for metadata-only `Report`, `ReportLease`, and `SecurityOperation` concepts.

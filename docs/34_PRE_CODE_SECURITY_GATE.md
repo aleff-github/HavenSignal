@@ -661,3 +661,18 @@ never imports or executes the target and returns only controlled content-free
 violations. Passing closes no authentication, WebAuthn, artifact binding,
 session, database, concurrency, independent-review, external-service, or
 production gate.
+
+The twenty-eighth Stage A slice adds a non-executing exact-AST policy for the
+sole inert `submission_workflow` initial migration. It fixes the empty
+dependency graph, exact metadata-only fields, closed submission states,
+state/version constraints, terminal timestamp pairing, imports, operations,
+and absence of additional numbered migrations.
+
+Reporter-data, credential, key, request-metadata, schema, state, constraint,
+data/SQL/custom-code, import, dynamic, dependency, and graph changes fail
+closed. Missing, malformed, unreadable, and out-of-root sources produce only
+controlled content-free violations. The scanner never imports, executes, or
+echoes the migration. Passing is static evidence only and closes no endpoint,
+attempt-credential, persistence-executor, reconciler, audit, cryptographic,
+external-service, PostgreSQL-concurrency, independent-review, or production
+gate.

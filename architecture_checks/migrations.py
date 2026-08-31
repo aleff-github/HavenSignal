@@ -1,6 +1,7 @@
 """Non-executing policy for the inert report-lifecycle migration graph."""
 
 import ast
+import hashlib
 from dataclasses import dataclass
 from enum import StrEnum
 from pathlib import Path
@@ -66,6 +67,27 @@ EXPECTED_LIFECYCLE_MIGRATION_FIELDS = MappingProxyType(
             "report",
         ),
     }
+)
+
+SUBMISSION_MIGRATION_PATH = (
+    "submission_workflow/migrations/0001_initial.py"
+)
+EXPECTED_SUBMISSION_MIGRATION_FIELDS = MappingProxyType(
+    {
+        "SubmissionAttempt": (
+            "id",
+            "state",
+            "state_version",
+            "created_at",
+            "last_progress_at",
+            "accepted_at",
+            "aborting_at",
+            "aborted_at",
+        ),
+    }
+)
+EXPECTED_SUBMISSION_MIGRATION_AST_DIGEST = (
+    "52235aa9e86d48c6f026347a207e47fb142d848e53071a718d862cd74864ec73"
 )
 
 _EXPECTED_FIELD_TYPE_PROFILE = {
@@ -518,3 +540,110 @@ def scan_lifecycle_migrations(
         source=source,
         relative_path=f"{relative_root}/0001_initial.py",
     )
+
+
+def _ast_digest(tree: ast.AST) -> str:
+    payload = ast.dump(
+        tree,
+        annotate_fields=True,
+        include_attributes=False,
+    ).encode("utf-8")
+    return hashlib.sha256(payload).hexdigest()
+
+
+def analyze_submission_migration_source(
+    *,
+    source: str,
+    relative_path: str = SUBMISSION_MIGRATION_PATH,
+) -> tuple[MigrationViolation, ...]:
+    """Require the exact reviewed submission migration without executing it."""
+
+    if relative_path != SUBMISSION_MIGRATION_PATH:
+        return (
+            _violation(
+                code=MigrationViolationCode.MIGRATION_GRAPH_MISMATCH,
+                relative_path=relative_path,
+                line=0,
+                detail_code="SUBMISSION_TARGET_SET",
+            ),
+        )
+    try:
+        tree = ast.parse(source, filename=relative_path)
+    except (SyntaxError, ValueError, TypeError):
+        return (
+            _violation(
+                code=MigrationViolationCode.SOURCE_PARSE_ERROR,
+                relative_path=relative_path,
+                line=0,
+                detail_code="PYTHON_SOURCE_INVALID",
+            ),
+        )
+    if _ast_digest(tree) != EXPECTED_SUBMISSION_MIGRATION_AST_DIGEST:
+        return (
+            _violation(
+                code=MigrationViolationCode.MIGRATION_GRAPH_MISMATCH,
+                relative_path=relative_path,
+                line=0,
+                detail_code="SUBMISSION_AST_PROFILE",
+            ),
+        )
+    return ()
+
+
+def scan_submission_migrations(
+    *, migrations_root: Path, relative_to: Path
+) -> tuple[MigrationViolation, ...]:
+    """Require the sole reviewed submission migration inside the repository."""
+
+    try:
+        resolved_repository = relative_to.resolve(strict=True)
+        resolved_migrations = migrations_root.resolve(strict=True)
+        resolved_migrations.relative_to(resolved_repository)
+        relative_root = migrations_root.relative_to(relative_to).as_posix()
+    except (OSError, ValueError):
+        return (
+            _violation(
+                code=MigrationViolationCode.SOURCE_PARSE_ERROR,
+                relative_path="<invalid-migration-path>",
+                line=0,
+                detail_code="PATH_INVALID",
+            ),
+        )
+    expected_root = SUBMISSION_MIGRATION_PATH.rsplit("/", 1)[0]
+    if relative_root != expected_root:
+        return (
+            _violation(
+                code=MigrationViolationCode.MIGRATION_GRAPH_MISMATCH,
+                relative_path=relative_root,
+                line=0,
+                detail_code="SUBMISSION_TARGET_SET",
+            ),
+        )
+    numbered_files = tuple(
+        sorted(
+            path
+            for path in resolved_migrations.glob("[0-9][0-9][0-9][0-9]_*.py")
+            if path.is_file()
+        )
+    )
+    if tuple(path.name for path in numbered_files) != ("0001_initial.py",):
+        return (
+            _violation(
+                code=MigrationViolationCode.MIGRATION_GRAPH_MISMATCH,
+                relative_path=relative_root,
+                line=0,
+                detail_code="NUMBERED_FILE_SET",
+            ),
+        )
+    try:
+        source = numbered_files[0].read_text(encoding="utf-8")
+    except (OSError, UnicodeError):
+        return (
+            _violation(
+                code=MigrationViolationCode.SOURCE_PARSE_ERROR,
+                relative_path=SUBMISSION_MIGRATION_PATH,
+                line=0,
+                detail_code="SOURCE_UNREADABLE",
+            ),
+        )
+    return analyze_submission_migration_source(source=source)
