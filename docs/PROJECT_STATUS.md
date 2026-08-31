@@ -88,6 +88,8 @@ types do not themselves:
 - store or look up recovery material;
 - canonicalize, encrypt, decrypt, parse, or persist Response Note material;
 - hold real Response-DEK, nonce, AAD, key-handle, or ciphertext values;
+- retain Response Note text, normalized text, canonical bytes, digests, drafts,
+  or previews;
 - authorize protected operations.
 
 The administrative step-up-v2 foundations are limited to content-free internal
@@ -161,6 +163,14 @@ nonce, tag, frame, envelope, immutable-context-size, AAD-purpose, and
 Response-DEK operation names cannot change without explicit review. The check
 never imports or executes the target and proves no canonicalization, CBOR,
 AEAD, Key Service, storage, endpoint, or response-use authorization capability.
+
+The Response Note text descriptor module is locked to its exact executable AST
+as content-free transient validation only. Unicode/NFC/LF/UTF-8 rules,
+scalar/byte limits, plain-text restrictions, conservative no-link/no-HTML
+markers, validators, and false capability flags cannot change without explicit
+review. The check never imports or executes the target and proves no preview,
+draft, canonical byte freezing, digest binding, staging, endpoint, or
+finalization capability.
 
 The controlled security-interface errors and unavailable external-service
 adapters are likewise parsed but never imported or executed and must retain

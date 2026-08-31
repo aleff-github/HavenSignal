@@ -68,3 +68,12 @@ class ResponseCryptoDescriptorRejected(ValueError):
 
     def __init__(self) -> None:
         super().__init__(self.public_code)
+
+
+class ResponseTextDescriptorRejected(ValueError):
+    """Controlled rejection for an invalid inert response text descriptor."""
+
+    public_code = "response_text_descriptor_rejected"
+
+    def __init__(self) -> None:
+        super().__init__(self.public_code)

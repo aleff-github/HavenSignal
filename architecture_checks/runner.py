@@ -40,6 +40,7 @@ from .recovery_descriptors import scan_repository_recovery_descriptor
 from .response_crypto_descriptors import (
     scan_repository_response_crypto_descriptor,
 )
+from .response_text_descriptors import scan_repository_response_text_descriptor
 from .submission import scan_submission_sources
 from .surfaces import (
     analyze_css_source,
@@ -254,6 +255,10 @@ ARCHITECTURE_CHECKS = (
     ArchitectureCheck(
         "response-crypto-descriptor",
         scan_repository_response_crypto_descriptor,
+    ),
+    ArchitectureCheck(
+        "response-text-descriptor",
+        scan_repository_response_text_descriptor,
     ),
     ArchitectureCheck("root-url-imports", _root_url_imports),
     ArchitectureCheck("reporter-gateway-imports", _reporter_gateway_imports),

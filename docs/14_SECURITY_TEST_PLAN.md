@@ -80,6 +80,18 @@ For the metadata-only Stage A described by
   exact; import, constant, registry, field, validator, false-capability,
   canonicalization, CBOR, AEAD, Key Service, storage, logging, endpoint, and
   authorization changes fail closed without importing or executing it;
+- Response Note text descriptors accept only the exact plain-text profile:
+  Unicode scalar values, NUL rejection, LF line-ending profile, NFC
+  normalization rule, strict UTF-8, 5,000-scalar and 20,000-byte limits,
+  conservative no-HTML markers, and conservative no-link markers;
+- response text validation returns no submitted text, normalized text,
+  canonical bytes, digest, preview, draft, frame, receipt, state, persistence,
+  endpoint, finalization, or authorization capability;
+- the complete executable AST of the response text descriptor module remains
+  exact; import, constant, registry, field, validator, false-capability,
+  retained-text, canonical-byte, digest, draft, persistence, staging, endpoint,
+  logging, service-call, finalization, and authorization changes fail closed
+  without importing or executing it;
 - administrative step-up-v2 foundations accept only exact 16-byte authorization,
   administrator, session, and device identifiers, binding-purpose/key-epoch
   metadata, a non-sliding 120-second lifetime, and an unused-only state;
@@ -726,6 +738,34 @@ Passing this policy proves only exact source conformance. It does not implement
 Response Note canonicalization, frame or envelope parsing, encryption,
 decryption, Response-DEK lifecycle operations, recovery authorization,
 persistence, endpoint behavior, or production readiness.
+
+## Stage A response text descriptor source conformance
+
+While Response Note finalization remains blocked behind independent review and
+dependent production gates, statically verify without importing or executing
+the target that:
+
+- the target path, imports, profile version, normalization, line-ending,
+  encoding, content kind, scalar limit, UTF-8 byte limit, forbidden codepoints,
+  forbidden characters, and no-link marker sequence remain exact;
+- immutable slotted descriptor classes expose only static profile shapes and no
+  submitted text, normalized text, canonical bytes, artifact digest, preview,
+  server-side draft, frame, receipt, report state, persistence, or endpoint
+  field;
+- validators reject non-string, NUL, surrogate, HTML-marker, link-marker,
+  over-scalar-limit, over-byte-limit, wrong-profile, and malformed objects with
+  a generic controlled error that echoes no supplied value;
+- digesting, byte freezing, frame construction, persistence, logging,
+  networking, file access, Django integration, step-up binding, finalization,
+  dynamic imports, `eval`, `exec`, and success authorization behavior fail
+  closed;
+- missing, unreadable, malformed, and out-of-root inputs return controlled,
+  content-free violations.
+
+Passing this policy proves only exact source conformance. It does not implement
+the final preview, canonical byte production, artifact digest binding,
+Response Note staging, persistence, endpoint behavior, finalization, or
+production readiness.
 
 ## Dependency/security checks
 
