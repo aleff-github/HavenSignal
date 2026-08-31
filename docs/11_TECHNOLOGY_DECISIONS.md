@@ -21,6 +21,23 @@ Current version candidate: **Django 5.2 LTS**, latest supported security patch a
 
 Do not pin to an old patch version in documentation; lock the exact dependency in the repository when implementation begins.
 
+## Dependency update policy
+
+Automated dependency pull requests are permitted only when GitHub Dependabot
+identifies a known security vulnerability with an available remediation.
+Routine version-update pull requests are disabled.
+
+Django remains on the approved 5.2 LTS line. A security update within that line
+may change only the patch component. If a security fix is unavailable on the
+approved line, automation MUST fail closed and the project owner must decide
+whether to approve a separately reviewed framework migration; automation must
+not silently cross a feature or major version boundary.
+
+Every dependency update must update the direct declaration and resolved lock
+together, preserve hash pinning, update `MANIFEST.sha256`, and pass the complete
+test and security-check suite. A green build that installed the previous lock
+does not constitute evidence that the proposed dependency was tested.
+
 ## Rendering
 
 Reporter-facing flow should prefer server-rendered HTML with minimal JavaScript rather than a SPA.
