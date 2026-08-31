@@ -645,3 +645,17 @@ The scanner parses but never imports, executes, or echoes the target. Passing
 is source-level conformance only. It does not implement deterministic CBOR,
 COSE, signature or receipt verification, audit append/durability, replay
 storage, protected consumers, independent review, or production capability.
+
+## Stage A alert descriptor source-conformance record
+
+The non-executing alert-descriptor policy fixes the complete executable AST of
+`security_interfaces/alert_descriptors.py` to the inert alert-v1 profile. It
+therefore locks the alert/severity/delivery registries, content-free immutable
+component fields, validator logic, acknowledgement pairing, and false durable-
+acceptance and protected-authorization results. Added delivery, persistence,
+SMTP, logging, network, dynamic, or other effectful behavior fails closed.
+
+The scanner parses but never imports, executes, or echoes the target. Passing
+does not create a full submit request, prove durable acceptance, deliver or
+acknowledge an alert, authorize a protected operation, or close PostgreSQL,
+service-authentication, independent-review, Alert Service, or production gates.

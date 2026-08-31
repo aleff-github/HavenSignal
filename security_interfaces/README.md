@@ -52,6 +52,12 @@ durable database/queue commit nor SMTP delivery and never authorizes a
 protected action. There is no Alert Service client, outbox, persistence,
 transport, acknowledgement mutation, or development success adapter.
 
+The alert descriptor's complete executable AST is also locked by a
+non-executing source policy. Registry, field, validator, false durability or
+authorization result, import, dynamic, and side-effect changes fail closed.
+Passing does not prove durable acceptance, delivery, acknowledgement, or an
+Alert Service boundary.
+
 `step_up_descriptors.py` models only the report-bound v1 UUID/counter context,
 the exact 120-second lifetime, ES256/EdDSA algorithm registry, binding purpose
 and key epoch, and an unused-only Stage A state. It deliberately contains no

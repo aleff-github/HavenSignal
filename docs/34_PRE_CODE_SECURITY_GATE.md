@@ -633,3 +633,16 @@ controlled content-free violations. The target is parsed but never imported or
 executed. Passing is static source evidence only and closes no CBOR/COSE,
 receipt verification, audit append/durability, replay storage, protected
 consumer, independent-review, external-service, or production gate.
+
+The twenty-sixth Stage A slice adds the equivalent non-executing source policy
+for the inert alert-v1 descriptor module. It fixes the exact target and complete
+executable AST: alert/severity/delivery registries, immutable content-free
+component fields, validators, acknowledgement pairing, and the false durable-
+acceptance and protected-action authorization results.
+
+Registry, field, validator, success-return, import, dynamic, SMTP, logging, I/O,
+persistence, network, and other side-effect changes fail closed. Invalid paths
+and malformed sources yield controlled content-free violations; the target is
+never imported or executed. Passing closes no full request-profile, durable
+acceptance, delivery, acknowledgement, service-authentication, PostgreSQL,
+independent-review, Alert Service, external-service, or production gate.

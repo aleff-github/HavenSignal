@@ -203,3 +203,11 @@ The scanner never imports, executes, or echoes the target. This is source-
 conformance evidence only and provides no CBOR/COSE, receipt verification,
 audit append/durability, replay storage, protected-action, or production
 authority.
+
+The twenty-sixth Stage A slice locks the complete executable AST of the inert
+alert-v1 descriptor module. Alert/severity/delivery registries, content-free
+fields, validators, acknowledgement pairing, false durability/authorization
+results, imports, and absence of dynamic/effectful behavior are fixed. The
+scanner never imports, executes, or echoes the target. This provides no full
+request profile, persistence, durable acceptance, delivery, acknowledgement,
+Alert Service, or production authority.

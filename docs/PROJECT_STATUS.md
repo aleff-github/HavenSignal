@@ -95,6 +95,10 @@ executable AST. Registry, field, validator, authorization-window, success-return
 import, dynamic, or side-effect changes require an explicit policy update; the
 target is never imported or executed by the check.
 
+The alert-v1 descriptors have the same non-executing exact-AST guard. Their
+fixed registries, content-free fields, validators and false durability and
+authorization results cannot change without an explicit policy update.
+
 The controlled security-interface errors and unavailable external-service
 adapters are likewise parsed but never imported or executed and must retain
 their exact generic fail-closed behavior.

@@ -43,6 +43,9 @@ For the metadata-only Stage A described by
   acknowledgement pairing while rejecting unknown/arbitrary values;
 - a structural alert acceptance response never proves durable inbox/outbox
   commit, SMTP delivery, human acknowledgement, or protected authorization;
+- the complete executable AST of the inert alert-v1 descriptor module remains
+  exact; registry, field, validator, false durability/authorization result,
+  import, dynamic, and side-effect changes fail closed without execution;
 - report-bound step-up-v1 components accept only exact identifier/counter
   shapes, approved COSE algorithm codes, binding-purpose metadata, and the
   non-sliding 120-second lifetime;

@@ -35,6 +35,10 @@ AUDIT_DESCRIPTOR_PATH = "security_interfaces/audit_descriptors.py"
 EXPECTED_AUDIT_DESCRIPTOR_AST_DIGEST = (
     "b89cd3f916c4834e8041d2cb622bb60d59f1ee892a8ea0e88688245cb8a3eb46"
 )
+ALERT_DESCRIPTOR_PATH = "security_interfaces/alert_descriptors.py"
+EXPECTED_ALERT_DESCRIPTOR_AST_DIGEST = (
+    "9a5767aad3a68ac40ce6c957d4880e554163f809aef7d2c32476a04b8aa0c972"
+)
 
 _EXPECTED_IMPORTS = (
     (0, "dataclasses", (("dataclass", None),)),
@@ -483,6 +487,68 @@ def scan_audit_descriptor_source(
             ),
         )
     return analyze_audit_descriptor_source(
+        source=source,
+        relative_path=relative_path,
+    )
+
+
+def analyze_alert_descriptor_source(
+    *, source: str, relative_path: str = ALERT_DESCRIPTOR_PATH
+) -> tuple[DescriptorSourceViolation, ...]:
+    """Check the exact inert alert-v1 source without importing it."""
+
+    if relative_path != ALERT_DESCRIPTOR_PATH:
+        return (
+            _violation(
+                DescriptorViolationCode.TARGET_SET_MISMATCH,
+                relative_path,
+                0,
+                "ALERT_DESCRIPTOR_TARGET",
+            ),
+        )
+    try:
+        tree = ast.parse(source, filename=relative_path)
+    except (SyntaxError, ValueError, TypeError, MemoryError, RecursionError):
+        return (
+            _violation(
+                DescriptorViolationCode.SOURCE_PARSE_ERROR,
+                relative_path,
+                0,
+                "PYTHON_SOURCE_INVALID",
+            ),
+        )
+    if _node_digest(tree) != EXPECTED_ALERT_DESCRIPTOR_AST_DIGEST:
+        return (
+            _violation(
+                DescriptorViolationCode.MODULE_PROFILE_MISMATCH,
+                relative_path,
+                0,
+                "EXACT_INERT_ALERT_DESCRIPTOR_AST",
+            ),
+        )
+    return ()
+
+
+def scan_alert_descriptor_source(
+    *, path: Path, relative_to: Path
+) -> tuple[DescriptorSourceViolation, ...]:
+    """Read the reviewed alert target or fail closed without source echo."""
+
+    try:
+        root = relative_to.resolve(strict=True)
+        resolved = path.resolve(strict=True)
+        relative_path = resolved.relative_to(root).as_posix()
+        source = resolved.read_text(encoding="utf-8")
+    except (OSError, UnicodeError, ValueError):
+        return (
+            _violation(
+                DescriptorViolationCode.SOURCE_PARSE_ERROR,
+                "<invalid-scan-path>",
+                0,
+                "TARGET_UNAVAILABLE",
+            ),
+        )
+    return analyze_alert_descriptor_source(
         source=source,
         relative_path=relative_path,
     )

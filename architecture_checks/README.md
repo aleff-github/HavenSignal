@@ -54,6 +54,11 @@ AST with the reviewed inert audit-v1 profile. Registry, field, validator,
 authorization-window, import, call, success-return, or side-effect changes fail
 closed without importing, executing, or echoing the target source.
 
+The alert-descriptor source policy applies the same non-executing exact-AST
+boundary to `security_interfaces/alert_descriptors.py`. It makes every change to
+the alert/severity/delivery registry, content-free fields, validators, false
+durability/authorization results, imports, or effects an explicit review event.
+
 The negative-capability policy parses only `security_interfaces/errors.py` and
 `security_interfaces/unavailable.py`. It locks the controlled dependency/error
 registry and every mandatory unavailable adapter to the exact executable AST
