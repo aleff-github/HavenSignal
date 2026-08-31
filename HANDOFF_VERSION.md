@@ -261,3 +261,12 @@ aggregate fail-closed runner for the current static policy registry and wires
 CI to call it. The command normalizes content-free violations from the existing
 non-executing checks and provides no new runtime, browser, database,
 external-service, deployment, or production authority.
+
+The thirty-fourth Stage A slice adds a content-free repository-hygiene policy
+to that aggregate runner. It inspects only tracked path names and `.gitignore`
+rules, rejects committed local databases, logs, virtual environments,
+secret/config material, export artifacts, temporary workspaces, quarantine
+areas, user media, collected static output, and cache/test artifacts, and fails
+closed without reading or echoing candidate file contents. It is repository
+hygiene only and does not replace secret scanning, security review, deployment
+validation, or production data-handling controls.

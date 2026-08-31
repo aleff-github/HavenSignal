@@ -28,6 +28,7 @@ class ArchitectureCheckRunnerTests(SimpleTestCase):
             {check.name for check in ARCHITECTURE_CHECKS},
             {
                 "dependency-policy",
+                "repository-hygiene",
                 "root-url-imports",
                 "reporter-gateway-imports",
                 "settings-surface",

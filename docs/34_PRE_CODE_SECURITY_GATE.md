@@ -742,3 +742,17 @@ import or execute scanned targets beyond the behavior of the already reviewed
 individual scanners. Passing closes no browser, runtime, PostgreSQL,
 process-isolation, external-service, deployment, independent-review, or
 production gate.
+
+The thirty-fourth Stage A slice adds a content-free repository-hygiene policy
+to the aggregate architecture runner. It inspects only tracked path names and
+the `.gitignore` rule set, rejecting committed local databases, logs, virtual
+environments, secret/config material, export artifacts, temporary workspaces,
+quarantine areas, user media, collected static output, and cache/test
+artifacts.
+
+Missing `.gitignore`, unavailable tracked-file enumeration, invalid tracked
+path shapes, removed required ignore rules, and forbidden tracked paths fail
+closed with controlled reason codes. The policy does not read or echo candidate
+file contents and is not a substitute for dedicated secret scanning,
+vulnerability scanning, deployment review, incident response, or production
+data-handling controls.
