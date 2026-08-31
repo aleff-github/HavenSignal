@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Protocol, Sequence
 
 from .bootstrap import scan_bootstrap_sources
+from .ci_workflow import scan_repository_ci_workflow
 from .dependency_policy import scan_repository
 from .descriptors import (
     ADMINISTRATIVE_STEP_UP_DESCRIPTOR_PATH,
@@ -244,6 +245,7 @@ ARCHITECTURE_CHECKS = (
     ArchitectureCheck("dependency-policy", scan_repository),
     ArchitectureCheck("repository-hygiene", scan_repository_hygiene),
     ArchitectureCheck("verification-script", scan_repository_verification_script),
+    ArchitectureCheck("ci-workflow", scan_repository_ci_workflow),
     ArchitectureCheck("root-url-imports", _root_url_imports),
     ArchitectureCheck("reporter-gateway-imports", _reporter_gateway_imports),
     ArchitectureCheck("settings-surface", _settings_surface),

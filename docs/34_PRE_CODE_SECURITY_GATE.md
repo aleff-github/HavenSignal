@@ -769,3 +769,16 @@ drift, malformed source, missing input, and out-of-root paths with controlled
 reason codes. Passing this policy provides only developer-tooling conformance;
 it closes no runtime, browser, database, cryptographic, external-service,
 deployment, independent-review, or production gate.
+
+The thirty-sixth Stage A slice updates the GitHub Actions CI workflow to
+install `requirements.lock` with `--require-hashes` and then run the reviewed
+`scripts/verify` entrypoint. It adds a non-executing workflow source policy
+that fixes read-only repository permissions, pinned checkout/setup-python
+actions, Python 3.13, locked dependency installation, and the script entrypoint.
+
+Write or OIDC permissions, moving action refs, un-hashed dependency
+installation, `continue-on-error`, missing workflow input, out-of-root input,
+and reviewed workflow hash drift fail closed with controlled reason codes. The
+policy reads only the workflow source, does not execute CI, and closes no
+supply-chain, dependency-vulnerability, deployment, independent-review, or
+production gate.

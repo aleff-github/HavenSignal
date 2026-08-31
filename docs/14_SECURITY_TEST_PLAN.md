@@ -88,6 +88,13 @@ For the metadata-only Stage A described by
   `scripts/verify`, rejects removed steps and executable-source drift, fails
   closed for missing/malformed/out-of-root input, and never echoes script source
   or injected sentinel values;
+- the GitHub Actions CI workflow remains locked to read-only repository
+  permissions, pinned checkout/setup-python actions, Python 3.13, locked
+  dependency installation with `--require-hashes`, and `scripts/verify`;
+- the CI-workflow source policy rejects write/id-token permissions, moving
+  action refs, un-hashed dependency installation, `continue-on-error`, missing
+  workflow input, out-of-root input, and reviewed workflow hash drift without
+  executing the workflow or echoing injected values;
 - the test-only PostgreSQL concurrency scaffold contains exactly the active
   report/lease/operation exclusions and stale report-version/lease-generation
   scenarios currently modeled, using only internally generated UUID metadata;
