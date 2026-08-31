@@ -70,6 +70,15 @@ class RecoveryDescriptorRejected(ValueError):
         super().__init__(self.public_code)
 
 
+class RequestAdmissionDescriptorRejected(ValueError):
+    """Controlled rejection for an invalid inert request-admission descriptor."""
+
+    public_code = "request_admission_descriptor_rejected"
+
+    def __init__(self) -> None:
+        super().__init__(self.public_code)
+
+
 class ResponseCryptoDescriptorRejected(ValueError):
     """Controlled rejection for an invalid inert response crypto descriptor."""
 

@@ -429,6 +429,15 @@ Test:
 - page/object/decompression/dimension/resource limits once approved;
 - verify proxy, Django upload handling, workers, and temporary workspaces do not durably spool plaintext.
 
+Current Stage A evidence additionally tests that the inert request-admission
+descriptor accepts only the approved 21 MiB body, 5 MiB per-file, 20 MiB
+aggregate-file, text/control/header/part/boundary, streaming-buffer, deadline,
+method/content-type, and file-slot metadata. Its exact-source policy rejects
+HTTP/multipart parsing, Django upload-handler installation, file-byte access,
+filename exposure, sandbox job creation, plaintext persistence, submission
+acceptance, dynamic behavior, and source echoing. These tests do not enable an
+upload endpoint or custom handler.
+
 Unsafe/uncertain should fail closed.
 
 ## File sandbox

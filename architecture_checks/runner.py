@@ -38,6 +38,9 @@ from .negative_capabilities import scan_negative_capability_sources
 from .orchestration import scan_inert_orchestration_sources
 from .repository_hygiene import scan_repository_hygiene
 from .recovery_descriptors import scan_repository_recovery_descriptor
+from .request_admission_descriptors import (
+    scan_repository_request_admission_descriptor,
+)
 from .response_crypto_descriptors import (
     scan_repository_response_crypto_descriptor,
 )
@@ -257,6 +260,10 @@ ARCHITECTURE_CHECKS = (
     ArchitectureCheck("ci-workflow", scan_repository_ci_workflow),
     ArchitectureCheck("captcha-descriptor", scan_repository_captcha_descriptor),
     ArchitectureCheck("recovery-descriptor", scan_repository_recovery_descriptor),
+    ArchitectureCheck(
+        "request-admission-descriptor",
+        scan_repository_request_admission_descriptor,
+    ),
     ArchitectureCheck(
         "response-crypto-descriptor",
         scan_repository_response_crypto_descriptor,
