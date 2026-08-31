@@ -454,6 +454,20 @@ Key Service product/topology/HSM and non-resurrection proof, service
 authentication, trusted-clock profile, PostgreSQL concurrency/durability,
 audit implementation/review, recovery endpoint, and deployment review.
 
+## Stage A inert implementation evidence
+
+The current implementation may validate only static Response Note crypto
+profile shapes and return content-free descriptors for the approved version,
+algorithm, content profile, fixed sizes, immutable context-size profile,
+AAD-purpose label, and allowlisted Response-DEK operation names.
+
+The Stage A descriptor and its non-executing source policy do not canonicalize
+Response Note text, create plaintext frames, encode or parse deterministic
+CBOR, encrypt, decrypt, compare tags, generate random material, retain nonce,
+AAD, ciphertext, key-handle, or Response-DEK values, persist protected bytes,
+call a Key Service, consume recovery authorization, use audit receipts, inspect
+state rows, expose endpoints, or authorize response use.
+
 ## External design references
 
 - [libsodium — XChaCha20-Poly1305 construction](https://doc.libsodium.org/secret-key_cryptography/aead/chacha20-poly1305/xchacha20-poly1305_construction)

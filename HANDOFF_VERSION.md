@@ -303,3 +303,20 @@ false capability results. Generation, verifier, storage, lookup, logging,
 network, file, Django integration, service-call, and authorization changes fail
 closed. This closes no recovery, cryptographic-review, Response-DEK,
 external-service, deployment, or production gate.
+
+The thirty-eighth Stage A slice adds inert Response Note crypto descriptors for
+the owner-approved version-1 profile. Validation accepts only exact static
+algorithm/profile IDs, key/nonce/tag/frame/ciphertext sizes, scalar and UTF-8
+limits, immutable context-size shape, AAD purpose, and the allowlisted
+Response-DEK operation sequence. The descriptor does not canonicalize, frame,
+CBOR-encode, encrypt, decrypt, hold real nonce/AAD/ciphertext/key-handle/DEK
+values, persist protected bytes, call services, consume recovery authorization,
+use receipts, inspect state, expose endpoints, or authorize response use.
+
+A new non-executing response-crypto descriptor source policy locks the exact
+imports, constants, enums, immutable classes, validators, and false capability
+results. Canonicalization, CBOR, AEAD, random generation, Key Service,
+storage, logging, network, file, Django integration, endpoint, service-call,
+and authorization changes fail closed. This closes no Response Note crypto,
+Response-DEK, Key Service, recovery authorization, independent-review,
+deployment, or production gate.

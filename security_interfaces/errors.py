@@ -59,3 +59,12 @@ class RecoveryDescriptorRejected(ValueError):
 
     def __init__(self) -> None:
         super().__init__(self.public_code)
+
+
+class ResponseCryptoDescriptorRejected(ValueError):
+    """Controlled rejection for an invalid inert response crypto descriptor."""
+
+    public_code = "response_crypto_descriptor_rejected"
+
+    def __init__(self) -> None:
+        super().__init__(self.public_code)

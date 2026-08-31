@@ -69,6 +69,17 @@ For the metadata-only Stage A described by
   import, constant, field, validator, false-capability, generation, verifier,
   storage, logging, endpoint, service-call, and authorization changes fail
   closed without importing or executing it;
+- Response Note crypto descriptors accept only the exact version-1 algorithm,
+  content-profile, key, nonce, tag, plaintext-frame, ciphertext/tag, immutable
+  context-size, AAD-purpose, and Response-DEK operation profile shapes;
+- response crypto validation cannot hold Response Note text, ciphertext, nonce
+  bytes, AAD bytes, real key handles, Response-DEK material, recovery
+  authorization, audit receipts, or state rows, and all capability flags remain
+  false;
+- the complete executable AST of the response crypto descriptor module remains
+  exact; import, constant, registry, field, validator, false-capability,
+  canonicalization, CBOR, AEAD, Key Service, storage, logging, endpoint, and
+  authorization changes fail closed without importing or executing it;
 - administrative step-up-v2 foundations accept only exact 16-byte authorization,
   administrator, session, and device identifiers, binding-purpose/key-epoch
   metadata, a non-sliding 120-second lifetime, and an unused-only state;
@@ -686,6 +697,35 @@ the target that:
 Passing this policy proves only exact source conformance. It does not implement
 credential generation, verifier creation/verification, recovery lookup,
 Response-DEK use, persistence, endpoint behavior, or production readiness.
+
+## Stage A response crypto descriptor source conformance
+
+While Response Note cryptography remains blocked behind independent review and
+dependent production gates, statically verify without importing or executing
+the target that:
+
+- the target path, imports, protocol version, algorithm ID/name, content-profile
+  ID/name, key size, nonce size, tag size, frame size, ciphertext/tag size,
+  scalar/UTF-8 limits, immutable context sizes, AAD purpose, and key-operation
+  sequence remain exact;
+- immutable slotted descriptor classes expose only static profile shapes and no
+  Response Note text, plaintext bytes, ciphertext bytes, nonce bytes, AAD bytes,
+  real key handle, Response-DEK material, receipt, recovery authorization, or
+  state field;
+- validators reject unknown algorithms, alternate profiles, wrong sizes, wrong
+  operation order, added operations, string-only operation lists, and malformed
+  objects with a generic controlled error that echoes no supplied value;
+- canonicalization, Unicode normalization, frame construction, deterministic
+  CBOR, AEAD encryption/decryption, Key Service calls, persistence, logging,
+  networking, file access, Django integration, dynamic imports, `eval`, `exec`,
+  and success authorization behavior fail closed;
+- missing, unreadable, malformed, and out-of-root inputs return controlled,
+  content-free violations.
+
+Passing this policy proves only exact source conformance. It does not implement
+Response Note canonicalization, frame or envelope parsing, encryption,
+decryption, Response-DEK lifecycle operations, recovery authorization,
+persistence, endpoint behavior, or production readiness.
 
 ## Dependency/security checks
 

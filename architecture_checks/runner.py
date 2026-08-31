@@ -37,6 +37,9 @@ from .negative_capabilities import scan_negative_capability_sources
 from .orchestration import scan_inert_orchestration_sources
 from .repository_hygiene import scan_repository_hygiene
 from .recovery_descriptors import scan_repository_recovery_descriptor
+from .response_crypto_descriptors import (
+    scan_repository_response_crypto_descriptor,
+)
 from .submission import scan_submission_sources
 from .surfaces import (
     analyze_css_source,
@@ -248,6 +251,10 @@ ARCHITECTURE_CHECKS = (
     ArchitectureCheck("verification-script", scan_repository_verification_script),
     ArchitectureCheck("ci-workflow", scan_repository_ci_workflow),
     ArchitectureCheck("recovery-descriptor", scan_repository_recovery_descriptor),
+    ArchitectureCheck(
+        "response-crypto-descriptor",
+        scan_repository_response_crypto_descriptor,
+    ),
     ArchitectureCheck("root-url-imports", _root_url_imports),
     ArchitectureCheck("reporter-gateway-imports", _reporter_gateway_imports),
     ArchitectureCheck("settings-surface", _settings_surface),

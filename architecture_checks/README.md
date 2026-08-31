@@ -139,6 +139,14 @@ false capability properties, imports, and absence of generation, HMAC,
 persistence, lookup, endpoint, logging, or authorization behavior are reviewed
 source facts.
 
+The response-crypto descriptor source policy locks the complete executable AST
+of `security_interfaces/response_crypto_descriptors.py`. Exact response
+algorithm/profile identifiers, key/nonce/tag/frame/envelope sizes, immutable
+context-size shapes, AAD purpose, allowlisted key-operation names, false
+capability properties, imports, and absence of canonicalization, CBOR, AEAD,
+Key Service calls, persistence, logging, endpoint, or authorization behavior
+are reviewed source facts.
+
 The negative-capability policy parses only `security_interfaces/errors.py` and
 `security_interfaces/unavailable.py`. It locks the controlled dependency/error
 registry and every mandatory unavailable adapter to the exact executable AST
