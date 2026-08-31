@@ -136,6 +136,15 @@ absence of challenge generation, media rendering, persistence, endpoint,
 network-identity binding, third-party CAPTCHA, service calls, or authorization
 behavior are reviewed source facts.
 
+The request-admission descriptor source policy locks the complete executable
+AST of `security_interfaces/request_admission_descriptors.py`. Exact
+body/file/text/control/header/part/boundary/streaming/time limits, closed
+method/content-type/file-slot registries, false capability properties, imports,
+and absence of HTTP parsing, multipart parsing, Django upload-handler
+installation, file-byte access, filename exposure, sandbox jobs, plaintext
+persistence, endpoint acceptance, logging, or service calls are reviewed source
+facts.
+
 The report step-up source policy locks the complete executable AST of
 `security_interfaces/step_up_descriptors.py`. Identifier/counter fields,
 algorithm and purpose registries, timing, unused state, validators, and every

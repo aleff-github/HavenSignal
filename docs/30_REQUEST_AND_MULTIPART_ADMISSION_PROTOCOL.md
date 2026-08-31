@@ -208,6 +208,26 @@ configuration, custom-handler code review, production no-spool evidence,
 sandbox capacity/DoS testing, and all dependent CAPTCHA/file/crypto/audit/Key
 Service gates remain release blockers after owner approval.
 
+## Inert Stage A implementation evidence
+
+The current `security_interfaces/request_admission_descriptors.py` module
+models only content-free version-1 request and multipart admission metadata:
+body, file, report-text, control-field, part-header, part-count, boundary,
+streaming-buffer, deadline, method, content-type, and ordered file-slot limits.
+
+It does not parse HTTP headers or multipart bodies, install Django upload
+handlers, read file bytes, expose original filenames, create sandbox jobs,
+persist plaintext, log request material, expose endpoints, or accept a
+submission.
+
+A non-executing exact-AST policy locks this descriptor source profile and
+rejects parsing, upload-handler, file-byte, filename, sandbox-job,
+plaintext-persistence, submission-acceptance, dynamic, logging, file, network,
+Django-integration, and service-call changes without importing or executing the
+target. Passing is source-conformance evidence only and closes no proxy,
+Django-handler, CSRF, CAPTCHA, sandbox, audit, Key Service, no-spool,
+request-smuggling, endpoint, deployment, or production gate.
+
 ## External design references
 
 - [RFC 9110 — HTTP Semantics](https://www.rfc-editor.org/rfc/rfc9110.html)

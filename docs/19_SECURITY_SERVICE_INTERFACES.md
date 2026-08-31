@@ -357,6 +357,12 @@ metadata only. This evidence does not create a Challenge Service, issue or
 verify challenges, render image/audio, bind requests, persist state, close the
 PostgreSQL concurrency proof, or authorize Reporter/Recovery Gateway use.
 
+Stage A also includes content-free request-admission descriptors and a
+non-executing exact-source policy for the approved body/multipart/streaming/time
+metadata only. This evidence does not parse HTTP or multipart data, install a
+Django upload handler, create sandbox jobs, prove proxy/no-spool behavior,
+preserve CSRF under the custom handler, or authorize submission endpoint use.
+
 ## Architecture conformance tests
 
 Before a profile receives production credentials, automated and operational tests must prove:

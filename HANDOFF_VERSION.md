@@ -367,3 +367,18 @@ logging, network, file, Django integration, service-call, and authorization
 changes fail closed. This closes no Pillow/font, audio/accessibility,
 PostgreSQL concurrency, Challenge Service, gateway, deployment, or production
 gate.
+
+The forty-second Stage A slice adds inert request and multipart admission
+descriptors for the owner-approved version-1 protocol. Validation covers only
+static body, file, report-text, control-field, part-header, part-count,
+boundary, streaming-buffer, deadline, method, content-type, and ordered
+file-slot metadata.
+
+A new non-executing request-admission descriptor source policy locks the exact
+imports, constants, enums, immutable classes, validators, and false capability
+results. HTTP parsing, multipart parsing, Django upload-handler installation,
+file-byte access, filename exposure, sandbox-job creation, plaintext
+persistence, submission acceptance, logging, network, file, Django integration,
+and service-call changes fail closed. This closes no proxy, Django-handler,
+CSRF, CAPTCHA, sandbox, audit, Key Service, no-spool, request-smuggling,
+endpoint, deployment, or production gate.

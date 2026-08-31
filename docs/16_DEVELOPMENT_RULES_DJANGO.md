@@ -70,6 +70,15 @@ request/multipart profile, streaming proxy behavior, and a single bounded
 handlers remain forbidden for the submission endpoint. The design is
 non-authorizing until independent review and production no-spool gates close.
 
+Request-admission code is currently limited to inert structural descriptors. It
+may validate only the exact owner-approved body, file, text, control, header,
+part, boundary, streaming-buffer, timing, method, content-type, and file-slot
+metadata. It must not parse HTTP or multipart bodies, install upload handlers,
+read file bytes, expose filenames, create sandbox jobs, persist plaintext, log
+request material, expose endpoints, or accept submissions until the proxy,
+Django handler, CSRF, CAPTCHA, sandbox, audit, Key Service, no-spool,
+request-smuggling, review, and production gates are closed.
+
 ## Logging
 
 Create explicit structured logging schemas.

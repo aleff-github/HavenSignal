@@ -91,6 +91,8 @@ The repository currently contains:
 - inert no-JavaScript CAPTCHA descriptors that validate only approved metadata,
   strict identifier/answer shapes, anonymous global bucket limits, and open
   production gates;
+- inert request/multipart admission descriptors that validate only approved
+  body, part, header, file, streaming, timing, and closed-grammar limits;
 - inert recovery credential descriptors that validate only strict Ticket ID and
   Recovery Secret encoding shapes without retaining credential material;
 - inert Response Note crypto descriptors that validate only approved format,
@@ -109,6 +111,8 @@ The repository currently contains:
 - a non-executing exact-AST guard for the inert audit-v1 descriptors;
 - a non-executing exact-AST guard for the inert alert-v1 descriptors;
 - a non-executing exact-AST guard for inert no-JavaScript CAPTCHA descriptors;
+- a non-executing exact-AST guard for inert request/multipart admission
+  descriptors;
 - a non-executing exact-AST guard for report-bound step-up-v1 descriptors;
 - a non-executing exact-AST guard for inert recovery credential descriptors;
 - a non-executing exact-AST guard for inert Response Note crypto descriptors;

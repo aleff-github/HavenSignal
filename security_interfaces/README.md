@@ -73,6 +73,20 @@ policy. Passing proves only reviewed source shape and closes no Pillow/font,
 audio/accessibility, PostgreSQL concurrency, Challenge Service, gateway,
 endpoint, deployment, or production gate.
 
+`request_admission_descriptors.py` models only the owner-approved version-1
+request and multipart admission metadata: the 21 MiB encoded-body ceiling,
+5 MiB per-file and 20 MiB aggregate-file ceilings, text/control/header/part
+limits, closed POST multipart profile, file-slot order, bounded streaming
+memory limits, and header/body deadlines. It does not parse HTTP or multipart
+bodies, install Django upload handlers, read file bytes, expose filenames,
+create sandbox jobs, persist plaintext, log request material, or accept a
+submission.
+
+The request-admission descriptor source is locked by a non-executing exact-AST
+policy. Passing proves only reviewed source shape and closes no proxy, Django
+upload-handler, sandbox, CSRF, CAPTCHA, audit, Key Service, no-spool,
+request-smuggling, endpoint, deployment, or production gate.
+
 `step_up_descriptors.py` models only the report-bound v1 UUID/counter context,
 the exact 120-second lifetime, ES256/EdDSA algorithm registry, binding purpose
 and key epoch, and an unused-only Stage A state. It deliberately contains no

@@ -864,3 +864,18 @@ service-call, and authorization changes without importing or executing the
 target. This is Stage A source-conformance evidence only and closes no
 Pillow/font, audio/accessibility, PostgreSQL concurrency, Challenge Service,
 gateway, deployment, or production gate.
+
+The forty-second Stage A slice adds inert request and multipart admission
+descriptors for the owner-approved version-1 protocol. Validation covers only
+static body, file, report-text, control-field, part-header, part-count,
+boundary, streaming-buffer, deadline, method, content-type, and ordered
+file-slot metadata.
+
+It also adds a non-executing exact-AST source policy for that descriptor. The
+policy rejects HTTP parsing, multipart parsing, Django upload-handler
+installation, file-byte access, filename exposure, sandbox-job creation,
+plaintext persistence, submission acceptance, import, dynamic, logging, file,
+network, Django-integration, and service-call changes without importing or
+executing the target. This is Stage A source-conformance evidence only and
+closes no proxy, Django-handler, CSRF, CAPTCHA, sandbox, audit, Key Service,
+no-spool, request-smuggling, endpoint, deployment, or production gate.
