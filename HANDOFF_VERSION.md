@@ -255,3 +255,9 @@ application and migration package initializers. Passive package markers and the
 reviewed `security_interfaces.__init__` re-export surface remain exact without
 importing or executing the targets. This provides no runtime import isolation,
 process, dependency, service, deployment, or production authority.
+
+The thirty-third Stage A slice adds `python -m architecture_checks .` as an
+aggregate fail-closed runner for the current static policy registry and wires
+CI to call it. The command normalizes content-free violations from the existing
+non-executing checks and provides no new runtime, browser, database,
+external-service, deployment, or production authority.
