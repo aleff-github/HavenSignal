@@ -148,6 +148,15 @@ The alert-v1 descriptors have the same non-executing exact-AST guard. Their
 fixed registries, content-free fields, validators and false durability and
 authorization results cannot change without an explicit policy update.
 
+The no-JavaScript CAPTCHA descriptor module is locked to its exact executable
+AST as content-free protocol metadata only. Identifier and answer shapes,
+anonymous form scope, expiry/cleanup timing, purpose/state registries, PNG
+bounds, global anonymous bucket limits, open production gates, validators, and
+false capability flags cannot change without explicit review. The check never
+imports or executes the target and proves no challenge generation, answer
+comparison, persistence, media rendering, network-identity binding, endpoint,
+service call, or protected-operation authorization capability.
+
 The report-bound step-up-v1 descriptor module is also locked to its complete
 reviewed executable AST, including timing, registries, content-free context,
 unused state, validators, and false WebAuthn/binding/authorization results.

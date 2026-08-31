@@ -88,6 +88,9 @@ The repository currently contains:
 - negative-capability placeholders for security services, with a non-executing
   guard that locks their exact fail-closed behavior;
 - inert audit, alert, and step-up structural descriptors;
+- inert no-JavaScript CAPTCHA descriptors that validate only approved metadata,
+  strict identifier/answer shapes, anonymous global bucket limits, and open
+  production gates;
 - inert recovery credential descriptors that validate only strict Ticket ID and
   Recovery Secret encoding shapes without retaining credential material;
 - inert Response Note crypto descriptors that validate only approved format,
@@ -105,6 +108,7 @@ The repository currently contains:
   step-up foundations to their exact inert source profile;
 - a non-executing exact-AST guard for the inert audit-v1 descriptors;
 - a non-executing exact-AST guard for the inert alert-v1 descriptors;
+- a non-executing exact-AST guard for inert no-JavaScript CAPTCHA descriptors;
 - a non-executing exact-AST guard for report-bound step-up-v1 descriptors;
 - a non-executing exact-AST guard for inert recovery credential descriptors;
 - a non-executing exact-AST guard for inert Response Note crypto descriptors;

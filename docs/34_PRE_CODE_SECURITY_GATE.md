@@ -846,3 +846,21 @@ service-call, and authorization changes without importing or executing the
 target. This is Stage A source-conformance evidence only and closes no
 deterministic-CBOR, envelope parsing, cryptographic authentication, Key
 Service, persistence, deployment, or production gate.
+
+The forty-first Stage A slice adds inert no-JavaScript CAPTCHA descriptors for
+the owner-approved version-1 protocol. Validation covers only static metadata
+and strict text shapes: 16-byte identifiers encoded as 22-character unpadded
+base64url text, six-character uppercase answers from the approved alphabet,
+16-byte anonymous form scopes, five-minute non-sliding expiry, 15-minute cleanup
+horizon, fixed PNG bounds, READY/CONSUMED/EXPIRED states,
+SUBMIT_REPORT/RECOVER_RESPONSE purposes, anonymous global token-bucket limits,
+and the open production gates.
+
+It also adds a non-executing exact-AST source policy for that descriptor. The
+policy rejects generation, answer comparison, challenge persistence, media
+rendering, IP/User-Agent/device binding, third-party CAPTCHA, endpoint
+enablement, import, dynamic, logging, file, network, Django-integration,
+service-call, and authorization changes without importing or executing the
+target. This is Stage A source-conformance evidence only and closes no
+Pillow/font, audio/accessibility, PostgreSQL concurrency, Challenge Service,
+gateway, deployment, or production gate.

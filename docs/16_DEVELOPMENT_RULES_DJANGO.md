@@ -119,6 +119,16 @@ The Response Note must remain reporter-invisible until Report-DEK destruction is
 
 Security-sensitive components whose exact construction remains OPEN must be represented only by explicit failing interfaces/placeholders. Do not add a convenience fallback, development plaintext mode, or provisional cryptographic construction.
 
+No-JavaScript CAPTCHA code is currently limited to inert structural descriptors.
+It may validate only the exact owner-approved version, identifier encoding,
+answer alphabet/length, anonymous form-scope size, expiry/cleanup timing,
+purpose/state registries, PNG bounds, global anonymous token-bucket limits, and
+open production gates. It must not generate challenges, render image/audio,
+persist challenge records, compare expected answers, use IP/User-Agent/device
+keys, expose endpoints, call a Challenge Service, or authorize a protected
+operation until the Pillow/font, audio/accessibility, PostgreSQL concurrency,
+Challenge Service, gateway, and production-boundary gates are closed.
+
 Recovery credential code is currently limited to inert structural descriptors.
 It may validate the exact owner-approved Ticket ID and Recovery Secret encoding
 shapes, but it must not generate credentials, compute or compare verifier tags,
