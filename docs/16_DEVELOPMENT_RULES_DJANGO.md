@@ -135,6 +135,13 @@ hold real nonces/key handles/DEKs, persist protected bytes, call a Key Service,
 or authorize response use until independent review and all dependent gates are
 closed.
 
+Response Note text code is currently limited to inert, content-free descriptor
+validation. It may transiently reject malformed synthetic text according to the
+approved scalar, NUL, line-ending, NFC, UTF-8 limit, plain-text, no-HTML, and
+no-link-marker profile, but it must not return or persist the text, normalized
+text, canonical bytes, previews, drafts, digests, frames, audit bindings, or
+state transitions until the finalization and cryptographic gates are closed.
+
 ## Inert bootstrap evidence
 
 The current `manage.py`, ASGI/WSGI entrypoints, and installed metadata-app

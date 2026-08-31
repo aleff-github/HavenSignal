@@ -147,6 +147,13 @@ capability properties, imports, and absence of canonicalization, CBOR, AEAD,
 Key Service calls, persistence, logging, endpoint, or authorization behavior
 are reviewed source facts.
 
+The response-text descriptor source policy locks the complete executable AST of
+`security_interfaces/response_text_descriptors.py`. Exact Unicode/NFC/LF/UTF-8
+profile constants, scalar and byte limits, plain-text restrictions, conservative
+link markers, content-free return shape, imports, and absence of retained text,
+canonical bytes, digests, drafts, persistence, endpoint, or authorization
+behavior are reviewed source facts.
+
 The negative-capability policy parses only `security_interfaces/errors.py` and
 `security_interfaces/unavailable.py`. It locks the controlled dependency/error
 registry and every mandatory unavailable adapter to the exact executable AST

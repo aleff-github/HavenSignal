@@ -815,3 +815,18 @@ without importing or executing the target. This is Stage A source-conformance
 evidence only and closes no Response Note cryptography, Response-DEK,
 Key Service, recovery authorization, persistence, external-service,
 independent-review, deployment, or production gate.
+
+The thirty-ninth Stage A slice adds inert Response Note text descriptors for
+the owner-approved plain-text profile. The module may transiently validate
+synthetic text against exact scalar, NUL, surrogate, line-ending, NFC, UTF-8
+limit, plain-text, no-HTML, and no-link-marker rules, but successful validation
+returns only immutable content-free profile evidence and no text, normalized
+text, canonical bytes, digest, preview, draft, frame, receipt, or state data.
+
+It also adds a non-executing exact-AST source policy for that descriptor. The
+policy rejects import, constant, enum, class, validator, false-capability,
+retained-text, canonical-byte, digest, draft, persistence, staging, endpoint,
+logging, network, file, Django-integration, service-call, finalization, and
+authorization changes without importing or executing the target. This is Stage
+A source-conformance evidence only and closes no preview, byte-freezing,
+artifact-binding, persistence, finalization, deployment, or production gate.

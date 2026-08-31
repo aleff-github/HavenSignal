@@ -320,3 +320,17 @@ storage, logging, network, file, Django integration, endpoint, service-call,
 and authorization changes fail closed. This closes no Response Note crypto,
 Response-DEK, Key Service, recovery authorization, independent-review,
 deployment, or production gate.
+
+The thirty-ninth Stage A slice adds inert Response Note text descriptors for
+the owner-approved plain-text profile. Validation may transiently inspect
+synthetic text for exact scalar, NUL, surrogate, line-ending, NFC, UTF-8 limit,
+plain-text, no-HTML, and no-link-marker rules, but it returns only content-free
+profile evidence and never returns or persists text, normalized text, canonical
+bytes, digests, previews, drafts, frames, receipts, or state.
+
+A new non-executing response-text descriptor source policy locks the exact
+imports, constants, enums, immutable classes, validators, and false capability
+results. Retained text, canonical bytes, digesting, drafting, persistence,
+staging, endpoint, logging, network, file, Django integration, service-call,
+finalization, and authorization changes fail closed. This closes no preview,
+byte-freezing, artifact-binding, finalization, deployment, or production gate.
