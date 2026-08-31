@@ -197,6 +197,21 @@ No automatic expiration period is currently defined for INTERRUPTED.
 
 This should be revisited during operational-policy review.
 
+## Inert Stage A implementation evidence
+
+The current controlled errors, closed report/lease/operation state graphs,
+pure transition and lease planners, fenced operation bindings, metadata-only
+models, and fail-closed persistence boundary are guarded by a non-executing
+exact-AST policy. It fixes the five-minute idle rule, monotonic versions and
+lease generations, UUID and current-state bindings, database constraints,
+creation-only model behavior, PostgreSQL capability checks, and an executor
+whose only result is the controlled unavailable error.
+
+The scanner never imports, executes, or echoes target source. This static
+evidence enables no protected transition, content access, authentication,
+audit receipt, key operation, deletion, PostgreSQL concurrency claim, or
+production capability.
+
 ## Flood / sealed deletion
 
 During a major flood of submissions, deletion of still-SEALED reports may be required.

@@ -218,6 +218,15 @@ version-2 administrative row/profile needed for non-report security operations,
 plus the supported role workstations and session lifetimes. That proposal does
 not amend this document until consolidated approval and independent review.
 
+The later owner decision in `docs/34` supplies that consolidated design approval
+while retaining independent and production gates. The inert Stage A now models
+only the v2 foundations whose shape is already exact: authorization,
+administrator, session, and device identifiers; binding purpose/key epoch; the
+120-second non-sliding timing; and unused state. It does not guess the closed
+operation, target, artifact, or actor-role-specific flood profiles and contains
+no challenge, credential, handle, binding bytes, persistence, consumption,
+WebAuthn verification, or authorization capability.
+
 ## Step-up issuance and consumption
 
 Issuance:
@@ -375,6 +384,37 @@ Browser mocks alone are insufficient. Acceptance requires supported hardware
 authenticators, pinned browsers, the hardened workstation profile, PostgreSQL
 multi-process concurrency, and an isolated test RP/origin matching production
 semantics.
+
+## Inert Stage A administrative source conformance
+
+The current non-executing source policy for
+`security_interfaces/administrative_step_up_descriptors.py` fixes only the
+exact version-2 inert foundation: imports, constants, top-level members,
+immutable class profiles, false capability results, validator bodies, and a
+closed call set. It rejects added effectful or dynamic behavior without
+importing or executing the target.
+
+This is review evidence for source shape only. It does not implement or prove
+WebAuthn, administrator identity, RP/origin checks, session/device binding,
+operation profiles, artifact binding, persistence, single-use consumption,
+concurrency, independent review, or production acceptance. Those gates remain
+OPEN.
+
+## Inert Stage A report step-up source conformance
+
+The non-executing Stage A policy parses but never imports or executes
+`security_interfaces/step_up_descriptors.py`. It fixes the complete executable
+AST of the report-bound version-1 foundations: protocol/lifetime, ES256/EdDSA
+and binding-purpose registries, internal identifier/counter context, exact
+timing, unused-only state, validators, and false operation-profile, WebAuthn,
+artifact-binding, and protected-authorization results.
+
+Field, registry, timing, validator, success-return, import, challenge,
+credential, handle, HMAC/binding, persistence, consumption, logging, network,
+I/O, cryptographic, dynamic, and other effect changes fail closed. Passing is
+source conformance only and implements no authentication, artifact binding,
+session, database, single-use consumption, concurrency, external service,
+independent review, or production capability.
 
 ## Consolidated decisions approved at the pre-code gate
 

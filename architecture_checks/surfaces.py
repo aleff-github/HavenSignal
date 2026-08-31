@@ -1,6 +1,7 @@
 """Static policies for the currently inert reporter-facing surface."""
 
 import ast
+import hashlib
 import re
 from dataclasses import dataclass
 from enum import StrEnum
@@ -17,6 +18,8 @@ class SurfaceViolationCode(StrEnum):
     SETTINGS_ASSIGNMENT_MISSING = "SETTINGS_ASSIGNMENT_MISSING"
     SETTINGS_VALUE_MISMATCH = "SETTINGS_VALUE_MISMATCH"
     SOURCE_PARSE_ERROR = "SOURCE_PARSE_ERROR"
+    REPORTER_PYTHON_SOURCE_MISMATCH = "REPORTER_PYTHON_SOURCE_MISMATCH"
+    REPORTER_PYTHON_TARGET_MISMATCH = "REPORTER_PYTHON_TARGET_MISMATCH"
     TEMPLATE_ATTRIBUTE_DISALLOWED = "TEMPLATE_ATTRIBUTE_DISALLOWED"
     TEMPLATE_DYNAMIC_VALUE = "TEMPLATE_DYNAMIC_VALUE"
     TEMPLATE_EXTERNAL_RESOURCE = "TEMPLATE_EXTERNAL_RESOURCE"
@@ -119,6 +122,17 @@ _CSS_ACTIVE_PATTERNS = (
     re.compile(r"javascript\s*:", re.IGNORECASE),
     re.compile(r"(?:^|[;{\s])behavior\s*:", re.IGNORECASE),
     re.compile(r"-moz-binding\s*:", re.IGNORECASE),
+)
+
+EXPECTED_REPORTER_PYTHON_AST_DIGESTS = MappingProxyType(
+    {
+        "reporter_gateway/middleware.py": (
+            "55a0c3a812fa44cd357c766b5dbc436ee74c5a402c01e091dbb5a757a0905f6a"
+        ),
+        "reporter_gateway/views.py": (
+            "45d8efa12daf594021786a544d486ea4efd2a662ac1509f01cec87bd1fba2f7e"
+        ),
+    }
 )
 
 
@@ -263,6 +277,49 @@ def analyze_settings_source(
                 )
             )
     return _sorted(violations)
+
+
+def analyze_reporter_python_source(
+    *, source: str, relative_path: str
+) -> tuple[SurfaceViolation, ...]:
+    """Lock the executable AST of the two inert reporter-facing modules."""
+
+    expected_digest = EXPECTED_REPORTER_PYTHON_AST_DIGESTS.get(relative_path)
+    if expected_digest is None:
+        return (
+            _violation(
+                code=SurfaceViolationCode.REPORTER_PYTHON_TARGET_MISMATCH,
+                relative_path=relative_path,
+                line=0,
+                detail_code="EXACT_REPORTER_PYTHON_TARGET",
+            ),
+        )
+    try:
+        tree = ast.parse(source, filename=relative_path)
+    except (SyntaxError, ValueError, TypeError, MemoryError, RecursionError):
+        return (
+            _violation(
+                code=SurfaceViolationCode.SOURCE_PARSE_ERROR,
+                relative_path=relative_path,
+                line=0,
+                detail_code="PYTHON_SOURCE_INVALID",
+            ),
+        )
+    payload = ast.dump(
+        tree,
+        annotate_fields=True,
+        include_attributes=False,
+    ).encode("utf-8")
+    if hashlib.sha256(payload).hexdigest() != expected_digest:
+        return (
+            _violation(
+                code=SurfaceViolationCode.REPORTER_PYTHON_SOURCE_MISMATCH,
+                relative_path=relative_path,
+                line=0,
+                detail_code="EXACT_INERT_EXECUTABLE_AST",
+            ),
+        )
+    return ()
 
 
 def _is_current_home_pattern(node: ast.AST) -> bool:

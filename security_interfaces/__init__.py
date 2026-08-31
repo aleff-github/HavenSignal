@@ -1,5 +1,20 @@
 """Deny-by-default boundaries for security controls that remain OPEN."""
 
+from .administrative_step_up_descriptors import (
+    ADMINISTRATIVE_STEP_UP_PROTOCOL_VERSION,
+    ADMINISTRATIVE_STEP_UP_TTL_MS,
+    AdministrativeStepUpArtifactProfileV2,
+    AdministrativeStepUpIdentityV2,
+    AdministrativeStepUpTimingV2,
+    AdministrativeStepUpUnusedStateV2,
+    StructurallyValidAdministrativeStepUpFoundationsV2,
+    validate_administrative_step_up_artifact_profile_v2,
+    validate_administrative_step_up_foundations_v2,
+    validate_administrative_step_up_identity_v2,
+    validate_administrative_step_up_timing_v2,
+    validate_administrative_step_up_unused_state_v2,
+)
+
 from .alert_descriptors import (
     ALERT_SEVERITY_BY_TYPE,
     AlertAcceptanceConfirmationV1,
@@ -68,6 +83,8 @@ from .unavailable import (
 )
 
 __all__ = [
+    "ADMINISTRATIVE_STEP_UP_PROTOCOL_VERSION",
+    "ADMINISTRATIVE_STEP_UP_TTL_MS",
     "ALERT_SEVERITY_BY_TYPE",
     "AUDIT_PROTOCOL_VERSION",
     "AUTHORIZATION_WINDOWS_MS",
@@ -90,6 +107,10 @@ __all__ = [
     "AlertProfileReferenceV1",
     "AlertSeverity",
     "AlertType",
+    "AdministrativeStepUpArtifactProfileV2",
+    "AdministrativeStepUpIdentityV2",
+    "AdministrativeStepUpTimingV2",
+    "AdministrativeStepUpUnusedStateV2",
     "ReportStepUpContextV1",
     "SecurityControlUnavailable",
     "SecurityDependency",
@@ -100,6 +121,7 @@ __all__ = [
     "StepUpUnusedStateV1",
     "StructurallyValidAuditAcceptanceClaimsV1",
     "StructurallyValidAlertAcceptanceConfirmationV1",
+    "StructurallyValidAdministrativeStepUpFoundationsV2",
     "StructurallyValidReportStepUpComponentsV1",
     "UnavailableAlertService",
     "UnavailableAuditReceiptService",
@@ -118,6 +140,11 @@ __all__ = [
     "validate_alert_delivery_state_v1",
     "validate_alert_operation_reference_v1",
     "validate_alert_profile_reference_v1",
+    "validate_administrative_step_up_artifact_profile_v2",
+    "validate_administrative_step_up_foundations_v2",
+    "validate_administrative_step_up_identity_v2",
+    "validate_administrative_step_up_timing_v2",
+    "validate_administrative_step_up_unused_state_v2",
     "validate_report_step_up_components_v1",
     "validate_report_step_up_context_v1",
     "validate_step_up_artifact_binding_profile_v1",

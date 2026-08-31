@@ -118,3 +118,21 @@ The Response Note must remain reporter-invisible until Report-DEK destruction is
 ## Security interfaces before implementation
 
 Security-sensitive components whose exact construction remains OPEN must be represented only by explicit failing interfaces/placeholders. Do not add a convenience fallback, development plaintext mode, or provisional cryptographic construction.
+
+## Inert bootstrap evidence
+
+The current `manage.py`, ASGI/WSGI entrypoints, and installed metadata-app
+configurations are guarded by a non-executing exact-AST policy. The reviewed
+settings module, standard Django application factories, command-line boundary,
+app identities, and absence of startup hooks are fixed. Alternate settings,
+wrappers, logging, network/file effects, early execution, and `ready()` hooks
+require explicit review.
+
+This evidence does not execute the entrypoints and does not prove runtime,
+process, proxy, environment, dependency, network, or production isolation.
+
+The current application and migration package initializers are guarded by the
+same non-executing exact-AST pattern. Passive package markers and the reviewed
+`security_interfaces.__init__` re-export surface must not gain imports,
+exports, startup effects, migration initializer code, or dynamic behavior
+without an explicit policy update.

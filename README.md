@@ -85,9 +85,28 @@ The repository currently contains:
 - metadata-only submission and report lifecycle models;
 - pure monotonic transition planners;
 - explicit fail-closed persistence boundaries;
-- negative-capability placeholders for security services;
+- negative-capability placeholders for security services, with a non-executing
+  guard that locks their exact fail-closed behavior;
 - inert audit, alert, and step-up structural descriptors;
-- architecture checks that constrain the reporter-facing surface;
+- pure, non-executing sequence contracts for finalization and OPEN-only operator deletion;
+- inert planners for Response Note expiry, ciphertext-cleanup retry timing,
+  terminal-metadata review, and isolated audit-retention review;
+- administrative step-up-v2 foundations that validate only content-free
+  identity, timing, binding-purpose, and unused-state shapes;
+- a non-executing descriptor-source guard that locks those administrative
+  step-up foundations to their exact inert source profile;
+- a non-executing exact-AST guard for the inert audit-v1 descriptors;
+- a non-executing exact-AST guard for the inert alert-v1 descriptors;
+- a non-executing exact-AST guard for report-bound step-up-v1 descriptors;
+- architecture checks that constrain the reporter-facing settings, route,
+  passive assets, read-only view, and restrictive response-header middleware;
+- a non-executing exact-AST guard for the sole inert submission migration;
+- a non-executing exact-AST guard for the inert submission state machine;
+- a non-executing exact-AST guard for the inert report-lifecycle core;
+- a non-executing exact-AST guard for the inert Django bootstrap entrypoints;
+- a non-executing exact-AST guard for application package initializers;
+- non-executing AST policies that keep lifecycle orchestration incapable of
+  persistence, cryptography, deletion, scheduling, logging, or service calls;
 - a test-only PostgreSQL concurrency scaffold.
 
 It currently contains **no production report-submission endpoint, report-content storage, report decryption, recovery flow, operator authentication flow, file-processing pipeline, emergency export, production audit service, production Key Service, or background processing capability**.

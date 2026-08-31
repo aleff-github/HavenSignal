@@ -337,6 +337,21 @@ Release-blocking tests must prove:
 SQLite, an in-memory queue, a mock SMTP sink, one-process concurrency, or a
 best-effort logging handler is insufficient for production acceptance.
 
+## Inert Stage A alert descriptor source conformance
+
+The non-executing Stage A policy parses but never imports or executes
+`security_interfaces/alert_descriptors.py`. It fixes the complete executable AST
+of the existing alert-v1 type/severity/delivery registries, immutable content-
+free components, acceptance and acknowledgement validators, and false durable-
+acceptance and protected-action results.
+
+Registry, field, validator, success-return, import, dynamic, SMTP, logging, I/O,
+persistence, network, and other side-effect changes fail closed with controlled
+content-free violations. Passing does not define the still-incomplete full
+request registry, submit or persist an alert, prove durability, deliver SMTP,
+acknowledge a record, or authorize a protected action. Independent review and
+all Alert Service and production gates remain OPEN.
+
 ## Consolidated decisions approved at the pre-code gate
 
 The project owner approved the following on 2026-08-26:

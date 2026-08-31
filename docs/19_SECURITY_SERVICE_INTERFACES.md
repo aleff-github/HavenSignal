@@ -317,6 +317,19 @@ Reporter IP address, User-Agent, request body, report text, attachment data, Rec
 
 Reporter-facing proxy, application, and upstream infrastructure configuration must be reviewed end to end; disabling logging only in Django is insufficient for `SEC-ANON-002`.
 
+During inert Stage A, a non-executing source policy fixes the exact executable
+AST of `reporter_gateway/views.py` and `reporter_gateway/middleware.py`. It
+therefore fails closed on added endpoint/input/persistence/cookie/logging
+behavior, request-derived render context, unsafe-method acceptance, or a change
+to the current restrictive cache, CSP, referrer, permissions, cross-origin, or
+cross-domain response headers. The policy parses but never imports or executes
+either target.
+
+Passing this policy is source-conformance evidence only. It does not prove
+browser behavior, reverse-proxy/header behavior, access-log suppression,
+network anonymity, process isolation, deployment configuration, or any future
+submission endpoint.
+
 ## OPEN implementation gates
 
 | Interface area | Blocking decision |
@@ -367,6 +380,23 @@ These tests supplement, and do not replace, `14_SECURITY_TEST_PLAN.md` and `18_S
 
 No step in this order authorizes report submission, recovery, key management, audit receipts, authentication, file processing, finalization, export, or deletion by itself.
 
+## Stage A negative-capability source conformance
+
+`architecture_checks/negative_capabilities.py` parses only
+`security_interfaces/errors.py` and `security_interfaces/unavailable.py`. It
+fixes the exact executable AST of the controlled dependency/error registry and
+all mandatory unavailable adapters. A success return, weaker or plaintext
+development fallback, added service/method, dependency reassignment,
+input-bearing error, logging/import side effect, or any other executable change
+fails closed pending an explicit policy review.
+
+Missing roots, unknown targets, malformed source, and unreadable inputs produce
+controlled content-free violations. Neither target is imported or executed.
+Passing this policy proves only the current negative-capability source shape; it
+does not prove process/network/credential isolation, service authentication,
+durability, cryptography, or any real external-service integration. Every
+dependent and production gate remains OPEN.
+
 ## Stage A static conformance record
 
 `architecture_checks/` now applies exact AST import allowlists to the current
@@ -408,3 +438,238 @@ backend probing and remains unavailable when a backend capability object is
 mocked as PostgreSQL-capable. Consequently, this slice is a future-test
 contract only: it supplies no concurrency, durability, isolation, lock-order,
 cleanup, or release evidence and closes no PostgreSQL or production gate.
+
+## Stage A lifecycle migration conformance record
+
+The current lifecycle migration is checked as source without importing it. The
+policy requires one `0001_initial.py`, an empty dependency graph, the exact
+Report/ReportLease/SecurityOperation field names and Django field constructors,
+and the reviewed `CreateModel`/`AddIndex`/`AddConstraint` sequence. Any other
+numbered migration, import, callable, dynamic expression, data migration, raw
+SQL, model, field, or constructor fails closed with a controlled content-free
+violation. Django's dry migration detector separately rejects model/migration
+drift.
+
+This policy makes a migration change review-visible. It does not prove the SQL
+emitted by a selected PostgreSQL version, transaction/lock behavior, online
+migration safety, rollback, backup interaction, durability, or production
+deployment. Those reviews and gates remain OPEN.
+
+## Stage A finalization sequence record
+
+The approved `FINALIZING` order is represented as one received-request
+checkpoint followed by the exact twelve actions in `docs/03`: validate OPEN
+context, validate CAPTCHA, consume exact-artifact step-up, durably audit the
+request, atomically commit protected staging plus `FINALIZING`, verify staging,
+request and confirm Report-DEK destruction, durably audit that destruction,
+publish availability, invalidate lease capabilities, and start ciphertext
+deletion. Every other edge is denied.
+
+These checkpoint names are not Report states, database rows, service receipts,
+or assertions that an action happened. Plans contain only operation/report/
+idempotency/operator/lease UUIDs and version/generation counters, and explicitly
+authorize nothing and persist nothing. The executor always fails closed. Actual CAPTCHA,
+step-up consumption, audit receipts, protected response bytes, PostgreSQL
+commit, Key Service destruction, availability, invalidation, cleanup, retries,
+and crash resumption remain absent and gated.
+
+## Stage A operator-deletion sequence record
+
+The approved OPEN-only operator-deletion order in `docs/32` is represented as
+one received-request checkpoint followed by the exact ten actions: validate
+the current OPEN/input/CAPTCHA context, verify step-up, durably audit the
+request, lock and revalidate, commit the fenced `DELETING` workflow, invalidate
+ordinary capabilities, confirm Report-DEK destruction, audit the destruction
+outcome, invalidate recovery eligibility, and enter the terminal state while
+starting cleanup. Every other edge is denied.
+
+Checkpoint names are conformance labels only, not Report states, database
+rows, receipts, destruction evidence, or claims that input, CAPTCHA, step-up,
+audit, locking, key handling, recovery invalidation, or cleanup occurred. Plans
+contain only internal operation/idempotency/report/operator/lease UUIDs and
+version/generation counters. They authorize nothing, persist nothing, and
+explicitly destroy no key or content. The executor always fails closed. The
+real operator-deletion workflow and every legal, independent-review,
+PostgreSQL, MFA, CAPTCHA, audit, Key Service, alert, cleanup, and production
+gate remain OPEN.
+
+## Stage A orchestration-source purity record
+
+`architecture_checks/orchestration.py` parses, but never imports or executes,
+the current inert finalization, OPEN-only operator-deletion, response-retention,
+ciphertext-cleanup, terminal-metadata retention, and audit-retention modules. The
+policy fixes the six exact target paths, imports and top-level members; closed
+enum members; content-free immutable snapshot/plan fields; every false
+capability flag; a closed call/raise set; and the executor signature/body whose
+only outcome is its controlled unavailable exception.
+
+Nested or altered imports, database/network/cryptographic/I/O and locally
+selected time calls, dynamic/effectful syntax, attribute or subscript writes,
+new content or authorization fields, and any executable executor body fail
+closed with controlled source-free violations. Imported types, constants,
+top-level members, and allowed call names cannot be shadowed. Response retention,
+cleanup, terminal-metadata retention, and audit retention alone may read server
+time and convert an already aware timestamp to UTC through their exact timezone
+calls. This is static review evidence, not a runtime sandbox, semantic proof,
+external-service control, or authority to finalize, recover, schedule, alert,
+expire, clean up, or delete a report. Every external and production gate remains
+OPEN.
+
+## Stage A response-retention planning record
+
+`report_lifecycle/retention.py` represents the owner-approved 90-day unread and
+72-hour read-window rules using only internal UUIDs, `RESPONSE_AVAILABLE`, a
+state version, and trusted timestamps. It requires the stored unread deadline
+to equal exactly `response_available_at + 90 * 24 hours`; an already stored
+first read must be strictly before that deadline and its stored expiry must
+equal exactly `first_read_at + 72 hours`. It never proposes a first read. At
+either exact deadline, expiry wins.
+
+The result is immutable and explicitly authorizes no recovery, persists no
+deadline, decrypts no response, and destroys no key or content. Its executor
+always returns one controlled unavailable failure. It does not implement the
+PostgreSQL first-read race, recovery authorization, audit receipt, Key Service
+conversion/destruction, verifier invalidation, ciphertext cleanup, or any
+reporter endpoint. All independent, legal/operational, external-service,
+concurrency, and production gates remain OPEN.
+
+## Stage A ciphertext-cleanup timing record
+
+`report_lifecycle/cleanup.py` represents only the timing metadata approved in
+`docs/32`: base delays of 5 seconds, 30 seconds, 2 minutes, then five minutes
+inside the first hour, one hour until the 24-hour boundary, and six hours
+thereafter without a policy retry maximum. It also fixes the 10% maximum jitter,
+one-minute maximum reconciler interval, and the persistent-failure alert boundary
+at exactly 15 minutes after the first failure.
+
+The planner receives only internal cleanup/idempotency UUIDs, a bounded counter,
+and trusted timestamps. It chooses no jitter and contains no target object ID,
+path, filename, provider error, receipt, key, or protected data. Its immutable
+plan explicitly authorizes no deletion, schedules/persists nothing, submits no
+alert, and calls no service; its executor always fails closed. It does not prove
+exactly-once alert acceptance, choose a cleanup scope, obtain an audit receipt,
+delete ciphertext, or implement a worker/reconciler. All audit, alert, storage,
+concurrency, external-service, and production gates remain OPEN.
+
+## Stage A terminal-metadata retention planning record
+
+`report_lifecycle/metadata_retention.py` represents only the owner-approved
+minimum terminal application metadata period in `docs/32`. It accepts internal
+retention/cleanup UUIDs and a trusted cleanup-confirmation timestamp. Until
+cleanup is durably confirmed it returns a retain classification with no removal
+time. A confirmation establishes the earliest review boundary at exactly
+30 times 24 elapsed hours in UTC; equality marks only `REMOVAL_REVIEW_DUE`.
+
+The immutable plan explicitly authorizes no removal, deletes no public Ticket
+ID lookup, persists no state, schedules no job, and calls no external service.
+It contains no public Ticket ID, Recovery Secret, verifier, content, filename,
+path, key, or provider error. Its executor always fails closed. This does not
+implement the separately credentialed retention job, a durable cleanup proof,
+database deletion, generic recovery behavior, Key Service tombstone retention,
+or legal/operational policy enforcement. Every dependent gate remains OPEN.
+
+The same non-executing source policy now fixes the exact metadata-retention
+target, imports, top-level members, closed disposition enum, immutable snapshot/
+plan fields, all five false capability flags, allowed calls and raises,
+protected binding names, and always-unavailable executor. Database deletion,
+scheduler, Audit Service, Key Service, I/O, logging, mutation, dynamic syntax,
+public-ticket/recovery/path/content fields, or an executable executor fail
+closed. Passing is static source evidence only and closes no retention-job,
+cleanup-proof, database, recovery, Key Service, legal, or production gate.
+
+## Stage A audit-retention planning record
+
+`report_lifecycle/audit_retention.py` represents only the exact minima approved
+in `docs/23` and `docs/32`: 365 times 24 elapsed hours for event/receipt/proof
+material and 730 times 24 elapsed hours for signed checkpoint, consistency,
+public-key-manifest, and witness evidence. It accepts only internal retention/
+evidence UUIDs, one closed evidence class, trusted collector time, and a strict
+boolean stating whether retained verification still requires the evidence.
+
+Before the minimum boundary it retains. At or after the boundary, a required
+dependency still retains; otherwise the planner marks only `EXPIRY_REVIEW_DUE`.
+The immutable plan authorizes no expiry, deletes no audit evidence, persists no
+retention batch, exposes no witness evidence, and calls no external service. Its
+executor always fails closed. This does not implement the isolated credential,
+daily job, dependency graph, controlled retention record, witness interface,
+database mutation, legal policy, or Audit Service. Every dependent gate remains
+OPEN.
+
+The non-executing source policy now fixes the exact audit-retention target,
+imports, top-level timing and type members, both closed enums, immutable
+snapshot/plan fields, all five false capability flags, allowed calls/raises,
+protected binding names, and always-unavailable executor. Database expiry,
+scheduler, witness, network, I/O, logging, mutation, dynamic syntax, receipt/
+content/key fields, or executable executor changes fail closed. Passing is
+static source evidence only and closes no clock, identity, dependency, database,
+retention-batch, witness, legal, Audit Service, or production gate.
+
+## Stage A administrative step-up v2 foundation record
+
+`security_interfaces/administrative_step_up_descriptors.py` validates only the
+version-2 fields that are exact without selecting an operation profile: 16-byte
+authorization, administrator, session, and device identifiers; the existing
+binding purpose and unsigned key epoch; exact non-sliding 120-second timing; and
+an unused-only state.
+
+The immutable structural result reports no complete operation profile, performs
+no WebAuthn or artifact-binding verification, and authorizes neither an
+administrative action nor flood deletion. It has no operation, target,
+artifact-kind/binding, credential-row, challenge, handle, persistence, or
+consumption field. Actor-role-specific flood profiles, MFA/session/device proof,
+database concurrency, service integration, independent review, and production
+gates remain OPEN.
+
+The non-executing descriptor-source policy fixes the exact target, imports,
+protocol-version and lifetime expressions, top-level member set, immutable
+class profiles, false capability results, validator bodies, and closed calls.
+Nested imports, dynamic constructs, added fields or members, persistence,
+network, file, logging, cryptographic, or authorization behavior fail closed.
+The target is parsed but never imported or executed.
+
+Passing this source policy closes no administrator-identity, authentication,
+WebAuthn, session/device, operation-profile, persistence, consumption,
+concurrency, independent-review, or production gate.
+
+## Stage A audit descriptor source-conformance record
+
+The non-executing audit-descriptor policy fixes the complete executable AST of
+`security_interfaces/audit_descriptors.py` to the reviewed inert audit-v1
+profile. Any change to imports, protocol constants, event/actor registries,
+authorization windows, context-dependent denial, immutable descriptor fields,
+validator logic, or the false authorization result requires an explicit policy
+update. Added success returns, dynamic behavior, I/O, logging, persistence,
+network, cryptographic, or other side effects fail closed.
+
+The scanner parses but never imports, executes, or echoes the target. Passing
+is source-level conformance only. It does not implement deterministic CBOR,
+COSE, signature or receipt verification, audit append/durability, replay
+storage, protected consumers, independent review, or production capability.
+
+## Stage A alert descriptor source-conformance record
+
+The non-executing alert-descriptor policy fixes the complete executable AST of
+`security_interfaces/alert_descriptors.py` to the inert alert-v1 profile. It
+therefore locks the alert/severity/delivery registries, content-free immutable
+component fields, validator logic, acknowledgement pairing, and false durable-
+acceptance and protected-authorization results. Added delivery, persistence,
+SMTP, logging, network, dynamic, or other effectful behavior fails closed.
+
+The scanner parses but never imports, executes, or echoes the target. Passing
+does not create a full submit request, prove durable acceptance, deliver or
+acknowledge an alert, authorize a protected operation, or close PostgreSQL,
+service-authentication, independent-review, Alert Service, or production gates.
+
+## Stage A report step-up descriptor source-conformance record
+
+The non-executing report-step-up policy fixes the complete executable AST of
+`security_interfaces/step_up_descriptors.py`. It locks the version/lifetime,
+ES256/EdDSA and binding-purpose registries, internal identifier/counter fields,
+immutable timing and unused-only state, validator logic, and every false
+WebAuthn, artifact-binding, operation-profile, and authorization result.
+
+Added challenge, credential, handle, binding, persistence, consumption,
+cryptographic, logging, network, I/O, dynamic, or success behavior fails closed.
+The scanner never imports, executes, or echoes the target. Passing closes no
+authentication, WebAuthn, artifact binding, session, database, concurrency,
+independent-review, external-service, or production gate.

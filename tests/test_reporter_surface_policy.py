@@ -6,10 +6,12 @@ from pathlib import Path
 from django.test import SimpleTestCase
 
 from architecture_checks import (
+    EXPECTED_REPORTER_PYTHON_AST_DIGESTS,
     EXPECTED_SETTINGS,
     SurfaceViolation,
     SurfaceViolationCode,
     analyze_css_source,
+    analyze_reporter_python_source,
     analyze_settings_source,
     analyze_template_source,
     analyze_urlconf_source,
@@ -21,6 +23,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 class CurrentReporterSurfaceTests(SimpleTestCase):
+    def test_current_reporter_python_modules_match_the_inert_profile(self) -> None:
+        for relative_path in EXPECTED_REPORTER_PYTHON_AST_DIGESTS:
+            with self.subTest(relative_path=relative_path):
+                violations = scan_surface_file(
+                    path=BASE_DIR / relative_path,
+                    relative_to=BASE_DIR,
+                    analyzer=analyze_reporter_python_source,
+                )
+                self.assertEqual(violations, ())
+
     def test_current_django_settings_match_the_inert_profile(self) -> None:
         violations = scan_surface_file(
             path=BASE_DIR / "anonymous_reporting" / "settings.py",
@@ -162,6 +174,96 @@ class SettingsAndUrlSurfaceAbuseTests(SimpleTestCase):
             SurfaceViolationCode.SOURCE_PARSE_ERROR,
         )
         self.assertNotIn(sentinel, repr(violations[0]))
+
+
+class ReporterPythonSourceAbuseTests(SimpleTestCase):
+    def source(self, relative_path: str) -> str:
+        return (BASE_DIR / relative_path).read_text(encoding="utf-8")
+
+    def test_view_behavior_changes_fail_closed(self) -> None:
+        relative_path = "reporter_gateway/views.py"
+        source = self.source(relative_path)
+        mutations = (
+            source.replace("@require_safe", "@require_safe\n@csrf_exempt"),
+            source.replace(
+                'return render(request, "reporter_gateway/home.html")',
+                'return render(request, "reporter_gateway/home.html", '
+                '{"request_body": request.body})',
+            ),
+            source + "\ndef submit(request):\n    return HttpResponse(request.body)\n",
+        )
+        for mutation in mutations:
+            with self.subTest(mutation=mutation[-60:]):
+                violations = analyze_reporter_python_source(
+                    source=mutation,
+                    relative_path=relative_path,
+                )
+                self.assertEqual(len(violations), 1)
+                self.assertEqual(
+                    violations[0].code,
+                    SurfaceViolationCode.REPORTER_PYTHON_SOURCE_MISMATCH,
+                )
+
+    def test_middleware_behavior_changes_fail_closed(self) -> None:
+        relative_path = "reporter_gateway/middleware.py"
+        source = self.source(relative_path)
+        mutations = (
+            source.replace(
+                'response["Cache-Control"] = "no-store, max-age=0"',
+                'response["Cache-Control"] = "public, max-age=3600"',
+            ),
+            source.replace(
+                'response = self.get_response(request)',
+                'print(request.headers)\n        response = self.get_response(request)',
+            ),
+            source.replace("script-src 'none'", "script-src 'self'"),
+            source + "\nTRACKER = 'https://tracker.invalid'\n",
+        )
+        for mutation in mutations:
+            with self.subTest(mutation=mutation[-60:]):
+                violations = analyze_reporter_python_source(
+                    source=mutation,
+                    relative_path=relative_path,
+                )
+                self.assertEqual(len(violations), 1)
+                self.assertEqual(
+                    violations[0].code,
+                    SurfaceViolationCode.REPORTER_PYTHON_SOURCE_MISMATCH,
+                )
+
+    def test_unknown_target_and_parse_failure_are_controlled(self) -> None:
+        target_violations = analyze_reporter_python_source(
+            source="pass",
+            relative_path="reporter_gateway/submit.py",
+        )
+        self.assertEqual(len(target_violations), 1)
+        self.assertEqual(
+            target_violations[0].code,
+            SurfaceViolationCode.REPORTER_PYTHON_TARGET_MISMATCH,
+        )
+
+        sentinel = "REPORT_TEXT_SENTINEL"
+        parse_violations = analyze_reporter_python_source(
+            source=f"def broken({sentinel}\n",
+            relative_path="reporter_gateway/views.py",
+        )
+        self.assertEqual(len(parse_violations), 1)
+        self.assertEqual(
+            parse_violations[0].code,
+            SurfaceViolationCode.SOURCE_PARSE_ERROR,
+        )
+        self.assertNotIn(sentinel, repr(parse_violations))
+
+    def test_source_is_never_executed_or_echoed(self) -> None:
+        relative_path = "reporter_gateway/views.py"
+        sentinel = "REPORT_TEXT_SENTINEL"
+        source = self.source(relative_path) + f"\nraise RuntimeError('{sentinel}')\n"
+        violations = analyze_reporter_python_source(
+            source=source,
+            relative_path=relative_path,
+        )
+        self.assertEqual(len(violations), 1)
+        self.assertNotIn(sentinel, repr(violations))
 
 
 class TemplateAndCssSurfaceAbuseTests(SimpleTestCase):
