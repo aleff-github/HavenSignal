@@ -74,8 +74,8 @@ non-executing exact-AST policy, so a success path, development fallback, added
 method, logging operation, or other side effect requires explicit review.
 
 The package includes inert structural descriptors for approved audit, alert,
-step-up, recovery-credential, and Response Note crypto concepts, but these
-types do not themselves:
+step-up, recovery-credential, Response Note crypto, and Response Note schema
+concepts, but these types do not themselves:
 
 - encode/verify production audit artifacts;
 - append audit events;
@@ -88,6 +88,8 @@ types do not themselves:
 - store or look up recovery material;
 - canonicalize, encrypt, decrypt, parse, or persist Response Note material;
 - hold real Response-DEK, nonce, AAD, key-handle, or ciphertext values;
+- encode or parse deterministic-CBOR AAD/envelope data;
+- hold real report/response/finalization IDs;
 - retain Response Note text, normalized text, canonical bytes, digests, drafts,
   or previews;
 - authorize protected operations.
@@ -171,6 +173,14 @@ markers, validators, and false capability flags cannot change without explicit
 review. The check never imports or executes the target and proves no preview,
 draft, canonical byte freezing, digest binding, staging, endpoint, or
 finalization capability.
+
+The Response Note schema descriptor module is locked to its exact executable
+AST as ordered metadata validation only. AAD and ciphertext-envelope field
+order, primitive categories, fixed byte sizes, public constant values,
+validators, and false capability flags cannot change without explicit review.
+The check never imports or executes the target and proves no deterministic
+CBOR, context-value retention, ciphertext handling, service call, persistence,
+endpoint, or response-use authorization capability.
 
 The controlled security-interface errors and unavailable external-service
 adapters are likewise parsed but never imported or executed and must retain

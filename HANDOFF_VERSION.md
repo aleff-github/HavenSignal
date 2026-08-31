@@ -334,3 +334,18 @@ results. Retained text, canonical bytes, digesting, drafting, persistence,
 staging, endpoint, logging, network, file, Django integration, service-call,
 finalization, and authorization changes fail closed. This closes no preview,
 byte-freezing, artifact-binding, finalization, deployment, or production gate.
+
+The fortieth Stage A slice adds inert Response Note schema descriptors for the
+owner-approved AAD and ciphertext-envelope field order. Validation covers only
+field names, primitive categories, fixed byte sizes, and public constant
+values. It does not encode or parse CBOR, hold real identifiers, key handles,
+nonce, AAD, ciphertext, plaintext, receipts, recovery authorization, or state,
+persist bytes, call services, expose endpoints, or authorize response use.
+
+A new non-executing response-schema descriptor source policy locks the exact
+imports, constants, enums, field order, immutable classes, validators, and
+false capability results. CBOR, retained context values, ciphertext handling,
+cryptographic authentication, storage, logging, network, file, Django
+integration, endpoint, service-call, and authorization changes fail closed.
+This closes no deterministic-CBOR, envelope parsing, Key Service, deployment,
+or production gate.

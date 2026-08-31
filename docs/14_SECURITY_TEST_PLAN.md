@@ -92,6 +92,18 @@ For the metadata-only Stage A described by
   retained-text, canonical-byte, digest, draft, persistence, staging, endpoint,
   logging, service-call, finalization, and authorization changes fail closed
   without importing or executing it;
+- Response Note schema descriptors accept only the exact ordered AAD and
+  ciphertext-envelope field names, primitive categories, public constant
+  values, and fixed byte-size metadata from the approved version-1 profile;
+- response schema validation returns no actual report ID, response ID,
+  finalization ID, key handle, nonce, AAD bytes, ciphertext, plaintext, receipt,
+  recovery authorization, state, persistence, endpoint, Key Service, or
+  authorization capability;
+- the complete executable AST of the response schema descriptor module remains
+  exact; import, constant, registry, field-order, validator, false-capability,
+  retained-context, ciphertext, CBOR, cryptographic, persistence, endpoint,
+  logging, service-call, and authorization changes fail closed without
+  importing or executing it;
 - administrative step-up-v2 foundations accept only exact 16-byte authorization,
   administrator, session, and device identifiers, binding-purpose/key-epoch
   metadata, a non-sliding 120-second lifetime, and an unused-only state;
@@ -766,6 +778,32 @@ Passing this policy proves only exact source conformance. It does not implement
 the final preview, canonical byte production, artifact digest binding,
 Response Note staging, persistence, endpoint behavior, finalization, or
 production readiness.
+
+## Stage A response schema descriptor source conformance
+
+While deterministic CBOR and Response Note envelope handling remain blocked,
+statically verify without importing or executing the target that:
+
+- the target path, imports, AAD schema field order, envelope schema field order,
+  field names, primitive categories, exact public constants, and fixed byte-size
+  metadata remain exact;
+- immutable slotted descriptor classes expose only schema metadata and no
+  actual report ID, response ID, finalization ID, key handle, nonce, AAD bytes,
+  ciphertext, plaintext, receipt, recovery authorization, or state field;
+- validators reject wrong schema kind, wrong version, reordered fields, missing
+  fields, extra fields, value-bearing byte fields, list inputs, and malformed
+  objects with a generic controlled error that echoes no supplied value;
+- deterministic-CBOR encoding/parsing, cryptographic authentication,
+  ciphertext handling, persistence, logging, networking, file access, Django
+  integration, Key Service calls, dynamic imports, `eval`, `exec`, and success
+  authorization behavior fail closed;
+- missing, unreadable, malformed, and out-of-root inputs return controlled,
+  content-free violations.
+
+Passing this policy proves only exact source conformance. It does not implement
+deterministic CBOR, envelope parsing, cryptographic authentication,
+Response-DEK lifecycle operations, recovery authorization, persistence,
+endpoint behavior, or production readiness.
 
 ## Dependency/security checks
 

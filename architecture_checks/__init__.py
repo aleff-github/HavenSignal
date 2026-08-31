@@ -130,6 +130,15 @@ from .response_crypto_descriptors import (
     scan_repository_response_crypto_descriptor,
     scan_response_crypto_descriptor_source,
 )
+from .response_schema_descriptors import (
+    EXPECTED_RESPONSE_SCHEMA_DESCRIPTOR_AST_DIGEST,
+    RESPONSE_SCHEMA_DESCRIPTOR_PATH,
+    ResponseSchemaDescriptorSourceViolation,
+    ResponseSchemaDescriptorSourceViolationCode,
+    analyze_response_schema_descriptor_source,
+    scan_repository_response_schema_descriptor,
+    scan_response_schema_descriptor_source,
+)
 from .response_text_descriptors import (
     EXPECTED_RESPONSE_TEXT_DESCRIPTOR_AST_DIGEST,
     RESPONSE_TEXT_DESCRIPTOR_PATH,
@@ -272,6 +281,13 @@ __all__ = [
     "analyze_response_crypto_descriptor_source",
     "scan_repository_response_crypto_descriptor",
     "scan_response_crypto_descriptor_source",
+    "EXPECTED_RESPONSE_SCHEMA_DESCRIPTOR_AST_DIGEST",
+    "RESPONSE_SCHEMA_DESCRIPTOR_PATH",
+    "ResponseSchemaDescriptorSourceViolation",
+    "ResponseSchemaDescriptorSourceViolationCode",
+    "analyze_response_schema_descriptor_source",
+    "scan_repository_response_schema_descriptor",
+    "scan_response_schema_descriptor_source",
     "EXPECTED_RESPONSE_TEXT_DESCRIPTOR_AST_DIGEST",
     "RESPONSE_TEXT_DESCRIPTOR_PATH",
     "ResponseTextDescriptorSourceViolation",

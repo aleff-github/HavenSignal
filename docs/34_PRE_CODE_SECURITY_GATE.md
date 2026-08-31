@@ -830,3 +830,19 @@ logging, network, file, Django-integration, service-call, finalization, and
 authorization changes without importing or executing the target. This is Stage
 A source-conformance evidence only and closes no preview, byte-freezing,
 artifact-binding, persistence, finalization, deployment, or production gate.
+
+The fortieth Stage A slice adds inert Response Note schema descriptors for the
+owner-approved AAD and ciphertext-envelope field order. The module validates
+only field names, primitive categories, public constant values, and fixed byte
+sizes; it does not encode or parse CBOR, retain actual identifiers, key
+handles, nonce, AAD, ciphertext, plaintext, receipt, recovery authorization, or
+state data.
+
+It also adds a non-executing exact-AST source policy for that descriptor. The
+policy rejects import, constant, enum, field-order, class, validator,
+false-capability, CBOR, retained-context, ciphertext, cryptographic,
+persistence, endpoint, logging, network, file, Django-integration,
+service-call, and authorization changes without importing or executing the
+target. This is Stage A source-conformance evidence only and closes no
+deterministic-CBOR, envelope parsing, cryptographic authentication, Key
+Service, persistence, deployment, or production gate.
