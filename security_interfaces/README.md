@@ -115,6 +115,18 @@ policy. Passing proves only reviewed source shape; it is not canonicalization,
 CBOR, encryption, decryption, Key Service behavior, verifier behavior,
 persistence, recovery authorization, endpoint behavior, or production evidence.
 
+`response_text_descriptors.py` performs only transient validation for the
+approved Response Note text profile: Unicode scalar values, NUL rejection,
+LF line-ending profile, NFC normalization rule, strict UTF-8 limits, plain text,
+and conservative no-HTML/no-link markers. Successful validation returns only
+the fixed profile descriptor and never returns or stores the submitted text,
+normalized text, canonical bytes, digest, preview, draft, frame, or state.
+
+The response text descriptor source is locked by a non-executing exact-AST
+policy. Passing proves only reviewed source shape; it is not final preview,
+canonical byte freezing, artifact digesting, step-up binding, persistence,
+finalization, response staging, endpoint behavior, or production evidence.
+
 The package initializer is also locked by a non-executing exact-AST policy so
 its reviewed re-export surface cannot gain a production service, side effect,
 dynamic behavior, or widened public capability without an explicit policy

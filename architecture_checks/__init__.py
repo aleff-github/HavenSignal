@@ -130,6 +130,15 @@ from .response_crypto_descriptors import (
     scan_repository_response_crypto_descriptor,
     scan_response_crypto_descriptor_source,
 )
+from .response_text_descriptors import (
+    EXPECTED_RESPONSE_TEXT_DESCRIPTOR_AST_DIGEST,
+    RESPONSE_TEXT_DESCRIPTOR_PATH,
+    ResponseTextDescriptorSourceViolation,
+    ResponseTextDescriptorSourceViolationCode,
+    analyze_response_text_descriptor_source,
+    scan_repository_response_text_descriptor,
+    scan_response_text_descriptor_source,
+)
 from .surfaces import (
     EXPECTED_REPORTER_PYTHON_AST_DIGESTS,
     EXPECTED_SETTINGS,
@@ -263,6 +272,13 @@ __all__ = [
     "analyze_response_crypto_descriptor_source",
     "scan_repository_response_crypto_descriptor",
     "scan_response_crypto_descriptor_source",
+    "EXPECTED_RESPONSE_TEXT_DESCRIPTOR_AST_DIGEST",
+    "RESPONSE_TEXT_DESCRIPTOR_PATH",
+    "ResponseTextDescriptorSourceViolation",
+    "ResponseTextDescriptorSourceViolationCode",
+    "analyze_response_text_descriptor_source",
+    "scan_repository_response_text_descriptor",
+    "scan_response_text_descriptor_source",
     "EXPECTED_SETTINGS",
     "EXPECTED_REPORTER_PYTHON_AST_DIGESTS",
     "SurfaceViolation",

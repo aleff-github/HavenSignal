@@ -468,6 +468,12 @@ AAD, ciphertext, key-handle, or Response-DEK values, persist protected bytes,
 call a Key Service, consume recovery authorization, use audit receipts, inspect
 state rows, expose endpoints, or authorize response use.
 
+The separate Stage A text descriptor may only validate the approved text shape
+transiently and return a fixed content-free profile. It does not return
+normalized text or canonical bytes and does not implement the final preview,
+byte freezing, digest binding, frame construction, persistence, staging, or
+finalization boundary.
+
 ## External design references
 
 - [libsodium — XChaCha20-Poly1305 construction](https://doc.libsodium.org/secret-key_cryptography/aead/chacha20-poly1305/xchacha20-poly1305_construction)

@@ -688,6 +688,31 @@ Passing this source policy closes no Response Note canonicalization,
 encryption/decryption, deterministic-CBOR, Response-DEK lifecycle, Key Service,
 recovery authorization, persistence, independent-review, or production gate.
 
+## Stage A Response Note text descriptor record
+
+`security_interfaces/response_text_descriptors.py` validates only the approved
+static text profile for Response Notes: Unicode scalar values, NUL rejection,
+LF line-ending profile, NFC normalization rule, strict UTF-8, 5,000-scalar and
+20,000-byte limits, plain-text content kind, and conservative no-HTML/no-link
+markers.
+
+Successful validation returns immutable profile evidence only. It does not
+return, retain, log, persist, preview, draft, frame, digest, encrypt, or bind
+the supplied text or normalized text. It does not create canonical bytes,
+interact with step-up, use an audit receipt, inspect report state, stage a
+response, expose an endpoint, or authorize finalization.
+
+The non-executing response-text descriptor policy fixes the exact target,
+imports, constants, enum registries, immutable class profiles, validator
+behavior, and false capability results. Added retained text, canonical-byte
+output, digesting, drafting, persistence, network, file, logging, Django
+integration, endpoint, staging, finalization, or authorization behavior fails
+closed. The target is parsed but never imported or executed.
+
+Passing this source policy closes no preview, canonical byte freezing,
+artifact-binding, finalization, response staging, persistence,
+independent-review, endpoint, or production gate.
+
 ## Stage A audit descriptor source-conformance record
 
 The non-executing audit-descriptor policy fixes the complete executable AST of
