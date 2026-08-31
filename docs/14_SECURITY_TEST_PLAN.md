@@ -55,6 +55,20 @@ For the metadata-only Stage A described by
 - the complete executable AST of the report-bound step-up-v1 descriptor module
   remains exact; field, registry, timing, validator, false verification or
   authorization result, import, dynamic, and effect changes fail closed;
+- recovery credential descriptors accept only the exact 16-byte/26-character
+  uppercase unpadded Base32 Ticket ID shape and 32-byte/43-character unpadded
+  base64url Recovery Secret shape;
+- recovery credential validation rejects lowercase Ticket IDs, padding,
+  whitespace, alternate alphabets, Unicode, non-string inputs, wrong lengths,
+  and non-canonical encodings without returning or persisting credential text
+  or decoded bytes;
+- the recovery descriptor verifier profile is metadata-only and cannot
+  generate credentials, compute a verifier, store a plaintext secret, perform
+  lookup, expose an endpoint, or authorize recovery;
+- the complete executable AST of the recovery descriptor module remains exact;
+  import, constant, field, validator, false-capability, generation, verifier,
+  storage, logging, endpoint, service-call, and authorization changes fail
+  closed without importing or executing it;
 - administrative step-up-v2 foundations accept only exact 16-byte authorization,
   administrator, session, and device identifiers, binding-purpose/key-epoch
   metadata, a non-sliding 120-second lifetime, and an unused-only state;
@@ -647,6 +661,31 @@ foundation, statically verify without importing or executing the target that:
 Passing this policy proves only exact source conformance. It does not prove
 administrator identity, WebAuthn, session/device binding, persistence,
 single-use consumption, concurrency, or production readiness.
+
+## Stage A recovery descriptor source conformance
+
+While recovery implementation remains blocked behind independent review and
+dependent production gates, statically verify without importing or executing
+the target that:
+
+- the target path, imports, protocol version, credential sizes, encoded
+  lengths, alphabets, encoding names, roles, verifier tag size, and domain label
+  remain exact;
+- immutable slotted descriptor classes return only content-free structural
+  evidence and expose no credential text, decoded bytes, verifier tag, key,
+  lookup, endpoint, persistence, or authorization field;
+- validators reject non-string, malformed, non-canonical, padded, wrong-length,
+  Unicode, alternate-alphabet, or role/encoding-mismatch inputs with a generic
+  controlled error that echoes no supplied value;
+- generation, random sources, HMAC/hash computation, constant-time comparison,
+  persistence, logging, networking, file access, Django integration, dynamic
+  imports, `eval`, `exec`, and success authorization behavior fail closed;
+- missing, unreadable, malformed, and out-of-root inputs return controlled,
+  content-free violations.
+
+Passing this policy proves only exact source conformance. It does not implement
+credential generation, verifier creation/verification, recovery lookup,
+Response-DEK use, persistence, endpoint behavior, or production readiness.
 
 ## Dependency/security checks
 

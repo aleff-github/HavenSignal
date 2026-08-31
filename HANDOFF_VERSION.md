@@ -289,3 +289,17 @@ rejecting write/OIDC permissions, moving action refs, un-hashed installs,
 `continue-on-error`, missing/out-of-root input, and source drift. It is CI
 source conformance only and no supply-chain, deployment, independent-review, or
 production gate is closed.
+
+The thirty-seventh Stage A slice adds inert recovery credential descriptors for
+the owner-approved version-1 Ticket ID and Recovery Secret shapes. Validation
+accepts only exact canonical Base32/base64url text and returns content-free
+shape evidence; it does not retain credential text or decoded bytes, generate
+credentials, compute/compare HMAC verifier tags, persist plaintext secrets,
+perform lookup, expose endpoints, call services, or authorize recovery.
+
+A new non-executing recovery-descriptor source policy locks the exact imports,
+constants, immutable classes, validators, metadata-only verifier purpose, and
+false capability results. Generation, verifier, storage, lookup, logging,
+network, file, Django integration, service-call, and authorization changes fail
+closed. This closes no recovery, cryptographic-review, Response-DEK,
+external-service, deployment, or production gate.
