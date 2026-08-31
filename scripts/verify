@@ -1,0 +1,85 @@
+#!/usr/bin/env python3
+"""Run the reviewed local verification sequence for HavenSignal."""
+
+from __future__ import annotations
+
+import subprocess
+import sys
+from pathlib import Path
+from typing import Sequence
+
+
+REPOSITORY_ROOT = Path(__file__).resolve().parent.parent
+COMMAND_SPECS = (
+    ("Architecture policies", ("{python}", "-m", "architecture_checks", ".")),
+    ("Django system check", ("{python}", "manage.py", "check")),
+    (
+        "Django migration drift check",
+        ("{python}", "manage.py", "makemigrations", "--check", "--dry-run"),
+    ),
+    ("Django test suite", ("{python}", "manage.py", "test", "-v", "1")),
+    (
+        "Python compile check",
+        (
+            "{python}",
+            "-m",
+            "compileall",
+            "anonymous_reporting",
+            "architecture_checks",
+            "reporter_gateway",
+            "report_lifecycle",
+            "security_interfaces",
+            "submission_workflow",
+            "tests",
+        ),
+    ),
+    ("Manifest validation", ("sha256sum", "-c", "MANIFEST.sha256")),
+)
+
+
+def _python_executable() -> str:
+    virtualenv_python = REPOSITORY_ROOT / ".venv" / "bin" / "python"
+    if virtualenv_python.exists():
+        return str(virtualenv_python)
+    return sys.executable
+
+
+def _command_args(
+    spec: tuple[str, tuple[str, ...]],
+    *,
+    python_executable: str,
+) -> tuple[str, ...]:
+    return tuple(
+        python_executable if item == "{python}" else item
+        for item in spec[1]
+    )
+
+
+def _run_step(
+    label: str,
+    args: Sequence[str],
+) -> int:
+    print(f"==> {label}", flush=True)
+    completed = subprocess.run(
+        args,
+        cwd=REPOSITORY_ROOT,
+        check=False,
+    )
+    return completed.returncode
+
+
+def main() -> int:
+    python_executable = _python_executable()
+    for spec in COMMAND_SPECS:
+        result = _run_step(
+            spec[0],
+            _command_args(spec, python_executable=python_executable),
+        )
+        if result:
+            return result
+    print("verification passed", flush=True)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
