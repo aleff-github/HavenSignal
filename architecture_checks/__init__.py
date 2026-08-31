@@ -71,6 +71,13 @@ from .negative_capabilities import (
     analyze_negative_capability_source,
     scan_negative_capability_sources,
 )
+from .runner import (
+    ARCHITECTURE_CHECKS,
+    ArchitectureCheck,
+    ArchitectureCheckViolation,
+    format_violation,
+    run_architecture_checks,
+)
 from .orchestration import (
     AUDIT_RETENTION_SOURCE_POLICY,
     CLEANUP_SOURCE_POLICY,
@@ -161,6 +168,11 @@ __all__ = [
     "NegativeCapabilityViolationCode",
     "analyze_negative_capability_source",
     "scan_negative_capability_sources",
+    "ARCHITECTURE_CHECKS",
+    "ArchitectureCheck",
+    "ArchitectureCheckViolation",
+    "format_violation",
+    "run_architecture_checks",
     "AUDIT_RETENTION_SOURCE_POLICY",
     "CLEANUP_SOURCE_POLICY",
     "DELETION_SOURCE_POLICY",

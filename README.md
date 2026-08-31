@@ -105,6 +105,7 @@ The repository currently contains:
 - a non-executing exact-AST guard for the inert report-lifecycle core;
 - a non-executing exact-AST guard for the inert Django bootstrap entrypoints;
 - a non-executing exact-AST guard for application package initializers;
+- an aggregate static architecture-policy runner used by CI;
 - non-executing AST policies that keep lifecycle orchestration incapable of
   persistence, cryptography, deletion, scheduling, logging, or service calls;
 - a test-only PostgreSQL concurrency scaffold.

@@ -136,3 +136,8 @@ same non-executing exact-AST pattern. Passive package markers and the reviewed
 `security_interfaces.__init__` re-export surface must not gain imports,
 exports, startup effects, migration initializer code, or dynamic behavior
 without an explicit policy update.
+
+CI must run `python -m architecture_checks .` as the aggregate static policy
+gate. This command only consolidates the existing non-executing checks; passing
+it is not browser, PostgreSQL, process-isolation, external-service, deployment,
+or production evidence.

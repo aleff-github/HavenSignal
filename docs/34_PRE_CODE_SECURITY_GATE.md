@@ -730,3 +730,15 @@ dynamic behavior, unknown targets, malformed source, and missing roots fail
 closed. The scanner never imports, executes, or echoes its targets. Passing
 closes no runtime import isolation, process, dependency, service, deployment,
 independent-review, or production gate.
+
+The thirty-third Stage A slice adds an aggregate command-line runner for the
+current static architecture-policy registry and wires CI to run it. The runner
+normalizes controlled violations from dependency, import, surface, migration,
+bootstrap, initializer, source-profile, orchestration, descriptor, and
+negative-capability policies.
+
+The runner adds no new protected policy semantics of its own and does not
+import or execute scanned targets beyond the behavior of the already reviewed
+individual scanners. Passing closes no browser, runtime, PostgreSQL,
+process-isolation, external-service, deployment, independent-review, or
+production gate.
