@@ -474,6 +474,12 @@ normalized text or canonical bytes and does not implement the final preview,
 byte freezing, digest binding, frame construction, persistence, staging, or
 finalization boundary.
 
+The separate Stage A schema descriptor may only validate the ordered metadata
+shape for the approved AAD and ciphertext-envelope fields. It does not encode
+or parse deterministic CBOR, retain actual context values, retain ciphertext,
+perform cryptographic authentication, persist bytes, call a Key Service, or
+authorize response use.
+
 ## External design references
 
 - [libsodium — XChaCha20-Poly1305 construction](https://doc.libsodium.org/secret-key_cryptography/aead/chacha20-poly1305/xchacha20-poly1305_construction)

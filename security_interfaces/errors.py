@@ -77,3 +77,12 @@ class ResponseTextDescriptorRejected(ValueError):
 
     def __init__(self) -> None:
         super().__init__(self.public_code)
+
+
+class ResponseSchemaDescriptorRejected(ValueError):
+    """Controlled rejection for an invalid inert response schema descriptor."""
+
+    public_code = "response_schema_descriptor_rejected"
+
+    def __init__(self) -> None:
+        super().__init__(self.public_code)

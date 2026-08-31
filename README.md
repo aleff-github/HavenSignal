@@ -94,6 +94,8 @@ The repository currently contains:
   size, algorithm, AAD, envelope, and key-operation profile shapes;
 - inert Response Note text descriptors that validate only approved plain-text,
   normalization, line-ending, scalar/byte-limit, and no-link/no-HTML rules;
+- inert Response Note schema descriptors that fix only the ordered AAD and
+  ciphertext-envelope field metadata;
 - pure, non-executing sequence contracts for finalization and OPEN-only operator deletion;
 - inert planners for Response Note expiry, ciphertext-cleanup retry timing,
   terminal-metadata review, and isolated audit-retention review;
@@ -107,6 +109,7 @@ The repository currently contains:
 - a non-executing exact-AST guard for inert recovery credential descriptors;
 - a non-executing exact-AST guard for inert Response Note crypto descriptors;
 - a non-executing exact-AST guard for inert Response Note text descriptors;
+- a non-executing exact-AST guard for inert Response Note schema descriptors;
 - architecture checks that constrain the reporter-facing settings, route,
   passive assets, read-only view, and restrictive response-header middleware;
 - a non-executing exact-AST guard for the sole inert submission migration;
