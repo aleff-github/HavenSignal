@@ -115,7 +115,7 @@ preserves every independent and production gate.
 | SEC-ALERT-002 | CRITICAL | 08 Audit Logging; 31 Alert | 14/31: closed-schema, prohibited-data, and exact-source tests | Content-free component shapes and their exact executable AST implemented; full closed request and independent review OPEN |
 | SEC-ALERT-003 | HIGH | 12 Open Decisions; 31 Alert | 31: durability, retry, escalation, acknowledgement, failure, and false-capability source tests | Structural acceptance and its locked false results cannot prove durability; service, PostgreSQL, SMTP, retry, and production gates OPEN |
 | SEC-BROWSER-001..002 | CRITICAL | 05 Recovery Response; 06 Operator Sessions; 16 Django Rules; 33 Operational Access | 14/33: cache, ephemeral profile, clipboard/print/download controls | Exact supported workstation/browser profile owner-approved; physical acceptance OPEN |
-| SEC-INPUT-001..006 | HIGH | 00 Scope; 07 File Security; 16 Django Rules; 20 Submission Protocol; 26 Report Crypto; 29 File/Sandbox; 30 Request Admission | 14/29/30: canonical text, byte/body/multipart/decoded-resource/no-spool tests | Exact profiles owner-approved; review and production boundary gates OPEN |
+| SEC-INPUT-001..006 | HIGH | 00 Scope; 07 File Security; 16 Django Rules; 20 Submission Protocol; 26 Report Crypto; 29 File/Sandbox; 30 Request Admission | 14/29/30: canonical text, byte/body/multipart/decoded-resource/no-spool tests plus inert descriptor source-conformance tests | Exact request/body/multipart limit profiles are modeled inertly; parser, handler, endpoint, proxy, review and production boundary gates OPEN |
 
 ## Cross-cutting interface mapping
 

@@ -157,6 +157,15 @@ imports or executes the target and proves no challenge generation, answer
 comparison, persistence, media rendering, network-identity binding, endpoint,
 service call, or protected-operation authorization capability.
 
+The request-admission descriptor module is locked to its exact executable AST
+as content-free request/multipart metadata only. Body, file, report-text,
+control-field, part-header, part-count, boundary, streaming-buffer, deadline,
+method, content-type, file-slot, and false capability profiles cannot change
+without explicit review. The check never imports or executes the target and
+proves no HTTP/multipart parsing, Django upload-handler installation, file-byte
+access, filename exposure, sandbox-job creation, plaintext persistence,
+endpoint, or submission-acceptance capability.
+
 The report-bound step-up-v1 descriptor module is also locked to its complete
 reviewed executable AST, including timing, registries, content-free context,
 unused state, validators, and false WebAuthn/binding/authorization results.
