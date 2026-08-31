@@ -25,8 +25,8 @@ jobs:
           cache: pip
           cache-dependency-path: requirements.lock
 
-      - name: Enforce dependency security policy
-        run: python -m architecture_checks.dependency_policy .
+      - name: Enforce static architecture policies
+        run: python -m architecture_checks .
 
       - name: Install locked dependencies
         run: python -m pip install --require-hashes -r requirements.lock

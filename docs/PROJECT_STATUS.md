@@ -96,6 +96,10 @@ root URL surface, including import allowlists, passive page expectations, and
 the exact executable AST of the read-only view and restrictive response-header
 middleware.
 
+`python -m architecture_checks .` runs the current static policy set as one
+aggregate fail-closed CI gate and reports only controlled, content-free
+violations.
+
 The same package statically locks the initial lifecycle migration and the inert
 finalization, operator-deletion and retention planners to closed imports,
 members, immutable metadata-only fields, false capability flags and

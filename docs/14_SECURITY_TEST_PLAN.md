@@ -78,6 +78,9 @@ For the metadata-only Stage A described by
   export surface cannot gain imports, exports, startup side effects, migration
   initializer code, dynamic behavior, malformed source, unknown targets, or
   missing roots without a controlled fail-closed violation;
+- the aggregate `python -m architecture_checks .` runner executes the complete
+  current static policy registry, returns success only when every policy passes,
+  and formats failures without echoing target source or sensitive values;
 - the test-only PostgreSQL concurrency scaffold contains exactly the active
   report/lease/operation exclusions and stale report-version/lease-generation
   scenarios currently modeled, using only internally generated UUID metadata;

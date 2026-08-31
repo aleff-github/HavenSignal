@@ -4,6 +4,16 @@ This package contains static, non-executing checks for the current inert
 dependency boundaries. It is not a runtime sandbox, credential boundary, or
 substitute for process/network isolation.
 
+Run all current static policies with:
+
+```bash
+python -m architecture_checks .
+```
+
+The aggregate runner normalizes controlled, content-free violations from the
+individual policies and returns a failing exit status when any policy fails.
+It does not expand what the individual policies prove.
+
 The reporter policy is an exact allowlist of imports used by the current
 read-only Reporter Gateway and root URL configuration. Any new absolute import
 requires an explicit reviewed policy change. Local single-level relative
