@@ -58,6 +58,21 @@ authorization result, import, dynamic, and side-effect changes fail closed.
 Passing does not prove durable acceptance, delivery, acknowledgement, or an
 Alert Service boundary.
 
+`captcha_descriptors.py` models only the owner-approved version-1
+no-JavaScript CAPTCHA protocol metadata: 16-byte challenge identifiers encoded
+as 22-character unpadded base64url text, six-character uppercase answers from
+the approved 32-symbol alphabet, 16-byte anonymous form scope shape, five-minute
+non-sliding expiry, 15-minute cleanup horizon, PNG bounds, global purpose/action
+token-bucket limits, and the open production gates. It returns content-free
+shape evidence only. It does not generate challenges, render image/audio,
+persist challenge records, compare answers, use request/IP/User-Agent/device
+data, expose endpoints, call a Challenge Service, or authorize operations.
+
+The CAPTCHA descriptor source is also locked by a non-executing exact-AST
+policy. Passing proves only reviewed source shape and closes no Pillow/font,
+audio/accessibility, PostgreSQL concurrency, Challenge Service, gateway,
+endpoint, deployment, or production gate.
+
 `step_up_descriptors.py` models only the report-bound v1 UUID/counter context,
 the exact 120-second lifetime, ES256/EdDSA algorithm registry, binding purpose
 and key epoch, and an unused-only Stage A state. It deliberately contains no

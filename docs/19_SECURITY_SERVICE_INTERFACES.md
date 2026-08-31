@@ -351,6 +351,12 @@ submission endpoint.
 
 An OPEN gate blocks only its affected interface. It does not authorize a mock that stores plaintext, returns a fixed success receipt, exposes a permissive key call, disables verification, or silently falls back.
 
+Current Stage A evidence includes content-free no-JavaScript CAPTCHA
+descriptors and a non-executing exact-source policy for their approved static
+metadata only. This evidence does not create a Challenge Service, issue or
+verify challenges, render image/audio, bind requests, persist state, close the
+PostgreSQL concurrency proof, or authorize Reporter/Recovery Gateway use.
+
 ## Architecture conformance tests
 
 Before a profile receives production credentials, automated and operational tests must prove:

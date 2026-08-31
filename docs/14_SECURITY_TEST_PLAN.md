@@ -611,6 +611,14 @@ Test:
 - neither CAPTCHA path uses IP/device fingerprinting or third-party tracking;
 - Tor Browser Safest remains usable after the no-JavaScript technology is approved.
 
+Current Stage A evidence additionally tests that the inert no-JavaScript
+CAPTCHA descriptor accepts only the approved identifier, answer, expiry,
+cleanup, state, purpose, PNG-bound, anonymous bucket, and open-gate metadata.
+Its exact-source policy rejects generation, persistence, answer validation
+success paths, network-identity binding, third-party CAPTCHA, endpoint
+enablement, dynamic behavior, and source echoing. These tests are source-level
+evidence only and do not enable the Challenge Service.
+
 ## Alerts
 
 Test:

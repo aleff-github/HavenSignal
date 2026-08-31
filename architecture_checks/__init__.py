@@ -18,6 +18,15 @@ from .ci_workflow import (
     scan_ci_workflow_source,
     scan_repository_ci_workflow,
 )
+from .captcha_descriptors import (
+    CAPTCHA_DESCRIPTOR_PATH,
+    EXPECTED_CAPTCHA_DESCRIPTOR_AST_DIGEST,
+    CaptchaDescriptorSourceViolation,
+    CaptchaDescriptorSourceViolationCode,
+    analyze_captcha_descriptor_source,
+    scan_captcha_descriptor_source,
+    scan_repository_captcha_descriptor,
+)
 
 from .descriptors import (
     ADMINISTRATIVE_STEP_UP_DESCRIPTOR_PATH,
@@ -193,6 +202,13 @@ __all__ = [
     "analyze_ci_workflow_source",
     "scan_ci_workflow_source",
     "scan_repository_ci_workflow",
+    "CAPTCHA_DESCRIPTOR_PATH",
+    "EXPECTED_CAPTCHA_DESCRIPTOR_AST_DIGEST",
+    "CaptchaDescriptorSourceViolation",
+    "CaptchaDescriptorSourceViolationCode",
+    "analyze_captcha_descriptor_source",
+    "scan_captcha_descriptor_source",
+    "scan_repository_captcha_descriptor",
     "ADMINISTRATIVE_STEP_UP_DESCRIPTOR_PATH",
     "ALERT_DESCRIPTOR_PATH",
     "AUDIT_DESCRIPTOR_PATH",

@@ -43,6 +43,15 @@ class AlertDescriptorRejected(ValueError):
         super().__init__(self.public_code)
 
 
+class CaptchaDescriptorRejected(ValueError):
+    """Controlled rejection for an invalid inert CAPTCHA descriptor."""
+
+    public_code = "captcha_descriptor_rejected"
+
+    def __init__(self) -> None:
+        super().__init__(self.public_code)
+
+
 class StepUpDescriptorRejected(ValueError):
     """Controlled rejection for an invalid inert step-up descriptor."""
 

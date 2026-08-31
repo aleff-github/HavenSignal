@@ -127,6 +127,15 @@ boundary to `security_interfaces/alert_descriptors.py`. It makes every change to
 the alert/severity/delivery registry, content-free fields, validators, false
 durability/authorization results, imports, or effects an explicit review event.
 
+The CAPTCHA-descriptor source policy locks the complete executable AST of
+`security_interfaces/captcha_descriptors.py`. Exact no-JavaScript protocol
+version, identifier and answer shapes, form-scope size, expiry and cleanup
+times, PNG bounds, purpose/state registries, anonymous global bucket limits,
+open production gates, validators, false capability properties, imports, and
+absence of challenge generation, media rendering, persistence, endpoint,
+network-identity binding, third-party CAPTCHA, service calls, or authorization
+behavior are reviewed source facts.
+
 The report step-up source policy locks the complete executable AST of
 `security_interfaces/step_up_descriptors.py`. Identifier/counter fields,
 algorithm and purpose registries, timing, unused state, validators, and every
