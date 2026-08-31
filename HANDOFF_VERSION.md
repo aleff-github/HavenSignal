@@ -242,3 +242,10 @@ rules, constraints, creation-only saves, PostgreSQL checks, and the unavailable
 executor remain exact without importing or executing targets. This provides no
 protected transition, database write, concurrency proof, or production
 authority.
+
+The thirty-first Stage A slice locks the complete executable AST of `manage.py`,
+the ASGI/WSGI entrypoints, and both installed metadata-app configurations. The
+settings-module identity, Django factories, management boundary, app identities,
+and absence of startup hooks remain exact without importing or executing the
+targets. This provides no runtime, process, proxy, network, deployment, or
+production authority.

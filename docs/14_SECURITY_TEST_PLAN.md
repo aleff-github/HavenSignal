@@ -68,6 +68,11 @@ For the metadata-only Stage A described by
 - static architecture scanning parses but never imports or executes the target
   source, fails closed for syntax/path/read errors, and is never represented as
   runtime credential/process/network isolation;
+- the exact executable AST of `manage.py`, ASGI/WSGI entrypoints, and installed
+  metadata-app configurations remains fixed; alternate settings, logging,
+  network/file effects, application wrappers, early command execution,
+  `AppConfig.ready()` hooks, malformed source, unknown targets, and missing
+  roots fail closed without import, execution, or echo;
 - the test-only PostgreSQL concurrency scaffold contains exactly the active
   report/lease/operation exclusions and stale report-version/lease-generation
   scenarios currently modeled, using only internally generated UUID metadata;

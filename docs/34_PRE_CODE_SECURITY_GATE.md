@@ -706,3 +706,16 @@ fail closed. The scanner never imports, executes, or echoes its targets.
 Passing closes no protected transition, authentication, audit, cryptographic,
 PostgreSQL-concurrency, external-service, independent-review, or production
 gate.
+
+The thirty-first Stage A slice adds a non-executing exact-AST policy for
+`manage.py`, both Django application entrypoints, and the two installed
+metadata-app configurations. It fixes the settings-module identity, standard
+ASGI/WSGI factories, management-command boundary, app identities, and absence
+of startup hooks.
+
+Alternate settings, logging, network/file effects, application wrappers, early
+command execution, `AppConfig.ready()` hooks, dynamic behavior, unknown
+targets, malformed source, and missing roots fail closed. The scanner never
+imports, executes, or echoes its targets. Passing closes no runtime, process,
+proxy, dependency, network, deployment, independent-review, or production
+gate.

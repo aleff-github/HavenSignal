@@ -125,6 +125,11 @@ their exact generic fail-closed behavior.
 
 These checks are review guards, not production network/process security boundaries.
 
+The Django management, ASGI/WSGI, and installed metadata-app bootstrap modules
+are also locked to their exact executable AST without being imported. Alternate
+settings, startup hooks, wrappers, logging, network, file, and other early
+side-effect changes require explicit review; this is not deployment evidence.
+
 ## Approved designs versus enabled capability
 
 The repository contains detailed approved protocol documents covering areas including:

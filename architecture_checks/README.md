@@ -53,6 +53,13 @@ behavior, the PostgreSQL capability gate, and the always-unavailable executor.
 New content fields, weaker fencing, relaxed timeouts, logging, database writes,
 or success paths require explicit review.
 
+The bootstrap-source policy locks the complete executable AST of `manage.py`,
+the ASGI/WSGI entrypoints, and both installed metadata-app `AppConfig` modules.
+It fixes the settings-module identity, standard Django application factories,
+management-command boundary, app identities, and absence of startup hooks.
+Added logging, network, file, wrapper, alternate-settings, early-execution, or
+`ready()` behavior requires explicit review without executing an entrypoint.
+
 The orchestration-source policy parses only `report_lifecycle/finalization.py`,
 `report_lifecycle/deletion.py`, `report_lifecycle/retention.py`,
 `report_lifecycle/cleanup.py`, `report_lifecycle/metadata_retention.py`, and

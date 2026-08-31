@@ -1,5 +1,13 @@
 """Static architecture checks for deny-by-default dependency boundaries."""
 
+from .bootstrap import (
+    EXPECTED_BOOTSTRAP_SOURCE_AST_DIGESTS,
+    BootstrapSourceViolation,
+    BootstrapSourceViolationCode,
+    analyze_bootstrap_source,
+    scan_bootstrap_sources,
+)
+
 from .descriptors import (
     ADMINISTRATIVE_STEP_UP_DESCRIPTOR_PATH,
     ALERT_DESCRIPTOR_PATH,
@@ -91,6 +99,11 @@ from .submission import (
 )
 
 __all__ = [
+    "EXPECTED_BOOTSTRAP_SOURCE_AST_DIGESTS",
+    "BootstrapSourceViolation",
+    "BootstrapSourceViolationCode",
+    "analyze_bootstrap_source",
+    "scan_bootstrap_sources",
     "ADMINISTRATIVE_STEP_UP_DESCRIPTOR_PATH",
     "ALERT_DESCRIPTOR_PATH",
     "AUDIT_DESCRIPTOR_PATH",
