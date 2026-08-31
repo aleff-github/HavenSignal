@@ -132,6 +132,13 @@ The report step-up source policy locks the complete executable AST of
 algorithm and purpose registries, timing, unused state, validators, and every
 false verification/authorization result remain inert unless explicitly reviewed.
 
+The recovery-descriptor source policy locks the complete executable AST of
+`security_interfaces/recovery_descriptors.py`. Exact Ticket ID and Recovery
+Secret sizes, encodings, alphabets, metadata-only verifier purpose, validators,
+false capability properties, imports, and absence of generation, HMAC,
+persistence, lookup, endpoint, logging, or authorization behavior are reviewed
+source facts.
+
 The negative-capability policy parses only `security_interfaces/errors.py` and
 `security_interfaces/unavailable.py`. It locks the controlled dependency/error
 registry and every mandatory unavailable adapter to the exact executable AST

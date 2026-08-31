@@ -782,3 +782,18 @@ and reviewed workflow hash drift fail closed with controlled reason codes. The
 policy reads only the workflow source, does not execute CI, and closes no
 supply-chain, dependency-vulnerability, deployment, independent-review, or
 production gate.
+
+The thirty-seventh Stage A slice adds inert recovery credential descriptors for
+the owner-approved Ticket ID and Recovery Secret shapes. The module validates
+only exact version-1 sizes, canonical encodings, alphabets, roles, verifier
+purpose metadata, domain label, and full verifier tag length; successful values
+are immutable content-free descriptors that do not retain credential text or
+decoded bytes.
+
+It also adds a non-executing exact-AST source policy for that descriptor. The
+policy rejects import, constant, class, validator, false-capability, random
+generation, HMAC/hash, persistence, lookup, endpoint, logging, network, file,
+Django-integration, service-call, and authorization changes without importing
+or executing the target. This is Stage A source-conformance evidence only and
+closes no recovery, cryptographic-review, Response-DEK, persistence,
+external-service, independent-review, deployment, or production gate.

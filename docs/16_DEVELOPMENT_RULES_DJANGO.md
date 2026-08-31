@@ -119,6 +119,13 @@ The Response Note must remain reporter-invisible until Report-DEK destruction is
 
 Security-sensitive components whose exact construction remains OPEN must be represented only by explicit failing interfaces/placeholders. Do not add a convenience fallback, development plaintext mode, or provisional cryptographic construction.
 
+Recovery credential code is currently limited to inert structural descriptors.
+It may validate the exact owner-approved Ticket ID and Recovery Secret encoding
+shapes, but it must not generate credentials, compute or compare verifier tags,
+persist or log plaintext secrets, perform lookup, expose endpoints, call a
+Recovery Verifier Service, or authorize access to a Response Note until the
+cryptographic-review and dependent gates are closed.
+
 ## Inert bootstrap evidence
 
 The current `manage.py`, ASGI/WSGI entrypoints, and installed metadata-app

@@ -73,7 +73,8 @@ Their controlled errors and unavailable adapters are also locked by a
 non-executing exact-AST policy, so a success path, development fallback, added
 method, logging operation, or other side effect requires explicit review.
 
-The package includes inert structural descriptors for approved audit, alert, and step-up concepts, but these types do not themselves:
+The package includes inert structural descriptors for approved audit, alert,
+step-up, and recovery-credential concepts, but these types do not themselves:
 
 - encode/verify production audit artifacts;
 - append audit events;
@@ -81,6 +82,9 @@ The package includes inert structural descriptors for approved audit, alert, and
 - persist alert delivery;
 - perform WebAuthn;
 - create or verify production step-up authorization artifacts;
+- generate recovery credentials;
+- compute or verify recovery HMAC/verifier tags;
+- store or look up recovery material;
 - authorize protected operations.
 
 The administrative step-up-v2 foundations are limited to content-free internal
@@ -140,6 +144,13 @@ authorization results cannot change without an explicit policy update.
 The report-bound step-up-v1 descriptor module is also locked to its complete
 reviewed executable AST, including timing, registries, content-free context,
 unused state, validators, and false WebAuthn/binding/authorization results.
+
+The recovery credential descriptor module is locked to its exact executable AST
+as content-free shape validation only. Ticket ID and Recovery Secret sizes,
+encodings, alphabets, metadata-only verifier purpose, validators, and false
+capability flags cannot change without explicit policy review. The check never
+imports or executes the target and proves no generation, verifier, storage,
+lookup, endpoint, or recovery authorization capability.
 
 The controlled security-interface errors and unavailable external-service
 adapters are likewise parsed but never imported or executed and must retain

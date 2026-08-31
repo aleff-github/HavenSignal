@@ -631,6 +631,32 @@ Passing this source policy closes no administrator-identity, authentication,
 WebAuthn, session/device, operation-profile, persistence, consumption,
 concurrency, independent-review, or production gate.
 
+## Stage A recovery credential descriptor record
+
+`security_interfaces/recovery_descriptors.py` validates only the credential
+shape facts already fixed by `docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md`: a
+version-1, 16-byte Ticket ID encoded as exactly 26 uppercase unpadded RFC 4648
+Base32 characters and a 32-byte Recovery Secret encoded as exactly 43 unpadded
+base64url characters. The verifier purpose profile records only the approved
+domain label and full 32-byte HMAC tag size.
+
+Successful validation returns immutable, content-free shape evidence. It does
+not return or retain the supplied credential text or decoded bytes, generate
+credentials, compute a verifier, compare tags, persist plaintext secrets,
+perform lookup, expose an endpoint, call a Recovery Verifier Service, use a
+Response-DEK, or authorize recovery.
+
+The non-executing recovery-descriptor policy fixes the exact target, imports,
+constants, immutable class profiles, validator behavior, and false capability
+results. Added random generation, HMAC/hash use, constant-time comparison,
+persistence, network, file, logging, Django integration, lookup, endpoint, or
+authorization behavior fails closed. The target is parsed but never imported or
+executed.
+
+Passing this source policy closes no credential-generation, verifier,
+cryptographic-review, recovery lookup, Response-DEK, persistence,
+external-service, independent-review, or production gate.
+
 ## Stage A audit descriptor source-conformance record
 
 The non-executing audit-descriptor policy fixes the complete executable AST of
