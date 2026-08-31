@@ -2,10 +2,14 @@
 
 from .descriptors import (
     ADMINISTRATIVE_STEP_UP_DESCRIPTOR_PATH,
+    AUDIT_DESCRIPTOR_PATH,
+    EXPECTED_AUDIT_DESCRIPTOR_AST_DIGEST,
     DescriptorSourceViolation,
     DescriptorViolationCode,
     analyze_administrative_step_up_descriptor_source,
+    analyze_audit_descriptor_source,
     scan_administrative_step_up_descriptor_source,
+    scan_audit_descriptor_source,
 )
 
 from .imports import (
@@ -61,10 +65,14 @@ from .surfaces import (
 
 __all__ = [
     "ADMINISTRATIVE_STEP_UP_DESCRIPTOR_PATH",
+    "AUDIT_DESCRIPTOR_PATH",
+    "EXPECTED_AUDIT_DESCRIPTOR_AST_DIGEST",
     "DescriptorSourceViolation",
     "DescriptorViolationCode",
     "analyze_administrative_step_up_descriptor_source",
+    "analyze_audit_descriptor_source",
     "scan_administrative_step_up_descriptor_source",
+    "scan_audit_descriptor_source",
     "REPORTER_GATEWAY_IMPORT_POLICY",
     "REPORTER_ROOT_URL_IMPORT_POLICY",
     "ArchitectureImportViolation",

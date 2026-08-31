@@ -90,6 +90,11 @@ It also locks the administrative step-up-v2 descriptor to its exact imports,
 constants, immutable classes, validators, and closed call profile without
 executing the descriptor source.
 
+The audit-v1 descriptor module is likewise locked to its complete reviewed
+executable AST. Registry, field, validator, authorization-window, success-return,
+import, dynamic, or side-effect changes require an explicit policy update; the
+target is never imported or executed by the check.
+
 The controlled security-interface errors and unavailable external-service
 adapters are likewise parsed but never imported or executed and must retain
 their exact generic fail-closed behavior.

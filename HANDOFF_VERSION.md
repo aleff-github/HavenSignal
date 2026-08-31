@@ -194,3 +194,12 @@ input-bearing errors, logging/import side effects, unknown targets, and
 malformed source fail closed without importing or executing either target.
 This is negative-capability source evidence only and enables no real service or
 production authority.
+
+The twenty-fifth Stage A slice locks the complete executable AST of the inert
+audit-v1 descriptor module. Changes to imports, constants, closed registries,
+authorization windows, context-dependent denial, immutable fields, validators,
+false authorization results, or added dynamic/effectful behavior fail closed.
+The scanner never imports, executes, or echoes the target. This is source-
+conformance evidence only and provides no CBOR/COSE, receipt verification,
+audit append/durability, replay storage, protected-action, or production
+authority.

@@ -552,6 +552,19 @@ Passing is static source conformance only. It proves no trusted Audit Collector
 clock, isolated identity, dependency graph, persistence, controlled retention
 record, witness evidence, legal approval, or production Audit Service behavior.
 
+The next inert Stage A source policy parses but never imports or executes
+`security_interfaces/audit_descriptors.py`. It fixes the complete executable AST
+of the existing audit-v1 registries, immutable content-free descriptors,
+authorization windows, context-dependent denial, validators, and false
+authorization result. Registry, field, lifetime, validator, success-return,
+import, dynamic, logging, I/O, persistence, network, cryptographic, or other
+side-effect changes fail closed with controlled content-free violations.
+
+Passing this policy does not encode deterministic CBOR, parse or verify COSE,
+append an event, prove durable acceptance, verify a receipt, store replay state,
+or authorize a protected action. Independent review and every Audit Service and
+production gate remain OPEN.
+
 ## Recorded project-owner decision
 
 On 2026-08-25 the project owner approved all five visible choices:

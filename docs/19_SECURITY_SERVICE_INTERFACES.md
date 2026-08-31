@@ -630,3 +630,18 @@ The target is parsed but never imported or executed.
 Passing this source policy closes no administrator-identity, authentication,
 WebAuthn, session/device, operation-profile, persistence, consumption,
 concurrency, independent-review, or production gate.
+
+## Stage A audit descriptor source-conformance record
+
+The non-executing audit-descriptor policy fixes the complete executable AST of
+`security_interfaces/audit_descriptors.py` to the reviewed inert audit-v1
+profile. Any change to imports, protocol constants, event/actor registries,
+authorization windows, context-dependent denial, immutable descriptor fields,
+validator logic, or the false authorization result requires an explicit policy
+update. Added success returns, dynamic behavior, I/O, logging, persistence,
+network, cryptographic, or other side effects fail closed.
+
+The scanner parses but never imports, executes, or echoes the target. Passing
+is source-level conformance only. It does not implement deterministic CBOR,
+COSE, signature or receipt verification, audit append/durability, replay
+storage, protected consumers, independent review, or production capability.

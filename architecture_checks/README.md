@@ -48,6 +48,12 @@ validator bodies, and closed call set. Added authentication, persistence,
 network, file, logging, dynamic, or authorization behavior fails closed without
 importing or executing the descriptor module.
 
+The audit-descriptor source policy parses only
+`security_interfaces/audit_descriptors.py` and compares its complete executable
+AST with the reviewed inert audit-v1 profile. Registry, field, validator,
+authorization-window, import, call, success-return, or side-effect changes fail
+closed without importing, executing, or echoing the target source.
+
 The negative-capability policy parses only `security_interfaces/errors.py` and
 `security_interfaces/unavailable.py`. It locks the controlled dependency/error
 registry and every mandatory unavailable adapter to the exact executable AST

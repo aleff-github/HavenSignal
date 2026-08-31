@@ -41,6 +41,12 @@ release, and all protected consumers remain absent. The context-dependent
 `REPORT_KEY_DESTROYED` authorization lifetime is rejected until its exact
 operation profile is closed rather than guessed.
 
+A non-executing source policy additionally locks the complete executable AST of
+`audit_descriptors.py` to this exact inert profile. It rejects registry, field,
+validator, lifetime, success-return, import, dynamic, and side-effect changes
+without importing or executing the module. Passing is only source-conformance
+evidence; it does not encode or verify an audit artifact or authorize an action.
+
 Likewise, a structurally valid alert acceptance response proves neither a
 durable database/queue commit nor SMTP delivery and never authorizes a
 protected action. There is no Alert Service client, outbox, persistence,

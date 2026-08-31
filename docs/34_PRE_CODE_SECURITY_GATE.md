@@ -619,3 +619,17 @@ violations. The targets are parsed but never imported or executed. Passing is
 static source evidence only and closes no service-authentication, process,
 network, credential, durability, cryptographic, external-service, independent-
 review, or production gate.
+
+The twenty-fifth Stage A slice adds a non-executing source policy for the inert
+audit-v1 descriptor module. It fixes the exact target and complete executable
+AST, including imports, protocol constants, closed event/actor registries,
+authorization windows, context-dependent denial, immutable content-free fields,
+validator logic, and the false protected-action authorization result.
+
+Registry, field, lifetime, validator, success-return, import, dynamic, logging,
+I/O, persistence, network, cryptographic, and other side-effect changes fail
+closed. Missing, malformed, unreadable, and out-of-root targets produce only
+controlled content-free violations. The target is parsed but never imported or
+executed. Passing is static source evidence only and closes no CBOR/COSE,
+receipt verification, audit append/durability, replay storage, protected
+consumer, independent-review, external-service, or production gate.
