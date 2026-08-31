@@ -107,6 +107,11 @@ artifacts, temporary workspaces, quarantine areas, user media, collected static
 output, and cache/test artifacts without reading or echoing candidate file
 contents.
 
+`scripts/verify` runs the reviewed local verification sequence. A non-executing
+source policy locks that script to architecture checks, Django system checks,
+migration drift checks, the Django test suite, Python compilation, and manifest
+validation. This is developer tooling only, not production readiness evidence.
+
 The same package statically locks the initial lifecycle migration and the inert
 finalization, operator-deletion and retention planners to closed imports,
 members, immutable metadata-only fields, false capability flags and

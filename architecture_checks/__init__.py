@@ -120,6 +120,16 @@ from .submission import (
     analyze_submission_source,
     scan_submission_sources,
 )
+from .verification_script import (
+    EXPECTED_COMMAND_SPECS,
+    EXPECTED_VERIFY_SCRIPT_AST_DIGEST,
+    VERIFICATION_SCRIPT_PATH,
+    VerificationScriptViolation,
+    VerificationScriptViolationCode,
+    analyze_verification_script_source,
+    scan_repository_verification_script,
+    scan_verification_script_source,
+)
 
 __all__ = [
     "EXPECTED_BOOTSTRAP_SOURCE_AST_DIGESTS",
@@ -216,4 +226,12 @@ __all__ = [
     "SubmissionSourceViolationCode",
     "analyze_submission_source",
     "scan_submission_sources",
+    "EXPECTED_COMMAND_SPECS",
+    "EXPECTED_VERIFY_SCRIPT_AST_DIGEST",
+    "VERIFICATION_SCRIPT_PATH",
+    "VerificationScriptViolation",
+    "VerificationScriptViolationCode",
+    "analyze_verification_script_source",
+    "scan_repository_verification_script",
+    "scan_verification_script_source",
 ]

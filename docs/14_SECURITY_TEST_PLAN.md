@@ -81,6 +81,13 @@ For the metadata-only Stage A described by
 - the aggregate `python -m architecture_checks .` runner executes the complete
   current static policy registry, returns success only when every policy passes,
   and formats failures without echoing target source or sensitive values;
+- the local `scripts/verify` command remains locked to the reviewed sequence:
+  architecture policies, Django system check, migration drift check, Django
+  tests, Python compilation, and manifest validation;
+- the verification-script source policy parses but never executes
+  `scripts/verify`, rejects removed steps and executable-source drift, fails
+  closed for missing/malformed/out-of-root input, and never echoes script source
+  or injected sentinel values;
 - the test-only PostgreSQL concurrency scaffold contains exactly the active
   report/lease/operation exclusions and stale report-version/lease-generation
   scenarios currently modeled, using only internally generated UUID metadata;

@@ -148,3 +148,9 @@ export artifacts, temporary workspaces, quarantine areas, user media, collected
 static output, and cache/test artifacts. The check may inspect path names and
 `.gitignore` rules only; it must not read or print candidate file contents and
 does not replace dedicated secret scanning.
+
+Local verification should use `scripts/verify`. That script is itself guarded
+by a non-executing source policy and must retain the reviewed sequence:
+architecture policies, Django system check, migration drift check, Django test
+suite, Python compilation, and manifest validation. The script is developer
+tooling only and is not production evidence.

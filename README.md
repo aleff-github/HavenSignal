@@ -106,6 +106,7 @@ The repository currently contains:
 - a non-executing exact-AST guard for the inert Django bootstrap entrypoints;
 - a non-executing exact-AST guard for application package initializers;
 - a content-free repository hygiene policy for tracked local/runtime artifacts;
+- a reviewed local verification script guarded by a non-executing source policy;
 - an aggregate static architecture-policy runner used by CI;
 - non-executing AST policies that keep lifecycle orchestration incapable of
   persistence, cryptography, deletion, scheduling, logging, or service calls;
@@ -128,6 +129,12 @@ This repository uses a staged security workflow:
 7. only then authorize the next boundary.
 
 `AGENTS.md` is the security constitution for both human and agent-assisted development.
+
+Run the full reviewed local verification sequence with:
+
+```bash
+scripts/verify
+```
 
 ## Codex and AI use
 
