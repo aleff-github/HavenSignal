@@ -657,6 +657,37 @@ Passing this source policy closes no credential-generation, verifier,
 cryptographic-review, recovery lookup, Response-DEK, persistence,
 external-service, independent-review, or production gate.
 
+## Stage A Response Note crypto descriptor record
+
+`security_interfaces/response_crypto_descriptors.py` validates only the static
+version-1 Response Note crypto profile facts already fixed by
+`docs/24_RESPONSE_NOTE_CRYPTOGRAPHIC_PROTOCOL.md`: XChaCha20-Poly1305-IETF
+combined-mode identifiers, 32-byte Response-DEK size, 24-byte nonce size,
+16-byte tag size, 20,005-byte fixed plaintext frame, 20,021-byte
+ciphertext-and-tag size, 5,000-scalar and 20,000-byte limits, immutable
+context-size shapes, AAD purpose, and the six allowlisted Response-DEK
+operation names.
+
+Successful validation returns immutable profile evidence only. It does not
+canonicalize Response Note text, construct plaintext frames, encode or parse
+deterministic CBOR, encrypt, decrypt, compare tags, expose or hold real
+Response-DEK material, retain nonce/AAD/ciphertext bytes, hold key-handle
+values, persist protected bytes, call a Key Service, consume recovery
+authorization, use audit receipts, inspect state rows, expose an endpoint, or
+authorize response use.
+
+The non-executing response-crypto descriptor policy fixes the exact target,
+imports, constants, enum registries, immutable class profiles, validator
+behavior, and false capability results. Added canonicalization, Unicode
+normalization, frame construction, CBOR, AEAD, random generation, Key Service
+calls, persistence, network, file, logging, Django integration, endpoint, or
+authorization behavior fails closed. The target is parsed but never imported or
+executed.
+
+Passing this source policy closes no Response Note canonicalization,
+encryption/decryption, deterministic-CBOR, Response-DEK lifecycle, Key Service,
+recovery authorization, persistence, independent-review, or production gate.
+
 ## Stage A audit descriptor source-conformance record
 
 The non-executing audit-descriptor policy fixes the complete executable AST of

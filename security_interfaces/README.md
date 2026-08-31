@@ -102,6 +102,19 @@ cannot change silently. Passing is only source-conformance evidence and closes
 no recovery, cryptographic-review, persistence, external-service, or production
 gate.
 
+`response_crypto_descriptors.py` validates only the static version-1 Response
+Note crypto profile already fixed in `docs/24`: XChaCha20-Poly1305-IETF
+combined-mode metadata, fixed plaintext-frame and ciphertext/tag sizes,
+immutable context-size shapes, AAD purpose, and the six allowlisted
+Response-DEK operation names. It never receives or retains Response Note text,
+ciphertext bytes, nonce bytes, AAD bytes, Response-DEK material, key-handle
+values, recovery authorization, audit receipts, or state rows.
+
+The response crypto descriptor source is locked by a non-executing exact-AST
+policy. Passing proves only reviewed source shape; it is not canonicalization,
+CBOR, encryption, decryption, Key Service behavior, verifier behavior,
+persistence, recovery authorization, endpoint behavior, or production evidence.
+
 The package initializer is also locked by a non-executing exact-AST policy so
 its reviewed re-export surface cannot gain a production service, side effect,
 dynamic behavior, or widened public capability without an explicit policy

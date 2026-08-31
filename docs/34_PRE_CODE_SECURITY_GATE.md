@@ -797,3 +797,21 @@ Django-integration, service-call, and authorization changes without importing
 or executing the target. This is Stage A source-conformance evidence only and
 closes no recovery, cryptographic-review, Response-DEK, persistence,
 external-service, independent-review, deployment, or production gate.
+
+The thirty-eighth Stage A slice adds inert Response Note crypto descriptors for
+the owner-approved version-1 format profile. The module validates only exact
+algorithm/profile identifiers, key, nonce, tag, frame, ciphertext/tag,
+scalar/UTF-8 limit, immutable-context-size, AAD-purpose, and Response-DEK
+operation shapes. It does not accept or retain real Response Note plaintext,
+ciphertext, nonce, AAD, key-handle, DEK, receipt, recovery authorization, or
+state data.
+
+It also adds a non-executing exact-AST source policy for that descriptor. The
+policy rejects import, constant, enum, class, validator, false-capability,
+canonicalization, Unicode normalization, frame construction, CBOR, AEAD,
+random generation, Key Service, persistence, lookup, endpoint, logging,
+network, file, Django-integration, service-call, and authorization changes
+without importing or executing the target. This is Stage A source-conformance
+evidence only and closes no Response Note cryptography, Response-DEK,
+Key Service, recovery authorization, persistence, external-service,
+independent-review, deployment, or production gate.
