@@ -141,3 +141,10 @@ CI must run `python -m architecture_checks .` as the aggregate static policy
 gate. This command only consolidates the existing non-executing checks; passing
 it is not browser, PostgreSQL, process-isolation, external-service, deployment,
 or production evidence.
+
+The aggregate policy must include a content-free repository-hygiene check for
+tracked local databases, logs, virtual environments, secret/config material,
+export artifacts, temporary workspaces, quarantine areas, user media, collected
+static output, and cache/test artifacts. The check may inspect path names and
+`.gitignore` rules only; it must not read or print candidate file contents and
+does not replace dedicated secret scanning.

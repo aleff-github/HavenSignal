@@ -14,6 +14,13 @@ The aggregate runner normalizes controlled, content-free violations from the
 individual policies and returns a failing exit status when any policy fails.
 It does not expand what the individual policies prove.
 
+The repository-hygiene policy inspects only tracked path names and `.gitignore`
+rules. It rejects committed local databases, logs, virtual environments,
+secret/config material, export artifacts, temporary workspaces, quarantine
+areas, user media, collected static output, and test/cache artifacts. It is not
+a content scanner or secret scanner and never reads or echoes candidate file
+contents.
+
 The reporter policy is an exact allowlist of imports used by the current
 read-only Reporter Gateway and root URL configuration. Any new absolute import
 requires an explicit reviewed policy change. Local single-level relative

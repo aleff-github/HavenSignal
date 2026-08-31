@@ -100,6 +100,13 @@ middleware.
 aggregate fail-closed CI gate and reports only controlled, content-free
 violations.
 
+The aggregate gate also includes a content-free repository-hygiene policy for
+tracked path names and `.gitignore` rules. It rejects committed local
+databases, logs, virtual environments, secret/config material, export
+artifacts, temporary workspaces, quarantine areas, user media, collected static
+output, and cache/test artifacts without reading or echoing candidate file
+contents.
+
 The same package statically locks the initial lifecycle migration and the inert
 finalization, operator-deletion and retention planners to closed imports,
 members, immutable metadata-only fields, false capability flags and

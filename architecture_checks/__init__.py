@@ -92,6 +92,15 @@ from .orchestration import (
     analyze_inert_orchestration_source,
     scan_inert_orchestration_sources,
 )
+from .repository_hygiene import (
+    FORBIDDEN_TRACKED_PATH_PATTERNS,
+    REQUIRED_GITIGNORE_RULES,
+    RepositoryHygieneViolation,
+    RepositoryHygieneViolationCode,
+    analyze_gitignore_source,
+    analyze_tracked_paths,
+    scan_repository_hygiene,
+)
 from .surfaces import (
     EXPECTED_REPORTER_PYTHON_AST_DIGESTS,
     EXPECTED_SETTINGS,
@@ -185,6 +194,13 @@ __all__ = [
     "OrchestrationViolationCode",
     "analyze_inert_orchestration_source",
     "scan_inert_orchestration_sources",
+    "FORBIDDEN_TRACKED_PATH_PATTERNS",
+    "REQUIRED_GITIGNORE_RULES",
+    "RepositoryHygieneViolation",
+    "RepositoryHygieneViolationCode",
+    "analyze_gitignore_source",
+    "analyze_tracked_paths",
+    "scan_repository_hygiene",
     "EXPECTED_SETTINGS",
     "EXPECTED_REPORTER_PYTHON_AST_DIGESTS",
     "SurfaceViolation",
