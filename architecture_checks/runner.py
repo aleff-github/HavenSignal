@@ -44,6 +44,7 @@ from .surfaces import (
     analyze_urlconf_source,
     scan_surface_file,
 )
+from .verification_script import scan_repository_verification_script
 
 
 class RawViolation(Protocol):
@@ -242,6 +243,7 @@ def _report_step_up_descriptor(root: Path) -> tuple[object, ...]:
 ARCHITECTURE_CHECKS = (
     ArchitectureCheck("dependency-policy", scan_repository),
     ArchitectureCheck("repository-hygiene", scan_repository_hygiene),
+    ArchitectureCheck("verification-script", scan_repository_verification_script),
     ArchitectureCheck("root-url-imports", _root_url_imports),
     ArchitectureCheck("reporter-gateway-imports", _reporter_gateway_imports),
     ArchitectureCheck("settings-surface", _settings_surface),

@@ -756,3 +756,16 @@ closed with controlled reason codes. The policy does not read or echo candidate
 file contents and is not a substitute for dedicated secret scanning,
 vulnerability scanning, deployment review, incident response, or production
 data-handling controls.
+
+The thirty-fifth Stage A slice adds `scripts/verify` as the reviewed local
+verification command and a non-executing source policy for that script. The
+script runs architecture policies, Django system checks, migration drift
+checks, the Django test suite, Python compilation, and manifest validation,
+stopping at the first failed command.
+
+The policy parses the script source without executing it, fixes the reviewed
+command sequence and exact executable AST, and rejects removed steps, source
+drift, malformed source, missing input, and out-of-root paths with controlled
+reason codes. Passing this policy provides only developer-tooling conformance;
+it closes no runtime, browser, database, cryptographic, external-service,
+deployment, independent-review, or production gate.

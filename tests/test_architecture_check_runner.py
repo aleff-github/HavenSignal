@@ -29,6 +29,7 @@ class ArchitectureCheckRunnerTests(SimpleTestCase):
             {
                 "dependency-policy",
                 "repository-hygiene",
+                "verification-script",
                 "root-url-imports",
                 "reporter-gateway-imports",
                 "settings-surface",

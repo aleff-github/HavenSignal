@@ -270,3 +270,12 @@ areas, user media, collected static output, and cache/test artifacts, and fails
 closed without reading or echoing candidate file contents. It is repository
 hygiene only and does not replace secret scanning, security review, deployment
 validation, or production data-handling controls.
+
+The thirty-fifth Stage A slice adds `scripts/verify` as the reviewed local
+verification command and locks it with a non-executing source policy. The
+script runs architecture policies, Django system checks, migration drift
+checks, the Django test suite, Python compilation, and manifest validation,
+then stops on the first failure. The policy fixes the exact command sequence
+and executable AST without executing the script; passing provides only
+developer-tooling conformance and no runtime, service, deployment,
+independent-review, or production authority.

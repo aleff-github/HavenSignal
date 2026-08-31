@@ -21,6 +21,12 @@ areas, user media, collected static output, and test/cache artifacts. It is not
 a content scanner or secret scanner and never reads or echoes candidate file
 contents.
 
+The verification-script policy parses, but never executes, `scripts/verify`.
+It locks the reviewed command order for architecture checks, Django system
+checks, migration drift checks, the Django test suite, Python compilation, and
+manifest validation. Removing a required step, changing the executable source,
+or making the script unavailable fails closed with controlled reason codes.
+
 The reporter policy is an exact allowlist of imports used by the current
 read-only Reporter Gateway and root URL configuration. Any new absolute import
 requires an explicit reviewed policy change. Local single-level relative
