@@ -523,6 +523,48 @@ At minimum, release-blocking tests must prove:
 SQLite, ordinary Django `TestCase`, one process, or an in-memory collector is
 not sufficient for concurrency, durability, or release acceptance.
 
+## Inert Stage A audit-retention planning record
+
+The metadata-only Stage A represents the exact retention minima in
+`report_lifecycle/audit_retention.py`. The pure planner accepts only internal
+retention/evidence UUIDs, a closed evidence class, trusted collector timestamps,
+and a strict verification-dependency flag. It calculates 365 times 24 elapsed
+hours for event/receipt/proof material and 730 times 24 elapsed hours for signed
+checkpoint, consistency, public-key-manifest, and witness evidence.
+
+Before the minimum boundary the evidence remains retained. At or after that
+boundary, any required verification dependency still retains it; otherwise the
+result says only that expiry review is due. Every capability flag is false and
+the executor is deliberately unavailable. No audit row, receipt, proof,
+checkpoint, manifest, or witness result is read, persisted, exposed, or deleted.
+The isolated credential, daily job, dependency proof, controlled retention
+batch record, witness interface, legal approval, independent review, and all
+Audit Service/production gates remain OPEN.
+
+The following source-policy slice parses but never imports or executes
+`audit_retention.py`. It fixes the exact target/import/member set, both closed
+enums, immutable snapshot and plan fields, five false capability flags, allowed
+calls and raises, protected bindings, and always-unavailable executor. Database
+expiry, scheduler, witness, network, I/O, logging, mutation, dynamic syntax,
+receipt/content/key fields, and executable executor changes fail closed.
+
+Passing is static source conformance only. It proves no trusted Audit Collector
+clock, isolated identity, dependency graph, persistence, controlled retention
+record, witness evidence, legal approval, or production Audit Service behavior.
+
+The next inert Stage A source policy parses but never imports or executes
+`security_interfaces/audit_descriptors.py`. It fixes the complete executable AST
+of the existing audit-v1 registries, immutable content-free descriptors,
+authorization windows, context-dependent denial, validators, and false
+authorization result. Registry, field, lifetime, validator, success-return,
+import, dynamic, logging, I/O, persistence, network, cryptographic, or other
+side-effect changes fail closed with controlled content-free violations.
+
+Passing this policy does not encode deterministic CBOR, parse or verify COSE,
+append an event, prove durable acceptance, verify a receipt, store replay state,
+or authorize a protected action. Independent review and every Audit Service and
+production gate remain OPEN.
+
 ## Recorded project-owner decision
 
 On 2026-08-25 the project owner approved all five visible choices:

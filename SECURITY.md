@@ -82,6 +82,21 @@ Contributors must not:
 
 `AGENTS.md` and the security documents under `docs/` are normative for security-sensitive changes.
 
+## Dependency security updates
+
+Dependabot version-update pull requests are disabled. Dependabot security
+updates remain enabled at repository level and may propose a remediation only
+for a known vulnerability.
+
+Django security updates are automatically eligible only when they remain on
+the approved 5.2 LTS line and change the patch component. If no supported patch
+exists on that line, a feature/major migration requires an explicit project
+owner decision and separate compatibility review.
+
+CI rejects a dependency change when the direct declaration, resolved lock, or
+repository integrity manifest is stale or inconsistent. Passing tests against
+an unchanged lock is not accepted as upgrade evidence.
+
 ## Safe test data
 
 Use only synthetic, non-identifying test content.

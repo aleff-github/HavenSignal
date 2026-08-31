@@ -243,6 +243,14 @@ exact batch descriptor instead of report/lease fields. It grants no report read
 or Key Service capability. Until that profile is owner-approved and
 independently reviewed, the flood ceremony remains unavailable.
 
+`docs/34` later records the consolidated owner approval and resolves the design
+dependency through `docs/33`; independent and production review remain open.
+The current inert Stage A represents only common administrative-v2 identity,
+binding-purpose, timing, and unused-state foundations. It does not define the
+actor-role-specific batch operation/target/artifact registries, verify step-up,
+or authorize the flood ceremony. Candidate admission, selection, quorum, audit,
+and destruction remain unavailable.
+
 The system selects candidates without exposing or processing content:
 
 - state must still be exactly `SEALED` with no claim, lease, export,
@@ -461,6 +469,100 @@ application backups, or a single successful object-store delete is
 insufficient for release acceptance.
 
 ## Consolidated decisions approved at the pre-code gate
+
+### Inert Stage A implementation record
+
+The metadata-only Stage A represents the exact never-read/read-window time
+rules in `report_lifecycle/retention.py`. The pure planner accepts only internal
+UUID, `RESPONSE_AVAILABLE`, state-version, and trusted-timestamp metadata. It
+requires an exact 90-times-24-hour unread deadline, never proposes a first read,
+recognizes an already stored first-read time only strictly before that boundary
+with the full exact 72-hour window, and treats equality at either deadline as
+expired.
+
+Plans are immutable and have false recovery, persistence, decryption, and
+destruction capability flags. The executor is deliberately unavailable. This
+record is not the PostgreSQL first-read winner, expiry workflow, recovery
+authorization, audit event/receipt, Key Service call, verifier invalidation,
+ciphertext cleanup, endpoint, or production evidence; every named gate below
+remains in force.
+
+The following Stage A source-policy slice statically fixes the exact retention
+imports, module members, snapshot/plan fields, calls, false flags, and
+always-unavailable executor without importing or executing the module. It also
+rejects binding shadowing and database, key, I/O, or logging calls. This adds
+review evidence only and closes none of the retained gates.
+
+The next inert Stage A slice represents the cleanup schedule as immutable timing
+metadata only. It fixes the three initial delays, one-hour and 24-hour tier
+boundaries, indefinite six-hour tier, 10% jitter ceiling, one-minute reconciler
+ceiling, and 15-minute alert boundary. It does not choose jitter, schedule a
+retry, submit an alert, select an object, obtain a receipt, persist state, or
+perform deletion; its executor is unavailable. Consequently it is not evidence
+for storage, audit, alert, concurrency, worker, cleanup, or production behavior.
+
+The subsequent non-executing source-policy slice fixes the exact cleanup target,
+imports, timing members, closed enums, immutable snapshot/plan fields, false
+capability flags, allowed calls/raises, protected binding names, and unavailable
+executor. It rejects storage, scheduler, audit, alert, logging, path/object,
+mutation, and executable behavior without importing or running `cleanup.py`.
+Passing is static source evidence only and closes none of the cleanup gates.
+
+The terminal-metadata Stage A slice represents only the minimum retention edge.
+Its immutable snapshot contains internal retention/cleanup UUIDs and an optional
+trusted cleanup-confirmation timestamp. Without durable cleanup confirmation it
+retains metadata indefinitely and exposes no removal time. With confirmation it
+computes exactly 30 times 24 elapsed hours in UTC; equality marks only that a
+separately credentialed removal review is due.
+
+The returned plan has false removal, Ticket-ID-lookup deletion, persistence,
+scheduling, and external-service capability flags, and its executor is always
+unavailable. It contains no public Ticket ID, Recovery Secret, verifier,
+protected content, filename, path, key, or provider error. This slice does not
+implement cleanup confirmation, database mutation, the retention job, generic
+recovery behavior, audit expiry, or Key Service tombstone handling. The
+legal/operational, independent-review, service, concurrency, and production
+gates remain OPEN.
+
+The following non-executing source-policy slice fixes the terminal-metadata
+planner's exact target/import/member profile, closed disposition enum, immutable
+snapshot and plan fields, five false capability flags, allowed call/raise set,
+protected bindings, and always-unavailable executor. It parses but never imports
+or executes `metadata_retention.py`.
+
+Database deletion, scheduling, audit/key-service calls, I/O, logging, mutation,
+dynamic syntax, public Ticket ID/recovery/path/content fields, and any executable
+executor fail closed. Passing is static review evidence only: it does not prove
+durable cleanup confirmation, implement the separately credentialed retention
+job, alter generic recovery behavior, or authorize metadata removal. Every
+dependent gate remains OPEN.
+
+The audit-retention Stage A slice represents only the exact minimum timing and
+dependency decision. Its immutable snapshot contains internal retention/
+evidence UUIDs, one closed evidence class, a trusted collector timestamp, and a
+strict flag for evidence still required to verify retained material. It fixes
+365 times 24 elapsed hours for event/receipt/proof material and 730 times 24
+elapsed hours for checkpoint/consistency/public-key-manifest/witness evidence.
+
+Before the minimum, or after it while a verification dependency remains, the
+classification retains. Otherwise equality marks only that an isolated expiry
+review is due. The plan authorizes no expiry, deletes no evidence, persists no
+retention batch, exposes no witness evidence, and calls no service; its executor
+is unavailable. No credential, job, dependency graph, database mutation,
+controlled retention evidence, witness integration, legal policy, or Audit
+Service is implemented. Every dependent gate remains OPEN.
+
+The subsequent non-executing source-policy slice fixes the audit-retention
+target, imports, timing/type members, both closed enums, immutable snapshot/plan
+fields, five false capability flags, allowed calls/raises, protected bindings,
+and always-unavailable executor. It rejects database expiry, scheduler, witness,
+network, I/O, logging, mutation, receipt/content/key fields, and executable
+behavior without importing or running `audit_retention.py`.
+
+Passing is static source evidence only. It does not prove trusted collector
+time, isolated credentials, dependency correctness, persistence, retention-batch
+evidence, witness integration, legal policy, or Audit Service behavior, and
+closes no dependent gate.
 
 The project owner approved the following on 2026-08-26:
 

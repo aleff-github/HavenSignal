@@ -13,6 +13,13 @@ For the metadata-only Stage A described by
   metadata;
 - every protected external-service adapter remains unavailable and fails
   closed without a fallback;
+- the controlled dependency/error registry and unavailable-adapter executable
+  AST remain exact; success returns, plaintext/development fallbacks, added
+  methods, dependency remapping, input-bearing errors, logging, imports, and
+  other side effects fail closed under a non-executing source policy;
+- missing roots, unknown targets, malformed source, and policy mutations return
+  controlled content-free violations without importing, executing, or echoing
+  either security-interface source;
 - no reporter submission, recovery, operator authentication/content, export,
   deletion, file handling, alert, or finalization endpoint exists;
 - lifecycle transitions reject stale state, stale lease generation, duplicate
@@ -28,23 +35,49 @@ For the metadata-only Stage A described by
 - structural audit validation never becomes receipt/signature verification or
   protected-action authorization, and context-dependent/incomplete profiles
   remain fail closed;
+- the complete executable AST of the inert audit-v1 descriptor module remains
+  exact; registry, field, validator, lifetime, success-return, import, dynamic,
+  and side-effect changes fail closed without importing or executing it;
 - alert-v1 descriptors enforce the exact ten alert/severity pairs, delivery
   states, actor pairing, identifier lengths, timestamp range, and
   acknowledgement pairing while rejecting unknown/arbitrary values;
 - a structural alert acceptance response never proves durable inbox/outbox
   commit, SMTP delivery, human acknowledgement, or protected authorization;
+- the complete executable AST of the inert alert-v1 descriptor module remains
+  exact; registry, field, validator, false durability/authorization result,
+  import, dynamic, and side-effect changes fail closed without execution;
 - report-bound step-up-v1 components accept only exact identifier/counter
   shapes, approved COSE algorithm codes, binding-purpose metadata, and the
   non-sliding 120-second lifetime;
 - Stage A step-up types cannot hold challenges, opaque browser handles,
   credentials, artifact bytes, HMAC bindings, consumed authorizations, or
   incomplete operation/state/artifact registry values, and authorize nothing;
+- the complete executable AST of the report-bound step-up-v1 descriptor module
+  remains exact; field, registry, timing, validator, false verification or
+  authorization result, import, dynamic, and effect changes fail closed;
+- administrative step-up-v2 foundations accept only exact 16-byte authorization,
+  administrator, session, and device identifiers, binding-purpose/key-epoch
+  metadata, a non-sliding 120-second lifetime, and an unused-only state;
+- v2 foundations reject unknown purposes, malformed identifiers/counters/times,
+  consumed state, and sensitive values; they contain no operation/target/
+  artifact profile, credential, challenge, handle, binding bytes, persistence,
+  consumption, WebAuthn verification, or flood/administrative authorization;
 - the current Reporter Gateway and root URL configuration pass exact
   deny-by-default import allowlists; sensitive/model/service/network imports,
   star/parent-relative imports, dynamic imports, `eval`, and `exec` fail;
 - static architecture scanning parses but never imports or executes the target
   source, fails closed for syntax/path/read errors, and is never represented as
   runtime credential/process/network isolation;
+- the exact executable AST of `manage.py`, ASGI/WSGI entrypoints, and installed
+  metadata-app configurations remains fixed; alternate settings, logging,
+  network/file effects, application wrappers, early command execution,
+  `AppConfig.ready()` hooks, malformed source, unknown targets, and missing
+  roots fail closed without import, execution, or echo;
+- application and migration package initializers remain fixed to their reviewed
+  executable AST; passive package markers and the `security_interfaces` re-
+  export surface cannot gain imports, exports, startup side effects, migration
+  initializer code, dynamic behavior, malformed source, unknown targets, or
+  missing roots without a controlled fail-closed violation;
 - the test-only PostgreSQL concurrency scaffold contains exactly the active
   report/lease/operation exclusions and stale report-version/lease-generation
   scenarios currently modeled, using only internally generated UUID metadata;
@@ -54,6 +87,94 @@ For the metadata-only Stage A described by
 - the scaffold runner remains unavailable on SQLite, configuration/backend
   failure, and a merely capability-shaped PostgreSQL backend, with zero model
   writes and no skipped/placeholder run represented as concurrency evidence;
+- the lifecycle migration package contains exactly one initial migration with
+  no dependency, data/SQL/custom-code operation, additional numbered migration,
+  dynamic expression, unlisted import/call, or field/model/type drift;
+- the migration's exact metadata-only model fields and constructor types match
+  the reviewed profile, and Django `makemigrations --check --dry-run` reports no
+  pending model change;
+- the submission migration package likewise contains exactly its reviewed
+  initial migration and complete executable AST; field, state, constraint,
+  timestamp, import, dynamic, data/SQL/custom-code, dependency, additional-file,
+  malformed-source, and out-of-root changes fail closed without execution or
+  echoed source;
+- the submission error, states, transition planner, and metadata model retain
+  their exact executable AST; new states/edges, backward acceptance, sensitive
+  fields, caller-selected time, logging, weakened constraints, successful
+  existing-row mutation, database capability, malformed source, unknown target,
+  and missing-root changes fail closed without import, execution, or echo;
+- the lifecycle errors, state registries, transition/lease planners, operation
+  bindings, metadata models, and persistence boundary retain their exact
+  executable AST; new/backward states, relaxed timing, skipped fencing,
+  sensitive fields, weakened constraints, backend relaxation, logging, writes,
+  success returns, malformed source, unknown targets, and missing roots fail
+  closed without import, execution, or echo;
+- the inert finalization sequence contains only the received-request checkpoint
+  followed by the exact twelve approved actions, rejects every skip, reverse,
+  repeat, unknown value, wrong operation, non-OPEN state, internally
+  inconsistent version, forged idempotency ID, or malformed lease binding, and
+  never echoes rejected values;
+- an inert finalization edge is immutable, content-free, non-authorizing and
+  non-persisting; its executor always returns the same controlled unavailable
+  failure and leaves all lifecycle tables empty;
+- the inert operator-deletion sequence contains only the received-request
+  checkpoint followed by the exact ten approved actions in `docs/32`, accepts
+  only an existing `DELETE_REPORT`/OPEN/current-lease binding, and rejects every
+  skip, reverse, repeat, unknown value, flood/finalization operation,
+  internally inconsistent version, malformed lease, or forged idempotency ID;
+- an inert operator-deletion edge is immutable, content-free, non-authorizing,
+  non-persisting, and explicitly non-destructive; its executor always returns
+  the same controlled unavailable failure and leaves all lifecycle tables empty;
+- non-executing orchestration scanning accepts only the exact current
+  `finalization.py`, `deletion.py`, `retention.py`, `cleanup.py`,
+  `metadata_retention.py`, and `audit_retention.py` import/member/call profiles,
+  closed enums, content-free immutable snapshot/plan fields, false capability
+  flags, and executors whose only result is the controlled unavailable exception;
+- nested/star imports, database/network/crypto/I/O or self-selected-time calls,
+  dynamic/effectful syntax, attribute/subscript mutation, content/authorizing
+  fields, altered executor bodies, missing targets, malformed source, and
+  out-of-root paths fail closed without importing, executing, or echoing source;
+- retention database/key/I/O/logging calls, imported type/constant/member
+  shadowing, recovery/verifier/content fields, changed capability flags, and
+  altered executor behavior fail the same non-executing source policy;
+- cleanup storage/scheduler/audit/alert/I/O/logging calls, imported constants or
+  member shadowing, object/path/provider/content fields, changed timing members
+  or capability flags, and altered executor behavior fail the same policy;
+- terminal-metadata database/scheduler/audit/Key-Service/I/O/logging calls,
+  imported constant/member shadowing, public-ticket/recovery/path/content fields,
+  changed capability flags, and altered executor behavior fail the same policy;
+- audit-retention database/scheduler/witness/I/O/logging calls, imported timing
+  or member shadowing, receipt/content/key fields, changed evidence/disposition
+  registries or capability flags, and altered executor behavior fail the policy;
+- response-retention planning fixes unread expiry at exactly 90 times 24 hours
+  after response availability, recognizes a stored first read strictly before
+  that boundary only with one full non-sliding 72-hour window, never proposes a
+  first read, and makes expiry win at either exact boundary;
+- malformed identifiers/state/version/timestamps, caller-shaped or naive time,
+  a future availability/first-read time, inconsistent stored deadlines, a first
+  read at or after unread expiry, and every attempt to execute the plan fail
+  closed without persistence, decryption, destruction, or echoed input;
+- inert ciphertext-cleanup timing fixes the first three base delays, the exact
+  one-hour/24-hour tier boundaries, indefinite six-hour tier, 10% jitter ceiling,
+  one-minute reconciler ceiling, and the alert transition at exactly 15 minutes;
+- malformed cleanup UUIDs/counters/timestamps, reversed or future failures,
+  premature/future alert records, untrusted time, and every execution attempt
+  fail closed without selecting jitter, scheduling, persistence, service calls,
+  alert submission, deletion, database writes, or echoed input;
+- terminal metadata remains retained without a removal time until cleanup is
+  durably confirmed; once confirmed, the earliest review boundary is exactly
+  30 times 24 elapsed hours in UTC and equality does not authorize removal;
+- malformed retention/cleanup UUIDs, naive, caller-shaped, or future timestamps,
+  and every execution attempt fail closed without Ticket ID lookup deletion,
+  metadata mutation, persistence, job scheduling, service calls, database
+  writes, or echoed input;
+- audit-retention planning fixes event/receipt/proof review at exactly 365 times
+  24 elapsed hours and checkpoint/consistency/key-manifest/witness review at
+  exactly 730 times 24 elapsed hours from trusted collector time;
+- an evidence dependency required for retained verification blocks expiry review
+  after the minimum period; malformed UUID/class/dependency/timestamps and every
+  execution attempt fail closed without audit deletion, batch persistence,
+  witness exposure, service calls, database writes, or echoed input;
 - SQLite results are never represented as PostgreSQL concurrency evidence;
 - the application still cannot accept a real report.
 
@@ -467,6 +588,12 @@ without importing or rendering the target source that:
   capability;
 - the root URL configuration contains exactly the read-only reporter home and
   cannot be extended through a later mutation;
+- the reporter view remains exactly one safe-method-only template render with
+  no request-derived context, input handling, persistence, cookies, redirect,
+  or additional endpoint behavior;
+- the response middleware retains the exact no-store, CSP, referrer,
+  permissions, cross-origin, and cross-domain header profile and performs no
+  request logging or other side effect;
 - the landing template contains only the closed passive tag, attribute, meta,
   first-party stylesheet, and Django-static-directive profile;
 - form, input, script, iframe, link, image, event/style attribute, template
@@ -475,10 +602,34 @@ without importing or rendering the target source that:
 - CSS `@import`, `@font-face`, `url()`, legacy expression/behavior/binding, and
   JavaScript-scheme constructs fail closed;
 - missing, unreadable, malformed, dynamic, mutated, and out-of-root policy
-  inputs return controlled violations without source excerpts.
+inputs return controlled violations without source excerpts.
+
+The reporter view and middleware checks compare their executable AST against
+the reviewed inert profile. Comments may change without altering that profile;
+any executable change requires an explicit reviewed policy update.
 
 Passing this source policy is not browser, runtime, process, network, or
 deployment proof and cannot close any external gate.
+
+## Stage A administrative step-up source conformance
+
+While the administrative step-up-v2 implementation remains an inert structural
+foundation, statically verify without importing or executing the target that:
+
+- the target path, imports, protocol version `2`, and `120 * 1000` millisecond
+  lifetime remain exact;
+- the complete top-level member set, immutable slotted class profiles, false
+  capability properties, and validator bodies remain exact;
+- only the closed constructor, validator, type-check, length, and timing calls
+  are present;
+- nested imports, dynamic constructs, added members, persistence, network,
+  cryptographic, file, logging, and authorization behavior fail closed;
+- missing, unreadable, malformed, and out-of-root inputs return controlled,
+  content-free violations.
+
+Passing this policy proves only exact source conformance. It does not prove
+administrator identity, WebAuthn, session/device binding, persistence,
+single-use consumption, concurrency, or production readiness.
 
 ## Dependency/security checks
 

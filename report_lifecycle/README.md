@@ -38,3 +38,79 @@ least two requested processes and one dedicated connection per contender, and
 contains no database credentials or reporter fields. Its runner always returns
 a controlled unavailable failure, including on a capability-shaped backend;
 therefore it runs no PostgreSQL test and supplies no release evidence.
+
+`architecture_checks/migrations.py` locks the current single initial migration
+to its empty dependency graph, exact three-model field/type profile, and closed
+`CreateModel`/`AddIndex`/`AddConstraint` operation sequence without importing
+the migration. Tests also run Django's dry no-drift check. This makes schema
+changes explicit for review but is not PostgreSQL execution, concurrency,
+durability, rollback, or production migration evidence.
+
+`finalization.py` represents only the approved request-plus-twelve-step
+`FINALIZING` order as an immutable, content-free sequence. It accepts only the
+existing structurally validated `FINALIZE_RESPONSE`/OPEN/lease binding, rejects
+every skipped, reversed, unknown, forged-idempotency, or malformed edge, and
+returns plans that retain only content-free operation context and explicitly
+neither authorize execution nor persist a checkpoint. The executor
+always raises a controlled unavailable error and performs no database or
+external-service operation. The sequence is conformance metadata, not current
+lease/receipt/key/staging evidence or a resumable workflow implementation.
+
+`deletion.py` represents only the approved request-plus-ten-step OPEN-only
+operator-deletion order as immutable, content-free sequence metadata. It
+accepts only the existing structurally validated `DELETE_REPORT`/OPEN/current-
+lease binding, rejects every skipped, reversed, unknown, flood/finalization, or
+malformed edge, and returns plans that explicitly authorize nothing, persist
+nothing, and destroy no key or content. Its executor always raises one
+controlled unavailable error and performs no database or external-service
+operation. No reason, protected note, CAPTCHA, step-up, receipt, state write,
+key operation, recovery change, cleanup, or resumable workflow exists.
+
+`architecture_checks/orchestration.py` statically parses `finalization.py`,
+`deletion.py`, `retention.py`, `cleanup.py`, and `metadata_retention.py` without
+importing any target, and now applies the same boundary to `audit_retention.py`.
+The exact import/member/call, enum, snapshot/plan-field/capability-flag,
+mutation/dynamic-syntax/shadowing, and always-unavailable executor profiles are
+closed. A change outside that reviewed source profile fails the test suite;
+passing it is source conformance only, never protected workflow authorization
+or runtime isolation.
+
+`retention.py` validates only internal UUID/state/version/timestamp metadata and
+describes the exact 90-day unread or stored non-sliding 72-hour read-window
+boundary using server time. It never proposes or commits a first read. Its
+immutable plans authorize no recovery, persist no deadline, decrypt no
+response, and destroy no key or content. The executor is always unavailable.
+No response row, recovery verifier, Key Service call, audit receipt, cleanup
+job, or reporter endpoint is implemented.
+
+`cleanup.py` describes only the owner-approved ciphertext-cleanup retry tiers,
+10% maximum jitter, one-minute reconciler ceiling, and the exact 15-minute alert
+boundary from internal UUID/counter/timestamp metadata. It selects no random
+jitter and has no object identifier, filename, path, provider error, receipt,
+key, or content field. Its plans schedule nothing, persist nothing, call no
+service, submit no alert, and authorize no deletion; its executor is always
+unavailable.
+
+`metadata_retention.py` describes only the minimum terminal application
+metadata period from internal retention/cleanup UUIDs and trusted timestamps.
+Cleanup that is not durably confirmed is retained without a removal time. A
+confirmed cleanup uses exactly 30 times 24 elapsed hours in UTC, after which the
+plan marks only a removal review as due. It does not hold a public Ticket ID,
+Recovery Secret, verifier, content, filename, path, key, or provider error; it
+cannot remove lookup state or metadata, persist, schedule, or call a service,
+and its executor is always unavailable.
+
+`audit_retention.py` describes only the exact 365-times-24-hour event/receipt/
+proof minimum and 730-times-24-hour checkpoint/consistency/key-manifest/witness
+minimum from internal UUIDs, closed evidence classes, a dependency flag, and
+trusted Audit Collector timestamps. A required verification dependency retains
+evidence after its minimum period. Its plan authorizes no expiry, deletes no
+audit evidence, persists no retention batch, exposes no witness evidence, and
+calls no service; its executor is always unavailable.
+
+The executable AST of the lifecycle errors, states, transitions, bindings,
+models, and persistence boundary is locked by a non-executing source policy.
+State edges, lease timing, fencing generations, immutable binding profiles,
+metadata-only constraints, creation-only saves, backend requirements, and the
+always-unavailable executor cannot change silently. Passing is static source
+evidence only and is not PostgreSQL concurrency or runtime isolation proof.

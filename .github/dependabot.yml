@@ -4,7 +4,9 @@ updates:
     directory: "/"
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
+    # Routine version updates are disabled. Repository-level Dependabot
+    # security updates remain enabled and are not subject to this limit.
+    open-pull-requests-limit: 0
     labels:
       - dependencies
 
@@ -12,6 +14,8 @@ updates:
     directory: "/"
     schedule:
       interval: monthly
-    open-pull-requests-limit: 5
+    # Keep GitHub Actions on reviewed pins unless a security advisory requires
+    # an update.
+    open-pull-requests-limit: 0
     labels:
       - dependencies

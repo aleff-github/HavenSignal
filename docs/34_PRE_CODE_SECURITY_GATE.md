@@ -373,3 +373,360 @@ SQLite, backend/configuration failure, and even a capability-shaped PostgreSQL
 mock. No test is skipped and then counted as proof. The real lock ordering,
 isolation level, executor review, multi-process run, cleanup, and result
 evidence remain OPEN and release-blocking.
+
+The ninth Stage A slice adds a non-executing source policy for the inert
+`report_lifecycle` migration graph. It requires exactly the single initial
+migration, an empty dependency graph, the exact three metadata-only models and
+field constructor types, and the reviewed create/index/constraint operation
+sequence. It rejects added numbered migrations, imports, callables, dynamic
+expressions, data/SQL operations, models, fields, or type substitutions. A
+separate dry Django migration check requires no pending model drift.
+
+No migration is generated or changed by this slice, and no PostgreSQL instance,
+driver, credential, write executor, production DDL, rollback, or deployment is
+introduced or proven. The policy is source-level review evidence only; all
+database execution, concurrency, durability, and production gates remain OPEN.
+
+The tenth Stage A slice adds a pure, non-persisting finalization sequence
+contract for the exact request-plus-twelve-action order already approved in
+`docs/03`. It accepts only the existing structurally validated
+`FINALIZE_RESPONSE` binding for an OPEN report and matching active lease, and
+rejects every skipped, reversed, repeated, unknown, wrong-operation,
+wrong-state, internally inconsistent version, forged-idempotency, or
+malformed-binding edge. Returned plans retain the internal operation
+idempotency UUID alongside the existing internal UUIDs and counters and
+explicitly authorize no execution.
+
+The checkpoints are not lifecycle/database states or evidence that CAPTCHA,
+step-up, audit, staging, key destruction, publication, invalidation, or cleanup
+occurred. They are not persisted. The executor always raises the same
+controlled unavailable error and calls no database or external service. The
+real finalization/resume workflow and every dependent review and production
+gate remain OPEN.
+
+The eleventh Stage A slice adds a pure, non-persisting sequence contract for
+the exact request-plus-ten-action OPEN-only operator-deletion order already
+approved in `docs/32`. It accepts only the existing structurally validated
+`DELETE_REPORT` binding for an OPEN report and matching active lease, and
+rejects every skipped, reversed, repeated, unknown, flood/finalization,
+wrong-state, internally inconsistent version, forged-idempotency, or
+malformed-binding edge. Returned plans contain only internal UUIDs and counters
+and explicitly authorize no execution, persist no checkpoint, and destroy no
+key or content.
+
+The checkpoints are not lifecycle/database states or evidence that input,
+CAPTCHA, step-up, audit, locking, `DELETING`, key destruction, recovery
+invalidation, terminal transition, or cleanup occurred. The executor always
+raises the same controlled unavailable error and calls no database or external
+service. The real deletion/resume workflow and every legal, independent-review,
+PostgreSQL, MFA, CAPTCHA, Audit Service, Key Service, Alert Service, cleanup,
+and production gate remain OPEN.
+
+The twelfth Stage A slice adds a non-executing AST purity policy for the two
+current inert orchestration modules. It requires their exact target paths,
+imports, top-level members, UUID/counter/checkpoint-only immutable plan fields,
+false capability flags, closed calls and raises, and executors that can only
+raise the reviewed controlled unavailable errors.
+
+The scanner never imports or executes `finalization.py` or `deletion.py`.
+Nested/star imports, database/network/cryptographic/I/O or self-selected-time
+calls, dynamic/effectful syntax, mutating targets, content/authorizing fields,
+and altered executor bodies fail closed. Passing is source-level conformance
+only: it does not implement or authorize CAPTCHA, MFA, audit receipts,
+persistence, staging, key destruction, recovery invalidation, cleanup,
+finalization, deletion, or production use.
+
+The thirteenth Stage A slice adds a pure, metadata-only Response Note retention
+planner for the exact owner-approved rules in `docs/32`. It accepts only
+internal UUIDs, `RESPONSE_AVAILABLE`, state/version, and trusted timestamps. It
+requires the immutable unread deadline to be exactly 90 times 24 hours after
+availability, never proposes a first read, recognizes an already stored first
+read strictly before that deadline only with one full non-sliding 72-hour
+window, and treats equality at either deadline as expired.
+
+Returned plans are immutable and explicitly authorize no recovery, persist no
+deadline, decrypt no response, and destroy no key or content. The executor
+always raises one controlled unavailable error. No PostgreSQL first-read race,
+recovery validation, audit receipt, Key Service conversion/destruction,
+verifier invalidation, cleanup, endpoint, or background worker is added; every
+legal/operational, independent, external-service, concurrency, and production
+gate remains OPEN.
+
+The fourteenth Stage A slice extends the non-executing orchestration-source
+policy to `report_lifecycle/retention.py`. It fixes the exact target/import/
+top-level-member set, both immutable content-free dataclasses, all four false
+capability flags, the closed call/raise profile, and the executor whose only
+outcome is the controlled unavailable error. Imported types/constants,
+top-level members, and allowed call names cannot be shadowed.
+
+The scanner permits retention to obtain server time and convert an already
+aware timestamp to UTC only through its exact timezone calls. Database, Key
+Service, network, cryptographic, I/O, logging, mutation, dynamic syntax,
+content/recovery/verifier fields, and executable executor changes fail closed.
+The target is parsed but never imported or executed. Passing remains static
+source evidence only and closes no recovery, expiry, audit, persistence,
+concurrency, cleanup, external-service, or production gate.
+
+The fifteenth Stage A slice adds a pure metadata-only planner for the ciphertext
+cleanup timing in `docs/32`. It fixes base delays of 5 seconds, 30 seconds,
+2 minutes, five minutes during the first hour, one hour through the 24-hour
+boundary, and six hours thereafter without a policy maximum. It exposes only
+the 10% maximum jitter, one-minute reconciler ceiling, and the transition to an
+alert-due classification at exactly 15 minutes after the first failure.
+
+The snapshot and immutable plan contain only internal cleanup/idempotency UUIDs,
+a bounded failure counter, trusted timestamps, closed tier/disposition enums,
+and durations. There is no target object ID, path, filename, provider error,
+receipt, key, or protected content. The planner chooses no jitter, schedules or
+persists nothing, submits no alert, calls no external service, and authorizes no
+deletion; its executor always raises one controlled unavailable error. Audit,
+alert, storage, exactly-once, concurrency, worker/reconciler, deletion, and
+production gates remain OPEN.
+
+The sixteenth Stage A slice extends the non-executing orchestration-source policy
+to `report_lifecycle/cleanup.py`. It fixes the exact target/import/top-level
+timing-member set, closed retry/alert enums, both immutable content-free
+dataclasses, all five false capability flags, the closed call/raise profile, and
+the executor whose only outcome is the controlled unavailable error. Imported
+types/constants, top-level members, and allowed call names cannot be shadowed.
+
+Only the exact server-time and aware-to-UTC calls used by the pure planner are
+allowed. Database/storage deletion, scheduler, Audit Service, Alert Service,
+network, cryptographic, I/O, logging, mutation, dynamic syntax, path/object/
+provider/content fields, and executable executor changes fail closed. The target
+is parsed but never imported or executed. Passing is static source evidence only
+and closes no receipt, storage, alert, exactly-once, concurrency, worker,
+reconciler, cleanup, deletion, or production gate.
+
+The seventeenth Stage A slice adds a pure terminal application metadata
+retention planner for the exact minimum in `docs/32`. It accepts only internal
+retention/cleanup UUIDs and an optional trusted cleanup-confirmation timestamp.
+Incomplete cleanup is retained with no removal time. A durable confirmation
+starts exactly 30 times 24 elapsed hours in UTC, and equality produces only a
+`REMOVAL_REVIEW_DUE` classification.
+
+The immutable plan explicitly authorizes no removal, deletes no public Ticket
+ID lookup, persists no state, schedules no job, and calls no external service.
+It contains no public Ticket ID, Recovery Secret, verifier, content, filename,
+path, key, or provider error; its executor always raises one controlled
+unavailable error. No cleanup proof, separately credentialed retention job,
+database mutation, generic recovery behavior, audit expiry, or Key Service
+tombstone handling is implemented. Legal/operational, independent-review,
+external-service, concurrency, and production gates remain OPEN.
+
+The eighteenth Stage A slice extends the non-executing orchestration-source
+policy to `report_lifecycle/metadata_retention.py`. It fixes the exact target,
+imports, top-level members, closed disposition enum, immutable content-free
+snapshot and plan, all five false capability flags, closed call/raise profile,
+protected binding names, and the executor whose only outcome is the controlled
+unavailable error.
+
+Only the exact server-time and aware-to-UTC calls used by the pure planner are
+allowed. Database deletion, scheduler, Audit Service, Key Service, network,
+cryptographic, I/O, logging, mutation, dynamic syntax, public-ticket/recovery/
+path/content fields, and executable executor changes fail closed. The target is
+parsed but never imported or executed. Passing is static source evidence only
+and closes no cleanup-proof, retention-job, database, recovery, Key Service,
+legal/operational, external-service, concurrency, or production gate.
+
+The nineteenth Stage A slice adds a pure audit-retention planner for the exact
+minima in `docs/23` and `docs/32`. It accepts only internal retention/evidence
+UUIDs, a closed evidence class, a trusted collector timestamp, and a strict
+verification-dependency flag. It computes 365 times 24 elapsed hours for event/
+receipt/proof material and 730 times 24 elapsed hours for checkpoint,
+consistency, public-key-manifest, and witness evidence.
+
+Before the minimum boundary the classification retains. At or after it, a
+required verification dependency still retains; otherwise the result marks only
+`EXPIRY_REVIEW_DUE`. The immutable plan authorizes no expiry, deletes no audit
+evidence, persists no retention batch, exposes no witness evidence, and calls no
+external service; its executor always raises one controlled unavailable error.
+No isolated credential, daily job, dependency graph, database mutation,
+controlled retention evidence, witness integration, legal policy, Audit Service,
+or production capability is implemented. Every dependent gate remains OPEN.
+
+The twentieth Stage A slice extends the non-executing orchestration-source policy
+to `report_lifecycle/audit_retention.py`. It fixes the exact target, imports,
+top-level timing/type members, both closed enums, immutable content-free snapshot
+and plan, all five false capability flags, closed call/raise profile, protected
+binding names, and the executor whose only outcome is the controlled unavailable
+error.
+
+Only the exact server-time, aware-to-UTC, and closed retention-limit calls used
+by the pure planner are allowed. Database expiry, scheduler, witness, network,
+cryptographic, I/O, logging, mutation, dynamic syntax, receipt/content/key fields,
+and executable executor changes fail closed. The target is parsed but never
+imported or executed. Passing is static source evidence only and closes no
+trusted-clock, isolated-identity, dependency, persistence, retention-batch,
+witness, legal/operational, Audit Service, or production gate.
+
+The twenty-first Stage A slice adds inert foundations for the owner-approved
+`AdministrativeStepUpAuthorization v2` in `docs/33`. It validates exact 16-byte
+authorization, administrator, session, and device identifiers; the existing
+binding purpose and unsigned key epoch; a non-sliding 120-second lifetime; and
+an unused-only state.
+
+The immutable structural result explicitly has no complete operation profile,
+does not verify WebAuthn or artifact binding, and authorizes neither an
+administrative action nor flood deletion. Operation, target kind/ID, artifact
+kind/binding, credential-row ID, challenge, opaque handle, persistence,
+consumption, actor-role-specific flood approvals, authentication/session/device
+proof, database concurrency, external services, independent review, and
+production capability remain absent and OPEN.
+
+The twenty-second Stage A slice adds a non-executing source policy for the
+administrative step-up-v2 foundation. It fixes the exact target and imports,
+protocol version `2`, the `120 * 1000` millisecond lifetime expression, complete
+top-level member set, immutable class profiles, false capability results,
+validator bodies, and closed constructor/validator/type/timing call profile.
+
+Nested imports, dynamic constructs, added members or fields, persistence,
+network, file, logging, cryptographic, and authorization behavior fail closed.
+Missing, unreadable, malformed, and out-of-root inputs produce controlled,
+content-free violations. The target is parsed but never imported or executed.
+Passing is static source evidence only and closes no administrator-identity,
+authentication, WebAuthn, session/device, operation/flood-profile, persistence,
+consumption, concurrency, independent-review, external-service, or production
+gate.
+
+The twenty-third Stage A slice extends the non-executing reporter-surface policy
+to the exact executable AST of `reporter_gateway/views.py` and
+`reporter_gateway/middleware.py`. The view remains one safe-method-only render
+of the passive landing template, with no request-derived context, input,
+persistence, cookie, redirect, or added endpoint behavior. The middleware
+retains the exact no-store, CSP, referrer, permissions, cross-origin, and
+cross-domain response-header profile and performs no request logging or other
+side effect.
+
+Unknown targets, malformed source, and any executable AST change fail closed
+with controlled, content-free violations. Both targets are parsed but never
+imported or executed. Passing is static source evidence only and closes no
+browser, proxy, logging, anonymity, process-isolation, submission, deployment,
+independent-review, external-service, or production gate.
+
+The twenty-fourth Stage A slice adds a non-executing source policy for the
+mandatory negative-capability boundary. It fixes the exact executable AST of
+`security_interfaces/errors.py` and `security_interfaces/unavailable.py`,
+including the closed dependency registry, generic controlled error, exact
+service families and public method set, dependency mapping, and deny-only
+method bodies.
+
+Success returns, plaintext or development fallbacks, new service methods,
+dependency reassignment, input-bearing errors, logging/import side effects, and
+all other executable changes fail closed. Missing roots, unknown targets,
+malformed source, and unreadable inputs produce controlled content-free
+violations. The targets are parsed but never imported or executed. Passing is
+static source evidence only and closes no service-authentication, process,
+network, credential, durability, cryptographic, external-service, independent-
+review, or production gate.
+
+The twenty-fifth Stage A slice adds a non-executing source policy for the inert
+audit-v1 descriptor module. It fixes the exact target and complete executable
+AST, including imports, protocol constants, closed event/actor registries,
+authorization windows, context-dependent denial, immutable content-free fields,
+validator logic, and the false protected-action authorization result.
+
+Registry, field, lifetime, validator, success-return, import, dynamic, logging,
+I/O, persistence, network, cryptographic, and other side-effect changes fail
+closed. Missing, malformed, unreadable, and out-of-root targets produce only
+controlled content-free violations. The target is parsed but never imported or
+executed. Passing is static source evidence only and closes no CBOR/COSE,
+receipt verification, audit append/durability, replay storage, protected
+consumer, independent-review, external-service, or production gate.
+
+The twenty-sixth Stage A slice adds the equivalent non-executing source policy
+for the inert alert-v1 descriptor module. It fixes the exact target and complete
+executable AST: alert/severity/delivery registries, immutable content-free
+component fields, validators, acknowledgement pairing, and the false durable-
+acceptance and protected-action authorization results.
+
+Registry, field, validator, success-return, import, dynamic, SMTP, logging, I/O,
+persistence, network, and other side-effect changes fail closed. Invalid paths
+and malformed sources yield controlled content-free violations; the target is
+never imported or executed. Passing closes no full request-profile, durable
+acceptance, delivery, acknowledgement, service-authentication, PostgreSQL,
+independent-review, Alert Service, external-service, or production gate.
+
+The twenty-seventh Stage A slice adds the non-executing source policy for the
+inert report-bound step-up-v1 descriptor module. It fixes the exact target and
+complete executable AST: protocol/lifetime, algorithm and binding-purpose
+registries, internal identifier/counter fields, timing, unused-only state,
+validators, and every false operation-profile, WebAuthn, artifact-binding, and
+protected-action result.
+
+Field, registry, timing, validator, success-return, import, challenge,
+credential, handle, binding, persistence, consumption, cryptographic, logging,
+network, I/O, dynamic, and other side-effect changes fail closed. The scanner
+never imports or executes the target and returns only controlled content-free
+violations. Passing closes no authentication, WebAuthn, artifact binding,
+session, database, concurrency, independent-review, external-service, or
+production gate.
+
+The twenty-eighth Stage A slice adds a non-executing exact-AST policy for the
+sole inert `submission_workflow` initial migration. It fixes the empty
+dependency graph, exact metadata-only fields, closed submission states,
+state/version constraints, terminal timestamp pairing, imports, operations,
+and absence of additional numbered migrations.
+
+Reporter-data, credential, key, request-metadata, schema, state, constraint,
+data/SQL/custom-code, import, dynamic, dependency, and graph changes fail
+closed. Missing, malformed, unreadable, and out-of-root sources produce only
+controlled content-free violations. The scanner never imports, executes, or
+echoes the migration. Passing is static evidence only and closes no endpoint,
+attempt-credential, persistence-executor, reconciler, audit, cryptographic,
+external-service, PostgreSQL-concurrency, independent-review, or production
+gate.
+
+The twenty-ninth Stage A slice adds a non-executing exact-AST policy for the
+current `submission_workflow` controlled error, state registry, transition
+planner, and metadata model. It fixes the generic public failure, closed
+one-way graph, exact single version increment, server-selected time, immutable
+plan, metadata-only constraints, creation-only save behavior, and absence of a
+protected persistence executor.
+
+New states or edges, backward acceptance, sensitive fields, caller-selected
+time, logging, weaker constraints, successful existing-row mutation, database
+capability, dynamic behavior, unknown targets, malformed source, and missing
+roots fail closed. The scanner never imports, executes, or echoes its targets.
+Passing closes no endpoint, credential, concurrency, reconciliation, audit,
+cryptographic, external-service, independent-review, or production gate.
+
+The thirtieth Stage A slice adds a non-executing exact-AST policy for the
+current lifecycle errors, state registries, transition/lease planners,
+operation bindings, metadata models, and persistence boundary. It fixes the
+closed state graphs, five-minute idle rule, server time, monotonic versions and
+generations, exact report/lease/operation fencing, metadata-only constraints,
+creation-only saves, PostgreSQL capability checks, and always-unavailable
+executor.
+
+New or backward state edges, relaxed timing, skipped fencing, sensitive fields,
+weakened constraints, backend relaxation, logging, database writes, success
+returns, dynamic behavior, unknown targets, malformed source, and missing roots
+fail closed. The scanner never imports, executes, or echoes its targets.
+Passing closes no protected transition, authentication, audit, cryptographic,
+PostgreSQL-concurrency, external-service, independent-review, or production
+gate.
+
+The thirty-first Stage A slice adds a non-executing exact-AST policy for
+`manage.py`, both Django application entrypoints, and the two installed
+metadata-app configurations. It fixes the settings-module identity, standard
+ASGI/WSGI factories, management-command boundary, app identities, and absence
+of startup hooks.
+
+Alternate settings, logging, network/file effects, application wrappers, early
+command execution, `AppConfig.ready()` hooks, dynamic behavior, unknown
+targets, malformed source, and missing roots fail closed. The scanner never
+imports, executes, or echoes its targets. Passing closes no runtime, process,
+proxy, dependency, network, deployment, independent-review, or production
+gate.
+
+The thirty-second Stage A slice adds a non-executing exact-AST policy for the
+current application and migration package initializers. It fixes the passive
+package markers for the Django project/apps, both empty migration package
+markers, and the reviewed `security_interfaces.__init__` re-export surface.
+
+Added imports, exports, startup side effects, migration initializer code,
+dynamic behavior, unknown targets, malformed source, and missing roots fail
+closed. The scanner never imports, executes, or echoes its targets. Passing
+closes no runtime import isolation, process, dependency, service, deployment,
+independent-review, or production gate.
