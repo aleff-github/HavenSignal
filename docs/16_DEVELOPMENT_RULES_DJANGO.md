@@ -142,6 +142,13 @@ no-link-marker profile, but it must not return or persist the text, normalized
 text, canonical bytes, previews, drafts, digests, frames, audit bindings, or
 state transitions until the finalization and cryptographic gates are closed.
 
+Response Note schema code is currently limited to inert, content-free metadata
+descriptors. It may validate only the ordered AAD and ciphertext-envelope field
+names, primitive categories, fixed byte sizes, and public constant values. It
+must not encode or parse CBOR, retain actual identifiers, key handles, nonces,
+ciphertext, AAD bytes, or plaintext, call services, inspect state, persist
+anything, expose endpoints, or authorize response use.
+
 ## Inert bootstrap evidence
 
 The current `manage.py`, ASGI/WSGI entrypoints, and installed metadata-app

@@ -33,6 +33,7 @@ class ArchitectureCheckRunnerTests(SimpleTestCase):
                 "ci-workflow",
                 "recovery-descriptor",
                 "response-crypto-descriptor",
+                "response-schema-descriptor",
                 "response-text-descriptor",
                 "root-url-imports",
                 "reporter-gateway-imports",

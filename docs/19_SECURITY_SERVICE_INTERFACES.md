@@ -713,6 +713,31 @@ Passing this source policy closes no preview, canonical byte freezing,
 artifact-binding, finalization, response staging, persistence,
 independent-review, endpoint, or production gate.
 
+## Stage A Response Note schema descriptor record
+
+`security_interfaces/response_schema_descriptors.py` validates only the ordered
+metadata schema for the approved Response Note AAD and ciphertext envelope. It
+records the exact field names, primitive categories, fixed byte sizes, and
+public constant values from `docs/24_RESPONSE_NOTE_CRYPTOGRAPHIC_PROTOCOL.md`.
+
+Successful validation returns immutable schema-profile evidence only. It does
+not encode or parse deterministic CBOR, hold actual report, response,
+finalization, key-handle, nonce, AAD, ciphertext, plaintext, receipt, recovery
+authorization, or state values, call a Key Service, persist bytes, expose an
+endpoint, or authorize response use.
+
+The non-executing response-schema descriptor policy fixes the exact target,
+imports, constants, enum registries, field order, immutable class profiles,
+validator behavior, and false capability results. Added CBOR, retained context
+values, ciphertext fields, cryptographic authentication, service calls,
+persistence, network, file, logging, Django integration, endpoint, or
+authorization behavior fails closed. The target is parsed but never imported or
+executed.
+
+Passing this source policy closes no deterministic-CBOR, envelope parsing,
+cryptographic authentication, Response-DEK lifecycle, Key Service, recovery
+authorization, persistence, independent-review, endpoint, or production gate.
+
 ## Stage A audit descriptor source-conformance record
 
 The non-executing audit-descriptor policy fixes the complete executable AST of

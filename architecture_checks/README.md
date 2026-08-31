@@ -154,6 +154,13 @@ link markers, content-free return shape, imports, and absence of retained text,
 canonical bytes, digests, drafts, persistence, endpoint, or authorization
 behavior are reviewed source facts.
 
+The response-schema descriptor source policy locks the complete executable AST
+of `security_interfaces/response_schema_descriptors.py`. Exact ordered AAD and
+ciphertext-envelope field names, primitive categories, public constant values,
+byte-size metadata, false capability properties, imports, and absence of CBOR,
+stored context values, ciphertext, service calls, persistence, endpoint, or
+authorization behavior are reviewed source facts.
+
 The negative-capability policy parses only `security_interfaces/errors.py` and
 `security_interfaces/unavailable.py`. It locks the controlled dependency/error
 registry and every mandatory unavailable adapter to the exact executable AST

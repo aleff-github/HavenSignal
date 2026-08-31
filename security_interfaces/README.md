@@ -127,6 +127,18 @@ policy. Passing proves only reviewed source shape; it is not final preview,
 canonical byte freezing, artifact digesting, step-up binding, persistence,
 finalization, response staging, endpoint behavior, or production evidence.
 
+`response_schema_descriptors.py` validates only the ordered metadata schema for
+the approved Response Note AAD and ciphertext envelope fields. It records field
+names, primitive categories, fixed byte sizes, and public constant values only.
+It does not encode or parse CBOR, retain report/response/finalization IDs,
+retain key handles, retain nonces or ciphertext, call a service, inspect state,
+or authorize response use.
+
+The response schema descriptor source is locked by a non-executing exact-AST
+policy. Passing proves only reviewed source shape; it is not deterministic
+CBOR, envelope parsing, cryptographic authentication, persistence, Key Service
+behavior, recovery behavior, endpoint behavior, or production evidence.
+
 The package initializer is also locked by a non-executing exact-AST policy so
 its reviewed re-export surface cannot gain a production service, side effect,
 dynamic behavior, or widened public capability without an explicit policy
