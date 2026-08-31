@@ -74,7 +74,8 @@ non-executing exact-AST policy, so a success path, development fallback, added
 method, logging operation, or other side effect requires explicit review.
 
 The package includes inert structural descriptors for approved audit, alert,
-step-up, and recovery-credential concepts, but these types do not themselves:
+step-up, recovery-credential, and Response Note crypto concepts, but these
+types do not themselves:
 
 - encode/verify production audit artifacts;
 - append audit events;
@@ -85,6 +86,8 @@ step-up, and recovery-credential concepts, but these types do not themselves:
 - generate recovery credentials;
 - compute or verify recovery HMAC/verifier tags;
 - store or look up recovery material;
+- canonicalize, encrypt, decrypt, parse, or persist Response Note material;
+- hold real Response-DEK, nonce, AAD, key-handle, or ciphertext values;
 - authorize protected operations.
 
 The administrative step-up-v2 foundations are limited to content-free internal
@@ -151,6 +154,13 @@ encodings, alphabets, metadata-only verifier purpose, validators, and false
 capability flags cannot change without explicit policy review. The check never
 imports or executes the target and proves no generation, verifier, storage,
 lookup, endpoint, or recovery authorization capability.
+
+The Response Note crypto descriptor module is locked to its exact executable
+AST as static profile validation only. Algorithm/profile identifiers, key,
+nonce, tag, frame, envelope, immutable-context-size, AAD-purpose, and
+Response-DEK operation names cannot change without explicit review. The check
+never imports or executes the target and proves no canonicalization, CBOR,
+AEAD, Key Service, storage, endpoint, or response-use authorization capability.
 
 The controlled security-interface errors and unavailable external-service
 adapters are likewise parsed but never imported or executed and must retain

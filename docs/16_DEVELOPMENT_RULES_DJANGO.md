@@ -126,6 +126,15 @@ persist or log plaintext secrets, perform lookup, expose endpoints, call a
 Recovery Verifier Service, or authorize access to a Response Note until the
 cryptographic-review and dependent gates are closed.
 
+Response Note cryptographic code is currently limited to inert structural
+descriptors. It may validate only the exact approved version, algorithm,
+content-profile, size, AAD-purpose, immutable-context, envelope, and
+Response-DEK operation profile shapes. It must not canonicalize Response Note
+text, construct frames or CBOR, encrypt, decrypt, parse ciphertext envelopes,
+hold real nonces/key handles/DEKs, persist protected bytes, call a Key Service,
+or authorize response use until independent review and all dependent gates are
+closed.
+
 ## Inert bootstrap evidence
 
 The current `manage.py`, ASGI/WSGI entrypoints, and installed metadata-app
