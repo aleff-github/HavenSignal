@@ -31,6 +31,7 @@ class ArchitectureCheckRunnerTests(SimpleTestCase):
                 "repository-hygiene",
                 "verification-script",
                 "ci-workflow",
+                "captcha-descriptor",
                 "recovery-descriptor",
                 "response-crypto-descriptor",
                 "response-schema-descriptor",

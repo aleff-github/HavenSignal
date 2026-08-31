@@ -381,6 +381,28 @@ On 2026-08-25 the project owner approved:
 Even after approval, no protected endpoint is authorized until its independent
 submission/recovery/operator gates are closed.
 
+## Inert Stage A implementation evidence
+
+The current `security_interfaces/captcha_descriptors.py` module models only
+content-free version-1 protocol metadata: challenge identifier shape, answer
+alphabet and length, anonymous form-scope size, expiry and cleanup timing,
+state and purpose registries, PNG bounds, global purpose/action bucket limits,
+and the open production gates.
+
+It may transiently reject malformed synthetic identifier or answer strings and
+returns only shape descriptors. It does not generate identifiers or answers,
+render image/audio, persist or consume records, compare an expected answer,
+inspect requests, bind to IP/User-Agent/device data, call a Challenge Service,
+expose endpoints, or authorize any operation.
+
+A non-executing exact-AST policy locks this descriptor source profile and
+rejects generation, storage, validation-success, network-identity,
+third-party CAPTCHA, endpoint enablement, dynamic, logging, file, network,
+Django-integration, and service-call changes without importing or executing the
+target. Passing is source-conformance evidence only and closes no Pillow/font,
+audio/accessibility, PostgreSQL concurrency, Challenge Service, gateway,
+deployment, or production gate.
+
 ## External design references
 
 - [Django 5.2 — `select_for_update()`](https://docs.djangoproject.com/en/5.2/ref/models/querysets/#select-for-update)
