@@ -27,6 +27,13 @@ checks, migration drift checks, the Django test suite, Python compilation, and
 manifest validation. Removing a required step, changing the executable source,
 or making the script unavailable fails closed with controlled reason codes.
 
+The CI-workflow policy parses `.github/workflows/ci.yml` as text without
+executing it. It fixes read-only repository permissions, pinned checkout and
+setup-python actions, Python 3.13, locked dependency installation with
+`--require-hashes`, and delegation to `scripts/verify`. Write permissions,
+unpinned moving action refs, un-hashed dependency installation, and
+`continue-on-error` fail closed.
+
 The reporter policy is an exact allowlist of imports used by the current
 read-only Reporter Gateway and root URL configuration. Any new absolute import
 requires an explicit reviewed policy change. Local single-level relative

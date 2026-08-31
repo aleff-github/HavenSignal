@@ -30,6 +30,7 @@ class ArchitectureCheckRunnerTests(SimpleTestCase):
                 "dependency-policy",
                 "repository-hygiene",
                 "verification-script",
+                "ci-workflow",
                 "root-url-imports",
                 "reporter-gateway-imports",
                 "settings-surface",

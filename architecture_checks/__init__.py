@@ -7,6 +7,17 @@ from .bootstrap import (
     analyze_bootstrap_source,
     scan_bootstrap_sources,
 )
+from .ci_workflow import (
+    CI_WORKFLOW_PATH,
+    EXPECTED_CI_WORKFLOW_SHA256,
+    FORBIDDEN_WORKFLOW_FRAGMENTS,
+    REQUIRED_WORKFLOW_LINES,
+    CIWorkflowViolation,
+    CIWorkflowViolationCode,
+    analyze_ci_workflow_source,
+    scan_ci_workflow_source,
+    scan_repository_ci_workflow,
+)
 
 from .descriptors import (
     ADMINISTRATIVE_STEP_UP_DESCRIPTOR_PATH,
@@ -137,6 +148,15 @@ __all__ = [
     "BootstrapSourceViolationCode",
     "analyze_bootstrap_source",
     "scan_bootstrap_sources",
+    "CI_WORKFLOW_PATH",
+    "EXPECTED_CI_WORKFLOW_SHA256",
+    "FORBIDDEN_WORKFLOW_FRAGMENTS",
+    "REQUIRED_WORKFLOW_LINES",
+    "CIWorkflowViolation",
+    "CIWorkflowViolationCode",
+    "analyze_ci_workflow_source",
+    "scan_ci_workflow_source",
+    "scan_repository_ci_workflow",
     "ADMINISTRATIVE_STEP_UP_DESCRIPTOR_PATH",
     "ALERT_DESCRIPTOR_PATH",
     "AUDIT_DESCRIPTOR_PATH",

@@ -25,17 +25,8 @@ jobs:
           cache: pip
           cache-dependency-path: requirements.lock
 
-      - name: Enforce static architecture policies
-        run: python -m architecture_checks .
-
       - name: Install locked dependencies
         run: python -m pip install --require-hashes -r requirements.lock
 
-      - name: Django system check
-        run: python manage.py check
-
-      - name: Test suite
-        run: python manage.py test -v 2
-
-      - name: Compile Python sources
-        run: python -m compileall -q anonymous_reporting architecture_checks report_lifecycle reporter_gateway security_interfaces submission_workflow tests
+      - name: Run reviewed verification script
+        run: scripts/verify
