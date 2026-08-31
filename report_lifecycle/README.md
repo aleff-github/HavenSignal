@@ -107,3 +107,10 @@ trusted Audit Collector timestamps. A required verification dependency retains
 evidence after its minimum period. Its plan authorizes no expiry, deletes no
 audit evidence, persists no retention batch, exposes no witness evidence, and
 calls no service; its executor is always unavailable.
+
+The executable AST of the lifecycle errors, states, transitions, bindings,
+models, and persistence boundary is locked by a non-executing source policy.
+State edges, lease timing, fencing generations, immutable binding profiles,
+metadata-only constraints, creation-only saves, backend requirements, and the
+always-unavailable executor cannot change silently. Passing is static source
+evidence only and is not PostgreSQL concurrency or runtime isolation proof.

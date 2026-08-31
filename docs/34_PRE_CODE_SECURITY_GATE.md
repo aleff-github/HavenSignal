@@ -690,3 +690,19 @@ capability, dynamic behavior, unknown targets, malformed source, and missing
 roots fail closed. The scanner never imports, executes, or echoes its targets.
 Passing closes no endpoint, credential, concurrency, reconciliation, audit,
 cryptographic, external-service, independent-review, or production gate.
+
+The thirtieth Stage A slice adds a non-executing exact-AST policy for the
+current lifecycle errors, state registries, transition/lease planners,
+operation bindings, metadata models, and persistence boundary. It fixes the
+closed state graphs, five-minute idle rule, server time, monotonic versions and
+generations, exact report/lease/operation fencing, metadata-only constraints,
+creation-only saves, PostgreSQL capability checks, and always-unavailable
+executor.
+
+New or backward state edges, relaxed timing, skipped fencing, sensitive fields,
+weakened constraints, backend relaxation, logging, database writes, success
+returns, dynamic behavior, unknown targets, malformed source, and missing roots
+fail closed. The scanner never imports, executes, or echoes its targets.
+Passing closes no protected transition, authentication, audit, cryptographic,
+PostgreSQL-concurrency, external-service, independent-review, or production
+gate.

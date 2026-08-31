@@ -44,6 +44,15 @@ behavior, and absence of a protected persistence executor. Added states,
 backward edges, sensitive fields, logging, caller-selected time, database
 capability, weakened constraints, or success paths require explicit review.
 
+The lifecycle-source policy locks the complete executable AST of
+`report_lifecycle/errors.py`, `states.py`, `transitions.py`, `bindings.py`,
+`models.py`, and `persistence.py`. It fixes controlled failures, closed state
+graphs, server-time lease rules, monotonic versions/generations, exact
+report/lease/operation fencing, metadata-only constraints, creation-only model
+behavior, the PostgreSQL capability gate, and the always-unavailable executor.
+New content fields, weaker fencing, relaxed timeouts, logging, database writes,
+or success paths require explicit review.
+
 The orchestration-source policy parses only `report_lifecycle/finalization.py`,
 `report_lifecycle/deletion.py`, `report_lifecycle/retention.py`,
 `report_lifecycle/cleanup.py`, `report_lifecycle/metadata_retention.py`, and

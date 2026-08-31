@@ -58,6 +58,12 @@ SQLite remains a development/test scaffold and is not accepted as evidence for s
 
 A test-only PostgreSQL concurrency scaffold exists, but it is not itself PostgreSQL acceptance evidence and does not enable protected transition execution.
 
+The complete executable AST of the lifecycle errors, state graphs, transition
+and lease planners, operation bindings, metadata models, and persistence gate
+is locked without importing or executing those modules. State, timing, fencing,
+field, constraint, backend, logging, write, and success-path changes require
+explicit review.
+
 ## Security interfaces
 
 Mandatory security integrations whose production designs or evidence remain gated are represented by deny-by-default interfaces under `security_interfaces/`.

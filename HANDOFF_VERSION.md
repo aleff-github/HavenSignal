@@ -234,3 +234,11 @@ metadata-only constraints, and creation-only persistence boundary remain exact
 without importing or executing target modules. This provides no endpoint,
 credential, protected executor, reconciliation, concurrency, or production
 authority.
+
+The thirtieth Stage A slice locks the complete executable AST of the lifecycle
+errors, closed state graphs, transition and lease planners, operation bindings,
+metadata models, and persistence boundary. Server time, timeout and fencing
+rules, constraints, creation-only saves, PostgreSQL checks, and the unavailable
+executor remain exact without importing or executing targets. This provides no
+protected transition, database write, concurrency proof, or production
+authority.

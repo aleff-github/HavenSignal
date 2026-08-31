@@ -102,6 +102,7 @@ The repository currently contains:
   passive assets, read-only view, and restrictive response-header middleware;
 - a non-executing exact-AST guard for the sole inert submission migration;
 - a non-executing exact-AST guard for the inert submission state machine;
+- a non-executing exact-AST guard for the inert report-lifecycle core;
 - non-executing AST policies that keep lifecycle orchestration incapable of
   persistence, cryptography, deletion, scheduling, logging, or service calls;
 - a test-only PostgreSQL concurrency scaffold.

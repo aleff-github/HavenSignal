@@ -30,6 +30,13 @@ from .imports import (
     scan_python_file,
     scan_python_package,
 )
+from .lifecycle import (
+    EXPECTED_LIFECYCLE_SOURCE_AST_DIGESTS,
+    LifecycleSourceViolation,
+    LifecycleSourceViolationCode,
+    analyze_lifecycle_source,
+    scan_lifecycle_sources,
+)
 from .migrations import (
     EXPECTED_LIFECYCLE_MIGRATION_FIELDS,
     EXPECTED_SUBMISSION_MIGRATION_AST_DIGEST,
@@ -109,6 +116,11 @@ __all__ = [
     "analyze_python_source",
     "scan_python_file",
     "scan_python_package",
+    "EXPECTED_LIFECYCLE_SOURCE_AST_DIGESTS",
+    "LifecycleSourceViolation",
+    "LifecycleSourceViolationCode",
+    "analyze_lifecycle_source",
+    "scan_lifecycle_sources",
     "EXPECTED_LIFECYCLE_MIGRATION_FIELDS",
     "EXPECTED_SUBMISSION_MIGRATION_AST_DIGEST",
     "EXPECTED_SUBMISSION_MIGRATION_FIELDS",

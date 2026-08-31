@@ -93,6 +93,12 @@ For the metadata-only Stage A described by
   fields, caller-selected time, logging, weakened constraints, successful
   existing-row mutation, database capability, malformed source, unknown target,
   and missing-root changes fail closed without import, execution, or echo;
+- the lifecycle errors, state registries, transition/lease planners, operation
+  bindings, metadata models, and persistence boundary retain their exact
+  executable AST; new/backward states, relaxed timing, skipped fencing,
+  sensitive fields, weakened constraints, backend relaxation, logging, writes,
+  success returns, malformed source, unknown targets, and missing roots fail
+  closed without import, execution, or echo;
 - the inert finalization sequence contains only the received-request checkpoint
   followed by the exact twelve approved actions, rejects every skip, reverse,
   repeat, unknown value, wrong operation, non-OPEN state, internally
