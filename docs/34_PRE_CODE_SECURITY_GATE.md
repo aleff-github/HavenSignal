@@ -719,3 +719,14 @@ targets, malformed source, and missing roots fail closed. The scanner never
 imports, executes, or echoes its targets. Passing closes no runtime, process,
 proxy, dependency, network, deployment, independent-review, or production
 gate.
+
+The thirty-second Stage A slice adds a non-executing exact-AST policy for the
+current application and migration package initializers. It fixes the passive
+package markers for the Django project/apps, both empty migration package
+markers, and the reviewed `security_interfaces.__init__` re-export surface.
+
+Added imports, exports, startup side effects, migration initializer code,
+dynamic behavior, unknown targets, malformed source, and missing roots fail
+closed. The scanner never imports, executes, or echoes its targets. Passing
+closes no runtime import isolation, process, dependency, service, deployment,
+independent-review, or production gate.

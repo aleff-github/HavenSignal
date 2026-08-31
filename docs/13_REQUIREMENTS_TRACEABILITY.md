@@ -13,7 +13,9 @@ constructions are unresolved. The current metadata-only initial migration and
 sole-file graph are locked to their complete executable AST without importing
 or executing the source. The controlled error, closed state graph, pure
 monotonic planner, and metadata-only model are also locked to exact executable
-AST profiles; all of this is static conformance evidence only.
+AST profiles; application package initializers are separately locked to their
+reviewed passive import-time profiles; all of this is static conformance
+evidence only.
 
 `docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md` is the owner-approved exact
 Ticket ID, Recovery Secret, and keyed-verifier construction. It remains
@@ -94,7 +96,7 @@ preserves every independent and production gate.
 | SEC-KEY-001..004 | CRITICAL | 04 Cryptographic Model; 11 Technology Decisions; 27 Key Service PoC | 14/27: destructive restore/rollback/stale-replica release gate | Acceptance plan owner-approved; product/topology/real PoC OPEN |
 | SEC-KEY-005 | HIGH | 04 Cryptographic Model; 27 Key Service PoC Proposal | Key inventory, separation, and lifecycle review | Application key roles specified; product procedures OPEN |
 | SEC-KEY-006..007 | CRITICAL | 02 Threat Model; 04 Cryptographic Model; 15 Trust Boundaries; 27 Key Service PoC | 14/27: negative capability and combined-backup restoration tests | Deny-only placeholder/error executable profile enforced statically; real capability implementation and restoration proof OPEN |
-| SEC-ROLE-001..003 | CRITICAL | 02 Threat Model; 15 Trust Boundaries; 19 Interfaces; 33 Operational Access | 14/33: source surface and cross-role device/network/credential/capability tests | Inert Reporter imports, settings, URL, bootstrap entrypoints, template, and CSS profiles enforced statically; physical, credential, network, browser, runtime, and production proof OPEN |
+| SEC-ROLE-001..003 | CRITICAL | 02 Threat Model; 15 Trust Boundaries; 19 Interfaces; 33 Operational Access | 14/33: source surface and cross-role device/network/credential/capability tests | Inert Reporter imports, settings, URL, bootstrap entrypoints, package initializers, template, and CSS profiles enforced statically; physical, credential, network, browser, runtime, and production proof OPEN |
 | SEC-ROLE-004 | HIGH | 02 Threat Model | Threat-model review | Accepted limitation |
 | SEC-RECOVERY-001..004 | CRITICAL | 05 Recovery Response; 20 Submission Protocol; 21 Recovery Credential Construction | 14: recovery enumeration/secret-handling tests | Owner choices approved; independent cryptographic review and dependent gates remain OPEN |
 | SEC-RECOVERY-005 | CRITICAL | 05 Recovery Response; 12 Open Decisions; 21 Recovery Credential Construction | Owner decision and independent cryptographic design review | Owner-approved; independent review required before implementation |

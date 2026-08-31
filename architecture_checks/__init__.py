@@ -38,6 +38,13 @@ from .imports import (
     scan_python_file,
     scan_python_package,
 )
+from .initializers import (
+    EXPECTED_INITIALIZER_SOURCE_AST_DIGESTS,
+    InitializerSourceViolation,
+    InitializerSourceViolationCode,
+    analyze_initializer_source,
+    scan_initializer_sources,
+)
 from .lifecycle import (
     EXPECTED_LIFECYCLE_SOURCE_AST_DIGESTS,
     LifecycleSourceViolation,
@@ -129,6 +136,11 @@ __all__ = [
     "analyze_python_source",
     "scan_python_file",
     "scan_python_package",
+    "EXPECTED_INITIALIZER_SOURCE_AST_DIGESTS",
+    "InitializerSourceViolation",
+    "InitializerSourceViolationCode",
+    "analyze_initializer_source",
+    "scan_initializer_sources",
     "EXPECTED_LIFECYCLE_SOURCE_AST_DIGESTS",
     "LifecycleSourceViolation",
     "LifecycleSourceViolationCode",

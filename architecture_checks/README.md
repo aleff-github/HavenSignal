@@ -60,6 +60,13 @@ management-command boundary, app identities, and absence of startup hooks.
 Added logging, network, file, wrapper, alternate-settings, early-execution, or
 `ready()` behavior requires explicit review without executing an entrypoint.
 
+The initializer-source policy locks the complete executable AST of the current
+application and migration package `__init__.py` files. It fixes passive package
+markers and the reviewed `security_interfaces` re-export surface. Added imports,
+exports, startup side effects, migration initializer code, dynamic behavior,
+unknown targets, malformed source, and missing roots fail closed without
+importing, executing, or echoing the initializer source.
+
 The orchestration-source policy parses only `report_lifecycle/finalization.py`,
 `report_lifecycle/deletion.py`, `report_lifecycle/retention.py`,
 `report_lifecycle/cleanup.py`, `report_lifecycle/metadata_retention.py`, and

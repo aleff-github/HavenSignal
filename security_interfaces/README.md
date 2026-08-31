@@ -85,3 +85,8 @@ including its imports, constants, immutable classes, validators, and closed
 call profile. Passing the policy is source-conformance evidence only; it is not
 authentication, WebAuthn, session, persistence, concurrency, or production
 proof.
+
+The package initializer is also locked by a non-executing exact-AST policy so
+its reviewed re-export surface cannot gain a production service, side effect,
+dynamic behavior, or widened public capability without an explicit policy
+update. Passing this initializer policy is source-conformance evidence only.

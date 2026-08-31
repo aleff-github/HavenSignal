@@ -73,6 +73,11 @@ For the metadata-only Stage A described by
   network/file effects, application wrappers, early command execution,
   `AppConfig.ready()` hooks, malformed source, unknown targets, and missing
   roots fail closed without import, execution, or echo;
+- application and migration package initializers remain fixed to their reviewed
+  executable AST; passive package markers and the `security_interfaces` re-
+  export surface cannot gain imports, exports, startup side effects, migration
+  initializer code, dynamic behavior, malformed source, unknown targets, or
+  missing roots without a controlled fail-closed violation;
 - the test-only PostgreSQL concurrency scaffold contains exactly the active
   report/lease/operation exclusions and stale report-version/lease-generation
   scenarios currently modeled, using only internally generated UUID metadata;

@@ -249,3 +249,9 @@ settings-module identity, Django factories, management boundary, app identities,
 and absence of startup hooks remain exact without importing or executing the
 targets. This provides no runtime, process, proxy, network, deployment, or
 production authority.
+
+The thirty-second Stage A slice locks the complete executable AST of the
+application and migration package initializers. Passive package markers and the
+reviewed `security_interfaces.__init__` re-export surface remain exact without
+importing or executing the targets. This provides no runtime import isolation,
+process, dependency, service, deployment, or production authority.

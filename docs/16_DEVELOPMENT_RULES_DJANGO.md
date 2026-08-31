@@ -130,3 +130,9 @@ require explicit review.
 
 This evidence does not execute the entrypoints and does not prove runtime,
 process, proxy, environment, dependency, network, or production isolation.
+
+The current application and migration package initializers are guarded by the
+same non-executing exact-AST pattern. Passive package markers and the reviewed
+`security_interfaces.__init__` re-export surface must not gain imports,
+exports, startup effects, migration initializer code, or dynamic behavior
+without an explicit policy update.

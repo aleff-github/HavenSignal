@@ -130,6 +130,12 @@ are also locked to their exact executable AST without being imported. Alternate
 settings, startup hooks, wrappers, logging, network, file, and other early
 side-effect changes require explicit review; this is not deployment evidence.
 
+Application and migration package initializers are also locked to their exact
+executable AST. Passive package markers and the reviewed
+`security_interfaces.__init__` re-export surface cannot gain imports, exports,
+startup effects, migration initializer code, or dynamic behavior without an
+explicit policy update.
+
 ## Approved designs versus enabled capability
 
 The repository contains detailed approved protocol documents covering areas including:
