@@ -107,6 +107,7 @@ The repository currently contains:
 - a non-executing exact-AST guard for application package initializers;
 - a content-free repository hygiene policy for tracked local/runtime artifacts;
 - a reviewed local verification script guarded by a non-executing source policy;
+- a non-executing source policy for the reviewed GitHub Actions CI workflow;
 - an aggregate static architecture-policy runner used by CI;
 - non-executing AST policies that keep lifecycle orchestration incapable of
   persistence, cryptography, deletion, scheduling, logging, or service calls;

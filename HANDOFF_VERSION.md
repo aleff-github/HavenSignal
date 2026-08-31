@@ -279,3 +279,13 @@ then stops on the first failure. The policy fixes the exact command sequence
 and executable AST without executing the script; passing provides only
 developer-tooling conformance and no runtime, service, deployment,
 independent-review, or production authority.
+
+The thirty-sixth Stage A slice updates GitHub Actions CI to install the locked
+dependency set with `--require-hashes` and delegate verification to
+`scripts/verify`. A new non-executing workflow source policy locks read-only
+repository permissions, pinned checkout/setup-python actions, Python 3.13,
+hash-checked dependency installation, and the reviewed script entrypoint while
+rejecting write/OIDC permissions, moving action refs, un-hashed installs,
+`continue-on-error`, missing/out-of-root input, and source drift. It is CI
+source conformance only and no supply-chain, deployment, independent-review, or
+production gate is closed.

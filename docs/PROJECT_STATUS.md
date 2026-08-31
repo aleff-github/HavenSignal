@@ -112,6 +112,12 @@ source policy locks that script to architecture checks, Django system checks,
 migration drift checks, the Django test suite, Python compilation, and manifest
 validation. This is developer tooling only, not production readiness evidence.
 
+The GitHub Actions CI workflow installs the locked dependency set and delegates
+verification to `scripts/verify`. A non-executing text policy locks the workflow
+to read-only repository permissions, pinned checkout/setup-python actions,
+Python 3.13, hash-checked dependency installation, and the reviewed script
+entrypoint. This does not replace independent supply-chain or release review.
+
 The same package statically locks the initial lifecycle migration and the inert
 finalization, operator-deletion and retention planners to closed imports,
 members, immutable metadata-only fields, false capability flags and

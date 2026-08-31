@@ -154,3 +154,9 @@ by a non-executing source policy and must retain the reviewed sequence:
 architecture policies, Django system check, migration drift check, Django test
 suite, Python compilation, and manifest validation. The script is developer
 tooling only and is not production evidence.
+
+CI must install dependencies from `requirements.lock` with `--require-hashes`
+and then run `scripts/verify`. The CI workflow must keep read-only repository
+permissions and pinned GitHub Action commit SHAs. Moving action refs, write or
+OIDC permissions, un-hashed dependency installation, and `continue-on-error`
+require explicit review and must fail the static workflow policy by default.
