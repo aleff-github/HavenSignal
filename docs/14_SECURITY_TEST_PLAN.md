@@ -152,6 +152,16 @@ For the metadata-only Stage A described by
   Key Service calls, first-read mutation, credential logging, endpoint
   behavior, and recovery authorization without importing or executing the
   target;
+- recovery key lifecycle descriptors accept only the exact approved 32-byte
+  verifier-key size, active/retired/destroyed states, separated key purposes,
+  forbidden source/settings/database/log/audit/browser/response locations, and
+  lifecycle requirements for service-selected key IDs, no silent fallback,
+  restore proof, fail-closed loss, and no Response-DEK authority;
+- recovery key lifecycle validation and source policy reject key generation,
+  key storage, request-time key selection, rotation execution, destruction,
+  verifier-record rewriting, Key Service calls, Response-DEK authorization,
+  endpoint behavior, and recovery authorization without importing or executing
+  the target;
 - Response Note crypto descriptors accept only the exact version-1 algorithm,
   content-profile, key, nonce, tag, plaintext-frame, ciphertext/tag, immutable
   context-size, AAD-purpose, and Response-DEK operation profile shapes;
@@ -403,6 +413,11 @@ For `20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`, also verify:
   persistence, redisplay, replacement credentials, `credentials_delivered`
   claims, content deduplication, endpoint, response rendering, recovery
   authorization, or submission authorization capability;
+- Stage A recovery key-lifecycle descriptor/source-conformance tests prove only
+  the approved verifier-key size, state, separation, forbidden-location, and
+  lifecycle requirement metadata, and reject key generation, key storage,
+  key selection, rotation, destruction, verifier rewriting, Key Service calls,
+  Response-DEK authorization, endpoint, or recovery authorization capability;
 - lost responses never cause credential re-display, replacement credentials,
   or a duplicate report for the same attempt;
 - no event or state claims that the reporter received or saved credentials;

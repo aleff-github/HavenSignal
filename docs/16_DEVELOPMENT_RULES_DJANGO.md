@@ -291,6 +291,15 @@ credentials, expose endpoints, or authorize recovery until verifier, response
 eligibility, first-read concurrency, Key Service, logging, deployment, and
 production gates are closed.
 
+Recovery Verifier key-lifecycle code is currently limited to inert structural
+descriptors. It may validate only the exact approved 32-byte verifier-key size,
+state registry, separated key purposes, forbidden locations, and lifecycle
+requirements. It must not generate keys, store key material, select keys for
+requests, rotate or destroy keys, rewrite verifier records, call a Key Service,
+authorize Response-DEK use, expose endpoints, or authorize recovery until the
+verifier service, rotation/incident procedure, restore proof, Key Service,
+logging, deployment, and production gates are closed.
+
 Response Note cryptographic code is currently limited to inert structural
 descriptors. It may validate only the exact approved version, algorithm,
 content-profile, size, AAD-purpose, immutable-context, envelope, and

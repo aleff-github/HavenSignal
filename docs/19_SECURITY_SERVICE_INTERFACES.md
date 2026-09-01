@@ -271,6 +271,15 @@ randomness, decode credentials, call a verifier, compare HMAC tags, read
 response state, call the Key Service, mutate first-read state, log
 credentials, expose endpoints, or authorize recovery.
 
+The current Stage A recovery key-lifecycle descriptor records only the approved
+32-byte verifier-key size, active/retired/destroyed state labels, separated key
+purpose labels, forbidden key-location labels, service-selected key ID,
+no-silent-fallback, restore-proof, loss-fail-closed, and no-Response-DEK-
+authority requirements from `docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md`. It
+does not generate, store, select, rotate, or destroy keys, rewrite verifier
+records, call a Key Service, expose endpoints, authorize Response-DEK use, or
+authorize recovery.
+
 The current Stage A credential-response descriptor records only the approved
 one-time live response and lost-response policy from
 `docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`. It does not generate credentials,
@@ -757,6 +766,35 @@ executed.
 Passing this source policy closes no credential-generation, verifier,
 cryptographic-review, recovery lookup, Response-DEK, persistence,
 external-service, independent-review, or production gate.
+
+## Stage A recovery key lifecycle descriptor record
+
+`security_interfaces/recovery_key_lifecycle_descriptors.py` validates only the
+Recovery Verifier key lifecycle facts already fixed by
+`docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md`: version-1 32-byte verifier keys,
+active-for-creation, retired-verify-only, and destroyed-after-no-eligible-
+references states, separation from application, report, response, audit,
+export, TLS, CAPTCHA, CSRF, session, and service-authentication keys, forbidden
+source/settings/database/log/audit/browser/response locations, and lifecycle
+requirements for service-selected key identifiers, no silent fallback, restore
+proof before destruction, fail-closed loss, and no Response-DEK authority.
+
+Successful validation returns immutable, content-free lifecycle evidence. It
+does not generate key material, store raw keys, select a key for a request,
+rotate or destroy keys, rewrite verifier records, call a Key Service, expose an
+endpoint, authorize Response-DEK use, or authorize recovery.
+
+The non-executing recovery key-lifecycle descriptor policy fixes the exact
+target, imports, constants, enum registries, immutable class profiles,
+validator behavior, and false capability results. Added key generation,
+storage, request-time key selection, rotation, destruction, verifier-record
+rewriting, Key Service calls, Response-DEK authorization, endpoint, file,
+network, dynamic, or recovery-authorization behavior fails closed. The target
+is parsed but never imported or executed.
+
+Passing this source policy closes no verifier-service, key-inventory,
+rotation/incident, restore-proof, Response-DEK lifecycle, Key Service,
+persistence, independent-review, or production gate.
 
 ## Stage A Response Note crypto descriptor record
 

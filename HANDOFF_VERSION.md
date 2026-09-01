@@ -678,3 +678,23 @@ authorization changes fail closed. This closes no recovery endpoint, verifier
 service, constant-time comparison implementation, response eligibility,
 first-read concurrency, Key Service, logging, deployment, independent-review,
 or production gate.
+
+The fifty-ninth Stage A slice adds inert Recovery Verifier key-lifecycle
+descriptors for the owner-approved `docs/21` lifecycle and rotation boundaries.
+Validation covers only the exact 32-byte verifier-key size, active/retired/
+destroyed state labels, separated key purpose labels, forbidden key-location
+labels, service-selected key ID, one-active-creation-version, retired
+verify-only, no-silent-fallback, restore-proof, loss-fail-closed, and
+no-Response-DEK-authority requirements. It does not generate keys, store raw
+key material, select keys for requests, rotate or destroy keys, rewrite
+verifier records, call a Key Service, expose endpoints, authorize Response-DEK
+use, or authorize recovery.
+
+A new non-executing recovery key-lifecycle descriptor source policy locks the
+exact imports, constants, enums, immutable classes, validators, and false
+capability results. Key generation, key storage, request-time key selection,
+rotation, destruction, verifier-record rewriting, Key Service calls,
+Response-DEK authorization, endpoint, file, network, dynamic, and recovery
+authorization changes fail closed. This closes no verifier-service,
+key-inventory, rotation/incident, restore-proof, Response-DEK lifecycle, Key
+Service, persistence, independent-review, deployment, or production gate.

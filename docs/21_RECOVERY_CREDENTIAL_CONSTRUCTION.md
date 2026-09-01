@@ -343,6 +343,16 @@ categories. They do not generate randomness, decode credentials, call a
 verifier, compare HMAC tags, read response state, call the Key Service, mutate
 first-read state, log credentials, expose endpoints, or authorize recovery.
 
+The Recovery Verifier key lifecycle profile is also represented by inert
+descriptors and a non-executing exact-AST source policy. They fix only the
+approved 32-byte key size, active/retired/destroyed states, key-separation
+labels, forbidden raw-key locations, and lifecycle requirements for
+service-selected key identifiers, one active creation version, retired
+verify-only keys, no silent fallback, restore proof before destruction,
+fail-closed loss, and no Response-DEK authority. They do not generate, store,
+select, rotate, or destroy keys, rewrite verifier records, call a Key Service,
+expose endpoints, authorize Response-DEK use, or authorize recovery.
+
 ## External design references
 
 - [RFC 4648 — Base-N Encodings](https://www.rfc-editor.org/rfc/rfc4648.html)
