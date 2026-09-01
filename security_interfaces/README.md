@@ -324,6 +324,21 @@ credential generation, verifier construction, response rendering, request
 handling, recovery authorization, submission authorization, or production
 evidence.
 
+`submission_failure_descriptors.py` validates only the static failure matrix
+approved in `docs/20`. It records the exact failure boundary labels, required
+result labels, and content-free/fail-closed flags for unsupported requests,
+parallel copies, audit unavailability, validation/sandbox uncertainty, Key
+Service failure, staging failure, metadata failure, crash/retry conditions,
+cleanup failure, and unknown state/version/receipt inputs. It does not handle
+requests, start submission pipelines, call services, write storage, create
+keys, persist plaintext, append audit events, mutate state, return
+credentials, expose endpoints, or authorize submission.
+
+The submission failure descriptor source is locked by a non-executing
+exact-AST policy. Passing proves only reviewed source shape; it is not
+failure handling, rollback, cleanup execution, retry processing, audit/client
+behavior, response rendering, endpoint behavior, or production evidence.
+
 `response_crypto_descriptors.py` validates only the static version-1 Response
 Note crypto profile already fixed in `docs/24`: XChaCha20-Poly1305-IETF
 combined-mode metadata, fixed plaintext-frame and ciphertext/tag sizes,

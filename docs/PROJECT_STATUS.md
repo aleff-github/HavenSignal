@@ -454,3 +454,17 @@ database state, render responses, run reconciliation, expose endpoints, or
 authorize submission. Endpoint, credential verifier, PostgreSQL concurrency,
 audit, Key Service, storage, logging, reconciliation, independent-review,
 deployment, and production gates remain open.
+
+## Latest Stage A slice — submission failure descriptors
+
+The current repository adds inert submission failure descriptors for the
+owner-approved `docs/20` failure matrix. The descriptor validates only the
+approved failure-boundary labels, required-result labels, content-free flags,
+and fail-closed flags.
+
+The descriptor and its exact-AST source policy intentionally do not handle
+requests, start submission pipelines, call services, write storage, create
+keys, persist plaintext, append audit events, mutate state, return
+credentials, expose endpoints, or authorize submission. Endpoint, pipeline
+executor, audit, Key Service, storage, cleanup, reconciliation, logging,
+independent-review, deployment, and production gates remain open.

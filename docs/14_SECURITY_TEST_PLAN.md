@@ -83,6 +83,13 @@ For the metadata-only Stage A described by
   report/Report-DEK creation, audit append, credential redisplay, status
   oracles, service calls, endpoint behavior, and submission authorization
   without importing or executing the target;
+- submission failure descriptors accept only the exact approved failure-boundary
+  labels, required-result labels, content-free flags, and fail-closed flags;
+- submission failure validation and source policy reject request handling,
+  submission pipeline start, service calls, storage writes, key creation,
+  plaintext persistence, audit append, state mutation, credential return,
+  endpoint behavior, and submission authorization without importing or
+  executing the target;
 - submission credential-response descriptors accept only the one live
   post-acceptance display opportunity, controlled indeterminate retry result,
   permitted Ticket ID/Recovery Secret response-field names, and forbidden
@@ -360,6 +367,11 @@ For `20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`, also verify:
   signal metadata, and reject request parsing, credential verification,
   attempt claiming, database-state inspection, report/DEK creation, audit
   append, status-oracle, service, endpoint, or authorization capability;
+- Stage A submission failure descriptor/source-conformance tests prove only
+  the approved failure-boundary, required-result, content-free, and fail-closed
+  metadata, and reject request handling, pipeline start, service, storage, key,
+  plaintext persistence, audit, state mutation, credential return, endpoint, or
+  authorization capability;
 - Stage A credential-response descriptor/source-conformance tests prove only
   the approved one-time display and lost-response metadata, and reject secret
   persistence, redisplay, replacement credentials, `credentials_delivered`

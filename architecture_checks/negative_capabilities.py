@@ -25,7 +25,7 @@ class NegativeCapabilitySourceViolation:
 NEGATIVE_CAPABILITY_SOURCE_DIGESTS = MappingProxyType(
     {
         "security_interfaces/errors.py": (
-            "cc7aa33d187997844b3611df90694cde3b505cbba6ecbfa2a2cad929461af946"
+            "9891315746967673b4b1754900c82e5f259507ff2531f431de500e13c7a5ac9f"
         ),
         "security_interfaces/unavailable.py": (
             "bea992f14b9caf17465914314d75f5a298bb0bd8ccf80af595e4d27c4e329aea"

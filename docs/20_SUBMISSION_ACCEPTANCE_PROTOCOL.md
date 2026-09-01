@@ -397,6 +397,13 @@ credentials, claim attempts, inspect database state, create reports or
 Report-DEKs, append audit events, redisplay credentials, expose status
 oracles, call services, expose endpoints, or authorize acceptance.
 
+The failure matrix is represented by inert descriptors and a non-executing
+exact-AST source policy. They fix only the approved failure boundary labels,
+required result labels, content-free flags, and fail-closed flags. They do not
+handle requests, start submission pipelines, call services, write storage,
+create keys, persist plaintext, append audit events, mutate state, return
+credentials, expose endpoints, or authorize acceptance.
+
 The credential-response/lost-response policy is represented by inert
 descriptors and a non-executing exact-AST source policy. They fix only the one
 live post-acceptance display opportunity, controlled indeterminate retry
