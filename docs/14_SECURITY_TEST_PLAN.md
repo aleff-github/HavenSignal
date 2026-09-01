@@ -90,6 +90,16 @@ For the metadata-only Stage A described by
   plaintext persistence, audit append, state mutation, credential return,
   endpoint behavior, and submission authorization without importing or
   executing the target;
+- submission idempotency descriptors accept only the exact approved
+  sequential-retry, synchronized-parallel-copy, multi-process, reconciliation,
+  stale-version, response-loss, crash-injection, cleanup, and logging
+  scenarios plus required invariants and forbidden runtime capability
+  categories;
+- submission idempotency validation and source policy reject parallel request
+  execution, request handling, attempt-state inspection, database locking,
+  storage writes, Report-DEK creation, audit append, artifact reconciliation,
+  reporter-input logging, endpoint behavior, and submission authorization
+  without importing or executing the target;
 - submission credential-response descriptors accept only the one live
   post-acceptance display opportunity, controlled indeterminate retry result,
   permitted Ticket ID/Recovery Secret response-field names, and forbidden
@@ -372,6 +382,12 @@ For `20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`, also verify:
   metadata, and reject request handling, pipeline start, service, storage, key,
   plaintext persistence, audit, state mutation, credential return, endpoint, or
   authorization capability;
+- Stage A submission idempotency descriptor/source-conformance tests prove only
+  the approved concurrency/idempotency scenario and invariant metadata, and
+  reject parallel request execution, request handling, attempt inspection,
+  database locking, storage writes, Report-DEK creation, audit append,
+  artifact reconciliation, reporter-input logging, endpoint, or authorization
+  capability;
 - Stage A credential-response descriptor/source-conformance tests prove only
   the approved one-time display and lost-response metadata, and reject secret
   persistence, redisplay, replacement credentials, `credentials_delivered`

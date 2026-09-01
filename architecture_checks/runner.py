@@ -73,6 +73,9 @@ from .submission_credential_response_descriptors import (
 from .submission_failure_descriptors import (
     scan_repository_submission_failure_descriptor,
 )
+from .submission_idempotency_descriptors import (
+    scan_repository_submission_idempotency_descriptor,
+)
 from .submission_reconciliation_descriptors import (
     scan_repository_submission_reconciliation_descriptor,
 )
@@ -361,6 +364,10 @@ ARCHITECTURE_CHECKS = (
     ArchitectureCheck(
         "submission-failure-descriptor",
         scan_repository_submission_failure_descriptor,
+    ),
+    ArchitectureCheck(
+        "submission-idempotency-descriptor",
+        scan_repository_submission_idempotency_descriptor,
     ),
     ArchitectureCheck(
         "submission-reconciliation-descriptor",

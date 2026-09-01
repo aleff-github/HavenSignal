@@ -293,6 +293,15 @@ from .submission_failure_descriptors import (
     scan_repository_submission_failure_descriptor,
     scan_submission_failure_descriptor_source,
 )
+from .submission_idempotency_descriptors import (
+    EXPECTED_SUBMISSION_IDEMPOTENCY_DESCRIPTOR_AST_DIGEST,
+    SUBMISSION_IDEMPOTENCY_DESCRIPTOR_PATH,
+    SubmissionIdempotencyDescriptorSourceViolation,
+    SubmissionIdempotencyDescriptorSourceViolationCode,
+    analyze_submission_idempotency_descriptor_source,
+    scan_repository_submission_idempotency_descriptor,
+    scan_submission_idempotency_descriptor_source,
+)
 from .submission_reconciliation_descriptors import (
     EXPECTED_SUBMISSION_RECONCILIATION_DESCRIPTOR_AST_DIGEST,
     SUBMISSION_RECONCILIATION_DESCRIPTOR_PATH,
@@ -552,6 +561,13 @@ __all__ = [
     "analyze_submission_failure_descriptor_source",
     "scan_repository_submission_failure_descriptor",
     "scan_submission_failure_descriptor_source",
+    "EXPECTED_SUBMISSION_IDEMPOTENCY_DESCRIPTOR_AST_DIGEST",
+    "SUBMISSION_IDEMPOTENCY_DESCRIPTOR_PATH",
+    "SubmissionIdempotencyDescriptorSourceViolation",
+    "SubmissionIdempotencyDescriptorSourceViolationCode",
+    "analyze_submission_idempotency_descriptor_source",
+    "scan_repository_submission_idempotency_descriptor",
+    "scan_submission_idempotency_descriptor_source",
     "EXPECTED_SUBMISSION_RECONCILIATION_DESCRIPTOR_AST_DIGEST",
     "SUBMISSION_RECONCILIATION_DESCRIPTOR_PATH",
     "SubmissionReconciliationDescriptorSourceViolation",

@@ -62,6 +62,7 @@ class ArchitectureCheckRunnerTests(SimpleTestCase):
                 "submission-attempt-credential-descriptor",
                 "submission-credential-response-descriptor",
                 "submission-failure-descriptor",
+                "submission-idempotency-descriptor",
                 "submission-reconciliation-descriptor",
                 "submission-retry-descriptor",
                 "lifecycle-sources",
