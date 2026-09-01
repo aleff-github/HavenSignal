@@ -333,6 +333,16 @@ service-call, and authorization behavior. They do not implement or approve
 credential generation, verifier creation or verification, recovery lookup,
 Response-DEK use, persistence, deployment, or production recovery.
 
+The recovery failure behavior profile is also represented by inert descriptors
+and a non-executing exact-AST source policy. They fix only the approved
+random-source, collision, encoding, verifier/key, unknown version/key, HMAC
+mismatch, unavailable/expired/destroyed response, concurrent first-read,
+Response-DEK expiry, and credential logging/telemetry failure labels, their
+required generic/fail-closed results, and forbidden runtime capability
+categories. They do not generate randomness, decode credentials, call a
+verifier, compare HMAC tags, read response state, call the Key Service, mutate
+first-read state, log credentials, expose endpoints, or authorize recovery.
+
 ## External design references
 
 - [RFC 4648 — Base-N Encodings](https://www.rfc-editor.org/rfc/rfc4648.html)
