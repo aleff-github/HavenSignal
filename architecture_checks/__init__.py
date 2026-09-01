@@ -7,6 +7,15 @@ from .bootstrap import (
     analyze_bootstrap_source,
     scan_bootstrap_sources,
 )
+from .attachment_admission_descriptors import (
+    ATTACHMENT_ADMISSION_DESCRIPTOR_PATH,
+    EXPECTED_ATTACHMENT_ADMISSION_DESCRIPTOR_AST_DIGEST,
+    AttachmentAdmissionDescriptorSourceViolation,
+    AttachmentAdmissionDescriptorSourceViolationCode,
+    analyze_attachment_admission_descriptor_source,
+    scan_attachment_admission_descriptor_source,
+    scan_repository_attachment_admission_descriptor,
+)
 from .ci_workflow import (
     CI_WORKFLOW_PATH,
     EXPECTED_CI_WORKFLOW_SHA256,
@@ -202,6 +211,13 @@ __all__ = [
     "BootstrapSourceViolationCode",
     "analyze_bootstrap_source",
     "scan_bootstrap_sources",
+    "ATTACHMENT_ADMISSION_DESCRIPTOR_PATH",
+    "EXPECTED_ATTACHMENT_ADMISSION_DESCRIPTOR_AST_DIGEST",
+    "AttachmentAdmissionDescriptorSourceViolation",
+    "AttachmentAdmissionDescriptorSourceViolationCode",
+    "analyze_attachment_admission_descriptor_source",
+    "scan_attachment_admission_descriptor_source",
+    "scan_repository_attachment_admission_descriptor",
     "CI_WORKFLOW_PATH",
     "EXPECTED_CI_WORKFLOW_SHA256",
     "FORBIDDEN_WORKFLOW_FRAGMENTS",

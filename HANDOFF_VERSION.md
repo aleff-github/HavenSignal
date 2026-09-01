@@ -382,3 +382,19 @@ persistence, submission acceptance, logging, network, file, Django integration,
 and service-call changes fail closed. This closes no proxy, Django-handler,
 CSRF, CAPTCHA, sandbox, audit, Key Service, no-spool, request-smuggling,
 endpoint, deployment, or production gate.
+
+The forty-third Stage A slice adds inert attachment-admission descriptors for
+the owner-approved common version-1 file profile. Validation covers only static
+count, size, kind, slot, extension, transient-filename, and trust-denial
+metadata. It does not inspect file bytes, parse JPEG/PNG/PDF, create sandbox
+jobs, persist originals, retain filenames, log request material, encrypt
+attachments, expose safe views, or authorize uploads.
+
+A new non-executing attachment-admission descriptor source policy locks the
+exact imports, constants, enums, immutable classes, validators, and false
+capability results. File-byte inspection, parser behavior, sandbox-job
+creation, original-byte persistence, original-filename persistence,
+request-material logging, upload authorization, file, network, Django
+integration, and service-call changes fail closed. This closes no parser,
+renderer, sandbox, encryption, safe-view, endpoint, deployment, or production
+gate.

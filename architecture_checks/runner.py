@@ -9,6 +9,9 @@ from pathlib import Path
 from typing import Protocol, Sequence
 
 from .bootstrap import scan_bootstrap_sources
+from .attachment_admission_descriptors import (
+    scan_repository_attachment_admission_descriptor,
+)
 from .ci_workflow import scan_repository_ci_workflow
 from .captcha_descriptors import scan_repository_captcha_descriptor
 from .dependency_policy import scan_repository
@@ -258,6 +261,10 @@ ARCHITECTURE_CHECKS = (
     ArchitectureCheck("repository-hygiene", scan_repository_hygiene),
     ArchitectureCheck("verification-script", scan_repository_verification_script),
     ArchitectureCheck("ci-workflow", scan_repository_ci_workflow),
+    ArchitectureCheck(
+        "attachment-admission-descriptor",
+        scan_repository_attachment_admission_descriptor,
+    ),
     ArchitectureCheck("captcha-descriptor", scan_repository_captcha_descriptor),
     ArchitectureCheck("recovery-descriptor", scan_repository_recovery_descriptor),
     ArchitectureCheck(

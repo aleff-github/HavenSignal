@@ -145,6 +145,14 @@ installation, file-byte access, filename exposure, sandbox jobs, plaintext
 persistence, endpoint acceptance, logging, or service calls are reviewed source
 facts.
 
+The attachment-admission descriptor source policy locks the complete executable
+AST of `security_interfaces/attachment_admission_descriptors.py`. Exact common
+file count, file-size, kind, slot, extension, transient-filename, and trust
+denial metadata, false capability properties, imports, and absence of file-byte
+inspection, parser behavior, sandbox jobs, original-byte persistence,
+filename persistence, request-material logging, upload authorization, or
+service calls are reviewed source facts.
+
 The report step-up source policy locks the complete executable AST of
 `security_interfaces/step_up_descriptors.py`. Identifier/counter fields,
 algorithm and purpose registries, timing, unused state, validators, and every

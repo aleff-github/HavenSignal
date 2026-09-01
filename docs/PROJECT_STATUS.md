@@ -166,6 +166,15 @@ proves no HTTP/multipart parsing, Django upload-handler installation, file-byte
 access, filename exposure, sandbox-job creation, plaintext persistence,
 endpoint, or submission-acceptance capability.
 
+The attachment-admission descriptor module is locked to its exact executable
+AST as content-free common file metadata only. Count, size, kind, slot,
+extension, transient-filename, trust-denial, validators, and false capability
+profiles cannot change without explicit review. The check never imports or
+executes the target and proves no file-byte inspection, JPEG/PNG/PDF parsing,
+sandbox-job creation, original-byte persistence, original-filename retention,
+request-material logging, upload endpoint, safe-view, encryption, or upload
+authorization capability.
+
 The report-bound step-up-v1 descriptor module is also locked to its complete
 reviewed executable AST, including timing, registries, content-free context,
 unused state, validators, and false WebAuthn/binding/authorization results.

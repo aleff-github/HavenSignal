@@ -93,6 +93,9 @@ The repository currently contains:
   production gates;
 - inert request/multipart admission descriptors that validate only approved
   body, part, header, file, streaming, timing, and closed-grammar limits;
+- inert attachment-admission descriptors that validate only approved common
+  file count, size, kind, slot, extension, transient-filename, and trust-denial
+  metadata;
 - inert recovery credential descriptors that validate only strict Ticket ID and
   Recovery Secret encoding shapes without retaining credential material;
 - inert Response Note crypto descriptors that validate only approved format,
@@ -113,6 +116,7 @@ The repository currently contains:
 - a non-executing exact-AST guard for inert no-JavaScript CAPTCHA descriptors;
 - a non-executing exact-AST guard for inert request/multipart admission
   descriptors;
+- a non-executing exact-AST guard for inert attachment-admission descriptors;
 - a non-executing exact-AST guard for report-bound step-up-v1 descriptors;
 - a non-executing exact-AST guard for inert recovery credential descriptors;
 - a non-executing exact-AST guard for inert Response Note crypto descriptors;

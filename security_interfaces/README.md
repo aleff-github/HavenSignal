@@ -87,6 +87,20 @@ policy. Passing proves only reviewed source shape and closes no proxy, Django
 upload-handler, sandbox, CSRF, CAPTCHA, audit, Key Service, no-spool,
 request-smuggling, endpoint, deployment, or production gate.
 
+`attachment_admission_descriptors.py` models only the owner-approved common
+version-1 attachment admission metadata: one PDF slot, three image slots,
+5 MiB per-file limit, accepted kind/slot/extension registries, the transient
+defense-in-depth filename shape, and the explicit denial that client MIME,
+Content-Disposition, paths, extensions, magic bytes, parser warnings, or partial
+success can authorize acceptance. It does not inspect file bytes, parse formats,
+create sandbox jobs, persist originals, retain filenames, log request material,
+or authorize uploads.
+
+The attachment-admission descriptor source is locked by a non-executing
+exact-AST policy. Passing proves only reviewed source shape and closes no
+JPEG/PNG/PDF parser, renderer, sandbox, encryption, safe-view, endpoint,
+deployment, or production gate.
+
 `step_up_descriptors.py` models only the report-bound v1 UUID/counter context,
 the exact 120-second lifetime, ES256/EdDSA algorithm registry, binding purpose
 and key epoch, and an unused-only Stage A state. It deliberately contains no
