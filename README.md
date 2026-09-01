@@ -136,6 +136,9 @@ The repository currently contains:
   no-delivery-claim metadata;
 - inert recovery credential descriptors that validate only strict Ticket ID and
   Recovery Secret encoding shapes without retaining credential material;
+- inert recovery failure descriptors that fix only approved recovery
+  failure-boundary, generic-result, fail-closed, and forbidden-capability
+  metadata;
 - inert Response Note crypto descriptors that validate only approved format,
   size, algorithm, AAD, envelope, and key-operation profile shapes;
 - inert Response Note text descriptors that validate only approved plain-text,
@@ -159,6 +162,7 @@ The repository currently contains:
 - a non-executing exact-AST guard for inert file-sandbox descriptors;
 - a non-executing exact-AST guard for report-bound step-up-v1 descriptors;
 - a non-executing exact-AST guard for inert recovery credential descriptors;
+- a non-executing exact-AST guard for inert recovery failure descriptors;
 - a non-executing exact-AST guard for inert Response Note crypto descriptors;
 - a non-executing exact-AST guard for inert Response Note text descriptors;
 - a non-executing exact-AST guard for inert Response Note schema descriptors;

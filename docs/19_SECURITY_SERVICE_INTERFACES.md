@@ -262,6 +262,15 @@ requests, handle requests, inspect attempt state, lock database rows, write
 storage, create Report-DEKs, append audit events, reconcile artifacts, log
 reporter input, expose endpoints, or authorize submission.
 
+The current Stage A recovery failure descriptor records only the approved
+random-source, collision, encoding, verifier/key, unknown version/key, HMAC
+mismatch, unavailable/expired/destroyed response, concurrent first-read,
+Response-DEK expiry, and credential logging/telemetry failure labels from
+`docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md`. It does not generate
+randomness, decode credentials, call a verifier, compare HMAC tags, read
+response state, call the Key Service, mutate first-read state, log
+credentials, expose endpoints, or authorize recovery.
+
 The current Stage A credential-response descriptor records only the approved
 one-time live response and lost-response policy from
 `docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`. It does not generate credentials,

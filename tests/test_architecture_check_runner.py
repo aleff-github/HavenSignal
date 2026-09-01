@@ -35,6 +35,7 @@ class ArchitectureCheckRunnerTests(SimpleTestCase):
                 "captcha-descriptor",
                 "file-sandbox-descriptor",
                 "recovery-descriptor",
+                "recovery-failure-descriptor",
                 "report-crypto-descriptor",
                 "report-frame-descriptor",
                 "report-schema-descriptor",

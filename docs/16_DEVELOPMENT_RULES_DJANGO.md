@@ -281,6 +281,16 @@ persist or log plaintext secrets, perform lookup, expose endpoints, call a
 Recovery Verifier Service, or authorize access to a Response Note until the
 cryptographic-review and dependent gates are closed.
 
+Recovery failure-behavior code is currently limited to inert structural
+descriptors. It may validate only the exact approved recovery failure-boundary
+labels, required-result labels, generic external-result flags, fail-closed
+flags, and forbidden runtime capability metadata. It must not generate
+randomness, decode credentials, call a verifier, compare HMAC tags, read
+response state, call the Key Service, mutate first-read state, log
+credentials, expose endpoints, or authorize recovery until verifier, response
+eligibility, first-read concurrency, Key Service, logging, deployment, and
+production gates are closed.
+
 Response Note cryptographic code is currently limited to inert structural
 descriptors. It may validate only the exact approved version, algorithm,
 content-profile, size, AAD-purpose, immutable-context, envelope, and
