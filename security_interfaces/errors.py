@@ -61,6 +61,15 @@ class CaptchaDescriptorRejected(ValueError):
         super().__init__(self.public_code)
 
 
+class FileSandboxDescriptorRejected(ValueError):
+    """Controlled rejection for an invalid inert file-sandbox descriptor."""
+
+    public_code = "file_sandbox_descriptor_rejected"
+
+    def __init__(self) -> None:
+        super().__init__(self.public_code)
+
+
 class StepUpDescriptorRejected(ValueError):
     """Controlled rejection for an invalid inert step-up descriptor."""
 

@@ -375,6 +375,12 @@ and ordinary-download-denial metadata. This evidence does not decrypt original
 bytes, render attachments, validate PNG output, call a sandbox, inspect leases,
 serve responses, or authorize operator access.
 
+Stage A also includes content-free file-sandbox descriptors and a non-executing
+exact-source policy for microVM compute, isolation, transport, filesystem, and
+credential-denial metadata. This evidence does not boot Firecracker, execute
+parsers, open files, create jobs, exchange vsock messages, process attachments,
+or prove a sandbox boundary.
+
 ## Architecture conformance tests
 
 Before a profile receives production credentials, automated and operational tests must prove:

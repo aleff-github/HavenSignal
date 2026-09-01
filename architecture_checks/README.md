@@ -160,6 +160,14 @@ denial, false capability properties, imports, and absence of decryption,
 rendering, PNG validation, sandbox calls, output persistence, response serving,
 endpoint, or authorization behavior are reviewed source facts.
 
+The file-sandbox descriptor source policy locks the complete executable AST of
+`security_interfaces/file_sandbox_descriptors.py`. Exact Firecracker reference,
+compute limits, isolation denials, transport profile, filesystem profile,
+credential profile, false capability properties, imports, and absence of
+microVM boot, parser execution, file access, job creation, vsock exchange,
+attachment inspection, plaintext persistence, endpoint, or authorization
+behavior are reviewed source facts.
+
 The report step-up source policy locks the complete executable AST of
 `security_interfaces/step_up_descriptors.py`. Identifier/counter fields,
 algorithm and purpose registries, timing, unused state, validators, and every

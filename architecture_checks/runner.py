@@ -15,6 +15,7 @@ from .attachment_admission_descriptors import (
 from .ci_workflow import scan_repository_ci_workflow
 from .captcha_descriptors import scan_repository_captcha_descriptor
 from .dependency_policy import scan_repository
+from .file_sandbox_descriptors import scan_repository_file_sandbox_descriptor
 from .descriptors import (
     ADMINISTRATIVE_STEP_UP_DESCRIPTOR_PATH,
     ALERT_DESCRIPTOR_PATH,
@@ -267,6 +268,10 @@ ARCHITECTURE_CHECKS = (
         scan_repository_attachment_admission_descriptor,
     ),
     ArchitectureCheck("captcha-descriptor", scan_repository_captcha_descriptor),
+    ArchitectureCheck(
+        "file-sandbox-descriptor",
+        scan_repository_file_sandbox_descriptor,
+    ),
     ArchitectureCheck("recovery-descriptor", scan_repository_recovery_descriptor),
     ArchitectureCheck(
         "request-admission-descriptor",

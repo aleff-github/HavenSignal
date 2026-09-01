@@ -98,6 +98,8 @@ The repository currently contains:
   metadata;
 - inert safe-view descriptors that validate only approved PNG output limits,
   headers, binding metadata, and ordinary-download denials;
+- inert file-sandbox descriptors that validate only approved microVM compute,
+  isolation, transport, filesystem, and credential-denial metadata;
 - inert recovery credential descriptors that validate only strict Ticket ID and
   Recovery Secret encoding shapes without retaining credential material;
 - inert Response Note crypto descriptors that validate only approved format,
@@ -120,6 +122,7 @@ The repository currently contains:
   descriptors;
 - a non-executing exact-AST guard for inert attachment-admission descriptors;
 - a non-executing exact-AST guard for inert safe-view descriptors;
+- a non-executing exact-AST guard for inert file-sandbox descriptors;
 - a non-executing exact-AST guard for report-bound step-up-v1 descriptors;
 - a non-executing exact-AST guard for inert recovery credential descriptors;
 - a non-executing exact-AST guard for inert Response Note crypto descriptors;
