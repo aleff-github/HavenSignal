@@ -542,3 +542,24 @@ endpoint, file, network, dynamic, and submission-authorization changes fail
 closed. This closes no reconciler, scheduler, Audit/Key/Alert Service,
 ciphertext cleanup, submission acceptance, storage, concurrency, deployment,
 independent-review, or production gate.
+
+The fifty-second Stage A slice adds inert submission credential-response
+descriptors for the owner-approved `docs/20` lost-response policy. Validation
+covers only the one live post-acceptance display opportunity, controlled
+indeterminate retry result, permitted Ticket ID and Recovery Secret
+response-field names, and forbidden persistence categories for plaintext
+Recovery Secret, redisplay/replacement state, `credentials_delivered` claims,
+content hashing/deduplication, request headers, and raw errors. It does not
+generate credentials, persist or redisplay secrets, issue replacements, record
+delivery, deduplicate by content, render responses, inspect requests, mutate
+attempts, expose endpoints, or authorize recovery/submission.
+
+A new non-executing credential-response descriptor source policy locks the
+exact imports, constants, enums, immutable classes, validators, and false
+capability results. Credential generation, secret persistence, redisplay,
+replacement issuance, delivery claims, content deduplication, response
+rendering, request inspection, endpoint, dynamic, file, network, recovery
+authorization, and submission-authorization changes fail closed. This closes no
+credential generation, verifier, response endpoint, recovery, submission
+acceptance, storage, logging, deployment, independent-review, or production
+gate.

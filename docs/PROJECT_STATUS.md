@@ -388,3 +388,20 @@ receipts, call the Audit/Key/Alert services, delete ciphertext, mutate attempt
 state, schedule jobs, expose endpoints, or authorize acceptance. Reconciler,
 scheduler, durable-audit, Key Service, Alert Service, cleanup, storage,
 concurrency, independent-review, deployment, and production gates remain open.
+
+## Latest Stage A slice — submission credential-response descriptors
+
+The current repository adds inert submission credential-response descriptors
+for the owner-approved `docs/20` lost-response policy. The descriptor validates
+only the one live post-acceptance display opportunity, controlled indeterminate
+retry result, permitted Ticket ID and Recovery Secret response-field names, and
+forbidden persistence categories for plaintext Recovery Secret,
+redisplay/replacement state, `credentials_delivered` claims, content
+hashing/deduplication, request headers, and raw errors.
+
+The descriptor and its exact-AST source policy intentionally do not generate
+credentials, persist or redisplay secrets, issue replacements, record delivery,
+deduplicate by content, render responses, inspect requests, mutate attempts,
+expose endpoints, or authorize recovery/submission. Credential generation,
+verifier, response endpoint, recovery, submission acceptance, storage, logging,
+independent-review, deployment, and production gates remain open.

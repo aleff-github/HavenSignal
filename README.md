@@ -117,6 +117,9 @@ The repository currently contains:
 - inert submission-reconciliation descriptors that fix only approved scan,
   progress-deadline, cleanup-retry, persistent-alert, state/action, and
   content-free payload metadata;
+- inert submission credential-response descriptors that fix only one-time
+  display, lost-response, no-escrow, no-replacement, no-redisplay, and
+  no-delivery-claim metadata;
 - inert recovery credential descriptors that validate only strict Ticket ID and
   Recovery Secret encoding shapes without retaining credential material;
 - inert Response Note crypto descriptors that validate only approved format,
@@ -147,6 +150,8 @@ The repository currently contains:
 - a non-executing exact-AST guard for inert Response Note schema descriptors;
 - a non-executing exact-AST guard for inert submission-audit descriptors;
 - a non-executing exact-AST guard for inert submission-reconciliation
+  descriptors;
+- a non-executing exact-AST guard for inert submission credential-response
   descriptors;
 - architecture checks that constrain the reporter-facing settings, route,
   passive assets, read-only view, and restrictive response-header middleware;
