@@ -223,6 +223,17 @@ creation/verification, attempt-state inspection, Audit Service calls, key
 creation, persistence, endpoint, or submission authorization behavior are
 reviewed source facts.
 
+The submission-attempt credential descriptor source policy locks the complete
+executable AST of
+`security_interfaces/submission_attempt_credential_descriptors.py`. Exact
+single-use semantics, two-hour pre-claim lifetime, transport allow/deny lists,
+forbidden report/recovery/network/account/device bindings, durable
+representation metadata, forbidden persistence categories, false capability
+properties, imports, and absence of credential generation/verification, cookie
+installation, request inspection, attempt claiming, logging, audit payloads,
+endpoint behavior, submission authorization, or report-read authorization are
+reviewed source facts.
+
 The submission-reconciliation descriptor source policy locks the complete
 executable AST of
 `security_interfaces/submission_reconciliation_descriptors.py`. Exact approved

@@ -46,6 +46,17 @@ For the metadata-only Stage A described by
   creation/verification, attempt-state inspection, Audit Service calls, key
   creation, submission metadata persistence, endpoint behavior, and submission
   authorization without importing or executing the target;
+- submission-attempt credential descriptors accept only the approved single-use
+  semantics, two-hour non-sliding pre-claim lifetime, POST body/protected
+  same-site cookie transport labels, URL/query/referrer/header-log denials,
+  forbidden report/recovery/network/account/device bindings, minimum
+  verifier/index representation, database uniqueness/state-version metadata,
+  and no-log/no-audit persistence denials;
+- attempt-credential validation and source policy reject credential generation
+  or verification, plaintext credential persistence, cookie installation,
+  request inspection, attempt claiming, logging, audit writes, reporter account
+  creation, endpoint behavior, submission authorization, and report-read
+  authorization without importing or executing the target;
 - submission-reconciliation descriptors accept only the exact approved maximum
   scan interval, progress deadline, cleanup retry cap, persistent-cleanup-alert
   threshold, candidate states, terminal outcomes, action names, alert type, and
@@ -308,6 +319,12 @@ For `20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`, also verify:
   approved phase order, timing labels, receipt-required flags, and
   content-free payload allow/deny metadata, and reject any append, receipt,
   service, persistence, key, endpoint, or authorization capability;
+- Stage A attempt-credential descriptor/source-conformance tests prove only the
+  approved single-use, two-hour pre-claim, allowed/forbidden transport,
+  forbidden binding, minimum durable-representation, and no-log/no-audit
+  metadata, and reject credential generation/verification, cookie installation,
+  request inspection, attempt claiming, endpoint, logging, audit write,
+  submission authorization, or report-read capability;
 - Stage A submission-reconciliation descriptor/source-conformance tests prove
   only the approved scan/progress/cleanup/alert timing metadata, candidate
   states, terminal outcomes, action registry, and payload allow/deny metadata,

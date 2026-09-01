@@ -88,6 +88,15 @@ class SubmissionAuditDescriptorRejected(ValueError):
         super().__init__(self.public_code)
 
 
+class SubmissionAttemptCredentialDescriptorRejected(ValueError):
+    """Controlled rejection for invalid inert attempt-credential metadata."""
+
+    public_code = "submission_attempt_credential_descriptor_rejected"
+
+    def __init__(self) -> None:
+        super().__init__(self.public_code)
+
+
 class SubmissionReconciliationDescriptorRejected(ValueError):
     """Controlled rejection for an invalid inert reconciliation descriptor."""
 
