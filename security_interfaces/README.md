@@ -354,6 +354,21 @@ concurrency test runner, database lock implementation, service adapter,
 artifact reconciler, logging pipeline, endpoint behavior, or production
 evidence.
 
+`recovery_failure_descriptors.py` validates only the static failure-behavior
+profile approved in `docs/21`. It records the exact random-source, collision,
+encoding, verifier/key, unknown version/key, HMAC mismatch, unavailable/
+expired/destroyed response, concurrent first-read, Response-DEK expiry, and
+credential logging/telemetry failure labels, their required generic/fail-closed
+results, and forbidden runtime capabilities. It does not generate randomness,
+decode credentials, call a verifier, compare HMAC tags, read response state,
+call the Key Service, log credentials, expose endpoints, or authorize recovery.
+
+The recovery failure descriptor source is locked by a non-executing exact-AST
+policy. Passing proves only reviewed source shape; it is not random
+generation, verifier construction, HMAC verification, recovery workflow
+authorization, first-read mutation, Key Service behavior, endpoint behavior, or
+production evidence.
+
 `response_crypto_descriptors.py` validates only the static version-1 Response
 Note crypto profile already fixed in `docs/24`: XChaCha20-Poly1305-IETF
 combined-mode metadata, fixed plaintext-frame and ciphertext/tag sizes,

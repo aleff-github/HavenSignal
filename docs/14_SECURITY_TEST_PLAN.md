@@ -142,6 +142,16 @@ For the metadata-only Stage A described by
   import, constant, field, validator, false-capability, generation, verifier,
   storage, logging, endpoint, service-call, and authorization changes fail
   closed without importing or executing it;
+- recovery failure descriptors accept only the exact approved random-source,
+  collision, encoding, verifier/key, unknown version/key, HMAC mismatch,
+  unavailable/expired/destroyed response, concurrent first-read, Response-DEK
+  expiry, and credential logging/telemetry failure labels with generic
+  fail-closed result metadata;
+- recovery failure validation and source policy reject random generation,
+  credential decoding, verifier calls, HMAC comparison, response-state reads,
+  Key Service calls, first-read mutation, credential logging, endpoint
+  behavior, and recovery authorization without importing or executing the
+  target;
 - Response Note crypto descriptors accept only the exact version-1 algorithm,
   content-profile, key, nonce, tag, plaintext-frame, ciphertext/tag, immutable
   context-size, AAD-purpose, and Response-DEK operation profile shapes;

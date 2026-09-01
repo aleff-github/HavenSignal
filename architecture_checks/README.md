@@ -290,6 +290,15 @@ inspection, database locking, storage writes, Report-DEK creation, audit
 append, artifact reconciliation, reporter-input logging, endpoint, or
 submission authorization behavior are reviewed source facts.
 
+The recovery failure descriptor source policy locks the complete executable AST
+of `security_interfaces/recovery_failure_descriptors.py`. Exact approved
+recovery failure boundary labels, required generic/fail-closed results,
+forbidden runtime capability categories, false capability properties, imports,
+and absence of random generation, credential decoding, verifier calls, HMAC
+comparison, response-state reads, Key Service calls, first-read mutation,
+credential logging, endpoint, or recovery authorization behavior are reviewed
+source facts.
+
 The response-crypto descriptor source policy locks the complete executable AST
 of `security_interfaces/response_crypto_descriptors.py`. Exact response
 algorithm/profile identifiers, key/nonce/tag/frame/envelope sizes, immutable

@@ -42,6 +42,9 @@ from .negative_capabilities import scan_negative_capability_sources
 from .orchestration import scan_inert_orchestration_sources
 from .repository_hygiene import scan_repository_hygiene
 from .recovery_descriptors import scan_repository_recovery_descriptor
+from .recovery_failure_descriptors import (
+    scan_repository_recovery_failure_descriptor,
+)
 from .report_crypto_descriptors import scan_repository_report_crypto_descriptor
 from .report_frame_descriptors import scan_repository_report_frame_descriptor
 from .report_schema_descriptors import scan_repository_report_schema_descriptor
@@ -299,6 +302,10 @@ ARCHITECTURE_CHECKS = (
         scan_repository_file_sandbox_descriptor,
     ),
     ArchitectureCheck("recovery-descriptor", scan_repository_recovery_descriptor),
+    ArchitectureCheck(
+        "recovery-failure-descriptor",
+        scan_repository_recovery_failure_descriptor,
+    ),
     ArchitectureCheck(
         "report-crypto-descriptor",
         scan_repository_report_crypto_descriptor,

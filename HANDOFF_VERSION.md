@@ -657,3 +657,24 @@ endpoint, file, network, dynamic, and submission-authorization changes fail
 closed. This closes no endpoint, PostgreSQL concurrency runner, database
 locking implementation, audit, Key Service, storage, reconciliation, logging,
 deployment, independent-review, or production gate.
+
+The fifty-eighth Stage A slice adds inert recovery failure descriptors for the
+owner-approved `docs/21` recovery credential failure behavior. Validation
+covers only the exact random-source, collision, encoding, verifier/key,
+unknown version/key, HMAC mismatch, unavailable/expired/destroyed response,
+concurrent first-read, Response-DEK expiry, and credential logging/telemetry
+failure labels, their required generic/fail-closed results, and forbidden
+runtime capability categories. It does not generate randomness, decode
+credentials, call a verifier, compare HMAC tags, read response state, call the
+Key Service, mutate first-read state, log credentials, expose endpoints, or
+authorize recovery.
+
+A new non-executing recovery failure descriptor source policy locks the exact
+imports, constants, enums, immutable classes, validators, and false capability
+results. Random generation, credential decoding, verifier calls, HMAC
+comparison, response-state reads, Key Service calls, first-read mutation,
+credential logging, endpoint, file, network, dynamic, and recovery
+authorization changes fail closed. This closes no recovery endpoint, verifier
+service, constant-time comparison implementation, response eligibility,
+first-read concurrency, Key Service, logging, deployment, independent-review,
+or production gate.

@@ -483,3 +483,21 @@ log reporter input, expose endpoints, or authorize submission. Endpoint,
 PostgreSQL concurrency runner, database locking implementation, audit, Key
 Service, storage, reconciliation, logging, independent-review, deployment, and
 production gates remain open.
+
+## Latest Stage A slice — recovery failure descriptors
+
+The current repository adds inert recovery failure descriptors for the
+owner-approved `docs/21` recovery credential failure behavior. The descriptor
+validates only the approved random-source, collision, encoding, verifier/key,
+unknown version/key, HMAC mismatch, unavailable/expired/destroyed response,
+concurrent first-read, Response-DEK expiry, and credential logging/telemetry
+failure labels, required generic/fail-closed results, and forbidden runtime
+capability categories.
+
+The descriptor and its exact-AST source policy intentionally do not generate
+randomness, decode credentials, call a verifier, compare HMAC tags, read
+response state, call the Key Service, mutate first-read state, log
+credentials, expose endpoints, or authorize recovery. Recovery endpoint,
+verifier service, constant-time comparison implementation, response
+eligibility, first-read concurrency, Key Service, logging, independent-review,
+deployment, and production gates remain open.
