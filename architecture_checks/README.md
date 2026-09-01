@@ -153,6 +153,13 @@ inspection, parser behavior, sandbox jobs, original-byte persistence,
 filename persistence, request-material logging, upload authorization, or
 service calls are reviewed source facts.
 
+The safe-view descriptor source policy locks the complete executable AST of
+`security_interfaces/safe_view_descriptors.py`. Exact PNG/sRGB/render-DPI,
+output limit, response-header, binding, non-durability, ordinary-download
+denial, false capability properties, imports, and absence of decryption,
+rendering, PNG validation, sandbox calls, output persistence, response serving,
+endpoint, or authorization behavior are reviewed source facts.
+
 The report step-up source policy locks the complete executable AST of
 `security_interfaces/step_up_descriptors.py`. Identifier/counter fields,
 algorithm and purpose registries, timing, unused state, validators, and every

@@ -446,6 +446,14 @@ original-byte persistence, filename persistence, request-material logging,
 upload authorization, dynamic behavior, and source echoing. These tests do not
 enable parser, sandbox, upload, safe-view, or encryption behavior.
 
+Current Stage A evidence also tests that the inert safe-view descriptor accepts
+only the approved PNG output, 8-bit sRGB, 144 DPI, output/resource limit,
+no-store/nosniff response, binding, non-durability, and ordinary-download-denial
+metadata. Its exact-source policy rejects decryption, rendering, sandbox calls,
+PNG-byte validation, output persistence, response serving, operator-access
+authorization, dynamic behavior, and source echoing. These tests do not enable
+safe-view generation or delivery.
+
 Unsafe/uncertain should fail closed.
 
 ## File sandbox

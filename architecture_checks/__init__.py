@@ -148,6 +148,15 @@ from .request_admission_descriptors import (
     scan_repository_request_admission_descriptor,
     scan_request_admission_descriptor_source,
 )
+from .safe_view_descriptors import (
+    EXPECTED_SAFE_VIEW_DESCRIPTOR_AST_DIGEST,
+    SAFE_VIEW_DESCRIPTOR_PATH,
+    SafeViewDescriptorSourceViolation,
+    SafeViewDescriptorSourceViolationCode,
+    analyze_safe_view_descriptor_source,
+    scan_repository_safe_view_descriptor,
+    scan_safe_view_descriptor_source,
+)
 from .response_crypto_descriptors import (
     EXPECTED_RESPONSE_CRYPTO_DESCRIPTOR_AST_DIGEST,
     RESPONSE_CRYPTO_DESCRIPTOR_PATH,
@@ -322,6 +331,13 @@ __all__ = [
     "analyze_request_admission_descriptor_source",
     "scan_repository_request_admission_descriptor",
     "scan_request_admission_descriptor_source",
+    "EXPECTED_SAFE_VIEW_DESCRIPTOR_AST_DIGEST",
+    "SAFE_VIEW_DESCRIPTOR_PATH",
+    "SafeViewDescriptorSourceViolation",
+    "SafeViewDescriptorSourceViolationCode",
+    "analyze_safe_view_descriptor_source",
+    "scan_repository_safe_view_descriptor",
+    "scan_safe_view_descriptor_source",
     "EXPECTED_RESPONSE_CRYPTO_DESCRIPTOR_AST_DIGEST",
     "RESPONSE_CRYPTO_DESCRIPTOR_PATH",
     "ResponseCryptoDescriptorSourceViolation",

@@ -369,6 +369,12 @@ extension, transient-filename, and trust-denial metadata. This evidence does
 not inspect file bytes, parse JPEG/PNG/PDF, create sandbox jobs, persist
 originals, expose safe views, encrypt attachments, or authorize upload handling.
 
+Stage A also includes content-free safe-view descriptors and a non-executing
+exact-source policy for PNG output, response-header, binding, non-durability,
+and ordinary-download-denial metadata. This evidence does not decrypt original
+bytes, render attachments, validate PNG output, call a sandbox, inspect leases,
+serve responses, or authorize operator access.
+
 ## Architecture conformance tests
 
 Before a profile receives production credentials, automated and operational tests must prove:
