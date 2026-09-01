@@ -46,6 +46,15 @@ For the metadata-only Stage A described by
   creation/verification, attempt-state inspection, Audit Service calls, key
   creation, submission metadata persistence, endpoint behavior, and submission
   authorization without importing or executing the target;
+- submission-reconciliation descriptors accept only the exact approved maximum
+  scan interval, progress deadline, cleanup retry cap, persistent-cleanup-alert
+  threshold, candidate states, terminal outcomes, action names, alert type, and
+  allowed/forbidden content-free payload metadata;
+- submission-reconciliation validation and source policy reject report-content
+  scanning, plaintext decryption, credential creation, audit append, receipt
+  verification, service calls, ciphertext deletion, state mutation, scheduling,
+  endpoint behavior, and submission authorization without importing or
+  executing the target;
 - alert-v1 descriptors enforce the exact ten alert/severity pairs, delivery
   states, actor pairing, identifier lengths, timestamp range, and
   acknowledgement pairing while rejecting unknown/arbitrary values;
@@ -288,6 +297,12 @@ For `20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`, also verify:
   approved phase order, timing labels, receipt-required flags, and
   content-free payload allow/deny metadata, and reject any append, receipt,
   service, persistence, key, endpoint, or authorization capability;
+- Stage A submission-reconciliation descriptor/source-conformance tests prove
+  only the approved scan/progress/cleanup/alert timing metadata, candidate
+  states, terminal outcomes, action registry, and payload allow/deny metadata,
+  and reject content scanning, credentials, receipt verification, service
+  calls, deletion, state mutation, scheduling, endpoint, or authorization
+  capability;
 - lost responses never cause credential re-display, replacement credentials,
   or a duplicate report for the same attempt;
 - no event or state claims that the reporter received or saved credentials;

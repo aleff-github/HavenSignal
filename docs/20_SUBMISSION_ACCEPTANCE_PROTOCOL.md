@@ -359,6 +359,16 @@ metadata. They do not append audit events, create or verify durable receipts,
 inspect attempt state, call the Audit Collector, create report keys, persist
 submission metadata, expose endpoints, or authorize acceptance.
 
+The reconciliation profile is represented by inert descriptors and a
+non-executing exact-AST source policy. They fix only the approved scan-at-least
+once-per-minute maximum interval, 15-minute progress deadline, five-minute
+cleanup retry cap, 15-minute persistent-cleanup-alert threshold, nonterminal
+candidate states, terminal outcome labels, action registry, alert type, and
+content-free payload allow/deny metadata. They do not scan report content,
+decrypt plaintext, create credentials, append audit events, verify receipts,
+call the Audit Collector, Key Service, or Alert Service, delete ciphertext,
+mutate attempts, schedule jobs, expose endpoints, or authorize acceptance.
+
 ## External design references
 
 - [RFC 9110, HTTP Semantics — idempotent methods and retry](https://www.rfc-editor.org/rfc/rfc9110.html#section-9.2.2)

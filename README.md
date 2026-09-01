@@ -114,6 +114,9 @@ The repository currently contains:
 - inert submission-audit descriptors that fix only the approved submission
   audit phase order, timing labels, authorization windows, and allowed/
   forbidden payload metadata;
+- inert submission-reconciliation descriptors that fix only approved scan,
+  progress-deadline, cleanup-retry, persistent-alert, state/action, and
+  content-free payload metadata;
 - inert recovery credential descriptors that validate only strict Ticket ID and
   Recovery Secret encoding shapes without retaining credential material;
 - inert Response Note crypto descriptors that validate only approved format,
@@ -143,6 +146,8 @@ The repository currently contains:
 - a non-executing exact-AST guard for inert Response Note text descriptors;
 - a non-executing exact-AST guard for inert Response Note schema descriptors;
 - a non-executing exact-AST guard for inert submission-audit descriptors;
+- a non-executing exact-AST guard for inert submission-reconciliation
+  descriptors;
 - architecture checks that constrain the reporter-facing settings, route,
   passive assets, read-only view, and restrictive response-header middleware;
 - a non-executing exact-AST guard for the sole inert submission migration;

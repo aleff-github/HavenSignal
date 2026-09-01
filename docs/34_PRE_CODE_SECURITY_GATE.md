@@ -1023,3 +1023,21 @@ inspection, Audit Service calls, key creation, persistence, endpoint, file,
 network, dynamic, and submission-authorization changes fail closed. This closes
 no durable-audit, receipt/checkpoint, submission acceptance, Key Service,
 storage, concurrency, deployment, independent-review, or production gate.
+
+The fifty-first Stage A slice adds inert submission-reconciliation descriptors
+for the owner-approved `docs/20` crash-reconciliation policy. Validation covers
+only the exact scan interval, progress deadline, cleanup retry cap,
+persistent-cleanup-alert threshold, candidate states, terminal outcomes, action
+registry, alert type, and content-free allowed/forbidden payload metadata. It
+does not scan report content, decrypt plaintext, create credentials, append
+audit events, verify receipts, call services, delete ciphertext, mutate
+attempts, schedule jobs, expose endpoints, or authorize submission.
+
+A new non-executing submission-reconciliation descriptor source policy locks
+the exact imports, constants, enums, immutable classes, validators, and false
+capability results. Content scanning, credential creation, audit append,
+receipt verification, service calls, deletion, state mutation, scheduling,
+endpoint, file, network, dynamic, and submission-authorization changes fail
+closed. This closes no reconciler, scheduler, Audit/Key/Alert Service,
+ciphertext cleanup, submission acceptance, storage, concurrency, deployment,
+independent-review, or production gate.
