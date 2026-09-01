@@ -323,3 +323,18 @@ handling, Key Service calls, attachment streaming, protected persistence,
 endpoints, or report-use authorization. Deterministic-CBOR, Key Service,
 sandbox-streaming, persistence, independent-review, deployment, and production
 gates remain open.
+
+## Latest Stage A slice — original-report text descriptors
+
+The current repository adds inert original-report text descriptors for the
+owner-approved `docs/26` canonical text metadata. The descriptor transiently
+validates only Unicode scalar policy, NUL and unpaired-surrogate rejection,
+CRLF/CR-to-LF profile, NFC, strict UTF-8, 5,000-scalar limit, 20,000-byte
+limit, and canonical UTF-8 authoritative-original metadata.
+
+The descriptor and its exact-AST source policy intentionally do not retain
+browser/wire text, return normalized text or canonical bytes, construct
+frames, encrypt, persist, log, create submissions, expose endpoints, or
+authorize acceptance. Submission, request-admission integration, audit, Key
+Service, storage, deployment, independent-review, and production gates remain
+open.

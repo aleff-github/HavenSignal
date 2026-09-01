@@ -60,6 +60,16 @@ exact source AST is locked by
 `architecture_checks/report_schema_descriptors.py`; passing that policy is
 also Stage A source-conformance evidence only.
 
+`security_interfaces/report_text_descriptors.py` separately performs only
+transient validation of the approved original-report text metadata profile:
+Unicode scalar policy, NUL/surrogate rejection, CRLF/CR-to-LF profile, NFC,
+strict UTF-8, 5,000-scalar limit, 20,000-byte limit, and the canonical UTF-8
+authoritative-original rule. It never returns or stores supplied text,
+normalized text, canonical bytes, frames, ciphertext, digests, submission IDs,
+or state. Its exact source AST is locked by
+`architecture_checks/report_text_descriptors.py`; passing that policy is also
+Stage A source-conformance evidence only.
+
 ## Selected primitives
 
 Version 1 uses only reviewed library constructions:

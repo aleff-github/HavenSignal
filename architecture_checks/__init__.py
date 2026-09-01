@@ -166,6 +166,15 @@ from .report_schema_descriptors import (
     scan_report_schema_descriptor_source,
     scan_repository_report_schema_descriptor,
 )
+from .report_text_descriptors import (
+    EXPECTED_REPORT_TEXT_DESCRIPTOR_AST_DIGEST,
+    REPORT_TEXT_DESCRIPTOR_PATH,
+    ReportTextDescriptorSourceViolation,
+    ReportTextDescriptorSourceViolationCode,
+    analyze_report_text_descriptor_source,
+    scan_report_text_descriptor_source,
+    scan_repository_report_text_descriptor,
+)
 from .request_admission_descriptors import (
     EXPECTED_REQUEST_ADMISSION_DESCRIPTOR_AST_DIGEST,
     REQUEST_ADMISSION_DESCRIPTOR_PATH,
@@ -372,6 +381,13 @@ __all__ = [
     "analyze_report_schema_descriptor_source",
     "scan_report_schema_descriptor_source",
     "scan_repository_report_schema_descriptor",
+    "EXPECTED_REPORT_TEXT_DESCRIPTOR_AST_DIGEST",
+    "REPORT_TEXT_DESCRIPTOR_PATH",
+    "ReportTextDescriptorSourceViolation",
+    "ReportTextDescriptorSourceViolationCode",
+    "analyze_report_text_descriptor_source",
+    "scan_report_text_descriptor_source",
+    "scan_repository_report_text_descriptor",
     "EXPECTED_REQUEST_ADMISSION_DESCRIPTOR_AST_DIGEST",
     "REQUEST_ADMISSION_DESCRIPTOR_PATH",
     "RequestAdmissionDescriptorSourceViolation",

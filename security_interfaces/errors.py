@@ -115,6 +115,15 @@ class ReportSchemaDescriptorRejected(ValueError):
         super().__init__(self.public_code)
 
 
+class ReportTextDescriptorRejected(ValueError):
+    """Controlled rejection for an invalid inert report text descriptor."""
+
+    public_code = "report_text_descriptor_rejected"
+
+    def __init__(self) -> None:
+        super().__init__(self.public_code)
+
+
 class SafeViewDescriptorRejected(ValueError):
     """Controlled rejection for an invalid inert safe-view descriptor."""
 

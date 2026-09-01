@@ -775,6 +775,30 @@ Passing this source policy closes no deterministic-CBOR, context binding,
 ciphertext handling, Key Service, sandbox streaming, persistence,
 independent-review, or production gate.
 
+## Stage A original-report text descriptor record
+
+`security_interfaces/report_text_descriptors.py` validates only the transient
+metadata profile for accepted original report text: Unicode scalar policy, NUL
+and unpaired-surrogate rejection, LF line-ending profile, NFC normalization,
+strict UTF-8, 5,000-scalar limit, 20,000-byte limit, and canonical UTF-8
+authoritative-original metadata.
+
+Successful validation returns immutable profile evidence only. It does not
+retain browser/wire report text, return normalized text or canonical bytes,
+construct plaintext frames, encrypt, persist, log, call services, create a
+submission, expose an endpoint, or authorize acceptance.
+
+The non-executing report-text descriptor policy fixes the exact target,
+imports, constants, enum registries, immutable class profiles, validator
+behavior, and false capability results. Added raw-text retention,
+canonical-byte output, frame construction, encryption, persistence, logging,
+network, file, Django integration, endpoint, or submission authorization
+behavior fails closed. The target is parsed but never imported or executed.
+
+Passing this source policy closes no browser/wire discard proof, canonical
+byte freezing, framing, encryption, submission staging, request admission,
+logging proof, independent-review, or production gate.
+
 ## Stage A Response Note text descriptor record
 
 `security_interfaces/response_text_descriptors.py` validates only the approved
