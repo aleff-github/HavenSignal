@@ -284,6 +284,15 @@ from .submission_reconciliation_descriptors import (
     scan_repository_submission_reconciliation_descriptor,
     scan_submission_reconciliation_descriptor_source,
 )
+from .submission_retry_descriptors import (
+    EXPECTED_SUBMISSION_RETRY_DESCRIPTOR_AST_DIGEST,
+    SUBMISSION_RETRY_DESCRIPTOR_PATH,
+    SubmissionRetryDescriptorSourceViolation,
+    SubmissionRetryDescriptorSourceViolationCode,
+    analyze_submission_retry_descriptor_source,
+    scan_repository_submission_retry_descriptor,
+    scan_submission_retry_descriptor_source,
+)
 from .verification_script import (
     EXPECTED_COMMAND_SPECS,
     EXPECTED_VERIFY_SCRIPT_AST_DIGEST,
@@ -518,6 +527,13 @@ __all__ = [
     "analyze_submission_reconciliation_descriptor_source",
     "scan_repository_submission_reconciliation_descriptor",
     "scan_submission_reconciliation_descriptor_source",
+    "EXPECTED_SUBMISSION_RETRY_DESCRIPTOR_AST_DIGEST",
+    "SUBMISSION_RETRY_DESCRIPTOR_PATH",
+    "SubmissionRetryDescriptorSourceViolation",
+    "SubmissionRetryDescriptorSourceViolationCode",
+    "analyze_submission_retry_descriptor_source",
+    "scan_repository_submission_retry_descriptor",
+    "scan_submission_retry_descriptor_source",
     "EXPECTED_COMMAND_SPECS",
     "EXPECTED_VERIFY_SCRIPT_AST_DIGEST",
     "VERIFICATION_SCRIPT_PATH",

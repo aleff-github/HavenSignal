@@ -120,6 +120,9 @@ The repository currently contains:
 - inert submission-reconciliation descriptors that fix only approved scan,
   progress-deadline, cleanup-retry, persistent-alert, state/action, and
   content-free payload metadata;
+- inert submission retry descriptors that fix only approved duplicate/retry
+  source, one-winner/no-second-pipeline outcome, no-redisplay,
+  indeterminate-response, and forbidden-signal metadata;
 - inert submission credential-response descriptors that fix only one-time
   display, lost-response, no-escrow, no-replacement, no-redisplay, and
   no-delivery-claim metadata;
@@ -156,6 +159,7 @@ The repository currently contains:
   descriptors;
 - a non-executing exact-AST guard for inert submission-reconciliation
   descriptors;
+- a non-executing exact-AST guard for inert submission retry descriptors;
 - a non-executing exact-AST guard for inert submission credential-response
   descriptors;
 - architecture checks that constrain the reporter-facing settings, route,

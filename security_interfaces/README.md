@@ -278,6 +278,21 @@ exact-AST policy. Passing proves only reviewed source shape; it is not a crash
 reconciler, scheduler, cleanup executor, service adapter, state transition,
 deletion operation, endpoint behavior, or production evidence.
 
+`submission_retry_descriptors.py` validates only the static duplicate/retry
+outcome profile approved in `docs/20`: allowed retry source labels, required
+one-database-winner and no-second-pipeline outcomes, controlled indeterminate
+response behavior, no credential redisplay, and forbidden signal categories.
+It does not parse requests, verify attempt credentials, claim attempts, inspect
+database state, create reports or Report-DEKs, append audit events, redisplay
+credentials, expose status oracles, call services, expose endpoints, or
+authorize submission.
+
+The submission retry descriptor source is locked by a non-executing exact-AST
+policy. Passing proves only reviewed source shape; it is not duplicate
+detection, retry handling, credential verification, database claiming,
+pipeline suppression, response rendering, endpoint behavior, or production
+evidence.
+
 `submission_credential_response_descriptors.py` validates only the static
 one-time credential-response and lost-response policy approved in `docs/20`.
 It records the one live post-acceptance display opportunity, the controlled

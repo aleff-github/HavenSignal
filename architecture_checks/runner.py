@@ -70,6 +70,7 @@ from .submission_credential_response_descriptors import (
 from .submission_reconciliation_descriptors import (
     scan_repository_submission_reconciliation_descriptor,
 )
+from .submission_retry_descriptors import scan_repository_submission_retry_descriptor
 from .surfaces import (
     analyze_css_source,
     analyze_reporter_python_source,
@@ -350,6 +351,10 @@ ARCHITECTURE_CHECKS = (
     ArchitectureCheck(
         "submission-reconciliation-descriptor",
         scan_repository_submission_reconciliation_descriptor,
+    ),
+    ArchitectureCheck(
+        "submission-retry-descriptor",
+        scan_repository_submission_retry_descriptor,
     ),
     ArchitectureCheck("lifecycle-sources", _lifecycle_sources),
     ArchitectureCheck("orchestration-sources", _orchestration_sources),

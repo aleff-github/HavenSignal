@@ -1083,3 +1083,22 @@ authorization, and report-read authorization changes fail closed. This closes
 no exact encoding, verifier, cookie/form binding, endpoint, persistence,
 concurrency, logging, audit, submission acceptance, deployment,
 independent-review, or production gate.
+
+The fifty-fourth Stage A slice adds inert submission retry descriptors for the
+owner-approved `docs/20` duplicate/retry outcome policy. Validation covers only
+the exact approved retry source labels, required one-database-winner and
+no-second-pipeline outcomes, controlled indeterminate response behavior, no
+credential redisplay, and forbidden signal categories. It does not parse
+requests, verify attempt credentials, claim attempts, inspect database state,
+create reports or Report-DEKs, append audit events, redisplay credentials,
+expose status oracles, call services, expose endpoints, or authorize
+submission.
+
+A new non-executing submission retry descriptor source policy locks the exact
+imports, constants, enums, immutable classes, validators, and false capability
+results. Request parsing, credential verification, attempt claiming, database
+inspection, report/DEK creation, audit append, credential redisplay, status
+oracle, service call, endpoint, file, network, dynamic, and submission
+authorization changes fail closed. This closes no endpoint, credential
+verifier, PostgreSQL concurrency, duplicate suppression executor, audit, Key
+Service, storage, logging, deployment, independent-review, or production gate.

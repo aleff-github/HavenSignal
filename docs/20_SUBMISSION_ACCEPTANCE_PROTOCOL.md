@@ -380,6 +380,15 @@ decrypt plaintext, create credentials, append audit events, verify receipts,
 call the Audit Collector, Key Service, or Alert Service, delete ciphertext,
 mutate attempts, schedule jobs, expose endpoints, or authorize acceptance.
 
+The duplicate/retry outcome profile is represented by inert descriptors and a
+non-executing exact-AST source policy. They fix only the approved retry source
+labels, required one-database-winner and no-second-pipeline outcomes,
+controlled indeterminate response behavior, no credential redisplay, and
+forbidden signal categories. They do not parse requests, verify attempt
+credentials, claim attempts, inspect database state, create reports or
+Report-DEKs, append audit events, redisplay credentials, expose status
+oracles, call services, expose endpoints, or authorize acceptance.
+
 The credential-response/lost-response policy is represented by inert
 descriptors and a non-executing exact-AST source policy. They fix only the one
 live post-acceptance display opportunity, controlled indeterminate retry
