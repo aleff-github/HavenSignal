@@ -215,6 +215,14 @@ Collector client, append events, create or verify receipts, inspect attempt
 state, persist submission metadata, create keys, expose endpoints, or authorize
 acceptance.
 
+The current Stage A submission-attempt credential descriptor records only the
+approved single-use, two-hour pre-claim lifetime, transport, forbidden binding,
+minimum durable-representation, and no-log/no-audit metadata from
+`docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`. It does not generate or verify
+credentials, persist credential material, install cookies, inspect requests,
+claim attempts, call services, expose endpoints, or authorize
+submission/report access.
+
 The current Stage A submission-reconciliation descriptor records only the
 approved crash-reconciliation timing, candidate-state, terminal-outcome,
 action, persistent-cleanup-alert, and allowlisted/forbidden payload metadata

@@ -405,3 +405,21 @@ deduplicate by content, render responses, inspect requests, mutate attempts,
 expose endpoints, or authorize recovery/submission. Credential generation,
 verifier, response endpoint, recovery, submission acceptance, storage, logging,
 independent-review, deployment, and production gates remain open.
+
+## Latest Stage A slice — submission-attempt credential descriptors
+
+The current repository adds inert submission-attempt credential descriptors for
+the owner-approved `docs/20` attempt policy. The descriptor validates only the
+approved single-use semantics, two-hour non-sliding pre-claim lifetime, POST
+body/protected same-site cookie transport labels, URL/query/referrer/header-log
+denials, forbidden report-content, Ticket ID, Recovery Secret, IP address,
+User-Agent, reporter-account, and device-fingerprint bindings, minimum
+verifier/index durable representation, database uniqueness/state-version
+metadata, and no-log/no-audit persistence denials.
+
+The descriptor and its exact-AST source policy intentionally do not generate or
+verify credentials, persist credential material, install cookies, inspect
+requests, claim attempts, call services, expose endpoints, authorize
+submission, or authorize report read. Exact encoding, verifier, cookie/form
+binding, endpoint, persistence, concurrency, logging, audit, submission
+acceptance, independent-review, deployment, and production gates remain open.

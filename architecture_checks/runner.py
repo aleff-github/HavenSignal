@@ -61,6 +61,9 @@ from .submission import scan_submission_sources
 from .submission_audit_descriptors import (
     scan_repository_submission_audit_descriptor,
 )
+from .submission_attempt_credential_descriptors import (
+    scan_repository_submission_attempt_credential_descriptor,
+)
 from .submission_credential_response_descriptors import (
     scan_repository_submission_credential_response_descriptor,
 )
@@ -335,6 +338,10 @@ ARCHITECTURE_CHECKS = (
     ArchitectureCheck(
         "submission-audit-descriptor",
         scan_repository_submission_audit_descriptor,
+    ),
+    ArchitectureCheck(
+        "submission-attempt-credential-descriptor",
+        scan_repository_submission_attempt_credential_descriptor,
     ),
     ArchitectureCheck(
         "submission-credential-response-descriptor",

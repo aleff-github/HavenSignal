@@ -202,6 +202,19 @@ submission metadata, expose endpoints, or authorize submission until the audit
 receipt, Key Service, submission, concurrency, deployment, and production gates
 are closed.
 
+Submission-attempt credential code is currently limited to inert structural
+descriptors. It may validate only the approved single-use semantics, two-hour
+non-sliding pre-claim lifetime, POST body/protected same-site cookie transport
+labels, URL/query/referrer/header-log denials, forbidden report/recovery/
+network/account/device bindings, minimum verifier/index representation,
+database uniqueness/state-version metadata, and no-log/no-audit persistence
+denials. It must not generate or verify credentials, persist credential
+material, install cookies, inspect requests, claim attempts, log or audit the
+credential, create reporter accounts, expose endpoints, authorize submission,
+or authorize report read until the exact encoding, verifier, cookie/form
+binding, endpoint, concurrency, logging, storage, and production gates are
+closed.
+
 Submission-reconciliation code is currently limited to inert structural
 descriptors. It may validate only the exact approved scan interval, progress
 deadline, cleanup retry cap, persistent-cleanup-alert threshold, candidate
