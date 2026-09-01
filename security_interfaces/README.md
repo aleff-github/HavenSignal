@@ -173,6 +173,22 @@ cannot change silently. Passing is only source-conformance evidence and closes
 no recovery, cryptographic-review, persistence, external-service, or production
 gate.
 
+`recovery_key_lifecycle_descriptors.py` validates only the static verifier-key
+lifecycle profile approved in `docs/21`: a 32-byte Recovery Verifier key,
+active-for-creation, retired-verify-only, and destroyed-after-no-eligible-
+references states, explicit separation from application, report, response,
+audit, export, TLS, CAPTCHA, CSRF, session, and service-authentication keys,
+forbidden source/settings/database/log/audit/browser/response locations, and
+fail-closed lifecycle requirements. It does not generate, store, select,
+rotate, destroy, or rewrite keys, call a Key Service, authorize Response-DEK
+use, expose endpoints, or authorize recovery.
+
+The recovery key lifecycle descriptor source is locked by a non-executing
+exact-AST policy. Passing proves only reviewed source shape; it is not a key
+inventory, rotation executor, verifier service, Response-DEK authorization
+path, incident procedure, persistence layer, endpoint behavior, or production
+evidence.
+
 `report_crypto_descriptors.py` validates only the static version-1 original
 report crypto profile already fixed in `docs/26`: XChaCha20-Poly1305-IETF
 combined-mode metadata, 32-byte Report-DEK and object-subkey sizes, fixed
@@ -368,6 +384,12 @@ policy. Passing proves only reviewed source shape; it is not random
 generation, verifier construction, HMAC verification, recovery workflow
 authorization, first-read mutation, Key Service behavior, endpoint behavior, or
 production evidence.
+
+The recovery key lifecycle descriptor source is locked by a non-executing
+exact-AST policy. Passing proves only reviewed source shape; it is not key
+generation, secret storage, key selection, rotation execution, destruction,
+verifier-record rewriting, Key Service behavior, Response-DEK authorization,
+endpoint behavior, or production evidence.
 
 `response_crypto_descriptors.py` validates only the static version-1 Response
 Note crypto profile already fixed in `docs/24`: XChaCha20-Poly1305-IETF
