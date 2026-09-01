@@ -111,6 +111,9 @@ The repository currently contains:
 - inert original-report frame descriptors that fix only approved plaintext
   frame layout metadata, public kind codes, endian markers, size fields, and
   zero-padding requirements;
+- inert submission-audit descriptors that fix only the approved submission
+  audit phase order, timing labels, authorization windows, and allowed/
+  forbidden payload metadata;
 - inert recovery credential descriptors that validate only strict Ticket ID and
   Recovery Secret encoding shapes without retaining credential material;
 - inert Response Note crypto descriptors that validate only approved format,
@@ -139,6 +142,7 @@ The repository currently contains:
 - a non-executing exact-AST guard for inert Response Note crypto descriptors;
 - a non-executing exact-AST guard for inert Response Note text descriptors;
 - a non-executing exact-AST guard for inert Response Note schema descriptors;
+- a non-executing exact-AST guard for inert submission-audit descriptors;
 - architecture checks that constrain the reporter-facing settings, route,
   passive assets, read-only view, and restrictive response-header middleware;
 - a non-executing exact-AST guard for the sole inert submission migration;

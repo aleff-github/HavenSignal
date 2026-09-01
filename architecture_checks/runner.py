@@ -58,6 +58,9 @@ from .response_schema_descriptors import (
 )
 from .response_text_descriptors import scan_repository_response_text_descriptor
 from .submission import scan_submission_sources
+from .submission_audit_descriptors import (
+    scan_repository_submission_audit_descriptor,
+)
 from .surfaces import (
     analyze_css_source,
     analyze_reporter_python_source,
@@ -323,6 +326,10 @@ ARCHITECTURE_CHECKS = (
     ArchitectureCheck("bootstrap-sources", _bootstrap_sources),
     ArchitectureCheck("initializer-sources", _initializer_sources),
     ArchitectureCheck("submission-sources", _submission_sources),
+    ArchitectureCheck(
+        "submission-audit-descriptor",
+        scan_repository_submission_audit_descriptor,
+    ),
     ArchitectureCheck("lifecycle-sources", _lifecycle_sources),
     ArchitectureCheck("orchestration-sources", _orchestration_sources),
     ArchitectureCheck("negative-capabilities", _negative_capabilities),

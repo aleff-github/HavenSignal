@@ -207,6 +207,14 @@ Receipt validation must bind the caller/operator, report, operation, current sta
 
 Read access uses a different service identity and interface. Retention expiry is collector-controlled. No application credential can update, delete, truncate, backdate, or accelerate expiry of historical events.
 
+The current Stage A submission-audit descriptor records only the approved
+submission event-family order, required timing labels, authorization windows,
+durable-receipt flags, and allowlisted/forbidden payload-field metadata from
+`docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`. It does not implement an Audit
+Collector client, append events, create or verify receipts, inspect attempt
+state, persist submission metadata, create keys, expose endpoints, or authorize
+acceptance.
+
 ### Key Service
 
 The Key Service exposes distinct policy operations for new-report protection, authorized report use, response protection/use, and per-object key destruction. Policy evaluation is state-aware and operation-scoped.

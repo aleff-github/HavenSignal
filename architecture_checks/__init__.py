@@ -248,6 +248,15 @@ from .submission import (
     analyze_submission_source,
     scan_submission_sources,
 )
+from .submission_audit_descriptors import (
+    EXPECTED_SUBMISSION_AUDIT_DESCRIPTOR_AST_DIGEST,
+    SUBMISSION_AUDIT_DESCRIPTOR_PATH,
+    SubmissionAuditDescriptorSourceViolation,
+    SubmissionAuditDescriptorSourceViolationCode,
+    analyze_submission_audit_descriptor_source,
+    scan_repository_submission_audit_descriptor,
+    scan_submission_audit_descriptor_source,
+)
 from .verification_script import (
     EXPECTED_COMMAND_SPECS,
     EXPECTED_VERIFY_SCRIPT_AST_DIGEST,
@@ -454,6 +463,13 @@ __all__ = [
     "SubmissionSourceViolationCode",
     "analyze_submission_source",
     "scan_submission_sources",
+    "EXPECTED_SUBMISSION_AUDIT_DESCRIPTOR_AST_DIGEST",
+    "SUBMISSION_AUDIT_DESCRIPTOR_PATH",
+    "SubmissionAuditDescriptorSourceViolation",
+    "SubmissionAuditDescriptorSourceViolationCode",
+    "analyze_submission_audit_descriptor_source",
+    "scan_repository_submission_audit_descriptor",
+    "scan_submission_audit_descriptor_source",
     "EXPECTED_COMMAND_SPECS",
     "EXPECTED_VERIFY_SCRIPT_AST_DIGEST",
     "VERIFICATION_SCRIPT_PATH",

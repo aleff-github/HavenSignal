@@ -214,6 +214,15 @@ of plaintext handling, frame construction/parsing, padding-byte validation,
 attachment inspection, encryption, persistence, endpoint, or authorization
 behavior are reviewed source facts.
 
+The submission-audit descriptor source policy locks the complete executable AST
+of `security_interfaces/submission_audit_descriptors.py`. Exact approved
+submission-audit phase order, event-family mapping, timing labels,
+authorization windows, durable-receipt flags, allowed/forbidden payload fields,
+false capability properties, imports, and absence of audit append, receipt
+creation/verification, attempt-state inspection, Audit Service calls, key
+creation, persistence, endpoint, or submission authorization behavior are
+reviewed source facts.
+
 The response-crypto descriptor source policy locks the complete executable AST
 of `security_interfaces/response_crypto_descriptors.py`. Exact response
 algorithm/profile identifiers, key/nonce/tag/frame/envelope sizes, immutable

@@ -350,6 +350,15 @@ database capability, or other executable change an explicit review event.
 Passing remains static source evidence and adds no protected executor or
 runtime authority.
 
+The submission-audit phase profile is represented by inert descriptors and a
+non-executing exact-AST source policy. They fix only the approved
+`SUBMISSION_ACCEPTANCE_REQUESTED`, `SUBMISSION_RECEIVED`, and
+`SUBMISSION_ACCEPTANCE_FAILED` order, timing labels, authorization windows,
+durable-receipt flags, and content-free allowed/forbidden payload-field
+metadata. They do not append audit events, create or verify durable receipts,
+inspect attempt state, call the Audit Collector, create report keys, persist
+submission metadata, expose endpoints, or authorize acceptance.
+
 ## External design references
 
 - [RFC 9110, HTTP Semantics — idempotent methods and retry](https://www.rfc-editor.org/rfc/rfc9110.html#section-9.2.2)
