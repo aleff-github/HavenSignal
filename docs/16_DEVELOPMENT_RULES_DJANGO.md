@@ -202,6 +202,16 @@ submission metadata, expose endpoints, or authorize submission until the audit
 receipt, Key Service, submission, concurrency, deployment, and production gates
 are closed.
 
+Submission acceptance checkpoint code is currently limited to inert structural
+descriptors. It may validate only the exact approved Phase 0-6 order,
+checkpoint names, requirement labels, and forbidden runtime capability
+metadata. It must not parse requests, validate credentials, claim attempts,
+append audit events, verify receipts, call the Key Service, encrypt content,
+write storage, commit database state, render responses, run reconciliation,
+expose endpoints, or authorize submission until endpoint, credential,
+PostgreSQL concurrency, audit, Key Service, storage, logging, reconciliation,
+deployment, and production gates are closed.
+
 Submission-attempt credential code is currently limited to inert structural
 descriptors. It may validate only the approved single-use semantics, two-hour
 non-sliding pre-claim lifetime, POST body/protected same-site cookie transport

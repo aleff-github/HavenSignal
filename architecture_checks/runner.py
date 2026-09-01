@@ -58,6 +58,9 @@ from .response_schema_descriptors import (
 )
 from .response_text_descriptors import scan_repository_response_text_descriptor
 from .submission import scan_submission_sources
+from .submission_acceptance_checkpoint_descriptors import (
+    scan_repository_submission_acceptance_checkpoint_descriptor,
+)
 from .submission_audit_descriptors import (
     scan_repository_submission_audit_descriptor,
 )
@@ -336,6 +339,10 @@ ARCHITECTURE_CHECKS = (
     ArchitectureCheck("bootstrap-sources", _bootstrap_sources),
     ArchitectureCheck("initializer-sources", _initializer_sources),
     ArchitectureCheck("submission-sources", _submission_sources),
+    ArchitectureCheck(
+        "submission-acceptance-checkpoint-descriptor",
+        scan_repository_submission_acceptance_checkpoint_descriptor,
+    ),
     ArchitectureCheck(
         "submission-audit-descriptor",
         scan_repository_submission_audit_descriptor,

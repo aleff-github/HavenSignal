@@ -57,6 +57,7 @@ class ArchitectureCheckRunnerTests(SimpleTestCase):
                 "bootstrap-sources",
                 "initializer-sources",
                 "submission-sources",
+                "submission-acceptance-checkpoint-descriptor",
                 "submission-audit-descriptor",
                 "submission-attempt-credential-descriptor",
                 "submission-credential-response-descriptor",

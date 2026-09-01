@@ -215,6 +215,14 @@ Collector client, append events, create or verify receipts, inspect attempt
 state, persist submission metadata, create keys, expose endpoints, or authorize
 acceptance.
 
+The current Stage A submission acceptance checkpoint descriptor records only
+the approved Phase 0-6 phase ordering, checkpoint labels, requirement labels,
+and forbidden runtime capability categories from
+`docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`. It does not parse requests,
+validate credentials, claim attempts, append audit events, verify receipts,
+call the Key Service, encrypt, write storage, commit database state, render
+responses, run reconciliation, expose endpoints, or authorize submission.
+
 The current Stage A submission-attempt credential descriptor records only the
 approved single-use, two-hour pre-claim lifetime, transport, forbidden binding,
 minimum durable-representation, and no-log/no-audit metadata from
