@@ -501,3 +501,21 @@ credentials, expose endpoints, or authorize recovery. Recovery endpoint,
 verifier service, constant-time comparison implementation, response
 eligibility, first-read concurrency, Key Service, logging, independent-review,
 deployment, and production gates remain open.
+
+## Latest Stage A slice — recovery key lifecycle descriptors
+
+The current repository adds inert Recovery Verifier key-lifecycle descriptors
+for the owner-approved `docs/21` lifecycle and rotation boundaries. The
+descriptor validates only the approved 32-byte verifier-key size,
+active/retired/destroyed states, separated key purposes, forbidden
+source/settings/database/log/audit/browser/response locations, and lifecycle
+requirements for service-selected key IDs, one active creation version, no
+silent fallback, restore proof before destruction, fail-closed loss, and no
+Response-DEK authority.
+
+The descriptor and its exact-AST source policy intentionally do not generate
+keys, store raw key material, select keys for requests, rotate or destroy keys,
+rewrite verifier records, call the Key Service, expose endpoints, authorize
+Response-DEK use, or authorize recovery. Verifier service, key inventory,
+rotation/incident procedure, restore proof, Response-DEK lifecycle, Key
+Service, independent-review, deployment, and production gates remain open.

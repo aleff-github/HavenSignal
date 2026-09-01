@@ -299,6 +299,15 @@ comparison, response-state reads, Key Service calls, first-read mutation,
 credential logging, endpoint, or recovery authorization behavior are reviewed
 source facts.
 
+The recovery key lifecycle descriptor source policy locks the complete
+executable AST of `security_interfaces/recovery_key_lifecycle_descriptors.py`.
+Exact verifier-key size, state, separation, forbidden-location, and lifecycle
+requirement metadata, false capability properties, imports, and absence of key
+generation, key storage, request-time key selection, rotation execution,
+destruction, verifier-record rewriting, Key Service calls, Response-DEK
+authorization, endpoint, or recovery authorization behavior are reviewed source
+facts.
+
 The response-crypto descriptor source policy locks the complete executable AST
 of `security_interfaces/response_crypto_descriptors.py`. Exact response
 algorithm/profile identifiers, key/nonce/tag/frame/envelope sizes, immutable

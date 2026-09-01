@@ -139,6 +139,9 @@ The repository currently contains:
 - inert recovery failure descriptors that fix only approved recovery
   failure-boundary, generic-result, fail-closed, and forbidden-capability
   metadata;
+- inert recovery key-lifecycle descriptors that fix only approved verifier-key
+  size, state, separation, forbidden-location, rotation, destruction, and
+  fail-closed metadata;
 - inert Response Note crypto descriptors that validate only approved format,
   size, algorithm, AAD, envelope, and key-operation profile shapes;
 - inert Response Note text descriptors that validate only approved plain-text,
@@ -163,6 +166,7 @@ The repository currently contains:
 - a non-executing exact-AST guard for report-bound step-up-v1 descriptors;
 - a non-executing exact-AST guard for inert recovery credential descriptors;
 - a non-executing exact-AST guard for inert recovery failure descriptors;
+- a non-executing exact-AST guard for inert recovery key-lifecycle descriptors;
 - a non-executing exact-AST guard for inert Response Note crypto descriptors;
 - a non-executing exact-AST guard for inert Response Note text descriptors;
 - a non-executing exact-AST guard for inert Response Note schema descriptors;
