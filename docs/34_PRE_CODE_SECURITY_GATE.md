@@ -912,3 +912,21 @@ file, network, Django-integration, and service-call changes without importing
 or executing the target. This is Stage A source-conformance evidence only and
 closes no decrypt, renderer, restricted-PNG verifier, sandbox, lease, response,
 endpoint, deployment, or production gate.
+
+The forty-fifth Stage A slice adds inert file-sandbox descriptors for the
+owner-approved microVM boundary metadata. Validation covers only static
+Firecracker reference, one-fresh-microVM profile, vCPU/RAM/process/file
+descriptor/time limits, authenticated-vsock profile, read-only measured root,
+guest RAM/tmpfs workspace, one-time job capability, no-production-credential
+profile, and network/shell/swap/snapshot/storage denials. It does not boot
+microVMs, execute parsers, open files, create jobs, exchange vsock messages,
+inspect attachments, persist plaintext, or authorize file processing.
+
+It also adds a non-executing exact-AST source policy for that descriptor. The
+policy rejects microVM boot, parser execution, file access, job creation, vsock
+exchange, attachment inspection, plaintext persistence, file-processing
+authorization, import, dynamic, file, network, Django-integration, and
+service-call changes without importing or executing the target. This is Stage A
+source-conformance evidence only and closes no Firecracker, jailer, kernel/
+rootfs, broker, vsock, parser, renderer, sandbox-execution, deployment, or
+production gate.
