@@ -369,6 +369,17 @@ decrypt plaintext, create credentials, append audit events, verify receipts,
 call the Audit Collector, Key Service, or Alert Service, delete ciphertext,
 mutate attempts, schedule jobs, expose endpoints, or authorize acceptance.
 
+The credential-response/lost-response policy is represented by inert
+descriptors and a non-executing exact-AST source policy. They fix only the one
+live post-acceptance display opportunity, controlled indeterminate retry
+result, permitted Ticket ID and Recovery Secret field names for that live
+response, and forbidden persistence categories for plaintext Recovery Secret,
+redisplay/replacement state, `credentials_delivered` claims, content
+hashing/deduplication, request headers, and raw errors. They do not generate
+credentials, persist or redisplay secrets, issue replacements, record delivery,
+deduplicate by content, render responses, inspect requests, mutate attempts,
+expose endpoints, or authorize recovery/submission.
+
 ## External design references
 
 - [RFC 9110, HTTP Semantics — idempotent methods and retry](https://www.rfc-editor.org/rfc/rfc9110.html#section-9.2.2)

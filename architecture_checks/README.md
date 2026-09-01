@@ -233,6 +233,16 @@ absence of content scanning, credential creation, audit receipt verification,
 service calls, deletion, state mutation, scheduling, endpoint, or submission
 authorization behavior are reviewed source facts.
 
+The submission credential-response descriptor source policy locks the complete
+executable AST of
+`security_interfaces/submission_credential_response_descriptors.py`. Exact
+one-time display opportunity, controlled indeterminate retry result, permitted
+live-response field names, forbidden persistence categories, false capability
+properties, imports, and absence of credential generation, secret persistence,
+redisplay, replacement, delivery claims, content deduplication, response
+rendering, endpoint, recovery authorization, or submission authorization
+behavior are reviewed source facts.
+
 The response-crypto descriptor source policy locks the complete executable AST
 of `security_interfaces/response_crypto_descriptors.py`. Exact response
 algorithm/profile identifiers, key/nonce/tag/frame/envelope sizes, immutable
