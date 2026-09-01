@@ -35,6 +35,7 @@ class ArchitectureCheckRunnerTests(SimpleTestCase):
                 "captcha-descriptor",
                 "file-sandbox-descriptor",
                 "recovery-descriptor",
+                "report-crypto-descriptor",
                 "request-admission-descriptor",
                 "safe-view-descriptor",
                 "response-crypto-descriptor",
