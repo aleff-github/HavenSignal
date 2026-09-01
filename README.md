@@ -108,6 +108,9 @@ The repository currently contains:
 - inert original-report text descriptors that transiently validate only the
   approved UTF-8/NFC/LF, scalar/byte-limit, NUL/surrogate, and no-raw-copy
   profile;
+- inert original-report frame descriptors that fix only approved plaintext
+  frame layout metadata, public kind codes, endian markers, size fields, and
+  zero-padding requirements;
 - inert recovery credential descriptors that validate only strict Ticket ID and
   Recovery Secret encoding shapes without retaining credential material;
 - inert Response Note crypto descriptors that validate only approved format,

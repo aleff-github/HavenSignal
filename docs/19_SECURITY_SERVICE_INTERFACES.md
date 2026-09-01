@@ -799,6 +799,33 @@ Passing this source policy closes no browser/wire discard proof, canonical
 byte freezing, framing, encryption, submission staging, request admission,
 logging proof, independent-review, or production gate.
 
+## Stage A original-report frame descriptor record
+
+`security_interfaces/report_frame_descriptors.py` validates only the ordered
+metadata layout for the approved original-report plaintext frames: version
+byte, uint32/uint64 big-endian length fields, canonical UTF-8 report-text
+payload marker, accepted-original attachment byte marker, public PDF/JPEG/PNG
+kind codes, fixed text and attachment frame sizes, and zero-padding
+requirements.
+
+Successful validation returns immutable profile evidence only. It does not
+accept plaintext bytes, canonicalize text, construct frames, parse frames,
+validate padding bytes, inspect attachments, encrypt, decrypt, persist content,
+call a Key Service, expose an endpoint, or authorize submission.
+
+The non-executing report-frame descriptor policy fixes the exact target,
+imports, constants, enum registries, immutable class profiles, validator
+behavior, and false capability results. Added plaintext handling, frame
+construction, frame parsing, padding-byte validation, attachment inspection,
+encryption, persistence, network, file, Django integration, endpoint, or
+submission authorization behavior fails closed. The target is parsed but never
+imported or executed.
+
+Passing this source policy closes no canonical-byte freezing, frame
+construction/parsing, padding verification, encryption, submission staging,
+request admission, Key Service, storage, independent-review, or production
+gate.
+
 ## Stage A Response Note text descriptor record
 
 `security_interfaces/response_text_descriptors.py` validates only the approved
