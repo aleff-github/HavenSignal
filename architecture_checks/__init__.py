@@ -248,6 +248,15 @@ from .submission import (
     analyze_submission_source,
     scan_submission_sources,
 )
+from .submission_acceptance_checkpoint_descriptors import (
+    EXPECTED_SUBMISSION_ACCEPTANCE_CHECKPOINT_DESCRIPTOR_AST_DIGEST,
+    SUBMISSION_ACCEPTANCE_CHECKPOINT_DESCRIPTOR_PATH,
+    SubmissionAcceptanceCheckpointDescriptorSourceViolation,
+    SubmissionAcceptanceCheckpointDescriptorSourceViolationCode,
+    analyze_submission_acceptance_checkpoint_descriptor_source,
+    scan_repository_submission_acceptance_checkpoint_descriptor,
+    scan_submission_acceptance_checkpoint_descriptor_source,
+)
 from .submission_audit_descriptors import (
     EXPECTED_SUBMISSION_AUDIT_DESCRIPTOR_AST_DIGEST,
     SUBMISSION_AUDIT_DESCRIPTOR_PATH,
@@ -499,6 +508,13 @@ __all__ = [
     "SubmissionSourceViolationCode",
     "analyze_submission_source",
     "scan_submission_sources",
+    "EXPECTED_SUBMISSION_ACCEPTANCE_CHECKPOINT_DESCRIPTOR_AST_DIGEST",
+    "SUBMISSION_ACCEPTANCE_CHECKPOINT_DESCRIPTOR_PATH",
+    "SubmissionAcceptanceCheckpointDescriptorSourceViolation",
+    "SubmissionAcceptanceCheckpointDescriptorSourceViolationCode",
+    "analyze_submission_acceptance_checkpoint_descriptor_source",
+    "scan_repository_submission_acceptance_checkpoint_descriptor",
+    "scan_submission_acceptance_checkpoint_descriptor_source",
     "EXPECTED_SUBMISSION_AUDIT_DESCRIPTOR_AST_DIGEST",
     "SUBMISSION_AUDIT_DESCRIPTOR_PATH",
     "SubmissionAuditDescriptorSourceViolation",

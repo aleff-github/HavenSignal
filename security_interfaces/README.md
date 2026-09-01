@@ -247,6 +247,20 @@ durable receipt creation, receipt verification, attempt-state inspection,
 Audit Service behavior, persistence, Key Service behavior, endpoint behavior,
 or production evidence.
 
+`submission_acceptance_checkpoint_descriptors.py` validates only the static
+Phase 0-6 checkpoint profile approved in `docs/20`. It records the ordered
+submission acceptance phase labels, checkpoint labels, exact prerequisite
+metadata, and forbidden runtime capability categories. It does not parse
+requests, validate credentials, claim attempts, append audit events, verify
+receipts, call the Key Service, encrypt, persist records, render responses,
+run reconciliation, expose endpoints, or authorize submission.
+
+The submission acceptance checkpoint descriptor source is locked by a
+non-executing exact-AST policy. Passing proves only reviewed source shape; it
+is not a request handler, acceptance coordinator, audit/client implementation,
+Key Service adapter, database transaction, response renderer, reconciler,
+endpoint behavior, or production evidence.
+
 `submission_attempt_credential_descriptors.py` validates only the static
 attempt-credential policy approved in `docs/20`: single-use semantics, the
 two-hour non-sliding pre-claim lifetime, POST body and protected same-site

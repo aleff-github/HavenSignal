@@ -359,6 +359,14 @@ metadata. They do not append audit events, create or verify durable receipts,
 inspect attempt state, call the Audit Collector, create report keys, persist
 submission metadata, expose endpoints, or authorize acceptance.
 
+The Phase 0-6 submission acceptance checkpoint profile is represented by inert
+descriptors and a non-executing exact-AST source policy. They fix only the
+approved phase order, checkpoint labels, requirement labels, and forbidden
+runtime capability categories. They do not parse requests, validate
+credentials, claim attempts, append audit events, verify receipts, call the Key
+Service, encrypt content, write storage, commit database state, render
+responses, run reconciliation, expose endpoints, or authorize acceptance.
+
 The submission-attempt credential policy is represented by inert descriptors
 and a non-executing exact-AST source policy. They fix only the approved
 single-use semantics, two-hour non-sliding pre-claim lifetime, POST body and

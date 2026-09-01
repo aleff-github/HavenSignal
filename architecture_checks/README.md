@@ -223,6 +223,16 @@ creation/verification, attempt-state inspection, Audit Service calls, key
 creation, persistence, endpoint, or submission authorization behavior are
 reviewed source facts.
 
+The submission acceptance checkpoint descriptor source policy locks the
+complete executable AST of
+`security_interfaces/submission_acceptance_checkpoint_descriptors.py`. Exact
+approved Phase 0-6 phase ordering, checkpoint names, requirement labels,
+forbidden capability categories, false capability properties, imports, and
+absence of request parsing, credential validation, attempt claiming, audit
+append, receipt verification, Key Service calls, encryption, storage writes,
+database commits, response rendering, reconciliation, endpoint, or submission
+authorization behavior are reviewed source facts.
+
 The submission-attempt credential descriptor source policy locks the complete
 executable AST of
 `security_interfaces/submission_attempt_credential_descriptors.py`. Exact

@@ -439,3 +439,18 @@ expose status oracles, call services, expose endpoints, or authorize
 submission. Endpoint, credential verifier, PostgreSQL concurrency, duplicate
 suppression executor, audit, Key Service, storage, logging, independent-review,
 deployment, and production gates remain open.
+
+## Latest Stage A slice — submission acceptance checkpoint descriptors
+
+The current repository adds inert submission acceptance checkpoint descriptors
+for the owner-approved `docs/20` Phase 0-6 submission acceptance sequence. The
+descriptor validates only the approved phase order, checkpoint labels,
+requirement labels, and forbidden runtime capability categories.
+
+The descriptor and its exact-AST source policy intentionally do not parse
+requests, validate credentials, claim attempts, append audit events, verify
+receipts, call the Key Service, encrypt content, write storage, commit
+database state, render responses, run reconciliation, expose endpoints, or
+authorize submission. Endpoint, credential verifier, PostgreSQL concurrency,
+audit, Key Service, storage, logging, reconciliation, independent-review,
+deployment, and production gates remain open.
