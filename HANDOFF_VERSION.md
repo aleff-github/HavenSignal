@@ -639,3 +639,21 @@ credential return, endpoint, file, network, dynamic, and submission
 authorization changes fail closed. This closes no endpoint, pipeline executor,
 audit, Key Service, storage, cleanup, reconciliation, logging, deployment,
 independent-review, or production gate.
+
+The fifty-seventh Stage A slice adds inert submission idempotency descriptors
+for the owner-approved `docs/20` concurrency/idempotency test requirements.
+Validation covers only the exact retry/concurrency scenario labels, invariant
+labels, and forbidden runtime capability categories. It does not run parallel
+requests, handle requests, inspect attempt state, lock database rows, write
+storage, create Report-DEKs, append audit events, reconcile artifacts, log
+reporter input, expose endpoints, or authorize submission.
+
+A new non-executing submission idempotency descriptor source policy locks the
+exact imports, constants, enums, immutable classes, validators, and false
+capability results. Parallel request execution, request handling,
+attempt-state inspection, database locking, storage writes, Report-DEK
+creation, audit append, artifact reconciliation, reporter-input logging,
+endpoint, file, network, dynamic, and submission-authorization changes fail
+closed. This closes no endpoint, PostgreSQL concurrency runner, database
+locking implementation, audit, Key Service, storage, reconciliation, logging,
+deployment, independent-review, or production gate.

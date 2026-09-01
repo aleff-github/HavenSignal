@@ -142,6 +142,15 @@ class SubmissionFailureDescriptorRejected(ValueError):
         super().__init__(self.public_code)
 
 
+class SubmissionIdempotencyDescriptorRejected(ValueError):
+    """Controlled rejection for invalid inert submission-idempotency metadata."""
+
+    public_code = "submission_idempotency_descriptor_rejected"
+
+    def __init__(self) -> None:
+        super().__init__(self.public_code)
+
+
 class RecoveryDescriptorRejected(ValueError):
     """Controlled rejection for an invalid inert recovery descriptor."""
 

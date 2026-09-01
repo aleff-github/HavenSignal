@@ -128,6 +128,9 @@ The repository currently contains:
   indeterminate-response, and forbidden-signal metadata;
 - inert submission failure descriptors that fix only approved failure-boundary,
   required-result, content-free, and fail-closed metadata;
+- inert submission idempotency descriptors that fix only approved
+  retry/concurrency scenarios, invariants, and forbidden runtime capability
+  metadata;
 - inert submission credential-response descriptors that fix only one-time
   display, lost-response, no-escrow, no-replacement, no-redisplay, and
   no-delivery-claim metadata;
@@ -168,6 +171,7 @@ The repository currently contains:
   descriptors;
 - a non-executing exact-AST guard for inert submission retry descriptors;
 - a non-executing exact-AST guard for inert submission failure descriptors;
+- a non-executing exact-AST guard for inert submission idempotency descriptors;
 - a non-executing exact-AST guard for inert submission credential-response
   descriptors;
 - architecture checks that constrain the reporter-facing settings, route,

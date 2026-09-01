@@ -281,6 +281,15 @@ pipeline start, service calls, storage writes, key creation, plaintext
 persistence, audit append, state mutation, credential return, endpoint, or
 submission authorization behavior are reviewed source facts.
 
+The submission idempotency descriptor source policy locks the complete
+executable AST of `security_interfaces/submission_idempotency_descriptors.py`.
+Exact approved retry/concurrency scenarios, idempotency invariants, forbidden
+runtime capability categories, false capability properties, imports, and
+absence of parallel request execution, request handling, attempt-state
+inspection, database locking, storage writes, Report-DEK creation, audit
+append, artifact reconciliation, reporter-input logging, endpoint, or
+submission authorization behavior are reviewed source facts.
+
 The response-crypto descriptor source policy locks the complete executable AST
 of `security_interfaces/response_crypto_descriptors.py`. Exact response
 algorithm/profile identifiers, key/nonce/tag/frame/envelope sizes, immutable

@@ -254,6 +254,14 @@ not handle requests, start submission pipelines, call services, write storage,
 create keys, persist plaintext, append audit events, mutate state, return
 credentials, expose endpoints, or authorize submission.
 
+The current Stage A submission idempotency descriptor records only the
+approved concurrency/idempotency scenario labels, invariant labels, and
+forbidden runtime capability categories from
+`docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`. It does not run parallel
+requests, handle requests, inspect attempt state, lock database rows, write
+storage, create Report-DEKs, append audit events, reconcile artifacts, log
+reporter input, expose endpoints, or authorize submission.
+
 The current Stage A credential-response descriptor records only the approved
 one-time live response and lost-response policy from
 `docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`. It does not generate credentials,

@@ -404,6 +404,14 @@ handle requests, start submission pipelines, call services, write storage,
 create keys, persist plaintext, append audit events, mutate state, return
 credentials, expose endpoints, or authorize acceptance.
 
+The concurrency/idempotency invariant profile is represented by inert
+descriptors and a non-executing exact-AST source policy. They fix only the
+approved retry/concurrency scenario labels, invariant labels, and forbidden
+runtime capability categories. They do not run parallel requests, handle
+requests, inspect attempt state, lock database rows, write storage, create
+Report-DEKs, append audit events, reconcile artifacts, log reporter input,
+expose endpoints, or authorize acceptance.
+
 The credential-response/lost-response policy is represented by inert
 descriptors and a non-executing exact-AST source policy. They fix only the one
 live post-acceptance display opportunity, controlled indeterminate retry
