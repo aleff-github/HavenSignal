@@ -197,6 +197,14 @@ frame/ciphertext sizes, false capability properties, imports, and absence of
 CBOR, stored context values, ciphertext, service calls, attachment streaming,
 persistence, endpoint, or authorization behavior are reviewed source facts.
 
+The report-text descriptor source policy locks the complete executable AST of
+`security_interfaces/report_text_descriptors.py`. Exact original-report
+UTF-8/NFC/LF profile constants, scalar and byte limits, NUL/surrogate
+rejection, canonical-original metadata, content-free return shape, imports,
+and absence of retained wire text, canonical bytes, frames, encryption,
+persistence, logging, endpoint, or submission authorization are reviewed source
+facts.
+
 The response-crypto descriptor source policy locks the complete executable AST
 of `security_interfaces/response_crypto_descriptors.py`. Exact response
 algorithm/profile identifiers, key/nonce/tag/frame/envelope sizes, immutable

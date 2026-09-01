@@ -296,6 +296,11 @@ Test:
 - OPEN and Emergency Export recover the exact same accepted canonical text
   bytes, while no raw pre-normalization representation is persisted, encrypted,
   queued, logged, audited, or backed up;
+- Stage A text descriptor/source-conformance tests prove only the transient
+  UTF-8/NFC/LF, scalar/byte-limit, NUL/surrogate rejection, and canonical
+  original metadata shape, and reject raw-text retention, canonical-byte
+  output, frame construction, encryption, persistence, logging, endpoint, and
+  submission-authorization additions;
 - attachment framing at 0 and 5,242,880-byte boundaries, fixed ciphertext size,
   kind binding, zero padding, and oversized rejection;
 - Reporter Gateway cannot decrypt existing content, Operator Console cannot

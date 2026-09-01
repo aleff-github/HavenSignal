@@ -44,6 +44,7 @@ from .repository_hygiene import scan_repository_hygiene
 from .recovery_descriptors import scan_repository_recovery_descriptor
 from .report_crypto_descriptors import scan_repository_report_crypto_descriptor
 from .report_schema_descriptors import scan_repository_report_schema_descriptor
+from .report_text_descriptors import scan_repository_report_text_descriptor
 from .request_admission_descriptors import (
     scan_repository_request_admission_descriptor,
 )
@@ -282,6 +283,10 @@ ARCHITECTURE_CHECKS = (
     ArchitectureCheck(
         "report-schema-descriptor",
         scan_repository_report_schema_descriptor,
+    ),
+    ArchitectureCheck(
+        "report-text-descriptor",
+        scan_repository_report_text_descriptor,
     ),
     ArchitectureCheck(
         "request-admission-descriptor",

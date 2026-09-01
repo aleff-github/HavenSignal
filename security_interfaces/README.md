@@ -204,6 +204,20 @@ CBOR, context binding, ciphertext handling, Key Service behavior, sandbox
 streaming, persistence, endpoint behavior, authorization, or production
 evidence.
 
+`report_text_descriptors.py` performs only transient validation for the
+approved original-report text profile: Unicode scalar values, NUL rejection,
+unpaired-surrogate rejection, CRLF/CR-to-LF profile, NFC normalization rule,
+strict UTF-8 limits, 5,000-scalar limit, 20,000-byte limit, and the
+owner-approved rule that only the canonical UTF-8 representation is the
+authoritative original. Successful validation returns only the fixed profile
+descriptor and never returns or stores the supplied text, normalized text,
+canonical bytes, digest, frame, ciphertext, submission ID, or state.
+
+The report text descriptor source is locked by a non-executing exact-AST
+policy. Passing proves only reviewed source shape; it is not browser/wire
+discard enforcement, canonical byte freezing, frame construction, encryption,
+submission staging, endpoint behavior, logging proof, or production evidence.
+
 `response_crypto_descriptors.py` validates only the static version-1 Response
 Note crypto profile already fixed in `docs/24`: XChaCha20-Poly1305-IETF
 combined-mode metadata, fixed plaintext-frame and ciphertext/tag sizes,

@@ -470,3 +470,21 @@ Django integration, and service-call changes fail closed. This closes no
 deterministic-CBOR, context-binding, ciphertext-handling, Key Service,
 sandbox-streaming, persistence, deployment, independent-review, or production
 gate.
+
+The forty-eighth Stage A slice adds inert original-report text descriptors for
+the owner-approved `docs/26` canonical text metadata. Validation covers only
+transient Unicode scalar policy, NUL and unpaired-surrogate rejection,
+CRLF/CR-to-LF profile, NFC, strict UTF-8, 5,000-scalar limit, 20,000-byte
+limit, and canonical UTF-8 authoritative-original metadata. It does not retain
+browser/wire text, return normalized text or canonical bytes, construct
+plaintext frames, encrypt, persist, log, create submissions, expose endpoints,
+or authorize acceptance.
+
+A new non-executing report-text descriptor source policy locks the exact
+imports, constants, enums, immutable classes, validators, and false capability
+results. Raw-text retention, canonical-byte output, frame construction,
+encryption, persistence, logging, submission authorization, file, network,
+Django integration, and service-call changes fail closed. This closes no
+browser/wire discard proof, canonical byte freezing, framing, encryption,
+submission staging, request admission, deployment, independent-review, or
+production gate.
