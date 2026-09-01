@@ -372,3 +372,19 @@ Service, create report keys, persist submission metadata, expose endpoints, or
 authorize acceptance. Durable-audit, receipt/checkpoint, submission acceptance,
 Key Service, storage, concurrency, independent-review, deployment, and
 production gates remain open.
+
+## Latest Stage A slice — submission-reconciliation descriptors
+
+The current repository adds inert submission-reconciliation descriptors for the
+owner-approved `docs/20` crash-reconciliation policy. The descriptor validates
+only the approved maximum scan interval, progress deadline, cleanup retry cap,
+persistent-cleanup-alert threshold, nonterminal candidate states, terminal
+outcome labels, action registry, alert type, and closed allowed/forbidden
+payload-field metadata.
+
+The descriptor and its exact-AST source policy intentionally do not scan report
+content, decrypt plaintext, create credentials, append audit events, verify
+receipts, call the Audit/Key/Alert services, delete ciphertext, mutate attempt
+state, schedule jobs, expose endpoints, or authorize acceptance. Reconciler,
+scheduler, durable-audit, Key Service, Alert Service, cleanup, storage,
+concurrency, independent-review, deployment, and production gates remain open.

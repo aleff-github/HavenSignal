@@ -88,6 +88,15 @@ class SubmissionAuditDescriptorRejected(ValueError):
         super().__init__(self.public_code)
 
 
+class SubmissionReconciliationDescriptorRejected(ValueError):
+    """Controlled rejection for an invalid inert reconciliation descriptor."""
+
+    public_code = "submission_reconciliation_descriptor_rejected"
+
+    def __init__(self) -> None:
+        super().__init__(self.public_code)
+
+
 class RecoveryDescriptorRejected(ValueError):
     """Controlled rejection for an invalid inert recovery descriptor."""
 

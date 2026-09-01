@@ -247,6 +247,20 @@ durable receipt creation, receipt verification, attempt-state inspection,
 Audit Service behavior, persistence, Key Service behavior, endpoint behavior,
 or production evidence.
 
+`submission_reconciliation_descriptors.py` validates only the static
+reconciliation profile approved in `docs/20`: maximum scan interval, progress
+deadline, cleanup retry cap, persistent-cleanup-alert threshold, candidate
+attempt states, terminal outcomes, action names, alert type, and content-free
+allowed/forbidden payload metadata. It does not scan report content, decrypt
+plaintext, create credentials, append audit events, verify receipts, call the
+Audit/Key/Alert services, delete ciphertext, mutate attempts, schedule jobs, or
+authorize submission.
+
+The submission-reconciliation descriptor source is locked by a non-executing
+exact-AST policy. Passing proves only reviewed source shape; it is not a crash
+reconciler, scheduler, cleanup executor, service adapter, state transition,
+deletion operation, endpoint behavior, or production evidence.
+
 `response_crypto_descriptors.py` validates only the static version-1 Response
 Note crypto profile already fixed in `docs/24`: XChaCha20-Poly1305-IETF
 combined-mode metadata, fixed plaintext-frame and ciphertext/tag sizes,

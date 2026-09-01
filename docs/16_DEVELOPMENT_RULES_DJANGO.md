@@ -202,6 +202,16 @@ submission metadata, expose endpoints, or authorize submission until the audit
 receipt, Key Service, submission, concurrency, deployment, and production gates
 are closed.
 
+Submission-reconciliation code is currently limited to inert structural
+descriptors. It may validate only the exact approved scan interval, progress
+deadline, cleanup retry cap, persistent-cleanup-alert threshold, candidate
+states, terminal outcomes, action names, alert type, and allowed/forbidden
+payload metadata. It must not scan report content, decrypt plaintext, create
+credentials, append audit events, verify receipts, call the Audit/Key/Alert
+services, delete ciphertext, mutate attempt state, schedule jobs, expose
+endpoints, or authorize submission until submission, audit, Key Service,
+storage, concurrency, scheduler, deployment, and production gates are closed.
+
 Recovery credential code is currently limited to inert structural descriptors.
 It may validate the exact owner-approved Ticket ID and Recovery Secret encoding
 shapes, but it must not generate credentials, compute or compare verifier tags,
