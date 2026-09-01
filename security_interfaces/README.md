@@ -247,6 +247,23 @@ durable receipt creation, receipt verification, attempt-state inspection,
 Audit Service behavior, persistence, Key Service behavior, endpoint behavior,
 or production evidence.
 
+`submission_attempt_credential_descriptors.py` validates only the static
+attempt-credential policy approved in `docs/20`: single-use semantics, the
+two-hour non-sliding pre-claim lifetime, POST body and protected same-site
+cookie transport labels, URL/query/referrer/header-log denials, independence
+from report content, Ticket ID, Recovery Secret, IP address, User-Agent,
+reporter accounts, and device fingerprints, plus minimum verifier/index,
+database uniqueness, and row/state-version metadata. It does not generate or
+verify credentials, persist credential material, install cookies, inspect
+requests, claim attempts, call services, expose endpoints, or authorize
+submission/report access.
+
+The attempt-credential descriptor source is locked by a non-executing
+exact-AST policy. Passing proves only reviewed source shape; it is not
+credential generation, verifier construction, cookie binding, request handling,
+database uniqueness enforcement, endpoint behavior, submission authorization,
+or production evidence.
+
 `submission_reconciliation_descriptors.py` validates only the static
 reconciliation profile approved in `docs/20`: maximum scan interval, progress
 deadline, cleanup retry cap, persistent-cleanup-alert threshold, candidate

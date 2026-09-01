@@ -1062,3 +1062,24 @@ authorization, and submission-authorization changes fail closed. This closes no
 credential generation, verifier, response endpoint, recovery, submission
 acceptance, storage, logging, deployment, independent-review, or production
 gate.
+
+The fifty-third Stage A slice adds inert submission-attempt credential
+descriptors for the owner-approved `docs/20` attempt policy. Validation covers
+only the approved single-use semantics, two-hour non-sliding pre-claim
+lifetime, POST body/protected same-site cookie transport labels, URL/query/
+referrer/header-log denials, forbidden report/recovery/network/account/device
+bindings, minimum verifier/index durable representation, database uniqueness/
+state-version metadata, and no-log/no-audit persistence denials. It does not
+generate or verify credentials, persist credential material, install cookies,
+inspect requests, claim attempts, call services, expose endpoints, authorize
+submission, or authorize report read.
+
+A new non-executing attempt-credential descriptor source policy locks the exact
+imports, constants, enums, immutable classes, validators, and false capability
+results. Credential generation/verification, plaintext persistence, cookie
+installation, request inspection, attempt claiming, logging, audit payloads,
+reporter account creation, endpoint, file, network, dynamic, submission
+authorization, and report-read authorization changes fail closed. This closes
+no exact encoding, verifier, cookie/form binding, endpoint, persistence,
+concurrency, logging, audit, submission acceptance, deployment,
+independent-review, or production gate.

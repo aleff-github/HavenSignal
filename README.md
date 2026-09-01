@@ -114,6 +114,9 @@ The repository currently contains:
 - inert submission-audit descriptors that fix only the approved submission
   audit phase order, timing labels, authorization windows, and allowed/
   forbidden payload metadata;
+- inert submission-attempt credential descriptors that fix only approved
+  single-use, two-hour pre-claim, transport, non-binding, durable-representation,
+  and no-log/no-audit metadata;
 - inert submission-reconciliation descriptors that fix only approved scan,
   progress-deadline, cleanup-retry, persistent-alert, state/action, and
   content-free payload metadata;
@@ -149,6 +152,8 @@ The repository currently contains:
 - a non-executing exact-AST guard for inert Response Note text descriptors;
 - a non-executing exact-AST guard for inert Response Note schema descriptors;
 - a non-executing exact-AST guard for inert submission-audit descriptors;
+- a non-executing exact-AST guard for inert submission-attempt credential
+  descriptors;
 - a non-executing exact-AST guard for inert submission-reconciliation
   descriptors;
 - a non-executing exact-AST guard for inert submission credential-response

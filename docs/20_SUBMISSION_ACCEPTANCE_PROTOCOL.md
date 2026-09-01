@@ -359,6 +359,17 @@ metadata. They do not append audit events, create or verify durable receipts,
 inspect attempt state, call the Audit Collector, create report keys, persist
 submission metadata, expose endpoints, or authorize acceptance.
 
+The submission-attempt credential policy is represented by inert descriptors
+and a non-executing exact-AST source policy. They fix only the approved
+single-use semantics, two-hour non-sliding pre-claim lifetime, POST body and
+protected same-site cookie transport labels, URL/query/referrer/header-log
+denials, independence from report content, Ticket ID, Recovery Secret, IP
+address, User-Agent, reporter accounts, and device fingerprints, plus minimum
+verifier/index, database uniqueness, row/state-version, and no-log/no-audit
+metadata. They do not generate or verify credentials, persist credential
+material, install cookies, inspect requests, claim attempts, call services,
+expose endpoints, authorize submission, or authorize report read.
+
 The reconciliation profile is represented by inert descriptors and a
 non-executing exact-AST source policy. They fix only the approved scan-at-least
 once-per-minute maximum interval, 15-minute progress deadline, five-minute
