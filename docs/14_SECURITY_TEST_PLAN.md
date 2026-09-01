@@ -55,6 +55,17 @@ For the metadata-only Stage A described by
   verification, service calls, ciphertext deletion, state mutation, scheduling,
   endpoint behavior, and submission authorization without importing or
   executing the target;
+- submission credential-response descriptors accept only the one live
+  post-acceptance display opportunity, controlled indeterminate retry result,
+  permitted Ticket ID/Recovery Secret response-field names, and forbidden
+  persistence categories for plaintext secrets, redisplay/replacement state,
+  `credentials_delivered` claims, content hashing, request headers, and raw
+  errors;
+- credential-response validation and source policy reject credential
+  generation, secret persistence, Recovery Secret redisplay, replacement
+  issuance, delivery claims, content deduplication, response rendering,
+  endpoint behavior, recovery authorization, and submission authorization
+  without importing or executing the target;
 - alert-v1 descriptors enforce the exact ten alert/severity pairs, delivery
   states, actor pairing, identifier lengths, timestamp range, and
   acknowledgement pairing while rejecting unknown/arbitrary values;
@@ -303,6 +314,11 @@ For `20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`, also verify:
   and reject content scanning, credentials, receipt verification, service
   calls, deletion, state mutation, scheduling, endpoint, or authorization
   capability;
+- Stage A credential-response descriptor/source-conformance tests prove only
+  the approved one-time display and lost-response metadata, and reject secret
+  persistence, redisplay, replacement credentials, `credentials_delivered`
+  claims, content deduplication, endpoint, response rendering, recovery
+  authorization, or submission authorization capability;
 - lost responses never cause credential re-display, replacement credentials,
   or a duplicate report for the same attempt;
 - no event or state claims that the reporter received or saved credentials;

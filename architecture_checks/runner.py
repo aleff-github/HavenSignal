@@ -61,6 +61,9 @@ from .submission import scan_submission_sources
 from .submission_audit_descriptors import (
     scan_repository_submission_audit_descriptor,
 )
+from .submission_credential_response_descriptors import (
+    scan_repository_submission_credential_response_descriptor,
+)
 from .submission_reconciliation_descriptors import (
     scan_repository_submission_reconciliation_descriptor,
 )
@@ -332,6 +335,10 @@ ARCHITECTURE_CHECKS = (
     ArchitectureCheck(
         "submission-audit-descriptor",
         scan_repository_submission_audit_descriptor,
+    ),
+    ArchitectureCheck(
+        "submission-credential-response-descriptor",
+        scan_repository_submission_credential_response_descriptor,
     ),
     ArchitectureCheck(
         "submission-reconciliation-descriptor",

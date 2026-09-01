@@ -222,6 +222,13 @@ from `docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`. It does not implement a
 reconciler, scheduler, Audit/Key/Alert Service adapter, ciphertext deletion,
 state transition, endpoint, or submission authorization capability.
 
+The current Stage A credential-response descriptor records only the approved
+one-time live response and lost-response policy from
+`docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`. It does not generate credentials,
+persist or redisplay a Recovery Secret, issue replacements, record
+`credentials_delivered`, deduplicate by content, render a response, inspect
+requests, expose endpoints, or authorize recovery/submission.
+
 ### Key Service
 
 The Key Service exposes distinct policy operations for new-report protection, authorized report use, response protection/use, and per-object key destruction. Policy evaluation is state-aware and operation-scoped.

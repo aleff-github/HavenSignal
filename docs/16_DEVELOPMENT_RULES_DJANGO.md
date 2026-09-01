@@ -212,6 +212,16 @@ services, delete ciphertext, mutate attempt state, schedule jobs, expose
 endpoints, or authorize submission until submission, audit, Key Service,
 storage, concurrency, scheduler, deployment, and production gates are closed.
 
+Submission credential-response code is currently limited to inert structural
+descriptors. It may validate only the approved one live post-acceptance display
+opportunity, controlled indeterminate retry result, permitted Ticket ID and
+Recovery Secret field names for that live response, and forbidden persistence
+categories. It must not generate credentials, persist or redisplay the Recovery
+Secret, issue replacements, record `credentials_delivered`, deduplicate by
+content, render responses, inspect requests, mutate attempts, expose endpoints,
+or authorize recovery/submission until the credential, verifier, endpoint,
+storage, logging, recovery, and production gates are closed.
+
 Recovery credential code is currently limited to inert structural descriptors.
 It may validate the exact owner-approved Ticket ID and Recovery Secret encoding
 shapes, but it must not generate credentials, compute or compare verifier tags,

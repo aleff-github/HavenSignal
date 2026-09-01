@@ -261,6 +261,23 @@ exact-AST policy. Passing proves only reviewed source shape; it is not a crash
 reconciler, scheduler, cleanup executor, service adapter, state transition,
 deletion operation, endpoint behavior, or production evidence.
 
+`submission_credential_response_descriptors.py` validates only the static
+one-time credential-response and lost-response policy approved in `docs/20`.
+It records the one live post-acceptance display opportunity, the controlled
+indeterminate retry result, the public field names that may appear only in that
+live response, and the forbidden persistence categories: plaintext Recovery
+Secret, redisplay state, replacement credential state, `credentials_delivered`
+claims, content hashing/deduplication, request headers, and raw errors. It
+does not generate credentials, persist secrets, render responses, inspect
+requests, mutate attempts, call services, expose endpoints, or authorize
+recovery/submission.
+
+The credential-response descriptor source is locked by a non-executing
+exact-AST policy. Passing proves only reviewed source shape; it is not
+credential generation, verifier construction, response rendering, request
+handling, recovery authorization, submission authorization, or production
+evidence.
+
 `response_crypto_descriptors.py` validates only the static version-1 Response
 Note crypto profile already fixed in `docs/24`: XChaCha20-Poly1305-IETF
 combined-mode metadata, fixed plaintext-frame and ciphertext/tag sizes,

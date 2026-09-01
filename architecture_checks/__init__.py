@@ -257,6 +257,15 @@ from .submission_audit_descriptors import (
     scan_repository_submission_audit_descriptor,
     scan_submission_audit_descriptor_source,
 )
+from .submission_credential_response_descriptors import (
+    EXPECTED_SUBMISSION_CREDENTIAL_RESPONSE_DESCRIPTOR_AST_DIGEST,
+    SUBMISSION_CREDENTIAL_RESPONSE_DESCRIPTOR_PATH,
+    SubmissionCredentialResponseDescriptorSourceViolation,
+    SubmissionCredentialResponseDescriptorSourceViolationCode,
+    analyze_submission_credential_response_descriptor_source,
+    scan_repository_submission_credential_response_descriptor,
+    scan_submission_credential_response_descriptor_source,
+)
 from .submission_reconciliation_descriptors import (
     EXPECTED_SUBMISSION_RECONCILIATION_DESCRIPTOR_AST_DIGEST,
     SUBMISSION_RECONCILIATION_DESCRIPTOR_PATH,
@@ -479,6 +488,13 @@ __all__ = [
     "analyze_submission_audit_descriptor_source",
     "scan_repository_submission_audit_descriptor",
     "scan_submission_audit_descriptor_source",
+    "EXPECTED_SUBMISSION_CREDENTIAL_RESPONSE_DESCRIPTOR_AST_DIGEST",
+    "SUBMISSION_CREDENTIAL_RESPONSE_DESCRIPTOR_PATH",
+    "SubmissionCredentialResponseDescriptorSourceViolation",
+    "SubmissionCredentialResponseDescriptorSourceViolationCode",
+    "analyze_submission_credential_response_descriptor_source",
+    "scan_repository_submission_credential_response_descriptor",
+    "scan_submission_credential_response_descriptor_source",
     "EXPECTED_SUBMISSION_RECONCILIATION_DESCRIPTOR_AST_DIGEST",
     "SUBMISSION_RECONCILIATION_DESCRIPTOR_PATH",
     "SubmissionReconciliationDescriptorSourceViolation",
