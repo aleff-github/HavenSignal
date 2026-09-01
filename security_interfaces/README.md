@@ -101,6 +101,20 @@ exact-AST policy. Passing proves only reviewed source shape and closes no
 JPEG/PNG/PDF parser, renderer, sandbox, encryption, safe-view, endpoint,
 deployment, or production gate.
 
+`safe_view_descriptors.py` models only the owner-approved operator safe-view
+metadata: PNG-only output, 8-bit sRGB profile, 144 DPI PDF rendering metadata,
+4,096-pixel dimensions, 16 MiB per-output and 128 MiB aggregate-output limits,
+50,000,000 rendered-pixel limit, no-store/nosniff image response headers,
+POST initiation, required operator/state/lease/object bindings, and ordinary
+original-download denial. It does not decrypt attachments, render files,
+validate PNG bytes, call a sandbox, persist output, serve responses, inspect
+leases, or authorize operator access.
+
+The safe-view descriptor source is locked by a non-executing exact-AST policy.
+Passing proves only reviewed source shape and closes no decrypt, renderer,
+restricted-PNG verifier, sandbox, lease, response, endpoint, deployment, or
+production gate.
+
 `step_up_descriptors.py` models only the report-bound v1 UUID/counter context,
 the exact 120-second lifetime, ES256/EdDSA algorithm registry, binding purpose
 and key epoch, and an unused-only Stage A state. It deliberately contains no

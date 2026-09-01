@@ -340,6 +340,24 @@ service-call changes without importing or executing the target. Passing is
 source-conformance evidence only and closes no parser, renderer, sandbox,
 encryption, safe-view, endpoint, deployment, or production gate.
 
+The current `security_interfaces/safe_view_descriptors.py` module models only
+content-free safe-view metadata: PNG-only output, 8-bit sRGB profile, 144 DPI
+PDF-rendering metadata, output dimensions and byte limits, no-store/nosniff
+response headers, POST initiation, required operator/state/lease/object
+bindings, non-durable safe-view handling, and ordinary original-download denial.
+
+It does not decrypt attachment bytes, render files, validate PNG bytes, call a
+sandbox, persist safe output, serve responses, inspect leases, or authorize
+operator access.
+
+A non-executing exact-AST policy locks this descriptor source profile and
+rejects decrypt, render, PNG-validation, sandbox-call, persistence,
+response-serving, endpoint, dynamic, logging, file, network,
+Django-integration, service-call, and authorization changes without importing
+or executing the target. Passing is source-conformance evidence only and closes
+no decrypt, renderer, restricted-PNG verifier, sandbox, lease, response,
+endpoint, deployment, or production gate.
+
 ## External design references
 
 - [qpdf 12 JSON representation](https://qpdf.readthedocs.io/en/latest/json.html)
