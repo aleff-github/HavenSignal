@@ -87,6 +87,15 @@ originals, retain original filenames, log request material, expose upload or
 safe-view endpoints, or authorize uploads until parser, sandbox, encryption,
 safe-view, review, and production gates are closed.
 
+Safe-view code is currently limited to inert structural descriptors. It may
+validate only the approved PNG output, 8-bit sRGB, 144 DPI, output/resource
+limit, no-store/nosniff response, binding, non-durability, and
+ordinary-download-denial metadata. It must not decrypt attachments, render
+files, validate PNG bytes, call a sandbox, persist output, serve responses,
+inspect leases, expose endpoints, or authorize operator access until decrypt,
+renderer, restricted-PNG verifier, sandbox, lease, response, review, and
+production gates are closed.
+
 ## Logging
 
 Create explicit structured logging schemas.

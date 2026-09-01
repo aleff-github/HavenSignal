@@ -175,6 +175,15 @@ sandbox-job creation, original-byte persistence, original-filename retention,
 request-material logging, upload endpoint, safe-view, encryption, or upload
 authorization capability.
 
+The safe-view descriptor module is locked to its exact executable AST as
+content-free operator-view metadata only. PNG/sRGB/render-DPI, output limits,
+response headers, required bindings, non-durability, ordinary-download denial,
+validators, and false capability profiles cannot change without explicit
+review. The check never imports or executes the target and proves no attachment
+decryption, rendering, PNG validation, sandbox call, output persistence,
+response serving, endpoint, lease inspection, or operator-access authorization
+capability.
+
 The report-bound step-up-v1 descriptor module is also locked to its complete
 reviewed executable AST, including timing, registries, content-free context,
 unused state, validators, and false WebAuthn/binding/authorization results.

@@ -895,3 +895,20 @@ Django-integration, and service-call changes without importing or executing the
 target. This is Stage A source-conformance evidence only and closes no parser,
 renderer, sandbox, encryption, safe-view, endpoint, deployment, or production
 gate.
+
+The forty-fourth Stage A slice adds inert safe-view descriptors for the
+owner-approved operator attachment-view metadata. Validation covers only static
+PNG output format, 8-bit sRGB profile, 144 DPI PDF-render metadata, output
+resource limits, no-store/nosniff response headers, POST initiation, required
+operator/state/lease/object bindings, non-durability, and ordinary original
+download denial. It does not decrypt attachments, render files, validate PNG
+bytes, call a sandbox, persist safe output, serve responses, inspect leases, or
+authorize operator access.
+
+It also adds a non-executing exact-AST source policy for that descriptor. The
+policy rejects decryption, rendering, PNG validation, sandbox calls, output
+persistence, response serving, operator-access authorization, import, dynamic,
+file, network, Django-integration, and service-call changes without importing
+or executing the target. This is Stage A source-conformance evidence only and
+closes no decrypt, renderer, restricted-PNG verifier, sandbox, lease, response,
+endpoint, deployment, or production gate.

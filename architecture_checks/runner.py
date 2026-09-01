@@ -44,6 +44,7 @@ from .recovery_descriptors import scan_repository_recovery_descriptor
 from .request_admission_descriptors import (
     scan_repository_request_admission_descriptor,
 )
+from .safe_view_descriptors import scan_repository_safe_view_descriptor
 from .response_crypto_descriptors import (
     scan_repository_response_crypto_descriptor,
 )
@@ -271,6 +272,7 @@ ARCHITECTURE_CHECKS = (
         "request-admission-descriptor",
         scan_repository_request_admission_descriptor,
     ),
+    ArchitectureCheck("safe-view-descriptor", scan_repository_safe_view_descriptor),
     ArchitectureCheck(
         "response-crypto-descriptor",
         scan_repository_response_crypto_descriptor,
