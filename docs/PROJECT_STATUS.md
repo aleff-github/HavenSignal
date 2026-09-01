@@ -468,3 +468,18 @@ keys, persist plaintext, append audit events, mutate state, return
 credentials, expose endpoints, or authorize submission. Endpoint, pipeline
 executor, audit, Key Service, storage, cleanup, reconciliation, logging,
 independent-review, deployment, and production gates remain open.
+
+## Latest Stage A slice — submission idempotency descriptors
+
+The current repository adds inert submission idempotency descriptors for the
+owner-approved `docs/20` concurrency/idempotency test requirements. The
+descriptor validates only the approved retry/concurrency scenario labels,
+invariant labels, and forbidden runtime capability categories.
+
+The descriptor and its exact-AST source policy intentionally do not run
+parallel requests, handle requests, inspect attempt state, lock database rows,
+write storage, create Report-DEKs, append audit events, reconcile artifacts,
+log reporter input, expose endpoints, or authorize submission. Endpoint,
+PostgreSQL concurrency runner, database locking implementation, audit, Key
+Service, storage, reconciliation, logging, independent-review, deployment, and
+production gates remain open.

@@ -255,6 +255,15 @@ credentials, expose endpoints, or authorize submission until endpoint,
 pipeline, audit, Key Service, storage, cleanup, reconciliation, logging,
 deployment, and production gates are closed.
 
+Submission idempotency code is currently limited to inert structural
+descriptors. It may validate only the exact approved concurrency/idempotency
+scenario labels, invariant labels, and forbidden runtime capability metadata.
+It must not run parallel requests, handle requests, inspect attempt state, lock
+database rows, write storage, create Report-DEKs, append audit events,
+reconcile artifacts, log reporter input, expose endpoints, or authorize
+submission until endpoint, PostgreSQL concurrency, audit, Key Service, storage,
+reconciliation, logging, deployment, and production gates are closed.
+
 Submission credential-response code is currently limited to inert structural
 descriptors. It may validate only the approved one live post-acceptance display
 opportunity, controlled indeterminate retry result, permitted Ticket ID and

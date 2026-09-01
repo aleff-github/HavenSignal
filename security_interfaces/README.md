@@ -339,6 +339,21 @@ exact-AST policy. Passing proves only reviewed source shape; it is not
 failure handling, rollback, cleanup execution, retry processing, audit/client
 behavior, response rendering, endpoint behavior, or production evidence.
 
+`submission_idempotency_descriptors.py` validates only the static
+concurrency/idempotency invariant profile approved in `docs/20`. It records
+the exact sequential-retry, synchronized-parallel-copy, multi-process,
+reconciliation, stale-version, response-loss, crash-injection, cleanup, and
+logging scenarios, plus the required invariants and forbidden runtime
+capability categories. It does not run parallel requests, inspect attempts,
+lock rows, write storage, create keys, append audit events, reconcile
+artifacts, log inputs, expose endpoints, or authorize submission.
+
+The submission idempotency descriptor source is locked by a non-executing
+exact-AST policy. Passing proves only reviewed source shape; it is not a
+concurrency test runner, database lock implementation, service adapter,
+artifact reconciler, logging pipeline, endpoint behavior, or production
+evidence.
+
 `response_crypto_descriptors.py` validates only the static version-1 Response
 Note crypto profile already fixed in `docs/24`: XChaCha20-Poly1305-IETF
 combined-mode metadata, fixed plaintext-frame and ciphertext/tag sizes,
