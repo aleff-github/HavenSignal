@@ -189,6 +189,21 @@ framing, HKDF, CBOR, encryption, decryption, Key Service behavior, sandbox
 streaming, persistence, endpoint behavior, authorization, deletion,
 restoration, deployment, or production evidence.
 
+`report_schema_descriptors.py` validates only the ordered metadata schema for
+the approved original-report AAD and ciphertext envelope fields. It records
+field names, primitive categories, fixed byte sizes, public constant values,
+allowed public object kinds, allowed public object slots, and allowed public
+frame/ciphertext sizes only. It does not encode or parse CBOR, retain
+report/attempt/object IDs, retain key handles, retain nonces or ciphertext,
+call a service, inspect state, stream attachments, persist data, expose an
+endpoint, or authorize report use.
+
+The report schema descriptor source is locked by a non-executing exact-AST
+policy. Passing proves only reviewed source shape; it is not deterministic
+CBOR, context binding, ciphertext handling, Key Service behavior, sandbox
+streaming, persistence, endpoint behavior, authorization, or production
+evidence.
+
 `response_crypto_descriptors.py` validates only the static version-1 Response
 Note crypto profile already fixed in `docs/24`: XChaCha20-Poly1305-IETF
 combined-mode metadata, fixed plaintext-frame and ciphertext/tag sizes,

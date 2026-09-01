@@ -950,3 +950,21 @@ Django-integration, and service-call changes without importing or executing the
 target. This is Stage A source-conformance evidence only and closes no
 cryptographic-review, Key Service, storage, sandbox, audit, export, deletion,
 restoration, deployment, or production gate.
+
+The forty-seventh Stage A slice adds inert original-report schema descriptors
+for the owner-approved `docs/26` AAD/envelope field metadata. Validation covers
+only ordered field names, primitive categories, fixed byte sizes, public
+constant values, allowed public object kinds/slots, and allowed public
+frame/ciphertext sizes. It does not encode or parse CBOR, hold report/attempt/
+object IDs, hold key handles, hold nonces, hold ciphertext, call a Key Service,
+stream attachments, inspect state/audit receipts, persist protected bytes,
+expose endpoints, or authorize report use.
+
+It also adds a non-executing exact-AST source policy for that descriptor. The
+policy rejects CBOR, context-value retention, ciphertext handling, service
+calls, attachment streaming, persistence, report-use authorization, import,
+dynamic, file, network, Django-integration, and service-call changes without
+importing or executing the target. This is Stage A source-conformance evidence
+only and closes no deterministic-CBOR, context-binding, ciphertext-handling,
+Key Service, sandbox-streaming, persistence, deployment, independent-review, or
+production gate.

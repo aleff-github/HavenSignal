@@ -309,6 +309,10 @@ Test:
   metadata shape, and reject generation, HKDF, AEAD, CBOR, plaintext,
   ciphertext, Key Service, stream, persistence, endpoint, and authorization
   additions.
+- Stage A schema descriptor/source-conformance tests prove only ordered
+  original-report AAD/envelope field metadata and reject CBOR,
+  context-value retention, ciphertext handling, service calls, attachment
+  streaming, persistence, endpoints, and authorization.
 
 ## Recovery enumeration
 

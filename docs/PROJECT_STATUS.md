@@ -308,3 +308,18 @@ streaming, protected persistence, endpoints, audit/state authorization,
 deletion, or recovery of report content. All cryptographic, Key Service,
 storage, sandbox, audit, export, deletion, independent-review, deployment, and
 production gates remain open.
+
+## Latest Stage A slice — original-report schema descriptors
+
+The current repository adds inert original-report schema descriptors for the
+owner-approved `docs/26` AAD/envelope metadata. The descriptor validates only
+ordered field names, primitive categories, fixed byte sizes, public constant
+values, allowed public object kinds/slots, and allowed public frame/ciphertext
+sizes.
+
+The descriptor and its exact-AST source policy intentionally do not implement
+deterministic CBOR, context binding, context-value retention, ciphertext
+handling, Key Service calls, attachment streaming, protected persistence,
+endpoints, or report-use authorization. Deterministic-CBOR, Key Service,
+sandbox-streaming, persistence, independent-review, deployment, and production
+gates remain open.

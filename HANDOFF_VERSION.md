@@ -452,3 +452,21 @@ persistence, report-use authorization, file, network, Django integration, and
 service-call changes fail closed. This closes no cryptographic-review, Key
 Service, storage, sandbox, audit, export, deletion, restoration, deployment, or
 production gate.
+
+The forty-seventh Stage A slice adds inert original-report schema descriptors
+for the owner-approved `docs/26` AAD/envelope field metadata. Validation covers
+only ordered field names, primitive categories, fixed byte sizes, public
+constant values, allowed public object kinds/slots, and allowed public
+frame/ciphertext sizes. It does not encode or parse CBOR, hold report/attempt/
+object IDs, hold key handles, hold nonces, hold ciphertext, call a Key Service,
+stream attachments, inspect state/audit receipts, persist protected bytes,
+expose endpoints, or authorize report use.
+
+A new non-executing report-schema descriptor source policy locks the exact
+imports, constants, enums, immutable classes, validators, and false capability
+results. CBOR, context-value retention, ciphertext handling, service calls,
+attachment streaming, persistence, report-use authorization, file, network,
+Django integration, and service-call changes fail closed. This closes no
+deterministic-CBOR, context-binding, ciphertext-handling, Key Service,
+sandbox-streaming, persistence, deployment, independent-review, or production
+gate.
