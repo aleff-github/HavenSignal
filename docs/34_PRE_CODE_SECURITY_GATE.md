@@ -930,3 +930,23 @@ service-call changes without importing or executing the target. This is Stage A
 source-conformance evidence only and closes no Firecracker, jailer, kernel/
 rootfs, broker, vsock, parser, renderer, sandbox-execution, deployment, or
 production gate.
+
+The forty-sixth Stage A slice adds inert original-report crypto descriptors
+for the owner-approved `docs/26` Report-DEK/object-subkey metadata.
+Validation covers only static XChaCha20-Poly1305-IETF identifiers,
+Report-DEK/subkey/nonce/tag sizes, fixed report-text and attachment frame
+sizes, fixed ciphertext-and-tag sizes, object-kind/slot metadata, immutable
+context-size shapes, AAD/KDF purposes, and allowlisted Report-DEK operation
+names. It does not canonicalize report text, inspect attachments, frame
+plaintext, generate keys/nonces, derive subkeys, encrypt, decrypt, encode or
+parse CBOR, persist protected material, stream attachments, call a Key Service,
+inspect state/audit receipts, expose endpoints, or authorize report use.
+
+It also adds a non-executing exact-AST source policy for that descriptor. The
+policy rejects key generation, HKDF, AEAD, CBOR, nonce generation,
+plaintext/ciphertext handling, Key Service calls, attachment streaming,
+persistence, report-use authorization, import, dynamic, file, network,
+Django-integration, and service-call changes without importing or executing the
+target. This is Stage A source-conformance evidence only and closes no
+cryptographic-review, Key Service, storage, sandbox, audit, export, deletion,
+restoration, deployment, or production gate.

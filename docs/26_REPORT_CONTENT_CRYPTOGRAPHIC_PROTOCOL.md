@@ -32,6 +32,24 @@ profile, service authentication, storage durability profile, or endpoint.
 The approved submission sequence in `docs/20`, audit protocol in `docs/23`,
 and service boundaries in `docs/19` remain authoritative.
 
+## Stage A inert implementation evidence
+
+`security_interfaces/report_crypto_descriptors.py` validates only static
+version-1 metadata for the approved Report-DEK/object-subkey profile, fixed
+report-text and attachment frame sizes, fixed ciphertext-and-tag sizes,
+object-kind/slot registry, immutable context-size shapes, AAD/KDF purposes,
+and allowlisted Key Service operation names.
+
+It does not canonicalize report text, inspect attachments, build frames,
+derive subkeys, generate nonces, encrypt, decrypt, encode/parse CBOR, retain
+keys/nonces/AAD/ciphertext/plaintext, persist protected material, stream
+attachments, call a Key Service, expose endpoints, inspect state/audit
+receipts, or authorize report use. Its exact source AST is locked by
+`architecture_checks/report_crypto_descriptors.py`; passing that policy is
+Stage A source-conformance evidence only and does not close any cryptographic,
+Key Service, storage, sandbox, audit, deletion, deployment, independent-review,
+or production gate.
+
 ## Selected primitives
 
 Version 1 uses only reviewed library constructions:

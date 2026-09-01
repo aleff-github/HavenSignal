@@ -173,6 +173,22 @@ cannot change silently. Passing is only source-conformance evidence and closes
 no recovery, cryptographic-review, persistence, external-service, or production
 gate.
 
+`report_crypto_descriptors.py` validates only the static version-1 original
+report crypto profile already fixed in `docs/26`: XChaCha20-Poly1305-IETF
+combined-mode metadata, 32-byte Report-DEK and object-subkey sizes, fixed
+report-text and attachment frame sizes, fixed ciphertext/tag sizes, immutable
+context-size shapes, AAD/KDF purposes, object-kind/slot metadata, and the
+seven allowlisted Report-DEK operation names. It never receives or retains
+report text, attachment bytes, ciphertext bytes, nonce bytes, AAD bytes,
+Report-DEK/subkey material, key-handle values, operator authorization, audit
+receipts, or state rows.
+
+The report crypto descriptor source is locked by a non-executing exact-AST
+policy. Passing proves only reviewed source shape; it is not canonicalization,
+framing, HKDF, CBOR, encryption, decryption, Key Service behavior, sandbox
+streaming, persistence, endpoint behavior, authorization, deletion,
+restoration, deployment, or production evidence.
+
 `response_crypto_descriptors.py` validates only the static version-1 Response
 Note crypto profile already fixed in `docs/24`: XChaCha20-Poly1305-IETF
 combined-mode metadata, fixed plaintext-frame and ciphertext/tag sizes,

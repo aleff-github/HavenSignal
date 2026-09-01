@@ -97,6 +97,15 @@ class RequestAdmissionDescriptorRejected(ValueError):
         super().__init__(self.public_code)
 
 
+class ReportCryptoDescriptorRejected(ValueError):
+    """Controlled rejection for an invalid inert report crypto descriptor."""
+
+    public_code = "report_crypto_descriptor_rejected"
+
+    def __init__(self) -> None:
+        super().__init__(self.public_code)
+
+
 class SafeViewDescriptorRejected(ValueError):
     """Controlled rejection for an invalid inert safe-view descriptor."""
 
