@@ -247,6 +247,13 @@ inspect database state, create reports or Report-DEKs, append audit events,
 redisplay credentials, expose status oracles, call services, expose endpoints,
 or authorize submission.
 
+The current Stage A submission failure descriptor records only the approved
+failure-boundary labels, required-result labels, content-free flags, and
+fail-closed flags from `docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`. It does
+not handle requests, start submission pipelines, call services, write storage,
+create keys, persist plaintext, append audit events, mutate state, return
+credentials, expose endpoints, or authorize submission.
+
 The current Stage A credential-response descriptor records only the approved
 one-time live response and lost-response policy from
 `docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`. It does not generate credentials,
