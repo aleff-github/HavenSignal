@@ -58,6 +58,7 @@ class ArchitectureCheckRunnerTests(SimpleTestCase):
                 "initializer-sources",
                 "submission-sources",
                 "submission-audit-descriptor",
+                "submission-reconciliation-descriptor",
                 "lifecycle-sources",
                 "orchestration-sources",
                 "negative-capabilities",

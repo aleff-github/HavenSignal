@@ -61,6 +61,9 @@ from .submission import scan_submission_sources
 from .submission_audit_descriptors import (
     scan_repository_submission_audit_descriptor,
 )
+from .submission_reconciliation_descriptors import (
+    scan_repository_submission_reconciliation_descriptor,
+)
 from .surfaces import (
     analyze_css_source,
     analyze_reporter_python_source,
@@ -329,6 +332,10 @@ ARCHITECTURE_CHECKS = (
     ArchitectureCheck(
         "submission-audit-descriptor",
         scan_repository_submission_audit_descriptor,
+    ),
+    ArchitectureCheck(
+        "submission-reconciliation-descriptor",
+        scan_repository_submission_reconciliation_descriptor,
     ),
     ArchitectureCheck("lifecycle-sources", _lifecycle_sources),
     ArchitectureCheck("orchestration-sources", _orchestration_sources),

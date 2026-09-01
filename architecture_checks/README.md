@@ -223,6 +223,16 @@ creation/verification, attempt-state inspection, Audit Service calls, key
 creation, persistence, endpoint, or submission authorization behavior are
 reviewed source facts.
 
+The submission-reconciliation descriptor source policy locks the complete
+executable AST of
+`security_interfaces/submission_reconciliation_descriptors.py`. Exact approved
+scan interval, progress deadline, cleanup retry cap, persistent-alert
+threshold, candidate states, terminal outcomes, action registry, alert type,
+allowed/forbidden payload fields, false capability properties, imports, and
+absence of content scanning, credential creation, audit receipt verification,
+service calls, deletion, state mutation, scheduling, endpoint, or submission
+authorization behavior are reviewed source facts.
+
 The response-crypto descriptor source policy locks the complete executable AST
 of `security_interfaces/response_crypto_descriptors.py`. Exact response
 algorithm/profile identifiers, key/nonce/tag/frame/envelope sizes, immutable

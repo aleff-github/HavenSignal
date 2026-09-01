@@ -215,6 +215,13 @@ Collector client, append events, create or verify receipts, inspect attempt
 state, persist submission metadata, create keys, expose endpoints, or authorize
 acceptance.
 
+The current Stage A submission-reconciliation descriptor records only the
+approved crash-reconciliation timing, candidate-state, terminal-outcome,
+action, persistent-cleanup-alert, and allowlisted/forbidden payload metadata
+from `docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`. It does not implement a
+reconciler, scheduler, Audit/Key/Alert Service adapter, ciphertext deletion,
+state transition, endpoint, or submission authorization capability.
+
 ### Key Service
 
 The Key Service exposes distinct policy operations for new-report protection, authorized report use, response protection/use, and per-object key destruction. Policy evaluation is state-aware and operation-scoped.

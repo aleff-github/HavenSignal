@@ -257,6 +257,15 @@ from .submission_audit_descriptors import (
     scan_repository_submission_audit_descriptor,
     scan_submission_audit_descriptor_source,
 )
+from .submission_reconciliation_descriptors import (
+    EXPECTED_SUBMISSION_RECONCILIATION_DESCRIPTOR_AST_DIGEST,
+    SUBMISSION_RECONCILIATION_DESCRIPTOR_PATH,
+    SubmissionReconciliationDescriptorSourceViolation,
+    SubmissionReconciliationDescriptorSourceViolationCode,
+    analyze_submission_reconciliation_descriptor_source,
+    scan_repository_submission_reconciliation_descriptor,
+    scan_submission_reconciliation_descriptor_source,
+)
 from .verification_script import (
     EXPECTED_COMMAND_SPECS,
     EXPECTED_VERIFY_SCRIPT_AST_DIGEST,
@@ -470,6 +479,13 @@ __all__ = [
     "analyze_submission_audit_descriptor_source",
     "scan_repository_submission_audit_descriptor",
     "scan_submission_audit_descriptor_source",
+    "EXPECTED_SUBMISSION_RECONCILIATION_DESCRIPTOR_AST_DIGEST",
+    "SUBMISSION_RECONCILIATION_DESCRIPTOR_PATH",
+    "SubmissionReconciliationDescriptorSourceViolation",
+    "SubmissionReconciliationDescriptorSourceViolationCode",
+    "analyze_submission_reconciliation_descriptor_source",
+    "scan_repository_submission_reconciliation_descriptor",
+    "scan_submission_reconciliation_descriptor_source",
     "EXPECTED_COMMAND_SPECS",
     "EXPECTED_VERIFY_SCRIPT_AST_DIGEST",
     "VERIFICATION_SCRIPT_PATH",
