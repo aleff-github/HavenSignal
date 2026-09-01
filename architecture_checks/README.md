@@ -244,6 +244,15 @@ absence of content scanning, credential creation, audit receipt verification,
 service calls, deletion, state mutation, scheduling, endpoint, or submission
 authorization behavior are reviewed source facts.
 
+The submission retry descriptor source policy locks the complete executable AST
+of `security_interfaces/submission_retry_descriptors.py`. Exact approved retry
+source labels, one-winner/no-second-pipeline outcomes, no-redisplay and
+controlled-indeterminate-response results, forbidden signal categories, false
+capability properties, imports, and absence of request parsing, credential
+verification, database inspection/claiming, report/DEK creation, audit append,
+service calls, status oracles, endpoint, or submission authorization behavior
+are reviewed source facts.
+
 The submission credential-response descriptor source policy locks the complete
 executable AST of
 `security_interfaces/submission_credential_response_descriptors.py`. Exact

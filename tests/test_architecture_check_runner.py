@@ -61,6 +61,7 @@ class ArchitectureCheckRunnerTests(SimpleTestCase):
                 "submission-attempt-credential-descriptor",
                 "submission-credential-response-descriptor",
                 "submission-reconciliation-descriptor",
+                "submission-retry-descriptor",
                 "lifecycle-sources",
                 "orchestration-sources",
                 "negative-capabilities",

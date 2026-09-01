@@ -423,3 +423,19 @@ requests, claim attempts, call services, expose endpoints, authorize
 submission, or authorize report read. Exact encoding, verifier, cookie/form
 binding, endpoint, persistence, concurrency, logging, audit, submission
 acceptance, independent-review, deployment, and production gates remain open.
+
+## Latest Stage A slice — submission retry descriptors
+
+The current repository adds inert submission retry descriptors for the
+owner-approved `docs/20` duplicate/retry outcome policy. The descriptor
+validates only the approved retry source labels, required one-database-winner
+and no-second-pipeline outcomes, controlled indeterminate response behavior,
+no credential redisplay, and forbidden signal categories.
+
+The descriptor and its exact-AST source policy intentionally do not parse
+requests, verify attempt credentials, claim attempts, inspect database state,
+create reports or Report-DEKs, append audit events, redisplay credentials,
+expose status oracles, call services, expose endpoints, or authorize
+submission. Endpoint, credential verifier, PostgreSQL concurrency, duplicate
+suppression executor, audit, Key Service, storage, logging, independent-review,
+deployment, and production gates remain open.

@@ -230,6 +230,15 @@ from `docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`. It does not implement a
 reconciler, scheduler, Audit/Key/Alert Service adapter, ciphertext deletion,
 state transition, endpoint, or submission authorization capability.
 
+The current Stage A submission retry descriptor records only the approved
+duplicate/retry source labels, required one-database-winner/no-second-pipeline
+outcomes, no-redisplay and controlled-indeterminate-response requirements, and
+forbidden signal metadata from `docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`.
+It does not parse requests, verify attempt credentials, claim attempts,
+inspect database state, create reports or Report-DEKs, append audit events,
+redisplay credentials, expose status oracles, call services, expose endpoints,
+or authorize submission.
+
 The current Stage A credential-response descriptor records only the approved
 one-time live response and lost-response policy from
 `docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`. It does not generate credentials,

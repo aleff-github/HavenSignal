@@ -225,6 +225,17 @@ services, delete ciphertext, mutate attempt state, schedule jobs, expose
 endpoints, or authorize submission until submission, audit, Key Service,
 storage, concurrency, scheduler, deployment, and production gates are closed.
 
+Submission retry code is currently limited to inert structural descriptors. It
+may validate only the exact approved retry source labels, required
+one-database-winner/no-second-pipeline outcomes, controlled indeterminate
+response behavior, no credential redisplay, and forbidden signal metadata. It
+must not parse requests, verify attempt credentials, claim attempts, inspect
+database state, create reports or Report-DEKs, append audit events, redisplay
+credentials, expose status oracles, call services, expose endpoints, or
+authorize submission until endpoint, credential verifier, PostgreSQL
+concurrency, audit, Key Service, storage, logging, and production gates are
+closed.
+
 Submission credential-response code is currently limited to inert structural
 descriptors. It may validate only the approved one live post-acceptance display
 opportunity, controlled indeterminate retry result, permitted Ticket ID and
