@@ -246,6 +246,15 @@ authorize submission until endpoint, credential verifier, PostgreSQL
 concurrency, audit, Key Service, storage, logging, and production gates are
 closed.
 
+Submission failure-matrix code is currently limited to inert structural
+descriptors. It may validate only the exact approved failure-boundary labels,
+required-result labels, content-free flags, and fail-closed flags. It must not
+handle requests, start submission pipelines, call services, write storage,
+create keys, persist plaintext, append audit events, mutate state, return
+credentials, expose endpoints, or authorize submission until endpoint,
+pipeline, audit, Key Service, storage, cleanup, reconciliation, logging,
+deployment, and production gates are closed.
+
 Submission credential-response code is currently limited to inert structural
 descriptors. It may validate only the approved one live post-acceptance display
 opportunity, controlled indeterminate retry result, permitted Ticket ID and

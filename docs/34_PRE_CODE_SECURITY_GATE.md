@@ -1121,3 +1121,20 @@ network, dynamic, and submission-authorization changes fail closed. This
 closes no endpoint, credential verifier, PostgreSQL concurrency, audit, Key
 Service, storage, logging, reconciliation, deployment, independent-review, or
 production gate.
+
+The fifty-sixth Stage A slice adds inert submission failure descriptors for the
+owner-approved `docs/20` failure matrix. Validation covers only the exact
+failure-boundary labels, required-result labels, content-free flags, and
+fail-closed flags. It does not handle requests, start submission pipelines,
+call services, write storage, create keys, persist plaintext, append audit
+events, mutate state, return credentials, expose endpoints, or authorize
+submission.
+
+A new non-executing submission failure descriptor source policy locks the
+exact imports, constants, enums, immutable classes, validators, and false
+capability results. Request handling, pipeline start, service calls, storage
+writes, key creation, plaintext persistence, audit append, state mutation,
+credential return, endpoint, file, network, dynamic, and submission
+authorization changes fail closed. This closes no endpoint, pipeline executor,
+audit, Key Service, storage, cleanup, reconciliation, logging, deployment,
+independent-review, or production gate.
