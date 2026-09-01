@@ -189,6 +189,14 @@ imports, and absence of canonicalization, framing, HKDF, CBOR, AEAD, Key
 Service calls, attachment streaming, persistence, logging, endpoint, or
 authorization behavior are reviewed source facts.
 
+The report-schema descriptor source policy locks the complete executable AST
+of `security_interfaces/report_schema_descriptors.py`. Exact ordered original
+report AAD and ciphertext-envelope field names, primitive categories, public
+constant values, fixed byte sizes, allowed object-kind/slot values, allowed
+frame/ciphertext sizes, false capability properties, imports, and absence of
+CBOR, stored context values, ciphertext, service calls, attachment streaming,
+persistence, endpoint, or authorization behavior are reviewed source facts.
+
 The response-crypto descriptor source policy locks the complete executable AST
 of `security_interfaces/response_crypto_descriptors.py`. Exact response
 algorithm/profile identifiers, key/nonce/tag/frame/envelope sizes, immutable

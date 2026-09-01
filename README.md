@@ -103,6 +103,8 @@ The repository currently contains:
 - inert original-report crypto descriptors that validate only approved Report-DEK,
   object-subkey, fixed-frame, envelope-size, object-kind, slot, and
   key-operation profile shapes;
+- inert original-report schema descriptors that fix only the ordered AAD and
+  ciphertext-envelope field metadata;
 - inert recovery credential descriptors that validate only strict Ticket ID and
   Recovery Secret encoding shapes without retaining credential material;
 - inert Response Note crypto descriptors that validate only approved format,
