@@ -183,6 +183,15 @@ construct frames, encrypt, persist, log, expose endpoints, create a submission,
 or authorize acceptance until submission, audit, Key Service, storage,
 request-admission, and production gates are closed.
 
+Original-report frame code is currently limited to inert structural
+descriptors. It may validate only the approved report-text and attachment
+plaintext-frame layout metadata, version byte, public kind codes, big-endian
+length markers, fixed frame sizes, payload markers, and zero-padding
+requirements. It must not accept plaintext bytes, construct or parse frames,
+validate padding bytes, inspect attachments, encrypt, decrypt, persist, expose
+endpoints, or authorize submission until the cryptographic, Key Service,
+storage, sandbox, request-admission, and production gates are closed.
+
 Recovery credential code is currently limited to inert structural descriptors.
 It may validate the exact owner-approved Ticket ID and Recovery Secret encoding
 shapes, but it must not generate credentials, compute or compare verifier tags,

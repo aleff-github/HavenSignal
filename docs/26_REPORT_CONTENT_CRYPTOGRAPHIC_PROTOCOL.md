@@ -70,6 +70,17 @@ or state. Its exact source AST is locked by
 `architecture_checks/report_text_descriptors.py`; passing that policy is also
 Stage A source-conformance evidence only.
 
+`security_interfaces/report_frame_descriptors.py` separately validates only
+the ordered plaintext-frame layout metadata for this protocol: version byte,
+uint32/uint64 big-endian length-field markers, canonical UTF-8 report-text
+payload marker, accepted-original attachment byte marker, public PDF/JPEG/PNG
+kind codes, fixed frame sizes, and zero-padding requirements. It does not
+accept plaintext bytes, construct frames, parse frames, validate padding bytes,
+inspect attachments, encrypt, decrypt, persist content, expose endpoints, or
+authorize submission. Its exact source AST is locked by
+`architecture_checks/report_frame_descriptors.py`; passing that policy is also
+Stage A source-conformance evidence only.
+
 ## Selected primitives
 
 Version 1 uses only reviewed library constructions:

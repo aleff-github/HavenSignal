@@ -43,6 +43,7 @@ from .orchestration import scan_inert_orchestration_sources
 from .repository_hygiene import scan_repository_hygiene
 from .recovery_descriptors import scan_repository_recovery_descriptor
 from .report_crypto_descriptors import scan_repository_report_crypto_descriptor
+from .report_frame_descriptors import scan_repository_report_frame_descriptor
 from .report_schema_descriptors import scan_repository_report_schema_descriptor
 from .report_text_descriptors import scan_repository_report_text_descriptor
 from .request_admission_descriptors import (
@@ -279,6 +280,10 @@ ARCHITECTURE_CHECKS = (
     ArchitectureCheck(
         "report-crypto-descriptor",
         scan_repository_report_crypto_descriptor,
+    ),
+    ArchitectureCheck(
+        "report-frame-descriptor",
+        scan_repository_report_frame_descriptor,
     ),
     ArchitectureCheck(
         "report-schema-descriptor",

@@ -986,3 +986,23 @@ importing or executing the target. This is Stage A source-conformance evidence
 only and closes no deterministic-CBOR, context-binding, ciphertext-handling,
 Key Service, sandbox-streaming, persistence, deployment, independent-review, or
 production gate.
+
+The forty-ninth Stage A slice adds inert original-report frame descriptors for
+the owner-approved `docs/26` plaintext-frame layout metadata. Validation covers
+only the version byte, uint32/uint64 big-endian length-field markers, canonical
+UTF-8 report-text payload marker, accepted-original attachment byte marker,
+public PDF/JPEG/PNG kind codes, fixed text and attachment frame sizes, and
+zero-padding requirements. It does not accept plaintext bytes, canonicalize
+text, construct frames, parse frames, validate padding bytes, inspect
+attachments, encrypt, decrypt, persist content, call a Key Service, expose
+endpoints, or authorize submission.
+
+It also adds a non-executing exact-AST source policy for that descriptor. The
+policy rejects plaintext handling, frame construction, frame parsing,
+padding-byte validation, attachment inspection, encryption, persistence,
+submission authorization, import, dynamic, file, network, Django-integration,
+and service-call changes without importing or executing the target. This is
+Stage A source-conformance evidence only and closes no canonical-byte freezing,
+frame construction/parsing, padding verification, encryption, submission
+staging, request admission, Key Service, storage, deployment,
+independent-review, or production gate.

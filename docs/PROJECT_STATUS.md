@@ -338,3 +338,20 @@ frames, encrypt, persist, log, create submissions, expose endpoints, or
 authorize acceptance. Submission, request-admission integration, audit, Key
 Service, storage, deployment, independent-review, and production gates remain
 open.
+
+## Latest Stage A slice — original-report frame descriptors
+
+The current repository adds inert original-report frame descriptors for the
+owner-approved `docs/26` plaintext-frame layout metadata. The descriptor
+validates only the version byte, uint32/uint64 big-endian length-field markers,
+canonical UTF-8 report-text payload marker, accepted-original attachment byte
+marker, public PDF/JPEG/PNG kind codes, fixed text and attachment frame sizes,
+and zero-padding requirements.
+
+The descriptor and its exact-AST source policy intentionally do not accept
+plaintext bytes, canonicalize text, construct frames, parse frames, validate
+padding bytes, inspect attachments, encrypt, decrypt, persist content, call a
+Key Service, expose endpoints, or authorize submission. Frame construction,
+padding verification, encryption, submission staging, request admission, Key
+Service, storage, independent-review, deployment, and production gates remain
+open.
