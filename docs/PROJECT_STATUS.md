@@ -184,6 +184,15 @@ decryption, rendering, PNG validation, sandbox call, output persistence,
 response serving, endpoint, lease inspection, or operator-access authorization
 capability.
 
+The file-sandbox descriptor module is locked to its exact executable AST as
+content-free microVM-boundary metadata only. Firecracker reference, compute
+limits, isolation denials, transport profile, filesystem/workspace profile,
+credential-denial profile, validators, and false capability profiles cannot
+change without explicit review. The check never imports or executes the target
+and proves no microVM boot, parser execution, file access, job creation, vsock
+exchange, attachment inspection, plaintext persistence, endpoint, or
+file-processing authorization capability.
+
 The report-bound step-up-v1 descriptor module is also locked to its complete
 reviewed executable AST, including timing, registries, content-free context,
 unused state, validators, and false WebAuthn/binding/authorization results.

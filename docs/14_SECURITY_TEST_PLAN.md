@@ -454,6 +454,14 @@ PNG-byte validation, output persistence, response serving, operator-access
 authorization, dynamic behavior, and source echoing. These tests do not enable
 safe-view generation or delivery.
 
+Current Stage A evidence also tests that the inert file-sandbox descriptor
+accepts only the approved Firecracker reference, compute limits, isolation
+denials, authenticated-vsock metadata, read-only/RAM/tmpfs workspace profile,
+one-time capability, and no-production-credential metadata. Its exact-source
+policy rejects microVM boot, parser execution, file access, job creation, vsock
+exchange, attachment inspection, plaintext persistence, authorization, dynamic
+behavior, and source echoing. These tests do not execute or prove a sandbox.
+
 Unsafe/uncertain should fail closed.
 
 ## File sandbox

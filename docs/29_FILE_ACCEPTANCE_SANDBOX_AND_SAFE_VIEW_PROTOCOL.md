@@ -358,6 +358,26 @@ or executing the target. Passing is source-conformance evidence only and closes
 no decrypt, renderer, restricted-PNG verifier, sandbox, lease, response,
 endpoint, deployment, or production gate.
 
+The current `security_interfaces/file_sandbox_descriptors.py` module models
+only content-free sandbox-boundary metadata: Firecracker reference, one fresh
+microVM per job, vCPU/RAM/process/file-descriptor/time limits, authenticated
+vsock transport, read-only measured root, guest RAM/tmpfs-only workspace,
+one-time job capability, no production credentials, and explicit denial of
+network, shell, SSH, ptrace, swap, snapshots, core dumps, reusable storage
+credentials, and shared writable host storage.
+
+It does not boot microVMs, execute parsers, open files, create jobs, exchange
+vsock messages, inspect attachments, persist plaintext, log request material,
+or authorize file processing.
+
+A non-executing exact-AST policy locks this descriptor source profile and
+rejects microVM boot, parser execution, file access, job creation, vsock
+exchange, attachment inspection, plaintext persistence, endpoint, dynamic,
+logging, file, network, Django-integration, service-call, and authorization
+changes without importing or executing the target. Passing is source-conformance
+evidence only and closes no Firecracker, jailer, kernel/rootfs, broker, vsock,
+parser, renderer, sandbox-execution, deployment, or production gate.
+
 ## External design references
 
 - [qpdf 12 JSON representation](https://qpdf.readthedocs.io/en/latest/json.html)

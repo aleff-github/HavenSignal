@@ -96,6 +96,15 @@ inspect leases, expose endpoints, or authorize operator access until decrypt,
 renderer, restricted-PNG verifier, sandbox, lease, response, review, and
 production gates are closed.
 
+File-sandbox code is currently limited to inert structural descriptors. It may
+validate only the approved Firecracker reference, compute limits, isolation
+denials, authenticated-vsock metadata, filesystem/workspace profile, and
+credential-denial metadata. It must not boot microVMs, execute parsers, open
+files, create jobs, exchange vsock messages, inspect attachment bytes, persist
+plaintext, expose endpoints, or authorize file processing until Firecracker,
+jailer, kernel/rootfs, broker, parser, renderer, review, and production gates
+are closed.
+
 ## Logging
 
 Create explicit structured logging schemas.

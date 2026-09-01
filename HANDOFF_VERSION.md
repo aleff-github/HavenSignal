@@ -415,3 +415,20 @@ response serving, operator-access authorization, file, network, Django
 integration, and service-call changes fail closed. This closes no decrypt,
 renderer, restricted-PNG verifier, sandbox, lease, response, endpoint,
 deployment, or production gate.
+
+The forty-fifth Stage A slice adds inert file-sandbox descriptors for the
+owner-approved microVM boundary metadata. Validation covers only static
+Firecracker reference, one-fresh-microVM profile, vCPU/RAM/process/file
+descriptor/time limits, authenticated-vsock profile, read-only measured root,
+guest RAM/tmpfs workspace, one-time job capability, no-production-credential
+profile, and network/shell/swap/snapshot/storage denials. It does not boot
+microVMs, execute parsers, open files, create jobs, exchange vsock messages,
+inspect attachments, persist plaintext, or authorize file processing.
+
+A new non-executing file-sandbox descriptor source policy locks the exact
+imports, constants, enums, immutable classes, validators, and false capability
+results. MicroVM boot, parser execution, file access, job creation, vsock
+exchange, attachment inspection, plaintext persistence, file-processing
+authorization, file, network, Django integration, and service-call changes fail
+closed. This closes no Firecracker, jailer, kernel/rootfs, broker, vsock,
+parser, renderer, sandbox-execution, deployment, or production gate.

@@ -36,6 +36,15 @@ from .captcha_descriptors import (
     scan_captcha_descriptor_source,
     scan_repository_captcha_descriptor,
 )
+from .file_sandbox_descriptors import (
+    EXPECTED_FILE_SANDBOX_DESCRIPTOR_AST_DIGEST,
+    FILE_SANDBOX_DESCRIPTOR_PATH,
+    FileSandboxDescriptorSourceViolation,
+    FileSandboxDescriptorSourceViolationCode,
+    analyze_file_sandbox_descriptor_source,
+    scan_file_sandbox_descriptor_source,
+    scan_repository_file_sandbox_descriptor,
+)
 
 from .descriptors import (
     ADMINISTRATIVE_STEP_UP_DESCRIPTOR_PATH,
@@ -243,6 +252,13 @@ __all__ = [
     "analyze_captcha_descriptor_source",
     "scan_captcha_descriptor_source",
     "scan_repository_captcha_descriptor",
+    "EXPECTED_FILE_SANDBOX_DESCRIPTOR_AST_DIGEST",
+    "FILE_SANDBOX_DESCRIPTOR_PATH",
+    "FileSandboxDescriptorSourceViolation",
+    "FileSandboxDescriptorSourceViolationCode",
+    "analyze_file_sandbox_descriptor_source",
+    "scan_file_sandbox_descriptor_source",
+    "scan_repository_file_sandbox_descriptor",
     "ADMINISTRATIVE_STEP_UP_DESCRIPTOR_PATH",
     "ALERT_DESCRIPTOR_PATH",
     "AUDIT_DESCRIPTOR_PATH",

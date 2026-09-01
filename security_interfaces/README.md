@@ -115,6 +115,20 @@ Passing proves only reviewed source shape and closes no decrypt, renderer,
 restricted-PNG verifier, sandbox, lease, response, endpoint, deployment, or
 production gate.
 
+`file_sandbox_descriptors.py` models only the owner-approved sandbox isolation
+metadata: Firecracker reference, one fresh microVM per job, vCPU/RAM/process/
+file-descriptor/time limits, authenticated vsock transport shape, read-only
+measured root, guest RAM/tmpfs-only workspace, one-time job capability, no
+production credentials, no NIC/MMDS/DNS/shell/SSH/swap/snapshot/core dump, and
+no reusable writable storage. It does not boot microVMs, execute parsers, open
+files, create jobs, exchange vsock messages, inspect attachments, persist
+plaintext, or authorize file processing.
+
+The file-sandbox descriptor source is locked by a non-executing exact-AST
+policy. Passing proves only reviewed source shape and closes no Firecracker,
+jailer, kernel/rootfs, broker, vsock, parser, renderer, sandbox execution,
+deployment, or production gate.
+
 `step_up_descriptors.py` models only the report-bound v1 UUID/counter context,
 the exact 120-second lifetime, ES256/EdDSA algorithm registry, binding purpose
 and key epoch, and an unused-only Stage A state. It deliberately contains no
