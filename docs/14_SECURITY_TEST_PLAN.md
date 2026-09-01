@@ -66,6 +66,15 @@ For the metadata-only Stage A described by
   verification, service calls, ciphertext deletion, state mutation, scheduling,
   endpoint behavior, and submission authorization without importing or
   executing the target;
+- submission retry descriptors accept only the exact approved duplicate/retry
+  source set, required one-database-winner/no-second-pipeline outcomes,
+  no-redisplay and controlled-indeterminate-response results, and forbidden
+  signal categories;
+- submission retry validation and source policy reject request parsing,
+  credential verification, attempt claiming, database-state inspection,
+  report/Report-DEK creation, audit append, credential redisplay, status
+  oracles, service calls, endpoint behavior, and submission authorization
+  without importing or executing the target;
 - submission credential-response descriptors accept only the one live
   post-acceptance display opportunity, controlled indeterminate retry result,
   permitted Ticket ID/Recovery Secret response-field names, and forbidden
@@ -331,6 +340,12 @@ For `20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`, also verify:
   and reject content scanning, credentials, receipt verification, service
   calls, deletion, state mutation, scheduling, endpoint, or authorization
   capability;
+- Stage A submission retry descriptor/source-conformance tests prove only the
+  approved duplicate/retry source labels, one-winner/no-second-pipeline
+  outcomes, no-redisplay, controlled indeterminate response, and forbidden
+  signal metadata, and reject request parsing, credential verification,
+  attempt claiming, database-state inspection, report/DEK creation, audit
+  append, status-oracle, service, endpoint, or authorization capability;
 - Stage A credential-response descriptor/source-conformance tests prove only
   the approved one-time display and lost-response metadata, and reject secret
   persistence, redisplay, replacement credentials, `credentials_delivered`
