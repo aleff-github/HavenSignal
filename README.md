@@ -105,6 +105,9 @@ The repository currently contains:
   key-operation profile shapes;
 - inert original-report schema descriptors that fix only the ordered AAD and
   ciphertext-envelope field metadata;
+- inert original-report text descriptors that transiently validate only the
+  approved UTF-8/NFC/LF, scalar/byte-limit, NUL/surrogate, and no-raw-copy
+  profile;
 - inert recovery credential descriptors that validate only strict Ticket ID and
   Recovery Secret encoding shapes without retaining credential material;
 - inert Response Note crypto descriptors that validate only approved format,

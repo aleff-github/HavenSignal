@@ -662,6 +662,24 @@ violations. Passing closes no authentication, WebAuthn, artifact binding,
 session, database, concurrency, independent-review, external-service, or
 production gate.
 
+The forty-eighth Stage A slice adds inert original-report text descriptors for
+the owner-approved `docs/26` canonical text metadata. Validation covers only
+transient Unicode scalar policy, NUL and unpaired-surrogate rejection,
+CRLF/CR-to-LF profile, NFC, strict UTF-8, 5,000-scalar limit, 20,000-byte
+limit, and canonical UTF-8 authoritative-original metadata. It does not retain
+browser/wire text, return normalized text or canonical bytes, construct
+plaintext frames, encrypt, persist, log, create submissions, expose endpoints,
+or authorize acceptance.
+
+It also adds a non-executing exact-AST source policy for that descriptor. The
+policy rejects raw-text retention, canonical-byte output, frame construction,
+encryption, persistence, logging, submission authorization, import, dynamic,
+file, network, Django-integration, and service-call changes without importing
+or executing the target. This is Stage A source-conformance evidence only and
+closes no browser/wire discard proof, canonical byte freezing, framing,
+encryption, submission staging, request admission, deployment,
+independent-review, or production gate.
+
 The twenty-eighth Stage A slice adds a non-executing exact-AST policy for the
 sole inert `submission_workflow` initial migration. It fixes the empty
 dependency graph, exact metadata-only fields, closed submission states,

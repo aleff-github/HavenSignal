@@ -175,6 +175,14 @@ attachments, call a Key Service, expose endpoints, log request material, or
 authorize report use until the independent crypto review, Key Service,
 storage, audit, sandbox, concurrency, and production gates are closed.
 
+Original-report text code is currently limited to transient inert profile
+validation. It may reject NUL/unpaired surrogate values and validate only the
+approved UTF-8/NFC/LF, 5,000-scalar, 20,000-byte, and canonical-original
+metadata profile. It must not retain browser/wire text, return canonical bytes,
+construct frames, encrypt, persist, log, expose endpoints, create a submission,
+or authorize acceptance until submission, audit, Key Service, storage,
+request-admission, and production gates are closed.
+
 Recovery credential code is currently limited to inert structural descriptors.
 It may validate the exact owner-approved Ticket ID and Recovery Secret encoding
 shapes, but it must not generate credentials, compute or compare verifier tags,
