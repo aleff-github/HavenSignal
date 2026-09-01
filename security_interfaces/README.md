@@ -218,6 +218,20 @@ policy. Passing proves only reviewed source shape; it is not browser/wire
 discard enforcement, canonical byte freezing, frame construction, encryption,
 submission staging, endpoint behavior, logging proof, or production evidence.
 
+`report_frame_descriptors.py` validates only the ordered metadata layout for
+the approved original-report plaintext frames. It records the version byte,
+uint32/uint64 big-endian length fields, canonical UTF-8 text payload marker,
+accepted-original attachment byte marker, public PDF/JPEG/PNG kind codes,
+total fixed frame sizes, and zero-padding requirements. It does not receive
+plaintext bytes, construct frames, parse frames, validate padding bytes,
+inspect attachments, encrypt, decrypt, persist content, expose endpoints, or
+authorize submission.
+
+The report frame descriptor source is locked by a non-executing exact-AST
+policy. Passing proves only reviewed source shape; it is not frame
+construction, frame parsing, padding validation, attachment validation,
+encryption, storage, endpoint behavior, or production evidence.
+
 `response_crypto_descriptors.py` validates only the static version-1 Response
 Note crypto profile already fixed in `docs/24`: XChaCha20-Poly1305-IETF
 combined-mode metadata, fixed plaintext-frame and ciphertext/tag sizes,

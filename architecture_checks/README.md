@@ -205,6 +205,15 @@ and absence of retained wire text, canonical bytes, frames, encryption,
 persistence, logging, endpoint, or submission authorization are reviewed source
 facts.
 
+The report-frame descriptor source policy locks the complete executable AST of
+`security_interfaces/report_frame_descriptors.py`. Exact original-report
+plaintext-frame layout names, version byte, uint32/uint64 big-endian length
+fields, public PDF/JPEG/PNG kind codes, fixed frame sizes, payload markers,
+zero-padding requirements, false capability properties, imports, and absence
+of plaintext handling, frame construction/parsing, padding-byte validation,
+attachment inspection, encryption, persistence, endpoint, or authorization
+behavior are reviewed source facts.
+
 The response-crypto descriptor source policy locks the complete executable AST
 of `security_interfaces/response_crypto_descriptors.py`. Exact response
 algorithm/profile identifiers, key/nonce/tag/frame/envelope sizes, immutable

@@ -157,6 +157,15 @@ from .report_crypto_descriptors import (
     scan_report_crypto_descriptor_source,
     scan_repository_report_crypto_descriptor,
 )
+from .report_frame_descriptors import (
+    EXPECTED_REPORT_FRAME_DESCRIPTOR_AST_DIGEST,
+    REPORT_FRAME_DESCRIPTOR_PATH,
+    ReportFrameDescriptorSourceViolation,
+    ReportFrameDescriptorSourceViolationCode,
+    analyze_report_frame_descriptor_source,
+    scan_report_frame_descriptor_source,
+    scan_repository_report_frame_descriptor,
+)
 from .report_schema_descriptors import (
     EXPECTED_REPORT_SCHEMA_DESCRIPTOR_AST_DIGEST,
     REPORT_SCHEMA_DESCRIPTOR_PATH,
@@ -374,6 +383,13 @@ __all__ = [
     "analyze_report_crypto_descriptor_source",
     "scan_report_crypto_descriptor_source",
     "scan_repository_report_crypto_descriptor",
+    "EXPECTED_REPORT_FRAME_DESCRIPTOR_AST_DIGEST",
+    "REPORT_FRAME_DESCRIPTOR_PATH",
+    "ReportFrameDescriptorSourceViolation",
+    "ReportFrameDescriptorSourceViolationCode",
+    "analyze_report_frame_descriptor_source",
+    "scan_report_frame_descriptor_source",
+    "scan_repository_report_frame_descriptor",
     "EXPECTED_REPORT_SCHEMA_DESCRIPTOR_AST_DIGEST",
     "REPORT_SCHEMA_DESCRIPTOR_PATH",
     "ReportSchemaDescriptorSourceViolation",

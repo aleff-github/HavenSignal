@@ -301,6 +301,12 @@ Test:
   original metadata shape, and reject raw-text retention, canonical-byte
   output, frame construction, encryption, persistence, logging, endpoint, and
   submission-authorization additions;
+- Stage A frame descriptor/source-conformance tests prove only ordered
+  report-text and attachment plaintext-frame layout metadata, public
+  PDF/JPEG/PNG kind codes, big-endian length-field markers, fixed sizes, and
+  zero-padding requirements, and reject plaintext handling, frame
+  construction/parsing, padding-byte validation, attachment inspection,
+  encryption, persistence, endpoint, and authorization additions;
 - attachment framing at 0 and 5,242,880-byte boundaries, fixed ciphertext size,
   kind binding, zero padding, and oversized rejection;
 - Reporter Gateway cannot decrypt existing content, Operator Console cannot

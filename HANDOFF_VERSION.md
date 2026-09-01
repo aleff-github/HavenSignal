@@ -488,3 +488,22 @@ Django integration, and service-call changes fail closed. This closes no
 browser/wire discard proof, canonical byte freezing, framing, encryption,
 submission staging, request admission, deployment, independent-review, or
 production gate.
+
+The forty-ninth Stage A slice adds inert original-report frame descriptors for
+the owner-approved `docs/26` plaintext-frame layout metadata. Validation covers
+only the version byte, uint32/uint64 big-endian length-field markers, canonical
+UTF-8 report-text payload marker, accepted-original attachment byte marker,
+public PDF/JPEG/PNG kind codes, fixed text and attachment frame sizes, and
+zero-padding requirements. It does not accept plaintext bytes, canonicalize
+text, construct frames, parse frames, validate padding bytes, inspect
+attachments, encrypt, decrypt, persist content, call a Key Service, expose
+endpoints, or authorize submission.
+
+A new non-executing report-frame descriptor source policy locks the exact
+imports, constants, enums, immutable classes, validators, and false capability
+results. Plaintext handling, frame construction, frame parsing, padding-byte
+validation, attachment inspection, encryption, persistence, submission
+authorization, file, network, Django integration, and service-call changes fail
+closed. This closes no canonical-byte freezing, frame construction/parsing,
+padding verification, encryption, submission staging, request admission, Key
+Service, storage, deployment, independent-review, or production gate.
