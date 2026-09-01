@@ -79,6 +79,14 @@ request material, expose endpoints, or accept submissions until the proxy,
 Django handler, CSRF, CAPTCHA, sandbox, audit, Key Service, no-spool,
 request-smuggling, review, and production gates are closed.
 
+Attachment-admission code is currently limited to inert structural descriptors.
+It may validate only the approved common count, size, kind, slot, extension,
+transient-filename, and trust-denial metadata. It must not inspect file bytes,
+trust filenames or MIME types, parse JPEG/PNG/PDF, create sandbox jobs, persist
+originals, retain original filenames, log request material, expose upload or
+safe-view endpoints, or authorize uploads until parser, sandbox, encryption,
+safe-view, review, and production gates are closed.
+
 ## Logging
 
 Create explicit structured logging schemas.
