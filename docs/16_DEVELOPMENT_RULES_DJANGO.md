@@ -164,6 +164,17 @@ keys, expose endpoints, call a Challenge Service, or authorize a protected
 operation until the Pillow/font, audio/accessibility, PostgreSQL concurrency,
 Challenge Service, gateway, and production-boundary gates are closed.
 
+Original-report crypto code is currently limited to inert structural
+descriptors. It may validate only the exact owner-approved Report-DEK,
+object-subkey, algorithm, nonce/tag, fixed plaintext-frame,
+ciphertext-and-tag, object-kind/slot, immutable-context, AAD/KDF purpose, and
+allowlisted operation metadata. It must not canonicalize report text, inspect
+attachment bytes, frame plaintext, generate keys/nonces, derive HKDF subkeys,
+encrypt, decrypt, encode/parse CBOR, persist protected material, stream
+attachments, call a Key Service, expose endpoints, log request material, or
+authorize report use until the independent crypto review, Key Service,
+storage, audit, sandbox, concurrency, and production gates are closed.
+
 Recovery credential code is currently limited to inert structural descriptors.
 It may validate the exact owner-approved Ticket ID and Recovery Secret encoding
 shapes, but it must not generate credentials, compute or compare verifier tags,

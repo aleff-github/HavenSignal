@@ -718,6 +718,38 @@ Passing this source policy closes no Response Note canonicalization,
 encryption/decryption, deterministic-CBOR, Response-DEK lifecycle, Key Service,
 recovery authorization, persistence, independent-review, or production gate.
 
+## Stage A original-report crypto descriptor record
+
+`security_interfaces/report_crypto_descriptors.py` validates only the static
+version-1 original-report crypto profile facts already fixed by
+`docs/26_REPORT_CONTENT_CRYPTOGRAPHIC_PROTOCOL.md`: XChaCha20-Poly1305-IETF
+combined-mode identifiers, 32-byte Report-DEK size, 32-byte object-subkey size,
+24-byte nonce size, 16-byte tag size, 20,005-byte report-text frame,
+5,242,890-byte attachment frame, fixed ciphertext-and-tag sizes, object-kind
+and slot metadata, immutable context-size shapes, AAD/KDF purposes, and the
+seven allowlisted Report-DEK operation names.
+
+Successful validation returns immutable profile evidence only. It does not
+canonicalize report text, construct plaintext frames, derive subkeys, generate
+nonces, encode or parse deterministic CBOR, encrypt, decrypt, compare tags,
+expose or hold real Report-DEK/subkey material, retain nonce/AAD/ciphertext
+bytes, hold key-handle values, stream original attachments, persist protected
+bytes, call a Key Service, use audit receipts, inspect state rows, expose an
+endpoint, or authorize report use.
+
+The non-executing report-crypto descriptor policy fixes the exact target,
+imports, constants, enum registries, immutable class profiles, validator
+behavior, and false capability results. Added canonicalization, frame
+construction, HKDF, CBOR, AEAD, random generation, Key Service calls,
+attachment streaming, persistence, network, file, logging, Django integration,
+endpoint, or authorization behavior fails closed. The target is parsed but
+never imported or executed.
+
+Passing this source policy closes no report-text canonicalization, attachment
+admission, encryption/decryption, deterministic-CBOR, Report-DEK lifecycle,
+Key Service, sandbox, storage, audit, export, deletion, independent-review, or
+production gate.
+
 ## Stage A Response Note text descriptor record
 
 `security_interfaces/response_text_descriptors.py` validates only the approved

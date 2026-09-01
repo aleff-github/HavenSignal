@@ -304,6 +304,11 @@ Test:
   issue credentials before every approved condition;
 - Report-DEK destruction makes every object permanently unusable across live
   replicas, rollback, snapshot, restore, and disaster recovery.
+- Stage A descriptor/source-conformance tests prove only the reviewed inert
+  Report-DEK, subkey, frame, envelope, object-kind, slot, and operation
+  metadata shape, and reject generation, HKDF, AEAD, CBOR, plaintext,
+  ciphertext, Key Service, stream, persistence, endpoint, and authorization
+  additions.
 
 ## Recovery enumeration
 

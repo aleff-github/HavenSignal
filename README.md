@@ -100,6 +100,9 @@ The repository currently contains:
   headers, binding metadata, and ordinary-download denials;
 - inert file-sandbox descriptors that validate only approved microVM compute,
   isolation, transport, filesystem, and credential-denial metadata;
+- inert original-report crypto descriptors that validate only approved Report-DEK,
+  object-subkey, fixed-frame, envelope-size, object-kind, slot, and
+  key-operation profile shapes;
 - inert recovery credential descriptors that validate only strict Ticket ID and
   Recovery Secret encoding shapes without retaining credential material;
 - inert Response Note crypto descriptors that validate only approved format,

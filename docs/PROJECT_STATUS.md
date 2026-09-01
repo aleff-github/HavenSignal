@@ -293,3 +293,18 @@ python manage.py runserver 127.0.0.1:8000
 ```
 
 The development server is for local testing only.
+
+## Latest Stage A slice — original-report crypto descriptors
+
+The current repository adds inert original-report crypto descriptors for the
+owner-approved `docs/26` profile. The descriptor validates only static
+Report-DEK/object-subkey, algorithm, nonce/tag, fixed-frame, ciphertext-size,
+object-kind/slot, immutable-context, AAD/KDF purpose, and allowlisted operation
+metadata.
+
+The descriptor and its exact-AST source policy intentionally do not implement
+canonicalization, framing, HKDF, AEAD, CBOR, Key Service calls, attachment
+streaming, protected persistence, endpoints, audit/state authorization,
+deletion, or recovery of report content. All cryptographic, Key Service,
+storage, sandbox, audit, export, deletion, independent-review, deployment, and
+production gates remain open.

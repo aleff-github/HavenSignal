@@ -148,6 +148,15 @@ from .recovery_descriptors import (
     scan_recovery_descriptor_source,
     scan_repository_recovery_descriptor,
 )
+from .report_crypto_descriptors import (
+    EXPECTED_REPORT_CRYPTO_DESCRIPTOR_AST_DIGEST,
+    REPORT_CRYPTO_DESCRIPTOR_PATH,
+    ReportCryptoDescriptorSourceViolation,
+    ReportCryptoDescriptorSourceViolationCode,
+    analyze_report_crypto_descriptor_source,
+    scan_report_crypto_descriptor_source,
+    scan_repository_report_crypto_descriptor,
+)
 from .request_admission_descriptors import (
     EXPECTED_REQUEST_ADMISSION_DESCRIPTOR_AST_DIGEST,
     REQUEST_ADMISSION_DESCRIPTOR_PATH,
@@ -340,6 +349,13 @@ __all__ = [
     "analyze_recovery_descriptor_source",
     "scan_recovery_descriptor_source",
     "scan_repository_recovery_descriptor",
+    "EXPECTED_REPORT_CRYPTO_DESCRIPTOR_AST_DIGEST",
+    "REPORT_CRYPTO_DESCRIPTOR_PATH",
+    "ReportCryptoDescriptorSourceViolation",
+    "ReportCryptoDescriptorSourceViolationCode",
+    "analyze_report_crypto_descriptor_source",
+    "scan_report_crypto_descriptor_source",
+    "scan_repository_report_crypto_descriptor",
     "EXPECTED_REQUEST_ADMISSION_DESCRIPTOR_AST_DIGEST",
     "REQUEST_ADMISSION_DESCRIPTOR_PATH",
     "RequestAdmissionDescriptorSourceViolation",

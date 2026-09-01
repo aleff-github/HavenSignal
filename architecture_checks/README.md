@@ -180,6 +180,15 @@ false capability properties, imports, and absence of generation, HMAC,
 persistence, lookup, endpoint, logging, or authorization behavior are reviewed
 source facts.
 
+The report-crypto descriptor source policy locks the complete executable AST
+of `security_interfaces/report_crypto_descriptors.py`. Exact original-report
+algorithm/profile identifiers, Report-DEK/subkey/nonce/tag/frame/envelope
+sizes, immutable context-size shapes, AAD/KDF purposes, object-kind/slot
+registries, allowlisted key-operation names, false capability properties,
+imports, and absence of canonicalization, framing, HKDF, CBOR, AEAD, Key
+Service calls, attachment streaming, persistence, logging, endpoint, or
+authorization behavior are reviewed source facts.
+
 The response-crypto descriptor source policy locks the complete executable AST
 of `security_interfaces/response_crypto_descriptors.py`. Exact response
 algorithm/profile identifiers, key/nonce/tag/frame/envelope sizes, immutable
