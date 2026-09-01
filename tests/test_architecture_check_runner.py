@@ -36,6 +36,7 @@ class ArchitectureCheckRunnerTests(SimpleTestCase):
                 "file-sandbox-descriptor",
                 "recovery-descriptor",
                 "report-crypto-descriptor",
+                "report-schema-descriptor",
                 "request-admission-descriptor",
                 "safe-view-descriptor",
                 "response-crypto-descriptor",

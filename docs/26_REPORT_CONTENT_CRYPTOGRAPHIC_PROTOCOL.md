@@ -50,6 +50,16 @@ Stage A source-conformance evidence only and does not close any cryptographic,
 Key Service, storage, sandbox, audit, deletion, deployment, independent-review,
 or production gate.
 
+`security_interfaces/report_schema_descriptors.py` separately validates only
+the ordered AAD/envelope field metadata for this protocol: field names,
+primitive categories, public constant values, fixed byte sizes, allowed object
+kinds/slots, and allowed public frame/ciphertext sizes. It does not encode or
+parse CBOR, retain context values, hold ciphertext, call a Key Service, stream
+attachments, persist data, expose endpoints, or authorize report use. Its
+exact source AST is locked by
+`architecture_checks/report_schema_descriptors.py`; passing that policy is
+also Stage A source-conformance evidence only.
+
 ## Selected primitives
 
 Version 1 uses only reviewed library constructions:

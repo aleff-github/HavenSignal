@@ -77,7 +77,7 @@ preserves every independent and production gate.
 
 | Requirement IDs | Severity | Primary design documents | Verification | Current gate |
 |---|---|---|---|---|
-| SEC-CONF-001..008 | CRITICAL | 02 Threat Model; 04 Cryptographic Model; 15 Trust Boundaries; 20 Submission Protocol; 26 Report Crypto | 14: AEAD/context, key destruction, roles/capabilities, deployment checks plus inert report-crypto descriptor source-conformance tests | Exact report crypto owner-approved and content-free Stage A descriptors/source guard implemented; independent review and Key Service gates OPEN |
+| SEC-CONF-001..008 | CRITICAL | 02 Threat Model; 04 Cryptographic Model; 15 Trust Boundaries; 20 Submission Protocol; 26 Report Crypto | 14: AEAD/context, key destruction, roles/capabilities, deployment checks plus inert report crypto/schema descriptor source-conformance tests | Exact report crypto owner-approved and content-free Stage A crypto/schema descriptors with source guards implemented; independent review and Key Service gates OPEN |
 | SEC-ANON-001..003 | CRITICAL | 00 Scope; 05 Recovery; 08 Audit; 10 Network Anonymity | 14: reporter logging, recovery enumeration, browser caching | End-to-end deployment validation required |
 | SEC-ANON-004 | HIGH | 10 Network Anonymity; 11 Technology Decisions | 14: CAPTCHA and dependency/security checks | No-JS product OPEN |
 | SEC-ANON-005 | CRITICAL | 10 Network Anonymity; 15 Trust Boundaries | Deployment/security acceptance test | Production deployment gate |

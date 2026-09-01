@@ -750,6 +750,31 @@ admission, encryption/decryption, deterministic-CBOR, Report-DEK lifecycle,
 Key Service, sandbox, storage, audit, export, deletion, independent-review, or
 production gate.
 
+## Stage A original-report schema descriptor record
+
+`security_interfaces/report_schema_descriptors.py` validates only the ordered
+metadata schema for the approved original-report AAD and ciphertext envelope
+fields. It records field names, primitive categories, fixed byte sizes, public
+constant values, allowed public object kinds, allowed public object slots, and
+allowed public frame/ciphertext sizes only.
+
+Successful validation returns immutable profile evidence only. It does not
+encode or parse deterministic CBOR, hold report/attempt/object IDs, hold key
+handles, hold nonces, hold ciphertext, call a Key Service, stream attachments,
+inspect state rows, use audit receipts, persist protected bytes, expose an
+endpoint, or authorize report use.
+
+The non-executing report-schema descriptor policy fixes the exact target,
+imports, constants, enum registries, immutable class profiles, validator
+behavior, and false capability results. Added CBOR, context-value retention,
+ciphertext handling, service calls, attachment streaming, persistence,
+network, file, logging, Django integration, endpoint, or authorization behavior
+fails closed. The target is parsed but never imported or executed.
+
+Passing this source policy closes no deterministic-CBOR, context binding,
+ciphertext handling, Key Service, sandbox streaming, persistence,
+independent-review, or production gate.
+
 ## Stage A Response Note text descriptor record
 
 `security_interfaces/response_text_descriptors.py` validates only the approved
