@@ -38,6 +38,14 @@ For the metadata-only Stage A described by
 - the complete executable AST of the inert audit-v1 descriptor module remains
   exact; registry, field, validator, lifetime, success-return, import, dynamic,
   and side-effect changes fail closed without importing or executing it;
+- submission-audit descriptors accept only the exact approved
+  `SUBMISSION_ACCEPTANCE_REQUESTED`, `SUBMISSION_RECEIVED`, and
+  `SUBMISSION_ACCEPTANCE_FAILED` order, timing labels, authorization windows,
+  durable-receipt flags, and allowed/forbidden payload metadata;
+- submission-audit validation and source policy reject event append, receipt
+  creation/verification, attempt-state inspection, Audit Service calls, key
+  creation, submission metadata persistence, endpoint behavior, and submission
+  authorization without importing or executing the target;
 - alert-v1 descriptors enforce the exact ten alert/severity pairs, delivery
   states, actor pairing, identifier lengths, timestamp range, and
   acknowledgement pairing while rejecting unknown/arbitrary values;
@@ -276,6 +284,10 @@ For `20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`, also verify:
 - `SUBMISSION_ACCEPTANCE_REQUESTED` is durable before key/material creation;
 - `SUBMISSION_RECEIVED` is emitted only after exact staged objects and metadata
   are durably verified;
+- Stage A submission-audit descriptor/source-conformance tests prove only the
+  approved phase order, timing labels, receipt-required flags, and
+  content-free payload allow/deny metadata, and reject any append, receipt,
+  service, persistence, key, endpoint, or authorization capability;
 - lost responses never cause credential re-display, replacement credentials,
   or a duplicate report for the same attempt;
 - no event or state claims that the reporter received or saved credentials;

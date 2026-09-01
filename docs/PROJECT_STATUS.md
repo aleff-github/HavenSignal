@@ -355,3 +355,20 @@ Key Service, expose endpoints, or authorize submission. Frame construction,
 padding verification, encryption, submission staging, request admission, Key
 Service, storage, independent-review, deployment, and production gates remain
 open.
+
+## Latest Stage A slice — submission-audit descriptors
+
+The current repository adds inert submission-audit descriptors for the
+owner-approved `docs/20` submission acceptance protocol. The descriptor
+validates only the exact `SUBMISSION_ACCEPTANCE_REQUESTED`,
+`SUBMISSION_RECEIVED`, and `SUBMISSION_ACCEPTANCE_FAILED` phase order,
+event-family mapping, timing labels, authorization windows,
+durable-receipt-required flags, and closed allowed/forbidden payload-field
+metadata.
+
+The descriptor and its exact-AST source policy intentionally do not append
+audit events, create or verify receipts, inspect attempt state, call the Audit
+Service, create report keys, persist submission metadata, expose endpoints, or
+authorize acceptance. Durable-audit, receipt/checkpoint, submission acceptance,
+Key Service, storage, concurrency, independent-review, deployment, and
+production gates remain open.
