@@ -232,6 +232,21 @@ policy. Passing proves only reviewed source shape; it is not frame
 construction, frame parsing, padding validation, attachment validation,
 encryption, storage, endpoint behavior, or production evidence.
 
+`submission_audit_descriptors.py` validates only the static audit profile for
+the approved submission acceptance sequence in `docs/20`. It records the
+ordered `SUBMISSION_ACCEPTANCE_REQUESTED`, `SUBMISSION_RECEIVED`, and
+`SUBMISSION_ACCEPTANCE_FAILED` phase names, their required timing labels,
+authorization windows, durable-receipt requirement flags, and the closed
+allowed/forbidden payload-field registries. It does not append audit events,
+create or verify receipts, inspect attempt state, call the Audit Service,
+create report keys, persist submission metadata, or authorize a submission.
+
+The submission-audit descriptor source is locked by a non-executing exact-AST
+policy. Passing proves only reviewed source shape; it is not audit append,
+durable receipt creation, receipt verification, attempt-state inspection,
+Audit Service behavior, persistence, Key Service behavior, endpoint behavior,
+or production evidence.
+
 `response_crypto_descriptors.py` validates only the static version-1 Response
 Note crypto profile already fixed in `docs/24`: XChaCha20-Poly1305-IETF
 combined-mode metadata, fixed plaintext-frame and ciphertext/tag sizes,

@@ -192,6 +192,16 @@ validate padding bytes, inspect attachments, encrypt, decrypt, persist, expose
 endpoints, or authorize submission until the cryptographic, Key Service,
 storage, sandbox, request-admission, and production gates are closed.
 
+Submission-audit code is currently limited to inert structural descriptors. It
+may validate only the exact approved `SUBMISSION_ACCEPTANCE_REQUESTED`,
+`SUBMISSION_RECEIVED`, and `SUBMISSION_ACCEPTANCE_FAILED` ordering, timing
+labels, authorization windows, durable-receipt flags, and allowed/forbidden
+payload metadata. It must not append audit events, create or verify receipts,
+inspect attempt state, call the Audit Service, create report keys, persist
+submission metadata, expose endpoints, or authorize submission until the audit
+receipt, Key Service, submission, concurrency, deployment, and production gates
+are closed.
+
 Recovery credential code is currently limited to inert structural descriptors.
 It may validate the exact owner-approved Ticket ID and Recovery Secret encoding
 shapes, but it must not generate credentials, compute or compare verifier tags,
