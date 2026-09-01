@@ -363,6 +363,12 @@ metadata only. This evidence does not parse HTTP or multipart data, install a
 Django upload handler, create sandbox jobs, prove proxy/no-spool behavior,
 preserve CSRF under the custom handler, or authorize submission endpoint use.
 
+Stage A also includes content-free attachment-admission descriptors and a
+non-executing exact-source policy for common file count, size, kind, slot,
+extension, transient-filename, and trust-denial metadata. This evidence does
+not inspect file bytes, parse JPEG/PNG/PDF, create sandbox jobs, persist
+originals, expose safe views, encrypt attachments, or authorize upload handling.
+
 ## Architecture conformance tests
 
 Before a profile receives production credentials, automated and operational tests must prove:

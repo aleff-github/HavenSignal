@@ -43,6 +43,15 @@ class AlertDescriptorRejected(ValueError):
         super().__init__(self.public_code)
 
 
+class AttachmentAdmissionDescriptorRejected(ValueError):
+    """Controlled rejection for an invalid inert attachment descriptor."""
+
+    public_code = "attachment_admission_descriptor_rejected"
+
+    def __init__(self) -> None:
+        super().__init__(self.public_code)
+
+
 class CaptchaDescriptorRejected(ValueError):
     """Controlled rejection for an invalid inert CAPTCHA descriptor."""
 

@@ -319,6 +319,27 @@ KVM host/jailer/kernel/root-image/broker review, fuzz corpus, Key Service/audit
 integration, PostgreSQL concurrency, and deployment validation remain release
 gates after owner approval.
 
+## Inert Stage A implementation evidence
+
+The current `security_interfaces/attachment_admission_descriptors.py` module
+models only content-free common attachment-admission metadata: slot counts,
+file-size bounds, accepted kind/slot/extension registries, transient
+defense-in-depth filename shape, and the explicit denial that client MIME,
+Content-Disposition, paths, extensions, magic bytes, parser warnings, or partial
+success are authoritative.
+
+It does not inspect file bytes, parse JPEG/PNG/PDF, create sandbox jobs, persist
+originals, retain original filenames, log request material, expose upload or
+safe-view endpoints, encrypt attachments, or authorize uploads.
+
+A non-executing exact-AST policy locks this descriptor source profile and
+rejects file-byte inspection, parser behavior, sandbox-job creation,
+original-byte persistence, filename persistence, request-material logging,
+upload authorization, dynamic, logging, file, network, Django-integration, and
+service-call changes without importing or executing the target. Passing is
+source-conformance evidence only and closes no parser, renderer, sandbox,
+encryption, safe-view, endpoint, deployment, or production gate.
+
 ## External design references
 
 - [qpdf 12 JSON representation](https://qpdf.readthedocs.io/en/latest/json.html)

@@ -438,6 +438,14 @@ filename exposure, sandbox job creation, plaintext persistence, submission
 acceptance, dynamic behavior, and source echoing. These tests do not enable an
 upload endpoint or custom handler.
 
+Current Stage A evidence also tests that the inert attachment-admission
+descriptor accepts only the approved common file count, size, kind, slot,
+extension, transient-filename, and trust-denial metadata. Its exact-source
+policy rejects file-byte inspection, format parsing, sandbox-job creation,
+original-byte persistence, filename persistence, request-material logging,
+upload authorization, dynamic behavior, and source echoing. These tests do not
+enable parser, sandbox, upload, safe-view, or encryption behavior.
+
 Unsafe/uncertain should fail closed.
 
 ## File sandbox
