@@ -1102,3 +1102,22 @@ oracle, service call, endpoint, file, network, dynamic, and submission
 authorization changes fail closed. This closes no endpoint, credential
 verifier, PostgreSQL concurrency, duplicate suppression executor, audit, Key
 Service, storage, logging, deployment, independent-review, or production gate.
+
+The fifty-fifth Stage A slice adds inert submission acceptance checkpoint
+descriptors for the owner-approved `docs/20` Phase 0-6 submission acceptance
+sequence. Validation covers only the exact phase order, checkpoint labels,
+requirement labels, and forbidden runtime capability categories. It does not
+parse requests, validate credentials, claim attempts, append audit events,
+verify receipts, call the Key Service, encrypt content, write storage, commit
+database state, render responses, run reconciliation, expose endpoints, or
+authorize submission.
+
+A new non-executing acceptance-checkpoint descriptor source policy locks the
+exact imports, constants, enums, immutable classes, validators, and false
+capability results. Request parsing, credential validation, attempt claiming,
+audit append, receipt verification, Key Service calls, encryption, storage
+writes, database commits, response rendering, reconciliation, endpoint, file,
+network, dynamic, and submission-authorization changes fail closed. This
+closes no endpoint, credential verifier, PostgreSQL concurrency, audit, Key
+Service, storage, logging, reconciliation, deployment, independent-review, or
+production gate.

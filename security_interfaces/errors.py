@@ -88,6 +88,15 @@ class SubmissionAuditDescriptorRejected(ValueError):
         super().__init__(self.public_code)
 
 
+class SubmissionAcceptanceCheckpointDescriptorRejected(ValueError):
+    """Controlled rejection for invalid inert acceptance-checkpoint metadata."""
+
+    public_code = "submission_acceptance_checkpoint_descriptor_rejected"
+
+    def __init__(self) -> None:
+        super().__init__(self.public_code)
+
+
 class SubmissionAttemptCredentialDescriptorRejected(ValueError):
     """Controlled rejection for invalid inert attempt-credential metadata."""
 

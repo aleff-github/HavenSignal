@@ -46,6 +46,14 @@ For the metadata-only Stage A described by
   creation/verification, attempt-state inspection, Audit Service calls, key
   creation, submission metadata persistence, endpoint behavior, and submission
   authorization without importing or executing the target;
+- submission acceptance checkpoint descriptors accept only the exact approved
+  Phase 0-6 phase order, checkpoint names, requirement labels, and forbidden
+  runtime capability categories;
+- submission acceptance checkpoint validation and source policy reject request
+  parsing, credential validation, attempt claiming, audit append, receipt
+  verification, Key Service calls, encryption, storage writes, database
+  commits, response rendering, reconciliation, endpoint behavior, and
+  submission authorization without importing or executing the target;
 - submission-attempt credential descriptors accept only the approved single-use
   semantics, two-hour non-sliding pre-claim lifetime, POST body/protected
   same-site cookie transport labels, URL/query/referrer/header-log denials,
@@ -328,6 +336,12 @@ For `20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`, also verify:
   approved phase order, timing labels, receipt-required flags, and
   content-free payload allow/deny metadata, and reject any append, receipt,
   service, persistence, key, endpoint, or authorization capability;
+- Stage A submission acceptance checkpoint descriptor/source-conformance tests
+  prove only the approved Phase 0-6 order, checkpoint names, requirement
+  labels, and forbidden runtime capability metadata, and reject request
+  parsing, credential validation, attempt claiming, audit append, receipt
+  verification, Key Service, encryption, storage, database, response,
+  reconciliation, endpoint, or authorization capability;
 - Stage A attempt-credential descriptor/source-conformance tests prove only the
   approved single-use, two-hour pre-claim, allowed/forbidden transport,
   forbidden binding, minimum durable-representation, and no-log/no-audit
