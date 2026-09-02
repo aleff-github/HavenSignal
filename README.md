@@ -100,7 +100,8 @@ The repository currently contains:
 - a preliminary fail-closed guard against encoded, transfer-coded, expected,
   or trailered disabled submission bodies;
 - a fail-closed query-string guard on disabled submission, response-recovery,
-  and operator-authentication routes;
+  and operator-authentication routes, including their missing-slash redirect
+  variants;
 - negative-capability placeholders for security services, with a non-executing
   guard that locks their exact fail-closed behavior;
 - inert audit, alert, and step-up structural descriptors;

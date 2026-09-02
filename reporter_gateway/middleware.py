@@ -14,6 +14,11 @@ FORBIDDEN_SUBMISSION_META_KEYS = frozenset(
         "HTTP_TRANSFER_ENCODING",
     }
 )
+SENSITIVE_QUERY_PATH_RESPONSE_CODES = (
+    (("/submit", "/submit/"), "submission_unavailable"),
+    (("/response", "/response/"), "response_retrieval_unavailable"),
+    (("/operator", "/operator/"), "operator_authentication_unavailable"),
+)
 
 
 class ReporterSecurityHeadersMiddleware:
@@ -29,16 +34,15 @@ class ReporterSecurityHeadersMiddleware:
         return self._apply_headers(response)
 
     def _admit_request(self, request: HttpRequest) -> HttpResponse | None:
-        if request.path_info in (
-            "/submit/",
-            "/response/",
-            "/operator/",
-        ) and request.META.get("QUERY_STRING", ""):
-            response_code = {
-                "/submit/": "submission_unavailable",
-                "/response/": "response_retrieval_unavailable",
-                "/operator/": "operator_authentication_unavailable",
-            }[request.path_info]
+        response_code = next(
+            (
+                code
+                for paths, code in SENSITIVE_QUERY_PATH_RESPONSE_CODES
+                if request.path_info in paths
+            ),
+            None,
+        )
+        if response_code is not None and request.META.get("QUERY_STRING", ""):
             return HttpResponse(
                 response_code,
                 content_type="text/plain; charset=utf-8",
