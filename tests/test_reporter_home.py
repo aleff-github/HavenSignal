@@ -1,9 +1,13 @@
 """Security and behavior tests for the inert reporter landing page."""
 
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.test import SimpleTestCase
 from django.urls import reverse
 
+from reporter_gateway.middleware import (
+    SUBMISSION_MAX_CONTENT_LENGTH_BYTES,
+    ReporterSecurityHeadersMiddleware,
+)
 from reporter_gateway.views import status, submit_unavailable
 
 
@@ -122,6 +126,60 @@ class ReporterSubmitUnavailableTests(SimpleTestCase):
         request.method = "POST"
 
         response = submit_unavailable(request)
+
+        self.assertEqual(response.status_code, 503)
+        self.assertEqual(response.content, b"submission_unavailable")
+
+    def test_submit_oversized_content_length_fails_before_view(self) -> None:
+        class BodyExplodes(HttpRequest):
+            @property
+            def body(self) -> bytes:  # type: ignore[override]
+                raise AssertionError("body must not be read")
+
+        def reject_view_call(request: HttpRequest) -> HttpResponse:
+            raise AssertionError("view must not be called")
+
+        request = BodyExplodes()
+        request.method = "POST"
+        request.path_info = "/submit/"
+        request.META["CONTENT_LENGTH"] = str(SUBMISSION_MAX_CONTENT_LENGTH_BYTES + 1)
+        middleware = ReporterSecurityHeadersMiddleware(reject_view_call)
+
+        response = middleware(request)
+
+        self.assertEqual(response.status_code, 413)
+        self.assertEqual(response.content, b"submission_unavailable")
+        self.assertEqual(response.headers["Cache-Control"], "no-store, max-age=0")
+        self.assertIn("default-src 'none'", response.headers["Content-Security-Policy"])
+
+    def test_submit_malformed_content_length_fails_before_view(self) -> None:
+        request = HttpRequest()
+        request.method = "POST"
+        request.path_info = "/submit/"
+        request.META["CONTENT_LENGTH"] = "22 MiB"
+        middleware = ReporterSecurityHeadersMiddleware(
+            lambda request: HttpResponse("unexpected")
+        )
+
+        response = middleware(request)
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.content, b"submission_unavailable")
+
+    def test_submit_limit_content_length_continues_to_fail_closed_view(self) -> None:
+        request = HttpRequest()
+        request.method = "POST"
+        request.path_info = "/submit/"
+        request.META["CONTENT_LENGTH"] = str(SUBMISSION_MAX_CONTENT_LENGTH_BYTES)
+        middleware = ReporterSecurityHeadersMiddleware(
+            lambda request: HttpResponse(
+                "submission_unavailable",
+                content_type="text/plain; charset=utf-8",
+                status=503,
+            )
+        )
+
+        response = middleware(request)
 
         self.assertEqual(response.status_code, 503)
         self.assertEqual(response.content, b"submission_unavailable")
