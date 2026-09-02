@@ -759,3 +759,25 @@ return, message logging, endpoint, file, network, dynamic, and recovery
 authorization changes fail closed. This closes no byte construction, verifier
 construction, secret handling, HMAC execution, logging, independent-review,
 deployment, or production gate.
+
+The sixty-third Stage A slice adds inert Recovery Verifier Service descriptors
+for the owner-approved `docs/21` service operation boundary. Validation covers
+only the exact create-only and boolean-verify operation labels, authenticated/
+encrypted/bounded channel requirements, body/credential log exclusions,
+create-output and verify-output rules, and forbidden capability metadata. It
+does not implement service calls, generate credentials, compute HMACs, compare
+tags, persist verifier records, perform lookups, accept reporter-supplied key
+IDs, return raw keys, expected tags, or partial-match detail, read response
+state, call a Key Service, authorize Response-DEK use, log credentials, expose
+endpoints, or authorize recovery.
+
+A new non-executing Recovery Verifier Service descriptor source policy locks
+the exact imports, constants, enums, immutable classes, validators, and false
+capability results. Service calls, credential generation, HMAC computation, tag
+comparison, verifier-record persistence, lookup, reporter-supplied key IDs,
+raw-key/tag/partial-match disclosure, response-state reads, Key Service calls,
+Response-DEK authorization, credential logging, endpoint, file, network,
+dynamic, and recovery authorization changes fail closed. This closes no
+service topology, network transport, verifier construction, persistence,
+lookup, response eligibility, Response-DEK lifecycle, Key Service,
+independent-review, deployment, or production gate.

@@ -150,6 +150,9 @@ The repository currently contains:
   and forbidden-material metadata;
 - inert recovery HMAC-message descriptors that fix only approved canonical
   domain/separator/Ticket-ID/Recovery-Secret layout metadata;
+- inert Recovery Verifier Service descriptors that fix only approved
+  create-only, boolean-verify, channel, output, and forbidden-capability
+  metadata;
 - inert Response Note crypto descriptors that validate only approved format,
   size, algorithm, AAD, envelope, and key-operation profile shapes;
 - inert Response Note text descriptors that validate only approved plain-text,
@@ -179,6 +182,8 @@ The repository currently contains:
 - a non-executing exact-AST guard for inert recovery verifier-record
   descriptors;
 - a non-executing exact-AST guard for inert recovery HMAC-message descriptors;
+- a non-executing exact-AST guard for inert Recovery Verifier Service
+  descriptors;
 - a non-executing exact-AST guard for inert Response Note crypto descriptors;
 - a non-executing exact-AST guard for inert Response Note text descriptors;
 - a non-executing exact-AST guard for inert Response Note schema descriptors;

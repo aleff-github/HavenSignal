@@ -232,6 +232,22 @@ exact-AST policy. Passing proves only reviewed source shape; it is not byte
 construction, HMAC computation, verifier construction, secret handling,
 endpoint behavior, or production evidence.
 
+`recovery_verifier_service_descriptors.py` validates only the static service
+operation boundary approved in `docs/21`: create-only for one current
+unaccepted submission attempt, boolean verify for recovery, authenticated/
+encrypted/bounded channel requirements, credential/body log exclusions,
+create-output limited to version/key ID/verifier tag, verify-output limited to
+boolean result, and explicit denial that verifier success authorizes
+Response-DEK use. It does not implement service calls, generate credentials,
+compute HMACs, compare tags, persist verifier records, perform lookups, expose
+endpoints, log credentials, or authorize recovery.
+
+The Recovery Verifier Service descriptor source is locked by a non-executing
+exact-AST policy. Passing proves only reviewed source shape; it is not a
+service client/server, network channel, verifier construction, persistence
+layer, lookup path, Response-DEK authorization path, endpoint behavior, or
+production evidence.
+
 `report_crypto_descriptors.py` validates only the static version-1 original
 report crypto profile already fixed in `docs/26`: XChaCha20-Poly1305-IETF
 combined-mode metadata, 32-byte Report-DEK and object-subkey sizes, fixed
@@ -451,6 +467,12 @@ exact-AST policy. Passing proves only reviewed source shape; it is not
 credential parsing, byte concatenation, HMAC computation, verifier key access,
 tag output, message logging, endpoint behavior, or recovery authorization
 evidence.
+
+The Recovery Verifier Service descriptor source is locked by a non-executing
+exact-AST policy. Passing proves only reviewed source shape; it is not a
+service call implementation, network client, HMAC computation, tag comparison,
+verifier-record persistence, lookup, response-state access, Key Service call,
+Response-DEK authorization, endpoint behavior, or production evidence.
 
 `response_crypto_descriptors.py` validates only the static version-1 Response
 Note crypto profile already fixed in `docs/24`: XChaCha20-Poly1305-IETF

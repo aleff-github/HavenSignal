@@ -205,6 +205,15 @@ class RecoveryVerifierRecordDescriptorRejected(ValueError):
         super().__init__(self.public_code)
 
 
+class RecoveryVerifierServiceDescriptorRejected(ValueError):
+    """Controlled rejection for invalid inert recovery verifier service metadata."""
+
+    public_code = "recovery_verifier_service_descriptor_rejected"
+
+    def __init__(self) -> None:
+        super().__init__(self.public_code)
+
+
 class RequestAdmissionDescriptorRejected(ValueError):
     """Controlled rejection for an invalid inert request-admission descriptor."""
 
