@@ -60,6 +60,21 @@ OPERATOR_CONSOLE_IMPORT_POLICY = ImportPolicy(
 )
 
 
+RECOVERY_GATEWAY_IMPORT_POLICY = ImportPolicy(
+    name="RECOVERY_GATEWAY_INERT_V1",
+    allowed_absolute_modules=frozenset(
+        {
+            "django.apps",
+            "django.http",
+            "django.shortcuts",
+            "django.urls",
+            "django.views.decorators.http",
+        }
+    ),
+    allow_local_relative_imports=True,
+)
+
+
 REPORTER_ROOT_URL_IMPORT_POLICY = ImportPolicy(
     name="REPORTER_ROOT_URL_INERT_V1",
     allowed_absolute_modules=frozenset(

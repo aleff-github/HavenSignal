@@ -42,6 +42,7 @@ EXPECTED_SETTINGS = MappingProxyType({
     "INSTALLED_APPS": (
         "django.contrib.staticfiles",
         "operator_console.apps.OperatorConsoleConfig",
+        "recovery_gateway.apps.RecoveryGatewayConfig",
         "report_lifecycle.apps.ReportLifecycleConfig",
         "submission_workflow.apps.SubmissionWorkflowConfig",
     ),
@@ -134,7 +135,10 @@ EXPECTED_REPORTER_PYTHON_AST_DIGESTS = MappingProxyType(
             "55a0c3a812fa44cd357c766b5dbc436ee74c5a402c01e091dbb5a757a0905f6a"
         ),
         "reporter_gateway/views.py": (
-            "48630258f94313ee7ec62abb3966eff430535d2e31f3dfecd4e82b82f850a4c4"
+            "dd6c7a1df7ae3895d458220395df95145907a9287b4b90911aa621875602d2db"
+        ),
+        "recovery_gateway/views.py": (
+            "f42f0534695fb03acf5d178b734c7f20de62c926d08df4808006141497a04fc2"
         ),
     }
 )
@@ -438,18 +442,22 @@ def analyze_urlconf_source(
     detail_code = "PUBLIC_INERT_SURFACES_ONLY"
     if isinstance(value, (ast.List, ast.Tuple)):
         if relative_path == "anonymous_reporting/urls.py":
-            valid = len(value.elts) == 2 and _is_include_path_pattern(
+            valid = len(value.elts) == 3 and _is_include_path_pattern(
                 value.elts[0],
                 route_value="",
                 included_urlconf="reporter_gateway.urls",
             ) and _is_include_path_pattern(
                 value.elts[1],
+                route_value="response/",
+                included_urlconf="recovery_gateway.urls",
+            ) and _is_include_path_pattern(
+                value.elts[2],
                 route_value="operator/",
                 included_urlconf="operator_console.urls",
             )
             detail_code = "ROOT_INERT_SURFACE_INCLUDES_ONLY"
         elif relative_path == "reporter_gateway/urls.py":
-            valid = len(value.elts) == 4 and _is_path_pattern(
+            valid = len(value.elts) == 3 and _is_path_pattern(
                 value.elts[0],
                 route_value="",
                 view_name="home",
@@ -464,13 +472,16 @@ def analyze_urlconf_source(
                 route_value="submit/",
                 view_name="submit_unavailable",
                 url_name="reporter-submit",
-            ) and _is_path_pattern(
-                value.elts[3],
-                route_value="response/",
+            )
+            detail_code = "REPORTER_INERT_ROUTES_ONLY"
+        elif relative_path == "recovery_gateway/urls.py":
+            valid = len(value.elts) == 1 and _is_path_pattern(
+                value.elts[0],
+                route_value="",
                 view_name="response_unavailable",
                 url_name="reporter-response",
             )
-            detail_code = "REPORTER_INERT_ROUTES_ONLY"
+            detail_code = "RECOVERY_INERT_ROUTES_ONLY"
         elif relative_path == "operator_console/urls.py":
             valid = len(value.elts) == 1 and _is_path_pattern(
                 value.elts[0],

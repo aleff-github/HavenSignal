@@ -7,6 +7,7 @@ from django.test import SimpleTestCase
 
 from architecture_checks import (
     OPERATOR_CONSOLE_IMPORT_POLICY,
+    RECOVERY_GATEWAY_IMPORT_POLICY,
     REPORTER_GATEWAY_IMPORT_POLICY,
     REPORTER_ROOT_URL_IMPORT_POLICY,
     ImportViolationCode,
@@ -32,6 +33,14 @@ class CurrentArchitectureBoundaryTests(SimpleTestCase):
         violations = scan_python_package(
             package_root=BASE_DIR / "operator_console",
             policy=OPERATOR_CONSOLE_IMPORT_POLICY,
+            relative_to=BASE_DIR,
+        )
+        self.assertEqual(violations, ())
+
+    def test_recovery_gateway_uses_only_current_inert_imports(self) -> None:
+        violations = scan_python_package(
+            package_root=BASE_DIR / "recovery_gateway",
+            policy=RECOVERY_GATEWAY_IMPORT_POLICY,
             relative_to=BASE_DIR,
         )
         self.assertEqual(violations, ())
@@ -94,6 +103,18 @@ class CurrentArchitectureBoundaryTests(SimpleTestCase):
         )
         self.assertEqual(
             OPERATOR_CONSOLE_IMPORT_POLICY.allowed_absolute_modules,
+            frozenset(
+                {
+                    "django.apps",
+                    "django.http",
+                    "django.shortcuts",
+                    "django.urls",
+                    "django.views.decorators.http",
+                }
+            ),
+        )
+        self.assertEqual(
+            RECOVERY_GATEWAY_IMPORT_POLICY.allowed_absolute_modules,
             frozenset(
                 {
                     "django.apps",
@@ -226,13 +247,18 @@ builtins.exec("pass")
             source=(
                 "from django.urls import include, path\n"
                 "from reporter_gateway.views import home\n"
+                "from recovery_gateway.views import response_unavailable\n"
                 "from operator_console.views import operator_unavailable\n"
             ),
             relative_path="anonymous_reporting/urls.py",
             policy=REPORTER_ROOT_URL_IMPORT_POLICY,
         )
-        self.assertEqual(len(violations), 2)
+        self.assertEqual(len(violations), 3)
         self.assertEqual(
             {violation.module for violation in violations},
-            {"operator_console.views", "reporter_gateway.views"},
+            {
+                "operator_console.views",
+                "recovery_gateway.views",
+                "reporter_gateway.views",
+            },
         )

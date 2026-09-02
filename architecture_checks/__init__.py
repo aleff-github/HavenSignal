@@ -68,6 +68,7 @@ from .descriptors import (
 
 from .imports import (
     OPERATOR_CONSOLE_IMPORT_POLICY,
+    RECOVERY_GATEWAY_IMPORT_POLICY,
     REPORTER_GATEWAY_IMPORT_POLICY,
     REPORTER_ROOT_URL_IMPORT_POLICY,
     ArchitectureImportViolation,
@@ -458,6 +459,7 @@ __all__ = [
     "scan_audit_descriptor_source",
     "scan_report_step_up_descriptor_source",
     "REPORTER_GATEWAY_IMPORT_POLICY",
+    "RECOVERY_GATEWAY_IMPORT_POLICY",
     "REPORTER_ROOT_URL_IMPORT_POLICY",
     "ArchitectureImportViolation",
     "ImportPolicy",

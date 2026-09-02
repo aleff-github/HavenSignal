@@ -45,6 +45,7 @@ class CurrentReporterSurfaceTests(SimpleTestCase):
         for relative_path in (
             "anonymous_reporting/urls.py",
             "reporter_gateway/urls.py",
+            "recovery_gateway/urls.py",
             "operator_console/urls.py",
         ):
             with self.subTest(relative_path=relative_path):
@@ -60,7 +61,6 @@ class CurrentReporterSurfaceTests(SimpleTestCase):
             "home.html",
             "status.html",
             "submit_unavailable.html",
-            "response_unavailable.html",
         ):
             with self.subTest(template_name=template_name):
                 violations = scan_surface_file(
@@ -69,6 +69,19 @@ class CurrentReporterSurfaceTests(SimpleTestCase):
                     analyzer=analyze_template_source,
                 )
                 self.assertEqual(violations, ())
+
+    def test_current_recovery_template_uses_only_the_passive_profile(self) -> None:
+        violations = scan_surface_file(
+            path=(
+                BASE_DIR
+                / "templates"
+                / "recovery_gateway"
+                / "response_unavailable.html"
+            ),
+            relative_to=BASE_DIR,
+            analyzer=analyze_template_source,
+        )
+        self.assertEqual(violations, ())
 
     def test_current_operator_template_uses_only_the_passive_profile(self) -> None:
         violations = scan_surface_file(
@@ -168,6 +181,7 @@ class SettingsAndUrlSurfaceAbuseTests(SimpleTestCase):
         sources = (
             (
                 "urlpatterns = [path('', include('reporter_gateway.urls')), "
+                "path('response/', include('recovery_gateway.urls')), "
                 "path('operator/', include('operator_console.urls')), "
                 "path('admin/', include('django.contrib.admin.urls'))]"
             ),
@@ -175,6 +189,7 @@ class SettingsAndUrlSurfaceAbuseTests(SimpleTestCase):
             "urlpatterns = [path('', include('reporter_gateway.urls'))]",
             (
                 "urlpatterns = [path('', include('reporter_gateway.urls')), "
+                "path('response/', include('recovery_gateway.urls')), "
                 "path('operator/', include('operator_console.urls'))]\n"
                 "urlpatterns.append(path('send/', send, name='send'))"
             ),
@@ -202,8 +217,11 @@ class SettingsAndUrlSurfaceAbuseTests(SimpleTestCase):
                 "urlpatterns = [path('', home, name='reporter-home'), "
                 "path('status/', status, name='reporter-status'), "
                 "path('submit/', submit_unavailable, name='reporter-submit'), "
-                "path('response/', response_unavailable, name='reporter-response'), "
                 "path('admin/', admin, name='admin')]",
+            ),
+            (
+                "recovery_gateway/urls.py",
+                "urlpatterns = [path('lookup/', lookup, name='recovery-lookup')]",
             ),
             (
                 "operator_console/urls.py",

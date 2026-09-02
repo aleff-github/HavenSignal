@@ -36,6 +36,9 @@ EXPECTED_BOOTSTRAP_SOURCE_AST_DIGESTS = MappingProxyType(
         "operator_console/apps.py": (
             "844fa7f1ddf8a9dc702582560244d32587dc93d658b28d863ac1fa665e658aeb"
         ),
+        "recovery_gateway/apps.py": (
+            "f6be3942860a22dd6362293c4e8a7a77fb287d6ed6bfb172383a542abe163cfe"
+        ),
         "report_lifecycle/apps.py": (
             "1e9d5f00b03746b95a215354f41d75993498aa51801c82b4e0e397205b3026a1"
         ),
