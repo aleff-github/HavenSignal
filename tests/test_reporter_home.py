@@ -166,7 +166,7 @@ class ReporterSubmitUnavailableTests(SimpleTestCase):
         self.assertIn("default-src 'none'", response.headers["Content-Security-Policy"])
 
     def test_submit_invalid_content_length_fails_before_view(self) -> None:
-        for content_length in ("", "0", "-1", "+1", "22 MiB"):
+        for content_length in ("", "0", "-1", "+1", "22 MiB", "١"):
             with self.subTest(content_length=content_length):
                 request = HttpRequest()
                 request.method = "POST"
@@ -180,6 +180,28 @@ class ReporterSubmitUnavailableTests(SimpleTestCase):
 
                 self.assertEqual(response.status_code, 400)
                 self.assertEqual(response.content, b"submission_unavailable")
+
+    def test_submit_huge_decimal_content_length_fails_without_conversion(self) -> None:
+        class BodyExplodes(HttpRequest):
+            @property
+            def body(self) -> bytes:  # type: ignore[override]
+                raise AssertionError("body must not be read")
+
+        def reject_view_call(request: HttpRequest) -> HttpResponse:
+            raise AssertionError("view must not be called")
+
+        request = BodyExplodes()
+        request.method = "POST"
+        request.path_info = "/submit/"
+        request.META["CONTENT_LENGTH"] = "9" * 10_000
+        middleware = ReporterSecurityHeadersMiddleware(reject_view_call)
+
+        response = middleware(request)
+
+        self.assertEqual(response.status_code, 413)
+        self.assertEqual(response.content, b"submission_unavailable")
+        self.assertEqual(response.headers["Cache-Control"], "no-store, max-age=0")
+        self.assertFalse(response.cookies)
 
     def test_submit_forbidden_framing_headers_fail_before_view(self) -> None:
         class BodyExplodes(HttpRequest):
@@ -265,22 +287,27 @@ class ReporterSubmitUnavailableTests(SimpleTestCase):
                 self.assertFalse(response.cookies)
 
     def test_submit_limit_content_length_continues_to_fail_closed_view(self) -> None:
-        request = HttpRequest()
-        request.method = "POST"
-        request.path_info = "/submit/"
-        request.META["CONTENT_LENGTH"] = str(SUBMISSION_MAX_CONTENT_LENGTH_BYTES)
-        middleware = ReporterSecurityHeadersMiddleware(
-            lambda request: HttpResponse(
-                "submission_unavailable",
-                content_type="text/plain; charset=utf-8",
-                status=503,
-            )
-        )
+        for content_length in (
+            str(SUBMISSION_MAX_CONTENT_LENGTH_BYTES),
+            "0001",
+        ):
+            with self.subTest(content_length=content_length):
+                request = HttpRequest()
+                request.method = "POST"
+                request.path_info = "/submit/"
+                request.META["CONTENT_LENGTH"] = content_length
+                middleware = ReporterSecurityHeadersMiddleware(
+                    lambda request: HttpResponse(
+                        "submission_unavailable",
+                        content_type="text/plain; charset=utf-8",
+                        status=503,
+                    )
+                )
 
-        response = middleware(request)
+                response = middleware(request)
 
-        self.assertEqual(response.status_code, 503)
-        self.assertEqual(response.content, b"submission_unavailable")
+                self.assertEqual(response.status_code, 503)
+                self.assertEqual(response.content, b"submission_unavailable")
 
     def test_submit_rejects_other_unsafe_methods(self) -> None:
         for method in ("put", "patch", "delete"):

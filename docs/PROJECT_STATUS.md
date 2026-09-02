@@ -37,9 +37,11 @@ POST returns a controlled `503` without reading `request.body`, `request.POST`,
 or `request.FILES`, and without creating any report, attempt, audit event,
 credential, key, upload, or database transition.
 
-POST `/submit/` requests with an absent, non-decimal, zero, or
+POST `/submit/` requests with an absent, non-ASCII-decimal, zero, or
 greater-than-22,020,096-byte `Content-Length` are rejected by the
-browser-facing middleware before the view is called. This preliminary guard
+browser-facing middleware before the view is called. Length comparison does
+not convert the untrusted field to an integer, so arbitrarily long decimal
+values fail without an integer-conversion exception. This preliminary guard
 reads no request body, installs no upload handler, parses no multipart data,
 and does not accept submissions.
 

@@ -95,8 +95,8 @@ The repository currently contains:
 - metadata-only submission and report lifecycle models;
 - pure monotonic transition planners;
 - explicit fail-closed persistence boundaries;
-- an inert submission `Content-Length` guard for invalid or oversized disabled
-  POSTs;
+- an inert submission `Content-Length` guard with bounded ASCII-decimal
+  validation for invalid or oversized disabled POSTs;
 - a preliminary fail-closed guard against encoded, transfer-coded, expected,
   or trailered disabled submission bodies;
 - a fail-closed query-string guard on disabled submission, response-recovery,
