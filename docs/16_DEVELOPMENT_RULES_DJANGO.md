@@ -154,6 +154,14 @@ The Response Note must remain reporter-invisible until Report-DEK destruction is
 
 Security-sensitive components whose exact construction remains OPEN must be represented only by explicit failing interfaces/placeholders. Do not add a convenience fallback, development plaintext mode, or provisional cryptographic construction.
 
+The reporter submission route may exist only as a disabled fail-closed surface
+until submission acceptance is explicitly enabled. Its GET response may render
+static guidance with no form. Its POST response must return controlled
+unavailable status without reading `request.body`, `request.POST`, or
+`request.FILES`, without echoing reporter input, and without creating reports,
+attempts, audit events, credentials, keys, uploads, storage writes, or state
+transitions.
+
 No-JavaScript CAPTCHA code is currently limited to inert structural descriptors.
 It may validate only the exact owner-approved version, identifier encoding,
 answer alphabet/length, anonymous form-scope size, expiry/cleanup timing,
