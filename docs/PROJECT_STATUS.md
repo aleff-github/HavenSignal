@@ -32,6 +32,11 @@ POST returns a controlled `503` without reading `request.body`, `request.POST`,
 or `request.FILES`, and without creating any report, attempt, audit event,
 credential, key, upload, or database transition.
 
+POST `/submit/` requests with malformed or greater-than-22,020,096-byte
+`Content-Length` are rejected by the browser-facing middleware before the view
+is called. This guard reads no request body, installs no upload handler, parses
+no multipart data, and does not accept submissions.
+
 The `/response/` route is intentionally disabled and served by the separate
 Recovery Gateway app. GET renders static guidance. POST returns a controlled
 `503` without reading `request.body`, `request.POST`, or `request.FILES`, and
