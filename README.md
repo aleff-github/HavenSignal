@@ -2,11 +2,16 @@
 
 **A security-first open-source system for anonymous disclosure and human guidance.**
 
-HavenSignal is designed for people who need to disclose a sensitive situation without creating an account or identifying themselves, especially when they may not know which institution, professional, authority, or support channel is appropriate.
+HavenSignal is designed for people who need to disclose a sensitive situation without creating an account or identifying themselves, especially inside universities, higher-education institutions, and other organizations where they may not know which office, professional, authority, or support channel is appropriate.
 
 The project deliberately avoids becoming a chat platform, case-management suite, automated accusation system, or AI decision-maker. Its baseline is intentionally narrow:
 
 **anonymous disclosure → human review → one guidance Response Note → cryptographic destruction of the original report**
+
+HavenSignal is not an e-commerce, Shopify, merchant, checkout, billing,
+subscription, marketplace, app-store, SaaS-growth, or monetization product.
+Those goals are outside the project boundary and must not influence product
+logic or implementation priorities.
 
 > [!IMPORTANT]
 > HavenSignal is under active development and is **not production-ready**. The current public reporter surface is intentionally inert and cannot receive real reports. Do not deploy the current repository to collect sensitive disclosures.
@@ -14,6 +19,10 @@ The project deliberately avoids becoming a chat platform, case-management suite,
 ## Why HavenSignal exists
 
 In complex institutions, a person may know that something is wrong but not know where to go next. Hierarchy, fear of retaliation, uncertainty about procedure, and the cost of choosing the wrong channel can make the first step difficult.
+
+The first intended deployment context is universities and higher-education
+institutions, while preserving a generic organizational model so the same
+security boundary can later support other suitable institutions.
 
 HavenSignal is intended to provide a minimal first-contact mechanism:
 

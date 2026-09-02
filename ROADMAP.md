@@ -4,6 +4,17 @@ This roadmap describes sequencing, not a promise of delivery dates.
 
 HavenSignal enables sensitive capabilities only after the corresponding security evidence exists.
 
+## Product direction
+
+HavenSignal's initial product context is anonymous sensitive reporting for
+universities and higher-education institutions.
+
+The roadmap must not include e-commerce, Shopify, merchant, checkout, billing,
+subscription, marketplace, app-store, SaaS-growth, or monetization goals. Work
+that does not advance confidential anonymous disclosure, human guidance,
+reporter anonymity, metadata minimization, operator accountability, controlled
+institutional operation, or release safety is out of scope.
+
 ## Phase 0 — Security architecture and specification
 
 **Status: substantially complete, with external/production gates still open.**

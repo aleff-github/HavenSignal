@@ -4,6 +4,17 @@
 
 This document keeps the implementation boundary visible without requiring the top-level README to reproduce the full handoff narrative.
 
+## Product identity
+
+HavenSignal is currently scoped as a university-born anonymous reporting
+system for highly sensitive disclosures. It is not a Shopify, e-commerce,
+merchant, checkout, billing, subscription, marketplace, app-store,
+SaaS-growth, or monetization product.
+
+The current implementation must remain aligned with anonymous disclosure,
+human review, one Response Note, cryptographic destruction of the original
+report, and institutional operator accountability.
+
 ## Reporter surface
 
 The repository contains a Django 5.2.17 development scaffold, one inert

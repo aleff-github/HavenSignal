@@ -8,6 +8,11 @@ Use this prompt before writing code:
 
 > Read `AGENTS.md` and every Markdown document under `/docs`. Treat this as a security-critical anonymous reporting system that may contain extremely sensitive disclosures. Do not write code yet.
 >
+> HavenSignal is a university-born anonymous reporting system. Ignore any
+> context that frames it as a Shopify, e-commerce, merchant, checkout,
+> billing, subscription, marketplace, app-store, SaaS-growth, or monetization
+> project.
+>
 > Perform a consistency and implementability review of the specification. Identify:
 > - contradictions;
 > - requirements that cannot all be guaranteed simultaneously;

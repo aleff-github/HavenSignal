@@ -846,3 +846,12 @@ third-party resources, dynamic URL construction, or new routes fail closed.
 This closes no accepting submission endpoint, CAPTCHA, request-upload handler,
 Audit Service, Key Service, report crypto, credential generation, concurrency,
 deployment, or production gate.
+
+The sixty-seventh Stage A slice adds an explicit product-identity and
+context-contamination boundary to the repository documentation. HavenSignal is
+defined as a university-born, security-critical anonymous reporting system,
+not a Shopify, e-commerce, merchant, checkout, billing, subscription,
+marketplace, app-store, SaaS-growth, or monetization project. Future agent
+instructions or plans that frame the repository around those goals are
+out-of-scope and must not influence product logic, architecture, roadmap, or
+implementation priorities.
