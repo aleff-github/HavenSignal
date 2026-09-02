@@ -43,6 +43,13 @@ browser-facing middleware before the view is called. This preliminary guard
 reads no request body, installs no upload handler, parses no multipart data,
 and does not accept submissions.
 
+The same preliminary application guard rejects a disabled submission POST when
+`Transfer-Encoding`, `Content-Encoding`, `Expect`, or `Trailer` is present. It
+checks only the presence of the corresponding request metadata keys and never
+reads or returns their values. Raw-header ambiguity, duplicate-header
+detection, request desynchronization testing, and enforcement at the earliest
+network boundary remain production-gated responsibilities.
+
 Any query string on `/submit/` or `/response/` is rejected before the
 corresponding view is called. The middleware checks only whether a query is
 present; it does not parse, echo, or log query values. This prevents report or

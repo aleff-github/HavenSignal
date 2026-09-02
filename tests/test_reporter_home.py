@@ -181,6 +181,41 @@ class ReporterSubmitUnavailableTests(SimpleTestCase):
                 self.assertEqual(response.status_code, 400)
                 self.assertEqual(response.content, b"submission_unavailable")
 
+    def test_submit_forbidden_framing_headers_fail_before_view(self) -> None:
+        class BodyExplodes(HttpRequest):
+            @property
+            def body(self) -> bytes:  # type: ignore[override]
+                raise AssertionError("body must not be read")
+
+        def reject_view_call(request: HttpRequest) -> HttpResponse:
+            raise AssertionError("view must not be called")
+
+        sentinel = "UNTRUSTED_HEADER_VALUE_DO_NOT_ECHO"
+        for meta_key in (
+            "HTTP_CONTENT_ENCODING",
+            "HTTP_EXPECT",
+            "HTTP_TRAILER",
+            "HTTP_TRANSFER_ENCODING",
+        ):
+            with self.subTest(meta_key=meta_key):
+                request = BodyExplodes()
+                request.method = "POST"
+                request.path_info = "/submit/"
+                request.META["CONTENT_LENGTH"] = "1"
+                request.META[meta_key] = sentinel
+                middleware = ReporterSecurityHeadersMiddleware(reject_view_call)
+
+                response = middleware(request)
+
+                self.assertEqual(response.status_code, 400)
+                self.assertEqual(response.content, b"submission_unavailable")
+                self.assertNotIn(sentinel, response.content.decode("utf-8"))
+                self.assertEqual(
+                    response.headers["Cache-Control"],
+                    "no-store, max-age=0",
+                )
+                self.assertFalse(response.cookies)
+
     def test_submit_limit_content_length_continues_to_fail_closed_view(self) -> None:
         request = HttpRequest()
         request.method = "POST"
