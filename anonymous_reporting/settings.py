@@ -21,6 +21,7 @@ ALLOWED_HOSTS: list[str] = []
 # assets remain first-party and contain no JavaScript or tracking resources.
 INSTALLED_APPS = [
     "django.contrib.staticfiles",
+    "operator_console.apps.OperatorConsoleConfig",
     "report_lifecycle.apps.ReportLifecycleConfig",
     "submission_workflow.apps.SubmissionWorkflowConfig",
 ]

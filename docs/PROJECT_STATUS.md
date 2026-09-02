@@ -8,7 +8,8 @@ This document keeps the implementation boundary visible without requiring the to
 
 The repository contains a Django 5.2.17 development scaffold, one inert
 reporter landing page, one inert `/status/` page, one fail-closed `/submit/`
-surface, and one fail-closed `/response/` recovery surface.
+surface, one fail-closed `/response/` recovery surface, and one inert
+fail-closed `/operator/` console entry point.
 
 These pages have no:
 
@@ -36,6 +37,12 @@ POST returns a controlled `503` without reading `request.body`, `request.POST`,
 or `request.FILES`, and without creating any credential verification, lookup,
 audit event, key operation, decryption, plaintext rendering, recovery-state
 mutation, or database transition.
+
+The `/operator/` route is intentionally disabled. GET renders a static
+operator-console unavailable page. POST returns a controlled `503` without
+reading `request.body`, `request.POST`, or `request.FILES`, and without
+creating any authentication session, WebAuthn challenge, report lookup, audit
+event, lease, key operation, decryption, export, or database transition.
 
 ## Submission workflow
 
@@ -122,10 +129,10 @@ authorization capabilities remain absent.
 
 ## Architecture checks
 
-`architecture_checks/` statically constrains the current Reporter Gateway and
-root URL surface, including import allowlists, passive page expectations, and
-the exact executable AST of the read-only view and restrictive response-header
-middleware.
+`architecture_checks/` statically constrains the current Reporter Gateway,
+operator-console entry point, and root URL surface, including import allowlists,
+passive page expectations, and the exact executable AST of the read-only and
+fail-closed views and restrictive response-header middleware.
 
 `python -m architecture_checks .` runs the current static policy set as one
 aggregate fail-closed CI gate and reports only controlled, content-free

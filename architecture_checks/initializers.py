@@ -27,6 +27,9 @@ EXPECTED_INITIALIZER_SOURCE_AST_DIGESTS = MappingProxyType(
         "anonymous_reporting/__init__.py": (
             "505f9dc9d894f75c5a8033f373e0b88fa108306b3f01719600e4aa5cf5cf1691"
         ),
+        "operator_console/__init__.py": (
+            "c30b794825a8688a569e54f824b7a91e53d7450f1486fabaf5fe4cc8b2810496"
+        ),
         "report_lifecycle/__init__.py": (
             "b9ba94e16ede68eab739a66e985a2808e95429186717eff3ffc208458d053888"
         ),

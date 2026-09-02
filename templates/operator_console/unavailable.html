@@ -1,0 +1,45 @@
+{% load static %}
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <title>Operator console unavailable</title>
+    <link rel="stylesheet" href="{% static 'reporter_gateway/home.css' %}">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="hero">
+        <p class="eyebrow">Operator Console</p>
+        <h1>Console operatore non ancora abilitata.</h1>
+        <p class="intro">
+          Questa superficie verifica solo routing e protezioni browser. Non
+          autentica operatori e non permette accesso a segnalazioni.
+        </p>
+      </header>
+
+      <section class="notice" aria-labelledby="operator-status">
+        <h2 id="operator-status">Operator authentication fail-closed</h2>
+        <p>
+          Login, sessioni, WebAuthn, claim, open lease, note di risposta,
+          allegati, export e decrittazione restano non disponibili.
+        </p>
+      </section>
+
+      <aside class="anonymity" aria-labelledby="operator-next">
+        <h2 id="operator-next">Prossimo gate</h2>
+        <p>
+          La console reale richiederà autenticazione forte, separazione dei
+          ruoli, sessioni server-side, CSRF, audit receipt e workstation
+          operatore approvata prima di mostrare contenuti sensibili.
+        </p>
+      </aside>
+
+      <footer>
+        Questa schermata non contiene form, JavaScript, analytics o risorse di
+        terze parti e non legge credenziali operatore.
+      </footer>
+    </main>
+  </body>
+</html>

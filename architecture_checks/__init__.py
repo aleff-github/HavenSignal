@@ -67,6 +67,7 @@ from .descriptors import (
 )
 
 from .imports import (
+    OPERATOR_CONSOLE_IMPORT_POLICY,
     REPORTER_GATEWAY_IMPORT_POLICY,
     REPORTER_ROOT_URL_IMPORT_POLICY,
     ArchitectureImportViolation,
@@ -461,6 +462,7 @@ __all__ = [
     "ArchitectureImportViolation",
     "ImportPolicy",
     "ImportViolationCode",
+    "OPERATOR_CONSOLE_IMPORT_POLICY",
     "analyze_python_source",
     "scan_python_file",
     "scan_python_package",

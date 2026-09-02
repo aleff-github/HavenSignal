@@ -41,6 +41,7 @@ EXPECTED_SETTINGS = MappingProxyType({
     "DEBUG": True,
     "INSTALLED_APPS": (
         "django.contrib.staticfiles",
+        "operator_console.apps.OperatorConsoleConfig",
         "report_lifecycle.apps.ReportLifecycleConfig",
         "submission_workflow.apps.SubmissionWorkflowConfig",
     ),
@@ -126,6 +127,9 @@ _CSS_ACTIVE_PATTERNS = (
 
 EXPECTED_REPORTER_PYTHON_AST_DIGESTS = MappingProxyType(
     {
+        "operator_console/views.py": (
+            "b6ab12b30737e431a3a7291f21c729943440c6f0fb091f5e0f9146497a4575c0"
+        ),
         "reporter_gateway/middleware.py": (
             "55a0c3a812fa44cd357c766b5dbc436ee74c5a402c01e091dbb5a757a0905f6a"
         ),
@@ -399,7 +403,7 @@ def analyze_urlconf_source(
         )
 
     value = assignments[0].value
-    valid = isinstance(value, (ast.List, ast.Tuple)) and len(value.elts) == 4
+    valid = isinstance(value, (ast.List, ast.Tuple)) and len(value.elts) == 5
     if valid:
         valid = _is_path_pattern(
             value.elts[0],
@@ -421,6 +425,11 @@ def analyze_urlconf_source(
             route_value="response/",
             view_name="response_unavailable",
             url_name="reporter-response",
+        ) and _is_path_pattern(
+            value.elts[4],
+            route_value="operator/",
+            view_name="operator_unavailable",
+            url_name="operator-console",
         )
     if valid:
         return ()
@@ -429,7 +438,7 @@ def analyze_urlconf_source(
             code=SurfaceViolationCode.URL_PATTERN_MISMATCH,
             relative_path=relative_path,
             line=assignments[0].lineno,
-            detail_code="REPORTER_HOME_STATUS_SUBMIT_RESPONSE_ONLY",
+            detail_code="PUBLIC_INERT_SURFACES_ONLY",
         ),
     )
 

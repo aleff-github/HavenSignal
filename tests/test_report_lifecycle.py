@@ -477,6 +477,7 @@ class LifecycleMetadataPersistenceTests(TestCase):
                 "reporter-status",
                 "reporter-submit",
                 "reporter-response",
+                "operator-console",
             },
         )
         app_path = Path(Report._meta.app_config.path)

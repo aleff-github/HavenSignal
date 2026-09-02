@@ -44,6 +44,7 @@ class InitializerSourcePolicyTests(SimpleTestCase):
     def test_passive_package_side_effects_are_rejected(self) -> None:
         passive_targets = (
             "anonymous_reporting/__init__.py",
+            "operator_console/__init__.py",
             "report_lifecycle/__init__.py",
             "reporter_gateway/__init__.py",
             "submission_workflow/__init__.py",
@@ -53,6 +54,7 @@ class InitializerSourcePolicyTests(SimpleTestCase):
             "\nimport socket\n",
             "\nopen('package.log', 'w')\n",
             "\nDYNAMIC = lambda: True\n",
+            "\nfrom django.conf import settings\n",
         )
         for relative_path, suffix in zip(passive_targets, suffixes, strict=True):
             with self.subTest(relative_path=relative_path):

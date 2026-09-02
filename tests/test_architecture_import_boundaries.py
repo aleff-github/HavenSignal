@@ -6,6 +6,7 @@ from pathlib import Path
 from django.test import SimpleTestCase
 
 from architecture_checks import (
+    OPERATOR_CONSOLE_IMPORT_POLICY,
     REPORTER_GATEWAY_IMPORT_POLICY,
     REPORTER_ROOT_URL_IMPORT_POLICY,
     ImportViolationCode,
@@ -23,6 +24,14 @@ class CurrentArchitectureBoundaryTests(SimpleTestCase):
         violations = scan_python_package(
             package_root=BASE_DIR / "reporter_gateway",
             policy=REPORTER_GATEWAY_IMPORT_POLICY,
+            relative_to=BASE_DIR,
+        )
+        self.assertEqual(violations, ())
+
+    def test_operator_console_uses_only_current_inert_imports(self) -> None:
+        violations = scan_python_package(
+            package_root=BASE_DIR / "operator_console",
+            policy=OPERATOR_CONSOLE_IMPORT_POLICY,
             relative_to=BASE_DIR,
         )
         self.assertEqual(violations, ())
@@ -78,7 +87,24 @@ class CurrentArchitectureBoundaryTests(SimpleTestCase):
         )
         self.assertEqual(
             REPORTER_ROOT_URL_IMPORT_POLICY.allowed_absolute_modules,
-            frozenset({"django.urls", "reporter_gateway.views"}),
+            frozenset(
+                {
+                    "django.urls",
+                    "operator_console.views",
+                    "reporter_gateway.views",
+                }
+            ),
+        )
+        self.assertEqual(
+            OPERATOR_CONSOLE_IMPORT_POLICY.allowed_absolute_modules,
+            frozenset(
+                {
+                    "django.apps",
+                    "django.http",
+                    "django.shortcuts",
+                    "django.views.decorators.http",
+                }
+            ),
         )
         with self.assertRaises(FrozenInstanceError):
             REPORTER_GATEWAY_IMPORT_POLICY.name = "WEAKENED"
@@ -181,11 +207,11 @@ builtins.exec("pass")
         self.assertIsNone(violations[0].module)
         self.assertNotIn(sentinel, repr(violations[0]))
 
-    def test_url_policy_rejects_any_new_surface_import(self) -> None:
+    def test_url_policy_rejects_any_unreviewed_surface_import(self) -> None:
         violations = analyze_python_source(
             source=(
                 "from django.urls import path\n"
-                "from operator_console.urls import urlpatterns\n"
+                "from unreviewed_console.views import endpoint\n"
             ),
             relative_path="anonymous_reporting/urls.py",
             policy=REPORTER_ROOT_URL_IMPORT_POLICY,
@@ -193,5 +219,5 @@ builtins.exec("pass")
         self.assertEqual(len(violations), 1)
         self.assertEqual(
             violations[0].module,
-            "operator_console.urls",
+            "unreviewed_console.views",
         )

@@ -27,6 +27,7 @@ from .descriptors import (
     scan_report_step_up_descriptor_source,
 )
 from .imports import (
+    OPERATOR_CONSOLE_IMPORT_POLICY,
     REPORTER_GATEWAY_IMPORT_POLICY,
     REPORTER_ROOT_URL_IMPORT_POLICY,
     scan_python_file,
@@ -191,6 +192,14 @@ def _reporter_gateway_imports(root: Path) -> tuple[object, ...]:
     )
 
 
+def _operator_console_imports(root: Path) -> tuple[object, ...]:
+    return scan_python_package(
+        package_root=root / "operator_console",
+        policy=OPERATOR_CONSOLE_IMPORT_POLICY,
+        relative_to=root,
+    )
+
+
 def _settings_surface(root: Path) -> tuple[object, ...]:
     return scan_surface_file(
         path=root / "anonymous_reporting" / "settings.py",
@@ -223,6 +232,14 @@ def _reporter_header_surface(root: Path) -> tuple[object, ...]:
     )
 
 
+def _operator_view_surface(root: Path) -> tuple[object, ...]:
+    return scan_surface_file(
+        path=root / "operator_console" / "views.py",
+        relative_to=root,
+        analyzer=analyze_reporter_python_source,
+    )
+
+
 def _template_surface(root: Path) -> tuple[object, ...]:
     return scan_surface_file(
         path=root / "templates" / "reporter_gateway" / "home.html",
@@ -234,6 +251,30 @@ def _template_surface(root: Path) -> tuple[object, ...]:
 def _submit_template_surface(root: Path) -> tuple[object, ...]:
     return scan_surface_file(
         path=root / "templates" / "reporter_gateway" / "submit_unavailable.html",
+        relative_to=root,
+        analyzer=analyze_template_source,
+    )
+
+
+def _status_template_surface(root: Path) -> tuple[object, ...]:
+    return scan_surface_file(
+        path=root / "templates" / "reporter_gateway" / "status.html",
+        relative_to=root,
+        analyzer=analyze_template_source,
+    )
+
+
+def _response_template_surface(root: Path) -> tuple[object, ...]:
+    return scan_surface_file(
+        path=root / "templates" / "reporter_gateway" / "response_unavailable.html",
+        relative_to=root,
+        analyzer=analyze_template_source,
+    )
+
+
+def _operator_template_surface(root: Path) -> tuple[object, ...]:
+    return scan_surface_file(
+        path=root / "templates" / "operator_console" / "unavailable.html",
         relative_to=root,
         analyzer=analyze_template_source,
     )
@@ -398,12 +439,17 @@ ARCHITECTURE_CHECKS = (
     ),
     ArchitectureCheck("root-url-imports", _root_url_imports),
     ArchitectureCheck("reporter-gateway-imports", _reporter_gateway_imports),
+    ArchitectureCheck("operator-console-imports", _operator_console_imports),
     ArchitectureCheck("settings-surface", _settings_surface),
     ArchitectureCheck("url-surface", _url_surface),
     ArchitectureCheck("reporter-view-surface", _reporter_view_surface),
     ArchitectureCheck("reporter-header-surface", _reporter_header_surface),
+    ArchitectureCheck("operator-view-surface", _operator_view_surface),
     ArchitectureCheck("template-surface", _template_surface),
+    ArchitectureCheck("status-template-surface", _status_template_surface),
     ArchitectureCheck("submit-template-surface", _submit_template_surface),
+    ArchitectureCheck("response-template-surface", _response_template_surface),
+    ArchitectureCheck("operator-template-surface", _operator_template_surface),
     ArchitectureCheck("css-surface", _css_surface),
     ArchitectureCheck("lifecycle-migrations", _lifecycle_migrations),
     ArchitectureCheck("submission-migrations", _submission_migrations),
