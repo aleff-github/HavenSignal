@@ -327,6 +327,15 @@ properties, imports, and absence of persistence, verifier computation,
 candidate-secret testing, lookup, database writes, endpoint, or recovery
 authorization behavior are reviewed source facts.
 
+The recovery HMAC-message descriptor source policy locks the complete
+executable AST of `security_interfaces/recovery_hmac_message_descriptors.py`.
+Exact canonical domain label, zero separator, Ticket ID and Recovery Secret
+field sizes, ordered component registry, fixed-layout requirements, false
+capability properties, imports, and absence of credential-value acceptance,
+byte concatenation, HMAC computation, message retention, key access, tag
+return, logging, endpoint, or recovery authorization behavior are reviewed
+source facts.
+
 The response-crypto descriptor source policy locks the complete executable AST
 of `security_interfaces/response_crypto_descriptors.py`. Exact response
 algorithm/profile identifiers, key/nonce/tag/frame/envelope sizes, immutable

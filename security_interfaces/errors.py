@@ -160,6 +160,15 @@ class RecoveryDescriptorRejected(ValueError):
         super().__init__(self.public_code)
 
 
+class RecoveryHmacMessageDescriptorRejected(ValueError):
+    """Controlled rejection for invalid inert recovery HMAC message metadata."""
+
+    public_code = "recovery_hmac_message_descriptor_rejected"
+
+    def __init__(self) -> None:
+        super().__init__(self.public_code)
+
+
 class RecoveryFailureDescriptorRejected(ValueError):
     """Controlled rejection for invalid inert recovery-failure metadata."""
 

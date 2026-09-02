@@ -182,6 +182,15 @@ For the metadata-only Stage A described by
   persistence, verifier computation, candidate-secret testing, lookup,
   database writes, endpoint behavior, and recovery authorization without
   importing or executing the target;
+- recovery HMAC-message descriptors accept only the exact approved ASCII domain
+  label, terminating zero separator, 16-byte Ticket ID field, 32-byte Recovery
+  Secret field, fixed order, fixed lengths, and purpose-specific framing
+  metadata;
+- recovery HMAC-message validation and source policy reject credential-value
+  acceptance, byte concatenation, HMAC computation, canonical-message
+  retention, Recovery Secret storage, verifier-key access, tag return, message
+  logging, endpoint behavior, and recovery authorization without importing or
+  executing the target;
 - Response Note crypto descriptors accept only the exact version-1 algorithm,
   content-profile, key, nonce, tag, plaintext-frame, ciphertext/tag, immutable
   context-size, AAD-purpose, and Response-DEK operation profile shapes;
@@ -450,6 +459,10 @@ For `20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`, also verify:
   forbidden-material metadata, and reject secret/key/raw-message/DEK fields,
   persistence, verifier computation, candidate-secret testing, lookup,
   database writes, endpoint, or recovery authorization capability;
+- Stage A recovery HMAC-message descriptor/source-conformance tests prove only
+  the approved canonical layout metadata, and reject credential parsing, byte
+  concatenation, HMAC computation, message retention, key access, tag output,
+  logging, endpoint, or recovery authorization capability;
 - lost responses never cause credential re-display, replacement credentials,
   or a duplicate report for the same attempt;
 - no event or state claims that the reporter received or saved credentials;

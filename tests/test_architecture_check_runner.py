@@ -36,6 +36,7 @@ class ArchitectureCheckRunnerTests(SimpleTestCase):
                 "file-sandbox-descriptor",
                 "recovery-descriptor",
                 "recovery-failure-descriptor",
+                "recovery-hmac-message-descriptor",
                 "recovery-key-lifecycle-descriptor",
                 "recovery-verification-descriptor",
                 "recovery-verifier-record-descriptor",
