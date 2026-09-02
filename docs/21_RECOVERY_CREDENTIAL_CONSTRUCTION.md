@@ -405,6 +405,16 @@ Service, read state/ciphertext, decrypt, mutate first-read state, destroy
 Response-DEKs, expose endpoints, return distinct failures, or authorize
 recovery.
 
+Recovery retrieval ordering is also represented by inert descriptors and a
+non-executing exact-AST source policy. They fix only the approved POST input,
+CAPTCHA/verifier checkpoint, retrieval-audit receipt, state/version lock,
+immutable expiry, scoped decrypt, fixed-frame/no-store rendering, content-free
+outcome, and forbidden capability metadata. They do not handle requests,
+validate CAPTCHA or credentials, append audit events, verify receipts, query
+state, mutate first-read state, call the Key Service, decrypt, render,
+persist plaintext, log credentials/plaintext, return distinct failures, expose
+endpoints, or authorize recovery.
+
 ## External design references
 
 - [RFC 4648 — Base-N Encodings](https://www.rfc-editor.org/rfc/rfc4648.html)

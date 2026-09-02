@@ -267,6 +267,24 @@ Recovery Gateway, State Authority, first-read race implementation, Key Service
 authorization path, expiry workflow, endpoint behavior, or production
 evidence.
 
+`recovery_retrieval_descriptors.py` validates only the static retrieval
+checkpoint order approved in `docs/05`, `docs/21`, and `docs/24`: POST-only
+Ticket ID/Recovery Secret/CAPTCHA input, self-hosted CAPTCHA and approved
+verifier, durable `RESPONSE_RETRIEVAL_REQUESTED` receipt, server-time state/
+version lock, immutable expiry arm/conversion, scoped Key Service decrypt,
+fixed-frame validation, no-store/no-referrer rendering, and content-free
+outcome append. It does not handle requests, validate CAPTCHA or credentials,
+append audit events, verify receipts, query state, mutate first-read state,
+call the Key Service, decrypt, validate plaintext frames, render responses,
+persist plaintext, log credentials/plaintext, expose endpoints, return
+distinct failures, or authorize recovery.
+
+The recovery retrieval descriptor source is locked by a non-executing
+exact-AST policy. Passing proves only reviewed source shape; it is not a
+Recovery Gateway implementation, audit integration, State Authority lock,
+Key Service client, decrypt path, renderer, endpoint behavior, or production
+evidence.
+
 `report_crypto_descriptors.py` validates only the static version-1 original
 report crypto profile already fixed in `docs/26`: XChaCha20-Poly1305-IETF
 combined-mode metadata, 32-byte Report-DEK and object-subkey sizes, fixed

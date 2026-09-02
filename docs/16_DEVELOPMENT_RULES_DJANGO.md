@@ -356,6 +356,18 @@ recovery until the Recovery Gateway, State Authority, Key Service,
 concurrency, audit, logging, independent-review, deployment, and production
 gates are closed.
 
+Recovery retrieval code is currently limited to inert structural descriptors.
+It may validate only the exact approved POST input, CAPTCHA/verifier,
+`RESPONSE_RETRIEVAL_REQUESTED` receipt, state/version lock, immutable expiry,
+scoped decrypt, fixed-frame/no-store rendering, content-free outcome, and
+forbidden-capability metadata. It must not handle requests, validate CAPTCHA
+or credentials, append audit events, verify receipts, query state, mutate
+first-read state, call the Key Service, decrypt, validate plaintext frames,
+render responses, persist plaintext, log credentials/plaintext, expose
+endpoints, return distinct failures, or authorize recovery until the Recovery
+Gateway, audit, State Authority, Key Service, concurrency, logging,
+independent-review, deployment, and production gates are closed.
+
 Response Note cryptographic code is currently limited to inert structural
 descriptors. It may validate only the exact approved version, algorithm,
 content-profile, size, AAD-purpose, immutable-context, envelope, and

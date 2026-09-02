@@ -357,6 +357,16 @@ ciphertext reads, decryption, first-read mutation, key destruction, endpoint,
 distinct-failure, or recovery authorization behavior are reviewed source
 facts.
 
+The recovery retrieval descriptor source policy locks the complete executable
+AST of `security_interfaces/recovery_retrieval_descriptors.py`. Exact POST-
+input, CAPTCHA/verifier, `RESPONSE_RETRIEVAL_REQUESTED` receipt, state/version
+lock, immutable expiry, scoped decrypt, frame-validation/rendering, outcome,
+and forbidden-capability metadata, false capability properties, imports, and
+absence of request handling, CAPTCHA/credential validation, audit append,
+receipt verification, state query, first-read mutation, Key Service calls,
+decryption, plaintext persistence, rendering, endpoint, distinct-failure, or
+recovery authorization behavior are reviewed source facts.
+
 The response-crypto descriptor source policy locks the complete executable AST
 of `security_interfaces/response_crypto_descriptors.py`. Exact response
 algorithm/profile identifiers, key/nonce/tag/frame/envelope sizes, immutable

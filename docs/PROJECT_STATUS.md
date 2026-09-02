@@ -606,3 +606,22 @@ response windows, log credentials, return distinct failures, or authorize
 recovery. Recovery Gateway, State Authority, first-read concurrency, expiry
 workflow, Key Service authorization, independent-review, deployment, and
 production gates remain open.
+
+## Latest Stage A slice — recovery retrieval descriptors
+
+The current repository adds inert recovery retrieval descriptors for the
+owner-approved Response Note retrieval order in `docs/05`, `docs/21`, and
+`docs/24`. The descriptor validates only the approved POST input, CAPTCHA/
+verifier, `RESPONSE_RETRIEVAL_REQUESTED` receipt, server-time state/version
+lock, immutable expiry arm/conversion, scoped Key Service decrypt, fixed-
+frame/no-store rendering, content-free outcome, and forbidden-capability
+metadata.
+
+The descriptor and its exact-AST source policy intentionally do not handle
+requests, validate CAPTCHA or credentials, append audit events, verify
+receipts, query state, mutate first-read state, call the Key Service, decrypt,
+validate plaintext frames, render responses, persist plaintext, log
+credentials/plaintext, expose endpoints, return distinct failures, or
+authorize recovery. Recovery Gateway implementation, audit integration, State
+Authority locking, first-read concurrency, Key Service client, decrypt path,
+renderer, independent-review, deployment, and production gates remain open.

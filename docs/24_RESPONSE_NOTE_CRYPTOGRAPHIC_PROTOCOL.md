@@ -305,6 +305,13 @@ disconnect, or Key Service failure after step 4 does not roll back or extend
 the 72-hour window. This confidentiality-first availability trade-off requires
 explicit owner approval.
 
+The inert Stage A recovery retrieval descriptors represent only the ordered
+metadata for this flow: POST input, CAPTCHA/verifier, retrieval audit receipt,
+state/version lock, immutable expiry confirmation, scoped decrypt, fixed-frame
+validation/no-store rendering, and content-free outcome. They do not implement
+request handling, verifier execution, audit append, locking, Key Service
+calls, decryption, rendering, logging, endpoint behavior, or authorization.
+
 The Key Service uses its approved clock and denies at or after its armed expiry
 without relying on later database cleanup. If the state authority presents an
 earlier valid expiry, the earlier boundary wins. A mismatch, extension attempt,

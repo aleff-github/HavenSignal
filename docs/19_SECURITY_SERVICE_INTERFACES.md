@@ -994,6 +994,38 @@ Passing this source policy closes no Recovery Gateway, State Authority,
 first-read race implementation, expiry workflow, Key Service authorization,
 verifier invalidation, endpoint, independent-review, or production gate.
 
+## Stage A recovery retrieval descriptor record
+
+`security_interfaces/recovery_retrieval_descriptors.py` validates only the
+Response Note retrieval ordering facts already fixed by
+`docs/05_RECOVERY_RESPONSE.md`, `docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md`,
+and `docs/24_RESPONSE_NOTE_CRYPTOGRAPHIC_PROTOCOL.md`: version-1 POST input,
+CAPTCHA/verifier validation checkpoint, `RESPONSE_RETRIEVAL_REQUESTED`
+receipt, server-time state/version lock, immutable expiry arm/conversion,
+scoped Key Service decrypt, fixed-frame validation, no-store/no-referrer text
+response, and content-free outcome append.
+
+Successful validation returns immutable, content-free retrieval-sequence
+evidence. It does not handle requests, validate CAPTCHA, validate credentials,
+append audit events, verify receipts, query response state, mutate first-read
+state, call the Key Service, decrypt a Response Note, validate plaintext
+frames, render responses, persist plaintext, log credentials or plaintext,
+return distinct failures, expose an endpoint, or authorize recovery.
+
+The non-executing recovery retrieval descriptor policy fixes the exact target,
+imports, constants, enum registries, immutable class profiles, validator
+behavior, and false capability results. Added request handling, CAPTCHA/
+credential validation, audit append, receipt verification, state query,
+first-read mutation, Key Service calls, decryption, plaintext-frame
+validation, rendering, plaintext persistence, credential/plaintext logging,
+distinct failure, endpoint, file, network, dynamic, or recovery-authorization
+behavior fails closed. The target is parsed but never imported or executed.
+
+Passing this source policy closes no Recovery Gateway implementation, audit
+integration, State Authority lock, first-read concurrency, Key Service client,
+decrypt path, frame validator, renderer, endpoint, independent-review, or
+production gate.
+
 ## Stage A Response Note crypto descriptor record
 
 `security_interfaces/response_crypto_descriptors.py` validates only the static
