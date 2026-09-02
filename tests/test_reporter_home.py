@@ -216,6 +216,21 @@ class ReporterSubmitUnavailableTests(SimpleTestCase):
                 )
                 self.assertFalse(response.cookies)
 
+    def test_submit_query_on_missing_slash_is_not_redirected(self) -> None:
+        sentinel = "REPORT_SENTINEL_DO_NOT_REDIRECT"
+        for method in ("get", "post"):
+            with self.subTest(method=method):
+                response = getattr(self.client, method)(
+                    "/submit",
+                    query_params={"report": sentinel},
+                )
+
+                self.assertEqual(response.status_code, 400)
+                self.assertEqual(response.content, b"submission_unavailable")
+                self.assertNotIn("Location", response.headers)
+                self.assertNotIn(sentinel, response.content.decode("utf-8"))
+                self.assertFalse(response.cookies)
+
     def test_submit_limit_content_length_continues_to_fail_closed_view(self) -> None:
         request = HttpRequest()
         request.method = "POST"
