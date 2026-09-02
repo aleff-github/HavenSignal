@@ -1280,3 +1280,28 @@ dynamic, and recovery authorization changes fail closed. This closes no
 service topology, network transport, verifier construction, persistence,
 lookup, response eligibility, Response-DEK lifecycle, Key Service,
 independent-review, deployment, or production gate.
+
+The sixty-fourth Stage A slice adds inert recovery eligibility descriptors for
+the owner-approved Response Note eligibility boundaries in `docs/05`,
+`docs/24`, and `docs/32`. Validation covers only the exact unavailable,
+available-unread, read-window-open, read-window-expired, never-read-expired,
+destroyed labels, 90-day unread-expiry, 72-hour first-read-expiry,
+server-authoritative state, verifier-success-is-not-sufficient,
+Response-DEK-authorization, original Report-DEK destruction-before-visibility,
+generic non-success, and forbidden capability metadata. It does not perform
+lookup, validate credentials or CAPTCHA, call the Recovery Verifier Service or
+Key Service, read response state/ciphertext, decrypt, mutate first-read state,
+destroy Response-DEKs, invalidate recovery state, expose endpoints, extend
+response windows, log credentials, return distinct failures, or authorize
+recovery.
+
+A new non-executing recovery eligibility descriptor source policy locks the
+exact imports, constants, enums, immutable classes, validators, and false
+capability results. Lookup, credential/CAPTCHA validation, verifier-service
+calls, Key Service calls, state/ciphertext reads, decryption, first-read
+mutation, Response-DEK destruction, recovery-state invalidation execution,
+endpoint, response-window extension, credential logging, distinct failure,
+file, network, dynamic, and recovery-authorization changes fail closed. This
+closes no Recovery Gateway, State Authority, first-read concurrency, expiry
+workflow, Key Service authorization, verifier invalidation, independent-
+review, deployment, or production gate.

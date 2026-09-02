@@ -37,7 +37,7 @@ EXPECTED_INITIALIZER_SOURCE_AST_DIGESTS = MappingProxyType(
             "d3b736ebfc4ebdca6ece0d77a35315cf9fc5ccdcf4597bfa97367f4f689f8af3"
         ),
         "security_interfaces/__init__.py": (
-            "e4be05f9a475056f41ffbf7ce4bb19d607beb7132995a0538d7b59fd9d2e8d6f"
+            "111b5a7b5e4f97f760f5dd67535fb0e2d9d64134c9c64370cd5c7c7db4232f6b"
         ),
         "submission_workflow/__init__.py": (
             "8f01144fb792c83a2751099ae0c6c2ee2926c53a3bb9be71d43ec7a5c05ab6e2"

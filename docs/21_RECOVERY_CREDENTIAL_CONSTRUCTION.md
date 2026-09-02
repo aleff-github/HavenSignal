@@ -395,6 +395,16 @@ raw keys, expected tags, or partial-match detail, read response state, call a
 Key Service, authorize Response-DEK use, log credentials, expose endpoints, or
 authorize recovery.
 
+Recovery eligibility is also represented by inert descriptors and a
+non-executing exact-AST source policy. They fix only the approved state labels,
+90-day unread deadline, 72-hour first-read window, POST credential/CAPTCHA,
+server-authoritative eligibility, generic non-success, verifier-success-is-
+not-sufficient, and Response-DEK-authorization-required metadata. They do not
+perform lookup, validate credentials or CAPTCHA, call the verifier or Key
+Service, read state/ciphertext, decrypt, mutate first-read state, destroy
+Response-DEKs, expose endpoints, return distinct failures, or authorize
+recovery.
+
 ## External design references
 
 - [RFC 4648 — Base-N Encodings](https://www.rfc-editor.org/rfc/rfc4648.html)

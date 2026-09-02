@@ -587,3 +587,22 @@ authorize recovery. Service topology, network transport, verifier
 construction, persistence, lookup, response eligibility, Response-DEK
 lifecycle, Key Service, independent-review, deployment, and production gates
 remain open.
+
+## Latest Stage A slice — recovery eligibility descriptors
+
+The current repository adds inert recovery eligibility descriptors for the
+owner-approved Response Note eligibility boundaries in `docs/05`, `docs/24`,
+and `docs/32`. The descriptor validates only the approved unavailable,
+available-unread, read-window-open, read-window-expired, never-read-expired,
+destroyed, 90-day unread-expiry, 72-hour first-read-expiry, server-
+authoritative, verifier-success-is-not-sufficient, Response-DEK authorization,
+generic-result, and forbidden-capability metadata.
+
+The descriptor and its exact-AST source policy intentionally do not perform
+lookup, validate credentials or CAPTCHA, call the Recovery Verifier Service or
+Key Service, read response state/ciphertext, decrypt, mutate first-read state,
+destroy Response-DEKs, invalidate recovery state, expose endpoints, extend
+response windows, log credentials, return distinct failures, or authorize
+recovery. Recovery Gateway, State Authority, first-read concurrency, expiry
+workflow, Key Service authorization, independent-review, deployment, and
+production gates remain open.

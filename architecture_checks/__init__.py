@@ -175,6 +175,15 @@ from .recovery_key_lifecycle_descriptors import (
     scan_recovery_key_lifecycle_descriptor_source,
     scan_repository_recovery_key_lifecycle_descriptor,
 )
+from .recovery_eligibility_descriptors import (
+    EXPECTED_RECOVERY_ELIGIBILITY_DESCRIPTOR_AST_DIGEST,
+    RECOVERY_ELIGIBILITY_DESCRIPTOR_PATH,
+    RecoveryEligibilityDescriptorSourceViolation,
+    RecoveryEligibilityDescriptorSourceViolationCode,
+    analyze_recovery_eligibility_descriptor_source,
+    scan_recovery_eligibility_descriptor_source,
+    scan_repository_recovery_eligibility_descriptor,
+)
 from .recovery_verification_descriptors import (
     EXPECTED_RECOVERY_VERIFICATION_DESCRIPTOR_AST_DIGEST,
     RECOVERY_VERIFICATION_DESCRIPTOR_PATH,
