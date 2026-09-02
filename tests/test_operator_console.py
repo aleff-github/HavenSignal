@@ -67,20 +67,21 @@ class OperatorConsoleUnavailableTests(SimpleTestCase):
     def test_operator_query_on_missing_slash_is_not_redirected(self) -> None:
         sentinel = "OPERATOR_CHALLENGE_SENTINEL_DO_NOT_REDIRECT"
         for method in ("get", "post"):
-            with self.subTest(method=method):
-                response = getattr(self.client, method)(
-                    "/operator",
-                    query_params={"challenge": sentinel},
-                )
+            for query_params in ({}, {"challenge": sentinel}):
+                with self.subTest(method=method, query=bool(query_params)):
+                    response = getattr(self.client, method)(
+                        "/operator",
+                        query_params=query_params,
+                    )
 
-                self.assertEqual(response.status_code, 400)
-                self.assertEqual(
-                    response.content,
-                    b"operator_authentication_unavailable",
-                )
-                self.assertNotIn("Location", response.headers)
-                self.assertNotIn(sentinel, response.content.decode("utf-8"))
-                self.assertFalse(response.cookies)
+                    self.assertEqual(response.status_code, 400)
+                    self.assertEqual(
+                        response.content,
+                        b"operator_authentication_unavailable",
+                    )
+                    self.assertNotIn("Location", response.headers)
+                    self.assertNotIn(sentinel, response.content.decode("utf-8"))
+                    self.assertFalse(response.cookies)
 
     def test_operator_view_does_not_need_request_body_for_post(self) -> None:
         class BodyExplodes(HttpRequest):

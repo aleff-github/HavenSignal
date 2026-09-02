@@ -52,11 +52,12 @@ network boundary remain production-gated responsibilities.
 
 Any query string on `/submit/`, `/response/`, or `/operator/` is rejected
 before the corresponding view is called. The missing-trailing-slash variants
-are rejected too, preventing framework redirects from copying query material
-into a `Location` header. The middleware checks only whether a query is
-present; it does not parse, echo, or log query values. This prevents report,
-recovery, authentication, or challenge material from being accepted or
-propagated in URLs while these surfaces remain disabled.
+are rejected with or without a query, preventing framework redirects from
+copying query material into a `Location` header and preventing unsafe methods
+from reaching framework canonicalization errors. The middleware checks only
+whether a query is present; it does not parse, echo, or log query values. This
+prevents report, recovery, authentication, or challenge material from being
+accepted or propagated in URLs while these surfaces remain disabled.
 
 The `/response/` route is intentionally disabled and served by the separate
 Recovery Gateway app. GET renders static guidance. POST returns a controlled
