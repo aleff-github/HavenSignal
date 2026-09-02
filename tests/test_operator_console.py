@@ -1,10 +1,11 @@
 """Security and behavior tests for the inert operator console surface."""
 
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.test import SimpleTestCase
 from django.urls import reverse
 
 from operator_console.views import operator_unavailable
+from reporter_gateway.middleware import ReporterSecurityHeadersMiddleware
 
 
 class OperatorConsoleUnavailableTests(SimpleTestCase):
@@ -30,6 +31,38 @@ class OperatorConsoleUnavailableTests(SimpleTestCase):
         self.assertEqual(response.content, b"operator_authentication_unavailable")
         self.assertNotIn(sentinel, response.content.decode("utf-8"))
         self.assertFalse(response.cookies)
+
+    def test_operator_query_string_fails_before_view_without_echo(self) -> None:
+        class BodyExplodes(HttpRequest):
+            @property
+            def body(self) -> bytes:  # type: ignore[override]
+                raise AssertionError("body must not be read")
+
+        def reject_view_call(request: HttpRequest) -> HttpResponse:
+            raise AssertionError("view must not be called")
+
+        sentinel = "OPERATOR_CHALLENGE_SENTINEL_DO_NOT_ECHO"
+        for method in ("GET", "POST"):
+            with self.subTest(method=method):
+                request = BodyExplodes()
+                request.method = method
+                request.path_info = "/operator/"
+                request.META["QUERY_STRING"] = f"challenge={sentinel}"
+                middleware = ReporterSecurityHeadersMiddleware(reject_view_call)
+
+                response = middleware(request)
+
+                self.assertEqual(response.status_code, 400)
+                self.assertEqual(
+                    response.content,
+                    b"operator_authentication_unavailable",
+                )
+                self.assertNotIn(sentinel, response.content.decode("utf-8"))
+                self.assertEqual(
+                    response.headers["Cache-Control"],
+                    "no-store, max-age=0",
+                )
+                self.assertFalse(response.cookies)
 
     def test_operator_view_does_not_need_request_body_for_post(self) -> None:
         class BodyExplodes(HttpRequest):

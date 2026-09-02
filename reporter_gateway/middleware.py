@@ -29,14 +29,16 @@ class ReporterSecurityHeadersMiddleware:
         return self._apply_headers(response)
 
     def _admit_request(self, request: HttpRequest) -> HttpResponse | None:
-        if request.path_info in ("/submit/", "/response/") and request.META.get(
-            "QUERY_STRING", ""
-        ):
-            response_code = (
-                "submission_unavailable"
-                if request.path_info == "/submit/"
-                else "response_retrieval_unavailable"
-            )
+        if request.path_info in (
+            "/submit/",
+            "/response/",
+            "/operator/",
+        ) and request.META.get("QUERY_STRING", ""):
+            response_code = {
+                "/submit/": "submission_unavailable",
+                "/response/": "response_retrieval_unavailable",
+                "/operator/": "operator_authentication_unavailable",
+            }[request.path_info]
             return HttpResponse(
                 response_code,
                 content_type="text/plain; charset=utf-8",
