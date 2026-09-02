@@ -6,6 +6,7 @@ from django.http import HttpRequest, HttpResponse
 
 
 SUBMISSION_MAX_CONTENT_LENGTH_BYTES = 22_020_096
+SUBMISSION_MAX_CONTENT_LENGTH_DECIMAL = str(SUBMISSION_MAX_CONTENT_LENGTH_BYTES)
 FORBIDDEN_SUBMISSION_META_KEYS = frozenset(
     {
         "HTTP_CONTENT_ENCODING",
@@ -62,13 +63,29 @@ class ReporterSecurityHeadersMiddleware:
                 status=400,
             )
         content_length = request.META.get("CONTENT_LENGTH", "")
-        if not content_length.isdecimal() or int(content_length) < 1:
+        if (
+            not isinstance(content_length, str)
+            or not content_length.isascii()
+            or not content_length.isdecimal()
+        ):
             return HttpResponse(
                 "submission_unavailable",
                 content_type="text/plain; charset=utf-8",
                 status=400,
             )
-        if int(content_length) > SUBMISSION_MAX_CONTENT_LENGTH_BYTES:
+        normalized_content_length = content_length.lstrip("0")
+        if not normalized_content_length:
+            return HttpResponse(
+                "submission_unavailable",
+                content_type="text/plain; charset=utf-8",
+                status=400,
+            )
+        normalized_digits = len(normalized_content_length)
+        maximum_digits = len(SUBMISSION_MAX_CONTENT_LENGTH_DECIMAL)
+        if normalized_digits > maximum_digits or (
+            normalized_digits == maximum_digits
+            and normalized_content_length > SUBMISSION_MAX_CONTENT_LENGTH_DECIMAL
+        ):
             return HttpResponse(
                 "submission_unavailable",
                 content_type="text/plain; charset=utf-8",
