@@ -1197,3 +1197,27 @@ Response-DEK authorization, endpoint, file, network, dynamic, and recovery
 authorization changes fail closed. This closes no verifier-service,
 key-inventory, rotation/incident, restore-proof, Response-DEK lifecycle, Key
 Service, persistence, independent-review, deployment, or production gate.
+
+The sixtieth Stage A slice adds inert Recovery Verifier verification
+descriptors for the owner-approved `docs/21` verification semantics.
+Validation covers only the exact full-length HMAC-SHA-256 algorithm label,
+32-byte tag size, constant-time full-tag comparison, boolean-only result,
+necessary-not-sufficient HMAC success, canonical input requirements,
+unknown-ticket dummy-verification requirement, generic external non-success,
+same status/template/headers/response class/wording, timing-distribution-test
+requirement, no-perfect-indistinguishability claim, and forbidden capability
+labels. It does not compute HMACs, compare tags, execute dummy verification,
+return expected tags or partial-match detail, read response state, validate
+CAPTCHA, call a Key Service, authorize Response-DEK use, log credentials,
+expose endpoints, or authorize recovery.
+
+A new non-executing recovery verification descriptor source policy locks the
+exact imports, constants, enums, immutable classes, validators, and false
+capability results. HMAC computation, tag comparison, dummy execution,
+expected-tag disclosure, partial-match detail, response-state reads, CAPTCHA
+validation, Key Service calls, Response-DEK authorization, credential logging,
+endpoint, file, network, dynamic, and recovery authorization changes fail
+closed. This closes no verifier implementation, constant-time-comparison
+implementation, timing proof, recovery workflow, response eligibility,
+CAPTCHA, Response-DEK lifecycle, Key Service, persistence, independent-review,
+deployment, or production gate.

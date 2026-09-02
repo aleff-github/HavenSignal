@@ -166,6 +166,15 @@ from .recovery_key_lifecycle_descriptors import (
     scan_recovery_key_lifecycle_descriptor_source,
     scan_repository_recovery_key_lifecycle_descriptor,
 )
+from .recovery_verification_descriptors import (
+    EXPECTED_RECOVERY_VERIFICATION_DESCRIPTOR_AST_DIGEST,
+    RECOVERY_VERIFICATION_DESCRIPTOR_PATH,
+    RecoveryVerificationDescriptorSourceViolation,
+    RecoveryVerificationDescriptorSourceViolationCode,
+    analyze_recovery_verification_descriptor_source,
+    scan_recovery_verification_descriptor_source,
+    scan_repository_recovery_verification_descriptor,
+)
 from .report_crypto_descriptors import (
     EXPECTED_REPORT_CRYPTO_DESCRIPTOR_AST_DIGEST,
     REPORT_CRYPTO_DESCRIPTOR_PATH,
@@ -480,6 +489,13 @@ __all__ = [
     "analyze_recovery_key_lifecycle_descriptor_source",
     "scan_recovery_key_lifecycle_descriptor_source",
     "scan_repository_recovery_key_lifecycle_descriptor",
+    "EXPECTED_RECOVERY_VERIFICATION_DESCRIPTOR_AST_DIGEST",
+    "RECOVERY_VERIFICATION_DESCRIPTOR_PATH",
+    "RecoveryVerificationDescriptorSourceViolation",
+    "RecoveryVerificationDescriptorSourceViolationCode",
+    "analyze_recovery_verification_descriptor_source",
+    "scan_recovery_verification_descriptor_source",
+    "scan_repository_recovery_verification_descriptor",
     "EXPECTED_REPORT_CRYPTO_DESCRIPTOR_AST_DIGEST",
     "REPORT_CRYPTO_DESCRIPTOR_PATH",
     "ReportCryptoDescriptorSourceViolation",

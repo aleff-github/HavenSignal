@@ -48,6 +48,9 @@ from .recovery_failure_descriptors import (
 from .recovery_key_lifecycle_descriptors import (
     scan_repository_recovery_key_lifecycle_descriptor,
 )
+from .recovery_verification_descriptors import (
+    scan_repository_recovery_verification_descriptor,
+)
 from .report_crypto_descriptors import scan_repository_report_crypto_descriptor
 from .report_frame_descriptors import scan_repository_report_frame_descriptor
 from .report_schema_descriptors import scan_repository_report_schema_descriptor
@@ -312,6 +315,10 @@ ARCHITECTURE_CHECKS = (
     ArchitectureCheck(
         "recovery-key-lifecycle-descriptor",
         scan_repository_recovery_key_lifecycle_descriptor,
+    ),
+    ArchitectureCheck(
+        "recovery-verification-descriptor",
+        scan_repository_recovery_verification_descriptor,
     ),
     ArchitectureCheck(
         "report-crypto-descriptor",
