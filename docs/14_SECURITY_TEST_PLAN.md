@@ -212,6 +212,16 @@ For the metadata-only Stage A described by
   Response-DEK destruction, recovery-state invalidation execution, distinct
   failure behavior, endpoint behavior, and recovery authorization without
   importing or executing the target;
+- recovery retrieval descriptors accept only the exact approved POST input,
+  CAPTCHA/verifier, retrieval-audit-receipt, state/version lock, immutable
+  expiry, scoped decrypt, fixed-frame/no-store rendering, content-free
+  outcome, and forbidden-capability metadata;
+- recovery retrieval validation and source policy reject request handling,
+  CAPTCHA/credential validation, audit append, receipt verification, response-
+  state query, first-read mutation, Key Service calls, decryption, plaintext
+  frame validation, rendering, plaintext persistence, credential/plaintext
+  logging, distinct failure behavior, endpoint behavior, and recovery
+  authorization without importing or executing the target;
 - Response Note crypto descriptors accept only the exact version-1 algorithm,
   content-profile, key, nonce, tag, plaintext-frame, ciphertext/tag, immutable
   context-size, AAD-purpose, and Response-DEK operation profile shapes;
@@ -497,6 +507,12 @@ For `20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`, also verify:
   service calls, state/ciphertext reads, decryption, first-read mutation, key
   destruction, endpoint, distinct failure, or recovery authorization
   capability;
+- Stage A recovery retrieval descriptor/source-conformance tests prove only
+  the approved retrieval ordering metadata, and reject request handling,
+  CAPTCHA/credential validation, audit append, receipt verification, state
+  query, first-read mutation, Key Service calls, decryption, plaintext-frame
+  validation, rendering, plaintext persistence, logging, endpoint, distinct
+  failure, or recovery authorization capability;
 - lost responses never cause credential re-display, replacement credentials,
   or a duplicate report for the same attempt;
 - no event or state claims that the reporter received or saved credentials;
