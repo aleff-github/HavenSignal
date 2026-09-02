@@ -318,6 +318,15 @@ absence of HMAC computation, tag comparison, dummy execution, response-state
 access, CAPTCHA validation, Key Service calls, Response-DEK authorization,
 endpoint, or recovery authorization behavior are reviewed source facts.
 
+The recovery verifier-record descriptor source policy locks the complete
+executable AST of `security_interfaces/recovery_verifier_record_descriptors.py`.
+Exact persisted-field names, full-tag size, server-controlled key ID,
+no-secret/no-raw-key/no-database-alone-test requirements, removal and
+invalidation metadata, forbidden-material categories, false capability
+properties, imports, and absence of persistence, verifier computation,
+candidate-secret testing, lookup, database writes, endpoint, or recovery
+authorization behavior are reviewed source facts.
+
 The response-crypto descriptor source policy locks the complete executable AST
 of `security_interfaces/response_crypto_descriptors.py`. Exact response
 algorithm/profile identifiers, key/nonce/tag/frame/envelope sizes, immutable

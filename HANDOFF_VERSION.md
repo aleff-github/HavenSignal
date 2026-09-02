@@ -722,3 +722,21 @@ closed. This closes no verifier implementation, constant-time-comparison
 implementation, timing proof, recovery workflow, response eligibility,
 CAPTCHA, Response-DEK lifecycle, Key Service, persistence, independent-review,
 deployment, or production gate.
+
+The sixty-first Stage A slice adds inert Recovery Verifier record descriptors
+for the owner-approved `docs/21` persisted verifier-record shape. Validation
+covers only the exact `scheme_version`, `verifier_key_id`, and `verifier_tag`
+field labels, 32-byte tag size, server-controlled key ID, no-secret/no-raw-
+key/no-database-alone-test requirements, removal with recovery state, terminal
+invalidation, and forbidden material categories. It does not persist records,
+compute verifiers, test candidate secrets, perform lookups, write a database,
+expose endpoints, or authorize recovery.
+
+A new non-executing recovery verifier-record descriptor source policy locks
+the exact imports, constants, enums, immutable classes, validators, and false
+capability results. Secret, raw-key, raw-HMAC-message, content, DEK,
+persistence, verifier computation, candidate-secret testing, lookup, database
+write, endpoint, file, network, dynamic, and recovery authorization changes
+fail closed. This closes no metadata-store schema, persistence, verifier
+construction, lookup, recovery-state lifecycle, Response-DEK lifecycle,
+independent-review, deployment, or production gate.

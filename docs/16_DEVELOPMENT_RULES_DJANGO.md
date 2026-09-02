@@ -311,6 +311,16 @@ Response-DEK use, log credentials, expose endpoints, or authorize recovery
 until verifier execution, timing, response eligibility, CAPTCHA, Key Service,
 logging, deployment, independent-review, and production gates are closed.
 
+Recovery verifier-record code is currently limited to inert structural
+descriptors. It may validate only the exact approved persisted field labels,
+32-byte tag size, server-controlled key ID, no-secret/no-raw-key/no-database-
+alone-test requirements, removal/invalidation metadata, and forbidden-material
+categories. It must not create database rows, persist real verifier records,
+compute verifiers, test candidate secrets, perform lookups, expose endpoints,
+or authorize recovery until verifier, metadata-store, recovery-state,
+Response-DEK, logging, deployment, independent-review, and production gates are
+closed.
+
 Response Note cryptographic code is currently limited to inert structural
 descriptors. It may validate only the exact approved version, algorithm,
 content-profile, size, AAD-purpose, immutable-context, envelope, and

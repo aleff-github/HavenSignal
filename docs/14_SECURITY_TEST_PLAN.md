@@ -172,6 +172,16 @@ For the metadata-only Stage A described by
   disclosure, response-state reads, CAPTCHA validation, Key Service calls,
   Response-DEK authorization, credential logging, endpoint behavior, and
   recovery authorization without importing or executing the target;
+- recovery verifier-record descriptors accept only the exact approved
+  `scheme_version`, `verifier_key_id`, and `verifier_tag` field metadata,
+  full 32-byte tag size, server-controlled key ID, no plaintext secret, no raw
+  verification key, database-alone secret-test denial, removal with recovery
+  state, terminal invalidation, and forbidden-material categories;
+- recovery verifier-record validation and source policy reject Recovery Secret,
+  raw key, raw HMAC message, report content, DEKs, operator identity,
+  persistence, verifier computation, candidate-secret testing, lookup,
+  database writes, endpoint behavior, and recovery authorization without
+  importing or executing the target;
 - Response Note crypto descriptors accept only the exact version-1 algorithm,
   content-profile, key, nonce, tag, plaintext-frame, ciphertext/tag, immutable
   context-size, AAD-purpose, and Response-DEK operation profile shapes;
@@ -435,6 +445,11 @@ For `20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`, also verify:
   response-state access, CAPTCHA validation, Key Service calls, Response-DEK
   authorization, credential logging, endpoint, or recovery authorization
   capability;
+- Stage A recovery verifier-record descriptor/source-conformance tests prove
+  only the approved persisted-record field, full-tag, requirement, and
+  forbidden-material metadata, and reject secret/key/raw-message/DEK fields,
+  persistence, verifier computation, candidate-secret testing, lookup,
+  database writes, endpoint, or recovery authorization capability;
 - lost responses never cause credential re-display, replacement credentials,
   or a duplicate report for the same attempt;
 - no event or state claims that the reporter received or saved credentials;

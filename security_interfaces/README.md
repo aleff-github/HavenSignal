@@ -205,6 +205,20 @@ exact-AST policy. Passing proves only reviewed source shape; it is not verifier
 construction, HMAC execution, timing proof, recovery workflow authorization,
 Response-DEK authorization, endpoint behavior, or production evidence.
 
+`recovery_verifier_record_descriptors.py` validates only the static persisted
+verifier-record shape approved in `docs/21`: scheme version, verifier key ID,
+full-length verifier tag, server-controlled key ID, no reporter-supplied key
+ID, no plaintext Recovery Secret, no raw verification key, database-alone
+secret-test denial, removal with recovery state, and invalidation at Response
+expiry or terminal destruction. It does not persist records, compute verifiers,
+test candidate secrets, perform lookups, write a database, expose endpoints, or
+authorize recovery.
+
+The recovery verifier-record descriptor source is locked by a non-executing
+exact-AST policy. Passing proves only reviewed source shape; it is not a
+database schema, persistence layer, verifier construction, lookup path,
+Response-DEK authorization path, endpoint behavior, or production evidence.
+
 `report_crypto_descriptors.py` validates only the static version-1 original
 report crypto profile already fixed in `docs/26`: XChaCha20-Poly1305-IETF
 combined-mode metadata, 32-byte Report-DEK and object-subkey sizes, fixed
@@ -413,6 +427,11 @@ computation, constant-time comparison implementation, dummy verification,
 timing-distribution evidence, response-state access, CAPTCHA validation, Key
 Service behavior, Response-DEK authorization, endpoint behavior, or production
 evidence.
+
+The recovery verifier-record descriptor source is locked by a non-executing
+exact-AST policy. Passing proves only reviewed source shape; it is not record
+persistence, HMAC computation, candidate-secret testing, database lookup,
+database writes, endpoint behavior, or recovery authorization evidence.
 
 `response_crypto_descriptors.py` validates only the static version-1 Response
 Note crypto profile already fixed in `docs/24`: XChaCha20-Poly1305-IETF
