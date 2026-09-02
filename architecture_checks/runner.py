@@ -216,6 +216,22 @@ def _url_surface(root: Path) -> tuple[object, ...]:
     )
 
 
+def _reporter_url_surface(root: Path) -> tuple[object, ...]:
+    return scan_surface_file(
+        path=root / "reporter_gateway" / "urls.py",
+        relative_to=root,
+        analyzer=analyze_urlconf_source,
+    )
+
+
+def _operator_url_surface(root: Path) -> tuple[object, ...]:
+    return scan_surface_file(
+        path=root / "operator_console" / "urls.py",
+        relative_to=root,
+        analyzer=analyze_urlconf_source,
+    )
+
+
 def _reporter_view_surface(root: Path) -> tuple[object, ...]:
     return scan_surface_file(
         path=root / "reporter_gateway" / "views.py",
@@ -442,6 +458,8 @@ ARCHITECTURE_CHECKS = (
     ArchitectureCheck("operator-console-imports", _operator_console_imports),
     ArchitectureCheck("settings-surface", _settings_surface),
     ArchitectureCheck("url-surface", _url_surface),
+    ArchitectureCheck("reporter-url-surface", _reporter_url_surface),
+    ArchitectureCheck("operator-url-surface", _operator_url_surface),
     ArchitectureCheck("reporter-view-surface", _reporter_view_surface),
     ArchitectureCheck("reporter-header-surface", _reporter_header_surface),
     ArchitectureCheck("operator-view-surface", _operator_view_surface),

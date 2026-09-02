@@ -37,6 +37,7 @@ REPORTER_GATEWAY_IMPORT_POLICY = ImportPolicy(
             "collections.abc",
             "django.http",
             "django.shortcuts",
+            "django.urls",
             "django.views.decorators.http",
         }
     ),
@@ -51,6 +52,7 @@ OPERATOR_CONSOLE_IMPORT_POLICY = ImportPolicy(
             "django.apps",
             "django.http",
             "django.shortcuts",
+            "django.urls",
             "django.views.decorators.http",
         }
     ),
@@ -63,8 +65,6 @@ REPORTER_ROOT_URL_IMPORT_POLICY = ImportPolicy(
     allowed_absolute_modules=frozenset(
         {
             "django.urls",
-            "operator_console.views",
-            "reporter_gateway.views",
         }
     ),
     allow_local_relative_imports=False,

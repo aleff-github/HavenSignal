@@ -57,6 +57,8 @@ class ArchitectureCheckRunnerTests(SimpleTestCase):
                 "operator-console-imports",
                 "settings-surface",
                 "url-surface",
+                "reporter-url-surface",
+                "operator-url-surface",
                 "reporter-view-surface",
                 "reporter-header-surface",
                 "operator-view-surface",
