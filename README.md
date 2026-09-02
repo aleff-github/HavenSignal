@@ -83,6 +83,7 @@ The repository currently contains:
 
 - Django 5.2.17 development scaffolding;
 - an inert, read-only reporter landing page;
+- a fail-closed response-retrieval page;
 - metadata-only submission and report lifecycle models;
 - pure monotonic transition planners;
 - explicit fail-closed persistence boundaries;

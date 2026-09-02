@@ -7,7 +7,8 @@ This document keeps the implementation boundary visible without requiring the to
 ## Reporter surface
 
 The repository contains a Django 5.2.17 development scaffold, one inert
-reporter landing page, and one fail-closed `/submit/` surface.
+reporter landing page, one fail-closed `/submit/` surface, and one fail-closed
+`/response/` recovery surface.
 
 These pages have no:
 
@@ -25,6 +26,12 @@ The `/submit/` route is intentionally disabled. GET renders static guidance.
 POST returns a controlled `503` without reading `request.body`, `request.POST`,
 or `request.FILES`, and without creating any report, attempt, audit event,
 credential, key, upload, or database transition.
+
+The `/response/` route is intentionally disabled. GET renders static guidance.
+POST returns a controlled `503` without reading `request.body`, `request.POST`,
+or `request.FILES`, and without creating any credential verification, lookup,
+audit event, key operation, decryption, plaintext rendering, recovery-state
+mutation, or database transition.
 
 ## Submission workflow
 
