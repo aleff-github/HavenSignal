@@ -472,7 +472,7 @@ class LifecycleMetadataPersistenceTests(TestCase):
     def test_no_route_view_admin_or_background_worker_is_enabled(self) -> None:
         self.assertEqual(
             {pattern.name for pattern in urls.urlpatterns},
-            {"reporter-home", "reporter-submit"},
+            {"reporter-home", "reporter-submit", "reporter-response"},
         )
         app_path = Path(Report._meta.app_config.path)
         for forbidden_file in (

@@ -50,7 +50,11 @@ class CurrentReporterSurfaceTests(SimpleTestCase):
         self.assertEqual(violations, ())
 
     def test_current_templates_use_only_the_passive_profile(self) -> None:
-        for template_name in ("home.html", "submit_unavailable.html"):
+        for template_name in (
+            "home.html",
+            "submit_unavailable.html",
+            "response_unavailable.html",
+        ):
             with self.subTest(template_name=template_name):
                 violations = scan_surface_file(
                     path=BASE_DIR / "templates" / "reporter_gateway" / template_name,
@@ -155,7 +159,8 @@ class SettingsAndUrlSurfaceAbuseTests(SimpleTestCase):
             "urlpatterns = [re_path('', home, name='reporter-home')]",
             (
                 "urlpatterns = [path('', home, name='reporter-home'), "
-                "path('submit/', submit_unavailable, name='reporter-submit')]\n"
+                "path('submit/', submit_unavailable, name='reporter-submit'), "
+                "path('response/', response_unavailable, name='reporter-response')]\n"
                 "urlpatterns.append(path('send/', send, name='send'))"
             ),
         )

@@ -1,0 +1,46 @@
+{% load static %}
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <title>Response retrieval unavailable</title>
+    <link rel="stylesheet" href="{% static 'reporter_gateway/home.css' %}">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="hero">
+        <p class="eyebrow">Anonymous Reporting</p>
+        <h1>Recupero risposta non ancora abilitato.</h1>
+        <p class="intro">
+          Questa superficie esiste per verificare routing e protezioni browser,
+          ma non accetta ancora credenziali di recupero.
+        </p>
+      </header>
+
+      <section class="notice" aria-labelledby="response-status">
+        <h2 id="response-status">Response retrieval fail-closed</h2>
+        <p>
+          Non inserire Ticket ID, Recovery Secret o altri dati personali. Le
+          dipendenze obbligatorie di CAPTCHA, Recovery Verifier Service, Audit
+          Service, Key Service, stato risposta e decrittazione restano chiuse.
+        </p>
+      </section>
+
+      <aside class="anonymity" aria-labelledby="response-next">
+        <h2 id="response-next">Prossimo gate</h2>
+        <p>
+          Il recupero reale sarà attivato solo quando potrà usare POST,
+          risultato generico per i non-successi, no-store, verifica
+          content-free e autorizzazione stretta della Response-DEK.
+        </p>
+      </aside>
+
+      <footer>
+        Questa schermata non contiene form, JavaScript, analytics o risorse di
+        terze parti e non legge credenziali di recupero.
+      </footer>
+    </main>
+  </body>
+</html>

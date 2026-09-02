@@ -215,7 +215,7 @@ class SubmissionAttemptPersistenceTests(TestCase):
     def test_no_accepting_submission_route_or_view_is_enabled(self) -> None:
         self.assertEqual(
             {pattern.name for pattern in urls.urlpatterns},
-            {"reporter-home", "reporter-submit"},
+            {"reporter-home", "reporter-submit", "reporter-response"},
         )
         app_path = Path(SubmissionAttempt._meta.app_config.path)
         self.assertFalse((app_path / "views.py").exists())

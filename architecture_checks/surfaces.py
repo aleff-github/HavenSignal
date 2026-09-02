@@ -130,7 +130,7 @@ EXPECTED_REPORTER_PYTHON_AST_DIGESTS = MappingProxyType(
             "55a0c3a812fa44cd357c766b5dbc436ee74c5a402c01e091dbb5a757a0905f6a"
         ),
         "reporter_gateway/views.py": (
-            "8b3967afa2de314c127ebf00435a5f9863755a61ea43e3f7470eed875c82b100"
+            "00a45c76dec0336f218aa10bfb759eb8df11ef6584bd298baa594c8a21bacee0"
         ),
     }
 )
@@ -282,7 +282,7 @@ def analyze_settings_source(
 def analyze_reporter_python_source(
     *, source: str, relative_path: str
 ) -> tuple[SurfaceViolation, ...]:
-    """Lock the executable AST of the two inert reporter-facing modules."""
+    """Lock the executable AST of the inert reporter-facing modules."""
 
     expected_digest = EXPECTED_REPORTER_PYTHON_AST_DIGESTS.get(relative_path)
     if expected_digest is None:
@@ -399,7 +399,7 @@ def analyze_urlconf_source(
         )
 
     value = assignments[0].value
-    valid = isinstance(value, (ast.List, ast.Tuple)) and len(value.elts) == 2
+    valid = isinstance(value, (ast.List, ast.Tuple)) and len(value.elts) == 3
     if valid:
         valid = _is_path_pattern(
             value.elts[0],
@@ -411,6 +411,11 @@ def analyze_urlconf_source(
             route_value="submit/",
             view_name="submit_unavailable",
             url_name="reporter-submit",
+        ) and _is_path_pattern(
+            value.elts[2],
+            route_value="response/",
+            view_name="response_unavailable",
+            url_name="reporter-response",
         )
     if valid:
         return ()
@@ -419,7 +424,7 @@ def analyze_urlconf_source(
             code=SurfaceViolationCode.URL_PATTERN_MISMATCH,
             relative_path=relative_path,
             line=assignments[0].lineno,
-            detail_code="REPORTER_HOME_AND_SUBMIT_ONLY",
+            detail_code="REPORTER_HOME_SUBMIT_RESPONSE_ONLY",
         ),
     )
 

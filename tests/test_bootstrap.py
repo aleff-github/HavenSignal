@@ -16,5 +16,5 @@ class BootstrapSmokeTest(SimpleTestCase):
         self.assertTrue(required_middleware.issubset(settings.MIDDLEWARE))
         self.assertEqual(
             {pattern.name for pattern in get_resolver().url_patterns},
-            {"reporter-home", "reporter-submit"},
+            {"reporter-home", "reporter-submit", "reporter-response"},
         )
