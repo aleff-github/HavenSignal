@@ -2,7 +2,9 @@
 
 ## Purpose
 
-Provide a minimal anonymous mechanism for a person to disclose a sensitive event or situation, allow a human operator to review it, and return exactly one guidance Response Note.
+Provide universities and higher-education institutions with a minimal anonymous
+mechanism for a person to disclose a sensitive event or situation, allow a
+human operator to review it, and return exactly one guidance Response Note.
 
 The system is intended to help people who may not know which office, professional, authority, or support channel is appropriate.
 
@@ -53,6 +55,11 @@ The Response Note:
 
 ## Organizational model
 
-One organization per deployment instance.
+One university, higher-education institution, or other approved organization
+per deployment instance.
 
-The project is not designed around university-specific identity systems and must remain generic.
+Universities and higher-education institutions are the initial deployment
+context. The implementation must not hard-code a particular institution's
+identity provider, hierarchy, terminology, or internal policy so that each
+approved deployment can be configured without weakening the common security
+model.

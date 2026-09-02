@@ -152,19 +152,21 @@ class ReporterSubmitUnavailableTests(SimpleTestCase):
         self.assertEqual(response.headers["Cache-Control"], "no-store, max-age=0")
         self.assertIn("default-src 'none'", response.headers["Content-Security-Policy"])
 
-    def test_submit_malformed_content_length_fails_before_view(self) -> None:
-        request = HttpRequest()
-        request.method = "POST"
-        request.path_info = "/submit/"
-        request.META["CONTENT_LENGTH"] = "22 MiB"
-        middleware = ReporterSecurityHeadersMiddleware(
-            lambda request: HttpResponse("unexpected")
-        )
+    def test_submit_invalid_content_length_fails_before_view(self) -> None:
+        for content_length in ("", "0", "-1", "+1", "22 MiB"):
+            with self.subTest(content_length=content_length):
+                request = HttpRequest()
+                request.method = "POST"
+                request.path_info = "/submit/"
+                request.META["CONTENT_LENGTH"] = content_length
+                middleware = ReporterSecurityHeadersMiddleware(
+                    lambda request: HttpResponse("unexpected")
+                )
 
-        response = middleware(request)
+                response = middleware(request)
 
-        self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.content, b"submission_unavailable")
+                self.assertEqual(response.status_code, 400)
+                self.assertEqual(response.content, b"submission_unavailable")
 
     def test_submit_limit_content_length_continues_to_fail_closed_view(self) -> None:
         request = HttpRequest()
