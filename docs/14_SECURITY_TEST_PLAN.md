@@ -162,6 +162,16 @@ For the metadata-only Stage A described by
   verifier-record rewriting, Key Service calls, Response-DEK authorization,
   endpoint behavior, and recovery authorization without importing or executing
   the target;
+- recovery verification descriptors accept only the exact approved full-length
+  HMAC-SHA-256, constant-time full-tag comparison, boolean-only result,
+  necessary-not-sufficient HMAC success, canonical input, dummy-verification,
+  generic-response, timing-distribution-test, and no-perfect-
+  indistinguishability metadata;
+- recovery verification validation and source policy reject HMAC computation,
+  tag comparison, dummy-verification execution, expected-tag or partial-match
+  disclosure, response-state reads, CAPTCHA validation, Key Service calls,
+  Response-DEK authorization, credential logging, endpoint behavior, and
+  recovery authorization without importing or executing the target;
 - Response Note crypto descriptors accept only the exact version-1 algorithm,
   content-profile, key, nonce, tag, plaintext-frame, ciphertext/tag, immutable
   context-size, AAD-purpose, and Response-DEK operation profile shapes;
@@ -418,6 +428,13 @@ For `20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`, also verify:
   lifecycle requirement metadata, and reject key generation, key storage,
   key selection, rotation, destruction, verifier rewriting, Key Service calls,
   Response-DEK authorization, endpoint, or recovery authorization capability;
+- Stage A recovery verification descriptor/source-conformance tests prove only
+  the approved full-length HMAC, comparison, result-rule, input, uniformity,
+  and forbidden-capability metadata, and reject HMAC computation, tag
+  comparison, dummy execution, tag disclosure, partial-match detail,
+  response-state access, CAPTCHA validation, Key Service calls, Response-DEK
+  authorization, credential logging, endpoint, or recovery authorization
+  capability;
 - lost responses never cause credential re-display, replacement credentials,
   or a duplicate report for the same attempt;
 - no event or state claims that the reporter received or saved credentials;

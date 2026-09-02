@@ -189,6 +189,22 @@ inventory, rotation executor, verifier service, Response-DEK authorization
 path, incident procedure, persistence layer, endpoint behavior, or production
 evidence.
 
+`recovery_verification_descriptors.py` validates only the static verifier
+verification semantics approved in `docs/21`: full-length HMAC-SHA-256,
+constant-time full-tag comparison, boolean-only result, HMAC success as
+necessary but not sufficient, canonical input requirements, unknown-ticket
+dummy verification, generic external non-success behavior, timing-distribution
+test requirement, and no perfect-indistinguishability claim. It does not
+compute HMACs, compare tags, execute dummy verification, return expected tags
+or partial-match details, read response state, validate CAPTCHA, call a Key
+Service, authorize Response-DEK use, log credentials, expose endpoints, or
+authorize recovery.
+
+The recovery verification descriptor source is locked by a non-executing
+exact-AST policy. Passing proves only reviewed source shape; it is not verifier
+construction, HMAC execution, timing proof, recovery workflow authorization,
+Response-DEK authorization, endpoint behavior, or production evidence.
+
 `report_crypto_descriptors.py` validates only the static version-1 original
 report crypto profile already fixed in `docs/26`: XChaCha20-Poly1305-IETF
 combined-mode metadata, 32-byte Report-DEK and object-subkey sizes, fixed
@@ -390,6 +406,13 @@ exact-AST policy. Passing proves only reviewed source shape; it is not key
 generation, secret storage, key selection, rotation execution, destruction,
 verifier-record rewriting, Key Service behavior, Response-DEK authorization,
 endpoint behavior, or production evidence.
+
+The recovery verification descriptor source is locked by a non-executing
+exact-AST policy. Passing proves only reviewed source shape; it is not HMAC
+computation, constant-time comparison implementation, dummy verification,
+timing-distribution evidence, response-state access, CAPTCHA validation, Key
+Service behavior, Response-DEK authorization, endpoint behavior, or production
+evidence.
 
 `response_crypto_descriptors.py` validates only the static version-1 Response
 Note crypto profile already fixed in `docs/24`: XChaCha20-Poly1305-IETF

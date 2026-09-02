@@ -280,6 +280,16 @@ does not generate, store, select, rotate, or destroy keys, rewrite verifier
 records, call a Key Service, expose endpoints, authorize Response-DEK use, or
 authorize recovery.
 
+The current Stage A recovery verification descriptor records only the approved
+full-length HMAC-SHA-256, constant-time full-tag comparison, boolean-only
+result, necessary-not-sufficient HMAC success, canonical input, dummy-
+verification, generic-response, timing-test, no-perfect-indistinguishability,
+and forbidden capability labels from
+`docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md`. It does not compute HMACs,
+compare tags, execute dummy verification, return expected tags or partial-match
+details, read response state, validate CAPTCHA, call a Key Service, authorize
+Response-DEK use, log credentials, expose endpoints, or authorize recovery.
+
 The current Stage A credential-response descriptor records only the approved
 one-time live response and lost-response policy from
 `docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`. It does not generate credentials,
@@ -795,6 +805,38 @@ is parsed but never imported or executed.
 Passing this source policy closes no verifier-service, key-inventory,
 rotation/incident, restore-proof, Response-DEK lifecycle, Key Service,
 persistence, independent-review, or production gate.
+
+## Stage A recovery verification descriptor record
+
+`security_interfaces/recovery_verification_descriptors.py` validates only the
+Recovery Verifier verification facts already fixed by
+`docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md`: version-1 full-length
+HMAC-SHA-256, 32-byte verifier tag, constant-time full-tag comparison,
+boolean-only result, HMAC success as necessary but not sufficient, canonical
+Ticket ID and Recovery Secret inputs, stored scheme version, server-selected
+key ID, stored full-length tag, unknown-ticket dummy record, generic external
+non-success, same status/template/headers/response class/wording,
+timing-distribution testing, and no perfect-indistinguishability claim.
+
+Successful validation returns immutable, content-free verification evidence.
+It does not compute an HMAC, compare tags, execute dummy verification, return
+the expected tag, return partial-match detail, read response state, validate
+CAPTCHA, call a Key Service, authorize Response-DEK use, log credentials,
+expose an endpoint, or authorize recovery.
+
+The non-executing recovery verification descriptor policy fixes the exact
+target, imports, constants, enum registries, immutable class profiles,
+validator behavior, and false capability results. Added HMAC computation, tag
+comparison, dummy execution, expected-tag disclosure, partial-match detail,
+response-state reads, CAPTCHA validation, Key Service calls, Response-DEK
+authorization, credential logging, endpoint, file, network, dynamic, or
+recovery-authorization behavior fails closed. The target is parsed but never
+imported or executed.
+
+Passing this source policy closes no verifier implementation,
+constant-time-comparison implementation, dummy-verification timing proof,
+recovery workflow, response eligibility, CAPTCHA, Response-DEK lifecycle, Key
+Service, persistence, independent-review, or production gate.
 
 ## Stage A Response Note crypto descriptor record
 
