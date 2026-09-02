@@ -31,6 +31,27 @@ class RecoveryResponseUnavailableTests(SimpleTestCase):
         self.assertNotIn(sentinel, response.content.decode("utf-8"))
         self.assertFalse(response.cookies)
 
+    def test_response_query_string_fails_before_view_without_echo(self) -> None:
+        sentinel = "RECOVERY_SECRET_SENTINEL_DO_NOT_ECHO"
+        for method in ("get", "post"):
+            with self.subTest(method=method):
+                response = getattr(self.client, method)(
+                    reverse("reporter-response"),
+                    query_params={"secret": sentinel},
+                )
+
+                self.assertEqual(response.status_code, 400)
+                self.assertEqual(
+                    response.content,
+                    b"response_retrieval_unavailable",
+                )
+                self.assertNotIn(sentinel, response.content.decode("utf-8"))
+                self.assertEqual(
+                    response.headers["Cache-Control"],
+                    "no-store, max-age=0",
+                )
+                self.assertFalse(response.cookies)
+
     def test_response_view_does_not_need_request_body_for_post(self) -> None:
         class BodyExplodes(HttpRequest):
             @property

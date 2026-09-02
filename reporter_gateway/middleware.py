@@ -21,6 +21,19 @@ class ReporterSecurityHeadersMiddleware:
         return self._apply_headers(response)
 
     def _admit_request(self, request: HttpRequest) -> HttpResponse | None:
+        if request.path_info in ("/submit/", "/response/") and request.META.get(
+            "QUERY_STRING", ""
+        ):
+            response_code = (
+                "submission_unavailable"
+                if request.path_info == "/submit/"
+                else "response_retrieval_unavailable"
+            )
+            return HttpResponse(
+                response_code,
+                content_type="text/plain; charset=utf-8",
+                status=400,
+            )
         if request.method != "POST" or request.path_info != "/submit/":
             return None
         content_length = request.META.get("CONTENT_LENGTH", "")
