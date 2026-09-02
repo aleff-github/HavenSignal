@@ -33,7 +33,7 @@ A security property must not be weakened merely to make implementation faster or
 
 ## Specification authority
 
-For implementation decisions, precedence is defined in `AGENTS.md`.
+For implementation decisions, precedence is defined in `docs/SECURITY_CONSTITUTION.md`.
 
 Security-sensitive behavior should be documented before it becomes an enabled product capability.
 

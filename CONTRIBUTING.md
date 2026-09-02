@@ -8,7 +8,7 @@ HavenSignal is intentionally developed more slowly than a typical web applicatio
 
 Read:
 
-1. `AGENTS.md`
+1. `docs/SECURITY_CONSTITUTION.md`
 2. `docs/00_PROJECT_SCOPE.md`
 3. `docs/01_SECURITY_BASELINE.md`
 4. `docs/02_THREAT_MODEL.md`
@@ -55,7 +55,9 @@ python manage.py check
 python manage.py test -v 2
 ```
 
-Use synthetic, non-identifying data only. Never send real reporter data, production-sensitive material, or transformations of that material to OpenAI or another external AI service for development, debugging, support, review, testing, or maintenance.
+Use synthetic, non-identifying data only. Never send real reporter data,
+production-sensitive material, or transformations of that material to external
+development, debugging, support, review, testing, or maintenance services.
 
 ## Pull request expectations
 

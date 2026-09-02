@@ -1,6 +1,6 @@
 # 18 — Security Review Checklist
 
-Use before accepting any security-sensitive Codex change.
+Use before accepting any security-sensitive change.
 
 - [ ] The change references applicable requirement IDs.
 - [ ] No reporter-controlled input is added to logs.

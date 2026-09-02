@@ -8,10 +8,11 @@ The documents in this directory are security and implementation specifications. 
 2. [01 — Security Baseline](01_SECURITY_BASELINE.md)
 3. [02 — Threat Model](02_THREAT_MODEL.md)
 4. [03 — Data Lifecycle](03_DATA_LIFECYCLE.md)
-5. [12 — Open Security Decisions](12_OPEN_SECURITY_DECISIONS.md)
-6. [14 — Security Test Plan](14_SECURITY_TEST_PLAN.md)
-7. [18 — Security Review Checklist](18_SECURITY_REVIEW_CHECKLIST.md)
-8. [34 — Pre-Code Security Gate](34_PRE_CODE_SECURITY_GATE.md)
+5. [Security Constitution](SECURITY_CONSTITUTION.md)
+6. [12 — Open Security Decisions](12_OPEN_SECURITY_DECISIONS.md)
+7. [14 — Security Test Plan](14_SECURITY_TEST_PLAN.md)
+8. [18 — Security Review Checklist](18_SECURITY_REVIEW_CHECKLIST.md)
+9. [34 — Pre-Code Security Gate](34_PRE_CODE_SECURITY_GATE.md)
 
 ## Core model
 
@@ -28,6 +29,7 @@ The documents in this directory are security and implementation specifications. 
 - [16 — Django Development Rules](16_DEVELOPMENT_RULES_DJANGO.md)
 - [17 — Glossary](17_GLOSSARY.md)
 - [19 — Security Service Interfaces](19_SECURITY_SERVICE_INTERFACES.md)
+- [Security Constitution](SECURITY_CONSTITUTION.md)
 
 ## Approved protocol specifications
 
@@ -50,11 +52,10 @@ The documents in this directory are security and implementation specifications. 
 ## Public project documentation added for OSS maintenance
 
 - [Project Impact](PROJECT_IMPACT.md)
-- [Codex Usage](CODEX_USAGE.md)
 - [Current Project Status](PROJECT_STATUS.md)
 
 ## Normative precedence
 
-For conflicts and specification precedence, follow `../AGENTS.md`.
+For conflicts and specification precedence, follow `SECURITY_CONSTITUTION.md`.
 
 The original questionnaire under `../source/` is historical source material; later Markdown decisions take precedence where explicitly stated.

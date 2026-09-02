@@ -80,7 +80,7 @@ Contributors must not:
 - add plaintext or weaker-security fallbacks for unavailable mandatory controls;
 - implement a sensitive endpoint without negative and abuse tests.
 
-`AGENTS.md` and the security documents under `docs/` are normative for security-sensitive changes.
+`docs/SECURITY_CONSTITUTION.md` and the security documents under `docs/` are normative for security-sensitive changes.
 
 ## Dependency security updates
 

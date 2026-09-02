@@ -8,7 +8,8 @@ This handoff consolidates:
 - the completed project security questionnaire;
 - later clarifications made after the questionnaire;
 - the current Python/Django implementation direction;
-- unresolved security decisions that must not be silently guessed by Codex.
+- unresolved security decisions that must not be silently guessed during
+  implementation.
 
 Version 0.2 additionally incorporates:
 

@@ -72,6 +72,7 @@ Start with:
 - [Deployment trust boundaries](docs/15_DEPLOYMENT_TRUST_BOUNDARIES.md)
 - [Security-service interfaces](docs/19_SECURITY_SERVICE_INTERFACES.md)
 - [Pre-code security gate](docs/34_PRE_CODE_SECURITY_GATE.md)
+- [Security constitution](docs/SECURITY_CONSTITUTION.md)
 - [Documentation index](docs/README.md)
 
 ## Current status
@@ -239,23 +240,13 @@ This repository uses a staged security workflow:
 6. review against the security specification;
 7. only then authorize the next boundary.
 
-`AGENTS.md` is the security constitution for both human and agent-assisted development.
+`docs/SECURITY_CONSTITUTION.md` is the security constitution for security-sensitive development.
 
 Run the full reviewed local verification sequence with:
 
 ```bash
 scripts/verify
 ```
-
-## Codex and AI use
-
-HavenSignal uses Codex and OpenAI models as **development and maintenance tools**, not as decision-makers inside the reporting product.
-
-Real reporter submissions, attachments, recovery material, cryptographic keys, audit artifacts, operator secrets, and any other sensitive or identifying disclosure data MUST NOT be sent to OpenAI or any other external AI service in any context. This prohibition includes product operation, development, debugging, support, issue triage, incident response, testing, and maintenance. Agent-assisted work must use only synthetic, non-identifying data.
-
-Intended agent-assisted maintenance work includes code review, regression-test generation, specification consistency checks, secure refactoring, dependency maintenance, issue triage, documentation, and release engineering under human review.
-
-See [CODEX_USAGE.md](docs/CODEX_USAGE.md).
 
 ## Contributing
 
