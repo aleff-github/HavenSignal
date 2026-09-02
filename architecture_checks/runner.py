@@ -54,6 +54,9 @@ from .recovery_key_lifecycle_descriptors import (
 from .recovery_eligibility_descriptors import (
     scan_repository_recovery_eligibility_descriptor,
 )
+from .recovery_retrieval_descriptors import (
+    scan_repository_recovery_retrieval_descriptor,
+)
 from .recovery_verification_descriptors import (
     scan_repository_recovery_verification_descriptor,
 )
@@ -335,6 +338,10 @@ ARCHITECTURE_CHECKS = (
     ArchitectureCheck(
         "recovery-eligibility-descriptor",
         scan_repository_recovery_eligibility_descriptor,
+    ),
+    ArchitectureCheck(
+        "recovery-retrieval-descriptor",
+        scan_repository_recovery_retrieval_descriptor,
     ),
     ArchitectureCheck(
         "recovery-verification-descriptor",

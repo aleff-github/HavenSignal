@@ -138,6 +138,7 @@ from .errors import (
     RecoveryKeyLifecycleDescriptorRejected,
     RecoveryVerificationDescriptorRejected,
     RecoveryEligibilityDescriptorRejected,
+    RecoveryRetrievalDescriptorRejected,
     RecoveryVerifierRecordDescriptorRejected,
     RecoveryVerifierServiceDescriptorRejected,
     ReportCryptoDescriptorRejected,
@@ -283,6 +284,23 @@ from .recovery_eligibility_descriptors import (
     validate_recovery_eligibility_requirement_profile_v1,
     validate_recovery_eligibility_state_profile_v1,
     validate_recovery_eligibility_timing_profile_v1,
+)
+from .recovery_retrieval_descriptors import (
+    RECOVERY_RETRIEVAL_CHECKPOINT_DESCRIPTORS_V1,
+    RECOVERY_RETRIEVAL_CHECKPOINTS_V1,
+    RECOVERY_RETRIEVAL_FORBIDDEN_CAPABILITIES_V1,
+    RECOVERY_RETRIEVAL_PHASES_V1,
+    RECOVERY_RETRIEVAL_PROFILE_VERSION,
+    RecoveryRetrievalCheckpoint,
+    RecoveryRetrievalCheckpointDescriptorV1,
+    RecoveryRetrievalForbiddenCapability,
+    RecoveryRetrievalPhase,
+    RecoveryRetrievalProfileV1,
+    RecoveryRetrievalRequirement,
+    StructurallyValidRecoveryRetrievalProfileV1,
+    expected_recovery_retrieval_profile_v1,
+    validate_recovery_retrieval_checkpoint_descriptor_v1,
+    validate_recovery_retrieval_profile_v1,
 )
 from .recovery_verification_descriptors import (
     RECOVERY_VERIFICATION_ALGORITHMS_V1,

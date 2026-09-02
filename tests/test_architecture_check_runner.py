@@ -39,6 +39,7 @@ class ArchitectureCheckRunnerTests(SimpleTestCase):
                 "recovery-hmac-message-descriptor",
                 "recovery-key-lifecycle-descriptor",
                 "recovery-eligibility-descriptor",
+                "recovery-retrieval-descriptor",
                 "recovery-verification-descriptor",
                 "recovery-verifier-record-descriptor",
                 "recovery-verifier-service-descriptor",

@@ -184,6 +184,15 @@ from .recovery_eligibility_descriptors import (
     scan_recovery_eligibility_descriptor_source,
     scan_repository_recovery_eligibility_descriptor,
 )
+from .recovery_retrieval_descriptors import (
+    EXPECTED_RECOVERY_RETRIEVAL_DESCRIPTOR_AST_DIGEST,
+    RECOVERY_RETRIEVAL_DESCRIPTOR_PATH,
+    RecoveryRetrievalDescriptorSourceViolation,
+    RecoveryRetrievalDescriptorSourceViolationCode,
+    analyze_recovery_retrieval_descriptor_source,
+    scan_recovery_retrieval_descriptor_source,
+    scan_repository_recovery_retrieval_descriptor,
+)
 from .recovery_verification_descriptors import (
     EXPECTED_RECOVERY_VERIFICATION_DESCRIPTOR_AST_DIGEST,
     RECOVERY_VERIFICATION_DESCRIPTOR_PATH,

@@ -806,3 +806,26 @@ file, network, dynamic, and recovery-authorization changes fail closed. This
 closes no Recovery Gateway, State Authority, first-read concurrency, expiry
 workflow, Key Service authorization, verifier invalidation, independent-
 review, deployment, or production gate.
+
+The sixty-fifth Stage A slice adds inert recovery retrieval descriptors for
+the owner-approved Response Note retrieval order in `docs/05`, `docs/21`, and
+`docs/24`. Validation covers only the exact POST input, CAPTCHA/verifier,
+`RESPONSE_RETRIEVAL_REQUESTED` receipt, server-time state/version lock,
+immutable expiry arm/conversion, scoped Key Service decrypt, fixed-frame/no-
+store rendering, content-free outcome, and forbidden capability metadata. It
+does not handle requests, validate CAPTCHA or credentials, append audit
+events, verify receipts, query state, mutate first-read state, call the Key
+Service, decrypt, validate plaintext frames, render responses, persist
+plaintext, log credentials/plaintext, expose endpoints, return distinct
+failures, or authorize recovery.
+
+A new non-executing recovery retrieval descriptor source policy locks the
+exact imports, constants, enums, immutable classes, validators, and false
+capability results. Request handling, CAPTCHA/credential validation, audit
+append, receipt verification, state query, first-read mutation, Key Service
+calls, decryption, plaintext-frame validation, rendering, plaintext
+persistence, credential/plaintext logging, distinct failure, endpoint, file,
+network, dynamic, and recovery-authorization changes fail closed. This closes
+no Recovery Gateway implementation, audit integration, State Authority lock,
+first-read concurrency, Key Service client, decrypt path, renderer,
+independent-review, deployment, or production gate.
