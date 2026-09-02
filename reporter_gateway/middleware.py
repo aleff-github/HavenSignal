@@ -6,6 +6,14 @@ from django.http import HttpRequest, HttpResponse
 
 
 SUBMISSION_MAX_CONTENT_LENGTH_BYTES = 22_020_096
+FORBIDDEN_SUBMISSION_META_KEYS = frozenset(
+    {
+        "HTTP_CONTENT_ENCODING",
+        "HTTP_EXPECT",
+        "HTTP_TRAILER",
+        "HTTP_TRANSFER_ENCODING",
+    }
+)
 
 
 class ReporterSecurityHeadersMiddleware:
@@ -36,6 +44,12 @@ class ReporterSecurityHeadersMiddleware:
             )
         if request.method != "POST" or request.path_info != "/submit/":
             return None
+        if any(key in request.META for key in FORBIDDEN_SUBMISSION_META_KEYS):
+            return HttpResponse(
+                "submission_unavailable",
+                content_type="text/plain; charset=utf-8",
+                status=400,
+            )
         content_length = request.META.get("CONTENT_LENGTH", "")
         if not content_length.isdecimal() or int(content_length) < 1:
             return HttpResponse(
