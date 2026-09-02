@@ -956,6 +956,44 @@ Passing this source policy closes no service topology, network transport,
 verifier construction, persistence, lookup, response eligibility,
 Response-DEK lifecycle, Key Service, independent-review, or production gate.
 
+## Stage A recovery eligibility descriptor record
+
+`security_interfaces/recovery_eligibility_descriptors.py` validates only the
+Recovery Gateway/State Authority/Key Service eligibility facts already fixed
+by `docs/05_RECOVERY_RESPONSE.md`, `docs/24_RESPONSE_NOTE_CRYPTOGRAPHIC_PROTOCOL.md`,
+and `docs/32_RETENTION_AND_DELETION_PROTOCOL.md`: version-1 unavailable,
+available-unread, read-window-open, read-window-expired, never-read-expired,
+and destroyed labels; exact `response_available_at + 90 * 24 hours` unread
+deadline; exact `first_read_at + 72 hours` read window; POST Ticket ID,
+Recovery Secret, and CAPTCHA requirement; server-authoritative state;
+verifier success as necessary but insufficient; narrow Response-DEK
+authorization; original Report-DEK destruction before visibility; exactly one
+immutable first-read time; non-extending read window; denial after
+server-authoritative expiry; recovery-state invalidation at expiry; and
+generic non-success for ineligible states.
+
+Successful validation returns immutable, content-free eligibility evidence.
+It does not perform lookup, validate credentials, validate CAPTCHA, call the
+Recovery Verifier Service, call the Key Service, read response state, read
+response ciphertext, decrypt a Response Note, mutate first-read state, destroy
+a Response-DEK, invalidate recovery state, expose an endpoint, extend a
+response window, log credentials, return distinct failures, or authorize
+recovery.
+
+The non-executing recovery eligibility descriptor policy fixes the exact
+target, imports, constants, enum registries, immutable class profiles,
+validator behavior, and false capability results. Added lookup,
+credential/CAPTCHA validation, verifier-service calls, Key Service calls,
+state/ciphertext reads, decryption, first-read mutation, Response-DEK
+destruction, recovery-state invalidation execution, endpoint, response-window
+extension, credential logging, distinct failure, file, network, dynamic, or
+recovery-authorization behavior fails closed. The target is parsed but never
+imported or executed.
+
+Passing this source policy closes no Recovery Gateway, State Authority,
+first-read race implementation, expiry workflow, Key Service authorization,
+verifier invalidation, endpoint, independent-review, or production gate.
+
 ## Stage A Response Note crypto descriptor record
 
 `security_interfaces/response_crypto_descriptors.py` validates only the static

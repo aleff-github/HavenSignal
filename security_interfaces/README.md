@@ -248,6 +248,25 @@ service client/server, network channel, verifier construction, persistence
 layer, lookup path, Response-DEK authorization path, endpoint behavior, or
 production evidence.
 
+`recovery_eligibility_descriptors.py` validates only the static response
+eligibility profile approved across `docs/05`, `docs/24`, and `docs/32`:
+unavailable, available-unread, read-window-open, read-window-expired,
+never-read-expired, and destroyed state labels; exact 90-day unread expiry;
+exact 72-hour first-read expiry; server-authoritative state, POST credentials
+and CAPTCHA, verifier-success-is-not-sufficient, Response-DEK authorization,
+original Report-DEK destruction before visibility, one immutable first-read
+time, non-extending read windows, expiry denial, recovery-state invalidation,
+and generic non-success requirements. It does not perform lookup, validate
+credentials or CAPTCHA, call services, read state/ciphertext, decrypt, mutate
+first-read state, destroy keys, expose endpoints, return distinct failures, or
+authorize recovery.
+
+The recovery eligibility descriptor source is locked by a non-executing
+exact-AST policy. Passing proves only reviewed source shape; it is not a
+Recovery Gateway, State Authority, first-read race implementation, Key Service
+authorization path, expiry workflow, endpoint behavior, or production
+evidence.
+
 `report_crypto_descriptors.py` validates only the static version-1 original
 report crypto profile already fixed in `docs/26`: XChaCha20-Poly1305-IETF
 combined-mode metadata, 32-byte Report-DEK and object-subkey sizes, fixed

@@ -153,6 +153,9 @@ The repository currently contains:
 - inert Recovery Verifier Service descriptors that fix only approved
   create-only, boolean-verify, channel, output, and forbidden-capability
   metadata;
+- inert recovery eligibility descriptors that fix only approved unavailable,
+  unread-available, read-window, expired/destroyed, 90-day unread, 72-hour
+  first-read, generic-result, and forbidden-capability metadata;
 - inert Response Note crypto descriptors that validate only approved format,
   size, algorithm, AAD, envelope, and key-operation profile shapes;
 - inert Response Note text descriptors that validate only approved plain-text,
@@ -184,6 +187,7 @@ The repository currently contains:
 - a non-executing exact-AST guard for inert recovery HMAC-message descriptors;
 - a non-executing exact-AST guard for inert Recovery Verifier Service
   descriptors;
+- a non-executing exact-AST guard for inert recovery eligibility descriptors;
 - a non-executing exact-AST guard for inert Response Note crypto descriptors;
 - a non-executing exact-AST guard for inert Response Note text descriptors;
 - a non-executing exact-AST guard for inert Response Note schema descriptors;

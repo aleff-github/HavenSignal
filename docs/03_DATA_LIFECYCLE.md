@@ -212,6 +212,13 @@ evidence enables no protected transition, content access, authentication,
 audit receipt, key operation, deletion, PostgreSQL concurrency claim, or
 production capability.
 
+The recovery eligibility Stage A descriptors additionally represent only the
+Response Note eligibility labels and timing facts around `RESPONSE_AVAILABLE`,
+the 90-day never-read deadline, the 72-hour first-read window, generic
+non-success, and recovery-state invalidation requirements. They do not
+implement state lookup, first-read concurrency, decryption, key destruction,
+endpoint behavior, or recovery authorization.
+
 ## Flood / sealed deletion
 
 During a major flood of submissions, deletion of still-SEALED reports may be required.

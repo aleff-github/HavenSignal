@@ -487,6 +487,14 @@ authorization, audit event/receipt, Key Service call, verifier invalidation,
 ciphertext cleanup, endpoint, or production evidence; every named gate below
 remains in force.
 
+The recovery eligibility descriptor slice mirrors those timing boundaries as
+inert interface metadata: exact 90-day unread expiry, exact 72-hour read
+window, server-authoritative eligibility, generic non-success, and denial of
+lookup, credential/CAPTCHA validation, service calls, decryption, mutation,
+key destruction, endpoint, distinct failure, and recovery authorization
+capabilities. It is not a retention job, State Authority implementation,
+Key Service authorization, expiry workflow, or production proof.
+
 The following Stage A source-policy slice statically fixes the exact retention
 imports, module members, snapshot/plan fields, calls, false flags, and
 always-unavailable executor without importing or executing the module. It also
