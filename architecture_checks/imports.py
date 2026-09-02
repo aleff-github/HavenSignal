@@ -44,11 +44,26 @@ REPORTER_GATEWAY_IMPORT_POLICY = ImportPolicy(
 )
 
 
+OPERATOR_CONSOLE_IMPORT_POLICY = ImportPolicy(
+    name="OPERATOR_CONSOLE_INERT_V1",
+    allowed_absolute_modules=frozenset(
+        {
+            "django.apps",
+            "django.http",
+            "django.shortcuts",
+            "django.views.decorators.http",
+        }
+    ),
+    allow_local_relative_imports=True,
+)
+
+
 REPORTER_ROOT_URL_IMPORT_POLICY = ImportPolicy(
     name="REPORTER_ROOT_URL_INERT_V1",
     allowed_absolute_modules=frozenset(
         {
             "django.urls",
+            "operator_console.views",
             "reporter_gateway.views",
         }
     ),

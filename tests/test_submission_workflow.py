@@ -220,6 +220,7 @@ class SubmissionAttemptPersistenceTests(TestCase):
                 "reporter-status",
                 "reporter-submit",
                 "reporter-response",
+                "operator-console",
             },
         )
         app_path = Path(SubmissionAttempt._meta.app_config.path)

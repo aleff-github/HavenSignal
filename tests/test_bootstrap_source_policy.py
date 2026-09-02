@@ -95,6 +95,11 @@ class BootstrapSourcePolicyTests(SimpleTestCase):
     def test_app_config_identity_and_ready_hooks_are_rejected(self) -> None:
         mutations = (
             (
+                "operator_console/apps.py",
+                'name = "operator_console"',
+                'name = "unreviewed_operator_console"',
+            ),
+            (
                 "submission_workflow/apps.py",
                 'name = "submission_workflow"',
                 'name = "unreviewed_submission"',

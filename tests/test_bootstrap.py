@@ -21,5 +21,6 @@ class BootstrapSmokeTest(SimpleTestCase):
                 "reporter-status",
                 "reporter-submit",
                 "reporter-response",
+                "operator-console",
             },
         )

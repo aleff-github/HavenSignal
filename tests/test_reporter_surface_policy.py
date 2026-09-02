@@ -64,6 +64,14 @@ class CurrentReporterSurfaceTests(SimpleTestCase):
                 )
                 self.assertEqual(violations, ())
 
+    def test_current_operator_template_uses_only_the_passive_profile(self) -> None:
+        violations = scan_surface_file(
+            path=BASE_DIR / "templates" / "operator_console" / "unavailable.html",
+            relative_to=BASE_DIR,
+            analyzer=analyze_template_source,
+        )
+        self.assertEqual(violations, ())
+
     def test_current_css_loads_no_resources_or_active_content(self) -> None:
         violations = scan_surface_file(
             path=BASE_DIR / "static" / "reporter_gateway" / "home.css",
@@ -162,7 +170,8 @@ class SettingsAndUrlSurfaceAbuseTests(SimpleTestCase):
                 "urlpatterns = [path('', home, name='reporter-home'), "
                 "path('status/', status, name='reporter-status'), "
                 "path('submit/', submit_unavailable, name='reporter-submit'), "
-                "path('response/', response_unavailable, name='reporter-response')]\n"
+                "path('response/', response_unavailable, name='reporter-response'), "
+                "path('operator/', operator_unavailable, name='operator-console')]\n"
                 "urlpatterns.append(path('send/', send, name='send'))"
             ),
         )
