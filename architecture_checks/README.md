@@ -17,8 +17,9 @@ It does not expand what the individual policies prove.
 The repository-hygiene policy inspects only tracked path names and `.gitignore`
 rules. It rejects committed local databases, logs, virtual environments,
 secret/config material, export artifacts, temporary workspaces, quarantine
-areas, user media, collected static output, and test/cache artifacts. It is not
-a content scanner or secret scanner and never reads or echoes candidate file
+areas, user media, collected static output, test/cache artifacts, and the
+explicitly local development-instruction and session paths. It is not a
+content scanner or secret scanner and never reads or echoes candidate file
 contents.
 
 The verification-script policy parses, but never executes, `scripts/verify`.
