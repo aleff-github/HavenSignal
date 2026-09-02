@@ -364,6 +364,16 @@ dummy verification, return expected tags or partial-match details, read
 response state, validate CAPTCHA, call a Key Service, authorize Response-DEK
 use, log credentials, expose endpoints, or authorize recovery.
 
+The persisted verifier-record shape is also represented by inert descriptors
+and a non-executing exact-AST source policy. They fix only the approved
+`scheme_version`, `verifier_key_id`, and `verifier_tag` field labels, full
+32-byte tag size, server-controlled key ID, no reporter-supplied key ID, no
+plaintext Recovery Secret, no raw verification key, database-alone secret-test
+denial, removal with recovery state, invalidation at Response expiry or
+terminal destruction, and forbidden material categories. They do not persist
+records, compute verifiers, test candidate secrets, perform lookups, write a
+database, expose endpoints, or authorize recovery.
+
 ## External design references
 
 - [RFC 4648 — Base-N Encodings](https://www.rfc-editor.org/rfc/rfc4648.html)

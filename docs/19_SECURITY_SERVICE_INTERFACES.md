@@ -290,6 +290,14 @@ compare tags, execute dummy verification, return expected tags or partial-match
 details, read response state, validate CAPTCHA, call a Key Service, authorize
 Response-DEK use, log credentials, expose endpoints, or authorize recovery.
 
+The current Stage A recovery verifier-record descriptor records only the
+approved persisted field labels, full 32-byte tag size, server-controlled key
+ID, no-secret/no-raw-key/no-database-alone-test requirements, removal and
+terminal invalidation metadata, and forbidden material categories from
+`docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md`. It does not persist records,
+compute verifiers, test candidate secrets, perform lookups, write a database,
+expose endpoints, or authorize recovery.
+
 The current Stage A credential-response descriptor records only the approved
 one-time live response and lost-response policy from
 `docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`. It does not generate credentials,
@@ -837,6 +845,35 @@ Passing this source policy closes no verifier implementation,
 constant-time-comparison implementation, dummy-verification timing proof,
 recovery workflow, response eligibility, CAPTCHA, Response-DEK lifecycle, Key
 Service, persistence, independent-review, or production gate.
+
+## Stage A recovery verifier record descriptor record
+
+`security_interfaces/recovery_verifier_record_descriptors.py` validates only
+the persisted verifier-record facts already fixed by
+`docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md`: version-1 records with
+`scheme_version`, `verifier_key_id`, and `verifier_tag` fields, full 32-byte
+verifier tag size, server-controlled key identifier, no reporter-supplied key
+identifier, no plaintext Recovery Secret, no raw verification key,
+database-alone secret-test denial, removal with recovery state, invalidation
+at Response expiry or terminal destruction, and forbidden Recovery Secret, raw
+verification key, raw HMAC message, report content, DEK, operator identity, and
+audit-history mutation material.
+
+Successful validation returns immutable, content-free record-shape evidence.
+It does not persist records, compute verifiers, test candidate secrets, perform
+lookups, write a database, expose an endpoint, or authorize recovery.
+
+The non-executing recovery verifier-record descriptor policy fixes the exact
+target, imports, constants, enum registries, immutable class profiles,
+validator behavior, and false capability results. Added secret, raw-key,
+raw-HMAC-message, content, DEK, persistence, verifier computation,
+candidate-secret testing, lookup, database write, endpoint, file, network,
+dynamic, or recovery-authorization behavior fails closed. The target is parsed
+but never imported or executed.
+
+Passing this source policy closes no metadata-store schema, persistence,
+verifier construction, lookup, recovery-state lifecycle, Response-DEK
+lifecycle, independent-review, or production gate.
 
 ## Stage A Response Note crypto descriptor record
 

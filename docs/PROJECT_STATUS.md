@@ -537,3 +537,18 @@ Service, authorize Response-DEK use, log credentials, expose endpoints, or
 authorize recovery. Verifier implementation, constant-time comparison, timing
 proof, response eligibility, CAPTCHA, Key Service, independent-review,
 deployment, and production gates remain open.
+
+## Latest Stage A slice — recovery verifier-record descriptors
+
+The current repository adds inert Recovery Verifier record descriptors for the
+owner-approved `docs/21` persisted verifier-record shape. The descriptor
+validates only the approved `scheme_version`, `verifier_key_id`, and
+`verifier_tag` field labels, 32-byte tag size, server-controlled key ID,
+no-secret/no-raw-key/no-database-alone-test requirements, removal with recovery
+state, terminal invalidation, and forbidden material categories.
+
+The descriptor and its exact-AST source policy intentionally do not persist
+records, compute verifiers, test candidate secrets, perform lookups, write a
+database, expose endpoints, or authorize recovery. Metadata-store schema,
+verifier construction, lookup, recovery-state lifecycle, Response-DEK
+lifecycle, independent-review, deployment, and production gates remain open.
