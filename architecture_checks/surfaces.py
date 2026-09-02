@@ -354,10 +354,41 @@ def _is_path_pattern(
     )
 
 
+def _is_include_path_pattern(
+    node: ast.AST,
+    *,
+    route_value: str,
+    included_urlconf: str,
+) -> bool:
+    if not isinstance(node, ast.Call):
+        return False
+    if not isinstance(node.func, ast.Name) or node.func.id != "path":
+        return False
+    if len(node.args) != 2 or node.keywords:
+        return False
+    route, include_call = node.args
+    if (
+        not isinstance(route, ast.Constant)
+        or type(route.value) is not str
+        or route.value != route_value
+    ):
+        return False
+    return (
+        isinstance(include_call, ast.Call)
+        and isinstance(include_call.func, ast.Name)
+        and include_call.func.id == "include"
+        and len(include_call.args) == 1
+        and not include_call.keywords
+        and isinstance(include_call.args[0], ast.Constant)
+        and type(include_call.args[0].value) is str
+        and include_call.args[0].value == included_urlconf
+    )
+
+
 def analyze_urlconf_source(
     *, source: str, relative_path: str
 ) -> tuple[SurfaceViolation, ...]:
-    """Require exactly the current inert root URL pattern."""
+    """Require exactly the current inert URL patterns for each surface."""
 
     try:
         tree = ast.parse(source, filename=relative_path)
@@ -403,34 +434,53 @@ def analyze_urlconf_source(
         )
 
     value = assignments[0].value
-    valid = isinstance(value, (ast.List, ast.Tuple)) and len(value.elts) == 5
-    if valid:
-        valid = _is_path_pattern(
-            value.elts[0],
-            route_value="",
-            view_name="home",
-            url_name="reporter-home",
-        ) and _is_path_pattern(
-            value.elts[1],
-            route_value="status/",
-            view_name="status",
-            url_name="reporter-status",
-        ) and _is_path_pattern(
-            value.elts[2],
-            route_value="submit/",
-            view_name="submit_unavailable",
-            url_name="reporter-submit",
-        ) and _is_path_pattern(
-            value.elts[3],
-            route_value="response/",
-            view_name="response_unavailable",
-            url_name="reporter-response",
-        ) and _is_path_pattern(
-            value.elts[4],
-            route_value="operator/",
-            view_name="operator_unavailable",
-            url_name="operator-console",
-        )
+    valid = False
+    detail_code = "PUBLIC_INERT_SURFACES_ONLY"
+    if isinstance(value, (ast.List, ast.Tuple)):
+        if relative_path == "anonymous_reporting/urls.py":
+            valid = len(value.elts) == 2 and _is_include_path_pattern(
+                value.elts[0],
+                route_value="",
+                included_urlconf="reporter_gateway.urls",
+            ) and _is_include_path_pattern(
+                value.elts[1],
+                route_value="operator/",
+                included_urlconf="operator_console.urls",
+            )
+            detail_code = "ROOT_INERT_SURFACE_INCLUDES_ONLY"
+        elif relative_path == "reporter_gateway/urls.py":
+            valid = len(value.elts) == 4 and _is_path_pattern(
+                value.elts[0],
+                route_value="",
+                view_name="home",
+                url_name="reporter-home",
+            ) and _is_path_pattern(
+                value.elts[1],
+                route_value="status/",
+                view_name="status",
+                url_name="reporter-status",
+            ) and _is_path_pattern(
+                value.elts[2],
+                route_value="submit/",
+                view_name="submit_unavailable",
+                url_name="reporter-submit",
+            ) and _is_path_pattern(
+                value.elts[3],
+                route_value="response/",
+                view_name="response_unavailable",
+                url_name="reporter-response",
+            )
+            detail_code = "REPORTER_INERT_ROUTES_ONLY"
+        elif relative_path == "operator_console/urls.py":
+            valid = len(value.elts) == 1 and _is_path_pattern(
+                value.elts[0],
+                route_value="",
+                view_name="operator_unavailable",
+                url_name="operator-console",
+            )
+            detail_code = "OPERATOR_INERT_ROUTES_ONLY"
+        else:
+            detail_code = "URLCONF_TARGET_PROFILE"
     if valid:
         return ()
     return (
@@ -438,7 +488,7 @@ def analyze_urlconf_source(
             code=SurfaceViolationCode.URL_PATTERN_MISMATCH,
             relative_path=relative_path,
             line=assignments[0].lineno,
-            detail_code="PUBLIC_INERT_SURFACES_ONLY",
+            detail_code=detail_code,
         ),
     )
 

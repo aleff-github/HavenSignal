@@ -2,7 +2,7 @@
 
 from django.conf import settings
 from django.test import SimpleTestCase
-from django.urls import get_resolver
+from django.urls import reverse
 
 
 class BootstrapSmokeTest(SimpleTestCase):
@@ -14,13 +14,8 @@ class BootstrapSmokeTest(SimpleTestCase):
         }
 
         self.assertTrue(required_middleware.issubset(settings.MIDDLEWARE))
-        self.assertEqual(
-            {pattern.name for pattern in get_resolver().url_patterns},
-            {
-                "reporter-home",
-                "reporter-status",
-                "reporter-submit",
-                "reporter-response",
-                "operator-console",
-            },
-        )
+        self.assertEqual(reverse("reporter-home"), "/")
+        self.assertEqual(reverse("reporter-status"), "/status/")
+        self.assertEqual(reverse("reporter-submit"), "/submit/")
+        self.assertEqual(reverse("reporter-response"), "/response/")
+        self.assertEqual(reverse("operator-console"), "/operator/")

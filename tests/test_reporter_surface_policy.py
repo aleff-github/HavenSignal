@@ -41,13 +41,19 @@ class CurrentReporterSurfaceTests(SimpleTestCase):
         )
         self.assertEqual(violations, ())
 
-    def test_current_urlconf_contains_only_the_inert_reporter_surfaces(self) -> None:
-        violations = scan_surface_file(
-            path=BASE_DIR / "anonymous_reporting" / "urls.py",
-            relative_to=BASE_DIR,
-            analyzer=analyze_urlconf_source,
-        )
-        self.assertEqual(violations, ())
+    def test_current_urlconfs_contain_only_the_inert_surfaces(self) -> None:
+        for relative_path in (
+            "anonymous_reporting/urls.py",
+            "reporter_gateway/urls.py",
+            "operator_console/urls.py",
+        ):
+            with self.subTest(relative_path=relative_path):
+                violations = scan_surface_file(
+                    path=BASE_DIR / relative_path,
+                    relative_to=BASE_DIR,
+                    analyzer=analyze_urlconf_source,
+                )
+                self.assertEqual(violations, ())
 
     def test_current_templates_use_only_the_passive_profile(self) -> None:
         for template_name in (
@@ -161,17 +167,15 @@ class SettingsAndUrlSurfaceAbuseTests(SimpleTestCase):
     def test_extra_or_dynamic_url_patterns_are_rejected(self) -> None:
         sources = (
             (
-                "urlpatterns = [path('', home, name='reporter-home'), "
-                "path('send/', send, name='send')]"
+                "urlpatterns = [path('', include('reporter_gateway.urls')), "
+                "path('operator/', include('operator_console.urls')), "
+                "path('admin/', include('django.contrib.admin.urls'))]"
             ),
             "urlpatterns = build_patterns()",
-            "urlpatterns = [re_path('', home, name='reporter-home')]",
+            "urlpatterns = [path('', include('reporter_gateway.urls'))]",
             (
-                "urlpatterns = [path('', home, name='reporter-home'), "
-                "path('status/', status, name='reporter-status'), "
-                "path('submit/', submit_unavailable, name='reporter-submit'), "
-                "path('response/', response_unavailable, name='reporter-response'), "
-                "path('operator/', operator_unavailable, name='operator-console')]\n"
+                "urlpatterns = [path('', include('reporter_gateway.urls')), "
+                "path('operator/', include('operator_console.urls'))]\n"
                 "urlpatterns.append(path('send/', send, name='send'))"
             ),
         )
@@ -180,6 +184,37 @@ class SettingsAndUrlSurfaceAbuseTests(SimpleTestCase):
                 violations = analyze_urlconf_source(
                     source=source,
                     relative_path="anonymous_reporting/urls.py",
+                )
+                self.assertEqual(len(violations), 1)
+                self.assertEqual(
+                    violations[0].code,
+                    SurfaceViolationCode.URL_PATTERN_MISMATCH,
+                )
+
+    def test_app_urlconf_route_changes_are_rejected(self) -> None:
+        cases = (
+            (
+                "reporter_gateway/urls.py",
+                "urlpatterns = [path('', home, name='reporter-home')]",
+            ),
+            (
+                "reporter_gateway/urls.py",
+                "urlpatterns = [path('', home, name='reporter-home'), "
+                "path('status/', status, name='reporter-status'), "
+                "path('submit/', submit_unavailable, name='reporter-submit'), "
+                "path('response/', response_unavailable, name='reporter-response'), "
+                "path('admin/', admin, name='admin')]",
+            ),
+            (
+                "operator_console/urls.py",
+                "urlpatterns = [path('login/', operator_login, name='operator-login')]",
+            ),
+        )
+        for relative_path, source in cases:
+            with self.subTest(relative_path=relative_path, source=source):
+                violations = analyze_urlconf_source(
+                    source=source,
+                    relative_path=relative_path,
                 )
                 self.assertEqual(len(violations), 1)
                 self.assertEqual(

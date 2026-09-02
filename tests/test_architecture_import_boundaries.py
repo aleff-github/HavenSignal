@@ -81,6 +81,7 @@ class CurrentArchitectureBoundaryTests(SimpleTestCase):
                     "collections.abc",
                     "django.http",
                     "django.shortcuts",
+                    "django.urls",
                     "django.views.decorators.http",
                 }
             ),
@@ -88,11 +89,7 @@ class CurrentArchitectureBoundaryTests(SimpleTestCase):
         self.assertEqual(
             REPORTER_ROOT_URL_IMPORT_POLICY.allowed_absolute_modules,
             frozenset(
-                {
-                    "django.urls",
-                    "operator_console.views",
-                    "reporter_gateway.views",
-                }
+                {"django.urls"}
             ),
         )
         self.assertEqual(
@@ -102,6 +99,7 @@ class CurrentArchitectureBoundaryTests(SimpleTestCase):
                     "django.apps",
                     "django.http",
                     "django.shortcuts",
+                    "django.urls",
                     "django.views.decorators.http",
                 }
             ),
@@ -123,6 +121,7 @@ class ArchitectureImportAbuseTests(SimpleTestCase):
 from collections.abc import Callable as Handler
 from django.http import HttpRequest as Request
 from django.shortcuts import render as render_page
+from django.urls import path as route
 from django.views.decorators.http import require_safe
 from .middleware import ReporterSecurityHeadersMiddleware
 """
@@ -220,4 +219,20 @@ builtins.exec("pass")
         self.assertEqual(
             violations[0].module,
             "unreviewed_console.views",
+        )
+
+    def test_url_policy_rejects_direct_surface_view_imports(self) -> None:
+        violations = analyze_python_source(
+            source=(
+                "from django.urls import include, path\n"
+                "from reporter_gateway.views import home\n"
+                "from operator_console.views import operator_unavailable\n"
+            ),
+            relative_path="anonymous_reporting/urls.py",
+            policy=REPORTER_ROOT_URL_IMPORT_POLICY,
+        )
+        self.assertEqual(len(violations), 2)
+        self.assertEqual(
+            {violation.module for violation in violations},
+            {"operator_console.views", "reporter_gateway.views"},
         )
