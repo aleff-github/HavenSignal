@@ -84,11 +84,11 @@ Goals:
 - documented residual risks;
 - incident response and release procedures.
 
-## Phase 5 — Controlled pilot
+## Phase 5 — Controlled university pilot
 
 Goals:
 
-- limited pilot with a suitable organization;
+- limited pilot with a suitable university or higher-education institution;
 - synthetic and controlled acceptance testing before real sensitive data;
 - accessibility review;
 - operator training;

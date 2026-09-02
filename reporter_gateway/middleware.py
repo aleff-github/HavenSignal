@@ -24,7 +24,7 @@ class ReporterSecurityHeadersMiddleware:
         if request.method != "POST" or request.path_info != "/submit/":
             return None
         content_length = request.META.get("CONTENT_LENGTH", "")
-        if not content_length.isdecimal():
+        if not content_length.isdecimal() or int(content_length) < 1:
             return HttpResponse(
                 "submission_unavailable",
                 content_type="text/plain; charset=utf-8",

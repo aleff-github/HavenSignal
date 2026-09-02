@@ -4,6 +4,11 @@
 
 This document keeps the implementation boundary visible without requiring the top-level README to reproduce the full handoff narrative.
 
+HavenSignal is initially intended for universities and higher-education
+institutions. Each deployment serves one approved organization while the
+software remains configurable rather than hard-coded to a specific
+institution's identity system, hierarchy, terminology, or internal policy.
+
 ## Reporter surface
 
 The repository contains a Django 5.2.17 development scaffold, one inert
@@ -32,10 +37,11 @@ POST returns a controlled `503` without reading `request.body`, `request.POST`,
 or `request.FILES`, and without creating any report, attempt, audit event,
 credential, key, upload, or database transition.
 
-POST `/submit/` requests with malformed or greater-than-22,020,096-byte
-`Content-Length` are rejected by the browser-facing middleware before the view
-is called. This guard reads no request body, installs no upload handler, parses
-no multipart data, and does not accept submissions.
+POST `/submit/` requests with an absent, non-decimal, zero, or
+greater-than-22,020,096-byte `Content-Length` are rejected by the
+browser-facing middleware before the view is called. This preliminary guard
+reads no request body, installs no upload handler, parses no multipart data,
+and does not accept submissions.
 
 The `/response/` route is intentionally disabled and served by the separate
 Recovery Gateway app. GET renders static guidance. POST returns a controlled

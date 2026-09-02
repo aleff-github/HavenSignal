@@ -2,7 +2,10 @@
 
 **A security-first open-source system for anonymous disclosure and human guidance.**
 
-HavenSignal is designed for people who need to disclose a sensitive situation without creating an account or identifying themselves, especially when they may not know which institution, professional, authority, or support channel is appropriate.
+HavenSignal is initially designed for universities and higher-education
+institutions. It gives people a way to disclose a sensitive situation without
+creating an account or identifying themselves, especially when they may not
+know which office, professional, authority, or support channel is appropriate.
 
 The project deliberately avoids becoming a chat platform, case-management suite, automated accusation system, or AI decision-maker. Its baseline is intentionally narrow:
 
@@ -13,7 +16,10 @@ The project deliberately avoids becoming a chat platform, case-management suite,
 
 ## Why HavenSignal exists
 
-In complex institutions, a person may know that something is wrong but not know where to go next. Hierarchy, fear of retaliation, uncertainty about procedure, and the cost of choosing the wrong channel can make the first step difficult.
+Inside universities and higher-education institutions, a person may know that
+something is wrong but not know where to go next. Hierarchy, fear of
+retaliation, uncertainty about procedure, and the cost of choosing the wrong
+channel can make the first step difficult.
 
 HavenSignal is intended to provide a minimal first-contact mechanism:
 
@@ -89,7 +95,8 @@ The repository currently contains:
 - metadata-only submission and report lifecycle models;
 - pure monotonic transition planners;
 - explicit fail-closed persistence boundaries;
-- an inert submission `Content-Length` guard for oversized disabled POSTs;
+- an inert submission `Content-Length` guard for invalid or oversized disabled
+  POSTs;
 - negative-capability placeholders for security services, with a non-executing
   guard that locks their exact fail-closed behavior;
 - inert audit, alert, and step-up structural descriptors;
