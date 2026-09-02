@@ -1,0 +1,46 @@
+{% load static %}
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <title>HavenSignal status</title>
+    <link rel="stylesheet" href="{% static 'reporter_gateway/home.css' %}">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="hero">
+        <p class="eyebrow">Anonymous Reporting</p>
+        <h1>Stato pubblico del servizio.</h1>
+        <p class="intro">
+          HavenSignal è in fase pre-alpha e non deve essere usato per inviare
+          segnalazioni reali.
+        </p>
+      </header>
+
+      <section class="notice" aria-labelledby="status-boundary">
+        <h2 id="status-boundary">Superfici abilitate</h2>
+        <p>
+          Sono disponibili solo pagine statiche e superfici fail-closed. Non
+          esiste ancora un endpoint di invio, recupero risposta, autenticazione
+          operatore, upload, decrittazione o gestione casi.
+        </p>
+      </section>
+
+      <aside class="anonymity" aria-labelledby="status-security">
+        <h2 id="status-security">Garanzia corrente</h2>
+        <p>
+          La garanzia corrente è negativa: le funzioni sensibili restano
+          indisponibili finché audit, CAPTCHA, Key Service, crittografia,
+          recovery e concorrenza non avranno superato i rispettivi gate.
+        </p>
+      </aside>
+
+      <footer>
+        Questa schermata non contiene form, JavaScript, analytics o risorse di
+        terze parti e non legge dati del segnalante.
+      </footer>
+    </main>
+  </body>
+</html>

@@ -52,6 +52,7 @@ class CurrentReporterSurfaceTests(SimpleTestCase):
     def test_current_templates_use_only_the_passive_profile(self) -> None:
         for template_name in (
             "home.html",
+            "status.html",
             "submit_unavailable.html",
             "response_unavailable.html",
         ):
@@ -159,6 +160,7 @@ class SettingsAndUrlSurfaceAbuseTests(SimpleTestCase):
             "urlpatterns = [re_path('', home, name='reporter-home')]",
             (
                 "urlpatterns = [path('', home, name='reporter-home'), "
+                "path('status/', status, name='reporter-status'), "
                 "path('submit/', submit_unavailable, name='reporter-submit'), "
                 "path('response/', response_unavailable, name='reporter-response')]\n"
                 "urlpatterns.append(path('send/', send, name='send'))"

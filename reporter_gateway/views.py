@@ -12,6 +12,13 @@ def home(request: HttpRequest) -> HttpResponse:
     return render(request, "reporter_gateway/home.html")
 
 
+@require_safe
+def status(request: HttpRequest) -> HttpResponse:
+    """Show a static public status page without reading runtime state."""
+
+    return render(request, "reporter_gateway/status.html")
+
+
 @require_http_methods(["GET", "POST"])
 def submit_unavailable(request: HttpRequest) -> HttpResponse:
     """Expose the submission surface while intake dependencies remain closed."""
