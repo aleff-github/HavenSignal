@@ -130,7 +130,7 @@ EXPECTED_REPORTER_PYTHON_AST_DIGESTS = MappingProxyType(
             "55a0c3a812fa44cd357c766b5dbc436ee74c5a402c01e091dbb5a757a0905f6a"
         ),
         "reporter_gateway/views.py": (
-            "45d8efa12daf594021786a544d486ea4efd2a662ac1509f01cec87bd1fba2f7e"
+            "8b3967afa2de314c127ebf00435a5f9863755a61ea43e3f7470eed875c82b100"
         ),
     }
 )
@@ -322,7 +322,13 @@ def analyze_reporter_python_source(
     return ()
 
 
-def _is_current_home_pattern(node: ast.AST) -> bool:
+def _is_path_pattern(
+    node: ast.AST,
+    *,
+    route_value: str,
+    view_name: str,
+    url_name: str,
+) -> bool:
     if not isinstance(node, ast.Call):
         return False
     if not isinstance(node.func, ast.Name) or node.func.id != "path":
@@ -334,13 +340,13 @@ def _is_current_home_pattern(node: ast.AST) -> bool:
     return (
         isinstance(route, ast.Constant)
         and type(route.value) is str
-        and route.value == ""
+        and route.value == route_value
         and isinstance(view, ast.Name)
-        and view.id == "home"
+        and view.id == view_name
         and keyword.arg == "name"
         and isinstance(keyword.value, ast.Constant)
         and type(keyword.value.value) is str
-        and keyword.value.value == "reporter-home"
+        and keyword.value.value == url_name
     )
 
 
@@ -393,11 +399,19 @@ def analyze_urlconf_source(
         )
 
     value = assignments[0].value
-    valid = (
-        isinstance(value, (ast.List, ast.Tuple))
-        and len(value.elts) == 1
-        and _is_current_home_pattern(value.elts[0])
-    )
+    valid = isinstance(value, (ast.List, ast.Tuple)) and len(value.elts) == 2
+    if valid:
+        valid = _is_path_pattern(
+            value.elts[0],
+            route_value="",
+            view_name="home",
+            url_name="reporter-home",
+        ) and _is_path_pattern(
+            value.elts[1],
+            route_value="submit/",
+            view_name="submit_unavailable",
+            url_name="reporter-submit",
+        )
     if valid:
         return ()
     return (
@@ -405,7 +419,7 @@ def analyze_urlconf_source(
             code=SurfaceViolationCode.URL_PATTERN_MISMATCH,
             relative_path=relative_path,
             line=assignments[0].lineno,
-            detail_code="REPORTER_HOME_ONLY",
+            detail_code="REPORTER_HOME_AND_SUBMIT_ONLY",
         ),
     )
 

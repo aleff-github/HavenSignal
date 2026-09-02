@@ -1,0 +1,46 @@
+{% load static %}
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <title>Submission unavailable</title>
+    <link rel="stylesheet" href="{% static 'reporter_gateway/home.css' %}">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="hero">
+        <p class="eyebrow">Anonymous Reporting</p>
+        <h1>Invio non ancora abilitato.</h1>
+        <p class="intro">
+          Questa superficie esiste per verificare il routing e le protezioni
+          browser, ma non accetta ancora segnalazioni.
+        </p>
+      </header>
+
+      <section class="notice" aria-labelledby="submission-status">
+        <h2 id="submission-status">Submission fail-closed</h2>
+        <p>
+          Non inserire dati personali, testo di segnalazione o allegati. Le
+          dipendenze obbligatorie di CAPTCHA, Audit Service, Key Service,
+          upload handler e crittografia restano chiuse.
+        </p>
+      </section>
+
+      <aside class="anonymity" aria-labelledby="submission-next">
+        <h2 id="submission-next">Prossimo gate</h2>
+        <p>
+          L’invio reale sarà attivato solo quando il flusso potrà proteggere
+          il contenuto prima della persistenza durevole e ottenere audit
+          receipt validi senza esporre input controllato dal segnalante.
+        </p>
+      </aside>
+
+      <footer>
+        Questa schermata non contiene form, JavaScript, analytics o risorse di
+        terze parti e non salva contenuti di segnalazione.
+      </footer>
+    </main>
+  </body>
+</html>

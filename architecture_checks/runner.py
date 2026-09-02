@@ -231,6 +231,14 @@ def _template_surface(root: Path) -> tuple[object, ...]:
     )
 
 
+def _submit_template_surface(root: Path) -> tuple[object, ...]:
+    return scan_surface_file(
+        path=root / "templates" / "reporter_gateway" / "submit_unavailable.html",
+        relative_to=root,
+        analyzer=analyze_template_source,
+    )
+
+
 def _css_surface(root: Path) -> tuple[object, ...]:
     return scan_surface_file(
         path=root / "static" / "reporter_gateway" / "home.css",
@@ -395,6 +403,7 @@ ARCHITECTURE_CHECKS = (
     ArchitectureCheck("reporter-view-surface", _reporter_view_surface),
     ArchitectureCheck("reporter-header-surface", _reporter_header_surface),
     ArchitectureCheck("template-surface", _template_surface),
+    ArchitectureCheck("submit-template-surface", _submit_template_surface),
     ArchitectureCheck("css-surface", _css_surface),
     ArchitectureCheck("lifecycle-migrations", _lifecycle_migrations),
     ArchitectureCheck("submission-migrations", _submission_migrations),

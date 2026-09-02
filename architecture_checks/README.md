@@ -41,15 +41,16 @@ imports are allowed only inside `reporter_gateway`; parent-relative imports,
 star imports, dynamic imports, `eval`, and `exec` are rejected.
 
 The surface policy also parses, but never imports or renders, the current
-development settings, root URL configuration, landing-page template, and CSS.
-It fixes the inert installed-app/middleware profile, the single home route, a
-closed passive HTML/attribute/directive subset, and CSS with no resource-loading
-or legacy active-content constructs. Missing, dynamic, mutated, malformed,
-unreadable, or out-of-root inputs fail closed with controlled reason codes.
+development settings, root URL configuration, landing-page and disabled-
+submission templates, and CSS. It fixes the inert installed-app/middleware
+profile, the home and disabled `/submit/` routes, a closed passive HTML/
+attribute/directive subset, and CSS with no resource-loading or legacy active-
+content constructs. Missing, dynamic, mutated, malformed, unreadable, or out-
+of-root inputs fail closed with controlled reason codes.
 
 The same policy locks the executable AST of the reporter view and response-
-header middleware. A new endpoint, unsafe method, request-derived render
-context, cookie, logging operation, relaxed cache/CSP/header behavior, or any
+header middleware. A new accepting endpoint, unsafe method, request-derived
+render context, cookie, logging operation, relaxed cache/CSP/header behavior, or any
 other executable change requires an explicit policy update. The files are
 parsed but never imported or executed.
 

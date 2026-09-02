@@ -342,8 +342,9 @@ The seventh Stage A slice adds non-executing source policies for the current
 development Django settings, root URL patterns, reporter landing template, and
 CSS. Exact literal app/middleware lists keep authentication, administrator,
 session, and protected-domain components absent; targeted post-assignment
-mutation is rejected. The root URL configuration remains exactly one inert
-home route and rejects later mutation or dynamic construction.
+mutation is rejected. The root URL configuration remains exactly the inert
+home route plus the disabled fail-closed `/submit/` route and rejects later
+mutation or dynamic construction.
 
 The template policy accepts only the present passive tags, attributes, meta
 profile, and first-party static stylesheet directive. It rejects interactive
@@ -589,14 +590,15 @@ authentication, WebAuthn, session/device, operation/flood-profile, persistence,
 consumption, concurrency, independent-review, external-service, or production
 gate.
 
-The twenty-third Stage A slice extends the non-executing reporter-surface policy
-to the exact executable AST of `reporter_gateway/views.py` and
-`reporter_gateway/middleware.py`. The view remains one safe-method-only render
-of the passive landing template, with no request-derived context, input,
-persistence, cookie, redirect, or added endpoint behavior. The middleware
-retains the exact no-store, CSP, referrer, permissions, cross-origin, and
-cross-domain response-header profile and performs no request logging or other
-side effect.
+The twenty-third Stage A slice extends the non-executing reporter-surface
+policy to the exact executable AST of `reporter_gateway/views.py` and
+`reporter_gateway/middleware.py`. The views remain the approved safe-method
+home render plus a disabled `/submit/` surface whose POST path returns a
+controlled unavailable response without request-body access, request-derived
+context, input parsing, persistence, cookie, redirect, or accepting endpoint
+behavior. The middleware retains the exact no-store, CSP, referrer,
+permissions, cross-origin, and cross-domain response-header profile and
+performs no request logging or other side effect.
 
 Unknown targets, malformed source, and any executable AST change fail closed
 with controlled, content-free violations. Both targets are parsed but never
@@ -1328,3 +1330,20 @@ network, dynamic, and recovery-authorization changes fail closed. This closes
 no Recovery Gateway implementation, audit integration, State Authority lock,
 first-read concurrency, Key Service client, decrypt path, renderer,
 independent-review, deployment, or production gate.
+
+The sixty-sixth Stage A slice adds a concrete but disabled reporter
+submission surface at `/submit/`. GET renders only a passive no-form status
+page. POST returns a controlled `503` fail-closed response without reading
+`request.body`, `request.POST`, or `request.FILES`, and without creating a
+report, attempt, audit event, credential, key, upload, database row, or
+submission transition. This gives a browser-testable surface while preserving
+the existing prohibition on an accepting submission endpoint.
+
+The reporter surface policy now fixes exactly the home route and disabled
+`/submit/` route, the updated `reporter_gateway/views.py` executable AST, and
+both passive templates. Added accepting forms, request-derived render context,
+request-body echo, input parsing, persistence, cookies, redirects, JavaScript,
+third-party resources, dynamic URL construction, or new routes fail closed.
+This closes no accepting submission endpoint, CAPTCHA, request-upload handler,
+Audit Service, Key Service, report crypto, credential generation, concurrency,
+deployment, or production gate.

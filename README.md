@@ -207,8 +207,9 @@ The repository currently contains:
 - a non-executing exact-AST guard for inert submission idempotency descriptors;
 - a non-executing exact-AST guard for inert submission credential-response
   descriptors;
-- architecture checks that constrain the reporter-facing settings, route,
-  passive assets, read-only view, and restrictive response-header middleware;
+- architecture checks that constrain the reporter-facing settings, routes,
+  passive assets, read-only/fail-closed views, and restrictive response-header
+  middleware;
 - a non-executing exact-AST guard for the sole inert submission migration;
 - a non-executing exact-AST guard for the inert submission state machine;
 - a non-executing exact-AST guard for the inert report-lifecycle core;

@@ -951,15 +951,18 @@ without importing or rendering the target source that:
   not add authentication, administrator, session, message, or protected-domain
   capability;
 - the root URL configuration contains exactly the read-only reporter home and
-  cannot be extended through a later mutation;
-- the reporter view remains exactly one safe-method-only template render with
-  no request-derived context, input handling, persistence, cookies, redirect,
-  or additional endpoint behavior;
+  disabled fail-closed `/submit/` surfaces and cannot be extended through a
+  later mutation;
+- the reporter views remain exactly the approved home render and disabled
+  submission surface; the POST path returns a controlled unavailable response
+  without request-body access, request-derived context, input parsing,
+  persistence, cookies, redirect, or accepting endpoint behavior;
 - the response middleware retains the exact no-store, CSP, referrer,
   permissions, cross-origin, and cross-domain header profile and performs no
   request logging or other side effect;
-- the landing template contains only the closed passive tag, attribute, meta,
-  first-party stylesheet, and Django-static-directive profile;
+- the landing and disabled-submission templates contain only the closed
+  passive tag, attribute, meta, first-party stylesheet, and Django-static-
+  directive profile;
 - form, input, script, iframe, link, image, event/style attribute, template
   variable/include, processing instruction, malformed nesting, and external or
   active URL scheme injections fail closed;

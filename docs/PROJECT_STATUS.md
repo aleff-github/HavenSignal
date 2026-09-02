@@ -6,9 +6,10 @@ This document keeps the implementation boundary visible without requiring the to
 
 ## Reporter surface
 
-The repository contains a Django 5.2.17 development scaffold and one inert, read-only reporter landing page.
+The repository contains a Django 5.2.17 development scaffold, one inert
+reporter landing page, and one fail-closed `/submit/` surface.
 
-The page has no:
+These pages have no:
 
 - submission form;
 - JavaScript;
@@ -20,11 +21,19 @@ The page has no:
 
 The current surface must not be used for real sensitive reports.
 
+The `/submit/` route is intentionally disabled. GET renders static guidance.
+POST returns a controlled `503` without reading `request.body`, `request.POST`,
+or `request.FILES`, and without creating any report, attempt, audit event,
+credential, key, upload, or database transition.
+
 ## Submission workflow
 
-`submission_workflow/` defines only the approved attempt states, database shape, constraints, and a pure monotonic transition planner.
+`submission_workflow/` defines only the approved attempt states, database
+shape, constraints, and a pure monotonic transition planner.
 
-It has no public submission endpoint or database transition executor and stores no reporter content, credential, key, verifier, filename, request metadata, or audit receipt.
+It has no accepting public submission endpoint or database transition executor
+and stores no reporter content, credential, key, verifier, filename, request
+metadata, or audit receipt.
 
 Its sole initial migration is locked by a non-executing exact-AST policy that
 also rejects additional numbered migrations. Schema, state/version,
@@ -625,3 +634,18 @@ credentials/plaintext, expose endpoints, return distinct failures, or
 authorize recovery. Recovery Gateway implementation, audit integration, State
 Authority locking, first-read concurrency, Key Service client, decrypt path,
 renderer, independent-review, deployment, and production gates remain open.
+
+## Latest Stage A slice — fail-closed submission surface
+
+The current repository adds a concrete but disabled reporter submission
+surface at `/submit/`. GET renders only static no-form guidance. POST returns a
+controlled `503` fail-closed response without reading request body/form/file
+data and without persisting content, invoking submission workflow, audit,
+CAPTCHA, Key Service, upload handling, credential generation, or storage.
+
+The reporter surface policy now locks the exact home and `/submit/` URL
+patterns, the updated view AST, and both passive templates. Tests verify
+headers, no cookies, no forms/scripts, fail-closed POST behavior, no reporter
+content echo, and that the POST branch does not require request-body access.
+The accepting submission endpoint, CAPTCHA, upload handler, audit, Key
+Service, crypto, concurrency, deployment, and production gates remain open.

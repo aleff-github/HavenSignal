@@ -3,8 +3,8 @@
 ## Status
 
 **OWNER-APPROVED DESIGN (2026-08-26) — independent HTTP/proxy/Django review
-remains required. No reporter submission endpoint or attachment upload is
-authorized.**
+remains required. No reporter submission endpoint that accepts content or
+attachment upload is authorized.**
 
 This proposal fixes the version-1 aggregate body ceiling, multipart grammar,
 streaming behavior, time/resource limits, Django upload-handler boundary, and
