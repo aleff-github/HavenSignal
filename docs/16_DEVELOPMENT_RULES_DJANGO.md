@@ -321,6 +321,16 @@ or authorize recovery until verifier, metadata-store, recovery-state,
 Response-DEK, logging, deployment, independent-review, and production gates are
 closed.
 
+Recovery HMAC-message code is currently limited to inert structural
+descriptors. It may validate only the exact approved canonical domain label,
+zero separator, Ticket ID and Recovery Secret field sizes, fixed order, fixed
+lengths, and purpose-specific framing metadata. It must not accept credential
+values, concatenate bytes, compute HMACs, retain canonical messages, store
+Recovery Secrets, access verifier keys, return verifier tags, log message
+material, expose endpoints, or authorize recovery until verifier construction,
+secret handling, logging, independent-review, deployment, and production gates
+are closed.
+
 Response Note cryptographic code is currently limited to inert structural
 descriptors. It may validate only the exact approved version, algorithm,
 content-profile, size, AAD-purpose, immutable-context, envelope, and

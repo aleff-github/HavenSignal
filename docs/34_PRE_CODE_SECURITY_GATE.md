@@ -1239,3 +1239,22 @@ write, endpoint, file, network, dynamic, and recovery authorization changes
 fail closed. This closes no metadata-store schema, persistence, verifier
 construction, lookup, recovery-state lifecycle, Response-DEK lifecycle,
 independent-review, deployment, or production gate.
+
+The sixty-second Stage A slice adds inert Recovery Verifier HMAC-message
+descriptors for the owner-approved `docs/21` canonical message layout.
+Validation covers only the exact ASCII domain label, terminating zero
+separator, 16-byte Ticket ID field, 32-byte Recovery Secret field, fixed order,
+fixed lengths, domain separation, version-bound purpose label, and unambiguous
+purpose-specific framing metadata. It does not accept credential values,
+concatenate bytes, compute HMACs, retain canonical messages, store Recovery
+Secrets, access verifier keys, return verifier tags, log message material,
+expose endpoints, or authorize recovery.
+
+A new non-executing recovery HMAC-message descriptor source policy locks the
+exact imports, constants, enums, immutable classes, validators, and false
+capability results. Credential-value acceptance, byte concatenation, HMAC
+computation, message retention, secret storage, verifier-key access, tag
+return, message logging, endpoint, file, network, dynamic, and recovery
+authorization changes fail closed. This closes no byte construction, verifier
+construction, secret handling, HMAC execution, logging, independent-review,
+deployment, or production gate.

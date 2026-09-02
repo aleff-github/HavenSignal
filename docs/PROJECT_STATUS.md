@@ -552,3 +552,19 @@ records, compute verifiers, test candidate secrets, perform lookups, write a
 database, expose endpoints, or authorize recovery. Metadata-store schema,
 verifier construction, lookup, recovery-state lifecycle, Response-DEK
 lifecycle, independent-review, deployment, and production gates remain open.
+
+## Latest Stage A slice — recovery HMAC-message descriptors
+
+The current repository adds inert Recovery Verifier HMAC-message descriptors
+for the owner-approved `docs/21` canonical message layout. The descriptor
+validates only the approved ASCII domain label, zero separator, 16-byte Ticket
+ID field, 32-byte Recovery Secret field, fixed order, fixed lengths, domain
+separation, version-bound purpose label, and unambiguous purpose-specific
+framing metadata.
+
+The descriptor and its exact-AST source policy intentionally do not accept
+credential values, concatenate bytes, compute HMACs, store canonical messages,
+store Recovery Secrets, access verifier keys, return verifier tags, log
+message material, expose endpoints, or authorize recovery. Byte construction,
+verifier construction, secret handling, HMAC execution, logging,
+independent-review, deployment, and production gates remain open.
