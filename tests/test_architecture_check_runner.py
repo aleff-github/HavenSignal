@@ -59,6 +59,7 @@ class ArchitectureCheckRunnerTests(SimpleTestCase):
                 "reporter-view-surface",
                 "reporter-header-surface",
                 "template-surface",
+                "submit-template-surface",
                 "css-surface",
                 "lifecycle-migrations",
                 "submission-migrations",

@@ -41,7 +41,7 @@ class CurrentReporterSurfaceTests(SimpleTestCase):
         )
         self.assertEqual(violations, ())
 
-    def test_current_urlconf_contains_only_the_inert_home(self) -> None:
+    def test_current_urlconf_contains_only_the_inert_reporter_surfaces(self) -> None:
         violations = scan_surface_file(
             path=BASE_DIR / "anonymous_reporting" / "urls.py",
             relative_to=BASE_DIR,
@@ -49,13 +49,15 @@ class CurrentReporterSurfaceTests(SimpleTestCase):
         )
         self.assertEqual(violations, ())
 
-    def test_current_template_uses_only_the_passive_profile(self) -> None:
-        violations = scan_surface_file(
-            path=BASE_DIR / "templates" / "reporter_gateway" / "home.html",
-            relative_to=BASE_DIR,
-            analyzer=analyze_template_source,
-        )
-        self.assertEqual(violations, ())
+    def test_current_templates_use_only_the_passive_profile(self) -> None:
+        for template_name in ("home.html", "submit_unavailable.html"):
+            with self.subTest(template_name=template_name):
+                violations = scan_surface_file(
+                    path=BASE_DIR / "templates" / "reporter_gateway" / template_name,
+                    relative_to=BASE_DIR,
+                    analyzer=analyze_template_source,
+                )
+                self.assertEqual(violations, ())
 
     def test_current_css_loads_no_resources_or_active_content(self) -> None:
         violations = scan_surface_file(
@@ -145,10 +147,17 @@ class SettingsAndUrlSurfaceAbuseTests(SimpleTestCase):
 
     def test_extra_or_dynamic_url_patterns_are_rejected(self) -> None:
         sources = (
-            "urlpatterns = [path('', home, name='reporter-home'), path('send/', send)]",
+            (
+                "urlpatterns = [path('', home, name='reporter-home'), "
+                "path('send/', send, name='send')]"
+            ),
             "urlpatterns = build_patterns()",
             "urlpatterns = [re_path('', home, name='reporter-home')]",
-            "urlpatterns = [path('', home, name='reporter-home')]\nurlpatterns.append(path('send/', send))",
+            (
+                "urlpatterns = [path('', home, name='reporter-home'), "
+                "path('submit/', submit_unavailable, name='reporter-submit')]\n"
+                "urlpatterns.append(path('send/', send, name='send'))"
+            ),
         )
         for source in sources:
             with self.subTest(source=source):
@@ -191,6 +200,10 @@ class ReporterPythonSourceAbuseTests(SimpleTestCase):
                 '{"request_body": request.body})',
             ),
             source + "\ndef submit(request):\n    return HttpResponse(request.body)\n",
+            source.replace(
+                'return HttpResponse(\n            "submission_unavailable",',
+                'return HttpResponse(\n            request.body.decode("utf-8"),',
+            ),
         )
         for mutation in mutations:
             with self.subTest(mutation=mutation[-60:]):

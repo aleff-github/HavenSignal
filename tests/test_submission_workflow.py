@@ -212,7 +212,10 @@ class SubmissionAttemptPersistenceTests(TestCase):
                     with transaction.atomic():
                         SubmissionAttempt.objects.filter(id=attempt.id).update(**updates)
 
-    def test_no_submission_route_or_view_is_enabled(self) -> None:
-        self.assertEqual(len(urls.urlpatterns), 1)
+    def test_no_accepting_submission_route_or_view_is_enabled(self) -> None:
+        self.assertEqual(
+            {pattern.name for pattern in urls.urlpatterns},
+            {"reporter-home", "reporter-submit"},
+        )
         app_path = Path(SubmissionAttempt._meta.app_config.path)
         self.assertFalse((app_path / "views.py").exists())

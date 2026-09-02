@@ -6,8 +6,10 @@
 
 This approval establishes the sequencing, retry, lost-response, state,
 audit-phase, and reconciliation policy in this document. It does not authorize
-a submission endpoint: every dependent security construction listed below
-remains independently blocking.
+an accepting submission endpoint: every dependent security construction listed
+below remains independently blocking. A disabled reporter route may return a
+controlled fail-closed response as long as it does not read, parse, persist,
+log, or process reporter content.
 
 This document resolves sequencing semantics only. It does not select or approve
 a CAPTCHA, cryptographic construction, Key Service, audit receipt format,
@@ -16,8 +18,8 @@ topology. Each dependent OPEN decision remains independently blocking.
 
 The current implementation may model these states and validate transitions
 without persisting a protected transition. A database transition executor,
-reconciler, form, and endpoint remain absent until their dependent gates and
-PostgreSQL concurrency/failure tests are complete.
+reconciler, accepting form, and accepting endpoint remain absent until their
+dependent gates and PostgreSQL concurrency/failure tests are complete.
 
 ## Governing requirements
 
@@ -178,9 +180,10 @@ cryptographic construction and would supersede this decision.
 7. Claim the attempt in one database transaction before security services or
    durable report storage are invoked.
 
-The endpoint remains disabled until the exact aggregate request limit, CAPTCHA,
-and request-upload handling are approved. Django's default temporary upload
-handler is not acceptable because it may durably spool reporter plaintext.
+The accepting endpoint remains disabled until the exact aggregate request
+limit, CAPTCHA, and request-upload handling are approved. Django's default
+temporary upload handler is not acceptable because it may durably spool
+reporter plaintext.
 
 `docs/30_REQUEST_AND_MULTIPART_ADMISSION_PROTOCOL.md` defines the owner-approved exact outer
 and multipart limits, streaming/no-retry proxy behavior, bounded custom Django

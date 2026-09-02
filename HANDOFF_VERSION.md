@@ -71,9 +71,9 @@ Reporter Gateway and root URL configuration. The checks make new source-level
 dependency edges explicit but do not claim runtime or deployment isolation.
 
 The seventh Stage A slice adds non-executing static policies for the inert
-Django settings, single reporter-home route, passive template subset, and
-no-resource-loading CSS. It adds controlled fail-closed abuse tests but no
-browser, runtime, protected workflow, or production capability.
+Django settings, reporter routes, passive template subset, and no-resource-
+loading CSS. It adds controlled fail-closed abuse tests but no browser,
+runtime, protected workflow, or production capability.
 
 The eighth Stage A slice adds a test-only, UUID-only plan for six future
 PostgreSQL metadata-concurrency scenarios with 20–100 contenders. The runner
@@ -829,3 +829,20 @@ network, dynamic, and recovery-authorization changes fail closed. This closes
 no Recovery Gateway implementation, audit integration, State Authority lock,
 first-read concurrency, Key Service client, decrypt path, renderer,
 independent-review, deployment, or production gate.
+
+The sixty-sixth Stage A slice adds a concrete but disabled reporter
+submission surface at `/submit/`. GET renders only a passive no-form status
+page. POST returns a controlled `503` fail-closed response without reading
+`request.body`, `request.POST`, or `request.FILES`, and without creating a
+report, attempt, audit event, credential, key, upload, database row, or
+submission transition. This gives a browser-testable surface while preserving
+the existing prohibition on an accepting submission endpoint.
+
+The reporter surface policy now fixes exactly the home route and disabled
+`/submit/` route, the updated `reporter_gateway/views.py` executable AST, and
+both passive templates. Added accepting forms, request-derived render context,
+request-body echo, input parsing, persistence, cookies, redirects, JavaScript,
+third-party resources, dynamic URL construction, or new routes fail closed.
+This closes no accepting submission endpoint, CAPTCHA, request-upload handler,
+Audit Service, Key Service, report crypto, credential generation, concurrency,
+deployment, or production gate.
