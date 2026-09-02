@@ -343,6 +343,19 @@ Response-DEK use, log credentials, expose endpoints, or authorize recovery
 until service topology, verifier execution, persistence, logging, deployment,
 independent-review, and production gates are closed.
 
+Recovery eligibility code is currently limited to inert structural
+descriptors. It may validate only the exact approved unavailable, available-
+unread, read-window, expired/destroyed, 90-day unread-expiry, 72-hour first-
+read-expiry, server-authoritative, verifier-success-is-not-sufficient,
+Response-DEK-authorization-required, generic-result, and forbidden-capability
+metadata. It must not perform lookup, validate credentials or CAPTCHA, call
+the Recovery Verifier Service or Key Service, read response state/ciphertext,
+decrypt responses, mutate first-read state, destroy Response-DEKs, invalidate
+recovery state, expose endpoints, return distinct failures, or authorize
+recovery until the Recovery Gateway, State Authority, Key Service,
+concurrency, audit, logging, independent-review, deployment, and production
+gates are closed.
+
 Response Note cryptographic code is currently limited to inert structural
 descriptors. It may validate only the exact approved version, algorithm,
 content-profile, size, AAD-purpose, immutable-context, envelope, and

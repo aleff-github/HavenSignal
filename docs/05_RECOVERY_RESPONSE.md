@@ -193,6 +193,14 @@ before that boundary retains the full existing 72-hour window. This design was
 owner-approved on 2026-08-26 but remains non-authorizing pending
 legal/operational and independent review and all production gates.
 
+The inert Stage A recovery eligibility descriptors represent only these
+eligibility facts as static metadata: unavailable/available-unread/read-window/
+expired/destroyed labels, exact 90-day unread expiry, exact 72-hour read
+window, server-authoritative state, generic non-success, and required
+Response-DEK authorization. They do not perform lookup, validate credentials or
+CAPTCHA, call services, decrypt, mutate first-read state, expose endpoints, or
+authorize recovery.
+
 ## Display-once guarantee boundary
 
 The server guarantees that it will not emit the Recovery Secret a second time after the one explicit post-submission response. `no-store` and `no-referrer` controls are mandatory.

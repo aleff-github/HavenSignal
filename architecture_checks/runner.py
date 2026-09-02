@@ -51,6 +51,9 @@ from .recovery_hmac_message_descriptors import (
 from .recovery_key_lifecycle_descriptors import (
     scan_repository_recovery_key_lifecycle_descriptor,
 )
+from .recovery_eligibility_descriptors import (
+    scan_repository_recovery_eligibility_descriptor,
+)
 from .recovery_verification_descriptors import (
     scan_repository_recovery_verification_descriptor,
 )
@@ -328,6 +331,10 @@ ARCHITECTURE_CHECKS = (
     ArchitectureCheck(
         "recovery-key-lifecycle-descriptor",
         scan_repository_recovery_key_lifecycle_descriptor,
+    ),
+    ArchitectureCheck(
+        "recovery-eligibility-descriptor",
+        scan_repository_recovery_eligibility_descriptor,
     ),
     ArchitectureCheck(
         "recovery-verification-descriptor",

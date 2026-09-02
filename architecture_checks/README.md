@@ -346,6 +346,17 @@ tag comparison, verifier-record persistence, lookup, Key Service calls,
 Response-DEK authorization, endpoint, or recovery authorization behavior are
 reviewed source facts.
 
+The recovery eligibility descriptor source policy locks the complete
+executable AST of `security_interfaces/recovery_eligibility_descriptors.py`.
+Exact response-availability/read-window/expired/destroyed labels, 90-day
+unread expiry, 72-hour first-read expiry, server-authoritative eligibility,
+generic non-success, verifier-success-is-not-sufficient, Response-DEK
+authorization requirement metadata, false capability properties, imports, and
+absence of lookup, credential/CAPTCHA validation, service calls, state or
+ciphertext reads, decryption, first-read mutation, key destruction, endpoint,
+distinct-failure, or recovery authorization behavior are reviewed source
+facts.
+
 The response-crypto descriptor source policy locks the complete executable AST
 of `security_interfaces/response_crypto_descriptors.py`. Exact response
 algorithm/profile identifiers, key/nonce/tag/frame/envelope sizes, immutable

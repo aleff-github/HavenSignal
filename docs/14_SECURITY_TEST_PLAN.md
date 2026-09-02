@@ -201,6 +201,17 @@ For the metadata-only Stage A described by
   partial-match disclosure, response-state reads, Key Service calls,
   Response-DEK authorization, credential logging, endpoint behavior, and
   recovery authorization without importing or executing the target;
+- recovery eligibility descriptors accept only the exact approved
+  response-unavailable, available-unread, read-window-open, read-window-
+  expired, never-read-expired, destroyed, 90-day unread-expiry, 72-hour
+  first-read-expiry, server-authoritative, generic-result, and forbidden-
+  capability metadata;
+- recovery eligibility validation and source policy reject lookup,
+  credential/CAPTCHA validation, verifier-service calls, Key Service calls,
+  response-state or ciphertext reads, decryption, first-read mutation,
+  Response-DEK destruction, recovery-state invalidation execution, distinct
+  failure behavior, endpoint behavior, and recovery authorization without
+  importing or executing the target;
 - Response Note crypto descriptors accept only the exact version-1 algorithm,
   content-profile, key, nonce, tag, plaintext-frame, ciphertext/tag, immutable
   context-size, AAD-purpose, and Response-DEK operation profile shapes;
@@ -478,6 +489,13 @@ For `20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`, also verify:
   forbidden-capability metadata, and reject service calls, HMAC/tag work,
   persistence, lookup, response-state reads, Key Service calls, Response-DEK
   authorization, credential logging, endpoint, or recovery authorization
+  capability;
+- Stage A recovery eligibility descriptor/source-conformance tests prove only
+  the approved eligibility state, 90-day unread-expiry, 72-hour first-read
+  expiry, server-authoritative/generic-response requirements, and forbidden-
+  capability metadata, and reject lookup, credential/CAPTCHA validation,
+  service calls, state/ciphertext reads, decryption, first-read mutation, key
+  destruction, endpoint, distinct failure, or recovery authorization
   capability;
 - lost responses never cause credential re-display, replacement credentials,
   or a duplicate report for the same attempt;
