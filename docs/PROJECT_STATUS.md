@@ -50,11 +50,11 @@ reads or returns their values. Raw-header ambiguity, duplicate-header
 detection, request desynchronization testing, and enforcement at the earliest
 network boundary remain production-gated responsibilities.
 
-Any query string on `/submit/` or `/response/` is rejected before the
-corresponding view is called. The middleware checks only whether a query is
-present; it does not parse, echo, or log query values. This prevents report or
-recovery material from being accepted in URLs while both surfaces remain
-disabled.
+Any query string on `/submit/`, `/response/`, or `/operator/` is rejected
+before the corresponding view is called. The middleware checks only whether a
+query is present; it does not parse, echo, or log query values. This prevents
+report, recovery, authentication, or challenge material from being accepted in
+URLs while these surfaces remain disabled.
 
 The `/response/` route is intentionally disabled and served by the separate
 Recovery Gateway app. GET renders static guidance. POST returns a controlled
