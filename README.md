@@ -102,6 +102,8 @@ The repository currently contains:
 - a fail-closed query-string guard on disabled submission, response-recovery,
   and operator-authentication routes, including their missing-slash redirect
   variants;
+- fail-closed rejection of non-canonical missing-slash sensitive routes before
+  framework redirects or errors;
 - negative-capability placeholders for security services, with a non-executing
   guard that locks their exact fail-closed behavior;
 - inert audit, alert, and step-up structural descriptors;

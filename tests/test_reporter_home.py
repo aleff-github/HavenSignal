@@ -219,16 +219,49 @@ class ReporterSubmitUnavailableTests(SimpleTestCase):
     def test_submit_query_on_missing_slash_is_not_redirected(self) -> None:
         sentinel = "REPORT_SENTINEL_DO_NOT_REDIRECT"
         for method in ("get", "post"):
-            with self.subTest(method=method):
-                response = getattr(self.client, method)(
-                    "/submit",
-                    query_params={"report": sentinel},
-                )
+            for query_params in ({}, {"report": sentinel}):
+                with self.subTest(method=method, query=bool(query_params)):
+                    response = getattr(self.client, method)(
+                        "/submit",
+                        query_params=query_params,
+                    )
+
+                    self.assertEqual(response.status_code, 400)
+                    self.assertEqual(response.content, b"submission_unavailable")
+                    self.assertNotIn("Location", response.headers)
+                    self.assertNotIn(sentinel, response.content.decode("utf-8"))
+                    self.assertFalse(response.cookies)
+
+    def test_noncanonical_sensitive_posts_fail_before_body_and_view(self) -> None:
+        class BodyExplodes(HttpRequest):
+            @property
+            def body(self) -> bytes:  # type: ignore[override]
+                raise AssertionError("body must not be read")
+
+        def reject_view_call(request: HttpRequest) -> HttpResponse:
+            raise AssertionError("view must not be called")
+
+        cases = (
+            ("/submit", b"submission_unavailable"),
+            ("/response", b"response_retrieval_unavailable"),
+            ("/operator", b"operator_authentication_unavailable"),
+        )
+        for path, expected_content in cases:
+            with self.subTest(path=path):
+                request = BodyExplodes()
+                request.method = "POST"
+                request.path_info = path
+                middleware = ReporterSecurityHeadersMiddleware(reject_view_call)
+
+                response = middleware(request)
 
                 self.assertEqual(response.status_code, 400)
-                self.assertEqual(response.content, b"submission_unavailable")
+                self.assertEqual(response.content, expected_content)
                 self.assertNotIn("Location", response.headers)
-                self.assertNotIn(sentinel, response.content.decode("utf-8"))
+                self.assertEqual(
+                    response.headers["Cache-Control"],
+                    "no-store, max-age=0",
+                )
                 self.assertFalse(response.cookies)
 
     def test_submit_limit_content_length_continues_to_fail_closed_view(self) -> None:

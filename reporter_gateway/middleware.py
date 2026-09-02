@@ -34,20 +34,25 @@ class ReporterSecurityHeadersMiddleware:
         return self._apply_headers(response)
 
     def _admit_request(self, request: HttpRequest) -> HttpResponse | None:
-        response_code = next(
+        query_path_response = next(
             (
-                code
+                (paths, code)
                 for paths, code in SENSITIVE_QUERY_PATH_RESPONSE_CODES
                 if request.path_info in paths
             ),
             None,
         )
-        if response_code is not None and request.META.get("QUERY_STRING", ""):
-            return HttpResponse(
-                response_code,
-                content_type="text/plain; charset=utf-8",
-                status=400,
-            )
+        if query_path_response is not None:
+            paths, response_code = query_path_response
+            if (
+                request.path_info != paths[1]
+                or request.META.get("QUERY_STRING", "")
+            ):
+                return HttpResponse(
+                    response_code,
+                    content_type="text/plain; charset=utf-8",
+                    status=400,
+                )
         if request.method != "POST" or request.path_info != "/submit/":
             return None
         if any(key in request.META for key in FORBIDDEN_SUBMISSION_META_KEYS):

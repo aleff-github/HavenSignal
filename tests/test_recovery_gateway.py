@@ -55,20 +55,21 @@ class RecoveryResponseUnavailableTests(SimpleTestCase):
     def test_response_query_on_missing_slash_is_not_redirected(self) -> None:
         sentinel = "RECOVERY_SECRET_SENTINEL_DO_NOT_REDIRECT"
         for method in ("get", "post"):
-            with self.subTest(method=method):
-                response = getattr(self.client, method)(
-                    "/response",
-                    query_params={"secret": sentinel},
-                )
+            for query_params in ({}, {"secret": sentinel}):
+                with self.subTest(method=method, query=bool(query_params)):
+                    response = getattr(self.client, method)(
+                        "/response",
+                        query_params=query_params,
+                    )
 
-                self.assertEqual(response.status_code, 400)
-                self.assertEqual(
-                    response.content,
-                    b"response_retrieval_unavailable",
-                )
-                self.assertNotIn("Location", response.headers)
-                self.assertNotIn(sentinel, response.content.decode("utf-8"))
-                self.assertFalse(response.cookies)
+                    self.assertEqual(response.status_code, 400)
+                    self.assertEqual(
+                        response.content,
+                        b"response_retrieval_unavailable",
+                    )
+                    self.assertNotIn("Location", response.headers)
+                    self.assertNotIn(sentinel, response.content.decode("utf-8"))
+                    self.assertFalse(response.cookies)
 
     def test_response_view_does_not_need_request_body_for_post(self) -> None:
         class BodyExplodes(HttpRequest):
