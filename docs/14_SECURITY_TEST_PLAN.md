@@ -191,6 +191,16 @@ For the metadata-only Stage A described by
   retention, Recovery Secret storage, verifier-key access, tag return, message
   logging, endpoint behavior, and recovery authorization without importing or
   executing the target;
+- Recovery Verifier Service descriptors accept only the exact approved
+  create-only and boolean-verify operation labels, authenticated/encrypted/
+  bounded channel requirements, body/credential log exclusions, create-output
+  and verify-output rules, and forbidden-capability metadata;
+- Recovery Verifier Service validation and source policy reject service call
+  implementation, credential generation, HMAC computation, tag comparison,
+  verifier-record persistence, lookup, reporter-supplied key IDs, raw-key/tag/
+  partial-match disclosure, response-state reads, Key Service calls,
+  Response-DEK authorization, credential logging, endpoint behavior, and
+  recovery authorization without importing or executing the target;
 - Response Note crypto descriptors accept only the exact version-1 algorithm,
   content-profile, key, nonce, tag, plaintext-frame, ciphertext/tag, immutable
   context-size, AAD-purpose, and Response-DEK operation profile shapes;
@@ -463,6 +473,12 @@ For `20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`, also verify:
   the approved canonical layout metadata, and reject credential parsing, byte
   concatenation, HMAC computation, message retention, key access, tag output,
   logging, endpoint, or recovery authorization capability;
+- Stage A Recovery Verifier Service descriptor/source-conformance tests prove
+  only the approved operation, channel, create-rule, verify-rule, and
+  forbidden-capability metadata, and reject service calls, HMAC/tag work,
+  persistence, lookup, response-state reads, Key Service calls, Response-DEK
+  authorization, credential logging, endpoint, or recovery authorization
+  capability;
 - lost responses never cause credential re-display, replacement credentials,
   or a duplicate report for the same attempt;
 - no event or state claims that the reporter received or saved credentials;

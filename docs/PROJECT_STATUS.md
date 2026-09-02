@@ -568,3 +568,22 @@ store Recovery Secrets, access verifier keys, return verifier tags, log
 message material, expose endpoints, or authorize recovery. Byte construction,
 verifier construction, secret handling, HMAC execution, logging,
 independent-review, deployment, and production gates remain open.
+
+## Latest Stage A slice — Recovery Verifier Service descriptors
+
+The current repository adds inert Recovery Verifier Service descriptors for the
+owner-approved `docs/21` service operation boundary. The descriptor validates
+only the approved create-only and boolean-verify operation labels,
+authenticated/encrypted/bounded channel requirements, body/credential log
+exclusions, create-output and verify-output rules, and forbidden capability
+metadata.
+
+The descriptor and its exact-AST source policy intentionally do not implement
+service calls, generate credentials, compute HMACs, compare tags, persist
+verifier records, perform lookups, accept reporter-supplied key IDs, return
+raw keys, expected tags, or partial-match detail, read response state, call the
+Key Service, authorize Response-DEK use, log credentials, expose endpoints, or
+authorize recovery. Service topology, network transport, verifier
+construction, persistence, lookup, response eligibility, Response-DEK
+lifecycle, Key Service, independent-review, deployment, and production gates
+remain open.

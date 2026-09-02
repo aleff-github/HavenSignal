@@ -383,6 +383,18 @@ compute HMACs, retain canonical messages, store Recovery Secrets, access
 verifier keys, return verifier tags, log message material, expose endpoints, or
 authorize recovery.
 
+The Recovery Verifier Service operation boundary is also represented by inert
+descriptors and a non-executing exact-AST source policy. They fix only the
+approved create-only and boolean-verify operation labels, authenticated/
+encrypted/bounded channel requirements, body and credential log exclusions,
+create-output limited to version/key ID/verifier tag, verify-output limited to
+a boolean result, and forbidden capability categories. They do not implement
+service calls, generate credentials, compute HMACs, compare tags, persist
+verifier records, perform lookups, accept reporter-supplied key IDs, return
+raw keys, expected tags, or partial-match detail, read response state, call a
+Key Service, authorize Response-DEK use, log credentials, expose endpoints, or
+authorize recovery.
+
 ## External design references
 
 - [RFC 4648 — Base-N Encodings](https://www.rfc-editor.org/rfc/rfc4648.html)
