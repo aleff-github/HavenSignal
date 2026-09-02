@@ -374,6 +374,15 @@ terminal destruction, and forbidden material categories. They do not persist
 records, compute verifiers, test candidate secrets, perform lookups, write a
 database, expose endpoints, or authorize recovery.
 
+The canonical HMAC-message layout is also represented by inert descriptors and
+a non-executing exact-AST source policy. They fix only the approved ASCII
+domain label, terminating zero separator, 16-byte Ticket ID field, 32-byte
+Recovery Secret field, fixed order, fixed lengths, and unambiguous purpose-
+specific framing. They do not accept credential values, concatenate bytes,
+compute HMACs, retain canonical messages, store Recovery Secrets, access
+verifier keys, return verifier tags, log message material, expose endpoints, or
+authorize recovery.
+
 ## External design references
 
 - [RFC 4648 — Base-N Encodings](https://www.rfc-editor.org/rfc/rfc4648.html)

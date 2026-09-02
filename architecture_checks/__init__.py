@@ -157,6 +157,15 @@ from .recovery_failure_descriptors import (
     scan_recovery_failure_descriptor_source,
     scan_repository_recovery_failure_descriptor,
 )
+from .recovery_hmac_message_descriptors import (
+    EXPECTED_RECOVERY_HMAC_MESSAGE_DESCRIPTOR_AST_DIGEST,
+    RECOVERY_HMAC_MESSAGE_DESCRIPTOR_PATH,
+    RecoveryHmacMessageDescriptorSourceViolation,
+    RecoveryHmacMessageDescriptorSourceViolationCode,
+    analyze_recovery_hmac_message_descriptor_source,
+    scan_recovery_hmac_message_descriptor_source,
+    scan_repository_recovery_hmac_message_descriptor,
+)
 from .recovery_key_lifecycle_descriptors import (
     EXPECTED_RECOVERY_KEY_LIFECYCLE_DESCRIPTOR_AST_DIGEST,
     RECOVERY_KEY_LIFECYCLE_DESCRIPTOR_PATH,
@@ -491,6 +500,13 @@ __all__ = [
     "analyze_recovery_failure_descriptor_source",
     "scan_recovery_failure_descriptor_source",
     "scan_repository_recovery_failure_descriptor",
+    "EXPECTED_RECOVERY_HMAC_MESSAGE_DESCRIPTOR_AST_DIGEST",
+    "RECOVERY_HMAC_MESSAGE_DESCRIPTOR_PATH",
+    "RecoveryHmacMessageDescriptorSourceViolation",
+    "RecoveryHmacMessageDescriptorSourceViolationCode",
+    "analyze_recovery_hmac_message_descriptor_source",
+    "scan_recovery_hmac_message_descriptor_source",
+    "scan_repository_recovery_hmac_message_descriptor",
     "EXPECTED_RECOVERY_KEY_LIFECYCLE_DESCRIPTOR_AST_DIGEST",
     "RECOVERY_KEY_LIFECYCLE_DESCRIPTOR_PATH",
     "RecoveryKeyLifecycleDescriptorSourceViolation",

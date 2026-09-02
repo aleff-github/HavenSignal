@@ -298,6 +298,14 @@ terminal invalidation metadata, and forbidden material categories from
 compute verifiers, test candidate secrets, perform lookups, write a database,
 expose endpoints, or authorize recovery.
 
+The current Stage A recovery HMAC-message descriptor records only the approved
+canonical domain label, zero separator, Ticket ID and Recovery Secret field
+sizes, fixed order, fixed lengths, purpose-specific framing, and forbidden
+capability labels from `docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md`. It does
+not accept credential values, concatenate bytes, compute HMACs, retain
+canonical messages, store Recovery Secrets, access verifier keys, return
+verifier tags, log message material, expose endpoints, or authorize recovery.
+
 The current Stage A credential-response descriptor records only the approved
 one-time live response and lost-response policy from
 `docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`. It does not generate credentials,
@@ -874,6 +882,33 @@ but never imported or executed.
 Passing this source policy closes no metadata-store schema, persistence,
 verifier construction, lookup, recovery-state lifecycle, Response-DEK
 lifecycle, independent-review, or production gate.
+
+## Stage A recovery HMAC message descriptor record
+
+`security_interfaces/recovery_hmac_message_descriptors.py` validates only the
+canonical HMAC-message layout facts already fixed by
+`docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md`: version-1 ASCII domain label
+`anonymous-reporting/recovery-verifier/v1`, terminating zero separator,
+16-byte Ticket ID field, 32-byte Recovery Secret field, fixed order, fixed
+lengths, domain separation, version-bound purpose label, and unambiguous
+purpose-specific framing.
+
+Successful validation returns immutable, content-free layout evidence. It does
+not accept credential values, concatenate bytes, compute HMACs, store canonical
+messages, store Recovery Secrets, access verifier keys, return verifier tags,
+log message material, expose an endpoint, or authorize recovery.
+
+The non-executing recovery HMAC-message descriptor policy fixes the exact
+target, imports, constants, enum registries, immutable class profiles,
+validator behavior, and false capability results. Added credential-value
+acceptance, byte concatenation, HMAC computation, canonical-message retention,
+Recovery Secret storage, verifier-key access, tag return, message logging,
+endpoint, file, network, dynamic, or recovery-authorization behavior fails
+closed. The target is parsed but never imported or executed.
+
+Passing this source policy closes no byte construction, verifier construction,
+secret handling, HMAC execution, logging, independent-review, or production
+gate.
 
 ## Stage A Response Note crypto descriptor record
 

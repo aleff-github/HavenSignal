@@ -219,6 +219,19 @@ exact-AST policy. Passing proves only reviewed source shape; it is not a
 database schema, persistence layer, verifier construction, lookup path,
 Response-DEK authorization path, endpoint behavior, or production evidence.
 
+`recovery_hmac_message_descriptors.py` validates only the static canonical
+HMAC message layout approved in `docs/21`: ASCII domain label, terminating zero
+separator, 16-byte Ticket ID field, 32-byte Recovery Secret field, fixed order,
+fixed lengths, and unambiguous purpose-specific framing. It does not accept
+credential values, concatenate bytes, compute HMACs, store canonical messages
+or Recovery Secrets, access verifier keys, return verifier tags, log message
+material, expose endpoints, or authorize recovery.
+
+The recovery HMAC-message descriptor source is locked by a non-executing
+exact-AST policy. Passing proves only reviewed source shape; it is not byte
+construction, HMAC computation, verifier construction, secret handling,
+endpoint behavior, or production evidence.
+
 `report_crypto_descriptors.py` validates only the static version-1 original
 report crypto profile already fixed in `docs/26`: XChaCha20-Poly1305-IETF
 combined-mode metadata, 32-byte Report-DEK and object-subkey sizes, fixed
@@ -432,6 +445,12 @@ The recovery verifier-record descriptor source is locked by a non-executing
 exact-AST policy. Passing proves only reviewed source shape; it is not record
 persistence, HMAC computation, candidate-secret testing, database lookup,
 database writes, endpoint behavior, or recovery authorization evidence.
+
+The recovery HMAC-message descriptor source is locked by a non-executing
+exact-AST policy. Passing proves only reviewed source shape; it is not
+credential parsing, byte concatenation, HMAC computation, verifier key access,
+tag output, message logging, endpoint behavior, or recovery authorization
+evidence.
 
 `response_crypto_descriptors.py` validates only the static version-1 Response
 Note crypto profile already fixed in `docs/24`: XChaCha20-Poly1305-IETF

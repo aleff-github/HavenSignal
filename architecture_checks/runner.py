@@ -45,6 +45,9 @@ from .recovery_descriptors import scan_repository_recovery_descriptor
 from .recovery_failure_descriptors import (
     scan_repository_recovery_failure_descriptor,
 )
+from .recovery_hmac_message_descriptors import (
+    scan_repository_recovery_hmac_message_descriptor,
+)
 from .recovery_key_lifecycle_descriptors import (
     scan_repository_recovery_key_lifecycle_descriptor,
 )
@@ -314,6 +317,10 @@ ARCHITECTURE_CHECKS = (
     ArchitectureCheck(
         "recovery-failure-descriptor",
         scan_repository_recovery_failure_descriptor,
+    ),
+    ArchitectureCheck(
+        "recovery-hmac-message-descriptor",
+        scan_repository_recovery_hmac_message_descriptor,
     ),
     ArchitectureCheck(
         "recovery-key-lifecycle-descriptor",
