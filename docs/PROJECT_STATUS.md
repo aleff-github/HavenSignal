@@ -43,6 +43,12 @@ browser-facing middleware before the view is called. This preliminary guard
 reads no request body, installs no upload handler, parses no multipart data,
 and does not accept submissions.
 
+Any query string on `/submit/` or `/response/` is rejected before the
+corresponding view is called. The middleware checks only whether a query is
+present; it does not parse, echo, or log query values. This prevents report or
+recovery material from being accepted in URLs while both surfaces remain
+disabled.
+
 The `/response/` route is intentionally disabled and served by the separate
 Recovery Gateway app. GET renders static guidance. POST returns a controlled
 `503` without reading `request.body`, `request.POST`, or `request.FILES`, and

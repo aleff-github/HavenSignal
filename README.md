@@ -97,6 +97,8 @@ The repository currently contains:
 - explicit fail-closed persistence boundaries;
 - an inert submission `Content-Length` guard for invalid or oversized disabled
   POSTs;
+- a fail-closed query-string guard on disabled submission and response-recovery
+  routes;
 - negative-capability placeholders for security services, with a non-executing
   guard that locks their exact fail-closed behavior;
 - inert audit, alert, and step-up structural descriptors;

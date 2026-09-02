@@ -116,6 +116,19 @@ class ReporterSubmitUnavailableTests(SimpleTestCase):
         self.assertNotIn(sentinel, response.content.decode("utf-8"))
         self.assertFalse(response.cookies)
 
+    def test_submit_query_string_fails_before_view_without_echo(self) -> None:
+        sentinel = "REPORT_SECRET_SENTINEL_DO_NOT_ECHO"
+        response = self.client.get(
+            reverse("reporter-submit"),
+            query_params={"secret": sentinel},
+        )
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.content, b"submission_unavailable")
+        self.assertNotIn(sentinel, response.content.decode("utf-8"))
+        self.assertEqual(response.headers["Cache-Control"], "no-store, max-age=0")
+        self.assertFalse(response.cookies)
+
     def test_submit_view_does_not_need_request_body_for_post(self) -> None:
         class BodyExplodes(HttpRequest):
             @property
