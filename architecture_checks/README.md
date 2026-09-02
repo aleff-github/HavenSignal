@@ -336,6 +336,16 @@ byte concatenation, HMAC computation, message retention, key access, tag
 return, logging, endpoint, or recovery authorization behavior are reviewed
 source facts.
 
+The Recovery Verifier Service descriptor source policy locks the complete
+executable AST of `security_interfaces/recovery_verifier_service_descriptors.py`.
+Exact create-only and boolean-verify operation labels, authenticated/encrypted/
+bounded channel requirements, credential/body log exclusions, create and verify
+result rules, forbidden-capability metadata, false capability properties,
+imports, and absence of service calls, credential generation, HMAC computation,
+tag comparison, verifier-record persistence, lookup, Key Service calls,
+Response-DEK authorization, endpoint, or recovery authorization behavior are
+reviewed source facts.
+
 The response-crypto descriptor source policy locks the complete executable AST
 of `security_interfaces/response_crypto_descriptors.py`. Exact response
 algorithm/profile identifiers, key/nonce/tag/frame/envelope sizes, immutable

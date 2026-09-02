@@ -40,6 +40,7 @@ class ArchitectureCheckRunnerTests(SimpleTestCase):
                 "recovery-key-lifecycle-descriptor",
                 "recovery-verification-descriptor",
                 "recovery-verifier-record-descriptor",
+                "recovery-verifier-service-descriptor",
                 "report-crypto-descriptor",
                 "report-frame-descriptor",
                 "report-schema-descriptor",

@@ -306,6 +306,17 @@ not accept credential values, concatenate bytes, compute HMACs, retain
 canonical messages, store Recovery Secrets, access verifier keys, return
 verifier tags, log message material, expose endpoints, or authorize recovery.
 
+The current Stage A Recovery Verifier Service descriptor records only the
+approved create-only and boolean-verify operation labels, authenticated/
+encrypted/bounded channel requirements, body/credential log exclusions,
+create-output and verify-output rules, and forbidden capability categories from
+`docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md`. It does not implement service
+calls, generate credentials, compute HMACs, compare tags, persist verifier
+records, perform lookups, accept reporter-supplied key IDs, return raw keys,
+expected tags, or partial-match detail, read response state, call a Key
+Service, authorize Response-DEK use, log credentials, expose endpoints, or
+authorize recovery.
+
 The current Stage A credential-response descriptor records only the approved
 one-time live response and lost-response policy from
 `docs/20_SUBMISSION_ACCEPTANCE_PROTOCOL.md`. It does not generate credentials,
@@ -909,6 +920,41 @@ closed. The target is parsed but never imported or executed.
 Passing this source policy closes no byte construction, verifier construction,
 secret handling, HMAC execution, logging, independent-review, or production
 gate.
+
+## Stage A Recovery Verifier Service descriptor record
+
+`security_interfaces/recovery_verifier_service_descriptors.py` validates only
+the Recovery Verifier Service operation-boundary facts already fixed by
+`docs/21_RECOVERY_CREDENTIAL_CONSTRUCTION.md`: version-1 create-only operation
+for one current unaccepted submission attempt, boolean verification operation
+for recovery, authenticated/encrypted/bounded channel requirements, proxy/
+application/audit/tracing/error log exclusions for body and credential fields,
+create binding to transient Reporter Gateway input, no replacement of existing
+Ticket ID verifier state, create output limited to version/key ID/verifier tag,
+verify input from Recovery Gateway POST only, verify output limited to a
+boolean authorization result, no expected-tag or partial-match disclosure, and
+no Response-DEK authorization from verifier success alone.
+
+Successful validation returns immutable, content-free service-boundary
+evidence. It does not implement service calls, generate credentials, compute
+HMACs, compare tags, persist verifier records, perform lookups, accept
+reporter-supplied key IDs, return raw verifier keys, return expected tags,
+return partial-match detail, read response state, call a Key Service, authorize
+Response-DEK use, log credentials, expose an endpoint, or authorize recovery.
+
+The non-executing Recovery Verifier Service descriptor policy fixes the exact
+target, imports, constants, enum registries, immutable class profiles,
+validator behavior, and false capability results. Added service calls,
+credential generation, HMAC computation, tag comparison, verifier-record
+persistence, lookup, reporter-supplied key IDs, raw-key/tag/partial-match
+disclosure, response-state reads, Key Service calls, Response-DEK
+authorization, credential logging, endpoint, file, network, dynamic, or
+recovery-authorization behavior fails closed. The target is parsed but never
+imported or executed.
+
+Passing this source policy closes no service topology, network transport,
+verifier construction, persistence, lookup, response eligibility,
+Response-DEK lifecycle, Key Service, independent-review, or production gate.
 
 ## Stage A Response Note crypto descriptor record
 

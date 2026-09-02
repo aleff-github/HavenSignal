@@ -331,6 +331,18 @@ material, expose endpoints, or authorize recovery until verifier construction,
 secret handling, logging, independent-review, deployment, and production gates
 are closed.
 
+Recovery Verifier Service code is currently limited to inert structural
+descriptors. It may validate only the exact approved create-only and
+boolean-verify operation labels, authenticated/encrypted/bounded channel
+requirements, body/credential log exclusions, create-output and verify-output
+rules, and forbidden-capability metadata. It must not implement service calls,
+generate credentials, compute HMACs, compare tags, persist verifier records,
+perform lookups, accept reporter-supplied key IDs, return raw keys/tags/
+partial-match details, read response state, call a Key Service, authorize
+Response-DEK use, log credentials, expose endpoints, or authorize recovery
+until service topology, verifier execution, persistence, logging, deployment,
+independent-review, and production gates are closed.
+
 Response Note cryptographic code is currently limited to inert structural
 descriptors. It may validate only the exact approved version, algorithm,
 content-profile, size, AAD-purpose, immutable-context, envelope, and
