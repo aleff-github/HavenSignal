@@ -56,6 +56,25 @@ class RepositoryHygieneAbuseTests(SimpleTestCase):
             },
         )
 
+    def test_tracked_local_instruction_and_session_paths_are_rejected(self) -> None:
+        violations = analyze_tracked_paths(
+            (
+                "AGENTS.md",
+                "START-CODEX.md",
+                "docs/CODEX_USAGE.md",
+                ".codex/session.json",
+                "resume",
+            )
+        )
+        self.assertEqual(len(violations), 5)
+        self.assertEqual(
+            {violation.detail_code for violation in violations},
+            {
+                "LOCAL_DEVELOPMENT_INSTRUCTION",
+                "LOCAL_SESSION_ARTIFACT",
+            },
+        )
+
     def test_env_example_exception_remains_allowed(self) -> None:
         self.assertEqual(analyze_tracked_paths((".env.example",)), ())
 

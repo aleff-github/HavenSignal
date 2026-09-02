@@ -35,6 +35,13 @@ secrets/
 .DS_Store
 Thumbs.db
 
+# Local development instructions and session context
+/AGENTS.md
+/START-CODEX.md
+/docs/CODEX_USAGE.md
+/.codex/
+/resume
+
 # Export artifacts / sensitive temp files
 exports/
 tmp/
