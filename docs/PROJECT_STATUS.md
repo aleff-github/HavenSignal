@@ -519,3 +519,21 @@ rewrite verifier records, call the Key Service, expose endpoints, authorize
 Response-DEK use, or authorize recovery. Verifier service, key inventory,
 rotation/incident procedure, restore proof, Response-DEK lifecycle, Key
 Service, independent-review, deployment, and production gates remain open.
+
+## Latest Stage A slice — recovery verification descriptors
+
+The current repository adds inert Recovery Verifier verification descriptors
+for the owner-approved `docs/21` verification semantics. The descriptor
+validates only the approved full-length HMAC-SHA-256, 32-byte tag,
+constant-time full-tag comparison, boolean-only result, necessary-not-
+sufficient HMAC success, canonical input, unknown-ticket dummy-verification,
+generic-response, timing-test, no-perfect-indistinguishability, and forbidden
+capability metadata.
+
+The descriptor and its exact-AST source policy intentionally do not compute
+HMACs, compare tags, execute dummy verification, return expected tags or
+partial-match detail, read response state, validate CAPTCHA, call the Key
+Service, authorize Response-DEK use, log credentials, expose endpoints, or
+authorize recovery. Verifier implementation, constant-time comparison, timing
+proof, response eligibility, CAPTCHA, Key Service, independent-review,
+deployment, and production gates remain open.

@@ -300,6 +300,17 @@ authorize Response-DEK use, expose endpoints, or authorize recovery until the
 verifier service, rotation/incident procedure, restore proof, Key Service,
 logging, deployment, and production gates are closed.
 
+Recovery verification code is currently limited to inert structural
+descriptors. It may validate only the exact approved full-length HMAC-SHA-256,
+constant-time full-tag comparison, boolean-only result, necessary-not-
+sufficient HMAC success, canonical input, dummy-verification, generic-response,
+timing-test, and no-perfect-indistinguishability metadata. It must not compute
+HMACs, compare tags, execute dummy verification, return tags or partial-match
+details, read response state, validate CAPTCHA, call a Key Service, authorize
+Response-DEK use, log credentials, expose endpoints, or authorize recovery
+until verifier execution, timing, response eligibility, CAPTCHA, Key Service,
+logging, deployment, independent-review, and production gates are closed.
+
 Response Note cryptographic code is currently limited to inert structural
 descriptors. It may validate only the exact approved version, algorithm,
 content-profile, size, AAD-purpose, immutable-context, envelope, and

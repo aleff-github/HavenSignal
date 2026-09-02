@@ -353,6 +353,17 @@ fail-closed loss, and no Response-DEK authority. They do not generate, store,
 select, rotate, or destroy keys, rewrite verifier records, call a Key Service,
 expose endpoints, authorize Response-DEK use, or authorize recovery.
 
+The Recovery Verifier verification semantics are also represented by inert
+descriptors and a non-executing exact-AST source policy. They fix only the
+approved full-length HMAC-SHA-256, constant-time full-tag comparison,
+boolean-only result, necessary-not-sufficient HMAC success, canonical input
+requirements, unknown-ticket dummy-verification requirement, generic external
+non-success behavior, timing-distribution-test requirement, and no-perfect-
+indistinguishability claim. They do not compute HMACs, compare tags, execute
+dummy verification, return expected tags or partial-match details, read
+response state, validate CAPTCHA, call a Key Service, authorize Response-DEK
+use, log credentials, expose endpoints, or authorize recovery.
+
 ## External design references
 
 - [RFC 4648 — Base-N Encodings](https://www.rfc-editor.org/rfc/rfc4648.html)

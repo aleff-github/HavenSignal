@@ -308,6 +308,16 @@ destruction, verifier-record rewriting, Key Service calls, Response-DEK
 authorization, endpoint, or recovery authorization behavior are reviewed source
 facts.
 
+The recovery verification descriptor source policy locks the complete
+executable AST of `security_interfaces/recovery_verification_descriptors.py`.
+Exact full-length HMAC-SHA-256, constant-time full-tag comparison, boolean-only
+result, necessary-not-sufficient HMAC success, canonical input, dummy-
+verification, generic-response, timing-test, no-perfect-indistinguishability,
+and forbidden-capability metadata, false capability properties, imports, and
+absence of HMAC computation, tag comparison, dummy execution, response-state
+access, CAPTCHA validation, Key Service calls, Response-DEK authorization,
+endpoint, or recovery authorization behavior are reviewed source facts.
+
 The response-crypto descriptor source policy locks the complete executable AST
 of `security_interfaces/response_crypto_descriptors.py`. Exact response
 algorithm/profile identifiers, key/nonce/tag/frame/envelope sizes, immutable
