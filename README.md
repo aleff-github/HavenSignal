@@ -84,7 +84,7 @@ The repository currently contains:
 - Django 5.2.17 development scaffolding;
 - an inert, read-only reporter landing page;
 - an inert public status page;
-- a fail-closed response-retrieval page;
+- a separate fail-closed recovery gateway entry point;
 - an inert fail-closed operator console entry point;
 - metadata-only submission and report lifecycle models;
 - pure monotonic transition planners;
@@ -212,8 +212,8 @@ The repository currently contains:
 - a non-executing exact-AST guard for inert submission credential-response
   descriptors;
 - architecture checks that constrain the reporter-facing settings, routes,
-  operator entry point, passive assets, read-only/fail-closed views, and
-  restrictive response-header middleware;
+  recovery and operator entry points, passive assets, read-only/fail-closed
+  views, and restrictive response-header middleware;
 - a non-executing exact-AST guard for the sole inert submission migration;
 - a non-executing exact-AST guard for the inert submission state machine;
 - a non-executing exact-AST guard for the inert report-lifecycle core;

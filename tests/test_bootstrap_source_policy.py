@@ -100,6 +100,11 @@ class BootstrapSourcePolicyTests(SimpleTestCase):
                 'name = "unreviewed_operator_console"',
             ),
             (
+                "recovery_gateway/apps.py",
+                'name = "recovery_gateway"',
+                'name = "unreviewed_recovery_gateway"',
+            ),
+            (
                 "submission_workflow/apps.py",
                 'name = "submission_workflow"',
                 'name = "unreviewed_submission"',

@@ -34,19 +34,21 @@ setup-python actions, Python 3.13, locked dependency installation with
 unpinned moving action refs, un-hashed dependency installation, and
 `continue-on-error` fail closed.
 
-The reporter policy is an exact allowlist of imports used by the current
-read-only Reporter Gateway and root URL configuration. Any new absolute import
-requires an explicit reviewed policy change. Local single-level relative
-imports are allowed only inside `reporter_gateway`; parent-relative imports,
-star imports, dynamic imports, `eval`, and `exec` are rejected.
+The surface-import policy is an exact allowlist of imports used by the current
+read-only Reporter Gateway, fail-closed Recovery Gateway, inert Operator
+Console, and root URL configuration. Any new absolute import requires an
+explicit reviewed policy change. Local single-level relative imports are
+allowed only inside the reviewed surface apps; parent-relative imports, star
+imports, dynamic imports, `eval`, and `exec` are rejected.
 
 The surface policy also parses, but never imports or renders, the current
 development settings, root URL configuration, landing-page and disabled-
-submission templates, and CSS. It fixes the inert installed-app/middleware
-profile, the home and disabled `/submit/` routes, a closed passive HTML/
-attribute/directive subset, and CSS with no resource-loading or legacy active-
-content constructs. Missing, dynamic, mutated, malformed, unreadable, or out-
-of-root inputs fail closed with controlled reason codes.
+submission, response-retrieval, and operator templates, and CSS. It fixes the
+inert installed-app/middleware profile, the home, disabled `/submit/`,
+disabled `/response/`, and disabled `/operator/` routes, a closed passive
+HTML/attribute/directive subset, and CSS with no resource-loading or legacy
+active-content constructs. Missing, dynamic, mutated, malformed, unreadable,
+or out-of-root inputs fail closed with controlled reason codes.
 
 The same policy locks the executable AST of the reporter view and response-
 header middleware. A new accepting endpoint, unsafe method, request-derived

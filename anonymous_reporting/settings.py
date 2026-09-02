@@ -22,6 +22,7 @@ ALLOWED_HOSTS: list[str] = []
 INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "operator_console.apps.OperatorConsoleConfig",
+    "recovery_gateway.apps.RecoveryGatewayConfig",
     "report_lifecycle.apps.ReportLifecycleConfig",
     "submission_workflow.apps.SubmissionWorkflowConfig",
 ]

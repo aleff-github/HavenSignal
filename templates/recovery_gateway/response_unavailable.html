@@ -1,0 +1,45 @@
+{% load static %}
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <title>Response retrieval unavailable</title>
+    <link rel="stylesheet" href="{% static 'reporter_gateway/home.css' %}">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="hero">
+        <p class="eyebrow">Recupero risposta</p>
+        <h1>Recupero risposta non ancora abilitato.</h1>
+        <p class="intro">
+          La superficie di recupero è presente solo per verificare il routing
+          pubblico. Non accetta Ticket ID, Recovery Secret o CAPTCHA.
+        </p>
+      </header>
+
+      <section class="notice" aria-labelledby="response-status">
+        <h2 id="response-status">Response retrieval fail-closed</h2>
+        <p>
+          Fino alla chiusura dei gate su verificatore credenziali, CAPTCHA,
+          audit receipt, stato di eleggibilità e Key Service, ogni tentativo di
+          recupero rimane indisponibile.
+        </p>
+      </section>
+
+      <aside class="anonymity" aria-labelledby="response-privacy">
+        <h2 id="response-privacy">Credenziali non lette</h2>
+        <p>
+          Questa versione non legge, verifica, registra o conserva Recovery
+          Secret, Ticket ID, corpo richiesta, query arbitrarie o contenuto di
+          risposta.
+        </p>
+      </aside>
+
+      <footer>
+        Non utilizzare questa installazione per recuperare risposte reali.
+      </footer>
+    </main>
+  </body>
+</html>

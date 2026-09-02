@@ -30,6 +30,9 @@ EXPECTED_INITIALIZER_SOURCE_AST_DIGESTS = MappingProxyType(
         "operator_console/__init__.py": (
             "c30b794825a8688a569e54f824b7a91e53d7450f1486fabaf5fe4cc8b2810496"
         ),
+        "recovery_gateway/__init__.py": (
+            "a9cbb07fd820f90a69b2d38910022a5889c24bc9de5b2955c43be5f3789198c0"
+        ),
         "report_lifecycle/__init__.py": (
             "b9ba94e16ede68eab739a66e985a2808e95429186717eff3ffc208458d053888"
         ),

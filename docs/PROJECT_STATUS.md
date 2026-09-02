@@ -8,8 +8,8 @@ This document keeps the implementation boundary visible without requiring the to
 
 The repository contains a Django 5.2.17 development scaffold, one inert
 reporter landing page, one inert `/status/` page, one fail-closed `/submit/`
-surface, one fail-closed `/response/` recovery surface, and one inert
-fail-closed `/operator/` console entry point.
+surface, one separate fail-closed `/response/` recovery-gateway surface, and
+one inert fail-closed `/operator/` console entry point.
 
 These pages have no:
 
@@ -32,11 +32,12 @@ POST returns a controlled `503` without reading `request.body`, `request.POST`,
 or `request.FILES`, and without creating any report, attempt, audit event,
 credential, key, upload, or database transition.
 
-The `/response/` route is intentionally disabled. GET renders static guidance.
-POST returns a controlled `503` without reading `request.body`, `request.POST`,
-or `request.FILES`, and without creating any credential verification, lookup,
-audit event, key operation, decryption, plaintext rendering, recovery-state
-mutation, or database transition.
+The `/response/` route is intentionally disabled and served by the separate
+Recovery Gateway app. GET renders static guidance. POST returns a controlled
+`503` without reading `request.body`, `request.POST`, or `request.FILES`, and
+without creating any credential verification, lookup, audit event, key
+operation, decryption, plaintext rendering, recovery-state mutation, or
+database transition.
 
 The `/operator/` route is intentionally disabled. GET renders a static
 operator-console unavailable page. POST returns a controlled `503` without
@@ -130,9 +131,9 @@ authorization capabilities remain absent.
 ## Architecture checks
 
 `architecture_checks/` statically constrains the current Reporter Gateway,
-operator-console entry point, and root URL surface, including import allowlists,
-passive page expectations, and the exact executable AST of the read-only and
-fail-closed views and restrictive response-header middleware.
+Recovery Gateway, operator-console entry point, and root URL surface, including
+import allowlists, passive page expectations, and the exact executable AST of
+the read-only and fail-closed views and restrictive response-header middleware.
 
 `python -m architecture_checks .` runs the current static policy set as one
 aggregate fail-closed CI gate and reports only controlled, content-free
