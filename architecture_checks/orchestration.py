@@ -355,6 +355,115 @@ FINALIZATION_SOURCE_POLICY = OrchestrationSourcePolicy(
     unavailable_error_name="FinalizationOrchestrationUnavailable",
 )
 
+EMERGENCY_EXPORT_SOURCE_POLICY = OrchestrationSourcePolicy(
+    name="EMERGENCY_EXPORT_INERT_SOURCE_V1",
+    relative_path="report_lifecycle/emergency_export.py",
+    expected_imports=(
+        *_COMMON_IMPORTS,
+        (
+            1,
+            "errors",
+            (
+                ("EmergencyExportOrchestrationUnavailable", None),
+                ("LifecycleTransitionDenied", None),
+            ),
+        ),
+        (1, "states", (("ReportState", None), ("SecurityOperationKind", None))),
+        (
+            1,
+            "transitions",
+            (("LeaseActivityPlan", None), ("MAX_STATE_VERSION", None)),
+        ),
+    ),
+    expected_module_members=(
+        ("class", "EmergencyExportCheckpoint"),
+        ("assign", "EMERGENCY_EXPORT_SEQUENCE"),
+        ("assign", "EMERGENCY_EXPORT_TRANSITIONS"),
+        ("class", "InertEmergencyExportStepPlan"),
+        ("function", "_valid_counter"),
+        ("function", "_require_emergency_export_binding"),
+        ("function", "plan_inert_emergency_export_step"),
+        ("function", "execute_emergency_export_step"),
+    ),
+    allowed_calls=frozenset(
+        {
+            "EmergencyExportOrchestrationUnavailable",
+            "InertEmergencyExportStepPlan",
+            "LifecycleTransitionDenied",
+            "MappingProxyType",
+            "_require_emergency_export_binding",
+            "_valid_counter",
+            "dataclass",
+            "enumerate",
+            "frozenset",
+            "len",
+            "set",
+            "timezone.is_aware",
+            "tuple",
+            "type",
+        }
+    ),
+    allowed_raises=frozenset(
+        {
+            "EmergencyExportOrchestrationUnavailable",
+            "LifecycleTransitionDenied",
+        }
+    ),
+    plan_class_name="InertEmergencyExportStepPlan",
+    plan_fields=(
+        *_COMMON_PLAN_FIELDS,
+        ("source_checkpoint", "EmergencyExportCheckpoint"),
+        ("target_checkpoint", "EmergencyExportCheckpoint"),
+    ),
+    plan_false_classvars=(
+        "authorizes_execution",
+        "persists_checkpoint",
+        "creates_export_artifact",
+        "releases_plaintext",
+    ),
+    executor_name="execute_emergency_export_step",
+    unavailable_error_name="EmergencyExportOrchestrationUnavailable",
+    expected_str_enums=(
+        (
+            "EmergencyExportCheckpoint",
+            (
+                ("CONTEXT_VALIDATED", "CONTEXT_VALIDATED"),
+                (
+                    "REQUEST_DESCRIPTOR_FROZEN_AND_STEP_UP_COMPLETED",
+                    "REQUEST_DESCRIPTOR_FROZEN_AND_STEP_UP_COMPLETED",
+                ),
+                (
+                    "REQUESTED_AUDIT_RECEIPT_OBTAINED",
+                    "REQUESTED_AUDIT_RECEIPT_OBTAINED",
+                ),
+                (
+                    "ADMINISTRATOR_ALERT_ACCEPTED",
+                    "ADMINISTRATOR_ALERT_ACCEPTED",
+                ),
+                (
+                    "AUTHORIZED_JOB_AND_FENCE_COMMITTED",
+                    "AUTHORIZED_JOB_AND_FENCE_COMMITTED",
+                ),
+                ("AUTHORIZED_AUDIT_ACCEPTED", "AUTHORIZED_AUDIT_ACCEPTED"),
+                ("ENCRYPTED_STAGING_CREATED", "ENCRYPTED_STAGING_CREATED"),
+                ("ENCRYPTED_STAGING_VERIFIED", "ENCRYPTED_STAGING_VERIFIED"),
+                (
+                    "COMPLETED_AUDIT_RECEIPT_OBTAINED",
+                    "COMPLETED_AUDIT_RECEIPT_OBTAINED",
+                ),
+                (
+                    "DELIVERY_CONTEXT_REVALIDATED",
+                    "DELIVERY_CONTEXT_REVALIDATED",
+                ),
+                (
+                    "DELIVERY_CONSUMED_AND_CLEANUP_STARTED",
+                    "DELIVERY_CONSUMED_AND_CLEANUP_STARTED",
+                ),
+            ),
+        ),
+    ),
+)
+
 DELETION_SOURCE_POLICY = OrchestrationSourcePolicy(
     name="OPERATOR_DELETION_INERT_SOURCE_V1",
     relative_path="report_lifecycle/deletion.py",
@@ -596,6 +705,7 @@ ORCHESTRATION_SOURCE_POLICIES = MappingProxyType({
     "audit_retention": AUDIT_RETENTION_SOURCE_POLICY,
     "cleanup": CLEANUP_SOURCE_POLICY,
     "deletion": DELETION_SOURCE_POLICY,
+    "emergency_export": EMERGENCY_EXPORT_SOURCE_POLICY,
     "finalization": FINALIZATION_SOURCE_POLICY,
     "metadata_retention": METADATA_RETENTION_SOURCE_POLICY,
     "retention": RETENTION_SOURCE_POLICY,

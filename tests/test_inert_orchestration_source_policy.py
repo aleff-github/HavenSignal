@@ -10,6 +10,7 @@ from architecture_checks import (
     AUDIT_RETENTION_SOURCE_POLICY,
     CLEANUP_SOURCE_POLICY,
     DELETION_SOURCE_POLICY,
+    EMERGENCY_EXPORT_SOURCE_POLICY,
     FINALIZATION_SOURCE_POLICY,
     METADATA_RETENTION_SOURCE_POLICY,
     ORCHESTRATION_SOURCE_POLICIES,
@@ -25,6 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 AUDIT_RETENTION_PATH = BASE_DIR / "report_lifecycle" / "audit_retention.py"
 CLEANUP_PATH = BASE_DIR / "report_lifecycle" / "cleanup.py"
 FINALIZATION_PATH = BASE_DIR / "report_lifecycle" / "finalization.py"
+EMERGENCY_EXPORT_PATH = BASE_DIR / "report_lifecycle" / "emergency_export.py"
 DELETION_PATH = BASE_DIR / "report_lifecycle" / "deletion.py"
 RETENTION_PATH = BASE_DIR / "report_lifecycle" / "retention.py"
 METADATA_RETENTION_PATH = (
@@ -47,6 +49,7 @@ class CurrentInertOrchestrationSourcePolicyTests(SimpleTestCase):
                 "audit_retention",
                 "cleanup",
                 "deletion",
+                "emergency_export",
                 "finalization",
                 "metadata_retention",
                 "retention",
@@ -59,6 +62,10 @@ class CurrentInertOrchestrationSourcePolicyTests(SimpleTestCase):
         self.assertEqual(
             CLEANUP_SOURCE_POLICY.relative_path,
             "report_lifecycle/cleanup.py",
+        )
+        self.assertEqual(
+            EMERGENCY_EXPORT_SOURCE_POLICY.relative_path,
+            "report_lifecycle/emergency_export.py",
         )
         self.assertEqual(
             FINALIZATION_SOURCE_POLICY.relative_path,
@@ -134,6 +141,8 @@ class CurrentInertOrchestrationSourcePolicyTests(SimpleTestCase):
         with self.assertRaises(FrozenInstanceError):
             FINALIZATION_SOURCE_POLICY.name = "WEAKENED"
         with self.assertRaises(FrozenInstanceError):
+            EMERGENCY_EXPORT_SOURCE_POLICY.name = "WEAKENED"
+        with self.assertRaises(FrozenInstanceError):
             CLEANUP_SOURCE_POLICY.name = "WEAKENED"
         with self.assertRaises(FrozenInstanceError):
             RETENTION_SOURCE_POLICY.name = "WEAKENED"
@@ -149,6 +158,9 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
             encoding="utf-8"
         )
         self.cleanup_source = CLEANUP_PATH.read_text(encoding="utf-8")
+        self.emergency_export_source = EMERGENCY_EXPORT_PATH.read_text(
+            encoding="utf-8"
+        )
         self.finalization_source = FINALIZATION_PATH.read_text(encoding="utf-8")
         self.deletion_source = DELETION_PATH.read_text(encoding="utf-8")
         self.retention_source = RETENTION_PATH.read_text(encoding="utf-8")
@@ -161,6 +173,13 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
             source=source,
             relative_path=FINALIZATION_SOURCE_POLICY.relative_path,
             policy=FINALIZATION_SOURCE_POLICY,
+        )
+
+    def analyze_emergency_export(self, source: str):
+        return analyze_inert_orchestration_source(
+            source=source,
+            relative_path=EMERGENCY_EXPORT_SOURCE_POLICY.relative_path,
+            policy=EMERGENCY_EXPORT_SOURCE_POLICY,
         )
 
     def analyze_audit_retention(self, source: str):
@@ -330,6 +349,19 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
             codes,
         )
 
+        export_source = self.emergency_export_source.replace(
+            "        raise EmergencyExportOrchestrationUnavailable()",
+            "        return plan",
+            1,
+        )
+        export_codes = {
+            item.code for item in self.analyze_emergency_export(export_source)
+        }
+        self.assertIn(
+            OrchestrationViolationCode.EXECUTOR_PROFILE_MISMATCH,
+            export_codes,
+        )
+
         retention_source = self.retention_source.replace(
             "        raise ResponseRetentionOrchestrationUnavailable()",
             "        return plan",
@@ -396,8 +428,17 @@ class InertOrchestrationSourcePolicyAbuseTests(SimpleTestCase):
                 "    destroys_key_or_content: ClassVar[bool] = True",
                 1,
             ),
+            self.emergency_export_source.replace(
+                "    releases_plaintext: ClassVar[bool] = False",
+                "    releases_plaintext: ClassVar[bool] = True",
+                1,
+            ),
         )
-        analyzers = (self.analyze_finalization, self.analyze_deletion)
+        analyzers = (
+            self.analyze_finalization,
+            self.analyze_deletion,
+            self.analyze_emergency_export,
+        )
         for source, analyzer in zip(sources, analyzers):
             with self.subTest(analyzer=analyzer.__name__):
                 codes = {item.code for item in analyzer(source)}
