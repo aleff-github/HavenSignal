@@ -128,7 +128,7 @@ class LifecycleSourcePolicyTests(SimpleTestCase):
             with self.subTest(new=new):
                 self.mutate(relative_path, old, new)
 
-    def test_persistence_success_and_backend_weakening_are_rejected(self) -> None:
+    def test_persistence_locking_and_backend_weakening_are_rejected(self) -> None:
         relative_path = "report_lifecycle/persistence.py"
         mutations = (
             (
@@ -136,12 +136,16 @@ class LifecycleSourcePolicyTests(SimpleTestCase):
                 'capabilities.vendor not in {"postgresql", "sqlite"}',
             ),
             (
-                "    raise LifecyclePersistenceUnavailable()\n",
-                "    return None\n",
+                ".select_for_update()",
+                ".all()",
             ),
             (
-                "from django.db import connections",
-                "from django.db import connections, transaction",
+                "with transaction.atomic(using=using):",
+                "if True:",
+            ),
+            (
+                "maximum_fence + 1",
+                "maximum_fence",
             ),
         )
         for old, new in mutations:

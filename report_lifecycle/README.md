@@ -16,16 +16,19 @@ It contains:
 It intentionally contains no views, URLs, forms, authentication, content,
 attachments, filenames, recovery data, keys, cryptography, protected notes,
 audit/alert payloads, service calls, or background jobs. Existing-row `save()`
-mutation is denied because the reviewed PostgreSQL persistence executor does
-not yet exist.
+mutation remains denied because a protected transition executor does not yet
+exist.
 
 `bindings.py` verifies exact actor, report/state version, lease identifier,
 lease generation, lease ownership, and server-time expiry. A validated binding
 is necessary metadata evidence only; it is never an authorization grant.
 
 `persistence.py` requires PostgreSQL transactions, row locking, and partial
-indexes, but still denies every write. Passing backend capability checks cannot
-replace the missing reviewed executor and multi-process integration evidence.
+indexes. Its only successful write locks the report and optional lease in that
+order, reconstructs and revalidates their database-authoritative snapshots,
+rejects an existing nonterminal operation, assigns the next monotonic fence,
+and inserts one metadata-only `PREPARED` operation. It cannot activate or
+execute that operation, update report/lease state, or call another service.
 
 SQLite tests validate pure behavior and ordinary constraints only. They are not
 PostgreSQL concurrency or release evidence. Protected workflows remain blocked
@@ -37,10 +40,11 @@ generates fresh UUID-only cases for 20–100 contenders, requires one process an
 one dedicated connection per contender, and contains no database credentials
 or reporter fields. On PostgreSQL it verifies exact winners for active report,
 lease, and operation constraints and exact rejection for stale report versions
-and lease generations, then removes every synthetic row. Other backends fail
-closed. This is evidence for the present metadata schema and test-only compare-
-and-set statements; it is not a production executor, lock-order review,
-durability proof, or protected-workflow release authorization.
+and lease generations. A seventh case verifies one winner when 20 processes use
+the preparation executor against one report. Every synthetic row is removed and
+other backends fail closed. This is evidence for the present metadata schema,
+test-only compare-and-set statements, and preparation lock order; it is not a
+protected transition executor, durability proof, or release authorization.
 
 `architecture_checks/migrations.py` locks the current single initial migration
 to its empty dependency graph, exact three-model field/type profile, and closed

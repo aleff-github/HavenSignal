@@ -1,9 +1,21 @@
 from dataclasses import dataclass
+from uuid import UUID
 
-from django.db import connections
+from django.db import DatabaseError, connections, transaction
+from django.db.models import Max
+from django.utils import timezone
 
-from .bindings import ValidatedSecurityOperationBinding
-from .errors import LifecyclePersistenceUnavailable
+from .bindings import (
+    LeaseBindingSnapshot,
+    ReportBindingSnapshot,
+    SecurityOperationCommand,
+    ValidatedSecurityOperationBinding,
+    validate_inert_security_operation_binding,
+)
+from .errors import LifecyclePersistenceUnavailable, LifecycleTransitionDenied
+from .models import Report, ReportLease, SecurityOperation
+from .states import SecurityOperationState
+from .transitions import MAX_STATE_VERSION
 
 
 @dataclass(frozen=True, slots=True)
@@ -13,6 +25,18 @@ class LifecycleBackendCapabilities:
     supports_transactions: bool
     supports_row_locks: bool
     supports_partial_indexes: bool
+
+
+@dataclass(frozen=True, slots=True)
+class PreparedSecurityOperation:
+    operation_id: UUID
+    report_id: UUID
+    idempotency_id: UUID
+    state: SecurityOperationState
+    bound_report_version: int
+    fence_token: int
+    lease_id: UUID | None
+    lease_generation: int | None
 
 
 def inspect_lifecycle_backend(*, using: str = "default") -> LifecycleBackendCapabilities:
@@ -30,7 +54,12 @@ def require_postgresql_transition_backend(
     *,
     using: str = "default",
 ) -> LifecycleBackendCapabilities:
-    capabilities = inspect_lifecycle_backend(using=using)
+    if type(using) is not str or not using:
+        raise LifecyclePersistenceUnavailable()
+    try:
+        capabilities = inspect_lifecycle_backend(using=using)
+    except Exception:
+        raise LifecyclePersistenceUnavailable() from None
     if (
         capabilities.vendor != "postgresql"
         or not capabilities.supports_transactions
@@ -45,13 +74,150 @@ def persist_validated_security_operation(
     *,
     binding: ValidatedSecurityOperationBinding,
     using: str = "default",
-) -> None:
-    """Fail closed until a production-equivalent PostgreSQL executor is reviewed."""
+) -> PreparedSecurityOperation:
+    """Atomically prepare metadata only; never execute a protected operation."""
 
-    if not isinstance(binding, ValidatedSecurityOperationBinding):
+    if (
+        type(binding) is not ValidatedSecurityOperationBinding
+        or type(binding.command) is not SecurityOperationCommand
+        or type(using) is not str
+        or not using
+    ):
         raise LifecyclePersistenceUnavailable()
     require_postgresql_transition_backend(using=using)
+    if connections[using].vendor != "postgresql":
+        raise LifecyclePersistenceUnavailable()
 
-    # Backend capability checks are necessary but not sufficient. No ORM write
-    # is enabled until lock ordering and multi-process PostgreSQL tests pass.
-    raise LifecyclePersistenceUnavailable()
+    try:
+        with transaction.atomic(using=using):
+            command = binding.command
+            report = (
+                Report.objects.using(using)
+                .select_for_update()
+                .get(id=command.report_id)
+            )
+            lease = _lock_optional_lease(
+                command=command,
+                report=report,
+                using=using,
+            )
+            revalidated = validate_inert_security_operation_binding(
+                command=command,
+                report=_report_snapshot(report),
+                lease=_lease_snapshot(lease),
+            )
+            if not _binding_matches_revalidated(
+                binding=binding,
+                revalidated=revalidated,
+            ):
+                raise LifecyclePersistenceUnavailable()
+            if SecurityOperation.objects.using(using).filter(
+                report=report,
+                state__in=(
+                    SecurityOperationState.PREPARED,
+                    SecurityOperationState.ACTIVE,
+                ),
+            ).exists():
+                raise LifecyclePersistenceUnavailable()
+
+            maximum_fence = (
+                SecurityOperation.objects.using(using)
+                .filter(report=report)
+                .aggregate(maximum=Max("fence_token"))["maximum"]
+                or 0
+            )
+            if maximum_fence >= MAX_STATE_VERSION:
+                raise LifecyclePersistenceUnavailable()
+            operation = SecurityOperation.objects.using(using).create(
+                id=command.operation_id,
+                report=report,
+                kind=revalidated.kind,
+                bound_report_version=report.state_version,
+                fence_token=maximum_fence + 1,
+                idempotency_id=command.idempotency_id,
+                actor_id=command.actor_id,
+                lease=lease,
+                lease_generation=(lease.generation if lease is not None else None),
+            )
+            return PreparedSecurityOperation(
+                operation_id=operation.id,
+                report_id=report.id,
+                idempotency_id=operation.idempotency_id,
+                state=SecurityOperationState(operation.state),
+                bound_report_version=operation.bound_report_version,
+                fence_token=operation.fence_token,
+                lease_id=operation.lease_id,
+                lease_generation=operation.lease_generation,
+            )
+    except LifecyclePersistenceUnavailable:
+        raise
+    except (DatabaseError, LifecycleTransitionDenied, TypeError, ValueError):
+        raise LifecyclePersistenceUnavailable() from None
+
+
+def _lock_optional_lease(
+    *,
+    command: SecurityOperationCommand,
+    report: Report,
+    using: str,
+) -> ReportLease | None:
+    if command.lease_id is None:
+        return None
+    return (
+        ReportLease.objects.using(using)
+        .select_for_update()
+        .get(id=command.lease_id, report=report)
+    )
+
+
+def _report_snapshot(report: Report) -> ReportBindingSnapshot:
+    return ReportBindingSnapshot(
+        report_id=report.id,
+        state=report.state,
+        state_version=report.state_version,
+        current_lease_generation=report.current_lease_generation,
+        active_operator_id=report.active_operator_id,
+    )
+
+
+def _lease_snapshot(lease: ReportLease | None) -> LeaseBindingSnapshot | None:
+    if lease is None:
+        return None
+    return LeaseBindingSnapshot(
+        lease_id=lease.id,
+        report_id=lease.report_id,
+        operator_id=lease.operator_id,
+        generation=lease.generation,
+        state=lease.state,
+        state_version=lease.state_version,
+        opened_at=lease.opened_at,
+        last_activity_at=lease.last_activity_at,
+        absolute_expires_at=lease.absolute_expires_at,
+    )
+
+
+def _binding_matches_revalidated(
+    *,
+    binding: ValidatedSecurityOperationBinding,
+    revalidated: ValidatedSecurityOperationBinding,
+) -> bool:
+    if (
+        binding.command != revalidated.command
+        or binding.kind is not revalidated.kind
+        or binding.report_state is not revalidated.report_state
+        or binding.report_state_version != revalidated.report_state_version
+        or not timezone.is_aware(binding.validated_at)
+        or binding.validated_at > revalidated.validated_at
+    ):
+        return False
+    if binding.lease_activity is None or revalidated.lease_activity is None:
+        return binding.lease_activity is revalidated.lease_activity
+    return (
+        binding.lease_activity.lease_id == revalidated.lease_activity.lease_id
+        and binding.lease_activity.generation
+        == revalidated.lease_activity.generation
+        and binding.lease_activity.previous_activity_at
+        == revalidated.lease_activity.previous_activity_at
+        and binding.lease_activity.absolute_expires_at
+        == revalidated.lease_activity.absolute_expires_at
+    )

@@ -6,7 +6,7 @@ class LifecycleTransitionDenied(Exception):
 
 
 class LifecyclePersistenceUnavailable(Exception):
-    """Controlled denial while the PostgreSQL executor remains gated."""
+    """Controlled denial when lifecycle persistence cannot safely proceed."""
 
     def __init__(self) -> None:
         super().__init__("lifecycle_persistence_unavailable")

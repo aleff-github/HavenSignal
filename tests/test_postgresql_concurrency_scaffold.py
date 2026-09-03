@@ -33,6 +33,7 @@ class PostgreSQLConcurrencyScaffoldTests(TestCase):
                 ConcurrencyScenario.ACTIVE_LEASE_PER_OPERATOR,
                 ConcurrencyScenario.ACTIVE_LEASE_PER_REPORT,
                 ConcurrencyScenario.ACTIVE_OPERATION_PER_REPORT,
+                ConcurrencyScenario.PREPARED_OPERATION_PER_REPORT,
                 ConcurrencyScenario.ACTIVE_REPORT_PER_OPERATOR,
                 ConcurrencyScenario.STALE_LEASE_GENERATION,
                 ConcurrencyScenario.STALE_REPORT_VERSION,

@@ -12,8 +12,17 @@ from uuid import UUID, uuid4, uuid5
 from django.db import IntegrityError, connections, transaction
 from django.utils import timezone
 
+from report_lifecycle.bindings import (
+    ReportBindingSnapshot,
+    SecurityOperationCommand,
+    validate_inert_security_operation_binding,
+)
+from report_lifecycle.errors import LifecyclePersistenceUnavailable
 from report_lifecycle.models import Report, ReportLease, SecurityOperation
-from report_lifecycle.persistence import require_postgresql_transition_backend
+from report_lifecycle.persistence import (
+    persist_validated_security_operation,
+    require_postgresql_transition_backend,
+)
 from report_lifecycle.states import (
     ReportState,
     SecurityOperationKind,
@@ -32,6 +41,7 @@ class ConcurrencyScenario(StrEnum):
     ACTIVE_LEASE_PER_OPERATOR = "ACTIVE_LEASE_PER_OPERATOR"
     ACTIVE_LEASE_PER_REPORT = "ACTIVE_LEASE_PER_REPORT"
     ACTIVE_OPERATION_PER_REPORT = "ACTIVE_OPERATION_PER_REPORT"
+    PREPARED_OPERATION_PER_REPORT = "PREPARED_OPERATION_PER_REPORT"
     ACTIVE_REPORT_PER_OPERATOR = "ACTIVE_REPORT_PER_OPERATOR"
     STALE_LEASE_GENERATION = "STALE_LEASE_GENERATION"
     STALE_REPORT_VERSION = "STALE_REPORT_VERSION"
@@ -54,6 +64,10 @@ CONCURRENCY_EXPECTATIONS = MappingProxyType(
             requirement_ids=("SEC-ACCESS-010", "SEC-ACCESS-015"),
         ),
         ConcurrencyScenario.ACTIVE_OPERATION_PER_REPORT: ConcurrencyExpectation(
+            maximum_successes=1,
+            requirement_ids=("SEC-ACCESS-010", "SEC-ACCESS-015"),
+        ),
+        ConcurrencyScenario.PREPARED_OPERATION_PER_REPORT: ConcurrencyExpectation(
             maximum_successes=1,
             requirement_ids=("SEC-ACCESS-010", "SEC-ACCESS-015"),
         ),
@@ -312,7 +326,7 @@ def _run_contender(
             if committed
             else ConcurrencyOutcome.REJECTED
         )
-    except IntegrityError:
+    except (IntegrityError, LifecyclePersistenceUnavailable):
         outcome = ConcurrencyOutcome.REJECTED
     except Exception:
         outcome = ConcurrencyOutcome.FAILED
@@ -382,6 +396,28 @@ def _attempt_case_write(
                 )
             ]
         )
+        return True
+    if scenario is ConcurrencyScenario.PREPARED_OPERATION_PER_REPORT:
+        command = SecurityOperationCommand(
+            operation_id=contender_id,
+            idempotency_id=uuid5(run_id, f"prepared:{contender_id.hex}"),
+            kind=SecurityOperationKind.DELETE_REPORT_FLOOD,
+            report_id=target_id,
+            expected_report_version=0,
+            actor_id=contender_id,
+        )
+        binding = validate_inert_security_operation_binding(
+            command=command,
+            report=ReportBindingSnapshot(
+                report_id=target_id,
+                state=ReportState.SEALED,
+                state_version=0,
+                current_lease_generation=0,
+                active_operator_id=None,
+            ),
+            lease=None,
+        )
+        persist_validated_security_operation(binding=binding, using=using)
         return True
     if scenario is ConcurrencyScenario.STALE_REPORT_VERSION:
         return (

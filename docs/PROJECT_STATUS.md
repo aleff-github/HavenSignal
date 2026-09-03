@@ -129,16 +129,19 @@ Docker alpha runs Django and the full test suite against a local PostgreSQL
 non-root read-only web container, health-gated migrations, and a persistent
 local database volume.
 
-A test-only PostgreSQL concurrency harness now runs the six approved metadata
+A test-only PostgreSQL concurrency harness now runs seven approved metadata
 fence scenarios with 20 synchronized processes and dedicated connections. It
 proves exact database winners for active report, lease, and operation
 constraints and exact rejection of stale report-version and lease-generation
-compare-and-set attempts, using only synthetic UUIDs and automatic cleanup.
+compare-and-set attempts. Its seventh scenario proves that the metadata-only
+preparation executor yields one winner for 20 contenders on one report, using
+only synthetic UUIDs and automatic cleanup.
 
 The harness does not expose its write primitives to application code and does
 not enable protected transition execution. It validates the present schema and
-test-only statements, but does not prove the future executor's lock ordering,
-crash recovery, durability, or production deployment gates.
+test-only statements and the preparation lock order, but does not prove a
+future protected transition executor, crash recovery, durability, or
+production deployment gates.
 
 The complete executable AST of the lifecycle errors, state graphs, transition
 and lease planners, operation bindings, metadata models, and persistence gate
@@ -744,17 +747,36 @@ Service, crypto, concurrency, deployment, and production gates remain open.
 
 ## Latest Stage A slice — PostgreSQL metadata concurrency acceptance
 
-The Docker PostgreSQL suite now executes all six approved lifecycle metadata
+The Docker PostgreSQL suite now executes seven approved lifecycle metadata
 contention scenarios with 20 synchronized processes and one connection per
 contender. Exact one-winner results are required for active report ownership,
 active lease per report, active lease per operator, and active operation per
 report. Stale report-version and lease-generation compare-and-set attempts must
-produce zero winners. Unexpected process/database outcomes fail the test and
-all generated rows are removed.
+produce zero winners. The seventh case requires one winner when all contenders
+invoke the application preparation executor for one report. Unexpected
+process/database outcomes fail the test and all generated rows are removed.
 
-The harness exists only under `tests/`, accepts only generated UUID metadata,
-and remains unavailable on non-PostgreSQL backends. The application persistence
-boundary still rejects every mutation. Passing closes only the metadata-schema
-contention evidence gap; it does not authorize a protected transition executor,
-request handling, report content, cryptography, audit, deployment, or production
-use.
+The harness accepts only generated UUID metadata and remains unavailable on
+non-PostgreSQL backends. The application persistence boundary permits only one
+locked, revalidated metadata-only `PREPARED` operation; it still denies state
+transitions and protected execution. Passing closes only the metadata-schema
+and preparation contention evidence gaps; it does not authorize request
+handling, report content, cryptography, audit, deployment, or production use.
+
+## Latest Stage A slice — metadata-only operation preparation
+
+The first application persistence success path is now limited to PostgreSQL
+and creates only a `PREPARED` `SecurityOperation`. Within one transaction it
+locks the report first and its optional lease second, reconstructs trusted
+snapshots from those rows, reruns all state/version/actor/lease/time binding
+checks, rejects another nonterminal operation, allocates the next per-report
+fence token, and inserts immutable operation metadata. It returns a frozen
+content-free result.
+
+SQLite, invalid aliases, forged/stale bindings, missing rows, expired leases,
+constraint conflicts, fence exhaustion, and database failures receive the same
+controlled denial. The executor neither changes report or lease state nor
+activates or executes the prepared operation. No endpoint imports it. Protected
+workflow execution, service calls, audit receipts, cryptography, content,
+recovery, crash/durability evidence, independent review, deployment, and
+production authorization remain open.
