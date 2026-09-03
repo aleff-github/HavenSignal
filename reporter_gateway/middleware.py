@@ -54,7 +54,9 @@ class ReporterSecurityHeadersMiddleware:
                     content_type="text/plain; charset=utf-8",
                     status=400,
                 )
-            if request.method == "POST" and request.path_info != "/submit/":
+            if request.method not in ("GET", "HEAD") and (
+                request.method != "POST" or request.path_info != "/submit/"
+            ):
                 return HttpResponse(
                     response_code,
                     content_type="text/plain; charset=utf-8",

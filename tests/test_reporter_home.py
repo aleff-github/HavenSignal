@@ -343,11 +343,53 @@ class ReporterSubmitUnavailableTests(SimpleTestCase):
                 )
                 self.assertFalse(response.cookies)
 
-    def test_submit_rejects_other_unsafe_methods(self) -> None:
-        for method in ("put", "patch", "delete"):
+    def test_submit_short_circuits_other_non_read_methods(self) -> None:
+        for method in ("put", "patch", "delete", "options", "trace"):
             with self.subTest(method=method):
                 response = getattr(self.client, method)(reverse("reporter-submit"))
-                self.assertEqual(response.status_code, 405)
+                self.assertEqual(response.status_code, 503)
+                self.assertEqual(response.content, b"submission_unavailable")
+
+    def test_sensitive_non_read_methods_stop_before_body_and_downstream(self) -> None:
+        class BodyExplodes(HttpRequest):
+            @property
+            def body(self) -> bytes:  # type: ignore[override]
+                raise AssertionError("body must not be read")
+
+        def reject_downstream_call(request: HttpRequest) -> HttpResponse:
+            raise AssertionError("downstream middleware and view must not be called")
+
+        cases = (
+            ("/submit/", b"submission_unavailable"),
+            ("/response/", b"response_retrieval_unavailable"),
+            ("/operator/", b"operator_authentication_unavailable"),
+        )
+        for method in (
+            "PUT",
+            "PATCH",
+            "DELETE",
+            "OPTIONS",
+            "TRACE",
+            "CONNECT",
+        ):
+            for path, expected_content in cases:
+                with self.subTest(method=method, path=path):
+                    request = BodyExplodes()
+                    request.method = method
+                    request.path_info = path
+                    middleware = ReporterSecurityHeadersMiddleware(
+                        reject_downstream_call
+                    )
+
+                    response = middleware(request)
+
+                    self.assertEqual(response.status_code, 503)
+                    self.assertEqual(response.content, expected_content)
+                    self.assertEqual(
+                        response.headers["Cache-Control"],
+                        "no-store, max-age=0",
+                    )
+                    self.assertFalse(response.cookies)
 
     def test_submit_has_restrictive_browser_headers(self) -> None:
         response = self.client.get(reverse("reporter-submit"))

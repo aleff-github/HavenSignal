@@ -79,6 +79,12 @@ retains the same fallback response. No path reads `request.body`,
 WebAuthn challenge, report lookup, audit event, lease, key operation,
 decryption, export, or database transition.
 
+On all three disabled sensitive routes, PUT, PATCH, DELETE, OPTIONS, TRACE, and
+any other non-read method are also stopped with the same controlled `503`
+before downstream middleware or view dispatch. Only GET and HEAD may pass this
+early rejection gate; `/submit/` POST alone first receives its framing and
+length checks before the same fail-closed result.
+
 ## Submission workflow
 
 `submission_workflow/` defines only the approved attempt states, database
