@@ -15,11 +15,14 @@ from django.utils import timezone
 from report_lifecycle.bindings import (
     ReportBindingSnapshot,
     SecurityOperationCommand,
+    ValidatedSecurityOperationBinding,
     validate_inert_security_operation_binding,
 )
 from report_lifecycle.errors import LifecyclePersistenceUnavailable
 from report_lifecycle.models import Report, ReportLease, SecurityOperation
 from report_lifecycle.persistence import (
+    PreparedSecurityOperation,
+    activate_prepared_security_operation,
     persist_validated_security_operation,
     require_postgresql_transition_backend,
 )
@@ -42,6 +45,7 @@ class ConcurrencyScenario(StrEnum):
     ACTIVE_LEASE_PER_REPORT = "ACTIVE_LEASE_PER_REPORT"
     ACTIVE_OPERATION_PER_REPORT = "ACTIVE_OPERATION_PER_REPORT"
     PREPARED_OPERATION_PER_REPORT = "PREPARED_OPERATION_PER_REPORT"
+    PREPARED_OPERATION_ACTIVATION = "PREPARED_OPERATION_ACTIVATION"
     ACTIVE_REPORT_PER_OPERATOR = "ACTIVE_REPORT_PER_OPERATOR"
     STALE_LEASE_GENERATION = "STALE_LEASE_GENERATION"
     STALE_REPORT_VERSION = "STALE_REPORT_VERSION"
@@ -68,6 +72,10 @@ CONCURRENCY_EXPECTATIONS = MappingProxyType(
             requirement_ids=("SEC-ACCESS-010", "SEC-ACCESS-015"),
         ),
         ConcurrencyScenario.PREPARED_OPERATION_PER_REPORT: ConcurrencyExpectation(
+            maximum_successes=1,
+            requirement_ids=("SEC-ACCESS-010", "SEC-ACCESS-015"),
+        ),
+        ConcurrencyScenario.PREPARED_OPERATION_ACTIVATION: ConcurrencyExpectation(
             maximum_successes=1,
             requirement_ids=("SEC-ACCESS-010", "SEC-ACCESS-015"),
         ),
@@ -283,6 +291,13 @@ def _prepare_case(*, case: _SyntheticConcurrencyCase, using: str) -> None:
         Report.objects.using(using).filter(id=case.contention_target_id).update(
             current_lease_generation=1
         )
+    if case.scenario is ConcurrencyScenario.PREPARED_OPERATION_ACTIVATION:
+        command = _activation_command(
+            run_id=case.run_id,
+            report_id=case.contention_target_id,
+        )
+        binding = _activation_binding(command=command)
+        persist_validated_security_operation(binding=binding, using=using)
 
 
 def _cleanup_case(*, case: _SyntheticConcurrencyCase, using: str) -> None:
@@ -419,6 +434,25 @@ def _attempt_case_write(
         )
         persist_validated_security_operation(binding=binding, using=using)
         return True
+    if scenario is ConcurrencyScenario.PREPARED_OPERATION_ACTIVATION:
+        command = _activation_command(run_id=run_id, report_id=target_id)
+        binding = _activation_binding(command=command)
+        prepared = PreparedSecurityOperation(
+            operation_id=command.operation_id,
+            report_id=command.report_id,
+            idempotency_id=command.idempotency_id,
+            state=SecurityOperationState.PREPARED,
+            bound_report_version=0,
+            fence_token=1,
+            lease_id=None,
+            lease_generation=None,
+        )
+        activate_prepared_security_operation(
+            binding=binding,
+            prepared=prepared,
+            using=using,
+        )
+        return True
     if scenario is ConcurrencyScenario.STALE_REPORT_VERSION:
         return (
             Report.objects.using(using)
@@ -434,3 +468,35 @@ def _attempt_case_write(
             == 1
         )
     return False
+
+
+def _activation_command(
+    *,
+    run_id: UUID,
+    report_id: UUID,
+) -> SecurityOperationCommand:
+    return SecurityOperationCommand(
+        operation_id=run_id,
+        idempotency_id=uuid5(run_id, "activation"),
+        kind=SecurityOperationKind.DELETE_REPORT_FLOOD,
+        report_id=report_id,
+        expected_report_version=0,
+        actor_id=run_id,
+    )
+
+
+def _activation_binding(
+    *,
+    command: SecurityOperationCommand,
+) -> ValidatedSecurityOperationBinding:
+    return validate_inert_security_operation_binding(
+        command=command,
+        report=ReportBindingSnapshot(
+            report_id=command.report_id,
+            state=ReportState.SEALED,
+            state_version=0,
+            current_lease_generation=0,
+            active_operator_id=None,
+        ),
+        lease=None,
+    )

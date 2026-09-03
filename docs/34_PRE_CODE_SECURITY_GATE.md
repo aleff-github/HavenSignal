@@ -1349,24 +1349,24 @@ Audit Service, Key Service, report crypto, credential generation, concurrency,
 deployment, or production gate.
 
 The sixty-seventh Stage A slice replaces the inert PostgreSQL concurrency
-scaffold runner with a test-only metadata acceptance harness. Each of the seven
+scaffold runner with a test-only metadata acceptance harness. Each of the eight
 approved scenarios uses 20 synchronized operating-system processes, one
 dedicated database connection per contender, generated UUID identifiers, a
 bounded completion deadline, controlled outcome counts, and automatic cleanup.
 PostgreSQL must produce exactly one winner for each active-report, active-lease,
-and active-operation uniqueness fence, one winner for metadata-only operation
-preparation, and zero winners for stale report-version and lease-generation
-compare-and-set attempts. Non-PostgreSQL execution and invalid process profiles
-remain fail-closed rather than skipped as evidence.
+and active-operation uniqueness fence, one winner each for metadata-only
+operation preparation and activation, and zero winners for stale report-version
+and lease-generation compare-and-set attempts. Non-PostgreSQL execution and
+invalid process profiles remain fail-closed rather than skipped as evidence.
 
 The harness is confined to `tests/`; its direct constraint and compare-and-set
 statements are not imported by application code. Its preparation case calls the
 separately reviewed metadata-only application executor. This slice closes only
 executable contention evidence for the present schema, synthetic test
-statements, and preparation lock order. It does not establish a protected
-transition executor, crash/durability behavior, audit or service integration,
-protected-content handling, independent review, deployment, or production
-authorization.
+statements, and preparation/activation lock order. It does not establish a
+protected operation executor, crash/durability behavior, audit or service
+integration, protected-content handling, independent review, deployment, or
+production authorization.
 
 The sixty-eighth Stage A slice enables one narrowly bounded PostgreSQL
 persistence success path: preparing immutable `SecurityOperation` metadata.
@@ -1387,3 +1387,21 @@ cryptography, content persistence, key use, or recovery. The 20-process harness
 requires exactly one preparation winner and automatic cleanup. Protected
 execution, crash/durability proof, independent review, deployment, and every
 production gate remain OPEN.
+
+The sixty-ninth Stage A slice enables the adjacent metadata-only activation of
+one previously prepared operation. Inside one PostgreSQL transaction it locks
+the report, optional lease, and operation in that fixed order; rebuilds and
+revalidates database-authoritative binding state; verifies every immutable
+preparation field including the fence; and applies exactly one
+`PREPARED`-version-0 to `ACTIVE`-version-1 compare-and-set with a server
+activation timestamp. Missing rows now also collapse into the same controlled
+persistence denial.
+
+The returned activation result is frozen and content-free. Activation neither
+changes the report or lease nor executes the named security operation. It calls
+no endpoint, worker, Audit Service, Key Service, export, deletion, cryptographic
+or content path. SQLite and mocked backend capabilities remain unavailable, a
+replay is denied, and the eighth 20-process scenario requires exactly one
+activation winner. Protected operation execution, terminalization,
+crash/durability proof, independent review, deployment, and every production
+gate remain OPEN.

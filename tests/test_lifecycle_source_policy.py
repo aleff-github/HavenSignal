@@ -128,7 +128,9 @@ class LifecycleSourcePolicyTests(SimpleTestCase):
             with self.subTest(new=new):
                 self.mutate(relative_path, old, new)
 
-    def test_persistence_locking_and_backend_weakening_are_rejected(self) -> None:
+    def test_persistence_locking_activation_and_backend_weakening_are_rejected(
+        self,
+    ) -> None:
         relative_path = "report_lifecycle/persistence.py"
         mutations = (
             (
@@ -146,6 +148,18 @@ class LifecycleSourcePolicyTests(SimpleTestCase):
             (
                 "maximum_fence + 1",
                 "maximum_fence",
+            ),
+            (
+                "and operation.fence_token == prepared.fence_token",
+                "and True",
+            ),
+            (
+                "target_state=SecurityOperationState.ACTIVE",
+                "target_state=SecurityOperationState.ABORTED",
+            ),
+            (
+                "activated_at=transition.changed_at",
+                "activated_at=None",
             ),
         )
         for old, new in mutations:

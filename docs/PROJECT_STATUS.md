@@ -129,18 +129,19 @@ Docker alpha runs Django and the full test suite against a local PostgreSQL
 non-root read-only web container, health-gated migrations, and a persistent
 local database volume.
 
-A test-only PostgreSQL concurrency harness now runs seven approved metadata
+A test-only PostgreSQL concurrency harness now runs eight approved metadata
 fence scenarios with 20 synchronized processes and dedicated connections. It
 proves exact database winners for active report, lease, and operation
 constraints and exact rejection of stale report-version and lease-generation
 compare-and-set attempts. Its seventh scenario proves that the metadata-only
-preparation executor yields one winner for 20 contenders on one report, using
-only synthetic UUIDs and automatic cleanup.
+preparation executor yields one winner for 20 contenders on one report; its
+eighth proves that only one of 20 contenders can activate the same prepared
+operation. Both use only synthetic UUIDs and automatic cleanup.
 
-The harness does not expose its write primitives to application code and does
-not enable protected transition execution. It validates the present schema and
-test-only statements and the preparation lock order, but does not prove a
-future protected transition executor, crash recovery, durability, or
+The harness does not expose its direct write primitives to application code and
+does not execute a protected operation. It validates the present schema,
+test-only statements, and the reviewed preparation/activation lock order, but
+does not prove crash recovery, durability, downstream security services, or
 production deployment gates.
 
 The complete executable AST of the lifecycle errors, state graphs, transition
@@ -745,25 +746,26 @@ content echo, and that the POST branch does not require request-body access.
 The accepting submission endpoint, CAPTCHA, upload handler, audit, Key
 Service, crypto, concurrency, deployment, and production gates remain open.
 
-## Latest Stage A slice — PostgreSQL metadata concurrency acceptance
+## Stage A slice — PostgreSQL metadata concurrency acceptance
 
-The Docker PostgreSQL suite now executes seven approved lifecycle metadata
+The Docker PostgreSQL suite now executes eight approved lifecycle metadata
 contention scenarios with 20 synchronized processes and one connection per
 contender. Exact one-winner results are required for active report ownership,
 active lease per report, active lease per operator, and active operation per
 report. Stale report-version and lease-generation compare-and-set attempts must
 produce zero winners. The seventh case requires one winner when all contenders
-invoke the application preparation executor for one report. Unexpected
-process/database outcomes fail the test and all generated rows are removed.
+invoke the application preparation executor for one report; the eighth requires
+one winner when they activate the same prepared operation. Unexpected process/
+database outcomes fail the test and all generated rows are removed.
 
 The harness accepts only generated UUID metadata and remains unavailable on
-non-PostgreSQL backends. The application persistence boundary permits only one
-locked, revalidated metadata-only `PREPARED` operation; it still denies state
-transitions and protected execution. Passing closes only the metadata-schema
-and preparation contention evidence gaps; it does not authorize request
-handling, report content, cryptography, audit, deployment, or production use.
+non-PostgreSQL backends. The application persistence boundary permits only
+locked, revalidated metadata-only preparation and activation; it still denies
+protected operation execution. Passing closes only the metadata-schema and
+executor contention evidence gaps; it does not authorize request handling,
+report content, cryptography, audit, deployment, or production use.
 
-## Latest Stage A slice — metadata-only operation preparation
+## Stage A slice — metadata-only operation preparation
 
 The first application persistence success path is now limited to PostgreSQL
 and creates only a `PREPARED` `SecurityOperation`. Within one transaction it
@@ -780,3 +782,22 @@ activates or executes the prepared operation. No endpoint imports it. Protected
 workflow execution, service calls, audit receipts, cryptography, content,
 recovery, crash/durability evidence, independent review, deployment, and
 production authorization remain open.
+
+## Latest Stage A slice — metadata-only operation activation
+
+A second PostgreSQL-only application write can now activate one exact
+`PREPARED` operation without executing it. Within one transaction it locks the
+report, optional lease, and operation in a fixed order, reconstructs current
+database snapshots, reruns the complete binding validation, and checks the
+supplied frozen preparation result against every immutable operation field. It
+then performs one `PREPARED` version 0 to `ACTIVE` version 1 compare-and-set
+using a server timestamp and returns a frozen content-free result.
+
+SQLite, mocked backend capabilities, missing rows, stale or forged bindings,
+altered preparation results, expired leases, and activation replays receive the
+same controlled denial. A new PostgreSQL test launches 20 processes against one
+prepared operation and requires exactly one activation winner. Report and lease
+metadata remain unchanged, and no endpoint, background worker, audit or key
+service, deletion/export action, cryptography, or report content is involved.
+Protected operation execution and terminalization, crash/durability evidence,
+independent review, deployment, and production authorization remain open.

@@ -201,15 +201,16 @@ This should be revisited during operational-policy review.
 
 The current controlled errors, closed report/lease/operation state graphs,
 pure transition and lease planners, fenced operation bindings, metadata-only
-models, and fail-closed persistence boundary are guarded by a non-executing
+models, and PostgreSQL-only persistence boundary are guarded by a non-executing
 exact-AST policy. It fixes the five-minute idle rule, monotonic versions and
 lease generations, UUID and current-state bindings, database constraints,
-creation-only model behavior, PostgreSQL capability checks, and an executor
-whose only result is the controlled unavailable error.
+creation-only direct model behavior, PostgreSQL capability checks, and the
+reviewed metadata-only preparation and activation executors.
 
-The scanner never imports, executes, or echoes target source. This static
-evidence enables no protected transition, content access, authentication,
-audit receipt, key operation, deletion, PostgreSQL concurrency claim, or
+The scanner never imports, executes, or echoes target source. Separate runtime
+tests exercise preparation and activation on PostgreSQL, including exact
+one-winner 20-process contention. This evidence enables no protected operation,
+content access, authentication, audit receipt, key operation, deletion, or
 production capability.
 
 The recovery eligibility Stage A descriptors additionally represent only the

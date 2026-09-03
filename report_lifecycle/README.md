@@ -24,11 +24,14 @@ lease generation, lease ownership, and server-time expiry. A validated binding
 is necessary metadata evidence only; it is never an authorization grant.
 
 `persistence.py` requires PostgreSQL transactions, row locking, and partial
-indexes. Its only successful write locks the report and optional lease in that
-order, reconstructs and revalidates their database-authoritative snapshots,
-rejects an existing nonterminal operation, assigns the next monotonic fence,
-and inserts one metadata-only `PREPARED` operation. It cannot activate or
-execute that operation, update report/lease state, or call another service.
+indexes. Preparation locks the report and optional lease in that order,
+reconstructs and revalidates their database-authoritative snapshots, rejects
+an existing nonterminal operation, assigns the next monotonic fence, and
+inserts one metadata-only `PREPARED` operation. Activation repeats that
+authoritative validation while locking report, optional lease, and operation
+in a fixed order; it requires an exact untampered preparation descriptor and
+performs one compare-and-set transition to `ACTIVE`. Neither path executes the
+protected operation, updates report/lease state, or calls another service.
 
 SQLite tests validate pure behavior and ordinary constraints only. They are not
 PostgreSQL concurrency or release evidence. Protected workflows remain blocked
@@ -41,10 +44,11 @@ one dedicated connection per contender, and contains no database credentials
 or reporter fields. On PostgreSQL it verifies exact winners for active report,
 lease, and operation constraints and exact rejection for stale report versions
 and lease generations. A seventh case verifies one winner when 20 processes use
-the preparation executor against one report. Every synthetic row is removed and
-other backends fail closed. This is evidence for the present metadata schema,
-test-only compare-and-set statements, and preparation lock order; it is not a
-protected transition executor, durability proof, or release authorization.
+the preparation executor against one report; an eighth verifies one winner when
+20 processes attempt to activate the same prepared operation. Every synthetic
+row is removed and other backends fail closed. This is evidence for the present
+metadata schema and reviewed metadata-only executors; it is not protected
+operation execution, durability proof, or release authorization.
 
 `architecture_checks/migrations.py` locks the current single initial migration
 to its empty dependency graph, exact three-model field/type profile, and closed
@@ -131,5 +135,6 @@ The executable AST of the lifecycle errors, states, transitions, bindings,
 models, and persistence boundary is locked by a non-executing source policy.
 State edges, lease timing, fencing generations, immutable binding profiles,
 metadata-only constraints, creation-only saves, backend requirements, and the
-always-unavailable executor cannot change silently. Passing is static source
-evidence only and is not PostgreSQL concurrency or runtime isolation proof.
+preparation/activation executors cannot change silently. Passing is static
+source evidence only and is not PostgreSQL concurrency or runtime isolation
+proof.

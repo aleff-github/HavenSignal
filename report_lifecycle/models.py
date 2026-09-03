@@ -153,7 +153,7 @@ class Report(models.Model):
             ):
                 raise LifecycleTransitionDenied()
         else:
-            # A reviewed PostgreSQL persistence executor does not exist yet.
+            # Direct mutation stays forbidden; reviewed executors use guarded updates.
             raise LifecycleTransitionDenied()
         super().save(*args, **kwargs)
 

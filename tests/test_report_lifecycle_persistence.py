@@ -1,4 +1,4 @@
-"""PostgreSQL preparation executor and fail-closed backend tests."""
+"""PostgreSQL operation persistence and fail-closed backend tests."""
 
 from dataclasses import FrozenInstanceError, fields, replace
 from datetime import timedelta
@@ -19,8 +19,10 @@ from report_lifecycle.bindings import (
 from report_lifecycle.errors import LifecyclePersistenceUnavailable
 from report_lifecycle.models import Report, ReportLease, SecurityOperation
 from report_lifecycle.persistence import (
+    ActivatedSecurityOperation,
     LifecycleBackendCapabilities,
     PreparedSecurityOperation,
+    activate_prepared_security_operation,
     inspect_lifecycle_backend,
     persist_validated_security_operation,
     require_postgresql_transition_backend,
@@ -103,6 +105,50 @@ class LifecyclePersistenceBoundaryTests(TransactionTestCase):
         with self.assertRaises(LifecyclePersistenceUnavailable) as raised:
             persist_validated_security_operation(binding=binding, using=using)
         self.assertEqual(str(raised.exception), "lifecycle_persistence_unavailable")
+
+    def assert_activation_denied(
+        self,
+        binding: object,
+        prepared: object,
+        *,
+        using: str = "default",
+    ) -> None:
+        with self.assertRaises(LifecyclePersistenceUnavailable) as raised:
+            activate_prepared_security_operation(
+                binding=binding,
+                prepared=prepared,
+                using=using,
+            )
+        self.assertEqual(str(raised.exception), "lifecycle_persistence_unavailable")
+
+    def _prepared_descriptor(self) -> PreparedSecurityOperation:
+        return PreparedSecurityOperation(
+            operation_id=self.command.operation_id,
+            report_id=self.report.id,
+            idempotency_id=self.command.idempotency_id,
+            state=SecurityOperationState.PREPARED,
+            bound_report_version=self.report.state_version,
+            fence_token=1,
+            lease_id=self.lease.id,
+            lease_generation=self.lease.generation,
+        )
+
+    def _store_prepared_operation(self) -> PreparedSecurityOperation:
+        if connection.vendor == "postgresql":
+            return persist_validated_security_operation(binding=self.binding)
+        prepared = self._prepared_descriptor()
+        SecurityOperation.objects.create(
+            id=prepared.operation_id,
+            report=self.report,
+            kind=self.command.kind,
+            bound_report_version=prepared.bound_report_version,
+            fence_token=prepared.fence_token,
+            idempotency_id=prepared.idempotency_id,
+            actor_id=self.command.actor_id,
+            lease=self.lease,
+            lease_generation=prepared.lease_generation,
+        )
+        return prepared
 
     def test_configured_backend_capabilities_are_explicit(self) -> None:
         capabilities = inspect_lifecycle_backend()
@@ -207,6 +253,103 @@ class LifecyclePersistenceBoundaryTests(TransactionTestCase):
         )
         self.assertEqual(second.fence_token, 2)
 
+    def test_activation_is_postgresql_only_and_metadata_only(self) -> None:
+        prepared = self._store_prepared_operation()
+        if connection.vendor != "postgresql":
+            self.assert_activation_denied(self.binding, prepared)
+            operation = SecurityOperation.objects.get(id=prepared.operation_id)
+            self.assertEqual(operation.state, SecurityOperationState.PREPARED)
+            self.assertIsNone(operation.activated_at)
+            return
+
+        activated = activate_prepared_security_operation(
+            binding=self.binding,
+            prepared=prepared,
+        )
+        self.assertEqual(
+            {field.name for field in fields(activated)},
+            {
+                "operation_id",
+                "report_id",
+                "idempotency_id",
+                "state",
+                "state_version",
+                "bound_report_version",
+                "fence_token",
+                "lease_id",
+                "lease_generation",
+                "activated_at",
+            },
+        )
+        self.assertIsInstance(activated, ActivatedSecurityOperation)
+        self.assertEqual(activated.operation_id, prepared.operation_id)
+        self.assertEqual(activated.report_id, self.report.id)
+        self.assertEqual(activated.idempotency_id, prepared.idempotency_id)
+        self.assertEqual(activated.state, SecurityOperationState.ACTIVE)
+        self.assertEqual(activated.state_version, 1)
+        self.assertEqual(activated.bound_report_version, 3)
+        self.assertEqual(activated.fence_token, 1)
+        self.assertEqual(activated.lease_id, self.lease.id)
+        self.assertEqual(activated.lease_generation, 2)
+        self.assertTrue(timezone.is_aware(activated.activated_at))
+        with self.assertRaises(FrozenInstanceError):
+            activated.state_version = 2
+
+        operation = SecurityOperation.objects.get(id=activated.operation_id)
+        self.assertEqual(operation.state, SecurityOperationState.ACTIVE)
+        self.assertEqual(operation.state_version, 1)
+        self.assertEqual(operation.activated_at, activated.activated_at)
+        self.assertIsNone(operation.terminal_at)
+        self.report.refresh_from_db()
+        self.lease.refresh_from_db()
+        self.assertEqual(self.report.state, ReportState.OPEN)
+        self.assertEqual(self.report.state_version, 3)
+        self.assertEqual(self.lease.state, LeaseState.ACTIVE)
+        self.assertEqual(self.lease.last_activity_at, self.now - timedelta(minutes=1))
+
+    def test_activation_revalidates_locked_state(self) -> None:
+        prepared = self._store_prepared_operation()
+        Report.objects.filter(id=self.report.id).update(state_version=4)
+        self.assert_activation_denied(self.binding, prepared)
+        operation = SecurityOperation.objects.get(id=prepared.operation_id)
+        self.assertEqual(operation.state, SecurityOperationState.PREPARED)
+        self.assertEqual(operation.state_version, 0)
+
+    def test_activation_rejects_forged_preparation_and_replay(self) -> None:
+        prepared = self._store_prepared_operation()
+        forged = replace(prepared, fence_token=prepared.fence_token + 1)
+        self.assert_activation_denied(self.binding, forged)
+        if connection.vendor != "postgresql":
+            return
+        activate_prepared_security_operation(
+            binding=self.binding,
+            prepared=prepared,
+        )
+        self.assert_activation_denied(self.binding, prepared)
+        operation = SecurityOperation.objects.get(id=prepared.operation_id)
+        self.assertEqual(operation.state, SecurityOperationState.ACTIVE)
+        self.assertEqual(operation.state_version, 1)
+
+    def test_missing_rows_are_controlled_denials(self) -> None:
+        missing_command = replace(
+            self.command,
+            operation_id=uuid4(),
+            idempotency_id=uuid4(),
+        )
+        missing_binding = self._validated_binding(missing_command)
+        missing_prepared = replace(
+            self._prepared_descriptor(),
+            operation_id=missing_command.operation_id,
+            idempotency_id=missing_command.idempotency_id,
+        )
+        self.assert_activation_denied(missing_binding, missing_prepared)
+
+        missing_report_binding = replace(
+            self.binding,
+            command=replace(self.command, report_id=uuid4()),
+        )
+        self.assert_persistence_denied(missing_report_binding)
+
     def test_mocked_capabilities_do_not_enable_sqlite(self) -> None:
         capabilities = LifecycleBackendCapabilities(
             alias="default",
@@ -232,4 +375,10 @@ class LifecyclePersistenceBoundaryTests(TransactionTestCase):
             self.assert_persistence_denied(object())
         backend_check.assert_not_called()
         self.assert_persistence_denied(self.binding, using="unknown")
+        self.assert_activation_denied(object(), object())
+        self.assert_activation_denied(
+            self.binding,
+            self._prepared_descriptor(),
+            using="unknown",
+        )
         self.assertEqual(SecurityOperation.objects.count(), 0)

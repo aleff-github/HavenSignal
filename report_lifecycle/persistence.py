@@ -1,6 +1,8 @@
 from dataclasses import dataclass
+from datetime import datetime
 from uuid import UUID
 
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import DatabaseError, connections, transaction
 from django.db.models import Max
 from django.utils import timezone
@@ -15,7 +17,7 @@ from .bindings import (
 from .errors import LifecyclePersistenceUnavailable, LifecycleTransitionDenied
 from .models import Report, ReportLease, SecurityOperation
 from .states import SecurityOperationState
-from .transitions import MAX_STATE_VERSION
+from .transitions import MAX_STATE_VERSION, plan_security_operation_transition
 
 
 @dataclass(frozen=True, slots=True)
@@ -37,6 +39,20 @@ class PreparedSecurityOperation:
     fence_token: int
     lease_id: UUID | None
     lease_generation: int | None
+
+
+@dataclass(frozen=True, slots=True)
+class ActivatedSecurityOperation:
+    operation_id: UUID
+    report_id: UUID
+    idempotency_id: UUID
+    state: SecurityOperationState
+    state_version: int
+    bound_report_version: int
+    fence_token: int
+    lease_id: UUID | None
+    lease_generation: int | None
+    activated_at: datetime
 
 
 def inspect_lifecycle_backend(*, using: str = "default") -> LifecycleBackendCapabilities:
@@ -151,7 +167,115 @@ def persist_validated_security_operation(
             )
     except LifecyclePersistenceUnavailable:
         raise
-    except (DatabaseError, LifecycleTransitionDenied, TypeError, ValueError):
+    except (
+        DatabaseError,
+        LifecycleTransitionDenied,
+        ObjectDoesNotExist,
+        TypeError,
+        ValueError,
+    ):
+        raise LifecyclePersistenceUnavailable() from None
+
+
+def activate_prepared_security_operation(
+    *,
+    binding: ValidatedSecurityOperationBinding,
+    prepared: PreparedSecurityOperation,
+    using: str = "default",
+) -> ActivatedSecurityOperation:
+    """Activate reviewed metadata only; never execute the protected operation."""
+
+    if (
+        type(binding) is not ValidatedSecurityOperationBinding
+        or type(binding.command) is not SecurityOperationCommand
+        or type(prepared) is not PreparedSecurityOperation
+        or type(using) is not str
+        or not using
+    ):
+        raise LifecyclePersistenceUnavailable()
+    require_postgresql_transition_backend(using=using)
+    if connections[using].vendor != "postgresql":
+        raise LifecyclePersistenceUnavailable()
+
+    try:
+        with transaction.atomic(using=using):
+            command = binding.command
+            report = (
+                Report.objects.using(using)
+                .select_for_update()
+                .get(id=command.report_id)
+            )
+            lease = _lock_optional_lease(
+                command=command,
+                report=report,
+                using=using,
+            )
+            operation = (
+                SecurityOperation.objects.using(using)
+                .select_for_update()
+                .get(id=command.operation_id, report=report)
+            )
+            revalidated = validate_inert_security_operation_binding(
+                command=command,
+                report=_report_snapshot(report),
+                lease=_lease_snapshot(lease),
+            )
+            if (
+                not _binding_matches_revalidated(
+                    binding=binding,
+                    revalidated=revalidated,
+                )
+                or not _prepared_matches_operation(
+                    prepared=prepared,
+                    operation=operation,
+                    revalidated=revalidated,
+                )
+            ):
+                raise LifecyclePersistenceUnavailable()
+            transition = plan_security_operation_transition(
+                operation_id=operation.id,
+                current_state=operation.state,
+                current_version=operation.state_version,
+                target_state=SecurityOperationState.ACTIVE,
+            )
+            updated = (
+                SecurityOperation.objects.using(using)
+                .filter(
+                    id=operation.id,
+                    state=transition.current_state,
+                    state_version=transition.current_version,
+                    activated_at__isnull=True,
+                    terminal_at__isnull=True,
+                )
+                .update(
+                    state=transition.target_state,
+                    state_version=transition.target_version,
+                    activated_at=transition.changed_at,
+                )
+            )
+            if updated != 1:
+                raise LifecyclePersistenceUnavailable()
+            return ActivatedSecurityOperation(
+                operation_id=operation.id,
+                report_id=report.id,
+                idempotency_id=operation.idempotency_id,
+                state=transition.target_state,
+                state_version=transition.target_version,
+                bound_report_version=operation.bound_report_version,
+                fence_token=operation.fence_token,
+                lease_id=operation.lease_id,
+                lease_generation=operation.lease_generation,
+                activated_at=transition.changed_at,
+            )
+    except LifecyclePersistenceUnavailable:
+        raise
+    except (
+        DatabaseError,
+        LifecycleTransitionDenied,
+        ObjectDoesNotExist,
+        TypeError,
+        ValueError,
+    ):
         raise LifecyclePersistenceUnavailable() from None
 
 
@@ -220,4 +344,35 @@ def _binding_matches_revalidated(
         == revalidated.lease_activity.previous_activity_at
         and binding.lease_activity.absolute_expires_at
         == revalidated.lease_activity.absolute_expires_at
+    )
+
+
+def _prepared_matches_operation(
+    *,
+    prepared: PreparedSecurityOperation,
+    operation: SecurityOperation,
+    revalidated: ValidatedSecurityOperationBinding,
+) -> bool:
+    command = revalidated.command
+    return (
+        operation.id == command.operation_id == prepared.operation_id
+        and operation.report_id == command.report_id == prepared.report_id
+        and operation.idempotency_id
+        == command.idempotency_id
+        == prepared.idempotency_id
+        and operation.kind == revalidated.kind
+        and operation.actor_id == command.actor_id
+        and operation.state == SecurityOperationState.PREPARED
+        and prepared.state is SecurityOperationState.PREPARED
+        and operation.state_version == 0
+        and operation.bound_report_version
+        == revalidated.report_state_version
+        == prepared.bound_report_version
+        and operation.fence_token == prepared.fence_token
+        and operation.lease_id == command.lease_id == prepared.lease_id
+        and operation.lease_generation
+        == command.lease_generation
+        == prepared.lease_generation
+        and operation.activated_at is None
+        and operation.terminal_at is None
     )
