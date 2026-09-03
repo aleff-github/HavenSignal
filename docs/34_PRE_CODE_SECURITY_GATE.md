@@ -1423,3 +1423,21 @@ orphaned preparation remains unavailable pending a reviewed time/authority
 rule. Report/lease mutation, protected operation execution, terminalization of
 active operations, endpoints, services, content, crash/durability proof,
 independent review, deployment, and every production gate remain OPEN.
+
+The seventy-first Stage A slice adds PostgreSQL-only rehydration for exact
+version-0 `PREPARED` metadata after database reconnection. The loader
+accepts one internal UUID, performs no write, returns the same frozen
+content-free preparation result, and rejects missing, active, terminal, or
+malformed operation state. The result is explicitly not authorization:
+activation and abort continue to lock and revalidate database-authoritative
+report, optional lease, operation, binding, and immutable fence metadata.
+
+The runtime suite closes all Django connections between prepare/load and
+activate/read, then verifies the committed state from a new connection. It also
+injects database-class failures after each prepare, activate, and abort write
+but before result construction, requiring the surrounding PostgreSQL
+transaction to restore the exact previous state. SQLite and capability mocks
+remain unavailable. This closes only connection-rehydration and application-
+transaction rollback evidence; process kill, database crash/failover, durable
+storage, backup/restore, protected execution, orphan-timeout policy,
+independent review, deployment, and every production gate remain OPEN.

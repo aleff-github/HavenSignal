@@ -805,7 +805,7 @@ service, deletion/export action, cryptography, or report content is involved.
 Protected operation execution and terminalization, crash/durability evidence,
 independent review, deployment, and production authorization remain open.
 
-## Latest Stage A slice — prepared-operation abort
+## Stage A slice — prepared-operation abort
 
 A third PostgreSQL-only application write can now close an exact `PREPARED`
 operation as `ABORTED` version 1. It uses the same report, optional lease, and
@@ -822,3 +822,22 @@ introduced because the specifications define no reviewed threshold; automatic
 reconciliation therefore remains unavailable. Report/lease mutation, protected
 execution, terminalization of active operations, services, endpoints, content,
 crash/durability proof, deployment, and production authorization remain open.
+
+## Latest Stage A slice — prepared-operation rehydration and rollback
+
+The PostgreSQL persistence boundary can now rehydrate one content-free
+`PreparedSecurityOperation` from its internal operation UUID after database
+reconnection. It accepts only a real UUID and real PostgreSQL backend, returns
+only an exact version-0 `PREPARED` row with null activation/terminal timestamps,
+and rejects missing, active, aborted, or otherwise malformed state through the
+same controlled denial. The result grants no authority: activation and abort
+still repeat all report, lease, binding, and immutable-operation checks.
+
+PostgreSQL tests now close every Django connection after preparation, rehydrate
+the descriptor on a new connection, activate it, close connections again, and
+verify durable active metadata. Fault injection after each database write but
+before returning its result also proves transaction rollback for preparation,
+activation, and abort. This is bounded application-level evidence, not an
+operating-system process-kill, database crash, failover, storage-loss, or backup
+restore proof. No endpoint, protected operation, content, service call, or
+automatic orphan recovery is enabled.

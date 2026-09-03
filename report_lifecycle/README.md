@@ -34,7 +34,10 @@ performs one compare-and-set transition to `ACTIVE`. A separate abort path uses
 the same locks and validation to transition only `PREPARED` metadata to
 `ABORTED`; it cannot interrupt an `ACTIVE` operation. None of these paths
 executes a protected operation, updates report/lease state, or calls another
-service.
+service. A PostgreSQL-only read path can reconstruct the same frozen
+`PREPARED` result after database reconnection; the result remains
+untrusted input to activation or abort and cannot rehydrate active or terminal
+operations.
 
 SQLite tests validate pure behavior and ordinary constraints only. They are not
 PostgreSQL concurrency or release evidence. Protected workflows remain blocked

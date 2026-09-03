@@ -34,7 +34,7 @@ EXPECTED_LIFECYCLE_SOURCE_AST_DIGESTS = MappingProxyType(
             "c5309a0d03d2d83442aa292d7603671ba411d6d35964bea274c6689983729cb4"
         ),
         "report_lifecycle/persistence.py": (
-            "79793f7c9d24ef0544a88f5112eaa57f6042ceda20c76207873b719f54c6a91e"
+            "635cce3fa64aa1def78948d5c7c7e503d57233d056676bf9d4561f9905109b1c"
         ),
         "report_lifecycle/states.py": (
             "42a04225df50b26c29e0eeb4bb52b823d9d731c0f4bf89606b16b34153490464"

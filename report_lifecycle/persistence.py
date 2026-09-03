@@ -169,21 +169,42 @@ def persist_validated_security_operation(
                 lease=lease,
                 lease_generation=(lease.generation if lease is not None else None),
             )
-            return PreparedSecurityOperation(
-                operation_id=operation.id,
-                report_id=report.id,
-                idempotency_id=operation.idempotency_id,
-                state=SecurityOperationState(operation.state),
-                bound_report_version=operation.bound_report_version,
-                fence_token=operation.fence_token,
-                lease_id=operation.lease_id,
-                lease_generation=operation.lease_generation,
-            )
+            return _prepared_result(operation)
     except LifecyclePersistenceUnavailable:
         raise
     except (
         DatabaseError,
         LifecycleTransitionDenied,
+        ObjectDoesNotExist,
+        TypeError,
+        ValueError,
+    ):
+        raise LifecyclePersistenceUnavailable() from None
+
+
+def load_prepared_security_operation(
+    *,
+    operation_id: UUID,
+    using: str = "default",
+) -> PreparedSecurityOperation:
+    """Rehydrate content-free prepared metadata after database reconnection."""
+
+    if type(operation_id) is not UUID or type(using) is not str or not using:
+        raise LifecyclePersistenceUnavailable()
+    require_postgresql_transition_backend(using=using)
+    if connections[using].vendor != "postgresql":
+        raise LifecyclePersistenceUnavailable()
+
+    try:
+        with transaction.atomic(using=using):
+            operation = SecurityOperation.objects.using(using).get(id=operation_id)
+            if not _is_prepared_operation(operation):
+                raise LifecyclePersistenceUnavailable()
+            return _prepared_result(operation)
+    except LifecyclePersistenceUnavailable:
+        raise
+    except (
+        DatabaseError,
         ObjectDoesNotExist,
         TypeError,
         ValueError,
@@ -491,4 +512,26 @@ def _prepared_matches_operation(
         == prepared.lease_generation
         and operation.activated_at is None
         and operation.terminal_at is None
+    )
+
+
+def _is_prepared_operation(operation: SecurityOperation) -> bool:
+    return (
+        operation.state == SecurityOperationState.PREPARED
+        and operation.state_version == 0
+        and operation.activated_at is None
+        and operation.terminal_at is None
+    )
+
+
+def _prepared_result(operation: SecurityOperation) -> PreparedSecurityOperation:
+    return PreparedSecurityOperation(
+        operation_id=operation.id,
+        report_id=operation.report_id,
+        idempotency_id=operation.idempotency_id,
+        state=SecurityOperationState(operation.state),
+        bound_report_version=operation.bound_report_version,
+        fence_token=operation.fence_token,
+        lease_id=operation.lease_id,
+        lease_generation=operation.lease_generation,
     )

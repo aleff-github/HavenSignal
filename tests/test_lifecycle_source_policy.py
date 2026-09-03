@@ -169,6 +169,14 @@ class LifecycleSourcePolicyTests(SimpleTestCase):
                 "terminal_at=transition.changed_at",
                 "terminal_at=None",
             ),
+            (
+                "type(operation_id) is not UUID",
+                "not isinstance(operation_id, UUID)",
+            ),
+            (
+                "if not _is_prepared_operation(operation):",
+                "if False:",
+            ),
         )
         for old, new in mutations:
             with self.subTest(new=new):

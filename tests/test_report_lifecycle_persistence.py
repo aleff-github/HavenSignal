@@ -5,7 +5,7 @@ from datetime import timedelta
 from unittest.mock import patch
 from uuid import uuid4
 
-from django.db import connection
+from django.db import DatabaseError, connection, connections
 from django.test import TransactionTestCase
 from django.utils import timezone
 
@@ -26,6 +26,7 @@ from report_lifecycle.persistence import (
     abort_prepared_security_operation,
     activate_prepared_security_operation,
     inspect_lifecycle_backend,
+    load_prepared_security_operation,
     persist_validated_security_operation,
     require_postgresql_transition_backend,
 )
@@ -134,6 +135,19 @@ class LifecyclePersistenceBoundaryTests(TransactionTestCase):
             abort_prepared_security_operation(
                 binding=binding,
                 prepared=prepared,
+                using=using,
+            )
+        self.assertEqual(str(raised.exception), "lifecycle_persistence_unavailable")
+
+    def assert_load_denied(
+        self,
+        operation_id: object,
+        *,
+        using: str = "default",
+    ) -> None:
+        with self.assertRaises(LifecyclePersistenceUnavailable) as raised:
+            load_prepared_security_operation(
+                operation_id=operation_id,
                 using=using,
             )
         self.assertEqual(str(raised.exception), "lifecycle_persistence_unavailable")
@@ -451,6 +465,74 @@ class LifecyclePersistenceBoundaryTests(TransactionTestCase):
         self.assertEqual(operation.state_version, 0)
         self.assertIsNone(operation.terminal_at)
 
+    def test_prepared_metadata_rehydrates_after_database_reconnection(self) -> None:
+        prepared = self._store_prepared_operation()
+        if connection.vendor != "postgresql":
+            self.assert_load_denied(prepared.operation_id)
+            return
+
+        connections.close_all()
+        rehydrated = load_prepared_security_operation(
+            operation_id=prepared.operation_id,
+        )
+        self.assertEqual(rehydrated, prepared)
+        activated = activate_prepared_security_operation(
+            binding=self.binding,
+            prepared=rehydrated,
+        )
+
+        connections.close_all()
+        operation = SecurityOperation.objects.get(id=prepared.operation_id)
+        self.assertEqual(operation.state, SecurityOperationState.ACTIVE)
+        self.assertEqual(operation.state_version, activated.state_version)
+        self.assertEqual(operation.activated_at, activated.activated_at)
+
+    def test_nonprepared_and_missing_metadata_cannot_be_rehydrated(self) -> None:
+        prepared = self._store_prepared_operation()
+        self.assert_load_denied(uuid4())
+        if connection.vendor != "postgresql":
+            self.assert_load_denied(prepared.operation_id)
+            return
+
+        activate_prepared_security_operation(
+            binding=self.binding,
+            prepared=prepared,
+        )
+        self.assert_load_denied(prepared.operation_id)
+
+    def test_result_construction_failures_rollback_every_write(self) -> None:
+        if connection.vendor != "postgresql":
+            self.assert_persistence_denied(self.binding)
+            return
+
+        with patch(
+            "report_lifecycle.persistence.PreparedSecurityOperation",
+            side_effect=DatabaseError(),
+        ):
+            self.assert_persistence_denied(self.binding)
+        self.assertEqual(SecurityOperation.objects.count(), 0)
+
+        prepared = persist_validated_security_operation(binding=self.binding)
+        with patch(
+            "report_lifecycle.persistence.ActivatedSecurityOperation",
+            side_effect=DatabaseError(),
+        ):
+            self.assert_activation_denied(self.binding, prepared)
+        operation = SecurityOperation.objects.get(id=prepared.operation_id)
+        self.assertEqual(operation.state, SecurityOperationState.PREPARED)
+        self.assertEqual(operation.state_version, 0)
+        self.assertIsNone(operation.activated_at)
+
+        with patch(
+            "report_lifecycle.persistence.AbortedSecurityOperation",
+            side_effect=DatabaseError(),
+        ):
+            self.assert_abort_denied(self.binding, prepared)
+        operation.refresh_from_db()
+        self.assertEqual(operation.state, SecurityOperationState.PREPARED)
+        self.assertEqual(operation.state_version, 0)
+        self.assertIsNone(operation.terminal_at)
+
     def test_missing_rows_are_controlled_denials(self) -> None:
         missing_command = replace(
             self.command,
@@ -496,6 +578,8 @@ class LifecyclePersistenceBoundaryTests(TransactionTestCase):
             self.assert_persistence_denied(object())
         backend_check.assert_not_called()
         self.assert_persistence_denied(self.binding, using="unknown")
+        self.assert_load_denied(object())
+        self.assert_load_denied(uuid4(), using="unknown")
         self.assert_activation_denied(object(), object())
         self.assert_activation_denied(
             self.binding,
