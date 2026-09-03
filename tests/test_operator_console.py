@@ -97,6 +97,27 @@ class OperatorConsoleUnavailableTests(SimpleTestCase):
         self.assertEqual(response.status_code, 503)
         self.assertEqual(response.content, b"operator_authentication_unavailable")
 
+    def test_operator_post_stops_before_body_and_downstream(self) -> None:
+        class BodyExplodes(HttpRequest):
+            @property
+            def body(self) -> bytes:  # type: ignore[override]
+                raise AssertionError("body must not be read")
+
+        def reject_downstream_call(request: HttpRequest) -> HttpResponse:
+            raise AssertionError("downstream middleware and view must not be called")
+
+        request = BodyExplodes()
+        request.method = "POST"
+        request.path_info = "/operator/"
+        middleware = ReporterSecurityHeadersMiddleware(reject_downstream_call)
+
+        response = middleware(request)
+
+        self.assertEqual(response.status_code, 503)
+        self.assertEqual(response.content, b"operator_authentication_unavailable")
+        self.assertEqual(response.headers["Cache-Control"], "no-store, max-age=0")
+        self.assertFalse(response.cookies)
+
     def test_operator_rejects_other_unsafe_methods(self) -> None:
         for method in ("put", "patch", "delete"):
             with self.subTest(method=method):

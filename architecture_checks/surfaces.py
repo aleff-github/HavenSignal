@@ -132,7 +132,7 @@ EXPECTED_REPORTER_PYTHON_AST_DIGESTS = MappingProxyType(
             "b6ab12b30737e431a3a7291f21c729943440c6f0fb091f5e0f9146497a4575c0"
         ),
         "reporter_gateway/middleware.py": (
-            "8c091799393bab79eac713ed4940fe06f98700eab54699890c1ce7114ebc31ec"
+            "53714d321389c7f34a06f44154fdcd97d682cc9e58c63b53f8c455a349c11363"
         ),
         "reporter_gateway/views.py": (
             "dd6c7a1df7ae3895d458220395df95145907a9287b4b90911aa621875602d2db"

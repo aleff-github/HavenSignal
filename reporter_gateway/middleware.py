@@ -54,6 +54,12 @@ class ReporterSecurityHeadersMiddleware:
                     content_type="text/plain; charset=utf-8",
                     status=400,
                 )
+            if request.method == "POST" and request.path_info != "/submit/":
+                return HttpResponse(
+                    response_code,
+                    content_type="text/plain; charset=utf-8",
+                    status=503,
+                )
         if request.method != "POST" or request.path_info != "/submit/":
             return None
         if any(key in request.META for key in FORBIDDEN_SUBMISSION_META_KEYS):
@@ -91,7 +97,11 @@ class ReporterSecurityHeadersMiddleware:
                 content_type="text/plain; charset=utf-8",
                 status=413,
             )
-        return None
+        return HttpResponse(
+            "submission_unavailable",
+            content_type="text/plain; charset=utf-8",
+            status=503,
+        )
 
     def _apply_headers(self, response: HttpResponse) -> HttpResponse:
         response["Cache-Control"] = "no-store, max-age=0"
