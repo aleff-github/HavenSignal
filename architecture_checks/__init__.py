@@ -36,6 +36,15 @@ from .captcha_descriptors import (
     scan_captcha_descriptor_source,
     scan_repository_captcha_descriptor,
 )
+from .emergency_export_request_descriptors import (
+    EMERGENCY_EXPORT_REQUEST_DESCRIPTOR_PATH,
+    EXPECTED_EMERGENCY_EXPORT_REQUEST_DESCRIPTOR_AST_DIGEST,
+    EmergencyExportRequestDescriptorSourceViolation,
+    EmergencyExportRequestDescriptorSourceViolationCode,
+    analyze_emergency_export_request_descriptor_source,
+    scan_emergency_export_request_descriptor_source,
+    scan_repository_emergency_export_request_descriptor,
+)
 from .file_sandbox_descriptors import (
     EXPECTED_FILE_SANDBOX_DESCRIPTOR_AST_DIGEST,
     FILE_SANDBOX_DESCRIPTOR_PATH,
@@ -709,4 +718,11 @@ __all__ = [
     "analyze_verification_script_source",
     "scan_repository_verification_script",
     "scan_verification_script_source",
+    "EMERGENCY_EXPORT_REQUEST_DESCRIPTOR_PATH",
+    "EXPECTED_EMERGENCY_EXPORT_REQUEST_DESCRIPTOR_AST_DIGEST",
+    "EmergencyExportRequestDescriptorSourceViolation",
+    "EmergencyExportRequestDescriptorSourceViolationCode",
+    "analyze_emergency_export_request_descriptor_source",
+    "scan_emergency_export_request_descriptor_source",
+    "scan_repository_emergency_export_request_descriptor",
 ]

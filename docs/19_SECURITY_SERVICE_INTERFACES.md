@@ -457,7 +457,7 @@ submission endpoint.
 | Response protection/use | Exact construction owner-approved in document 24; independent review and Key Service gates OPEN CRITICAL |
 | Key Service | Exact acceptance/capability plan PROPOSED in document 27; product, topology, real PoC, and independent review OPEN CRITICAL |
 | Audit receipts/checkpoints | Receipt, anti-replay, chain/batch, signatures, independent verification, alerting — OPEN CRITICAL |
-| Emergency Export | Exact construction PROPOSED in document 28; owner/review, alert, signer/HSM, custody, Key Service, concurrency, workstation, and deployment gates OPEN CRITICAL |
+| Emergency Export | Exact construction owner-approved in document 28; independent review, alert, signer/HSM, custody, Key Service, concurrency, workstation, and deployment gates OPEN CRITICAL |
 | Administrator alerts | Exact self-hosted transport, closed schema, durable acceptance, retry/escalation, and failure policy PROPOSED in document 31; owner/review and production gates OPEN HIGH |
 | Retention and deletion | 90-day unread expiry, OPEN-only operator deletion, exceptional SEALED flood ceremony, cleanup, metadata minimization, and audit expiry authority PROPOSED in document 32; owner/legal/review and production gates OPEN CRITICAL |
 | Operational access/workstations | Three separate Ubuntu/Firefox device classes, exact role sessions, admin v2 step-up, export transfer broker, custodian quorum/bastion/break-glass PROPOSED in document 33; owner/review and physical production gates OPEN CRITICAL |
@@ -1258,3 +1258,18 @@ cryptographic, logging, network, I/O, dynamic, or success behavior fails closed.
 The scanner never imports, executes, or echoes the target. Passing closes no
 authentication, WebAuthn, artifact binding, session, database, concurrency,
 independent-review, external-service, or production gate.
+
+## Stage A Emergency Export request descriptor record
+
+The non-executing Emergency Export request-descriptor policy fixes the complete
+executable AST of the inert version-1 schema profile. It locks the exact field
+order, primitive categories, identifier/digest sizes, protected-note size
+metadata, object count/slot rules, deterministic-CBOR requirements, immutable
+profile classes, validators, and every false encoding, retention, artifact and
+authorization capability result.
+
+The scanner never imports, executes, or echoes the target. Passing does not
+encode or validate request values, retain a Ticket ID, note or envelope digest,
+create step-up artifact bytes, authorize export, or close independent-review,
+MFA, audit, alert, Key Service, signer/HSM, recipient-custody, PostgreSQL,
+worker, delivery, workstation, deployment, or production gates.

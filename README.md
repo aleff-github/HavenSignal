@@ -113,6 +113,9 @@ The repository currently contains:
 - inert audit, alert, and step-up structural descriptors;
 - an inert, content-free Emergency Export sequence planner whose executor
   remains unavailable;
+- inert Emergency Export request-schema descriptors that fix only the approved
+  field order, primitive shapes, size limits, object slots, and fail-closed
+  capability boundary without holding request values;
 - inert no-JavaScript CAPTCHA descriptors that validate only approved metadata,
   strict identifier/answer shapes, anonymous global bucket limits, and open
   production gates;

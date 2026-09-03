@@ -241,6 +241,15 @@ class RequestAdmissionDescriptorRejected(ValueError):
         super().__init__(self.public_code)
 
 
+class EmergencyExportRequestDescriptorRejected(ValueError):
+    """Controlled rejection for invalid inert export-request metadata."""
+
+    public_code = "emergency_export_request_descriptor_rejected"
+
+    def __init__(self) -> None:
+        super().__init__(self.public_code)
+
+
 class ReportCryptoDescriptorRejected(ValueError):
     """Controlled rejection for an invalid inert report crypto descriptor."""
 
