@@ -12,10 +12,11 @@ from typing import Iterable, Sequence
 
 CI_WORKFLOW_PATH = ".github/workflows/ci.yml"
 EXPECTED_CI_WORKFLOW_SHA256 = (
-    "3bd0b33e32a3c876cfba00ebecda182bff72dbb5b6749fa591e7a73d7aa69f00"
+    "4bd7e8772d4929ee788cc87c57239f860746fb108f1a25d544693ed37e05042e"
 )
 REQUIRED_WORKFLOW_LINES = (
     "name: CI",
+    "    branches: [main, alpha-direct]",
     "  contents: read",
     "  test:",
     "    runs-on: ubuntu-latest",
