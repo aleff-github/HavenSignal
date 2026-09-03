@@ -161,6 +161,14 @@ class LifecycleSourcePolicyTests(SimpleTestCase):
                 "activated_at=transition.changed_at",
                 "activated_at=None",
             ),
+            (
+                "target_state=SecurityOperationState.ABORTED",
+                "target_state=SecurityOperationState.COMPLETED",
+            ),
+            (
+                "terminal_at=transition.changed_at",
+                "terminal_at=None",
+            ),
         )
         for old, new in mutations:
             with self.subTest(new=new):

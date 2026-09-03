@@ -55,6 +55,20 @@ class ActivatedSecurityOperation:
     activated_at: datetime
 
 
+@dataclass(frozen=True, slots=True)
+class AbortedSecurityOperation:
+    operation_id: UUID
+    report_id: UUID
+    idempotency_id: UUID
+    state: SecurityOperationState
+    state_version: int
+    bound_report_version: int
+    fence_token: int
+    lease_id: UUID | None
+    lease_generation: int | None
+    terminal_at: datetime
+
+
 def inspect_lifecycle_backend(*, using: str = "default") -> LifecycleBackendCapabilities:
     connection = connections[using]
     return LifecycleBackendCapabilities(
@@ -266,6 +280,108 @@ def activate_prepared_security_operation(
                 lease_id=operation.lease_id,
                 lease_generation=operation.lease_generation,
                 activated_at=transition.changed_at,
+            )
+    except LifecyclePersistenceUnavailable:
+        raise
+    except (
+        DatabaseError,
+        LifecycleTransitionDenied,
+        ObjectDoesNotExist,
+        TypeError,
+        ValueError,
+    ):
+        raise LifecyclePersistenceUnavailable() from None
+
+
+def abort_prepared_security_operation(
+    *,
+    binding: ValidatedSecurityOperationBinding,
+    prepared: PreparedSecurityOperation,
+    using: str = "default",
+) -> AbortedSecurityOperation:
+    """Abort prepared metadata only; never interrupt an active operation."""
+
+    if (
+        type(binding) is not ValidatedSecurityOperationBinding
+        or type(binding.command) is not SecurityOperationCommand
+        or type(prepared) is not PreparedSecurityOperation
+        or type(using) is not str
+        or not using
+    ):
+        raise LifecyclePersistenceUnavailable()
+    require_postgresql_transition_backend(using=using)
+    if connections[using].vendor != "postgresql":
+        raise LifecyclePersistenceUnavailable()
+
+    try:
+        with transaction.atomic(using=using):
+            command = binding.command
+            report = (
+                Report.objects.using(using)
+                .select_for_update()
+                .get(id=command.report_id)
+            )
+            lease = _lock_optional_lease(
+                command=command,
+                report=report,
+                using=using,
+            )
+            operation = (
+                SecurityOperation.objects.using(using)
+                .select_for_update()
+                .get(id=command.operation_id, report=report)
+            )
+            revalidated = validate_inert_security_operation_binding(
+                command=command,
+                report=_report_snapshot(report),
+                lease=_lease_snapshot(lease),
+            )
+            if (
+                not _binding_matches_revalidated(
+                    binding=binding,
+                    revalidated=revalidated,
+                )
+                or not _prepared_matches_operation(
+                    prepared=prepared,
+                    operation=operation,
+                    revalidated=revalidated,
+                )
+            ):
+                raise LifecyclePersistenceUnavailable()
+            transition = plan_security_operation_transition(
+                operation_id=operation.id,
+                current_state=operation.state,
+                current_version=operation.state_version,
+                target_state=SecurityOperationState.ABORTED,
+            )
+            updated = (
+                SecurityOperation.objects.using(using)
+                .filter(
+                    id=operation.id,
+                    state=transition.current_state,
+                    state_version=transition.current_version,
+                    activated_at__isnull=True,
+                    terminal_at__isnull=True,
+                )
+                .update(
+                    state=transition.target_state,
+                    state_version=transition.target_version,
+                    terminal_at=transition.changed_at,
+                )
+            )
+            if updated != 1:
+                raise LifecyclePersistenceUnavailable()
+            return AbortedSecurityOperation(
+                operation_id=operation.id,
+                report_id=report.id,
+                idempotency_id=operation.idempotency_id,
+                state=transition.target_state,
+                state_version=transition.target_version,
+                bound_report_version=operation.bound_report_version,
+                fence_token=operation.fence_token,
+                lease_id=operation.lease_id,
+                lease_generation=operation.lease_generation,
+                terminal_at=transition.changed_at,
             )
     except LifecyclePersistenceUnavailable:
         raise

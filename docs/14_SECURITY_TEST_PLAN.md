@@ -326,7 +326,7 @@ For the metadata-only Stage A described by
   bindings, metadata models, and persistence boundary retain their exact
   executable AST; new/backward states, relaxed timing, skipped fencing,
   sensitive fields, weakened constraints, backend relaxation, logging, writes,
-  unreviewed success returns, altered preparation/activation behavior,
+  unreviewed success returns, altered preparation/activation/abort behavior,
   malformed source, unknown targets, and missing roots fail closed without
   import, execution, or echo;
 - the inert finalization sequence contains only the received-request checkpoint

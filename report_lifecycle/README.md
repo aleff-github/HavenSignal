@@ -30,8 +30,11 @@ an existing nonterminal operation, assigns the next monotonic fence, and
 inserts one metadata-only `PREPARED` operation. Activation repeats that
 authoritative validation while locking report, optional lease, and operation
 in a fixed order; it requires an exact untampered preparation descriptor and
-performs one compare-and-set transition to `ACTIVE`. Neither path executes the
-protected operation, updates report/lease state, or calls another service.
+performs one compare-and-set transition to `ACTIVE`. A separate abort path uses
+the same locks and validation to transition only `PREPARED` metadata to
+`ABORTED`; it cannot interrupt an `ACTIVE` operation. None of these paths
+executes a protected operation, updates report/lease state, or calls another
+service.
 
 SQLite tests validate pure behavior and ordinary constraints only. They are not
 PostgreSQL concurrency or release evidence. Protected workflows remain blocked
@@ -45,8 +48,9 @@ or reporter fields. On PostgreSQL it verifies exact winners for active report,
 lease, and operation constraints and exact rejection for stale report versions
 and lease generations. A seventh case verifies one winner when 20 processes use
 the preparation executor against one report; an eighth verifies one winner when
-20 processes attempt to activate the same prepared operation. Every synthetic
-row is removed and other backends fail closed. This is evidence for the present
+20 processes attempt to activate the same prepared operation; a ninth races
+activation against abort and requires one total winner. Every synthetic row is
+removed and other backends fail closed. This is evidence for the present
 metadata schema and reviewed metadata-only executors; it is not protected
 operation execution, durability proof, or release authorization.
 
@@ -135,6 +139,6 @@ The executable AST of the lifecycle errors, states, transitions, bindings,
 models, and persistence boundary is locked by a non-executing source policy.
 State edges, lease timing, fencing generations, immutable binding profiles,
 metadata-only constraints, creation-only saves, backend requirements, and the
-preparation/activation executors cannot change silently. Passing is static
-source evidence only and is not PostgreSQL concurrency or runtime isolation
-proof.
+preparation/activation/abort executors cannot change silently. Passing is
+static source evidence only and is not PostgreSQL concurrency or runtime
+isolation proof.

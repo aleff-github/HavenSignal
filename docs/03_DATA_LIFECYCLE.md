@@ -205,13 +205,14 @@ models, and PostgreSQL-only persistence boundary are guarded by a non-executing
 exact-AST policy. It fixes the five-minute idle rule, monotonic versions and
 lease generations, UUID and current-state bindings, database constraints,
 creation-only direct model behavior, PostgreSQL capability checks, and the
-reviewed metadata-only preparation and activation executors.
+reviewed metadata-only preparation, activation, and prepared-abort executors.
 
 The scanner never imports, executes, or echoes target source. Separate runtime
-tests exercise preparation and activation on PostgreSQL, including exact
-one-winner 20-process contention. This evidence enables no protected operation,
-content access, authentication, audit receipt, key operation, deletion, or
-production capability.
+tests exercise preparation, activation, and prepared abort on PostgreSQL,
+including exact one-winner 20-process contention and a mixed activation/abort
+race. This evidence enables no protected operation, content access,
+authentication, audit receipt, key operation, deletion, or production
+capability.
 
 The recovery eligibility Stage A descriptors additionally represent only the
 Response Note eligibility labels and timing facts around `RESPONSE_AVAILABLE`,

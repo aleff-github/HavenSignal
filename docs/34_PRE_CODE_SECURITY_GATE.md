@@ -1349,21 +1349,22 @@ Audit Service, Key Service, report crypto, credential generation, concurrency,
 deployment, or production gate.
 
 The sixty-seventh Stage A slice replaces the inert PostgreSQL concurrency
-scaffold runner with a test-only metadata acceptance harness. Each of the eight
+scaffold runner with a test-only metadata acceptance harness. Each of the nine
 approved scenarios uses 20 synchronized operating-system processes, one
 dedicated database connection per contender, generated UUID identifiers, a
 bounded completion deadline, controlled outcome counts, and automatic cleanup.
 PostgreSQL must produce exactly one winner for each active-report, active-lease,
 and active-operation uniqueness fence, one winner each for metadata-only
-operation preparation and activation, and zero winners for stale report-version
-and lease-generation compare-and-set attempts. Non-PostgreSQL execution and
-invalid process profiles remain fail-closed rather than skipped as evidence.
+operation preparation and activation, one total winner for the mixed
+activation/abort decision, and zero winners for stale report-version and
+lease-generation compare-and-set attempts. Non-PostgreSQL execution and invalid
+process profiles remain fail-closed rather than skipped as evidence.
 
 The harness is confined to `tests/`; its direct constraint and compare-and-set
 statements are not imported by application code. Its preparation case calls the
 separately reviewed metadata-only application executor. This slice closes only
 executable contention evidence for the present schema, synthetic test
-statements, and preparation/activation lock order. It does not establish a
+statements, and preparation/activation/abort lock order. It does not establish a
 protected operation executor, crash/durability behavior, audit or service
 integration, protected-content handling, independent review, deployment, or
 production authorization.
@@ -1405,3 +1406,20 @@ replay is denied, and the eighth 20-process scenario requires exactly one
 activation winner. Protected operation execution, terminalization,
 crash/durability proof, independent review, deployment, and every production
 gate remain OPEN.
+
+The seventieth Stage A slice enables one adjacent metadata-only abort from
+`PREPARED` version 0 to `ABORTED` version 1. It reuses the fixed report,
+optional-lease, operation lock order; revalidates current database state and
+the complete immutable preparation descriptor; writes one server terminal
+timestamp; and returns a frozen content-free result. A successful abort frees
+the report for a new preparation while preserving the monotonic fence history.
+
+The abort executor cannot interrupt an `ACTIVE` operation or alter any terminal
+row. Forgery, stale state, replay, missing rows, SQLite, and capability mocks
+share the controlled denial. The ninth 20-process PostgreSQL scenario races ten
+activation attempts against ten abort attempts and requires exactly one total
+winner. No automatic stale-preparation threshold is invented: recovery of an
+orphaned preparation remains unavailable pending a reviewed time/authority
+rule. Report/lease mutation, protected operation execution, terminalization of
+active operations, endpoints, services, content, crash/durability proof,
+independent review, deployment, and every production gate remain OPEN.

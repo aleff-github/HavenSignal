@@ -22,6 +22,7 @@ from report_lifecycle.errors import LifecyclePersistenceUnavailable
 from report_lifecycle.models import Report, ReportLease, SecurityOperation
 from report_lifecycle.persistence import (
     PreparedSecurityOperation,
+    abort_prepared_security_operation,
     activate_prepared_security_operation,
     persist_validated_security_operation,
     require_postgresql_transition_backend,
@@ -46,6 +47,7 @@ class ConcurrencyScenario(StrEnum):
     ACTIVE_OPERATION_PER_REPORT = "ACTIVE_OPERATION_PER_REPORT"
     PREPARED_OPERATION_PER_REPORT = "PREPARED_OPERATION_PER_REPORT"
     PREPARED_OPERATION_ACTIVATION = "PREPARED_OPERATION_ACTIVATION"
+    PREPARED_OPERATION_DECISION = "PREPARED_OPERATION_DECISION"
     ACTIVE_REPORT_PER_OPERATOR = "ACTIVE_REPORT_PER_OPERATOR"
     STALE_LEASE_GENERATION = "STALE_LEASE_GENERATION"
     STALE_REPORT_VERSION = "STALE_REPORT_VERSION"
@@ -76,6 +78,10 @@ CONCURRENCY_EXPECTATIONS = MappingProxyType(
             requirement_ids=("SEC-ACCESS-010", "SEC-ACCESS-015"),
         ),
         ConcurrencyScenario.PREPARED_OPERATION_ACTIVATION: ConcurrencyExpectation(
+            maximum_successes=1,
+            requirement_ids=("SEC-ACCESS-010", "SEC-ACCESS-015"),
+        ),
+        ConcurrencyScenario.PREPARED_OPERATION_DECISION: ConcurrencyExpectation(
             maximum_successes=1,
             requirement_ids=("SEC-ACCESS-010", "SEC-ACCESS-015"),
         ),
@@ -291,7 +297,10 @@ def _prepare_case(*, case: _SyntheticConcurrencyCase, using: str) -> None:
         Report.objects.using(using).filter(id=case.contention_target_id).update(
             current_lease_generation=1
         )
-    if case.scenario is ConcurrencyScenario.PREPARED_OPERATION_ACTIVATION:
+    if case.scenario in (
+        ConcurrencyScenario.PREPARED_OPERATION_ACTIVATION,
+        ConcurrencyScenario.PREPARED_OPERATION_DECISION,
+    ):
         command = _activation_command(
             run_id=case.run_id,
             report_id=case.contention_target_id,
@@ -452,6 +461,32 @@ def _attempt_case_write(
             prepared=prepared,
             using=using,
         )
+        return True
+    if scenario is ConcurrencyScenario.PREPARED_OPERATION_DECISION:
+        command = _activation_command(run_id=run_id, report_id=target_id)
+        binding = _activation_binding(command=command)
+        prepared = PreparedSecurityOperation(
+            operation_id=command.operation_id,
+            report_id=command.report_id,
+            idempotency_id=command.idempotency_id,
+            state=SecurityOperationState.PREPARED,
+            bound_report_version=0,
+            fence_token=1,
+            lease_id=None,
+            lease_generation=None,
+        )
+        if ordinal % 2 == 0:
+            activate_prepared_security_operation(
+                binding=binding,
+                prepared=prepared,
+                using=using,
+            )
+        else:
+            abort_prepared_security_operation(
+                binding=binding,
+                prepared=prepared,
+                using=using,
+            )
         return True
     if scenario is ConcurrencyScenario.STALE_REPORT_VERSION:
         return (
