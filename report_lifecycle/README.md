@@ -31,13 +31,16 @@ SQLite tests validate pure behavior and ordinary constraints only. They are not
 PostgreSQL concurrency or release evidence. Protected workflows remain blocked
 by the independent and production gates in `docs/34`.
 
-`tests/postgresql_concurrency_scaffold.py` is a test-only, content-free plan for
-the future multi-process proof. It fixes the current constraint/version/fence
-scenarios, generates fresh UUID-only cases for 20–100 contenders, requires at
-least two requested processes and one dedicated connection per contender, and
-contains no database credentials or reporter fields. Its runner always returns
-a controlled unavailable failure, including on a capability-shaped backend;
-therefore it runs no PostgreSQL test and supplies no release evidence.
+`tests/postgresql_concurrency_scaffold.py` is a test-only, content-free
+multi-process harness. It fixes the current constraint/version/fence scenarios,
+generates fresh UUID-only cases for 20–100 contenders, requires one process and
+one dedicated connection per contender, and contains no database credentials
+or reporter fields. On PostgreSQL it verifies exact winners for active report,
+lease, and operation constraints and exact rejection for stale report versions
+and lease generations, then removes every synthetic row. Other backends fail
+closed. This is evidence for the present metadata schema and test-only compare-
+and-set statements; it is not a production executor, lock-order review,
+durability proof, or protected-workflow release authorization.
 
 `architecture_checks/migrations.py` locks the current single initial migration
 to its empty dependency graph, exact three-model field/type profile, and closed

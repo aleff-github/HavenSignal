@@ -12,7 +12,7 @@ from typing import Iterable, Sequence
 
 CI_WORKFLOW_PATH = ".github/workflows/ci.yml"
 EXPECTED_CI_WORKFLOW_SHA256 = (
-    "4bd7e8772d4929ee788cc87c57239f860746fb108f1a25d544693ed37e05042e"
+    "eba1892a57c2b23d4be823cd72b0305193bed328e301f5b8c3fc8c9f548b8d8a"
 )
 REQUIRED_WORKFLOW_LINES = (
     "name: CI",
@@ -36,6 +36,8 @@ REQUIRED_WORKFLOW_LINES = (
     "        run: python -m pip install --require-hashes -r requirements.lock",
     "      - name: Run reviewed verification script",
     "        run: scripts/verify",
+    "      - name: Run PostgreSQL verification in Docker",
+    "        run: scripts/docker-local test",
 )
 FORBIDDEN_WORKFLOW_FRAGMENTS = (
     "pull_request_target",

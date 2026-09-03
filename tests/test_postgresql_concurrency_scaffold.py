@@ -4,7 +4,8 @@ from dataclasses import FrozenInstanceError, fields
 from unittest.mock import patch
 from uuid import UUID, uuid4
 
-from django.test import TestCase
+from django.db import connection
+from django.test import TestCase, TransactionTestCase
 
 from report_lifecycle.models import Report, ReportLease, SecurityOperation
 from report_lifecycle.persistence import LifecycleBackendCapabilities
@@ -15,6 +16,7 @@ from tests.postgresql_concurrency_scaffold import (
     MIN_PROCESSES,
     PROFILE_VERSION,
     ConcurrencyExpectation,
+    ConcurrencyResult,
     ConcurrencyScenario,
     PostgreSQLConcurrencyHarnessUnavailable,
     _SyntheticConcurrencyCase,
@@ -162,7 +164,7 @@ class PostgreSQLConcurrencyScaffoldTests(TestCase):
         self.assertEqual(ReportLease.objects.count(), 0)
         self.assertEqual(SecurityOperation.objects.count(), 0)
 
-    def test_capability_shaped_backend_still_cannot_run_or_write(self) -> None:
+    def test_capability_mock_cannot_bypass_actual_backend_check(self) -> None:
         case = build_synthetic_concurrency_case(
             scenario=ConcurrencyScenario.ACTIVE_OPERATION_PER_REPORT
         )
@@ -173,9 +175,15 @@ class PostgreSQLConcurrencyScaffoldTests(TestCase):
             supports_row_locks=True,
             supports_partial_indexes=True,
         )
-        with patch(
-            "tests.postgresql_concurrency_scaffold.require_postgresql_transition_backend",
-            return_value=capabilities,
+        with (
+            patch(
+                "tests.postgresql_concurrency_scaffold.require_postgresql_transition_backend",
+                return_value=capabilities,
+            ),
+            patch(
+                "tests.postgresql_concurrency_scaffold._is_postgresql_backend",
+                return_value=False,
+            ),
         ):
             with self.assertRaises(PostgreSQLConcurrencyHarnessUnavailable):
                 run_postgresql_concurrency_case(case=case)
@@ -203,3 +211,37 @@ class PostgreSQLConcurrencyScaffoldTests(TestCase):
             with self.assertRaises(PostgreSQLConcurrencyHarnessUnavailable):
                 run_postgresql_concurrency_case(case=object())
         backend_probe.assert_not_called()
+
+
+class PostgreSQLConcurrencyAcceptanceTests(TransactionTestCase):
+    reset_sequences = False
+
+    def test_all_synthetic_metadata_fences_have_expected_winners(self) -> None:
+        for scenario, expectation in CONCURRENCY_EXPECTATIONS.items():
+            with self.subTest(scenario=scenario):
+                case = build_synthetic_concurrency_case(
+                    scenario=scenario,
+                    contender_count=MIN_CONTENDERS,
+                    process_count=MIN_CONTENDERS,
+                )
+                if connection.vendor != "postgresql":
+                    with self.assertRaises(PostgreSQLConcurrencyHarnessUnavailable):
+                        run_postgresql_concurrency_case(case=case)
+                    continue
+
+                result = run_postgresql_concurrency_case(case=case)
+                self.assertIsInstance(result, ConcurrencyResult)
+                self.assertEqual(result.scenario, scenario)
+                self.assertEqual(result.contender_count, MIN_CONTENDERS)
+                self.assertEqual(result.failed_count, 0)
+                self.assertEqual(
+                    result.committed_count,
+                    expectation.maximum_successes,
+                )
+                self.assertEqual(
+                    result.rejected_count,
+                    MIN_CONTENDERS - expectation.maximum_successes,
+                )
+                self.assertEqual(Report.objects.count(), 0)
+                self.assertEqual(ReportLease.objects.count(), 0)
+                self.assertEqual(SecurityOperation.objects.count(), 0)

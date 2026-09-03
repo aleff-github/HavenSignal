@@ -1347,3 +1347,21 @@ third-party resources, dynamic URL construction, or new routes fail closed.
 This closes no accepting submission endpoint, CAPTCHA, request-upload handler,
 Audit Service, Key Service, report crypto, credential generation, concurrency,
 deployment, or production gate.
+
+The sixty-seventh Stage A slice replaces the inert PostgreSQL concurrency
+scaffold runner with a test-only metadata acceptance harness. Each of the six
+approved scenarios uses 20 synchronized operating-system processes, one
+dedicated database connection per contender, generated UUID identifiers, a
+bounded completion deadline, controlled outcome counts, and automatic cleanup.
+PostgreSQL must produce exactly one winner for each active-report, active-lease,
+and active-operation uniqueness fence and zero winners for stale report-version
+and lease-generation compare-and-set attempts. Non-PostgreSQL execution and
+invalid process profiles remain fail-closed rather than skipped as evidence.
+
+The harness is confined to `tests/`; its ORM writes and compare-and-set
+statements are not imported by application code. `report_lifecycle.persistence`
+continues to deny all mutations. This slice closes only executable contention
+evidence for the present metadata schema and synthetic test statements. It does
+not establish the future executor's lock ordering, transaction isolation,
+crash/durability behavior, audit or service integration, protected-content
+handling, independent review, deployment, or production authorization.

@@ -129,12 +129,16 @@ Docker alpha runs Django and the full test suite against a local PostgreSQL
 non-root read-only web container, health-gated migrations, and a persistent
 local database volume.
 
-A test-only PostgreSQL concurrency scaffold exists, but it is not itself PostgreSQL acceptance evidence and does not enable protected transition execution.
+A test-only PostgreSQL concurrency harness now runs the six approved metadata
+fence scenarios with 20 synchronized processes and dedicated connections. It
+proves exact database winners for active report, lease, and operation
+constraints and exact rejection of stale report-version and lease-generation
+compare-and-set attempts, using only synthetic UUIDs and automatic cleanup.
 
-Running ordinary tests on the Docker PostgreSQL backend validates migrations,
-constraints, backend capabilities, and cross-backend behavior. It still does
-not execute the deliberately unavailable 20–100 contender harness, prove the
-future transition executor, or close production concurrency/durability gates.
+The harness does not expose its write primitives to application code and does
+not enable protected transition execution. It validates the present schema and
+test-only statements, but does not prove the future executor's lock ordering,
+crash recovery, durability, or production deployment gates.
 
 The complete executable AST of the lifecycle errors, state graphs, transition
 and lease planners, operation bindings, metadata models, and persistence gate
@@ -737,3 +741,20 @@ headers, no cookies, no forms/scripts, fail-closed POST behavior, no reporter
 content echo, and that the POST branch does not require request-body access.
 The accepting submission endpoint, CAPTCHA, upload handler, audit, Key
 Service, crypto, concurrency, deployment, and production gates remain open.
+
+## Latest Stage A slice — PostgreSQL metadata concurrency acceptance
+
+The Docker PostgreSQL suite now executes all six approved lifecycle metadata
+contention scenarios with 20 synchronized processes and one connection per
+contender. Exact one-winner results are required for active report ownership,
+active lease per report, active lease per operator, and active operation per
+report. Stale report-version and lease-generation compare-and-set attempts must
+produce zero winners. Unexpected process/database outcomes fail the test and
+all generated rows are removed.
+
+The harness exists only under `tests/`, accepts only generated UUID metadata,
+and remains unavailable on non-PostgreSQL backends. The application persistence
+boundary still rejects every mutation. Passing closes only the metadata-schema
+contention evidence gap; it does not authorize a protected transition executor,
+request handling, report content, cryptography, audit, deployment, or production
+use.

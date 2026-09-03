@@ -1,17 +1,31 @@
-"""Inert, content-free scaffold for future PostgreSQL concurrency proof."""
+"""Synthetic PostgreSQL concurrency acceptance harness for metadata fences."""
 
+from datetime import timedelta
 from dataclasses import dataclass
 from enum import StrEnum
+from multiprocessing import get_context
+from queue import Empty
+from time import monotonic
 from types import MappingProxyType
-from uuid import UUID, uuid4
+from uuid import UUID, uuid4, uuid5
 
+from django.db import IntegrityError, connections, transaction
+from django.utils import timezone
+
+from report_lifecycle.models import Report, ReportLease, SecurityOperation
 from report_lifecycle.persistence import require_postgresql_transition_backend
+from report_lifecycle.states import (
+    ReportState,
+    SecurityOperationKind,
+    SecurityOperationState,
+)
 
 
 PROFILE_VERSION = 1
 MIN_CONTENDERS = 20
 MAX_CONTENDERS = 100
 MIN_PROCESSES = 2
+PROCESS_DEADLINE_SECONDS = 30
 
 
 class ConcurrencyScenario(StrEnum):
@@ -64,6 +78,21 @@ class PostgreSQLConcurrencyHarnessUnavailable(Exception):
 
     def __init__(self) -> None:
         super().__init__("postgresql_concurrency_harness_unavailable")
+
+
+class ConcurrencyOutcome(StrEnum):
+    COMMITTED = "COMMITTED"
+    REJECTED = "REJECTED"
+    FAILED = "FAILED"
+
+
+@dataclass(frozen=True, slots=True)
+class ConcurrencyResult:
+    scenario: ConcurrencyScenario
+    contender_count: int
+    committed_count: int
+    rejected_count: int
+    failed_count: int
 
 
 @dataclass(frozen=True, slots=True)
@@ -145,10 +174,14 @@ def run_postgresql_concurrency_case(
     *,
     case: _SyntheticConcurrencyCase,
     using: str = "default",
-) -> None:
-    """Always deny until the PostgreSQL runner and executor are reviewed."""
+) -> ConcurrencyResult:
+    """Run one synthetic test case without exposing a production executor."""
 
-    if type(case) is not _SyntheticConcurrencyCase or type(using) is not str:
+    if (
+        type(case) is not _SyntheticConcurrencyCase
+        or type(using) is not str
+        or case.requested_process_count != case.contender_count
+    ):
         raise PostgreSQLConcurrencyHarnessUnavailable()
     try:
         require_postgresql_transition_backend(using=using)
@@ -156,8 +189,212 @@ def run_postgresql_concurrency_case(
         # Dependency/configuration failures must not leak connection details or
         # accidentally turn an unavailable harness into a partial test run.
         raise PostgreSQLConcurrencyHarnessUnavailable() from None
+    if not _is_postgresql_backend(using):
+        raise PostgreSQLConcurrencyHarnessUnavailable()
 
-    # Backend shape alone is not concurrency evidence. Enabling work here
-    # requires the reviewed executor, lock order, isolation profile, barrier,
-    # independent connections/processes, cleanup, and result assertions.
-    raise PostgreSQLConcurrencyHarnessUnavailable()
+    _prepare_case(case=case, using=using)
+    context = get_context("fork")
+    barrier = context.Barrier(case.contender_count)
+    results = context.Queue()
+    processes = [
+        context.Process(
+            target=_run_contender,
+            args=(
+                case.scenario.value,
+                str(case.run_id),
+                str(case.contention_target_id),
+                str(contender_id),
+                ordinal,
+                using,
+                barrier,
+                results,
+            ),
+        )
+        for ordinal, contender_id in enumerate(case.contender_ids)
+    ]
+    connections.close_all()
+    try:
+        for process in processes:
+            process.start()
+        deadline = monotonic() + PROCESS_DEADLINE_SECONDS
+        for process in processes:
+            process.join(max(0.0, deadline - monotonic()))
+        for process in processes:
+            if process.is_alive():
+                process.terminate()
+                process.join()
+
+        outcomes: list[ConcurrencyOutcome] = []
+        while len(outcomes) < case.contender_count:
+            try:
+                outcomes.append(ConcurrencyOutcome(results.get(timeout=1)))
+            except (Empty, ValueError):
+                break
+        missing = case.contender_count - len(outcomes)
+        failed = outcomes.count(ConcurrencyOutcome.FAILED) + missing
+        return ConcurrencyResult(
+            scenario=case.scenario,
+            contender_count=case.contender_count,
+            committed_count=outcomes.count(ConcurrencyOutcome.COMMITTED),
+            rejected_count=outcomes.count(ConcurrencyOutcome.REJECTED),
+            failed_count=failed,
+        )
+    finally:
+        results.close()
+        results.join_thread()
+        connections.close_all()
+        _cleanup_case(case=case, using=using)
+
+
+def _is_postgresql_backend(using: str) -> bool:
+    return connections[using].vendor == "postgresql"
+
+
+def _prepare_case(*, case: _SyntheticConcurrencyCase, using: str) -> None:
+    report_ids: tuple[UUID, ...]
+    if case.scenario is ConcurrencyScenario.ACTIVE_REPORT_PER_OPERATOR:
+        report_ids = ()
+    elif case.scenario is ConcurrencyScenario.ACTIVE_LEASE_PER_OPERATOR:
+        report_ids = case.contender_ids
+    else:
+        report_ids = (case.contention_target_id,)
+    Report.objects.using(using).bulk_create(
+        [Report(id=report_id) for report_id in report_ids]
+    )
+    if case.scenario is ConcurrencyScenario.STALE_REPORT_VERSION:
+        Report.objects.using(using).filter(id=case.contention_target_id).update(
+            state_version=1
+        )
+    if case.scenario is ConcurrencyScenario.STALE_LEASE_GENERATION:
+        Report.objects.using(using).filter(id=case.contention_target_id).update(
+            current_lease_generation=1
+        )
+
+
+def _cleanup_case(*, case: _SyntheticConcurrencyCase, using: str) -> None:
+    report_ids = (*case.contender_ids, case.contention_target_id)
+    SecurityOperation.objects.using(using).filter(
+        report_id__in=report_ids
+    ).delete()
+    ReportLease.objects.using(using).filter(report_id__in=report_ids).delete()
+    Report.objects.using(using).filter(id__in=report_ids).delete()
+
+
+def _run_contender(
+    scenario_value: str,
+    run_id_value: str,
+    target_id_value: str,
+    contender_id_value: str,
+    ordinal: int,
+    using: str,
+    barrier: object,
+    results: object,
+) -> None:
+    connections.close_all()
+    outcome = ConcurrencyOutcome.FAILED
+    try:
+        scenario = ConcurrencyScenario(scenario_value)
+        run_id = UUID(run_id_value)
+        target_id = UUID(target_id_value)
+        contender_id = UUID(contender_id_value)
+        barrier.wait(timeout=PROCESS_DEADLINE_SECONDS)
+        with transaction.atomic(using=using):
+            committed = _attempt_case_write(
+                scenario=scenario,
+                run_id=run_id,
+                target_id=target_id,
+                contender_id=contender_id,
+                ordinal=ordinal,
+                using=using,
+            )
+        outcome = (
+            ConcurrencyOutcome.COMMITTED
+            if committed
+            else ConcurrencyOutcome.REJECTED
+        )
+    except IntegrityError:
+        outcome = ConcurrencyOutcome.REJECTED
+    except Exception:
+        outcome = ConcurrencyOutcome.FAILED
+    finally:
+        connections.close_all()
+        results.put(outcome.value)
+
+
+def _attempt_case_write(
+    *,
+    scenario: ConcurrencyScenario,
+    run_id: UUID,
+    target_id: UUID,
+    contender_id: UUID,
+    ordinal: int,
+    using: str,
+) -> bool:
+    now = timezone.now()
+    if scenario is ConcurrencyScenario.ACTIVE_REPORT_PER_OPERATOR:
+        Report.objects.using(using).bulk_create(
+            [
+                Report(
+                    id=contender_id,
+                    state=ReportState.CLAIMED,
+                    active_operator_id=target_id,
+                    claimed_at=now,
+                    claim_expires_at=now + timedelta(hours=1),
+                )
+            ]
+        )
+        return True
+    if scenario is ConcurrencyScenario.ACTIVE_LEASE_PER_REPORT:
+        ReportLease.objects.using(using).create(
+            id=contender_id,
+            report_id=target_id,
+            operator_id=contender_id,
+            generation=ordinal + 1,
+            opened_at=now,
+            last_activity_at=now,
+            absolute_expires_at=now + timedelta(hours=1),
+        )
+        return True
+    if scenario is ConcurrencyScenario.ACTIVE_LEASE_PER_OPERATOR:
+        ReportLease.objects.using(using).create(
+            id=uuid5(run_id, contender_id.hex),
+            report_id=contender_id,
+            operator_id=target_id,
+            generation=1,
+            opened_at=now,
+            last_activity_at=now,
+            absolute_expires_at=now + timedelta(hours=1),
+        )
+        return True
+    if scenario is ConcurrencyScenario.ACTIVE_OPERATION_PER_REPORT:
+        SecurityOperation.objects.using(using).bulk_create(
+            [
+                SecurityOperation(
+                    id=contender_id,
+                    report_id=target_id,
+                    kind=SecurityOperationKind.REOPEN_REPORT,
+                    state=SecurityOperationState.ACTIVE,
+                    bound_report_version=0,
+                    fence_token=ordinal + 1,
+                    idempotency_id=uuid5(run_id, f"idempotency:{contender_id.hex}"),
+                    actor_id=contender_id,
+                    activated_at=now,
+                )
+            ]
+        )
+        return True
+    if scenario is ConcurrencyScenario.STALE_REPORT_VERSION:
+        return (
+            Report.objects.using(using)
+            .filter(id=target_id, state_version=0)
+            .update(state_version=2)
+            == 1
+        )
+    if scenario is ConcurrencyScenario.STALE_LEASE_GENERATION:
+        return (
+            Report.objects.using(using)
+            .filter(id=target_id, current_lease_generation=0)
+            .update(current_lease_generation=2)
+            == 1
+        )
+    return False

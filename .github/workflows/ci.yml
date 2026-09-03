@@ -30,3 +30,14 @@ jobs:
 
       - name: Run reviewed verification script
         run: scripts/verify
+
+  postgres-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Run PostgreSQL verification in Docker
+        run: scripts/docker-local test
