@@ -1106,6 +1106,29 @@ deterministic CBOR, envelope parsing, cryptographic authentication,
 Response-DEK lifecycle operations, recovery authorization, persistence,
 endpoint behavior, or production readiness.
 
+## Stage A Emergency Export request descriptor source conformance
+
+While Emergency Export remains blocked, statically verify without importing or
+executing the target that:
+
+- the version/purpose, request and object field order, primitive categories,
+  identifier/digest sizes, note limits, object count and slot order remain
+  exact;
+- immutable profiles contain schema metadata only and no Ticket ID, protected
+  note, envelope digest, artifact bytes, key, report content, or request value;
+- validators reject wrong types, booleans masquerading as integers, reordered,
+  missing, added, or altered fields and limits with one content-free error;
+- CBOR encoding, value retention, step-up artifact construction, persistence,
+  logging, file/network access, endpoint behavior, and export authorization
+  remain absent;
+- missing, unreadable, malformed, and out-of-root inputs return controlled,
+  content-free violations.
+
+Passing proves only schema source conformance. It closes no note
+canonicalization, CBOR, WebAuthn, audit, alert, Key Service, signer/HSM,
+recipient custody, PostgreSQL, worker, delivery, independent-review, or
+production gate.
+
 ## Dependency/security checks
 
 During inert Stage A, CI must run `python -m architecture_checks .`. The

@@ -133,6 +133,13 @@ state-version and lease-generation metadata only. They explicitly authorize no
 execution or persistence, create no export artifact, and release no plaintext;
 the executor always fails closed.
 
+The Emergency Export request descriptor fixes only the approved version,
+purpose, ordered field names, primitive categories, identifier/digest sizes,
+protected-note size metadata, object count and slot rules, and deterministic-
+CBOR/closed-array requirements. It holds no Ticket ID, note, envelope digest,
+key, request artifact, or report content; it neither encodes CBOR nor creates a
+step-up artifact and cannot authorize an export.
+
 ## Security interfaces
 
 Mandatory security integrations whose production designs or evidence remain gated are represented by deny-by-default interfaces under `security_interfaces/`.
@@ -143,8 +150,8 @@ non-executing exact-AST policy, so a success path, development fallback, added
 method, logging operation, or other side effect requires explicit review.
 
 The package includes inert structural descriptors for approved audit, alert,
-step-up, recovery-credential, Response Note crypto, and Response Note schema
-concepts, but these types do not themselves:
+step-up, recovery-credential, Response Note crypto/schema, and Emergency
+Export request concepts, but these types do not themselves:
 
 - encode/verify production audit artifacts;
 - append audit events;
@@ -161,7 +168,8 @@ concepts, but these types do not themselves:
 - hold real report/response/finalization IDs;
 - retain Response Note text, normalized text, canonical bytes, digests, drafts,
   or previews;
-- authorize protected operations.
+- authorize protected operations;
+- encode or retain an Emergency Export request or its protected values.
 
 The administrative step-up-v2 foundations are limited to content-free internal
 identity shapes, binding-purpose/key-epoch metadata, the exact non-sliding

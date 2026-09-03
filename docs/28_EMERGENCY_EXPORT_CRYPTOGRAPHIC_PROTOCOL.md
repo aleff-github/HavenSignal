@@ -93,6 +93,22 @@ filenames or plaintext hashes. Any later change to content, context, reason,
 note, lease, state/version, key ID, or object list invalidates the step-up and
 requires a new request.
 
+### Inert Stage A request-schema record
+
+`security_interfaces/emergency_export_request_descriptors.py` represents only
+the closed schema metadata above: field order and primitive categories,
+identifier and digest sizes, note size/scalar ceilings, object count and slot
+ordering, and deterministic-CBOR/closed-array requirements. Its validated
+profile contains no request values and explicitly cannot encode CBOR, retain a
+Ticket ID, protected note or envelope digest, create step-up artifact bytes, or
+authorize export.
+
+The corresponding non-executing exact-AST policy parses but never imports or
+executes the descriptor. Passing is source-conformance evidence only and
+closes no note-normalization, CBOR, WebAuthn, audit, alert, Key Service, signer,
+recipient custody, PostgreSQL, worker, delivery, independent-review, or
+production gate.
+
 ## Package contents
 
 The uncompressed logical package contains only these regular files, in order

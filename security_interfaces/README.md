@@ -58,6 +58,17 @@ authorization result, import, dynamic, and side-effect changes fail closed.
 Passing does not prove durable acceptance, delivery, acknowledgement, or an
 Alert Service boundary.
 
+`emergency_export_request_descriptors.py` models only the owner-approved
+version-1 request-schema metadata from `docs/28`: exact field order and
+primitive categories, 16-byte identifier/key-ID shapes, 32-byte envelope
+digest shape, protected-note size metadata, one-to-five ordered object slots,
+and deterministic-CBOR/closed-array requirements. It holds no request value,
+Ticket ID, protected note, envelope digest, key, or report content. It does not
+encode CBOR, create step-up artifact bytes, expose an endpoint, or authorize
+export. Its non-executing exact-AST source policy makes any capability or
+schema change explicit while closing no cryptographic, service, concurrency,
+workstation, or production gate.
+
 `captcha_descriptors.py` models only the owner-approved version-1
 no-JavaScript CAPTCHA protocol metadata: 16-byte challenge identifiers encoded
 as 22-character unpadded base64url text, six-character uppercase answers from
