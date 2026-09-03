@@ -107,11 +107,15 @@ class RecoveryResponseUnavailableTests(SimpleTestCase):
         self.assertEqual(response.headers["Cache-Control"], "no-store, max-age=0")
         self.assertFalse(response.cookies)
 
-    def test_response_rejects_other_unsafe_methods(self) -> None:
-        for method in ("put", "patch", "delete"):
+    def test_response_short_circuits_other_non_read_methods(self) -> None:
+        for method in ("put", "patch", "delete", "options", "trace"):
             with self.subTest(method=method):
                 response = getattr(self.client, method)(reverse("reporter-response"))
-                self.assertEqual(response.status_code, 405)
+                self.assertEqual(response.status_code, 503)
+                self.assertEqual(
+                    response.content,
+                    b"response_retrieval_unavailable",
+                )
 
     def test_response_has_restrictive_browser_headers(self) -> None:
         response = self.client.get(reverse("reporter-response"))
