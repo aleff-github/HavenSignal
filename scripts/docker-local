@@ -1,0 +1,57 @@
+#!/bin/sh
+set -eu
+
+repository_root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+secrets_directory="$repository_root/.docker/secrets"
+
+create_secret() {
+    secret_path=$1
+    if [ ! -f "$secret_path" ]; then
+        temporary_path="$secret_path.tmp.$$"
+        umask 077
+        od -An -N32 -tx1 /dev/urandom | tr -d ' \n' > "$temporary_path"
+        mv "$temporary_path" "$secret_path"
+    fi
+    chmod 640 "$secret_path"
+}
+
+prepare_secrets() {
+    mkdir -p "$secrets_directory"
+    chmod 700 "$secrets_directory"
+    create_secret "$secrets_directory/postgres_password"
+    create_secret "$secrets_directory/django_secret_key"
+}
+
+cd "$repository_root"
+export HAVENSIGNAL_HOST_UID="$(id -u)"
+export HAVENSIGNAL_HOST_GID="$(id -g)"
+
+case "${1:-}" in
+    up)
+        prepare_secrets
+        docker compose build web migrate
+        docker compose up --detach postgres migrate web
+        docker compose ps
+        ;;
+    test)
+        prepare_secrets
+        docker compose --profile test build test
+        docker compose --profile test run --rm test
+        ;;
+    logs)
+        docker compose logs --follow postgres web
+        ;;
+    ps)
+        docker compose ps
+        ;;
+    down)
+        docker compose down --remove-orphans
+        ;;
+    reset)
+        docker compose down --volumes --remove-orphans
+        ;;
+    *)
+        echo "usage: ./scripts/docker-local {up|test|logs|ps|down|reset}" >&2
+        exit 2
+        ;;
+esac

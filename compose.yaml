@@ -1,0 +1,128 @@
+name: havensignal-alpha
+
+x-app: &app
+  image: havensignal-alpha:local
+  build:
+    context: .
+    dockerfile: Dockerfile
+  environment: &app-environment
+    DJANGO_SETTINGS_MODULE: anonymous_reporting.settings_docker
+    HAVENSIGNAL_DB_HOST: postgres
+    HAVENSIGNAL_DB_PORT: "5432"
+    HAVENSIGNAL_DB_NAME: havensignal
+    HAVENSIGNAL_DB_USER: havensignal
+    HAVENSIGNAL_DB_PASSWORD_FILE: /run/secrets/postgres_password
+    HAVENSIGNAL_DJANGO_SECRET_FILE: /run/secrets/django_secret_key
+  secrets:
+    - postgres_password
+    - django_secret_key
+  group_add:
+    - "${HAVENSIGNAL_HOST_GID:-1000}"
+  init: true
+  security_opt:
+    - no-new-privileges:true
+  cap_drop:
+    - ALL
+
+services:
+  postgres:
+    image: postgres:17.11-bookworm@sha256:051f7b7b3abdd564d5d1bd1e8c4b9c1b6e77087d1dd22020ede611c096a272e0
+    environment:
+      POSTGRES_DB: havensignal
+      POSTGRES_USER: havensignal
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
+      POSTGRES_INITDB_ARGS: --auth-host=scram-sha-256 --auth-local=scram-sha-256
+    secrets:
+      - postgres_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:${HAVENSIGNAL_POSTGRES_PORT:-55432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready --username=havensignal --dbname=havensignal"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+      start_period: 5s
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+
+  migrate:
+    <<: *app
+    command:
+      - python
+      - manage.py
+      - migrate
+      - --noinput
+    depends_on:
+      postgres:
+        condition: service_healthy
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    restart: "no"
+
+  web:
+    <<: *app
+    command:
+      - python
+      - manage.py
+      - runserver
+      - 0.0.0.0:8000
+    depends_on:
+      postgres:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    ports:
+      - "127.0.0.1:${HAVENSIGNAL_HTTP_PORT:-8000}:8000"
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - >-
+          import urllib.request;
+          urllib.request.urlopen('http://127.0.0.1:8000/status/', timeout=2)
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 5s
+    restart: unless-stopped
+
+  test:
+    <<: *app
+    image: havensignal-alpha-test:local
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: test
+    user: "${HAVENSIGNAL_HOST_UID:-1000}:${HAVENSIGNAL_HOST_GID:-1000}"
+    environment:
+      <<: *app-environment
+      GIT_CONFIG_COUNT: "1"
+      GIT_CONFIG_KEY_0: safe.directory
+      GIT_CONFIG_VALUE_0: /app
+    volumes:
+      - .:/app
+    command:
+      - ./scripts/verify
+    depends_on:
+      postgres:
+        condition: service_healthy
+    profiles:
+      - test
+    restart: "no"
+
+volumes:
+  postgres_data:
+
+secrets:
+  postgres_password:
+    file: ./.docker/secrets/postgres_password
+  django_secret_key:
+    file: ./.docker/secrets/django_secret_key

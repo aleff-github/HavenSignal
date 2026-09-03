@@ -24,6 +24,7 @@ staticfiles/
 .env.*
 !.env.example
 secrets/
+/.docker/secrets/
 *.pem
 *.key
 *.p12

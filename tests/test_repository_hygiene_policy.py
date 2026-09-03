@@ -40,6 +40,7 @@ class RepositoryHygieneAbuseTests(SimpleTestCase):
         violations = analyze_tracked_paths(
             (
                 "secrets/operator.key",
+                ".docker/secrets/postgres_password",
                 "exports/package.age",
                 "tmp/plaintext.bin",
             )
@@ -51,6 +52,7 @@ class RepositoryHygieneAbuseTests(SimpleTestCase):
             },
             {
                 ("secrets/operator.key", "SECRET_DIRECTORY"),
+                (".docker/secrets/postgres_password", "SECRET_DIRECTORY"),
                 ("exports/package.age", "EXPORT_ARTIFACT"),
                 ("tmp/plaintext.bin", "TEMPORARY_WORKSPACE"),
             },

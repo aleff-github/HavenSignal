@@ -122,9 +122,19 @@ It includes:
 - pure planners for Response Note retention, ciphertext-cleanup retry timing,
   terminal-metadata retention review, and isolated audit-retention review.
 
-SQLite remains a development/test scaffold and is not accepted as evidence for security-sensitive concurrency.
+SQLite remains the lightweight native development/test scaffold and is not
+accepted as evidence for security-sensitive concurrency. The contributor
+Docker alpha runs Django and the full test suite against a local PostgreSQL
+17 service with loopback-only host ports, generated untracked secrets, a
+non-root read-only web container, health-gated migrations, and a persistent
+local database volume.
 
 A test-only PostgreSQL concurrency scaffold exists, but it is not itself PostgreSQL acceptance evidence and does not enable protected transition execution.
+
+Running ordinary tests on the Docker PostgreSQL backend validates migrations,
+constraints, backend capabilities, and cross-backend behavior. It still does
+not execute the deliberately unavailable 20–100 contender harness, prove the
+future transition executor, or close production concurrency/durability gates.
 
 The complete executable AST of the lifecycle errors, state graphs, transition
 and lease planners, operation bindings, metadata models, and persistence gate

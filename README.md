@@ -293,7 +293,25 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md), [GOVERNANCE.md](GOVERNANCE.md), and [SE
 
 ## Local development
 
-Create an isolated environment and install the locked dependencies.
+The recommended alpha environment runs both Django and PostgreSQL in Docker:
+
+```bash
+./scripts/docker-local up
+./scripts/docker-local test
+```
+
+The application is then available only on `http://127.0.0.1:8000/` and
+PostgreSQL only on `127.0.0.1:55432` by default. The helper creates random
+local-only secrets under the ignored `.docker/secrets/` directory. Use
+`./scripts/docker-local down` to stop the environment. The explicit `reset`
+command also destroys the local PostgreSQL volume and all of its alpha data.
+
+This configuration is for synthetic contributor testing only. It is closer to
+the intended database behavior than SQLite, but it is not a production
+deployment profile and must never receive real reports.
+
+Alternatively, create an isolated native Python environment. This path retains
+the SQLite development backend and cannot supply PostgreSQL evidence.
 
 ### Linux / macOS
 

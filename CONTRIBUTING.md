@@ -47,6 +47,21 @@ Without an explicit approved design change, do not introduce:
 
 ## Development setup
 
+The recommended contributor workflow uses the repository's local Docker alpha
+environment:
+
+```bash
+./scripts/docker-local up
+./scripts/docker-local test
+```
+
+Docker binds both exposed ports to loopback, generates untracked local secrets,
+and runs the full suite against PostgreSQL. Use only synthetic identifiers and
+content. `./scripts/docker-local reset` is intentionally destructive and
+removes the local PostgreSQL volume.
+
+For lightweight checks that do not need PostgreSQL:
+
 ```bash
 python -m venv .venv
 # activate the environment for your platform

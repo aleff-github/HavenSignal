@@ -65,18 +65,24 @@ class LifecyclePersistenceBoundaryTests(TestCase):
                 lease=lease,
             )
 
-    def test_development_sqlite_backend_is_explicitly_rejected(self) -> None:
+    def test_configured_backend_capabilities_are_explicit(self) -> None:
         capabilities = inspect_lifecycle_backend()
-        self.assertEqual(capabilities.vendor, "sqlite")
-        self.assertFalse(capabilities.supports_row_locks)
-        with self.assertRaises(LifecyclePersistenceUnavailable) as raised:
-            require_postgresql_transition_backend()
-        self.assertEqual(
-            str(raised.exception),
-            "lifecycle_persistence_unavailable",
-        )
+        if capabilities.vendor == "sqlite":
+            self.assertFalse(capabilities.supports_row_locks)
+            with self.assertRaises(LifecyclePersistenceUnavailable) as raised:
+                require_postgresql_transition_backend()
+            self.assertEqual(
+                str(raised.exception),
+                "lifecycle_persistence_unavailable",
+            )
+            return
+        self.assertEqual(capabilities.vendor, "postgresql")
+        self.assertTrue(capabilities.supports_transactions)
+        self.assertTrue(capabilities.supports_row_locks)
+        self.assertTrue(capabilities.supports_partial_indexes)
+        self.assertEqual(require_postgresql_transition_backend(), capabilities)
 
-    def test_validated_binding_still_cannot_write_on_sqlite(self) -> None:
+    def test_validated_binding_still_cannot_write(self) -> None:
         with self.assertRaises(LifecyclePersistenceUnavailable):
             persist_validated_security_operation(binding=self.binding)
         self.assertEqual(SecurityOperation.objects.count(), 0)
