@@ -111,6 +111,8 @@ The repository currently contains:
 - negative-capability placeholders for security services, with a non-executing
   guard that locks their exact fail-closed behavior;
 - inert audit, alert, and step-up structural descriptors;
+- an inert, content-free Emergency Export sequence planner whose executor
+  remains unavailable;
 - inert no-JavaScript CAPTCHA descriptors that validate only approved metadata,
   strict identifier/answer shapes, anonymous global bucket limits, and open
   production gates;

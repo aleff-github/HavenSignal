@@ -112,7 +112,7 @@ It includes:
 - stale-version/stale-generation/wrong-lease/expired-lease rejection;
 - a fail-closed persistence boundary.
 - pure, non-persisting sequence contracts for the approved finalization order
-  and OPEN-only operator-deletion order;
+  and OPEN-only operator-deletion and Emergency Export orders;
 - pure planners for Response Note retention, ciphertext-cleanup retry timing,
   terminal-metadata retention review, and isolated audit-retention review.
 
@@ -125,6 +125,13 @@ and lease planners, operation bindings, metadata models, and persistence gate
 is locked without importing or executing those modules. State, timing, fencing,
 field, constraint, backend, logging, write, and success-path changes require
 explicit review.
+
+The Emergency Export sequence shell accepts only the existing validated
+`EMERGENCY_EXPORT`/OPEN/current-lease binding and permits only the approved
+eleven adjacent checkpoints. Its immutable plans contain identifiers,
+state-version and lease-generation metadata only. They explicitly authorize no
+execution or persistence, create no export artifact, and release no plaintext;
+the executor always fails closed.
 
 ## Security interfaces
 

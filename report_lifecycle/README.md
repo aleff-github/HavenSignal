@@ -66,9 +66,21 @@ controlled unavailable error and performs no database or external-service
 operation. No reason, protected note, CAPTCHA, step-up, receipt, state write,
 key operation, recovery change, cleanup, or resumable workflow exists.
 
+`emergency_export.py` represents only the approved eleven-checkpoint
+Emergency Export order as immutable, content-free sequence metadata. It
+accepts only the existing structurally validated `EMERGENCY_EXPORT`/OPEN/
+current-lease binding, rejects every skipped, reversed, repeated, unknown, or
+malformed edge, and returns plans that authorize and persist nothing, create
+no artifact, and release no plaintext. Its executor always raises a controlled
+unavailable error. No request descriptor, protected note, step-up, receipt,
+alert, key operation, archive, signature, encryption, staging, delivery, or
+cleanup capability is implemented.
+
 `architecture_checks/orchestration.py` statically parses `finalization.py`,
-`deletion.py`, `retention.py`, `cleanup.py`, and `metadata_retention.py` without
-importing any target, and now applies the same boundary to `audit_retention.py`.
+`deletion.py`, `emergency_export.py`, `retention.py`, `cleanup.py`, and
+`metadata_retention.py` without importing any target, and applies the same
+boundary to `audit_retention.py`.
+
 The exact import/member/call, enum, snapshot/plan-field/capability-flag,
 mutation/dynamic-syntax/shadowing, and always-unavailable executor profiles are
 closed. A change outside that reviewed source profile fails the test suite;
