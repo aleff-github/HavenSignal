@@ -127,4 +127,5 @@ class ReporterSecurityHeadersMiddleware:
         response["Cross-Origin-Opener-Policy"] = "same-origin"
         response["Cross-Origin-Resource-Policy"] = "same-origin"
         response["X-Permitted-Cross-Domain-Policies"] = "none"
+        response["X-Robots-Tag"] = "noindex, nofollow, noarchive"
         return response

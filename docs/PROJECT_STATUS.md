@@ -173,6 +173,10 @@ the read-only and fail-closed views and restrictive response-header middleware.
 aggregate fail-closed CI gate and reports only controlled, content-free
 violations.
 
+The reporter security middleware applies `X-Robots-Tag: noindex, nofollow,
+noarchive` to every response, including plain-text failures that cannot rely on
+the passive templates' equivalent robots metadata.
+
 The aggregate gate also includes a content-free repository-hygiene policy for
 tracked path names and `.gitignore` rules. It rejects committed local
 databases, logs, virtual environments, secret/config material, export

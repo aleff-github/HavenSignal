@@ -132,6 +132,10 @@ class OperatorConsoleUnavailableTests(SimpleTestCase):
         self.assertEqual(response.headers["Referrer-Policy"], "no-referrer")
         self.assertEqual(response.headers["X-Frame-Options"], "DENY")
         self.assertEqual(response.headers["X-Content-Type-Options"], "nosniff")
+        self.assertEqual(
+            response.headers["X-Robots-Tag"],
+            "noindex, nofollow, noarchive",
+        )
         self.assertIn("default-src 'none'", response.headers["Content-Security-Policy"])
         self.assertIn("script-src 'none'", response.headers["Content-Security-Policy"])
         self.assertIn("frame-ancestors 'none'", response.headers["Content-Security-Policy"])

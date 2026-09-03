@@ -106,6 +106,8 @@ The repository currently contains:
   framework redirects or errors;
 - middleware-level short-circuiting of every disabled sensitive POST before
   Django CSRF, body parsing, or view dispatch;
+- response-level `noindex`, `nofollow`, and `noarchive` enforcement for HTML
+  pages and plain-text failure responses;
 - negative-capability placeholders for security services, with a non-executing
   guard that locks their exact fail-closed behavior;
 - inert audit, alert, and step-up structural descriptors;
