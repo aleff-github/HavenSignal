@@ -33,9 +33,11 @@ queries no database, calls no services, exposes no runtime health detail, and
 does not create or mutate application state.
 
 The `/submit/` route is intentionally disabled. GET renders static guidance.
-POST returns a controlled `503` without reading `request.body`, `request.POST`,
-or `request.FILES`, and without creating any report, attempt, audit event,
-credential, key, upload, or database transition.
+The reporter security middleware returns a controlled `503` for an otherwise
+admitted POST before downstream Django middleware or the view can parse a
+body. The view retains the same fail-closed response as a fallback. Neither
+path reads `request.body`, `request.POST`, or `request.FILES`, or creates any
+report, attempt, audit event, credential, key, upload, or database transition.
 
 POST `/submit/` requests with an absent, non-ASCII-decimal, zero, or
 greater-than-22,020,096-byte `Content-Length` are rejected by the
@@ -62,17 +64,20 @@ prevents report, recovery, authentication, or challenge material from being
 accepted or propagated in URLs while these surfaces remain disabled.
 
 The `/response/` route is intentionally disabled and served by the separate
-Recovery Gateway app. GET renders static guidance. POST returns a controlled
-`503` without reading `request.body`, `request.POST`, or `request.FILES`, and
-without creating any credential verification, lookup, audit event, key
-operation, decryption, plaintext rendering, recovery-state mutation, or
-database transition.
+Recovery Gateway app. GET renders static guidance. The reporter security
+middleware returns a controlled POST `503` before downstream Django middleware
+or the view, which retains the same fallback response. No path reads
+`request.body`, `request.POST`, or `request.FILES`, or creates any credential
+verification, lookup, audit event, key operation, decryption, plaintext
+rendering, recovery-state mutation, or database transition.
 
 The `/operator/` route is intentionally disabled. GET renders a static
-operator-console unavailable page. POST returns a controlled `503` without
-reading `request.body`, `request.POST`, or `request.FILES`, and without
-creating any authentication session, WebAuthn challenge, report lookup, audit
-event, lease, key operation, decryption, export, or database transition.
+operator-console unavailable page. The reporter security middleware returns a
+controlled POST `503` before downstream Django middleware or the view, which
+retains the same fallback response. No path reads `request.body`,
+`request.POST`, or `request.FILES`, or creates any authentication session,
+WebAuthn challenge, report lookup, audit event, lease, key operation,
+decryption, export, or database transition.
 
 ## Submission workflow
 

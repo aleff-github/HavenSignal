@@ -104,6 +104,8 @@ The repository currently contains:
   variants;
 - fail-closed rejection of non-canonical missing-slash sensitive routes before
   framework redirects or errors;
+- middleware-level short-circuiting of every disabled sensitive POST before
+  Django CSRF, body parsing, or view dispatch;
 - negative-capability placeholders for security services, with a non-executing
   guard that locks their exact fail-closed behavior;
 - inert audit, alert, and step-up structural descriptors;

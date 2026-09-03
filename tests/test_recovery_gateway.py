@@ -1,10 +1,11 @@
 """Security and behavior tests for the inert recovery gateway surface."""
 
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.test import SimpleTestCase
 from django.urls import reverse
 
 from recovery_gateway.views import response_unavailable
+from reporter_gateway.middleware import ReporterSecurityHeadersMiddleware
 
 
 class RecoveryResponseUnavailableTests(SimpleTestCase):
@@ -84,6 +85,27 @@ class RecoveryResponseUnavailableTests(SimpleTestCase):
 
         self.assertEqual(response.status_code, 503)
         self.assertEqual(response.content, b"response_retrieval_unavailable")
+
+    def test_response_post_stops_before_body_and_downstream(self) -> None:
+        class BodyExplodes(HttpRequest):
+            @property
+            def body(self) -> bytes:  # type: ignore[override]
+                raise AssertionError("body must not be read")
+
+        def reject_downstream_call(request: HttpRequest) -> HttpResponse:
+            raise AssertionError("downstream middleware and view must not be called")
+
+        request = BodyExplodes()
+        request.method = "POST"
+        request.path_info = "/response/"
+        middleware = ReporterSecurityHeadersMiddleware(reject_downstream_call)
+
+        response = middleware(request)
+
+        self.assertEqual(response.status_code, 503)
+        self.assertEqual(response.content, b"response_retrieval_unavailable")
+        self.assertEqual(response.headers["Cache-Control"], "no-store, max-age=0")
+        self.assertFalse(response.cookies)
 
     def test_response_rejects_other_unsafe_methods(self) -> None:
         for method in ("put", "patch", "delete"):

@@ -1,7 +1,7 @@
 """Security and behavior tests for the inert reporter landing page."""
 
 from django.http import HttpRequest, HttpResponse
-from django.test import SimpleTestCase
+from django.test import Client, SimpleTestCase
 from django.urls import reverse
 
 from reporter_gateway.middleware import (
@@ -115,6 +115,25 @@ class ReporterSubmitUnavailableTests(SimpleTestCase):
         self.assertEqual(response.content, b"submission_unavailable")
         self.assertNotIn(sentinel, response.content.decode("utf-8"))
         self.assertFalse(response.cookies)
+
+    def test_sensitive_posts_stop_before_csrf_processing(self) -> None:
+        client = Client(enforce_csrf_checks=True)
+        client.cookies["csrftoken"] = "a" * 32
+        cases = (
+            ("/submit/", b"submission_unavailable"),
+            ("/response/", b"response_retrieval_unavailable"),
+            ("/operator/", b"operator_authentication_unavailable"),
+        )
+        for path, expected_content in cases:
+            with self.subTest(path=path):
+                response = client.post(
+                    path,
+                    data={"csrfmiddlewaretoken": "invalid"},
+                )
+
+                self.assertEqual(response.status_code, 503)
+                self.assertEqual(response.content, expected_content)
+                self.assertFalse(response.cookies)
 
     def test_submit_query_string_fails_before_view_without_echo(self) -> None:
         sentinel = "REPORT_SECRET_SENTINEL_DO_NOT_ECHO"
@@ -286,28 +305,35 @@ class ReporterSubmitUnavailableTests(SimpleTestCase):
                 )
                 self.assertFalse(response.cookies)
 
-    def test_submit_limit_content_length_continues_to_fail_closed_view(self) -> None:
+    def test_submit_admitted_length_stops_before_body_and_downstream(self) -> None:
+        class BodyExplodes(HttpRequest):
+            @property
+            def body(self) -> bytes:  # type: ignore[override]
+                raise AssertionError("body must not be read")
+
+        def reject_downstream_call(request: HttpRequest) -> HttpResponse:
+            raise AssertionError("downstream middleware and view must not be called")
+
         for content_length in (
             str(SUBMISSION_MAX_CONTENT_LENGTH_BYTES),
             "0001",
         ):
             with self.subTest(content_length=content_length):
-                request = HttpRequest()
+                request = BodyExplodes()
                 request.method = "POST"
                 request.path_info = "/submit/"
                 request.META["CONTENT_LENGTH"] = content_length
-                middleware = ReporterSecurityHeadersMiddleware(
-                    lambda request: HttpResponse(
-                        "submission_unavailable",
-                        content_type="text/plain; charset=utf-8",
-                        status=503,
-                    )
-                )
+                middleware = ReporterSecurityHeadersMiddleware(reject_downstream_call)
 
                 response = middleware(request)
 
                 self.assertEqual(response.status_code, 503)
                 self.assertEqual(response.content, b"submission_unavailable")
+                self.assertEqual(
+                    response.headers["Cache-Control"],
+                    "no-store, max-age=0",
+                )
+                self.assertFalse(response.cookies)
 
     def test_submit_rejects_other_unsafe_methods(self) -> None:
         for method in ("put", "patch", "delete"):
