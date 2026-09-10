@@ -2,6 +2,8 @@
 
 from dataclasses import FrozenInstanceError, fields, replace
 from datetime import timedelta
+from multiprocessing import get_context
+from os import _exit
 from unittest.mock import patch
 from uuid import uuid4
 
@@ -36,6 +38,41 @@ from report_lifecycle.states import (
     SecurityOperationKind,
     SecurityOperationState,
 )
+
+
+PROCESS_DEADLINE_SECONDS = 30
+UNCOMMITTED_TERMINATION_EXIT_CODE = 73
+UNEXPECTED_PROCESS_FAILURE_EXIT_CODE = 74
+
+
+def _terminate_before_preparation_result(_operation: SecurityOperation) -> None:
+    _exit(UNCOMMITTED_TERMINATION_EXIT_CODE)
+
+
+def _run_preparation_process(
+    binding: ValidatedSecurityOperationBinding,
+    terminate_before_result: bool,
+    using: str,
+) -> None:
+    connections.close_all()
+    try:
+        if terminate_before_result:
+            with patch(
+                "report_lifecycle.persistence._prepared_result",
+                side_effect=_terminate_before_preparation_result,
+            ):
+                persist_validated_security_operation(
+                    binding=binding,
+                    using=using,
+                )
+        else:
+            persist_validated_security_operation(
+                binding=binding,
+                using=using,
+            )
+    except BaseException:
+        _exit(UNEXPECTED_PROCESS_FAILURE_EXIT_CODE)
+    _exit(0)
 
 
 class LifecyclePersistenceBoundaryTests(TransactionTestCase):
@@ -180,6 +217,26 @@ class LifecyclePersistenceBoundaryTests(TransactionTestCase):
             lease_generation=prepared.lease_generation,
         )
         return prepared
+
+    def _run_preparation_in_separate_process(
+        self,
+        *,
+        terminate_before_result: bool,
+    ) -> int:
+        context = get_context("fork")
+        process = context.Process(
+            target=_run_preparation_process,
+            args=(self.binding, terminate_before_result, "default"),
+        )
+        connections.close_all()
+        process.start()
+        process.join(PROCESS_DEADLINE_SECONDS)
+        if process.is_alive():
+            process.terminate()
+            process.join()
+            self.fail("preparation process exceeded its bounded deadline")
+        self.assertIsNotNone(process.exitcode)
+        return process.exitcode
 
     def test_configured_backend_capabilities_are_explicit(self) -> None:
         capabilities = inspect_lifecycle_backend()
@@ -486,6 +543,43 @@ class LifecyclePersistenceBoundaryTests(TransactionTestCase):
         self.assertEqual(operation.state, SecurityOperationState.ACTIVE)
         self.assertEqual(operation.state_version, activated.state_version)
         self.assertEqual(operation.activated_at, activated.activated_at)
+
+    def test_committed_preparation_survives_application_process_exit(self) -> None:
+        if connection.vendor != "postgresql":
+            self.assert_persistence_denied(self.binding)
+            return
+
+        exit_code = self._run_preparation_in_separate_process(
+            terminate_before_result=False,
+        )
+        self.assertEqual(exit_code, 0)
+
+        connections.close_all()
+        prepared = load_prepared_security_operation(
+            operation_id=self.command.operation_id,
+        )
+        self.assertEqual(prepared, self._prepared_descriptor())
+        activated = activate_prepared_security_operation(
+            binding=self.binding,
+            prepared=prepared,
+        )
+        self.assertEqual(activated.state, SecurityOperationState.ACTIVE)
+
+    def test_process_exit_before_commit_rolls_back_preparation(self) -> None:
+        if connection.vendor != "postgresql":
+            self.assert_persistence_denied(self.binding)
+            return
+
+        exit_code = self._run_preparation_in_separate_process(
+            terminate_before_result=True,
+        )
+        self.assertEqual(exit_code, UNCOMMITTED_TERMINATION_EXIT_CODE)
+
+        connections.close_all()
+        self.assertFalse(
+            SecurityOperation.objects.filter(id=self.command.operation_id).exists()
+        )
+        self.assert_load_denied(self.command.operation_id)
 
     def test_nonprepared_and_missing_metadata_cannot_be_rehydrated(self) -> None:
         prepared = self._store_prepared_operation()

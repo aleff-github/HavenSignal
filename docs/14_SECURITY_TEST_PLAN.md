@@ -306,6 +306,9 @@ For the metadata-only Stage A described by
 - the scaffold runner remains unavailable on SQLite, configuration/backend
   failure, and a merely capability-shaped PostgreSQL backend, with zero model
   writes and no skipped/placeholder run represented as concurrency evidence;
+- a preparation committed by a separate application process remains
+  rehydratable after that process exits, while forced exit after the insert but
+  before the atomic block returns leaves no operation;
 - the lifecycle migration package contains exactly one initial migration with
   no dependency, data/SQL/custom-code operation, additional numbered migration,
   dynamic expression, unlisted import/call, or field/model/type drift;

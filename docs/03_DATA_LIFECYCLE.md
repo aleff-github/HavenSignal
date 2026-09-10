@@ -212,9 +212,11 @@ The scanner never imports, executes, or echoes target source. Separate runtime
 tests exercise preparation, post-reconnection rehydration, activation, and
 prepared abort on PostgreSQL, including exact one-winner 20-process contention,
 a mixed activation/abort race, and rollback after injected result-construction
-failures. This evidence enables no protected operation, content access,
-authentication, audit receipt, key operation, deletion, or production
-capability.
+failures. A separate child-process test proves that committed preparation
+survives application-process exit and that forced process termination before
+the transaction returns leaves no operation. This evidence enables no protected
+operation, content access, authentication, audit receipt, key operation,
+deletion, or production capability.
 
 The recovery eligibility Stage A descriptors additionally represent only the
 Response Note eligibility labels and timing facts around `RESPONSE_AVAILABLE`,

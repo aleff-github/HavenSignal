@@ -1438,6 +1438,24 @@ injects database-class failures after each prepare, activate, and abort write
 but before result construction, requiring the surrounding PostgreSQL
 transaction to restore the exact previous state. SQLite and capability mocks
 remain unavailable. This closes only connection-rehydration and application-
-transaction rollback evidence; process kill, database crash/failover, durable
-storage, backup/restore, protected execution, orphan-timeout policy,
-independent review, deployment, and every production gate remain OPEN.
+transaction rollback evidence; application-process termination, database
+crash/failover, durable storage, backup/restore, protected execution,
+orphan-timeout policy, independent review, deployment, and every production
+gate remain OPEN.
+
+The seventy-second Stage A slice adds bounded application-process termination
+evidence for the PostgreSQL preparation boundary. A dedicated child process
+uses the real application executor and exits only after its atomic block has
+returned; a separate parent connection must then rehydrate and activate the
+committed content-free metadata. A second child is forcibly terminated from
+inside result construction, after the insert but before the atomic block can
+return; the parent must observe no operation and the loader must fail closed.
+
+The child receives only the existing validated metadata binding, inherits no
+open database connection, has a 30-second deadline, and uses explicit exit
+codes so unexpected exceptions cannot look like successful crash evidence.
+This proves the two bounded application-process outcomes on the local
+PostgreSQL profile. It is not database-container restart, server crash,
+failover, disk loss, durable-storage, backup/restore, or orphan-recovery proof,
+and it enables no endpoint, content, service call, protected operation,
+claim/open transition, independent review, deployment, or production gate.

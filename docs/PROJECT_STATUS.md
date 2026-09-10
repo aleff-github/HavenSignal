@@ -823,7 +823,7 @@ reconciliation therefore remains unavailable. Report/lease mutation, protected
 execution, terminalization of active operations, services, endpoints, content,
 crash/durability proof, deployment, and production authorization remain open.
 
-## Latest Stage A slice — prepared-operation rehydration and rollback
+## Stage A slice — prepared-operation rehydration and rollback
 
 The PostgreSQL persistence boundary can now rehydrate one content-free
 `PreparedSecurityOperation` from its internal operation UUID after database
@@ -837,7 +837,24 @@ PostgreSQL tests now close every Django connection after preparation, rehydrate
 the descriptor on a new connection, activate it, close connections again, and
 verify durable active metadata. Fault injection after each database write but
 before returning its result also proves transaction rollback for preparation,
-activation, and abort. This is bounded application-level evidence, not an
-operating-system process-kill, database crash, failover, storage-loss, or backup
-restore proof. No endpoint, protected operation, content, service call, or
-automatic orphan recovery is enabled.
+activation, and abort. This slice alone is connection-level evidence; the next
+slice covers bounded application-process termination but not database crash,
+failover, storage loss, or backup/restore. No endpoint, protected operation,
+content, service call, or automatic orphan recovery is enabled.
+
+## Latest Stage A slice — application-process termination evidence
+
+The PostgreSQL test suite now executes preparation inside a dedicated child
+application process with no inherited open database connection. When the real
+executor returns and the child exits immediately, a separate parent connection
+must rehydrate the exact committed `PREPARED` metadata and activate it. When a
+second child exits after the insert but before result construction lets the
+atomic block return, PostgreSQL must roll the transaction back and the parent
+must observe no operation through either ORM lookup or the controlled loader.
+
+Both paths are bounded by a 30-second deadline and distinguish intended
+termination from unexpected child failure with exact exit codes. This adds
+application-process boundary evidence only. PostgreSQL container restart,
+database crash/failover, durable storage, backup/restore, orphan policy,
+protected execution, content, services, claim/open behavior, independent
+review, deployment, and production authorization remain open.

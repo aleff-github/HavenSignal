@@ -37,7 +37,9 @@ executes a protected operation, updates report/lease state, or calls another
 service. A PostgreSQL-only read path can reconstruct the same frozen
 `PREPARED` result after database reconnection; the result remains
 untrusted input to activation or abort and cannot rehydrate active or terminal
-operations.
+operations. PostgreSQL process-boundary tests also prove that a preparation
+committed by a child process remains rehydratable after that process exits,
+while forced termination before the atomic block returns leaves no operation.
 
 SQLite tests validate pure behavior and ordinary constraints only. They are not
 PostgreSQL concurrency or release evidence. Protected workflows remain blocked
