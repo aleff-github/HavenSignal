@@ -859,7 +859,7 @@ database crash/failover, durable storage, backup/restore, orphan policy,
 protected execution, content, services, claim/open behavior, independent
 review, deployment, and production authorization remain open.
 
-## Latest Stage A slice — isolated PostgreSQL container restart
+## Stage A slice — isolated PostgreSQL container restart
 
 The Docker test gate now creates a uniquely named disposable Compose project
 with random loopback ports and an isolated volume. A test-only probe migrates
@@ -875,3 +875,19 @@ controlled container-restart evidence, not abrupt database crash, failover,
 disk-loss, durable-storage, or backup/restore proof. No protected operation,
 content, service, claim/open behavior, independent-review, deployment, or
 production gate is enabled.
+
+## Latest Stage A slice — malformed persisted preparation rejection
+
+The PostgreSQL persistence suite now mutates synthetic operation rows into
+otherwise constraint-valid but semantically invalid preparation shapes:
+`PREPARED` version drift, `ACTIVE` version zero, and `ABORTED` version zero.
+The rehydration boundary rejects every case. A separate direct attempt to add a
+terminal timestamp while retaining `PREPARED` state is rejected by the database
+constraint inside an atomic block, and the exact original row remains intact.
+
+These are test-only direct updates and expose no application mutation or
+corruption capability. Together with the process and isolated-container tests,
+they close the current checklist item for malformed persisted operation shape,
+not database crash/failover, backup/restore, protected execution, content,
+services, claim/open behavior, independent review, deployment, or production
+authorization.

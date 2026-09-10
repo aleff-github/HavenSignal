@@ -1477,3 +1477,17 @@ a Docker socket inside the application container. This closes only controlled
 local container-restart evidence. Abrupt server crash, failover, storage loss,
 backup/restore, protected execution, content, services, claim/open transitions,
 independent review, deployment, and every production gate remain OPEN.
+
+The seventy-fourth Stage A slice adds persisted-shape corruption regression
+coverage around preparation rehydration. PostgreSQL test-only direct updates
+create `PREPARED` version drift plus constraint-valid `ACTIVE`/`ABORTED`
+state-version combinations; none may be rehydrated as a preparation. A direct
+attempt to attach a terminal timestamp to `PREPARED` metadata must be rejected
+by the database constraint inside an atomic block, after which every original
+field remains unchanged.
+
+SQLite still receives only the controlled persistence denial and cannot count
+as this evidence. The test adds no corruption API, schema relaxation, endpoint,
+content, service call, protected operation, or claim/open transition. Database
+server crash/failover, disk loss, backup/restore, independent review,
+deployment, and every production gate remain OPEN.

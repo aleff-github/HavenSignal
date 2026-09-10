@@ -225,6 +225,12 @@ the exact metadata before deleting the probe volume. This is controlled local
 restart evidence, not server-crash, failover, disk-loss, or backup/restore
 evidence.
 
+The rehydration boundary is exercised against persisted `PREPARED` version
+drift and state/version combinations that remain structurally valid to the
+database but are invalid to the loader. Direct attempts to attach a terminal
+timestamp to `PREPARED` metadata must fail the database constraint and preserve
+the original row.
+
 The recovery eligibility Stage A descriptors additionally represent only the
 Response Note eligibility labels and timing facts around `RESPONSE_AVAILABLE`,
 the 90-day never-read deadline, the 72-hour first-read window, generic

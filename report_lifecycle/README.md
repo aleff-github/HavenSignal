@@ -44,6 +44,10 @@ The Docker test command separately persists one synthetic preparation in an
 isolated Compose project, restarts that PostgreSQL container, rehydrates the
 exact metadata from a new application container, and destroys the disposable
 probe volume after verification.
+Rehydration tests also corrupt otherwise constraint-valid state/version pairs
+through direct test-only updates and require denial. Timestamp shapes that the
+database declares impossible must be rejected by the database and leave the
+original exact preparation unchanged.
 
 SQLite tests validate pure behavior and ordinary constraints only. They are not
 PostgreSQL concurrency or release evidence. Protected workflows remain blocked

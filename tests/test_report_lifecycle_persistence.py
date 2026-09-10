@@ -7,7 +7,13 @@ from os import _exit
 from unittest.mock import patch
 from uuid import uuid4
 
-from django.db import DatabaseError, connection, connections
+from django.db import (
+    DatabaseError,
+    IntegrityError,
+    connection,
+    connections,
+    transaction,
+)
 from django.test import TransactionTestCase
 from django.utils import timezone
 
@@ -593,6 +599,55 @@ class LifecyclePersistenceBoundaryTests(TransactionTestCase):
             prepared=prepared,
         )
         self.assert_load_denied(prepared.operation_id)
+
+    def test_malformed_persisted_preparation_never_rehydrates(self) -> None:
+        if connection.vendor != "postgresql":
+            self.assert_persistence_denied(self.binding)
+            return
+
+        prepared = persist_validated_security_operation(binding=self.binding)
+        malformed_updates = (
+            {"state_version": 1},
+            {
+                "state": SecurityOperationState.ACTIVE,
+                "state_version": 0,
+                "activated_at": self.now,
+            },
+            {
+                "state": SecurityOperationState.ABORTED,
+                "state_version": 0,
+                "terminal_at": self.now,
+            },
+        )
+        for update in malformed_updates:
+            with self.subTest(update=tuple(sorted(update))):
+                SecurityOperation.objects.filter(id=prepared.operation_id).update(
+                    state=SecurityOperationState.PREPARED,
+                    state_version=0,
+                    activated_at=None,
+                    terminal_at=None,
+                )
+                SecurityOperation.objects.filter(id=prepared.operation_id).update(
+                    **update
+                )
+                self.assert_load_denied(prepared.operation_id)
+
+        SecurityOperation.objects.filter(id=prepared.operation_id).update(
+            state=SecurityOperationState.PREPARED,
+            state_version=0,
+            activated_at=None,
+            terminal_at=None,
+        )
+        with self.assertRaises(IntegrityError):
+            with transaction.atomic():
+                SecurityOperation.objects.filter(id=prepared.operation_id).update(
+                    terminal_at=self.now,
+                )
+        operation = SecurityOperation.objects.get(id=prepared.operation_id)
+        self.assertEqual(operation.state, SecurityOperationState.PREPARED)
+        self.assertEqual(operation.state_version, 0)
+        self.assertIsNone(operation.activated_at)
+        self.assertIsNone(operation.terminal_at)
 
     def test_result_construction_failures_rollback_every_write(self) -> None:
         if connection.vendor != "postgresql":

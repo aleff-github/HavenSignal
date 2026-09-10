@@ -36,7 +36,7 @@ Target: 7–20 September 2026.
 - [x] Prove an interrupted uncommitted preparation leaves no partial operation.
 - [x] Exercise committed-state recovery after a controlled PostgreSQL container
       restart without treating it as failover or backup/restore evidence.
-- [ ] Add regression coverage for malformed persisted operation state and
+- [x] Add regression coverage for malformed persisted operation state and
       version/timestamp combinations.
 - [ ] Record a binary Stage A exit result while keeping claim, open, content,
       service calls, and protected execution disabled.

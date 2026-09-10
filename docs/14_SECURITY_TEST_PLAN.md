@@ -312,6 +312,9 @@ For the metadata-only Stage A described by
 - a uniquely named disposable Docker project commits synthetic preparation
   metadata, restarts only its PostgreSQL container, rehydrates the exact row
   from a new application container, and removes its isolated volume;
+- direct test-only corruption of persisted preparation version/state metadata
+  cannot pass rehydration, and database-rejected timestamp corruption leaves
+  the exact original preparation unchanged;
 - the lifecycle migration package contains exactly one initial migration with
   no dependency, data/SQL/custom-code operation, additional numbered migration,
   dynamic expression, unlisted import/call, or field/model/type drift;
