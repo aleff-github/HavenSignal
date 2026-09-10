@@ -40,6 +40,10 @@ untrusted input to activation or abort and cannot rehydrate active or terminal
 operations. PostgreSQL process-boundary tests also prove that a preparation
 committed by a child process remains rehydratable after that process exits,
 while forced termination before the atomic block returns leaves no operation.
+The Docker test command separately persists one synthetic preparation in an
+isolated Compose project, restarts that PostgreSQL container, rehydrates the
+exact metadata from a new application container, and destroys the disposable
+probe volume after verification.
 
 SQLite tests validate pure behavior and ordinary constraints only. They are not
 PostgreSQL concurrency or release evidence. Protected workflows remain blocked

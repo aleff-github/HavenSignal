@@ -34,7 +34,7 @@ Target: 7–20 September 2026.
 - [x] Prove committed preparation survives application process termination and
       rehydration by a separate process.
 - [x] Prove an interrupted uncommitted preparation leaves no partial operation.
-- [ ] Exercise committed-state recovery after a controlled PostgreSQL container
+- [x] Exercise committed-state recovery after a controlled PostgreSQL container
       restart without treating it as failover or backup/restore evidence.
 - [ ] Add regression coverage for malformed persisted operation state and
       version/timestamp combinations.

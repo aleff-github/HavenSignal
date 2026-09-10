@@ -305,6 +305,10 @@ PostgreSQL only on `127.0.0.1:55432` by default. The helper creates random
 local-only secrets under the ignored `.docker/secrets/` directory. Use
 `./scripts/docker-local down` to stop the environment. The explicit `reset`
 command also destroys the local PostgreSQL volume and all of its alpha data.
+The test command additionally creates a uniquely named disposable PostgreSQL
+project, proves committed synthetic operation metadata survives a container
+restart, and removes that probe project and its volume afterward. It does not
+restart or delete the contributor's ordinary alpha database.
 
 This configuration is for synthetic contributor testing only. It is closer to
 the intended database behavior than SQLite, but it is not a production

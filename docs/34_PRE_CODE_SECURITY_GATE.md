@@ -1459,3 +1459,21 @@ PostgreSQL profile. It is not database-container restart, server crash,
 failover, disk loss, durable-storage, backup/restore, or orphan-recovery proof,
 and it enables no endpoint, content, service call, protected operation,
 claim/open transition, independent review, deployment, or production gate.
+
+The seventy-third Stage A slice adds an isolated controlled PostgreSQL-container
+restart probe to the Docker test gate. The host helper creates a uniquely named
+Compose project with random loopback ports and its own volume, migrates it,
+commits one deterministic-from-random-UUID synthetic `PREPARED` operation,
+restarts only that project's database container, and requires a fresh
+application container to rehydrate the exact operation and report metadata.
+Cleanup deletes the synthetic rows and the explicitly scoped disposable volume
+on both success and failure; it cannot target the contributor's ordinary alpha
+project.
+
+The probe emits only one controlled error label, carries no report content or
+credentials, and remains PostgreSQL-only. Static tests fix its isolated project
+name, random-port profile, action order, bounded volume cleanup, and absence of
+a Docker socket inside the application container. This closes only controlled
+local container-restart evidence. Abrupt server crash, failover, storage loss,
+backup/restore, protected execution, content, services, claim/open transitions,
+independent review, deployment, and every production gate remain OPEN.

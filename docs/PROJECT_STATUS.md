@@ -842,7 +842,7 @@ slice covers bounded application-process termination but not database crash,
 failover, storage loss, or backup/restore. No endpoint, protected operation,
 content, service call, or automatic orphan recovery is enabled.
 
-## Latest Stage A slice — application-process termination evidence
+## Stage A slice — application-process termination evidence
 
 The PostgreSQL test suite now executes preparation inside a dedicated child
 application process with no inherited open database connection. When the real
@@ -858,3 +858,20 @@ application-process boundary evidence only. PostgreSQL container restart,
 database crash/failover, durable storage, backup/restore, orphan policy,
 protected execution, content, services, claim/open behavior, independent
 review, deployment, and production authorization remain open.
+
+## Latest Stage A slice — isolated PostgreSQL container restart
+
+The Docker test gate now creates a uniquely named disposable Compose project
+with random loopback ports and an isolated volume. A test-only probe migrates
+that database, commits one content-free synthetic `PREPARED` operation, restarts
+only the probe PostgreSQL container, and requires a fresh application container
+to rehydrate the exact operation and report metadata. Success and failure paths
+delete the synthetic rows and then remove the explicitly scoped probe volume.
+
+The ordinary contributor alpha database is neither restarted nor deleted. The
+probe accepts one random UUID, derives purpose-separated synthetic identifiers,
+emits only a controlled error label, and has native fail-closed tests. This is
+controlled container-restart evidence, not abrupt database crash, failover,
+disk-loss, durable-storage, or backup/restore proof. No protected operation,
+content, service, claim/open behavior, independent-review, deployment, or
+production gate is enabled.

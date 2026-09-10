@@ -218,6 +218,13 @@ the transaction returns leaves no operation. This evidence enables no protected
 operation, content access, authentication, audit receipt, key operation,
 deletion, or production capability.
 
+The local Docker test profile separately creates a uniquely named disposable
+PostgreSQL project, commits one synthetic `PREPARED` operation, restarts only
+that database container, and requires a new application container to rehydrate
+the exact metadata before deleting the probe volume. This is controlled local
+restart evidence, not server-crash, failover, disk-loss, or backup/restore
+evidence.
+
 The recovery eligibility Stage A descriptors additionally represent only the
 Response Note eligibility labels and timing facts around `RESPONSE_AVAILABLE`,
 the 90-day never-read deadline, the 72-hour first-read window, generic

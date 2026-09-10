@@ -22,6 +22,41 @@ prepare_secrets() {
     create_secret "$secrets_directory/django_secret_key"
 }
 
+run_postgresql_restart_probe() {
+    restart_probe_project="havensignal-alpha-restart-probe-$$"
+    restart_probe_id=$(tr -d '\n' < /proc/sys/kernel/random/uuid)
+
+    restart_probe_compose() {
+        HAVENSIGNAL_POSTGRES_PORT=0 HAVENSIGNAL_HTTP_PORT=0 \
+            docker compose \
+                --project-name "$restart_probe_project" \
+                --profile test \
+                "$@"
+    }
+
+    cleanup_restart_probe() {
+        trap - EXIT INT TERM
+        cleanup_status=0
+        restart_probe_compose run --rm test \
+            python -m tests.postgresql_restart_probe cleanup "$restart_probe_id" \
+            || cleanup_status=$?
+        restart_probe_compose down --volumes --remove-orphans \
+            || cleanup_status=$?
+        return "$cleanup_status"
+    }
+
+    trap cleanup_restart_probe EXIT INT TERM
+    restart_probe_compose up --detach --wait postgres
+    restart_probe_compose run --rm test python manage.py migrate --noinput
+    restart_probe_compose run --rm test \
+        python -m tests.postgresql_restart_probe prepare "$restart_probe_id"
+    restart_probe_compose restart postgres
+    restart_probe_compose up --detach --wait postgres
+    restart_probe_compose run --rm test \
+        python -m tests.postgresql_restart_probe verify "$restart_probe_id"
+    cleanup_restart_probe
+}
+
 cd "$repository_root"
 export HAVENSIGNAL_HOST_UID="$(id -u)"
 export HAVENSIGNAL_HOST_GID="$(id -g)"
@@ -37,6 +72,7 @@ case "${1:-}" in
         prepare_secrets
         docker compose --profile test build test
         docker compose --profile test run --rm test
+        run_postgresql_restart_probe
         ;;
     logs)
         docker compose logs --follow postgres web

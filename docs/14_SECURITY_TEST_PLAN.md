@@ -309,6 +309,9 @@ For the metadata-only Stage A described by
 - a preparation committed by a separate application process remains
   rehydratable after that process exits, while forced exit after the insert but
   before the atomic block returns leaves no operation;
+- a uniquely named disposable Docker project commits synthetic preparation
+  metadata, restarts only its PostgreSQL container, rehydrates the exact row
+  from a new application container, and removes its isolated volume;
 - the lifecycle migration package contains exactly one initial migration with
   no dependency, data/SQL/custom-code operation, additional numbered migration,
   dynamic expression, unlisted import/call, or field/model/type drift;

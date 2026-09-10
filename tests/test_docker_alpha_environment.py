@@ -13,6 +13,9 @@ class DockerAlphaEnvironmentTests(SimpleTestCase):
     def setUp(self) -> None:
         self.compose = (BASE_DIR / "compose.yaml").read_text(encoding="utf-8")
         self.dockerfile = (BASE_DIR / "Dockerfile").read_text(encoding="utf-8")
+        self.docker_local = (BASE_DIR / "scripts/docker-local").read_text(
+            encoding="utf-8"
+        )
 
     def test_base_images_are_exactly_pinned(self) -> None:
         self.assertRegex(
@@ -61,3 +64,29 @@ class DockerAlphaEnvironmentTests(SimpleTestCase):
             ),
             1,
         )
+
+    def test_restart_probe_is_isolated_and_cleanup_is_bounded(self) -> None:
+        self.assertIn(
+            'restart_probe_project="havensignal-alpha-restart-probe-$$"',
+            self.docker_local,
+        )
+        self.assertIn("HAVENSIGNAL_POSTGRES_PORT=0", self.docker_local)
+        self.assertIn("HAVENSIGNAL_HTTP_PORT=0", self.docker_local)
+        self.assertIn("/proc/sys/kernel/random/uuid", self.docker_local)
+        self.assertIn(
+            "restart_probe_compose down --volumes --remove-orphans",
+            self.docker_local,
+        )
+        self.assertNotIn("/var/run/docker.sock", self.compose)
+        execution = self.docker_local.split(
+            "trap cleanup_restart_probe EXIT INT TERM",
+            1,
+        )[1]
+        actions = (
+            "postgresql_restart_probe prepare",
+            "restart_probe_compose restart postgres",
+            "postgresql_restart_probe verify",
+            "cleanup_restart_probe",
+        )
+        positions = tuple(execution.index(action) for action in actions)
+        self.assertEqual(positions, tuple(sorted(positions)))

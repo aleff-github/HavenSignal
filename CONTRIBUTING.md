@@ -56,9 +56,11 @@ environment:
 ```
 
 Docker binds both exposed ports to loopback, generates untracked local secrets,
-and runs the full suite against PostgreSQL. Use only synthetic identifiers and
-content. `./scripts/docker-local reset` is intentionally destructive and
-removes the local PostgreSQL volume.
+and runs the full suite against PostgreSQL. The test command also exercises one
+committed-metadata restart in a uniquely named disposable Compose project and
+removes only that probe volume. Use only synthetic identifiers and content.
+`./scripts/docker-local reset` is intentionally destructive and removes the
+ordinary local PostgreSQL alpha volume.
 
 For lightweight checks that do not need PostgreSQL:
 
