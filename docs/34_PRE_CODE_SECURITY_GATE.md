@@ -250,6 +250,15 @@ the inert Stage A boundary in section 5.
 
 ## 8. Stage A implementation record
 
+The [2026-09-14 Stage A exit record](STAGE_A_EXIT_RECORD.md) closes only the
+bounded local metadata checklist after native/PostgreSQL verification and an
+isolated fresh-volume database restart. It records a TCP readiness correction,
+the executable evidence, and remaining limits. The historical slices below
+describe how that boundary was reached; no unavailable service or protected
+workflow is enabled by this exit. Sections 4 and 5 remain in force. Phase 2
+review preparation is tracked in the
+[security-service packet](SECURITY_SERVICE_REVIEW_PACKET.md).
+
 The first metadata-only slice adds the `report_lifecycle` Django app with:
 
 - explicit Report, ReportLease, and SecurityOperation enums and allowed edges;

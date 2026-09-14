@@ -26,7 +26,8 @@ Exit condition: internal design approval does not substitute for independent rev
 
 ## Phase 1 — Metadata-only Stage A
 
-**Status: active.**
+**Status: bounded local exit passed on 2026-09-14; see the
+[Stage A exit record](docs/STAGE_A_EXIT_RECORD.md).**
 
 Goals:
 
@@ -41,6 +42,9 @@ Goals:
 No reporter content, recovery credential, cryptographic key, or production protected workflow should be introduced merely to complete this phase.
 
 ## Phase 2 — Security-service proofs and independent review
+
+**Status: preparation started; service proofs and independent review remain
+open. See the [work packet](docs/SECURITY_SERVICE_REVIEW_PACKET.md).**
 
 Goals:
 

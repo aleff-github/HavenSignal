@@ -38,8 +38,9 @@ Target: 7–20 September 2026.
       restart without treating it as failover or backup/restore evidence.
 - [x] Add regression coverage for malformed persisted operation state and
       version/timestamp combinations.
-- [ ] Record a binary Stage A exit result while keeping claim, open, content,
-      service calls, and protected execution disabled.
+- [x] Record a binary Stage A exit result while keeping claim, open, content,
+      service calls, and protected execution disabled. See the
+      [2026-09-14 PASS record](STAGE_A_EXIT_RECORD.md) for scope and evidence.
 
 Exit condition: the present metadata boundary has process-level and local
 database-restart evidence, and every test remains fail-closed outside real
@@ -49,6 +50,8 @@ PostgreSQL.
 
 Target: 21 September–18 October 2026. External review can extend this phase.
 
+- [x] Prepare the [security-service review and proof packet](SECURITY_SERVICE_REVIEW_PACKET.md)
+      with unresolved audit profile inputs and concrete acceptance deliverables.
 - [ ] Build deterministic CBOR and COSE interoperability test vectors for the
       approved Audit v1 protocol.
 - [ ] Implement a local Audit Service proof of concept with durable pre-action

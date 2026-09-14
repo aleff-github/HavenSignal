@@ -52,6 +52,8 @@ The documents in this directory are security and implementation specifications. 
 ## Public project documentation added for OSS maintenance
 
 - [Alpha Development Checklist](ALPHA_DEVELOPMENT_TODO.md)
+- [Metadata-only Stage A Exit Record](STAGE_A_EXIT_RECORD.md)
+- [Security-service Review and Proof Packet](SECURITY_SERVICE_REVIEW_PACKET.md)
 - [Project Impact](PROJECT_IMPACT.md)
 - [Current Project Status](PROJECT_STATUS.md)
 

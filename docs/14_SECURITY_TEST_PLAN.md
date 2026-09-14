@@ -4,6 +4,11 @@ This is a minimum plan, not a complete penetration-test program.
 
 ## Pre-code Stage A boundary
 
+The [2026-09-14 exit record](STAGE_A_EXIT_RECORD.md) records the bounded local
+PASS, including the fresh-volume TCP readiness correction and explicit limits
+on process/container-restart evidence. Service proofs remain separate work in
+the [security-service packet](SECURITY_SERVICE_REVIEW_PACKET.md).
+
 For the metadata-only Stage A described by
 `docs/34_PRE_CODE_SECURITY_GATE.md`, test that:
 

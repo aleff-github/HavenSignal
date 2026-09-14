@@ -85,6 +85,11 @@ Start with:
 
 HavenSignal is in a **security-first pre-alpha implementation stage**.
 
+The bounded metadata-only [Stage A exit](docs/STAGE_A_EXIT_RECORD.md) passed
+local native and PostgreSQL verification on 2026-09-14. Work now proceeds to
+[security-service proof preparation](docs/SECURITY_SERVICE_REVIEW_PACKET.md);
+protected workflows and independent service/release gates remain open.
+
 The repository currently contains:
 
 - Django 5.2.17 development scaffolding;

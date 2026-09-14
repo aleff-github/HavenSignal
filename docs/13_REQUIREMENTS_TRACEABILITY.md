@@ -75,6 +75,13 @@ preserves every independent and production gate.
 
 ## Traceability index
 
+The [Stage A exit record](STAGE_A_EXIT_RECORD.md) maps the bounded metadata
+criteria to the executed native/PostgreSQL tests and isolated restart probe.
+It closes the local Phase 1 checklist only, not any complete SEC-ACCESS,
+SEC-LOG, SEC-KEY, or production requirement. The
+[security-service work packet](SECURITY_SERVICE_REVIEW_PACKET.md) maps the
+remaining audit and key proof deliverables to their governing requirements.
+
 | Requirement IDs | Severity | Primary design documents | Verification | Current gate |
 |---|---|---|---|---|
 | SEC-CONF-001..008 | CRITICAL | 02 Threat Model; 04 Cryptographic Model; 15 Trust Boundaries; 20 Submission Protocol; 26 Report Crypto | 14: AEAD/context, key destruction, roles/capabilities, submission failure matrix, deployment checks plus inert report text/frame/crypto/schema descriptor source-conformance tests | Exact report crypto and submission failure behavior owner-approved and content-free Stage A text/frame/crypto/schema/failure descriptors with source guards implemented; independent review and Key Service gates OPEN |

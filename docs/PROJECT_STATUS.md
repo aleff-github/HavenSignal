@@ -1,6 +1,7 @@
 # Current Project Status
 
-**Status: security-first pre-alpha / metadata-only implementation stage.**
+**Status: security-first pre-alpha / bounded metadata-only Stage A passed;
+security-service proof preparation started.**
 
 This document keeps the implementation boundary visible without requiring the top-level README to reproduce the full handoff narrative.
 
@@ -8,6 +9,13 @@ HavenSignal is initially intended for universities and higher-education
 institutions. Each deployment serves one approved organization while the
 software remains configurable rather than hard-coded to a specific
 institution's identity system, hierarchy, terminology, or internal policy.
+
+The [Stage A exit record](STAGE_A_EXIT_RECORD.md) records the 2026-09-14 local
+PASS: 799 native tests, 799 PostgreSQL tests, and the isolated fresh-volume
+database restart probe. The [next work packet](SECURITY_SERVICE_REVIEW_PACKET.md)
+identifies exact audit profile review inputs and service-proof deliverables.
+No independent review, Audit Service proof, Key Service acceptance, protected
+workflow, or release gate is closed by these records.
 
 ## Reporter surface
 
