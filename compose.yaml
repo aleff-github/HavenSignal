@@ -39,7 +39,8 @@ services:
     ports:
       - "127.0.0.1:${HAVENSIGNAL_POSTGRES_PORT:-55432}:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready --username=havensignal --dbname=havensignal"]
+      # The temporary initdb server accepts Unix sockets before TCP is ready.
+      test: ["CMD", "pg_isready", "--host=127.0.0.1", "--port=5432", "--username=havensignal", "--dbname=havensignal"]
       interval: 2s
       timeout: 3s
       retries: 30

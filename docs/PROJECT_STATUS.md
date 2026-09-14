@@ -11,6 +11,12 @@ institution's identity system, hierarchy, terminology, or internal policy.
 
 ## Reporter surface
 
+The contributor PostgreSQL healthcheck now probes TCP explicitly. A fresh-volume
+Stage A verification exposed that the previous Unix-socket probe could report
+the temporary initialization server as healthy before other containers could
+connect. The TCP probe keeps migrations and tests waiting for the final server.
+This changes only local dependency readiness, not production acceptance.
+
 The repository contains a Django 5.2.17 development scaffold, one inert
 reporter landing page, one inert `/status/` page, one fail-closed `/submit/`
 surface, one separate fail-closed `/response/` recovery-gateway surface, and
