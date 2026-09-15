@@ -1,0 +1,45 @@
+{
+  "rfc8949_source": "https://www.rfc-editor.org/rfc/rfc8949.html#appendix-A",
+  "cbor": [
+    {"id": "uint-0", "value": 0, "hex": "00"},
+    {"id": "uint-23", "value": 23, "hex": "17"},
+    {"id": "uint-24", "value": 24, "hex": "1818"},
+    {"id": "uint-100", "value": 100, "hex": "1864"},
+    {"id": "uint-1000", "value": 1000, "hex": "1903e8"},
+    {"id": "uint-million", "value": 1000000, "hex": "1a000f4240"},
+    {"id": "uint-trillion", "value": 1000000000000, "hex": "1b000000e8d4a51000"},
+    {"id": "uint64-max", "value": {"integer": "18446744073709551615"}, "hex": "1bffffffffffffffff"},
+    {"id": "negative-1", "value": -1, "hex": "20"},
+    {"id": "null", "value": null, "hex": "f6"},
+    {"id": "false", "value": false, "hex": "f4"},
+    {"id": "true", "value": true, "hex": "f5"},
+    {"id": "empty-bytes", "value": {"bytes": ""}, "hex": "40"},
+    {"id": "four-bytes", "value": {"bytes": "01020304"}, "hex": "4401020304"},
+    {"id": "ietf-text", "value": "IETF", "hex": "6449455446"},
+    {"id": "array", "value": [1, 2, 3], "hex": "83010203"}
+  ],
+  "rfc8032_source": "https://www.rfc-editor.org/rfc/rfc8032.html#section-7.1",
+  "cose_wg": {
+    "source": "https://github.com/cose-wg/Examples/blob/53c9d634333bb4f529d78f5980fffa2667ee2c12/eddsa-examples/eddsa-sig-01.json",
+    "id": "cose-wg-eddsa-sig-01",
+    "message_hex": "546869732069732074686520636f6e74656e742e",
+    "signature_input_hex": "846a5369676e61747572653145a2012703004054546869732069732074686520636f6e74656e742e",
+    "receipt_hex": "d28445a201270300a10442313154546869732069732074686520636f6e74656e742e58407142fd2ff96d56db85bee905a76ba1d0b7321a95c8c4d3607c5781932b7afb8711497dfa751bf40b58b3bcc32300b1487f3db34085eef013bf08f4a44d6fef0d"
+  },
+  "ed25519": [
+    {
+      "id": "rfc8032-test-1-public-test-key",
+      "seed_hex": "9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60",
+      "public_hex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+      "message_hex": "",
+      "signature_hex": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b"
+    },
+    {
+      "id": "rfc8032-test-2-public-test-key",
+      "seed_hex": "4ccd089b28ff96da9db6c346ec114e0f5b8a319f35aba624da8cf6ed4fb8a6fb",
+      "public_hex": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+      "message_hex": "72",
+      "signature_hex": "92a009a9f0d4cab8720e820b5f642540a2b27b5416503f8fb3762223ebdb69da085ac1e43e15996e458f3613d0f11d8c387b2eaeb4302aeeb00d291612bb0c00"
+    }
+  ]
+}

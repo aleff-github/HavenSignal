@@ -49,6 +49,13 @@ rows or undecided fields remain blocking for the affected implementation.
 
 ## P2-02 — Produce reproducible interoperability evidence
 
+The first [bounded wire corpus](../proofs/audit_vectors/README.md) passed on
+2026-09-15: published CBOR/Ed25519/COSE examples plus 40 synthetic
+acceptance-receipt cases, independently verified in Python and JavaScript.
+The full deliverable below remains open. The minimal public COSE Key map used
+to derive the fixture key ID is explicitly a test choice; the production
+parameter set for that serialization also needs review.
+
 Depends on P2-01 for application-specific profiles and on the independent
 review gates of docs/21, docs/23, docs/24, and docs/26 for protected integration.
 

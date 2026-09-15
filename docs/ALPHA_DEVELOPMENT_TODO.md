@@ -52,8 +52,12 @@ Target: 21 September–18 October 2026. External review can extend this phase.
 
 - [x] Prepare the [security-service review and proof packet](SECURITY_SERVICE_REVIEW_PACKET.md)
       with unresolved audit profile inputs and concrete acceptance deliverables.
+- [x] Cross-check the [bounded acceptance-receipt wire corpus](../proofs/audit_vectors/README.md)
+      with independent Python and JavaScript implementations, published standard
+      vectors, signed malformed cases, and an isolated CI job.
 - [ ] Build deterministic CBOR and COSE interoperability test vectors for the
-      approved Audit v1 protocol.
+      approved Audit v1 protocol, including complete event profiles,
+      checkpoints, and inclusion/consistency proofs.
 - [ ] Implement a local Audit Service proof of concept with durable pre-action
       receipts, idempotency, signed checkpoints, and witness-failure tests.
 - [ ] Prove the application cannot complete a protected action without the

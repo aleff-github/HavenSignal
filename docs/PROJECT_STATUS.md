@@ -1,7 +1,7 @@
 # Current Project Status
 
 **Status: security-first pre-alpha / bounded metadata-only Stage A passed;
-security-service proof preparation started.**
+bounded audit wire interoperability proof implemented.**
 
 This document keeps the implementation boundary visible without requiring the top-level README to reproduce the full handoff narrative.
 
@@ -16,6 +16,16 @@ database restart probe. The [next work packet](SECURITY_SERVICE_REVIEW_PACKET.md
 identifies exact audit profile review inputs and service-proof deliverables.
 No independent review, Audit Service proof, Key Service acceptance, protected
 workflow, or release gate is closed by these records.
+
+The [offline audit wire corpus](../proofs/audit_vectors/README.md) now provides
+16 CBOR standard examples, two RFC Ed25519 vectors, one published COSE example,
+and 40 synthetic acceptance-receipt cases (3 positive, 37 negative). Python
+CWT/cbor2/cryptography and node-cbor/noble independently verify the frozen
+artifacts. Correctly signed malformed receipts still fail profile checks.
+The proof has isolated hash-locked dependencies and its own CI job; it is
+excluded from the runtime image. Full event/profile, checkpoint/proof,
+durability, authorization, Key Service, and independent-review work remains
+open. See the proof README for library limitations and dated dependency checks.
 
 ## Reporter surface
 

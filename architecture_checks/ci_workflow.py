@@ -12,7 +12,7 @@ from typing import Iterable, Sequence
 
 CI_WORKFLOW_PATH = ".github/workflows/ci.yml"
 EXPECTED_CI_WORKFLOW_SHA256 = (
-    "eba1892a57c2b23d4be823cd72b0305193bed328e301f5b8c3fc8c9f548b8d8a"
+    "14cd8af1d87974cd2f168a1f1d8b1b707215fc29c15b5a12d1fa6458b30d082b"
 )
 REQUIRED_WORKFLOW_LINES = (
     "name: CI",
@@ -38,6 +38,16 @@ REQUIRED_WORKFLOW_LINES = (
     "        run: scripts/verify",
     "      - name: Run PostgreSQL verification in Docker",
     "        run: scripts/docker-local test",
+    "  audit-vectors:",
+    "    timeout-minutes: 10",
+    "        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6",
+    '          node-version: "22"',
+    "        working-directory: proofs/audit_vectors",
+    "          .venv/bin/python -m pip install --require-hashes -r requirements.lock",
+    "          npm ci --ignore-scripts --no-audit --no-fund",
+    "          .venv/bin/python build_vectors.py",
+    "          .venv/bin/python verify_python.py",
+    "          node verify.mjs",
 )
 FORBIDDEN_WORKFLOW_FRAGMENTS = (
     "pull_request_target",

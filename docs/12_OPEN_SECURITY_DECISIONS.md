@@ -138,6 +138,13 @@ HSM/signer, service authentication, PostgreSQL
 durability/concurrency, clock, alert transport, deployment, and dependent-flow
 reviews also remain OPEN.
 
+The [offline wire proof](../proofs/audit_vectors/README.md) covers only a
+bounded acceptance-receipt subset. It does not close the complete per-event
+profile matrix, checkpoint/RFC 9942 content types, or clock-skew choices.
+The exact optional-parameter policy for public COSE Key serialization used in
+`kid` derivation also remains to be specified; the proof's minimal test map
+does not select the production representation.
+
 Hash chaining alone is not acceptable. The proposal instead uses independently
 witnessed signed Merkle checkpoints to detect mutation, gaps, forks,
 truncation, rollback, and cessation.

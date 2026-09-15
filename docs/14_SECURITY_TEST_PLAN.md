@@ -4,6 +4,14 @@ This is a minimum plan, not a complete penetration-test program.
 
 ## Pre-code Stage A boundary
 
+The separate [Phase 2 wire corpus](../proofs/audit_vectors/README.md) verifies
+published standard bytes and a bounded acceptance-receipt subset using two
+implementations. Its signed-malformed cases distinguish signature validity
+from format/context acceptance. A dedicated CI job verifies exact regeneration
+and both implementations; native tests reject static imports of the proof
+stack into application packages and inclusion in runtime dependencies/builds.
+This proof is not a receipt-issuing service or protected application path.
+
 The [2026-09-14 exit record](STAGE_A_EXIT_RECORD.md) records the bounded local
 PASS, including the fresh-volume TCP readiness correction and explicit limits
 on process/container-restart evidence. Service proofs remain separate work in

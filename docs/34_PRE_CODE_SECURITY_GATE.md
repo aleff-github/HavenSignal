@@ -250,6 +250,15 @@ the inert Stage A boundary in section 5.
 
 ## 8. Stage A implementation record
 
+After the bounded Stage A exit, Phase 2 now includes an
+[isolated offline wire-format proof](../proofs/audit_vectors/README.md).
+It uses only public RFC test keys and fixed synthetic claims, with no
+application import, endpoint, database, real receipt, or service capability.
+The runtime image excludes the proof tools and fixtures. Its PASS applies
+only to the documented CBOR/COSE/Ed25519 subset and does not change the
+protected-implementation or review gates in sections 4 and 5. It exposes no
+production verifier or signer and grants no application authorization.
+
 The [2026-09-14 Stage A exit record](STAGE_A_EXIT_RECORD.md) closes only the
 bounded local metadata checklist after native/PostgreSQL verification and an
 isolated fresh-volume database restart. It records a TCP readiness correction,

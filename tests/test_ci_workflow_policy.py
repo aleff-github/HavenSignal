@@ -23,6 +23,20 @@ class CurrentCIWorkflowPolicyTests(SimpleTestCase):
 
 
 class CIWorkflowPolicyAbuseTests(SimpleTestCase):
+    def test_proof_cannot_pass_without_independent_verification(self) -> None:
+        source = (BASE_DIR / CI_WORKFLOW_PATH).read_text(encoding="utf-8")
+        for command in (
+            "          .venv/bin/python build_vectors.py\n",
+            "          .venv/bin/python verify_python.py\n",
+            "          node verify.mjs\n",
+        ):
+            with self.subTest(command=command.strip()):
+                violations = analyze_ci_workflow_source(source.replace(command, ""))
+                self.assertIn(
+                    CIWorkflowViolationCode.REQUIRED_WORKFLOW_LINE_MISSING,
+                    {violation.code for violation in violations},
+                )
+
     def test_removing_reviewed_verification_script_fails_closed(self) -> None:
         source = (BASE_DIR / CI_WORKFLOW_PATH).read_text(encoding="utf-8")
         mutated = source.replace("        run: scripts/verify\n", "")

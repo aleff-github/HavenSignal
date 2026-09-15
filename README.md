@@ -90,6 +90,11 @@ local native and PostgreSQL verification on 2026-09-14. Work now proceeds to
 [security-service proof preparation](docs/SECURITY_SERVICE_REVIEW_PACKET.md);
 protected workflows and independent service/release gates remain open.
 
+The first [offline audit wire proof](proofs/audit_vectors/README.md) checks
+published CBOR/Ed25519/COSE examples and 40 synthetic receipt cases using two
+independent implementations. Its tooling and public test keys are excluded
+from the application image; no Audit Service is enabled.
+
 The repository currently contains:
 
 - Django 5.2.17 development scaffolding;

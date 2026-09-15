@@ -12,6 +12,7 @@ htmlcov/
 .venv/
 venv/
 env/
+node_modules/
 
 # Django/runtime
 *.sqlite3

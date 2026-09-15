@@ -12,6 +12,12 @@ checkpoint cadence, and signing-key separation. It does not approve an Audit
 Service product, database/topology, HSM, service-authentication mechanism,
 alert transport, deployment, or application endpoint.
 
+The [offline acceptance-receipt corpus](../proofs/audit_vectors/README.md) adds
+bounded standard-vector and cross-implementation wire evidence. Its synthetic
+claims, public test keys, fixture key-ID representation, and syntax checks
+grant no durable-acceptance or protected-action authority. Full protocol
+review, event profiles, checkpoints/proofs, and service acceptance remain open.
+
 ## Governing requirements
 
 This proposal applies primarily to:

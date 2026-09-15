@@ -41,3 +41,35 @@ jobs:
 
       - name: Run PostgreSQL verification in Docker
         run: scripts/docker-local test
+
+  audit-vectors:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+
+      - name: Set up Node for independent verification
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: "22"
+
+      - name: Install isolated locked proof dependencies
+        working-directory: proofs/audit_vectors
+        run: |
+          python -m venv .venv
+          .venv/bin/python -m pip install --require-hashes -r requirements.lock
+          npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Check frozen corpus and both implementations
+        working-directory: proofs/audit_vectors
+        run: |
+          .venv/bin/python build_vectors.py
+          .venv/bin/python verify_python.py
+          node verify.mjs

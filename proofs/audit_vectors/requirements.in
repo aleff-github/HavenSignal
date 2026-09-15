@@ -1,0 +1,4 @@
+# Offline proof tools only; never application dependencies.
+cbor2==5.9.0
+cwt==3.3.0
+cryptography==50.0.1

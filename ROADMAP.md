@@ -43,8 +43,9 @@ No reporter content, recovery credential, cryptographic key, or production prote
 
 ## Phase 2 — Security-service proofs and independent review
 
-**Status: preparation started; service proofs and independent review remain
-open. See the [work packet](docs/SECURITY_SERVICE_REVIEW_PACKET.md).**
+**Status: bounded [audit wire interoperability](proofs/audit_vectors/README.md)
+implemented; service proofs and independent review remain open. See the
+[work packet](docs/SECURITY_SERVICE_REVIEW_PACKET.md).**
 
 Goals:
 
